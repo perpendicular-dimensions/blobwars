@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: blobwars 1.06\n"
-"PO-Revision-Date: 2007-03-22 13:28+0100\n"
+"PO-Revision-Date: 2007-04-22 14:12+0200\n"
 "Last-Translator: Guus Sliepen <guus@debian.org>\n"
 "Language-Team: Dutch Localization <debian-l10n-dutch@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -267,13 +267,13 @@ msgid "Fight Galdov"
 msgstr "Vecht met Galdov"
 
 msgid "Find 1st Cypher Piece"
-msgstr "Vind het 1e Cypherdeel"
+msgstr "Vind 1e deel Codesleutel"
 
 msgid "Find 2 Sticks of Dynamite"
 msgstr "Vind 2 staven Dynamiet"
 
 msgid "Find 2nd Cypher Piece"
-msgstr "Vind het 2e Cypherdeel"
+msgstr "Vind 2e deel Codesleutel"
 
 msgid "Find 3 Ancient Cogs"
 msgstr "Vind 3 Oude Tandwielen"
@@ -381,67 +381,103 @@ msgstr "Stop het Instorten van de Grot"
 # Picked up...
 
 msgid "Picked up an Ancient Cog"
-msgstr "Oud Tandwiel opgerapen"
+msgstr "Oud Tandwiel opgepakt"
 
 msgid "Picked up an Ancient Key"
-msgstr "Oude Sleutel opgerapen"
+msgstr "Oude Sleutel opgepakt"
 
 msgid "Picked up a Blue Keycard"
-msgstr "Blauwe Kaart opgerapen"
+msgstr "Blauwe Kaart opgepakt"
+
+msgid "Picked up a Box of Orichalcum"
+msgstr "Doos Orichalcumparels opgepakt"
 
 msgid "Picked up a Bronze Key"
-msgstr "Bronzen Sleutel opgerapen"
+msgstr "Bronzen Sleutel opgepakt"
 
 msgid "Picked up a bunch of Cherries"
-msgstr "Handvol Kersen opgerapen"
+msgstr "Handvol Kersen opgepakt"
 
 msgid "Picked up a Cherry"
-msgstr "Kers opgerapen"
+msgstr "Kers opgepakt"
+
+msgid "Picked up a Cherry Plant"
+msgstr "Kersenplant opgepakt"
 
 msgid "Picked up a Crystal Shard"
-msgstr "Kristalscherf opgerapen"
+msgstr "Kristalscherf opgepakt"
 
 msgid "Picked up a Cyan Keycard"
-msgstr "Turkooise Kaart opgerapen"
+msgstr "Turkooise Kaart opgepakt"
+
+msgid "Picked up a Cypher Piece #1"
+msgstr "Codesleutel deel #1 opgepakt"
+
+msgid "Picked up a Cypher Piece #2"
+msgstr "Codesleutel deel #1 opgepakt"
+
+msgid "Picked up a Diamond"
+msgstr "Diamant opgepakt"
+
+msgid "Picked up a Fire Crystal"
+msgstr "Vuurkristal opgepakt"
 
 msgid "Picked up a Gold Key"
-msgstr "Gouden Sleutel opgerapen"
+msgstr "Gouden Sleutel opgepakt"
 
 msgid "Picked up a Green Keycard"
-msgstr "Groene Kaart opgerapen"
-
-msgid "Picked up a Grenades"
-msgstr "Granaten opgerapen"
+msgstr "Groene Kaart opgepakt"
 
 msgid "Picked up a Keycard"
-msgstr "Kaart opgerapen"
+msgstr "Kaart opgepakt"
 
 msgid "Picked up a Laser Gun"
-msgstr "Lasergeweer opgerapen"
+msgstr "Lasergeweer opgepakt"
 
 msgid "Picked up a Machine Gun"
-msgstr "Machinegeweer opgerapen"
+msgstr "Machinegeweer opgepakt"
+
+msgid "Picked up a Map Piece"
+msgstr "Deel van Kaart opgepakt"
+
+msgid "Picked up a Pack of Dynamite"
+msgstr "Pak Dynamiet opgepakt"
 
 msgid "Picked up a pair of Cherries"
-msgstr "Paar Kersen opgerapen"
+msgstr "Paar Kersen opgepakt"
 
 msgid "Picked up a Pistol"
-msgstr "Pistool opgerapen"
+msgstr "Pistool opgepakt"
 
 msgid "Picked up a Purple Keycard"
-msgstr "Paarse Kaart opgerapen"
+msgstr "Paarse Kaart opgepakt"
 
 msgid "Picked up a Red Keycard"
-msgstr "Rode Kaart opgerapen"
+msgstr "Rode Kaart opgepakt"
+
+msgid "Picked up a Set of Blueprints"
+msgstr "Blauwdrukken opgepakt"
 
 msgid "Picked up a set of Grenades"
-msgstr "Granaten opgerapen"
+msgstr "Granaten opgepakt"
+
+msgid "Picked up a Space Crystal"
+msgstr "Ruimtekristal opgepakt"
+
+msgid "Picked up a Sword"
+msgstr "Zwaard opgepakt"
 
 msgid "Picked up a Silver Key"
-msgstr "Zilveren Sleutel opgerapen"
+msgstr "Zilveren Sleutel opgepakt"
 
 msgid "Picked up a Three Way Spread"
-msgstr "Spreidgeweer opgerapen"
+msgstr "Spreidgeweer opgepakt"
+
+msgid "Picked up a Time Crystal"
+msgstr "Tijdskristal opgepakt"
+
+msgid "Picked up a Transmitter"
+msgstr "Zender opgepakt"
 
 # ... required
 
@@ -461,10 +497,10 @@ msgid "Cyan Keycard required"
 msgstr "Turkooisen Kaart vereist"
 
 msgid "Cypher Piece #1 required"
-msgstr "1e Cypherdeel vereist"
+msgstr "1e deel Codesleutel vereist"
 
 msgid "Cypher Piece #2 required"
-msgstr "2e Cypherdeel vereist"
+msgstr "2e deel Codesleutel vereist"
 
 msgid "Dynamite required"
 msgstr "Dynamiet vereist"
@@ -488,6 +524,9 @@ msgid "Red Keycard required"
 msgstr "Rode Kaart vereist"
 
 msgid "Silver Key Required"
+msgstr "Zilveren Sleutel vereist"
+
+msgid "Silver Key required"
 msgstr "Zilveren Sleutel vereist"
 
 # Speech
@@ -552,7 +591,7 @@ msgid "Automap is not available!"
 msgstr "Automap is niet beschikbaar!"
 
 msgid "Average Continue Usage:"
-msgstr "Gemiddeld gebruik continuering:"
+msgstr "Gemiddeld gebruik Doorgaan:"
 
 msgid "Best Combo"
 msgstr "Beste Combo"
@@ -590,6 +629,9 @@ msgstr "Kan nog niet verlaten - Onbehaalde doelen"
 msgid "Cave In!! Looks like it might be controlled by that switch..."
 msgstr "Instortingsgevaar!! Het lijkt alsof die knop er iets mee te maken heeft..."
 
+msgid "Cave in stopped"
+msgstr "Instorting gestopt"
+
 msgid "Cell Door #1 Opened"
 msgstr "Celdeur #1 geopend"
 
@@ -606,7 +648,7 @@ msgid "Completed"
 msgstr "Afgerond"
 
 msgid "Continues Used:"
-msgstr "Continueringen gebruikt:"
+msgstr "Doorgaan gebruikt:"
 
 msgid "Copyright (C) 2004, 2005 Parallel Realities"
 msgstr "Copyright © 2004, 2005 Parallel Realities"
@@ -646,7 +688,7 @@ msgid "Doors Opened"
 msgstr "Deuren geopend"
 
 msgid "Eastern passage is now accessible"
-msgstr "Oostelijke pas is nu toegankelijk"
+msgstr "Oostelijke Pas is nu toegankelijk"
 
 msgid "Easy"
 msgstr "Makkelijk"
@@ -665,6 +707,9 @@ msgstr "Vijanden verslagen:"
 
 msgid "Escapes Used:"
 msgstr "Escapes gebruikt:"
+
+msgid "Exit Open"
+msgstr "Uitgang open"
 
 msgid "Extreme"
 msgstr "Extreem"

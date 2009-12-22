@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: blobwars 1.06\n"
-"PO-Revision-Date: 2007-03-18 02:04+0100\n"
+"Project-Id-Version: blobwars 1.05\n"
+"PO-Revision-Date: 2007-03-23 01:45+0100\n"
 "Last-Translator: Javier Serrano Polo <jasp00@terra.es>\n"
 "Language-Team: Catalan Localization <debian-l10n-catalan@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -386,6 +386,9 @@ msgstr "Has agafat una Clau Antiga"
 msgid "Picked up a Blue Keycard"
 msgstr "Has agafat una Targeta Blava"
 
+msgid "Picked up a Box of Orichalcum"
+msgstr "Has recollit una Caixa d'Oricalc"
+
 msgid "Picked up a Bronze Key"
 msgstr "Has agafat una Clau de Bronze"
 
@@ -395,20 +398,32 @@ msgstr "T'has pres un penjoll de Cireres"
 msgid "Picked up a Cherry"
 msgstr "T'has pres una Cirera"
 
+msgid "Picked up a Cherry Plant"
+msgstr "Has recollit una Planta de Cireres"
+
 msgid "Picked up a Crystal Shard"
-msgstr "Has agafat un Fragment de Cristall"
+msgstr "Has trobat un Fragment de Cristall"
 
 msgid "Picked up a Cyan Keycard"
 msgstr "Has agafat una Targeta Cian"
+
+msgid "Picked up a Cypher Piece #1"
+msgstr "Has trobat la 1a Peça Clau"
+
+msgid "Picked up a Cypher Piece #2"
+msgstr "Has trobat la 2a Peça Clau"
+
+msgid "Picked up a Diamond"
+msgstr "Has trobat un Diamant"
+
+msgid "Picked up a Fire Crystal"
+msgstr "Has agafat el Cristall del Foc"
 
 msgid "Picked up a Gold Key"
 msgstr "Has agafat una Clau d'Or"
 
 msgid "Picked up a Green Keycard"
 msgstr "Has agafat una Targeta Verda"
-
-msgid "Picked up a Grenades"
-msgstr "Has aconseguit Granades"
 
 msgid "Picked up a Keycard"
 msgstr "Has agafat una Targeta"
@@ -418,6 +433,12 @@ msgstr "Has aconseguit un Canó Làser"
 
 msgid "Picked up a Machine Gun"
 msgstr "Has aconseguit una Metralladora"
+
+msgid "Picked up a Map Piece"
+msgstr "Has trobat una Part del Mapa"
+
+msgid "Picked up a Pack of Dynamite"
+msgstr "Has trobat un Cartutx de Dinamita"
 
 msgid "Picked up a pair of Cherries"
 msgstr "T'has pres un parell de Cireres"
@@ -431,14 +452,29 @@ msgstr "Has agafat una Targeta Morada"
 msgid "Picked up a Red Keycard"
 msgstr "Has agafat una Targeta Vermella"
 
+msgid "Picked up a Set of Blueprints"
+msgstr "Has robat els Plànols"
+
 msgid "Picked up a set of Grenades"
 msgstr "Has aconseguit un joc de Granades"
 
 msgid "Picked up a Silver Key"
 msgstr "Has agafat una Clau d'Argent"
 
+msgid "Picked up a Space Crystal"
+msgstr "Has agafat el Cristall de l'Espai"
+
+msgid "Picked up a Sword"
+msgstr "Has trobat una Espasa"
+
 msgid "Picked up a Three Way Spread"
 msgstr "Has aconseguit un Rifle a Tres Bandes"
+
+msgid "Picked up a Time Crystal"
+msgstr "Has agafat el Cristall del Temps"
+
+msgid "Picked up a Transmitter"
+msgstr "Has trobat el Transmissor"
 
 # ... required
 
@@ -485,6 +521,9 @@ msgid "Red Keycard required"
 msgstr "Requereix una Targeta Vermella"
 
 msgid "Silver Key Required"
+msgstr "Requereix una Clau d'Argent"
+
+msgid "Silver Key required"
 msgstr "Requereix una Clau d'Argent"
 
 # Speech
@@ -587,6 +626,9 @@ msgstr "Encara No Pots Sortir - Objectius Pendents"
 msgid "Cave In!! Looks like it might be controlled by that switch..."
 msgstr "Despreniment!! Sembla que està controlat per aquell interruptor..."
 
+msgid "Cave in stopped"
+msgstr "Despreniment aturat"
+
 msgid "Cell Door #1 Opened"
 msgstr "Porta de la Cel·la #1 Oberta"
 
@@ -662,6 +704,9 @@ msgstr "Enemics Derrotats:"
 
 msgid "Escapes Used:"
 msgstr "Fugides Fetes:"
+
+msgid "Exit Open"
+msgstr "Sortida Oberta"
 
 msgid "Extreme"
 msgstr "Extrem"
