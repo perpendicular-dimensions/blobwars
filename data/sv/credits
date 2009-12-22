@@ -1,0 +1,110 @@
+109
+000 1 HUVUDPROGRAMMERING
+020 0 Stephen Sweeney
+040 1 YTTERLIGARE PROGRAMMERING
+020 0 Richard Sweeney
+040 1 GRAFIK
+020 0 Stephen Sweeney
+020 0 Richard Sweeney
+020 0 Ceri Done
+050 1 PRODUCTION SOFTWARE
+050 1 LINUX MANDRAKE 10.0
+020 0 Copyright (c) 2004 Mandrakesoft
+020 0 All Rights Reserved
+020 0 http://www.linux-mandrake.com
+050 1 KDE 3.2
+020 0 Copyright (c) 2004, The KDE Team
+020 0 All Rights Reserved
+020 0 http://www.kde.org
+050 1 GNU GCC
+020 0 http://gcc.gnu.org
+050 1 SIMPLE DIRECTMEDIA LAYER
+020 0 Skapat av Sam Lantinga
+020 0 http://www.libsdl.org
+050 1 KATE
+020 0 Copyright (c) 2000 - 2003, The Kate Authors
+020 0 http://kate.sourceforge.net
+050 1 POV RAY
+020 0 Copyright (c) 2003, The POV RAY Team
+020 0 http://www.pov-ray.org
+050 1 KPOV MODELER
+020 0 Copyright (c) 2001 Andreas Zehender
+050 1 THE GIMP
+020 0 http://www.gimp.org
+050 1 QUALITY ASSURANCE AND ADVICE
+020 0 Stephane Marchesin, Henning, Eugene Marcotte, Dorian P
+020 0 Ulrich Eckhardt, Emmanuel Poirier, Caleb Sawtell
+020 0 Peter Cordes, Michael Banks, Allan Crain, Torbjorn Andersson
+020 0 Erik Schnetter, Andrew Levstik, Josh Triplett
+020 0 Wesley Whitmore, Faye Price, Ceri Done
+020 0 Emma Hamilton, Ian Bisset, Rob Jones
+020 0 Neil Ellis
+050 1 PORTING OCH PATCHAR
+020 0 LouiSe, Richard June, Bas Wijnen
+020 0 Ondrej Sury, Bob Ippolito
+050 1 MUSIK
+040 0 "Helmet Shake"
+020 0 Komponerad av Jogeir / Spaceballs
+020 0 Copyright (c) Jogeir
+040 0 "For a Friend"
+020 0 Komponerad av David Elfstrom
+020 0 Copyright (c) 1991 David Elfstrom
+040 0 "Commando"
+020 0 Komponerad av Kaizsu
+020 0 Copyright (c) Kaizsu
+040 0 "Do Viking"
+020 0 Komponerad av Scorpik
+020 0 Copyright (c) Scorpik
+040 0 "Thug Live"
+020 0 Komponerad av Gryzor
+020 0 Copyright (c) Gryzor
+040 0 "Daisy Chain"
+020 0 Okänd upphovsman
+040 0 "Condom Corruption"
+020 0 Komponerad av Travolta / Spaceballs
+020 0 Copyright (c) 1992 Travolta
+040 0 "Ice Cave"
+020 0 Okänd upphovsman
+040 0 "Doctor Must Die"
+020 0 Okänd upphovsman
+040 0 "A Friend Has Died"
+020 0 Composed by Scorpik
+020 0 Copyright (c) 1995 Scorpik
+040 0 "Ice World"
+020 0 Okänd upphovsman
+040 0 "Circuit Overlode"
+020 0 Komponerad av HellTrot Co
+020 0 Copyright (c) 1998 HellTrot Co
+020 0 All Rights Reserved
+040 0 "Sweet Dreams"
+020 0 Komponerad av Jussi Salemla
+020 0 Copyright (c) Jussi Salemla
+040 0 "Autumns Dawning"
+020 0 Komponerad av Andy Carlson
+020 0 Copyright (c) 1995 Andy Carlson
+050 1 SPECIELLT TACK
+020 0 Mina föräldrar för deras uppmuntran till projektet "The Little Yellow Balls"
+020 0 The Debian community för deras flitiga buggjakt
+020 0 Bertrand Lamy för bidragande av joystick-kod
+020 0 Allan Crain för korrigering av stavning och grammatik
+020 0 Alla de individer som tog tid att testa och rapportera buggar
+020 0 Och alla dessa personer på the SDL Mailing List
+050 1 BITSTREAM VERA FONT
+020 0 Copyright (c) 2003 by Bitstream, Inc.
+020 0 All Rights Reserved.
+020 0 Bitstream Vera is a trademark of Bitstream, Inc.
+100 0 All musik och ljudeffekter i spelet har hämtats från olika,
+020 0 fritt tillgängliga hemsidor på internet. Samtliga ljud- och musikfiler
+020 0 antas vara allmän egendom och därför fria att distribuera.
+020 0 We accept no responsibility for audio contain herein that was made freely
+020 0 available without the consent of the owner.
+100 0 Alla namnen på karaktärerna i spelet är upphovsrätts- och/eller
+020 0 varumärkesskyddade av sina respektive ägare. De är inte på något vis
+020 0 associerade med varken Blob Wars: Metal Blob Solid eller Parallel Realities.
+220 1 Parallel Realities and the Alien Device
+020 1 Copyright (c) 2004 Parallel Realities
+020 1 All Rights Reserved
+450 1 Blob Wars : Metal Blob Solid
+020 1 Copyright (c) 2004 Parallel Realities
+020 1 Licenserat under the GNU General Public License
+120 1 http://www.parallelrealities.co.uk

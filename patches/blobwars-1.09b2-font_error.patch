@@ -1,0 +1,49 @@
+diff -u blobwars-1.09b2/src/game.cpp blobwars-1.09b2-new/src/game.cpp
+--- blobwars-1.09b2/src/game.cpp	2008-02-29 19:07:01.000000000 +0100
++++ blobwars-1.09b2-new/src/game.cpp	2008-08-30 00:57:19.000000000 +0200
+@@ -407,8 +407,7 @@
+ 	if (map.totalMIAs > 0)
+ 	{
+ 		graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
+-		sprintf(message, "%s", _("Rescue %d MIAs"));
+-		sprintf(message, message, map.requiredMIAs);
++		sprintf(message, _("Rescue %d MIAs"), map.requiredMIAs);
+ 		graphics.drawString(message, col1, y, TXT_LEFT, panel);
+ 
+ 		if (map.foundMIAs < map.requiredMIAs)
+diff -u blobwars-1.09b2/src/info.cpp blobwars-1.09b2-new/src/info.cpp
+--- blobwars-1.09b2/src/info.cpp	2008-02-29 19:07:01.000000000 +0100
++++ blobwars-1.09b2-new/src/info.cpp	2008-08-30 01:00:48.000000000 +0200
+@@ -233,8 +233,7 @@
+ 	graphics.drawString(string, col2, y, TXT_LEFT, graphics.screen);
+ 
+ 	graphics.drawString(_("Best Combo"), col1, y += 20, TXT_RIGHT, graphics.screen);
+-	sprintf(string, "%s", _("%d Hits"));
+-	sprintf(string, string, game.maxComboHits);
++	sprintf(string, _("%d Hits"), game.maxComboHits);
+ 	graphics.drawString(string, col2, y, TXT_LEFT, graphics.screen);
+ 
+ 	graphics.drawString(_("++ Inventory ++"), 320, y += 40, TXT_CENTERED, graphics.screen);
+@@ -249,8 +248,7 @@
+ 	if (map.totalMIAs > 0)
+ 	{
+ 		graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
+-		sprintf(message, "%s", _("Rescue %d MIAs"));
+-		sprintf(message, message, map.requiredMIAs);
++		sprintf(message, _("Rescue %d MIAs"), map.requiredMIAs);
+ 		graphics.drawString(message, col1, y, TXT_RIGHT, graphics.screen);
+ 
+ 		if (map.foundMIAs < map.requiredMIAs)
+diff -u blobwars-1.09b2/src/mission.cpp blobwars-1.09b2-new/src/mission.cpp
+--- blobwars-1.09b2/src/mission.cpp	2008-02-29 19:07:01.000000000 +0100
++++ blobwars-1.09b2-new/src/mission.cpp	2008-08-30 01:00:39.000000000 +0200
+@@ -220,8 +220,7 @@
+ 	if (map.totalMIAs > 0)
+ 	{
+ 		graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
+-		sprintf(message, "%s", _("Rescue %d MIAs"));
+-		sprintf(message, message, map.requiredMIAs);
++		sprintf(message, _("Rescue %d MIAs"), map.requiredMIAs);
+ 		graphics.drawString(message, col1, y, TXT_RIGHT, graphics.background);
+ 
+ 		if (map.foundMIAs < map.requiredMIAs)

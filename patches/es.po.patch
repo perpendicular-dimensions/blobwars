@@ -1,0 +1,136 @@
+--- es.po.orig	2009-03-02 09:07:32.000000000 +0100
++++ es.po	2009-03-02 09:08:24.000000000 +0100
+@@ -1,9 +1,9 @@
+ msgid ""
+ msgstr ""
+-"Project-Id-Version: blobwars 1.06\n"
+-"PO-Revision-Date: 2007-06-04 09:33+0100\n"
++"Project-Id-Version: blobwars 1.11\n"
++"PO-Revision-Date: 2009-03-02 09:08+0100\n"
+ "Last-Translator: Pacho Ramos <pacho@condmat1.ciencias.uniovi.es>\n"
+-"Language-Team: Catalan Localization <debian-l10n-catalan@lists.debian.org>\n"
++"Language-Team: \n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=UTF-8\n"
+ "Content-Transfer-Encoding: 8bit\n"
+@@ -169,10 +169,10 @@
+ msgstr "Lucha contra Galdov"
+ 
+ msgid "Collect 10 Cherry Plants"
+-msgstr "Recolectar 10 Plantas de Cerezas"
++msgstr "Recolectar 10 Cerezos"
+ 
+ msgid "Collect 20 Cherry Plants"
+-msgstr "Recolectar 20 Plantas de Cerezas"
++msgstr "Recolectar 20 Cerezos"
+ 
+ msgid "Collect 25 Boxes of Orichalcum Beads"
+ msgstr "Recolectar 25 Cajas de Bolas de Oricalc"
+@@ -344,7 +344,7 @@
+ msgstr "Llega al Bosque"
+ 
+ msgid "Get to the Main Pump Room"
+-msgstr "Llega al la Sala Principal de la Bomba"
++msgstr "Llega a la Sala Principal de la Bomba"
+ 
+ msgid "Get to the Maintenance Room"
+ msgstr "Llega a la Sala de Mantenimiento"
+@@ -437,6 +437,49 @@
+ msgid "Picked up a Three Way Spread"
+ msgstr "Has conseguido un Rifle a Tres Bandas"
+ 
++#missing Picked up...
++msgid "Picked up a Transmitter"
++msgstr "Has conseguido un Transmisor"
++
++msgid "Picked up a Cherry Plant"
++msgstr "Has tomado un Cerezo"
++
++msgid "Picked up a Fire Crystal"
++msgstr "Has conseguido un Cristal de Fuego"
++
++msgid "Picked up a Time Crystal"
++msgstr "Has conseguido un Cristal del Tiempo"
++
++msgid "Picked up a Space Crystal"
++msgstr "Has conseguido un Cristal del Espacio"
++
++msgid "Picked up a Reality Crystal"
++msgstr "Has conseguido un Cristal de la realidad"
++
++msgid "Picked up a Sword"
++msgstr "Has conseguido una Espada"
++
++msgid "Picked up a Pack of Dynamite"
++msgstr "Has conseguido un Cartucho de Dinamita"
++
++msgid "Picked up a Diamond"
++msgstr "Has adquirido un Diamante"
++
++msgid "Picked up a Set of Blueprints"
++msgstr "Has adquirido los Planos"
++
++msgid "Picked up a Map Piece"
++msgstr "Has conseguido una pieza del Mapa"
++
++msgid "Picked up a Box of Orichalcum"
++msgstr "Has adquirido una caja de Oricalc"
++
++msgid "Picked up a Cypher Piece #1"
++msgstr "Pieza clave #1 conseguida"
++
++msgid "Picked up a Cypher Piece #2"
++msgstr "Pieza clave #2 conseguida"
++ 
+ # ... required
+ msgid "Ancient Cog required"
+ msgstr "Se requiere una Rueda Dentada Antigua"
+@@ -643,7 +686,7 @@
+ msgstr "Fácil"
+ 
+ msgid "Empty"
+-msgstr "Vacío"
++msgstr "Vacía"
+ 
+ msgid "Enemies"
+ msgstr "Enemigos"
+@@ -673,10 +716,10 @@
+ msgstr "¡¡Galdov ha perdido el cristal!! ¡Rápido! ¡Hay que conseguirlo!"
+ 
+ msgid "Got the Aqua Lung! You can now swim forever!"
+-msgstr "¡Ya tienes el Pulmón Acuático! ¡Podrás nadar para siempre¡"
++msgstr "¡Ya tienes el Pulmón Acuático! ¡Podrás nadar sin límite¡"
+ 
+ msgid "Got the Jetpack! Press SPACE to Activate!"
+-msgstr "¡Ya tienes la Mochila a Propulsión! ¡Actívalo para volar!"
++msgstr "¡Ya tienes la Mochila a Propulsión! ¡Actívala para volar!"
+ 
+ msgid "Grenades"
+ msgstr "Granadas"
+@@ -715,7 +758,7 @@
+ msgstr "Mochila a Propulsión"
+ 
+ msgid "Jetpack cannot be used underwater"
+-msgstr "No puedes usar la Mochila a Propulsión bajo agua"
++msgstr "No puedes usar la Mochila a Propulsión bajo el agua"
+ 
+ msgid "Jetpack is recharging..."
+ msgstr "La Mochila a Propulsión está recargándose..."
+@@ -991,7 +1034,7 @@
+ msgstr "¡Ya tienes la Mochila a Propulsión!"
+ 
+ msgid "You'll need to 'Kill Two Birds with One Stone' here..."
+-msgstr "Aquí necesitarás \"Matar Dos Pájaros de Una Tiro\"..."
++msgstr "Aquí necesitarás \"Matar Dos Pájaros de Un Tiro\"..."
+ 
+ # Keys
+ msgid "backspace"
+@@ -1007,7 +1050,7 @@
+ msgstr "abajo"
+ 
+ msgid "end"
+-msgstr "fifin"
++msgstr "fin"
+ 
+ msgid "enter"
+ msgstr "intro"

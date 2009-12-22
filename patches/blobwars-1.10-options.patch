@@ -1,0 +1,115 @@
+diff -ur blobwars-1.10.orig/src/widgets.cpp blobwars-1.10/src/widgets.cpp
+--- blobwars-1.10.orig/src/widgets.cpp	2009-02-01 14:34:45.000000000 +0300
++++ blobwars-1.10/src/widgets.cpp	2009-02-27 22:01:52.000000000 +0300
+@@ -34,68 +34,48 @@
+ 
+ 	char *c = widget->options;
+ 
+-	char token[100];
+-	strcpy(token, "");
+-	
+ 	SDL_Surface *text;
+ 
+-	while (*c != '\0')
++	while (*c)
+ 	{
+-		if (*c == '|')
+-		{
+-			if (widget->enabled)
+-			{
+-				graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
+-				if (count == *widget->value)
+-					graphics.setFontColor(0x00, 0x00, 0x00, 0x00, 0xff, 0x00);
+-			}
+-			else
+-			{
+-				graphics.setFontColor(0x77, 0x77, 0x77, 0x00, 0x00, 0x00);
+-			}
+-
+-			sprintf(token, "%s", token);
++		char token[100];
++		int token_len;
+ 
+-			text = graphics.getString(token, false);
++		char *eow = strchr (c, '|');
++		if (!eow)
++			eow = strchr (c, 0);
++
++		token_len = eow - c;
++		if (token_len > sizeof (token) - 1)
++			token_len = sizeof (token) - 1;
++		memcpy (token, c, token_len);
++		token [token_len] = 0;
++
++		c = eow;
++		if (*c)
++			c++;
+ 
+-			if ((widget->enabled) && (count == *widget->value))
+-				graphics.drawWidgetRect(x, widget->y, text->w, text->h);
+-
+-			graphics.blit(text, x, widget->y, graphics.screen, false);
+-
+-			x += text->w + 25;
+-			count++;
+-			strcpy(token, "");
++		if (widget->enabled)
++		{
++			graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
++			if (count == *widget->value)
++				graphics.setFontColor(0x00, 0x00, 0x00, 0x00, 0xff, 0x00);
+ 		}
+ 		else
+ 		{
+-			sprintf(token, "%s%c", token, *c);
++			graphics.setFontColor(0x77, 0x77, 0x77, 0x00, 0x00, 0x00);
+ 		}
+ 
+-		*c++;
+-	}
+-
+-	if (widget->enabled)
+-	{
+-		graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
+-		if (count == *widget->value)
+-			graphics.setFontColor(0x00, 0x00, 0x00, 0x00, 0xff, 0x00);
+-	}
+-	else
+-	{
+-		graphics.setFontColor(0x77, 0x77, 0x77, 0x00, 0x00, 0x00);
+-	}
++		text = graphics.getString(token, false);
+ 
+-	sprintf(token, "%s", token);
++		if ((widget->enabled) && (count == *widget->value))
++			graphics.drawWidgetRect(x, widget->y, text->w, text->h);
+ 
+-	text = graphics.getString(token, false);
++		graphics.blit(text, x, widget->y, graphics.screen, false);
+ 
+-	if ((widget->enabled) && (count == *widget->value))
+-	{
+-		graphics.drawWidgetRect(x, widget->y, text->w, text->h);
++		x += text->w + 25;
++		count++;
+ 	}
+-
+-	graphics.blit(text, x, widget->y, graphics.screen, false);
+ }
+ 
+ /**
+@@ -176,12 +156,8 @@
+ 	
+ 	int x = 300;
+ 	
+-	char text[25];
+-	strcpy(text, "");
+-	
+-	sprintf(text, "%s", Keyboard::translateKey(*widget->value));
+-	
+-	graphics.drawString(text, x, widget->y, TXT_LEFT, graphics.screen);
++	graphics.drawString(Keyboard::translateKey(*widget->value),
++			    x, widget->y, TXT_LEFT, graphics.screen);
+ }
+ 
+ /**

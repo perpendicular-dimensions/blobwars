@@ -1,0 +1,585 @@
+<html>
+<head>
+	<title>Blob Wars : Metal Blob Solid Gameplay Manual</title>
+	<meta content="">
+	<style>
+		a {color: #499FFF; text-decoration: none; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px;}
+		a:hover {color: #499FFF; text-decoration: underline; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px;}
+		body {color: #FFFFFF; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px;}
+		p.terminal {color: #00CC00; font-family: monospace; font-size: 13px;}
+		table {color: #FFFFFF; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px;}
+		table.blue {background-color: #000066; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px;}
+		td {color: #FFFFFF; background-color: #000000; 13px}
+		h4 {background: #0022FF; font-size: 13px;}
+	</style>
+</head>
+<body BGCOLOR="#000000" COLOR="#FFFFFF">
+
+<CENTER>
+
+<TABLE WIDTH="100%" BGCOLOR="#0022FF" CELLPADDING="10"><TR BGCOLOR="#000000"><TD>
+
+<CENTER>
+<IMG SRC="title.png">
+<P STYLE="font-size:18pt">Blob Wars : Episode I</P>
+<TABLE CELLSPACING="5"><TR>
+<TD VALIGN="BOTTOM"><IMG SRC="cherry.png" TITLE="A Cherry"></TD>
+<TD VALIGN="BOTTOM"><IMG SRC="bob.gif" TITLE="Bob"></TD>
+<TD VALIGN="BOTTOM"><IMG SRC="eyeDroid.gif" TITLE="Eye Droid"></TD>
+<TD VALIGN="BOTTOM"><IMG SRC="scaredMIA.gif" TITLE="Scared MIA"></TD>
+<TD VALIGN="BOTTOM"><IMG SRC="pistolBlob.gif" TITLE="Evil Pistol Blob"></TD>
+<TD VALIGN="BOTTOM"><IMG SRC="machineGunIcon.png" TITLE="Machine Gun Powerup"></TD>
+<TD VALIGN="BOTTOM"><IMG SRC="keyCard.gif" TITLE="Key Card"></TD>
+<TD VALIGN="BOTTOM"><IMG SRC="points.gif" TITLE="Points Pod"></TD>
+<TD VALIGN="BOTTOM"><IMG SRC="galdov.png" TITLE="Galdov, the Metal Blob"></TD>
+</TR></TABLE>
+</CENTER>
+
+<A NAME="license"></A>
+<H4>License and Disclaimer</H4>
+
+<P>This program is free software; you can redistribute it and/or<BR>
+modify it under the terms of the GNU General Public License<BR>
+as published by the Free Software Foundation; either version 2<BR>
+of the License, or (at your option) any later version.</P>
+
+<P>This program is distributed in the hope that it will be useful,<BR>
+but WITHOUT ANY WARRANTY; without even the implied warranty of<BR>
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</P>
+
+<P>See the GNU General Public License for more details.</P>
+
+<P>You should have received a copy of the GNU General Public License<BR>
+along with this program; if not, write to the Free Software<BR>
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.<BR></P>
+
+<P>Blob Wars : Metal Blob Solid is distributed and licensed under the GNU General Public License. You can read
+the full license by clicking <A HREF="LICENSE">here</A>.</P>
+
+<P>This license agreement is shown the first time the game is played. IT MUST NOT BE REMOVED UNDER ANY
+CIRCUMSTANCES. DO NOT DISTRIBUTE THIS GAME IN ANY FORM WHERE THE USER DOES NOT SEE THE LICENSE.</P>
+
+<P>This manual is based on the downloadable version of Metal Blob Solid as found on the Parallel Realities
+website. Be aware that depending on the version of the game you are playing this manual may be incomplete or
+incorrect in places.</P>
+
+<A NAME="introduction"></A>
+<H4>Introduction</H4>
+<P>Blob Wars : Metal Blob Solid is a platform game, not unlike those found on the Amiga and SNES. The object of the
+game is to take on the role of solider Blob, Bob, and play through the various levels and attempt to rescue as
+many MIA (Missing In Action) Blobs as possible. This is not quite as straight forward as it sounds, since the MIAs
+will often be not directly reachable and will require some extra thought. Bob also has to contend with environmental
+hazards, alien invaders and assimilated Blobs.</P>
+
+<A NAME="requirements"></A>
+<H4>Requirements</H4>
+<P>Blob Wars requires the following,</P>
+<UL>
+	<LI><A HREF="http://www.libsdl.org">SDL</A></LI>
+	<LI><A HREF="http://www.libsdl.org/projects/SDL_image">SDL Image</A></LI>
+	<LI><A HREF="http://www.libsdl.org/projects/SDL_mixer">SDL Mixer</A></LI>
+	<LI><A HREF="http://www.libsdl.org/projects/SDL_ttf">SDL TTF</A></LI>
+	<LI>Zlib</LI>
+</UL>
+
+<P>
+<PRE>
+Screen Resolution : 640 x 480
+Color Depth       : 16 bit or greater
+Harddrive         : 7MBs
+Controls          : Keyboard (or Joypad)
+</PRE>
+
+<P>Most Linux users will find that the required SDL libraries came with their system and are probably already
+installed. If not, click the name of the library above to go to the relevant homepage.</P>
+
+<A NAME="installation"></A>
+<H4>Installation</H4>
+<P>Blob Wars : Metal Blob Solid can be installed in two different ways. The first (and easiest) is by using
+a binary RPM package. The second involves building the game. It is recommended that you install via an RPM
+if you are able to. You will require the libraries listed in the Requirements section whichever method you
+choose. For installation from source you will also require the development packages for those libraries
+listed.</P>
+
+<P><B>Installation from RPM Package</B></P>
+<P>To install from RPM simply use your preferred method of installation (eg - via a GUI such as KPackage
+or via a terminal). If you wish to install via a terminal you can use the do so by typing
+the following (remember to change the filename to match the name of the package you are installing),</P>
+
+<P CLASS="terminal">rpm -U blobwars-x.x-x.i586.rpm</P>
+
+<P>Provided you have all the required libraries installed the game should install without problems.</P>
+
+<P><B>Installation from source</B></P>
+<P>If you choose this method you will need to build the game from source. This will require all the appropriate
+development libraries (see Requirements) and some knowledge of building an application using the source code.
+Open a terminal and use the following commands to extract, compile and install the game (again remember to change the
+filename to match the name of the download),</P>
+
+<P CLASS="terminal">
+tar xzf blobwars-x.x-x.tar.gz<BR>
+cd blobwars-x.x-x<BR>
+make<BR>
+make install<FONT COLOR="#FFFFFF">*</FONT><BR>
+</P>
+
+<P><I>* - You will have to be root in order to perform this step.</I></P>
+
+<P>Notes</P>
+<UL>
+	<LI>Default installation target is /usr/games for the binary and usr/share/games for the data</LI>
+	<LI>Music and Font data are extracted to /tmp and loaded from there. SDL currently does not support loading
+	music directly from memory. Also segmentation faults occurred when loading fonts from memory. These are
+	only minor issues and should not affect the game in any way.</LI>
+	<LI>Menu items are added for Gnome and KDE desktops into Games and Games/Arcade respectively.</LI>
+</UL>
+
+<A NAME="running"></A>
+<H4>Running</H4>
+<P>Either type,</P>
+
+<P CLASS="terminal">blobwars</P>
+
+<P>in a terminal window, or you can use the menu links that have been added for Gnome and KDE desktops. These under located in Games
+and Games / Arcade respectively.</P>
+
+<A NAME="story"></A>
+<H4>The Story</H4>
+
+<P>Bob is a solider in the Blob Army. Many years ago the Blobs' Homeworld was invaded by a race of symbiotic
+cybernetic organisms. Since then the Blobs have faced a lifetime of war. Recently the Blob Army has decided to
+fall back, regroup and change their offensive strategy. But some soliders did not regroup. They were marked as
+Missing In Action and left. However one solider was not happy with this arrangement.</P>
+<P>Bob made it his mission to go out and <I>"Bring Our Boys Home"</I>. There had been enough loss of life already and
+Bob wanted to bring back as many soliders as possible, even if he died trying.</P>
+<P>But one thing puzzled him. The aliens could have wiped out their planet in just a matter of months. But
+they hadn't. The aliens could have taken all the resources they wanted and left. But they hadn't. What were
+they really after? And why?</P>
+
+<A NAME="controls"></A>
+<H4>Controls</H4>
+
+<P><B>Title / Options</B></P>
+<TABLE CLASS="blue" BORDER="0" CELLPADDING="3">
+<TR><TD WIDTH="200">Arrow Up / Arrow Down</TD><TD>Change menu selection</TD></TR>
+<TR><TD>Arrow Left / Arrow Right</TD><TD>Change menu option</TD></TR>
+<TR><TD>Enter / Space / LCtrl</TD><TD>Accept</TD></TR>
+<TR><TD>Escape</TD><TD>Back</TD></TR>
+</TABLE>
+
+<P><B>Hub</B></P>
+<TABLE CLASS="blue" CELLPADDING="3">
+<TR><TD WIDTH="200">Mouse</TD><TD>Move Cursor</TD></TR>
+<TR><TD>Left Mouse Button</TD><TD>Select Icon Option / Select Destination</TD></TR>
+<TR><TD>Right Mouse Button</TD><TD>Destination Information</TD></TR>
+</TABLE>
+
+<P><B>In Game (whilst on the ground)</B></P>
+<TABLE CLASS="blue" CELLPADDING="3">
+<TR><TD WIDTH="200">Arrow Left / Right</TD><TD>Move Left / Right</TD></TR>
+<TR><TD>Arrow Up</TD><TD>Jump</TD></TR>
+<TR><TD>LCtrl</TD><TD>Fire</TD></TR>
+<TR><TD>Space</TD><TD>Activate Jetpack (once aquired)</TD></TR>
+</TABLE>
+
+<P><B>In Game (whilst swimming)</B></P>
+<TABLE CLASS="blue" CELLPADDING="3">
+<TR><TD WIDTH="200">Arrow Up / Down</TD><TD>Swim Up / Down</TD></TR>
+<TR><TD>Arrow Left / Right</TD><TD>Swim Left / Right</TD></TR>
+<TR><TD>LCtrl</TD><TD>Fire</TD></TR>
+</TABLE>
+
+<P><B>In Game (General)</B></P>
+<TABLE CLASS="blue" CELLPADDING="3">
+<TR><TD WIDTH="200">Tab</TD><TD>Radar Map</TD></TR>
+<TR><TD WIDTH="200">P</TD><TD>Pause Game</TD></TR>
+<TR><TD>Escape</TD><TD>In Game Menu</TD></TR>
+</TABLE>
+
+<P><B>Misc</B></P>
+<TABLE CLASS="blue" CELLPADDING="3">
+<TR><TD WIDTH="200">F10</TD><TD>Toggle Full Screen</TD></TR>
+<TR><TD WIDTH="200">Alt + Return</TD><TD>Toggle Full Screen</TD></TR>
+</TABLE>
+
+<A NAME="starting"></A>
+<H4>Starting a New Game</H4>
+<P>From the Title screen select "Start New Game" then choose your difficulty level. Depending
+on the difficulty you choose the game will play in a different manner. Below is a table of how
+the difficulty level affects the game play,</P>
+
+<TABLE CLASS="blue" CELLPADDING="5">
+<TR><TD VALIGN="TOP"><B>Practice</B></TD><TD>
+Optionally complete various tasks<BR>
+Unlimited continues<BR>
+<P><I>(This is just a training level. It does not count toward the game)</I></P>
+</TD></TR>
+<TR><TD VALIGN="TOP"><B>Easy</B></TD><TD>
+Rescue MIAs<BR>
+No further objectives (no Boss missions either)<BR>
+Few Enemies<BR>
+Enemies spawn slowly and in few numbers<BR>
+Enemies attack rarely
+</TD></TR>
+<TR><TD VALIGN="TOP"><B>Normal</B></TD><TD>
+Rescue MIAs<BR>
+Complete additional required objectives<BR>
+Normal number of enemies<BR>
+Enemies spawn normally and in normal numbers<BR>
+Enemies attack normally
+</TD></TR>
+<TR><TD VALIGN="TOP"><B>Hard</B></TD><TD>
+Rescue MIAs<BR>
+Complete additional required objectives<BR>
+Large numbers of enemies<BR>
+Enemies spawn rapidly and in great numbers<BR>
+Enemies attack constantly
+</TD></TR>
+<TR><TD VALIGN="TOP"><B>Extreme</B></TD><TD>
+Rescue ALL MIAs<BR>
+Complete ALL Objectives<BR>
+Large numbers of enemies<BR>
+Enemies spawn rapidly and in greater numbers<BR>
+Enemies attack constantly<BR>
+You must complete the mission within a set time
+<P><I>(This setting cannot be attempted until you have complete the game once)</I></P>
+</TD></TR>
+</TABLE>
+
+<A NAME="keyboard"></A>
+<H4>Keyboard Configuration</H4>
+<P>To change the controls select Keyboard Configuration from the Options screen.</P>
+<P>The currently configured button will be displayed to the right of the action. To configure an
+action highlight the action you wish to set (using the arrow keys on the keyboard) and then press Return.
+The current button configuration entry will disappear and allow you to press the new key you wish
+to use. After doing so the new button will then be displayed.</P>
+<P>Repeat this process until you have configured all the keys you wish to. Key configuration is
+saved to a file called keyboard.conf in ~/.parallelrealities/blobwars/. Configuration is saved only
+once and not on a save game basis.</P>
+<P>If you wish to test out your configuration and tweak the settings to your liking it is recommended
+that you start a game in Practice mode where you can easily tweak and buttons and test the output.</P>
+
+<A NAME="joypad"></A>
+<H4>Joystick Configuration</H4>
+<P>Should you have a joystick / joypad connected then you will be able to configure the controls in this
+screen. The controls that can be configured map to the actions that can be performed in the game. eg -
+Up, Down, Left, Right, Fire, etc.</P>
+<P>The currently configured button will be displayed to the right of the action. To configure a joypad
+action highlight the action you wish to set (using the arrow keys on the keyboard) and then press Return.
+The current button configuration entry will disappear and allow you to press the new button on your
+joystick. After doing so the new button will then be displayed.</P>
+<P>Repeat this process until you have configured all the buttons you wish to. Joypad configuration is
+saved to a file called joystick.conf in ~/.parallelrealities/blobwars/. Configuration is saved only
+once and not on a save game basis.</P>
+<P>If you wish to test out your configuration and tweak the settings to your liking it is recommended
+that you start a game in Practice mode where you can easily tweak and buttons and test the output.</P>
+
+<A NAME="options"></A>
+<H4>Options</H4>
+<P>Various options are available to the player. These options can be set from the Title screen, the Hub or
+from In Game. Highlight an option by pressing the Up or Down arrow keys and then the Left or Right arrow
+keys in order to change the option's value.</P>
+
+<TABLE CLASS="blue" CELLPADDING="5">
+<TR><TD><B>Fullscreen</B></TD><TD>Toggles fullscreen mode. Either Off or On.</TD></TR>
+<TR><TD><B>Sound Volume</B></TD><TD>Changes sound volume. Slide the bar left or right to decrease or increase the
+sound volume.</TD></TR>
+<TR><TD><B>Music Volume</B></TD><TD>Changes music volume. Slide the bar left or right to decrease or increase the
+music volume.</TD></TR>
+<TR><TD><B>Output Type</B></TD><TD>Change the game's audio output type. You may select None, Mono or Stereo.
+<DIV STYLE="color:#FFFF00">The game will have to be restarted in order for a change from Mono to Stereo to take effect.</DIV></TD></TR>
+<TR><TD><B>Auto Save Slot</B></TD><TD>Selects the save slot the game will auto save the game to. Choose from slots
+1, 2, 3, 4 or 5.</TD></TR>
+<TR><TD><B>Brightness</B></TD><TD>Changes the brightness. Slide the bar left or right to decrease or increase the
+brightness of the display.</TD></TR>
+<TR><TD><B>Blood and Gore</B></TD><TD>Toggles the blood during gameplay. Either Off or On.</TD></TR>
+<TR><TD><B>Configure Keyboard</B></TD><TD>Go to the key configuration menu.</TD></TR>
+<TR><TD><B>Configure Joysticks</B></TD><TD>Go to the joystick configuration menu.<BR>
+<I>(disabled if no joysticks are detected)</I></TD></TR>
+</TABLE>
+
+<A NAME="playing"></A>
+<H4>How to Play</H4>
+<P>Playing Blob Wars : Metal Blob Solid is very straight forward. If you have ever played games such as
+Super Mario Brothers then you will get the hang of the game very quickly. Blob Wars : Metal Blob Solid has
+game play elements more closely related to The New Zealand Story though, since you have weapons with which
+to attack and can do other things such as swim.</P>
+<P>You can move Bob around the game world by using the arrow keys (see Controls) and using left CTRL to fire
+your current weapon. Due to the nature of the game, there are no ammunition restrictions so you can use
+your current weapon as much as you want. Also note that it is not possible to manually change weapons. To
+change your weapon you must pick up a weapon icon.</P>
+<P>Remember to keep an eye on your health (the red squares at the top of the screen). When you take damage
+you will lose a red square (or more depending on how you were damaged!). Bob is killed when all his health
+is depleted. At this point the game ends and you fail the mission. If you have reached a checkpoint before
+this time you will be given the option to continue (see Checkpoints). You get health back by picking up
+Cherries (a Blob's staple diet). One Cherry restores on unit of health so grab them whenever you see them.</P>
+<P>When swimming you have a limited amount of oxygen. Your current oxygen is represented by a set of blue
+squares to the right of your health. When you are underwater these squares are slowly removed. Once they
+run out your health will quickly begin to deplete, so don't stay underwater too long! You get oxygen back
+when you are out of the water.</P>
+<P>Blob Wars : Metal Blob Solid is divded into various missions, each with their own objectives. Depending
+on the level of difficulty you play on the number of objectives will change. For all difficulty levels you
+will be required to rescue a certain amount of MIAs. Other difficulty levels will have other objectives
+that you will be required to complete. See "Completing Missions" for more information.</P>
+
+<A NAME="mias"></A>
+<H4>Rescuing MIAs</H4>
+
+<P><IMG SRC="scaredMIA.gif" TITLE="MIA" ALIGN="LEFT">
+To rescue an MIA you simply walk into them. They will then be automatically teleported back home.
+This however is not always easy. Since you can only rescue an MIA by walking into them, you must first
+<I>be able</I> to do so. Some MIAs will be in high places, others behind doors. You may have to over come
+certain obstacles and other factors before you can rescue them.</P>
+
+<A NAME="objectives"></A>
+<H4>Objectives</H4>
+<P>As well as rescuing MIAs, some missions have other objectives. These can vary from finding objects, to
+defeating a certain enemies or number of enemies. Before a mission can be cleared you must first complete
+all the required objectives. Special objectives, such as Exiting a Mission, can only be achieved once all
+the other required objectives are completed. If that sounds complicated, don't worry, you'll get the idea!
+See "Completing Missions" for more information.</P>
+
+<P>You can see a list of objectives by pressing "P" to pause the game. This will also show each objective's
+completion status, including how much more is needed to be done.</P>
+
+<A NAME="missions"></A>
+<H4>Completing Missions</H4>
+<P>In order to complete a mission in Blob Wars : Metal Blob Solid, you will need to complete all the
+required objectives. For most missions this will involve rescuing a certain number of MIAs. The required
+objectives change depending on which level of difficulty you are playing on.</P>
+<P>The mission "Grasslands" requires you to rescue 5 MIAs. If you have set the difficulty to Normal or above
+then you will also be required to find a Transmitter.</P>
+
+<P>During the course of the mission you will receive checkpoints. These checkpoints allow you continue
+if you are killed during the mission. See below for more information.</P>
+
+<A NAME="checkpoints"></A>
+<H4>Checkpoints</H4>
+<P>Upon completing objectives you will be awared a checkpoint. A checkpoint allows you to restart the mission
+from a certain point if you are killed during play. When you are presented with the Game Over text, pressing
+space will bring up the continue options. You may either restart from the last checkpoint or return to the
+title screen. If you did not reach a checkpoint when you are killed you will simply be taken back to the
+title screen without prompting.</P>
+
+<P>Checkpoints are also awarded for rescuing half the number of required MIAs, all the required MIAs and the
+total MIAs on a mission. So, if you are required to rescue 12 MIAs you will receive a checkpoint after
+rescuing 6 and another for rescuing all 12.</P>
+
+<P>When restarting you will restart from the location you were at when the checkpoint was awarded (or the
+last place where you were on solid ground). You will
+restart with half your full health and everything you did before you were killed will be the way it was (so,
+if you saved an MIA after a checkpoint and were killed before receiving another you won't have to rescue
+the MIA again). Checkpoints can only be used a maximum of 3 times. Everytime you receive a checkpoint notice
+you will be allowed to continue a further 3 times. The number of continues remaining is noted in brackets
+next to the Continue option.</P>
+
+<P>Note that due to the nature of the game it is not possible to continue on Boss missions.</P>
+
+<A NAME="gameover"></A>
+<H4>Game Over</H4>
+<P>The game ends when Bob is killed during a mission (his health is reduced to 0). At this point you will be
+presented with a Game Over message. If you have managed to receive a check point (from completing objectives)
+you will be given the option to return to this check point or quit to the title screen. Otherwise you
+will be taken back to the title screen.</P>
+
+<A NAME="hub"></A>
+<H4>Hub</H4>
+<P>The Hub is the place you will spend time between missions. The Hub allows you to select which mission you
+will next undertake and also give you information relating to the missions you have just done, which MIAs
+you have currently rescued and some overall game statistics.</P>
+
+<P>The hub can be effectively divided into three different areas - The Map, the Destination Bar and the
+Action Bar</P>
+
+<P>The main screen of the Hub is the map. The map will show various locations that can be visited (represented
+by animated red shapes). Placing the mouse cursor over these locations will show their name just above the
+cursor. To select a destination left click on the location. The Destination Bar will change to reflect the
+name destination you have choosen. Right clicking on the location will display statistics about the location
+(more on that in a minute!).</P>
+
+<P>The Action Bar has 6 options - Start, Info, MIAs, Stats, Options and Quit.</P>
+
+<P>Clicking on Start will allow you play the mission you have currently selected (as Selected Destination).</P>
+
+<P>Info will display information about the destination you have selected. You will be shown how many MIAs you have
+rescued in that area and which objectives you have currently completed. This will be useful to you later in the
+game when you wish to revisit missions in order to complete them fully. A briefing is available for missions
+that have yet to be cleared and an objective summary is available afterwards.</P>
+
+<P>MIAs displays a list of all the MIAs that you have and haven't currently rescued. The list is updated once an
+area is cleared. The list shows the MIAs names, locations and their status (Found or Missing). Like the Info
+screen this is useful for discovering what levels need to still be rescued. Click in the Left and Right arrows
+to scroll through the various pages.</P>
+
+<P>Stats gives you some information on how you are currently doing in the game. Most of the information here is
+just for fun. There are three pages, giving various bits of information. One thing to note - You may notice that
+the Percentage Complete statistic fluctuates a lot. This is because this is a percentage of what is currently
+known and not an overall percentage. So you may notice that at one stage it says 60% and then after finishing
+a stage it says 55%!</P>
+
+<A NAME="enemies"></A>
+<H4>Enemies</H4>
+<P>The aliens are now littered around the Blobs' homeworld. Most of them have taken over the bodies of Blob
+soliders and are using them for their evil purposes. Some others travel around in their robot housing. Most
+of the enemies are easily dealt with - A single shot will take them down. But what they lack in defence they
+make up for in weaponary. Here are just a couple of the enemies you may encounter,</P>
+
+<TABLE CLASS="blue" CELLPADDING="5">
+<TR>
+	<TD><B>Pistol Blob</B></TD>
+	<TD><CENTER><IMG SRC="pistolBlob.gif" TITLE="Pistol Blob"></CENTER></TD>
+	<TD VALIGN="TOP">Once a cadet in the Blob army this Blob has been assimilated by the alien's nano technology.
+	Weak and poor shots, these Blobs can still cause Bob problems in large numbers. Their green colouring
+	is the result of alien's assimilation process.</TD>
+</TR>
+<TR>
+	<TD><B>Eye Droid</B></TD>
+	<TD><CENTER><IMG SRC="eyeDroid.gif" TITLE="Eye Droid V1.0"></CENTER></TD>
+	<TD VALIGN="TOP">A floating alien sentry. Given the ability to fly by its Anti Gav unit, it will attack
+	Bob on sight. Easily downed... but keep a safe distance, these suckers explode!</TD>
+</TR>
+<TABLE>
+
+<P>Other Blobs, ariel and swimming enemies exist. Keep your eyes peeled...</P>
+
+<A NAME="bosses"></A>
+<H4>Bosses</H4>
+<P>During the course of them game (except Easy) you will encounter Bosses. These are often Blobs that the
+aliens have experimented on and transformed into hidious creatures. They are a lot stronger than normal
+enemies, attack differently and are all very dangerous. Bob will have to confront each other these bosses
+before he can move on. In some cases the boss's base area will also contain a item that essential to 
+Bob's progress within the game.</P>
+
+<A NAME="galdov"></A>
+<H4>Galdov</H4>
+<P><IMG SRC="galdov.png" TITLE="Galdov, the Metal Blob" ALIGN="LEFT">
+Galdov is the alien leader. He looks strangely like the Blobs, except for the fact that he is entirely
+robotic. He has been dubbed Metal Blob by the Blobs for his appearence seems to harbour a secret to the
+Blobs' past, the reason the aliens have attack their world and the myths and legends of "war".
+</P>
+
+<P>A particular times in the game you will be required to battle Galdov. He is more powerful than regular
+enemies and has more weapons available at his disposal. Don't linger.</P>
+
+<A NAME="weapons"></A>
+<H4>Weapons</H4>
+
+<P>There are five different weapons that Bob can get in Blob Wars : Metal Blob Solid,</P>
+
+<TABLE CLASS="blue" CELLPADDING="5">
+<TR><TD VALIGN="TOP"><B>Pistol</B></TD>
+<TD VALIGN="TOP"><IMG SRC="pistolIcon.png" TITLE="Pistol Powerup"></TD>
+<TD>This is your standard weapon and the weapon that Bob always begins a mission with. Compared to the other
+weapons it seems rather wimpy due to its slow during rate. However it is the <I>only</I> weapon that can be fired
+underwater!</TD></TR>
+<TR><TD VALIGN="TOP"><B>Machine Gun</B></TD>
+<TD VALIGN="TOP"><IMG SRC="machineGunIcon.png" TITLE="Machine Gun Powerup"></TD>
+<TD>Somewhat the same as the pistol except for the high firing rate. This is a useful mission for clearing
+large numbers of enemies quickly.</TD></TR>
+<TR><TD VALIGN="TOP"><B>Grenades</B></TD>
+<TD VALIGN="TOP"><IMG SRC="grenadeIcon.png" TITLE="Grenade Powerup"></TD>
+<TD>Grenades bounce around and explode on contact. The explosion is enough to take
+out a few enemies within a small radius. Although grenades cannot be thrown underwater, it is possible to jump out of
+the water and throw a grenade. Careful timing can help to tkae out enemies in the water. The explosion from your own
+grenades cannot harm you, so don't worry. Grenades also have other uses, since they can be thrown into places
+Bob may not be able to normally access...</TD></TR>
+<TR><TD VALIGN="TOP"><B>Laser Cannon</B></TD>
+<TD VALIGN="TOP"><IMG SRC="laserIcon.png" TITLE="Laser Cannon Powerup"></TD>
+<TD>Slow to fire but has the devestating effect of passing through the enemy it strikes. A single laser bolt can take
+out a great deal of enemies. It also bounces if it hits something solid, which means that it can strike enemies both
+in front and behind you!</TD></TR>
+<TR><TD VALIGN="TOP"><B>Spread</B></TD>
+<TD VALIGN="TOP"><IMG SRC="spreadIcon.png" TITLE="Spread Powerup"></TD>
+<TD>A three way spread weapon. It is good for taking out enemies above and below. Has a decent firing rate too!<B/TD></TR>
+</TABLE>
+
+<A NAME="items"></A>
+<H4>Items</H4>
+<P>Besides the weapon pick ups there are also a couple of others you should be aware of,<P>
+
+<TABLE CLASS="blue" CELLPADDING="5">
+<TR><TD><B>Cherry</B></TD>
+<TD><IMG SRC="cherry.png" TITLE="A Cherry"></TD>
+<TD>A cherry will restore one unit of valuable health to you. Make sure you pick them up as soon as you see them.
+Cherries can also be found in pairs or in a large bunch, restoring 2 and 5 units of health respectively.
+</TD></TR>
+
+<TR><TD><B>Keycards</B></TD>
+<TD><IMG SRC="keyCard.gif" TITLE="A Keycard"></TD>
+<TD>Keycards and keys are used to access doors and other places in the game. Search the levels carefully to find
+them.</TD></TR>
+
+<TR><TD><B>Points</B></TD>
+<TD><IMG SRC="points.gif" TITLE="Points Pod"></TD>
+<TD>These are points pods. They increase your score and come in various different flavours.</TD></TR>
+</TABLE>
+
+<A NAME="aqualung"></A>
+<H4>Aqua Lung and Jetpack</H4>
+
+<P>Two special unique items appear in the game - An Aqua Lung and a Jetpack. These two items are both essential
+for progressing further in missions and also for rescuing all the MIAs. Some missions will <I>require</I> you to
+have one of these two items so you can play them properly.</P>
+
+<IMG SRC="aquaLung.png" TITLE="Pistol Powerup" ALIGN="LEFT" SPACING="5">
+<P>The Aqua Lung provides the player with an unlimited supply of oxygen, so you can stay underwater forever. You
+will then be able to reach MIAs and areas that you were previously unable to. There is no need to activate this
+item, it is used automatically when you enter water. You will also notice that there is no longer an oxygen meter
+at the top of the screen. Note that the Aqua Lung <I>does not</I> protect you from slime and lava.</P>
+
+<IMG SRC="jetpack.gif" TITLE="Pistol Powerup" ALIGN="LEFT">
+<P>The Jetpack allows the player to fly for a short time when it is activated. Press Space and then use the
+directional buttons to fly in the direction you desire. There are two things to note about the Jetpack - Unlike enemies,
+when flying Bob will suffer inertia... that is to say, if you are flying left and then push right you will have to
+slow down before you can begin flying right. You can however fly one way and shoot another using this technique. The
+second thing to note is that the Jetpack has an energy limit. Whilst it is activated it will lose power. The remaining
+power is shown at the top of the screen (in place of oxygen). When the power runs out, the Jetpack will automatically
+disengage. The Jetpack recharges whilst it is not in use. Note that the Jetpack cannot be reactivated if it has
+less than 3 units of power.</P>
+
+<P>These items will become available as your progress through the game. They are unique so only need to
+be found once (so don't panic if you haven't found them, you can't miss them!).</P>
+
+<A NAME="misc"></A>
+<H4>Misc Gameplay Information</H4>
+
+<P>As you progress through the game you may notice that some levels have objectives marked as
+"???????????". These objectives (at the time) are optional but all will be revealed much later into
+the game's story.</P>
+
+<P>There is no need to worry about completing these objectives until you are prompted to by the
+game.</P>
+
+<A NAME="about"></A>
+<H4>About</H4>
+
+<P>Parallel Realities started off writing games on the Amiga using AMOS and then, later, Blitz Basic
+2. Games written included the BOTSS Trilogy and most notably TANX Squadron. TANX Squadron was awarded
+Amiga Format's contributor prize of the month in the summer of 1999. Project: Starfighter was Parallel
+Realities' first contribution to the Linux gaming scene and was well recieved when it was released in
+2003.</P>
+
+<P>Blob Wars : Metal Blob Solid is our second contribution to Linux and we hope you enjoy it as much
+as Project: Starfighter. Like Starfighter the game went through several incarnation before the platform
+game was decided on. The original game involved a Capture the Flag type affair whilst the second was
+centered on a Blob agent called Solid Blob and his (rather dopey) companion, Bob.</P>
+
+<P>The game direction changed when we wanted something a little faster paced and with more replay
+value. The game changed from its top down view point to a platform game and the Evil Blobs became
+assimilated Blobs. Bob later became the hero of the game now known as Metal Blob Solid.</P>
+
+<CENTER>
+<P>&nbsp;</P>
+Blob Wars : Metal Blob Solid<BR>
+Copyright &copy; 2004 Parallel Realities<BR>
+Licensed under the GNU General Public License</P>
+<P>&nbsp;</P>
+</CENTER>
+
+<P ALIGN="RIGHT"><A HREF="http://www.parallelrealities.co.uk">www.parallelrealities.co.uk</A></P>
+
+</TD></TR></TABLE>
+</CENTER>
+
+</body>
+</html>

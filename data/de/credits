@@ -1,0 +1,110 @@
+109
+000 1 LEITENDE PROGRAMMIERUNG
+020 0 Stephen Sweeney
+040 1 ZUSÄTZLICHE PROGRAMMIERUNG
+020 0 Richard Sweeney
+040 1 GRAFIK
+020 0 Stephen Sweeney
+020 0 Richard Sweeney
+020 0 Ceri Done
+050 1 PRODUKTIONSSOFTWARE
+050 1 LINUX MANDRAKE 10.0
+020 0 Copyright (c) 2004 Mandrakesoft
+020 0 All Rights Reserved
+020 0 http://www.linux-mandrake.com
+050 1 KDE 3.2
+020 0 Copyright (c) 2004, The KDE Team
+020 0 All Rights Reserved
+020 0 http://www.kde.org
+050 1 GNU GCC
+020 0 http://gcc.gnu.org
+050 1 SIMPLE DIRECTMEDIA LAYER
+020 0 Created by Sam Lantinga
+020 0 http://www.libsdl.org
+050 1 KATE
+020 0 Copyright (c) 2000 - 2003, The Kate Authors
+020 0 http://kate.sourceforge.net
+050 1 POV RAY
+020 0 Copyright (c) 2003, The POV RAY Team
+020 0 http://www.pov-ray.org
+050 1 KPOV MODELER
+020 0 Copyright (c) 2001 Andreas Zehender
+050 1 THE GIMP
+020 0 http://www.gimp.org
+050 1 QUALITÄTSSICHERUNG UND BERATUNG
+020 0 Stephane Marchesin, Henning, Eugene Marcotte, Dorian P
+020 0 Ulrich Eckhardt, Emmanuel Poirier, Caleb Sawtell
+020 0 Peter Cordes, Michael Banks, Allan Crain, Torbjorn Andersson
+020 0 Erik Schnetter, Andrew Levstik, Josh Triplett
+020 0 Wesley Whitmore, Faye Price, Ceri Done
+020 0 Emma Hamilton, Ian Bisset, Rob Jones
+020 0 Neil Ellis
+050 1 PORTIERUNG UND PATCHES
+020 0 LouiSe, Richard June, Bas Wijnen
+020 0 Ondrej Sury, Bob Ippolito
+050 1 MUSIK
+040 0 "Helmet Shake"
+020 0 Composed by Jogeir / Spaceballs
+020 0 Copyright (c) Jogeir
+040 0 "For a Friend"
+020 0 Composed by David Elfstrom
+020 0 Copyright (c) 1991 David Elfstrom
+040 0 "Commando"
+020 0 Composed by Kaizsu
+020 0 Copyright (c) Kaizsu
+040 0 "Do Viking"
+020 0 Composed by Scorpik
+020 0 Copyright (c) Scorpik
+040 0 "Thug Live"
+020 0 Composed by Gryzor
+020 0 Copyright (c) Gryzor
+040 0 "Daisy Chain"
+020 0 Unbekannter Künstler
+040 0 "Condom Corruption"
+020 0 Composed by Travolta / Spaceballs
+020 0 Copyright (c) 1992 Travolta
+040 0 "Ice Cave"
+020 0 Unbekannter Künstler
+040 0 "Doctor Must Die"
+020 0 Unbekannter Künstler
+040 0 "A Friend Has Died"
+020 0 Composed by Scorpik
+020 0 Copyright (c) 1995 Scorpik
+040 0 "Ice World"
+020 0 Unbekannter Künstler
+040 0 "Circuit Overlode"
+020 0 Composed by HellTrot Co
+020 0 Copyright (c) 1998 HellTrot Co
+020 0 All Rights Reserved
+040 0 "Sweet Dreams"
+020 0 Composed by Jussi Salemla
+020 0 Copyright (c) Jussi Salemla
+040 0 "Autumns Dawning"
+020 0 Composed by Andy Carlson
+020 0 Copyright (c) 1995 Andy Carlson
+050 1 BESONDEREN DANK AN
+020 0 meine Eltern, für die Unterstützung des Projekts "Kleine Gelbe Bälle",
+020 0 die Debian-Gemeinde, für ihre gewissenhafte Fehlerjagd,
+020 0 Bertrand Lamy, für die Beisteuerung des Joypad-Codes,
+020 0 Allan Crain, für die Korrektur von Rechtschreibung und Grammatik,
+020 0 die vielen Leute, die sich die Zeit genommen haben zu testen und Fehler zu melden
+020 0 und all jene auf der SDL-Mailingliste.
+050 1 BITSTREAM VERA FONT
+020 0 Copyright (c) 2003 by Bitstream, Inc.
+020 0 All Rights Reserved.
+020 0 Bitstream Vera is a trademark of Bitstream, Inc.
+100 0 Alle in diesem Spiel enthaltenen Musik- und Geräuscheffekte stammen von frei  
+020 0 zugänglichen Internetseiten. In allen Fällen wird angenommen, dass diese Musik
+020 0 jedermann zugänglich ist und damit frei weitergegeben werden darf.
+020 0 Wir übernehmen keine Verantwortung für hierin enthaltene Audiodaten, sollten diese
+020 0 ohne Zustimmung des Autors frei verfügbar gemacht worden sein.
+100 0 Alle im Spiel verwendeten Personennamen sind urheberrechtlich und/oder markenrechtlich
+020 0 von den jeweiligen Eigentümern geschützt. Es besteht auf keine Weise eine Verbindung
+020 0 zwischen ihnen und Blob Wars: Metal Blob Solid oder Parallel Realities.
+220 1 Parallel Realities and the Alien Device
+020 1 Copyright (c) 2004 Parallel Realities
+020 1 All Rights Reserved
+450 1 Blob Wars: Metal Blob Solid
+020 1 Copyright (c) 2004 Parallel Realities
+020 1 Lizensiert unter der GNU General Public License
+120 1 http://www.parallelrealities.co.uk

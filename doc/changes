@@ -1,0 +1,182 @@
+CHANGE LOG
+----------
+
+Version 1.05
+
+* Fixed endian issue with PAK file creation code. PAK file is now created using
+  little endian in all cases.
+  
+* Attempted to fix "wall climbing" bug.
+
+Version 1.04
+
+* Fixed a minor bug in the PAK creation code that prevented
+  the music during the credits from playing (buffer was only 500K)
+  
+* Fixed a potential problem is the make file
+
+Version 1.03
+
+* Minor level updates to prevent some rare show stopper situations
+
+* Some other misc bug fixes (contributed patches)
+
+
+Version 1.02
+
+* Fixed swimming and linedef uses when using manually configured keys
+
+
+Version 1.01
+
+* Fixed Uncharted Cavern and a bunch of other levels where a segfault or potential segfault could
+  occur on load. This was caused by these levels having more than 300 lines of level data (update to
+  the map editor may have been writing too many lines upon save due to an array overflow).
+  
+* Also fixed a bug that allowed the player to continue on Extreme Mode after their time had run out.
+
+* Fixed : Enemy lasers were not "throwing" Bob on contact
+
+
+Version 1.0
+
+* Minor graphical updates
+
+
+Version 0.99
+
+* Attempted to ensure fonts are loaded at a particular pixel size
+
+* Minor misc. level tweaks
+
+* Minor misc. bug fixes
+
+
+Version 0.98
+
+* Very minor changes to some levels
+
+
+Version 0.97
+
+* Added Key configuration screen
+
+* Added a warning when running the game as root
+
+* Added animation graphics for Aqua Blob and Spider Blobs
+
+* Stopped doors from closing on Bob (and enemies)
+
+* Prevented enemies from spawning within doors
+
+* Removed cheat option for "Super Jump" and replaced with "More Blood and Gore"
+
+* Added a check to enemies to ensure they are no longer referenced by bullets before deletion
+
+* Added keyboard repeat (so up and down hand be held in menus)
+
+* Restored gravity to previous limits (- +12 instead of - + 30). This change made some levels 
+  impossible since Bob now fell far too quickly.
+
+* Removed a potentially fatal blit onto a locked surface (particles.cpp).
+
+* Add "Exit" signs for levels in which the player must get to the exit.
+    
+* Misc gameplay, level and graphical tweaks.
+
+
+Version 0.96
+
+* Changed temp extraction direction from /tmp to ~/.parallelrealities/blobwars
+
+* Gore setting is now remembered from last play (or changed via a load)
+
+* Added all Extreme Mode Time Limits
+
+* Updated more graphics
+
+* Updated some cutscenes with antialiasing
+
+* Lots of other misc gameplay tweaks.
+
+
+Version 0.93 - 0.95
+
+* Updated joypad support (via a patch from a player)
+
+* Misc tweaks
+
+* Updated graphics
+
+
+Version 0.92
+
+* Fixed auto save bug where game would always save to Slot #1
+
+* Made hub signals red only when new, yellow when cleared once
+
+* Added more cutscene graphics
+
+* Fixed L.R.T.S part bug
+
+* Lots of misc fixes
+
+
+Version 0.91
+
+* Fixed joypad code
+
+* Fixed many levels
+
+* It is now possible to finish the game from start to finish
+
+* Added lots of misc little changes
+
+* Removed slopes due to technical difficulties :(
+
+
+Version 0.9
+
+* Added all missions
+
+* Added Boss missions
+
+* Added level persistance
+
+* Added cutscenes and more music
+
+* Fixed bug on big endian machines where switches did not appear in levels
+
+* Added true joypad support and configuartion
+
+
+Version 0.52
+
+* Fixed bug relating to Flooded Tunnel #1 when destroying generators with
+  grenades.
+  
+* Added in placeholder level for Boss #1 (to be fully implemented)
+
+* Implemented joypad support and configuartion.
+
+* Removed need for ZZIP Lib - Now using custom virtual file system
+  (see CPak.cpp / CFileData.cpp)
+
+* Removed diagonal lifts. Seems to be causing problems on some people's
+  machines.
+  
+* Added Ancient Tomb #4
+
+* Added Practice mission
+
+
+Version <= 0.51
+
+* Lots of different bits and pieces. Too many to mention really.
+
+
+Stephen Sweeney
+stephen.sweeney@parallelrealities.co.uk
+http://www.parallelrealities.co.uk
+
+(NB: This email address does not accept HTML formatted messages. Plain text only)

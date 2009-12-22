@@ -1,0 +1,1083 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: blobwars 1.06\n"
+"PO-Revision-Date: 2007-03-22 13:28+0100\n"
+"Last-Translator: Guus Sliepen <guus@debian.org>\n"
+"Language-Team: Dutch Localization <debian-l10n-dutch@lists.debian.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# Files
+
+msgid "data/LICENSE"
+msgstr "data/nl/LICENSE"
+
+msgid "data/cheatWidgets"
+msgstr "data/nl/cheatWidgets"
+
+msgid "data/credits"
+msgstr "data/nl/credits"
+
+msgid "data/ending"
+msgstr "data/nl/ending"
+
+msgid "data/gameOverWidgets"
+msgstr "data/nl/gameOverWidgets"
+
+msgid "data/inGameWidgets"
+msgstr "data/nl/inGameWidgets"
+
+msgid "data/introText"
+msgstr "data/nl/introText"
+
+msgid "data/joystickWidgets"
+msgstr "data/nl/joystickWidgets"
+
+msgid "data/keyboardWidgets"
+msgstr "data/nl/keyboardWidgets"
+
+msgid "data/levelBrief"
+msgstr "data/nl/levelBrief"
+
+msgid "data/optionWidgets"
+msgstr "data/nl/optionWidgets"
+
+msgid "data/titleWidgets"
+msgstr "data/nl/titleWidgets"
+
+# Areas
+
+msgid "Ancient Tomb #1"
+msgstr "Oude Tombe #1"
+
+msgid "Ancient Tomb #2"
+msgstr "Oude Tombe #2"
+
+msgid "Ancient Tomb #3"
+msgstr "Oude Tombe #3"
+
+msgid "Ancient Tomb #4"
+msgstr "Oude Tombe #4"
+
+msgid "Arctic Wastes"
+msgstr "IJsvlaktes"
+
+msgid "BioMech Assimilator"
+msgstr "BioMech Assimilator"
+
+msgid "BioMech Communications"
+msgstr "BioMech Communicatie"
+
+msgid "BioMech HQ"
+msgstr "BioMech Hoofdkwartier"
+
+msgid "BioMech Supply Depot"
+msgstr "BioMech Voorraaddepot"
+
+msgid "Flooded Tunnel"
+msgstr "Ondergestroomde Tunnel"
+
+msgid "Flooded Tunnel #2"
+msgstr "Ondergestroomde Tunnel #2"
+
+msgid "Flooded Tunnel #3"
+msgstr "Ondergestroomde Tunnel #3"
+
+msgid "Flooded Tunnel #4"
+msgstr "Ondergestroomde Tunnel #4"
+
+msgid "Forgotten Caves"
+msgstr "Vergeten Grotten"
+
+msgid "Grasslands"
+msgstr "Grasland"
+
+msgid "Grasslands #2"
+msgstr "Grasland #2"
+
+msgid "Grasslands #3"
+msgstr "Grasland #3"
+
+msgid "Ice Cave #1"
+msgstr "IJsgrot #1"
+
+msgid "Ice Cave #2"
+msgstr "IJsgrot #2"
+
+msgid "Inner Cave Network, Part 1"
+msgstr "Binnenste Grottenstelsel, Deel 1"
+
+msgid "Inner Cave Network, Part 2"
+msgstr "Binnenste Grottenstelsel, Deel 2"
+
+msgid "Space Station"
+msgstr "Ruimtestation"
+
+msgid "Training Mission"
+msgstr "Trainingsmissie"
+
+msgid "Uncharted Cavern"
+msgstr "Onbekende Grot"
+
+# Objectives
+
+msgid "4 Hit Combo with Grenades"
+msgstr "4 keer Combo met Granaten"
+
+msgid "6 Hit Combo with Spread Gun"
+msgstr "6 keer Combo met Spreidgeweer"
+
+msgid "8 Hit Combo with Grenades"
+msgstr "8 keer Combo met Granaten"
+
+msgid "10 Hit Combo with Machine Gun"
+msgstr "10 keer Combo met Machinegeweer"
+
+msgid "12 Hit Combo with Spread Gun"
+msgstr "12 keer Combo met Spreidgeweer"
+
+msgid "20 Hit Combo with Machine Gun"
+msgstr "20 keer Combo met Machinegeweer"
+
+msgid "Access Eastern Passage"
+msgstr "Betreed de Oostelijke Pas"
+
+msgid "Access Fourth Floor"
+msgstr "Betreed de Vierde Verdieping"
+
+msgid "Access Northern Passage"
+msgstr "Betreed de Noordelijke Pas"
+
+msgid "Access Second Floor"
+msgstr "Betreed de Tweede Verdieping"
+
+msgid "Access Third Floor"
+msgstr "Betreed de Derde Verdieping"
+
+msgid "Access Western Passage"
+msgstr "Betreed de Westelijke Pas"
+
+msgid "Access Upper Cave System"
+msgstr "Betreed het Bovenste Grottensysteem"
+
+msgid "Access Upper Floor"
+msgstr "Betreed de Bovenste Verdieping"
+
+msgid "Activate 2 Security Points"
+msgstr "Activeer 2 Veiligheidspunten"
+
+msgid "Activate 4 Security Points"
+msgstr "Activeer 4 Veiligheidspunten"
+
+msgid "Battle Galdov"
+msgstr "Vecht met Galdov"
+
+msgid "Collect 10 Cherry Plants"
+msgstr "Verzamel 10 Kersenplanten"
+
+msgid "Collect 20 Cherry Plants"
+msgstr "Verzamel 20 Kersenplanten"
+
+msgid "Collect 25 Boxes of Orichalcum Beads"
+msgstr "Verzamel 25 dozen Orichalcumparels"
+
+msgid "Collect the Blueprints"
+msgstr "Verzamel de Blauwdrukken"
+
+msgid "Collect three keys"
+msgstr "Verzamel drie Sleutels"
+
+msgid "Deactivate Security Systems"
+msgstr "Deactiveer de Veiligheidssystemen"
+
+msgid "Defeat 10 Hard Hide Blobs"
+msgstr "Versla 10 Hardhuidblobs"
+
+msgid "Defeat 15 Machine Gun Droids"
+msgstr "Versla 15 Droids met Machinegeweer"
+
+msgid "Defeat 25 Machine Gun Droids"
+msgstr "Versla 25 Droids met Machinegeweer"
+
+msgid "Defeat 30 enemies"
+msgstr "Versla 30 Vijanden"
+
+msgid "Defeat 50 Enemies"
+msgstr "Versla 50 Vijanden"
+
+msgid "Defeat 100 Enemies"
+msgstr "Versla 100 Vijanden"
+
+msgid "Defeat 200 Enemies"
+msgstr "Versla 200 Vijanden"
+
+msgid "Defeat BioMech Jetpack Blob"
+msgstr "Versla BioMech Jetpackblob"
+
+msgid "Defeat Galdov"
+msgstr "Versla Galdov"
+
+msgid "Destroy 5 Power Generators"
+msgstr "Vernietig 5 Generators"
+
+msgid "Destroy 5 Satellite Dishes"
+msgstr "Vernietig 5 Satelietschotels"
+
+msgid "Destroy 6 Power Generators"
+msgstr "Vernietig 6 Generators"
+
+msgid "Destroy 10 Sentry Guns"
+msgstr "Vernietig 10 Automatische Kanonnen"
+
+msgid "Destroy 10 Spider Blobs"
+msgstr "Vernietig 10 Spinneblobs"
+
+msgid "Destroy BioMech Aqua Blob"
+msgstr "Vernietig BioMech Aquablob"
+
+msgid "Destroy BioMech Tank V1.1"
+msgstr "Vernietig BioMech Tank V1.1"
+
+msgid "Destroy BioMech Tank V2.6"
+msgstr "Vernietig BioMech Tank V2.6"
+
+msgid "Destroy the Ice Blobs"
+msgstr "Vernietig de IJsblobs"
+
+msgid "Disable Booby Traps"
+msgstr "Schakel de Boobytraps uit"
+
+msgid "Disable the Auto Cannon"
+msgstr "Schakel het Automatisch Kanon uit"
+
+msgid "Enter Ancient Tomb"
+msgstr "Betreed de Oude Tombe"
+
+msgid "Exit the Ice Caves"
+msgstr "Verlaat de IJsgrotten"
+
+msgid "Exit the Tunnel System"
+msgstr "Verlaat het Tunnelsysteem"
+
+msgid "Explore the Flooded Area"
+msgstr "Verken het Ondergelopen Gebied"
+
+msgid "Fight Galdov"
+msgstr "Vecht met Galdov"
+
+msgid "Find 1st Cypher Piece"
+msgstr "Vind het 1e Cypherdeel"
+
+msgid "Find 2 Sticks of Dynamite"
+msgstr "Vind 2 staven Dynamiet"
+
+msgid "Find 2nd Cypher Piece"
+msgstr "Vind het 2e Cypherdeel"
+
+msgid "Find 3 Ancient Cogs"
+msgstr "Vind 3 Oude Tandwielen"
+
+msgid "Find 3 Ancient Keys"
+msgstr "Vind 3 Oude Sleutels"
+
+msgid "Find 4 Ancient Keys"
+msgstr "Vind 4 Oude Sleutels"
+
+msgid "Find 5 Earth Crystal Shards"
+msgstr "Vind 5 Scherven van het Aardekristal"
+
+msgid "Find 10 Diamonds"
+msgstr "Vind 10 Diamanten"
+
+msgid "Find Galdov"
+msgstr "Vind Galdov"
+
+msgid "Find L.R.T.S. Part"
+msgstr "Vind L.A.T.S. Onderdeel"
+
+# Find L.R.T.S. Part
+msgid "???? ???????? ????"
+msgstr "???? ???????? ?????????"
+
+msgid "Find the 4 Map Pieces"
+msgstr "Vind de 4 Stukken Kaart"
+
+msgid "Find the 5 Crystal Shards"
+msgstr "Vind de 4 Kristalscherven"
+
+msgid "Find the Dynamite"
+msgstr "Vind het Dynamiet"
+
+msgid "Find the Transmitter"
+msgstr "Vind de Zender"
+
+msgid "Find Two Ancient Keys"
+msgstr "Vind Twee Oude Sleutels"
+
+msgid "Find Water Orb Shards"
+msgstr "Vind Scherven van het Waterkristal"
+
+msgid "Get the Ancient Fire Crystal"
+msgstr "Verkrijg het Oude Vuurkristal" 
+
+msgid "Get the Ancient Reality Crystal"
+msgstr "Verkrijg het Oude Realiteitskristal"
+
+msgid "Get the Ancient Space Crystal"
+msgstr "Verkrijg het Oude Ruimtekristal"
+
+msgid "Get the Ancient Time Crystal"
+msgstr "Verkrijg het Oude Tijdskristal"
+
+msgid "Get the Aqua Lung"
+msgstr "Verkrijg de Aqualong"
+
+msgid "Get the Jetpack"
+msgstr "Verkrijg de Jetpack"
+
+msgid "Get the Reality Crystal"
+msgstr "Verkrijg het Realiteitskristal"
+
+msgid "Get to the Exit"
+msgstr "Bereik de Uitgang"
+
+msgid "Get to the exit"
+msgstr "Bereik de Uitgang"
+
+msgid "Get to the Forest"
+msgstr "Bereik het Bos"
+
+msgid "Get to the Main Pump Room"
+msgstr "Bereik de Hoofdpompkamer"
+
+msgid "Get to the Maintenance Room"
+msgstr "Bereik de Onderhoudskamer"
+
+msgid "Get to the Tomb Entrance"
+msgstr "Bereik de Ingang van de Tombe"
+
+msgid "Locate 10 Sticks of Dynamite"
+msgstr "Zoek 10 Dynamietstaven"
+
+msgid "Locate Tomb Entrance"
+msgstr "Zoek de Ingang van de Tombe"
+
+msgid "Open Exit Door"
+msgstr "Open de Uitgangsdeur"
+
+msgid "Plant 10 Sticks of Dynamite"
+msgstr "Plant 10 Dynamietstaven"
+
+msgid "Raise Water Level"
+msgstr "Verhoog het Waterniveau"
+
+msgid "Rescue %d MIAs"
+msgstr "Red %d MIAs"
+
+msgid "Stop the Cave in"
+msgstr "Stop het Instorten van de Grot"
+
+# Picked up...
+
+msgid "Picked up an Ancient Cog"
+msgstr "Oud Tandwiel opgerapen"
+
+msgid "Picked up an Ancient Key"
+msgstr "Oude Sleutel opgerapen"
+
+msgid "Picked up a Blue Keycard"
+msgstr "Blauwe Kaart opgerapen"
+
+msgid "Picked up a Bronze Key"
+msgstr "Bronzen Sleutel opgerapen"
+
+msgid "Picked up a bunch of Cherries"
+msgstr "Handvol Kersen opgerapen"
+
+msgid "Picked up a Cherry"
+msgstr "Kers opgerapen"
+
+msgid "Picked up a Crystal Shard"
+msgstr "Kristalscherf opgerapen"
+
+msgid "Picked up a Cyan Keycard"
+msgstr "Turkooise Kaart opgerapen"
+
+msgid "Picked up a Gold Key"
+msgstr "Gouden Sleutel opgerapen"
+
+msgid "Picked up a Green Keycard"
+msgstr "Groene Kaart opgerapen"
+
+msgid "Picked up a Grenades"
+msgstr "Granaten opgerapen"
+
+msgid "Picked up a Keycard"
+msgstr "Kaart opgerapen"
+
+msgid "Picked up a Laser Gun"
+msgstr "Lasergeweer opgerapen"
+
+msgid "Picked up a Machine Gun"
+msgstr "Machinegeweer opgerapen"
+
+msgid "Picked up a pair of Cherries"
+msgstr "Paar Kersen opgerapen"
+
+msgid "Picked up a Pistol"
+msgstr "Pistool opgerapen"
+
+msgid "Picked up a Purple Keycard"
+msgstr "Paarse Kaart opgerapen"
+
+msgid "Picked up a Red Keycard"
+msgstr "Rode Kaart opgerapen"
+
+msgid "Picked up a set of Grenades"
+msgstr "Granaten opgerapen"
+
+msgid "Picked up a Silver Key"
+msgstr "Zilveren Sleutel opgerapen"
+
+msgid "Picked up a Three Way Spread"
+msgstr "Spreidgeweer opgerapen"
+
+# ... required
+
+msgid "Ancient Cog required"
+msgstr "Oud Tandwiel vereist"
+
+msgid "Ancient Key required"
+msgstr "Oude Sleutel vereist"
+
+msgid "Blue Keycard required"
+msgstr "Blauwe Kaart vereist"
+
+msgid "Bronze Key Required"
+msgstr "Bronzen Sleutel vereist"
+
+msgid "Cyan Keycard required"
+msgstr "Turkooisen Kaart vereist"
+
+msgid "Cypher Piece #1 required"
+msgstr "1e Cypherdeel vereist"
+
+msgid "Cypher Piece #2 required"
+msgstr "2e Cypherdeel vereist"
+
+msgid "Dynamite required"
+msgstr "Dynamiet vereist"
+
+msgid "Gold Key Required"
+msgstr "Gouden Sleutel vereist"
+
+msgid "Green Keycard required"
+msgstr "Groene Kaart vereist"
+
+msgid "Keycard required"
+msgstr "Kaart vereist"
+
+msgid "Pack of Dynamite required"
+msgstr "Pak Dynamiet vereist"
+
+msgid "Purple Keycard required"
+msgstr "Paarse Kaart vereist"
+
+msgid "Red Keycard required"
+msgstr "Rode Kaart vereist"
+
+msgid "Silver Key Required"
+msgstr "Zilveren Sleutel vereist"
+
+# Speech
+
+msgid "help me..."
+msgstr "help me..."
+
+msgid "i don't like it here..."
+msgstr "ik vind het hier niet leuk..."
+
+msgid "i don't wanna die..."
+msgstr "ik wil niet dood..."
+
+msgid "i... i'm scared..."
+msgstr "ik... ik ben bang..."
+
+msgid "i wanna go home..."
+msgstr "ik wil naar huis..."
+
+msgid "please... someone help..."
+msgstr "iemand... help me alsjeblieft..."
+
+msgid "what was that?!"
+msgstr "wat was dat?!"
+
+msgid "Galdov: And this is the best the Blob Army can offer?"
+msgstr "Galdov: En dit is het beste dat het Blobleger in huis heeft?"
+
+msgid "Galdov: Stupid creature!! Give up and join us!"
+msgstr "Galdov: Stom creatuur!! Geef het op en kom bij ons!"
+
+msgid "Galdov: We WILL have the crystals! NOTHING will stop us!!"
+msgstr "Galdov: We ZULLEN de kristallen krijgen! NIETS zal ons stoppen!!"
+
+msgid "Galdov: Why do you persist in fighting us?!"
+msgstr "Galdov: Waarom blijf je ons maar bevechten?!"
+
+msgid "Galdov: You're mine now!!!"
+msgstr "Galdov: Je bent nu van mij!!!"
+
+# Misc
+
+msgid "Access Confirmed"
+msgstr "Toegang bevestigd"
+
+msgid "Access Granted"
+msgstr "Toegang verleend"
+
+msgid "Accuracy"
+msgstr "Precisie"
+
+msgid "All Required Objectives Met - Mission Complete"
+msgstr "Alle vereiste doelen bereikt - Missie geslaagd"
+
+msgid "Ammo Used"
+msgstr "Ammunitie verbruikt"
+
+msgid "An SDL Game"
+msgstr "Een SDL spel"
+
+msgid "Automap is not available!"
+msgstr "Automap is niet beschikbaar!"
+
+msgid "Average Continue Usage:"
+msgstr "Gemiddeld gebruik continuering:"
+
+msgid "Best Combo"
+msgstr "Beste Combo"
+
+msgid "Best Combo:"
+msgstr "Beste Combo:"
+
+msgid "BioMech Aqua Blob"
+msgstr "BioMech Aquablob"
+
+msgid "BioMech Jetpack Blob"
+msgstr "BioMech Jetpackblob"
+
+msgid "BioMech Tank V1.1"
+msgstr "BioMech Tank V1.1"
+
+msgid "BioMech Tank V2.6"
+msgstr "BioMech Tank V2.6"
+
+msgid "Blob Wars : Episode I"
+msgstr "Blob Wars: Episode I"
+
+msgid "Bonuses Picked Up:"
+msgstr "Bonussen opgepakt:"
+
+msgid "Bridge Activated"
+msgstr "Brug geactiveerd"
+
+msgid "Bridge Deployed"
+msgstr "Brug opgesteld"
+
+msgid "Can't Exit Yet - Objectives Not Met"
+msgstr "Kan nog niet verlaten - Onbehaalde doelen"
+
+msgid "Cave In!! Looks like it might be controlled by that switch..."
+msgstr "Instortingsgevaar!! Het lijkt alsof die knop er iets mee te maken heeft..."
+
+msgid "Cell Door #1 Opened"
+msgstr "Celdeur #1 geopend"
+
+msgid "Cell Door #2 Opened"
+msgstr "Celdeur #2 geopend"
+
+msgid "Checkpoint Reached"
+msgstr "Controlepost bereikt"
+
+msgid "Cogs Released"
+msgstr "Tandwielen losgelaten"
+
+msgid "Completed"
+msgstr "Afgerond"
+
+msgid "Continues Used:"
+msgstr "Continueringen gebruikt:"
+
+msgid "Copyright (C) 2004, 2005 Parallel Realities"
+msgstr "Copyright © 2004, 2005 Parallel Realities"
+
+# as in Corrupt Save Data
+msgid "Corrupt"
+msgstr "Verminkt"
+
+msgid "Corrupt Save Data"
+msgstr "Verminkte save data"
+
+msgid "Crystal Defence System Activated"
+msgstr "Kristal Beveiligingssysteem geactiveerd"
+
+msgid "Crystal Room is now accessible"
+msgstr "Kristalkamer is nu toegankelijk"
+
+msgid "Crystal Room Open"
+msgstr "Kristalkamer open"
+
+msgid "Detonation Started..."
+msgstr "Detonatie gestart..."
+
+msgid "Don't have jetpack!"
+msgstr "Je hebt geen Jetpack!"
+
+msgid "Door is locked"
+msgstr "Deur is gesloten"
+
+msgid "Door Opened"
+msgstr "Deur geopend"
+
+msgid "Door opened"
+msgstr "Deur geopend"
+
+msgid "Doors Opened"
+msgstr "Deuren geopend"
+
+msgid "Eastern passage is now accessible"
+msgstr "Oostelijke pas is nu toegankelijk"
+
+msgid "Easy"
+msgstr "Makkelijk"
+
+msgid "Empty"
+msgstr "Leeg"
+
+msgid "Enemies"
+msgstr "Vijanden"
+
+msgid "Enemies Defeated"
+msgstr "Vijanden verslagen"
+
+msgid "Enemies Defeated:"
+msgstr "Vijanden verslagen:"
+
+msgid "Escapes Used:"
+msgstr "Escapes gebruikt:"
+
+msgid "Extreme"
+msgstr "Extreem"
+
+msgid "First Crystal Door Opened"
+msgstr "Eerste Kristaldeur geopend"
+
+msgid "Found"
+msgstr "Gevonden"
+
+msgid "Fourth floor is now accessible"
+msgstr "Vierde verdieping is nu toegankelijk"
+
+msgid "Galdov has dropped the crystal! Quick! Get it!!"
+msgstr "Galdov heeft het kristal laten vallen! Snel! Grijp het!!"
+
+msgid "Got the Aqua Lung! You can now swim forever!"
+msgstr "Je hebt de Aqualong! Je kunt nu zwemmen zo lang je wil!"
+
+msgid "Got the Jetpack! Press SPACE to Activate!"
+msgstr "Je hebt de Jetpack! Druk op SPATIE om te activeren!"
+
+msgid "Grenades"
+msgstr "Granaten"
+
+msgid "Hard"
+msgstr "Moeilijk"
+
+msgid "Health"
+msgstr "Welzijn"
+
+msgid "%d Hit Combo!"
+msgstr "%d keer Combo!"
+
+msgid "%d Hits"
+msgstr "%d keer"
+
+msgid "Incomplete"
+msgstr "Incompleet"
+
+msgid "Information for %s"
+msgstr "Informatie over %s"
+
+msgid "++ Inventory ++"
+msgstr "++ Inhoud ++"
+
+msgid "Items"
+msgstr "Objecten"
+
+msgid "Items Collected"
+msgstr "Verzamelde objecten"
+
+msgid "Items Collected:"
+msgstr "Verzamelde objecten:"
+
+msgid "Jetpack"
+msgstr "Jetpack"
+
+msgid "Jetpack cannot be used underwater"
+msgstr "Jetpack kan niet onder water gebruikt worden"
+
+msgid "Jetpack is recharging..."
+msgstr "Jetpack is aan het opladen..."
+
+msgid "Key Released"
+msgstr "Sleutel losgelaten"
+
+msgid "Keycard Released"
+msgstr "Kaart losgelaten"
+
+msgid "Laser Cannon"
+msgstr "Laserkanon"
+
+msgid "Lift Activated"
+msgstr "Lift geactiveerd"
+
+msgid "Lift activated"
+msgstr "Lift geactiveerd"
+
+msgid "Lift is not currently active"
+msgstr "Lift is nu niet actief"
+
+msgid "Lifts Activated"
+msgstr "Liften geactiveerd"
+
+msgid "Loading..."
+msgstr "Laden..."
+
+msgid "Location"
+msgstr "Locatie"
+
+msgid "Locks Released"
+msgstr "Sloten geopend"
+
+msgid "Machine Gun"
+msgstr "Machinegeweer"
+
+msgid "Main Lift Activated"
+msgstr "Hoofdlift geactiveerd"
+
+msgid "Maintenance Room is now accessible"
+msgstr "Onderhoudskamer is nu toegankelijk"
+
+msgid "Metal Blob Solid : Statistics"
+msgstr "Metal Blob Solid: statistiek"
+
+msgid "MIA Statistics"
+msgstr "MIA statistiek"
+
+msgid "MIAs"
+msgstr "MIAs"
+
+msgid "MIAs in Area"
+msgstr "MIAs in gebied"
+
+msgid "MIAs Rescued"
+msgstr "MIAs gered"
+
+msgid "MIAs Saved:"
+msgstr "MIAs gered:"
+
+msgid "Mines Disabled"
+msgstr "Mijnen uitgeschakeld"
+
+msgid "Missing"
+msgstr "Missend"
+
+msgid "Mission Failed! Time Up!"
+msgstr "Missie gefaald! Tijd om!"
+
+msgid "Mission Time"
+msgstr "Missietijd"
+
+msgid "Missions Started:"
+msgstr "Missies gestart:"
+
+msgid "%s - %d more to go..."
+msgstr "%s - nog %d te gaan..."
+
+msgid "Most Used Weapon"
+msgstr "Meest gebruikte wapen"
+
+msgid "Name"
+msgstr "Naam"
+
+msgid "%s - need %d more"
+msgstr "%s - %d meer nodig"
+
+msgid "Normal"
+msgstr "Normaal"
+
+msgid "Northern passage is now accessible"
+msgstr "Noordelijke Pas is nu toegankelijk"
+
+msgid "Not carrying anything"
+msgstr "Je hebt niets bij je"
+
+msgid "%s - Objective Completed"
+msgstr "%s - Doel bereikt"
+
+msgid "%s - Objective Completed - Check Point Reached!"
+msgstr "%s - Doel bereikt - Controlepunt bereikt!"
+
+msgid "Objectives Completed:"
+msgstr "Doelen bereikt:"
+
+msgid "Obstacles Reset"
+msgstr "Obstakels opnieuw ingesteld"
+
+msgid "%s - %d of %d"
+msgstr "%s - %d van %d"
+
+msgid "(optional)"
+msgstr "(optioneel)"
+
+msgid "Oxygen"
+msgstr "Zuurstof"
+
+msgid "*** PAUSED ***"
+msgstr "*** PAUSE ***"
+
+msgid "Percentage Complete:"
+msgstr "Percentage compleet:"
+
+msgid "Pistol"
+msgstr "Pistool"
+
+msgid "Position = %d:%d"
+msgstr "Positie = %d:%d"
+
+msgid "Presents"
+msgstr "Presenteert"
+
+msgid "Press Button to Continue..."
+msgstr "Druk op een knop om door te gaan..."
+
+msgid "Press Fire to Continue"
+msgstr "Druk op Vuur om door te gaan"
+
+msgid "Press Space to Continue..."
+msgstr "Druk op Spatie om door te gaan..."
+
+msgid "Rescue %d MIAs - Objective Complete - Checkpoint Reached!"
+msgstr "Red %d MIAs - Doel bereikt - Controlepunt bereikt!"
+
+msgid "Rescued %s!"
+msgstr "%s gered!"
+
+msgid "Rescued %s - Checkpoint Reached!"
+msgstr "%s gered - Controlepunt bereikt!"
+
+msgid "Save Complete"
+msgstr "Opslag compleet"
+
+msgid "Saving Game to Save Slot #%d. Please Wait..."
+msgstr "Bezig met opslaan spel in vak #%d. Even geduld..."
+
+msgid "Score:"
+msgstr "Score:"
+
+msgid "Second Crystal Door Opened"
+msgstr "Tweede Kristaldeur geopend"
+
+msgid "Second floor is now accessible"
+msgstr "Tweede verdieping is nu toegankelijk"
+
+msgid "Selected Destination"
+msgstr "Geselecteerde bestemming"
+
+msgid "Skill Level:"
+msgstr "Moeilijkheidsgraad:"
+
+msgid "Skipping Mission..."
+msgstr "Missie overslaan..."
+
+msgid "Spike Balls Disabled"
+msgstr "Spijkerballen uitgeschakeld"
+
+msgid "Spikes Disabled"
+msgstr "Speren uitgeschakeld"
+
+msgid "Spread Gun"
+msgstr "Spreidgeweer"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Teleporter Activated"
+msgstr "Teleporter geactiveerd"
+
+msgid "That Auto Cannon is guarding the entrance to the forest..."
+msgstr "Dat Automatisch Kanon bewaakt de ingang tot het bos..."
+
+msgid "Third Crystal Door Opened"
+msgstr "Derde Kristaldeur geopend"
+
+msgid "Three bronze keys are needed to open these doors..."
+msgstr "Drie bronzen sleutels zijn nodig om deze deuren te openen..."
+
+msgid "Throw a grenade on the switch and recieve a present..."
+msgstr "Gooi een granaat op de knop en ontvang een cadeau..."
+
+msgid "Throw a grenade onto that switch to trigger it"
+msgstr "Gooi een granaat op die knop om hem te activeren"
+
+msgid "Time Limit - %d:%.2d Minutes"
+msgstr "Tijdslimiet - %d:%.2d minuten"
+
+msgid "Time Remaining: %.2d:%.2d"
+msgstr "Resterende tijd: %.2d:%.2d"
+
+msgid "Time your movement through Energy Barriers like these..."
+msgstr "Zorg voor de juiste timing om door dit soort Energiebarriëres te gaan..."
+
+msgid "Tomb Door Opened"
+msgstr "Tombedeur geopend"
+
+msgid "Total"
+msgstr "Totaal"
+
+msgid "Total Game Time"
+msgstr "Totale speltijd"
+
+msgid "Trap Activated"
+msgstr "Vallen geactiveerd"
+
+msgid "Trap deactivated"
+msgstr "Val gedeactiveerd"
+
+msgid "Traps Deactivated"
+msgstr "Vallen gedeactiveerd"
+
+msgid "Used Bronze Key"
+msgstr "Bronzen Sleutel gebruikt"
+
+msgid "Used Gold Key"
+msgstr "Gouden Sleutel gebruikt"
+
+msgid "Used Silver Key"
+msgstr "Zilveren Sleutel gebruikt"
+
+msgid "Version %s"
+msgstr "Versie %s"
+
+msgid "WARNING: ACTIVE BOOBY TRAP AHEAD!! DEACTIVATE WITH SWITCH EASTWARD !!"
+msgstr "WAARSCHUWING: ACTIEVE BOOBYTRAP VERDEROP!! DEACTIVEER MET DE KNOP OOSTWAARDS!!"
+
+msgid "WARNING: ACTIVE BOOBY TRAP AHEAD!! DO NOT PROCEED UNTIL DEACTIVATED!!"
+msgstr "WAARSCHUWING: ACTIEVE BOOBYTRAP VERDEROP!! GA NIET VERDER TENZIJ GEDEACTIVEERD!!"
+
+msgid "WARNING: ACTIVE BOOBY TRAP AHEAD!! MINES *WILL* KILL YOU IF TRIPPED!!"
+msgstr "WAARSCHUWING: ACTIEVE BOOBYTRAPS VERDEROP!! MIJNEN *ZULLEN* JE DODEN INDIEN GERAAKT!!"
+
+msgid "Water Door Opened"
+msgstr "Waterdeur geopend"
+
+msgid "Water level is rising"
+msgstr "Waterniveau stijgt"
+
+msgid "Weapon"
+msgstr "Wapen"
+
+msgid "Weapon:"
+msgstr "Wapen:"
+
+msgid "Western passage is now accessible"
+msgstr "Westelijke Pas is nu toegankelijk"
+
+msgid "You got the Aqua Lung!"
+msgstr "Je hebt de Aqualong!"
+
+msgid "You got the Jet Pack!"
+msgstr "Je hebt de Jetpack!"
+
+msgid "You'll need to 'Kill Two Birds with One Stone' here..."
+msgstr "Je zult hier 'twee vliegen in één klap' moeten slaan..."
+
+# Keys
+
+msgid "backspace"
+msgstr "backspace"
+
+msgid "caps lock"
+msgstr "caps lock"
+
+msgid "delete"
+msgstr "delete"
+
+msgid "down"
+msgstr "neer"
+
+msgid "end"
+msgstr "end"
+
+msgid "enter"
+msgstr "enter"
+
+msgid "home"
+msgstr "home"
+
+msgid "insert"
+msgstr "insert"
+
+msgid "left"
+msgstr "links"
+
+msgid "left alt"
+msgstr "linker alt"
+
+msgid "left ctrl"
+msgstr "linker control"
+
+msgid "left shift"
+msgstr "linker shift"
+
+msgid "left super"
+msgstr "linker super"
+
+msgid "menu"
+msgstr "menu"
+
+msgid "numlock"
+msgstr "numlock"
+
+msgid "page down"
+msgstr "page down"
+
+msgid "page up"
+msgstr "page up"
+
+msgid "pause"
+msgstr "pause"
+
+msgid "print screen"
+msgstr "print screen"
+
+msgid "return"
+msgstr "return"
+
+msgid "right"
+msgstr "rechts"
+
+msgid "right ctrl"
+msgstr "rechter control"
+
+msgid "right shift"
+msgstr "rechter shift"
+
+msgid "scroll lock"
+msgstr "scroll lock"
+
+msgid "space"
+msgstr "spatie"
+
+msgid "up"
+msgstr "omhoog"

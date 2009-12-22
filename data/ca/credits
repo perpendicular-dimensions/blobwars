@@ -1,0 +1,110 @@
+109
+000 1 PROGRAMACIÓ PRINCIPAL
+020 0 Stephen Sweeney
+040 1 PROGRAMACIÓ ADDICIONAL
+020 0 Richard Sweeney
+040 1 GRÀFICS
+020 0 Stephen Sweeney
+020 0 Richard Sweeney
+020 0 Ceri Done
+050 1 PROGRAMARI DE PRODUCCIÓ
+050 1 LINUX MANDRAKE 10.0
+020 0 Copyright © 2004 Mandrakesoft
+020 0 Tots els Drets Reservats
+020 0 http://www.linux-mandrake.com
+050 1 KDE 3.2
+020 0 Copyright © 2004, L'Equip de KDE
+020 0 Tots els Drets Reservats
+020 0 http://www.kde.org
+050 1 GNU GCC
+020 0 http://gcc.gnu.org
+050 1 SIMPLE DIRECTMEDIA LAYER
+020 0 Creat per Sam Lantinga
+020 0 http://www.libsdl.org
+050 1 KATE
+020 0 Copyright © 2000 - 2003, Els Autors de Kate
+020 0 http://kate.sourceforge.net
+050 1 POV RAY
+020 0 Copyright © 2003, L'Equip de POV RAY
+020 0 http://www.pov-ray.org
+050 1 KPOV MODELER
+020 0 Copyright © 2001 Andreas Zehender
+050 1 THE GIMP
+020 0 http://www.gimp.org
+050 1 ASSEGURAMENT DE QUALITAT I CONSELLS
+020 0 Stephane Marchesin, Henning, Eugene Marcotte, Dorian P
+020 0 Ulrich Eckhardt, Emmanuel Poirier, Caleb Sawtell
+020 0 Peter Cordes, Michael Banks, Allan Crain, Torbjorn Andersson
+020 0 Erik Schnetter, Andrew Levstik, Josh Triplett
+020 0 Wesley Whitmore, Faye Price, Ceri Done
+020 0 Emma Hamilton, Ian Bisset, Rob Jones
+020 0 Neil Ellis
+050 1 PORTAMENT I PEDAÇOS
+020 0 LouiSe, Richard June, Bas Wijnen
+020 0 Ondrej Sury, Bob Ippolito
+050 1 MÚSICA
+040 0 "Helmet Shake"
+020 0 Composat per Jogeir / Spaceballs
+020 0 Copyright © Jogeir
+040 0 "For a Friend"
+020 0 Composat per David Elfstrom
+020 0 Copyright © 1991 David Elfstrom
+040 0 "Commando"
+020 0 Composat per Kaizsu
+020 0 Copyright © Kaizsu
+040 0 "Do Viking"
+020 0 Composat per Scorpik
+020 0 Copyright © Scorpik
+040 0 "Thug Live"
+020 0 Composat per Gryzor
+020 0 Copyright © Gryzor
+040 0 "Daisy Chain"
+020 0 Autor Desconegut
+040 0 "Condom Corruption"
+020 0 Composat per Travolta / Spaceballs
+020 0 Copyright © 1992 Travolta
+040 0 "Ice Cave"
+020 0 Autor Desconegut
+040 0 "Doctor Must Die"
+020 0 Autor Desconegut
+040 0 "A Friend Has Died"
+020 0 Composat per Scorpik
+020 0 Copyright © 1995 Scorpik
+040 0 "Ice World"
+020 0 Autor Desconegut
+040 0 "Circuit Overlode"
+020 0 Composat per HellTrot Co
+020 0 Copyright © 1998 HellTrot Co
+020 0 Tots els Drets Reservats
+040 0 "Sweet Dreams"
+020 0 Composat per Jussi Salemla
+020 0 Copyright © Jussi Salemla
+040 0 "Autumns Dawning"
+020 0 Composat per Andy Carlson
+020 0 Copyright © 1995 Andy Carlson
+050 1 AGRAÏMENTS ESPECIALS
+020 0 Els meus pares per llur encoratjament al projecte "Les Petites Boles Grogues"
+020 0 La comunitat Debian per la seva diligent caça d'errors
+020 0 Bertrand Lamy per contribuir codi de maneta de joc
+020 0 Allan Crain per corregir ortografia i gramàtica
+020 0 La molta gent que s'ha molestat en provar i informar els errors
+020 0 I tots aquells de la Llista de Correu de SDL
+050 1 FONT BITSTREAM VERA
+020 0 Copyright © 2003 per Bitstream, Inc.
+020 0 Tots els Drets Reservats.
+020 0 Bitstream Vera és una marca de Bitstream, Inc.
+100 0 Tota la música i els efectes de so continguts en aquest joc s'han pres de varis
+020 0 llocs web d'internet lliurement accessibles. En tot cas, aquesta música i so
+020 0 s'assumeixen posats en domini públic i, per tant, lliures per a distribuir.
+020 0 No acceptem cap responsabilitat per àudio contingut aquí que ha estat disponible
+020 0 lliurement sense el consentiment del propietari.
+100 0 Tots els noms dels personatges usats en el joc són copyright i/o marques de
+020 0 llurs propietaris respectius. No estan associats de cap manera amb
+020 0 Blob Wars: Metal Blob Solid o Parallel Realities.
+220 1 Parallel Realities and the Alien Device
+020 1 Copyright © 2004 Parallel Realities
+020 1 Tots els Drets Reservats
+450 1 Blob Wars : Metal Blob Solid
+020 1 Copyright © 2004 Parallel Realities
+020 1 Llicenciat sota la GNU General Public License
+120 1 http://www.parallelrealities.co.uk

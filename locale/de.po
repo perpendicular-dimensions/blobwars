@@ -1,0 +1,1083 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: blobwars 1.06\n"
+"PO-Revision-Date: 2007-05-07 16:55+0100\n"
+"Last-Translator: Alexander C. Schmid <sahib@phreaker.net>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# Files
+
+msgid "data/LICENSE"
+msgstr "data/de/LICENSE"
+
+msgid "data/cheatWidgets"
+msgstr "data/de/cheatWidgets"
+
+msgid "data/credits"
+msgstr "data/de/credits"
+
+msgid "data/ending"
+msgstr "data/de/ending"
+
+msgid "data/gameOverWidgets"
+msgstr "data/de/gameOverWidgets"
+
+msgid "data/inGameWidgets"
+msgstr "data/de/inGameWidgets"
+
+msgid "data/introText"
+msgstr "data/de/introText"
+
+msgid "data/joystickWidgets"
+msgstr "data/de/joystickWidgets"
+
+msgid "data/keyboardWidgets"
+msgstr "data/de/keyboardWidgets"
+
+msgid "data/levelBrief"
+msgstr "data/de/levelBrief"
+
+msgid "data/optionWidgets"
+msgstr "data/de/optionWidgets"
+
+msgid "data/titleWidgets"
+msgstr "data/de/titleWidgets"
+
+# Areas
+
+msgid "Ancient Tomb #1"
+msgstr "Historische Grabstätte #1"
+
+msgid "Ancient Tomb #2"
+msgstr "Historische Grabstätte #2"
+
+msgid "Ancient Tomb #3"
+msgstr "Historische Grabstätte #3"
+
+msgid "Ancient Tomb #4"
+msgstr "Historische Grabstätte #4"
+
+msgid "Arctic Wastes"
+msgstr "Arktische Wüsten"
+
+msgid "BioMech Assimilator"
+msgstr "BioMech-Assimilator"
+
+msgid "BioMech Communications"
+msgstr "BioMech-Kommunikationsbereich"
+
+msgid "BioMech HQ"
+msgstr "BioMech-Hauptquartier"
+
+msgid "BioMech Supply Depot"
+msgstr "BioMech-Versorgungslager"
+
+msgid "Flooded Tunnel"
+msgstr "Überfluteter Tunnel"
+
+msgid "Flooded Tunnel #2"
+msgstr "Überfluteter Tunnel #2"
+
+msgid "Flooded Tunnel #3"
+msgstr "Überfluteter Tunnel #3"
+
+msgid "Flooded Tunnel #4"
+msgstr "Überfluteter Tunnel #4"
+
+msgid "Forgotten Caves"
+msgstr "Vergessene Höhlen"
+
+msgid "Grasslands"
+msgstr "Wiesen"
+
+msgid "Grasslands #2"
+msgstr "Wiesen #2"
+
+msgid "Grasslands #3"
+msgstr "Wiesen #3"
+
+msgid "Ice Cave #1"
+msgstr "Eishöhle #1"
+
+msgid "Ice Cave #2"
+msgstr "Eishöhle #2"
+
+msgid "Inner Cave Network, Part 1"
+msgstr "Inneres Höhlennetz, Teil 1"
+
+msgid "Inner Cave Network, Part 2"
+msgstr "Inneres Höhlennetz, Teil 2"
+
+msgid "Space Station"
+msgstr "Raumstation"
+
+msgid "Training Mission"
+msgstr "Trainingsmission"
+
+msgid "Uncharted Cavern"
+msgstr "Unerforschte Kaverne"
+
+# Objectives
+
+msgid "4 Hit Combo with Grenades"
+msgstr "4-Treffer-Combo mit Granaten"
+
+msgid "6 Hit Combo with Spread Gun"
+msgstr "6-Treffer-Combo mit Schrotflinte"
+
+msgid "8 Hit Combo with Grenades"
+msgstr "8-Treffer-Combo mit Granaten"
+
+msgid "10 Hit Combo with Machine Gun"
+msgstr "10-Treffer-Combo mit Maschinengewehr"
+
+msgid "12 Hit Combo with Spread Gun"
+msgstr "12-Treffer-Combo mit Schrotflinte"
+
+msgid "20 Hit Combo with Machine Gun"
+msgstr "20-Treffer-Combo mit Maschinengewehr"
+
+msgid "Access Eastern Passage"
+msgstr "Betrete Ostkorridor"
+
+msgid "Access Fourth Floor"
+msgstr "Betrete vierte Ebene"
+
+msgid "Access Northern Passage"
+msgstr "Betrete Nordkorridor"
+
+msgid "Access Second Floor"
+msgstr "Betrete zweite Ebene"
+
+msgid "Access Third Floor"
+msgstr "Betrete dritte Ebene"
+
+msgid "Access Western Passage"
+msgstr "Betrete Westkorridor"
+
+msgid "Access Upper Cave System"
+msgstr "Betrete Oberes Höhlensystem"
+
+msgid "Access Upper Floor"
+msgstr "Betrete Obere Ebene"
+
+msgid "Activate 2 Security Points"
+msgstr "Aktiviere 2 Sicherheitseinrichtungen"
+
+msgid "Activate 4 Security Points"
+msgstr "Aktiviere 4 Sicherheitseinrichtungen"
+
+msgid "Battle Galdov"
+msgstr "Bekämpfe Galdov"
+
+msgid "Collect 10 Cherry Plants"
+msgstr "Sammle 10 Kirschbäumchen"
+
+msgid "Collect 20 Cherry Plants"
+msgstr "Sammle 20 Kirschbäumchen"
+
+msgid "Collect 25 Boxes of Orichalcum Beads"
+msgstr "Sammle 25 Schachteln Orichalcum-Perlen"
+
+msgid "Collect the Blueprints"
+msgstr "Sammle die Blaupausen ein"
+
+msgid "Collect three keys"
+msgstr "Sammle drei Schlüssel"
+
+msgid "Deactivate Security Systems"
+msgstr "Deaktiviere Sicherheitssysteme"
+
+msgid "Defeat 10 Hard Hide Blobs"
+msgstr "Besiege 10 Harthautblobs"
+
+msgid "Defeat 15 Machine Gun Droids"
+msgstr "Besiege 15 Maschinengewehrdroiden"
+
+msgid "Defeat 25 Machine Gun Droids"
+msgstr "Besiege 25 Maschinengewehrdroiden"
+
+msgid "Defeat 30 enemies"
+msgstr "Besiege 30 Feinde"
+
+msgid "Defeat 50 Enemies"
+msgstr "Besiege 50 Feinde"
+
+msgid "Defeat 100 Enemies"
+msgstr "Besiege 100 Feinde"
+
+msgid "Defeat 200 Enemies"
+msgstr "Besiege 200 Feinde"
+
+msgid "Defeat BioMech Jetpack Blob"
+msgstr "Besiege BioMech-Jetpackblob"
+
+msgid "Defeat Galdov"
+msgstr "Besiege Galdov"
+
+msgid "Destroy 5 Power Generators"
+msgstr "Zerstöre 5 Stromgeneratoren"
+
+msgid "Destroy 5 Satellite Dishes"
+msgstr "Zerstöre 5 Satellitenschüsseln"
+
+msgid "Destroy 6 Power Generators"
+msgstr "Zerstöre 6 Stromgeneratoren"
+
+msgid "Destroy 10 Sentry Guns"
+msgstr "Zerstöre 10 Selbstschussanlagen"
+
+msgid "Destroy 10 Spider Blobs"
+msgstr "Zerstöre 10 Spinnenblobs"
+
+msgid "Destroy BioMech Aqua Blob"
+msgstr "Zerstöre BioMech-Aquablob"
+
+msgid "Destroy BioMech Tank V1.1"
+msgstr "Zerstöre BioMech-Panzer V1.1"
+
+msgid "Destroy BioMech Tank V2.6"
+msgstr "Zerstöre BioMech-Panzer V2.6"
+
+msgid "Destroy the Ice Blobs"
+msgstr "Vernichte die Eisblobs"
+
+msgid "Disable Booby Traps"
+msgstr "Entschärfe Sprengfallen"
+
+msgid "Disable the Auto Cannon"
+msgstr "Deaktiviere die Automatikkanone"
+
+msgid "Enter Ancient Tomb"
+msgstr "Betrete Historische Grabstätte"
+
+msgid "Exit the Ice Caves"
+msgstr "Verlasse Eishöhlen"
+
+msgid "Exit the Tunnel System"
+msgstr "Verlasse das Tunnelsystem"
+
+msgid "Explore the Flooded Area"
+msgstr "Erforsche den überfluteten Bereich"
+
+msgid "Fight Galdov"
+msgstr "Bekämpfe Galdov"
+
+msgid "Find 1st Cypher Piece"
+msgstr "Finde 1. Codestück"
+
+msgid "Find 2 Sticks of Dynamite"
+msgstr "Finde 2 Stangen Dynamit"
+
+msgid "Find 2nd Cypher Piece"
+msgstr "Finde 2. Codestück"
+
+msgid "Find 3 Ancient Cogs"
+msgstr "Finde 3 antike Zahnräder"
+
+msgid "Find 3 Ancient Keys"
+msgstr "Finde 3 antike Schlüssel"
+
+msgid "Find 4 Ancient Keys"
+msgstr "Finde 4 antike Schlüssel"
+
+msgid "Find 5 Earth Crystal Shards"
+msgstr "Finde 5 Scherben des Erdkristalls"
+
+msgid "Find 10 Diamonds"
+msgstr "Finde 10 Diamanten"
+
+msgid "Find Galdov"
+msgstr "Finde Galdov"
+
+msgid "Find L.R.T.S. Part"
+msgstr "Finde L.R.T.S.-Teil"
+
+# Find L.R.T.S. Part
+msgid "???? ???????? ????"
+msgstr "????? ???????? ????"
+
+msgid "Find the 4 Map Pieces"
+msgstr "Finde die 4 Kartenstücke"
+
+msgid "Find the 5 Crystal Shards"
+msgstr "Finde die 5 Kristallscherben"
+
+msgid "Find the Dynamite"
+msgstr "Finde das Dynamit"
+
+msgid "Find the Transmitter"
+msgstr "Finde den Sender"
+
+msgid "Find Two Ancient Keys"
+msgstr "Finde zwei antike Schlüssel"
+
+msgid "Find Water Orb Shards"
+msgstr "Finde Scherben der Wassersphäre"
+
+msgid "Get the Ancient Fire Crystal"
+msgstr "Hole den antiken Feuerkristall" 
+
+msgid "Get the Ancient Reality Crystal"
+msgstr "Hole den antiken Realitätskristall"
+
+msgid "Get the Ancient Space Crystal"
+msgstr "Hole den antiken Raumkristall"
+
+msgid "Get the Ancient Time Crystal"
+msgstr "Hole den antiken Zeitkristall"
+
+msgid "Get the Aqua Lung"
+msgstr "Hole die Aqualunge"
+
+msgid "Get the Jetpack"
+msgstr "Hole den Jetpack"
+
+msgid "Get the Reality Crystal"
+msgstr "Hole den Realitätskristall"
+
+msgid "Get to the Exit"
+msgstr "Erreiche den Ausgang"
+
+msgid "Get to the exit"
+msgstr "Erreiche den Ausgang"
+
+msgid "Get to the Forest"
+msgstr "Erreiche den Wald"
+
+msgid "Get to the Main Pump Room"
+msgstr "Erreiche die Hauptpumpenkammer"
+
+msgid "Get to the Maintenance Room"
+msgstr "Erreiche den Wartungsraum"
+
+msgid "Get to the Tomb Entrance"
+msgstr "Erreiche den Grabeingang"
+
+msgid "Locate 10 Sticks of Dynamite"
+msgstr "Lokalisiere 10 Stangen Dynamit"
+
+msgid "Locate Tomb Entrance"
+msgstr "Lokalisiere Grabeingang"
+
+msgid "Open Exit Door"
+msgstr "Öffne Ausgangstor"
+
+msgid "Plant 10 Sticks of Dynamite"
+msgstr "Lege 10 Stangen Dynamit"
+
+msgid "Raise Water Level"
+msgstr "Erhöhe den Wasserspiegel"
+
+msgid "Rescue %d MIAs"
+msgstr "Rette %d Vermisste"
+
+msgid "Stop the Cave in"
+msgstr "Stoppe den Einsturz"
+
+# Picked up...
+
+msgid "Picked up an Ancient Cog"
+msgstr "Antikes Zahnrad aufgenommen"
+
+msgid "Picked up an Ancient Key"
+msgstr "Antiken Schlüssel aufgenommen"
+
+msgid "Picked up a Blue Keycard"
+msgstr "Blaue Zugangskarte aufgenommen"
+
+msgid "Picked up a Bronze Key"
+msgstr "Bronzenen Schlüssel aufgenommen"
+
+msgid "Picked up a bunch of Cherries"
+msgstr "Ein Bündel Kirschen aufgenommen"
+
+msgid "Picked up a Cherry"
+msgstr "Kirsche aufgenommen"
+
+msgid "Picked up a Crystal Shard"
+msgstr "Kristallscherbe aufgenommen"
+
+msgid "Picked up a Cyan Keycard"
+msgstr "Türkise Zugangskarte aufgenommen"
+
+msgid "Picked up a Gold Key"
+msgstr "Goldenen Schlüssel aufgenommen"
+
+msgid "Picked up a Green Keycard"
+msgstr "Grüne Zugangskarte aufgenommen"
+
+msgid "Picked up a Grenades"
+msgstr "Granaten aufgenommen"
+
+msgid "Picked up a Keycard"
+msgstr "Zugangskarte aufgenommen"
+
+msgid "Picked up a Laser Gun"
+msgstr "Lasergewehr aufgenommen"
+
+msgid "Picked up a Machine Gun"
+msgstr "Maschinengewehr aufgenommen"
+
+msgid "Picked up a pair of Cherries"
+msgstr "Ein Paar Kirschen aufgenommen"
+
+msgid "Picked up a Pistol"
+msgstr "Pistole aufgenommen"
+
+msgid "Picked up a Purple Keycard"
+msgstr "Purpurne Zugangskarte aufgenommen"
+
+msgid "Picked up a Red Keycard"
+msgstr "Rote Zugangskarte aufgenommen"
+
+msgid "Picked up a set of Grenades"
+msgstr "Einen Satz Granaten aufgenommen"
+
+msgid "Picked up a Silver Key"
+msgstr "Silbernen Schlüssel aufgenommen"
+
+msgid "Picked up a Three Way Spread"
+msgstr "Schrotflinte aufgenommen"
+
+# ... required
+
+msgid "Ancient Cog required"
+msgstr "Benötige antikes Zahnrad"
+
+msgid "Ancient Key required"
+msgstr "Benötige antiken Schlüssel"
+
+msgid "Blue Keycard required"
+msgstr "Benötige blaue Zugangskarte"
+
+msgid "Bronze Key Required"
+msgstr "Benötige bronzenen Schlüssel"
+
+msgid "Cyan Keycard required"
+msgstr "Benötige türkise Zugangskarte"
+
+msgid "Cypher Piece #1 required"
+msgstr "Benötige 1. Codestück"
+
+msgid "Cypher Piece #2 required"
+msgstr "Benötige 2. Codestück"
+
+msgid "Dynamite required"
+msgstr "Benötige Dynamit"
+
+msgid "Gold Key Required"
+msgstr "Benötige goldenen Schlüssel"
+
+msgid "Green Keycard required"
+msgstr "Benötige grüne Zugangskarte"
+
+msgid "Keycard required"
+msgstr "Benötige Zugangskarte"
+
+msgid "Pack of Dynamite required"
+msgstr "Benötige ein Bündel Dynamit"
+
+msgid "Purple Keycard required"
+msgstr "Benötige purpurne Zugangskarte"
+
+msgid "Red Keycard required"
+msgstr "Benötige rote Zugangskarte"
+
+msgid "Silver Key Required"
+msgstr "Benötige silbernen Schlüssel"
+
+# Speech
+
+msgid "help me..."
+msgstr "hilf mir..."
+
+msgid "i don't like it here..."
+msgstr "mir gefällt es hier nicht..."
+
+msgid "i don't wanna die..."
+msgstr "ich will nicht sterben..."
+
+msgid "i... i'm scared..."
+msgstr "ich... ich habe Angst..."
+
+msgid "i wanna go home..."
+msgstr "ich möchte nach hause..."
+
+msgid "please... someone help..."
+msgstr "bitte... hilf mir jemand..."
+
+msgid "what was that?!"
+msgstr "was war das?!"
+
+msgid "Galdov: And this is the best the Blob Army can offer?"
+msgstr "Galdov: Und das ist der beste Blob, den die Armee anzubieten hat?"
+
+msgid "Galdov: Stupid creature!! Give up and join us!"
+msgstr "Galdov: Dumme Kreatur!! Gib auf und schließ dich uns an!"
+
+msgid "Galdov: We WILL have the crystals! NOTHING will stop us!!"
+msgstr "Galdov: Wir WERDEN die Kristalle bekommen! NICHTS wird uns aufhalten!!"
+
+msgid "Galdov: Why do you persist in fighting us?!"
+msgstr "Galdov: Warum bestehst du darauf uns zu bekämpfen?!"
+
+msgid "Galdov: You're mine now!!!"
+msgstr "Galdov: Jetzt gehörst du mir!!!"
+
+# Misc
+
+msgid "Access Confirmed"
+msgstr "Zugang bestätigt"
+
+msgid "Access Granted"
+msgstr "Zugang gewährt"
+
+msgid "Accuracy"
+msgstr "Zielsicherheit"
+
+msgid "All Required Objectives Met - Mission Complete"
+msgstr "Alle nötigen Ziele erreicht - Mission vollständig"
+
+msgid "Ammo Used"
+msgstr "Munition verbraucht"
+
+msgid "An SDL Game"
+msgstr "Ein SDL-Spiel"
+
+msgid "Automap is not available!"
+msgstr "Automatische Karte nicht verfügbar!"
+
+msgid "Average Continue Usage:"
+msgstr "Durchschnittliche neue Versuche:"
+
+msgid "Best Combo"
+msgstr "Beste Combo"
+
+msgid "Best Combo:"
+msgstr "Beste Combo:"
+
+msgid "BioMech Aqua Blob"
+msgstr "BioMech-Aquablob"
+
+msgid "BioMech Jetpack Blob"
+msgstr "BioMech-Jetpackblob"
+
+msgid "BioMech Tank V1.1"
+msgstr "BioMech-Panzer V1.1"
+
+msgid "BioMech Tank V2.6"
+msgstr "BioMech-Panzer V2.6"
+
+msgid "Blob Wars : Episode I"
+msgstr "Blob Wars: Episode I"
+
+msgid "Bonuses Picked Up:"
+msgstr "Bonuspunkte aufgenommen:"
+
+msgid "Bridge Activated"
+msgstr "Brücke aktiviert"
+
+msgid "Bridge Deployed"
+msgstr "Brücke ausgefahren"
+
+msgid "Can't Exit Yet - Objectives Not Met"
+msgstr "Kann noch nicht hinaus - Ziele nicht erreicht"
+
+msgid "Cave In!! Looks like it might be controlled by that switch..."
+msgstr "Steinschlag!! Womöglich wird er von diesem Schalter kontrolliert..."
+
+msgid "Cell Door #1 Opened"
+msgstr "Zellentür #1 geöffnet"
+
+msgid "Cell Door #2 Opened"
+msgstr "Zellentür #2 geöffnet"
+
+msgid "Checkpoint Reached"
+msgstr "Kontrollpunkt erreicht"
+
+msgid "Cogs Released"
+msgstr "Zahnräder freigegeben"
+
+msgid "Completed"
+msgstr "Vollständig"
+
+msgid "Continues Used:"
+msgstr "Neue Versuche benötigt:"
+
+msgid "Copyright (C) 2004, 2005 Parallel Realities"
+msgstr "Copyright (C) 2004, 2005 Parallel Realities"
+
+# as in Corrupt Save Data
+msgid "Corrupt"
+msgstr "Beschädigt"
+
+msgid "Corrupt Save Data"
+msgstr "Beschädigte Speicherdaten"
+
+msgid "Crystal Defence System Activated"
+msgstr "Kristallschutzsystem aktiviert"
+
+msgid "Crystal Room is now accessible"
+msgstr "Kristallkammer ist jetzt zugänglich"
+
+msgid "Crystal Room Open"
+msgstr "Kristallkammer offen"
+
+msgid "Detonation Started..."
+msgstr "Sprengung eingeleitet..."
+
+msgid "Don't have jetpack!"
+msgstr "Kein Jetpack!"
+
+msgid "Door is locked"
+msgstr "Tor ist verschlossen"
+
+msgid "Door Opened"
+msgstr "Tor geöffnet"
+
+msgid "Door opened"
+msgstr "Tor geöffnet"
+
+msgid "Doors Opened"
+msgstr "Tore geöffnet"
+
+msgid "Eastern passage is now accessible"
+msgstr "Ostkorridor ist jetzt zugänglich"
+
+msgid "Easy"
+msgstr "Leicht"
+
+msgid "Empty"
+msgstr "Leer"
+
+msgid "Enemies"
+msgstr "Feinde"
+
+msgid "Enemies Defeated"
+msgstr "Feinde besiegt"
+
+msgid "Enemies Defeated:"
+msgstr "Feinde besiegt:"
+
+msgid "Escapes Used:"
+msgstr "Anzahl Abbrüche:"
+
+msgid "Extreme"
+msgstr "Extrem"
+
+msgid "First Crystal Door Opened"
+msgstr "Erstes Kristalltor geöffnet"
+
+msgid "Found"
+msgstr "Gefunden"
+
+msgid "Fourth floor is now accessible"
+msgstr "Vierte Ebene ist jetzt zugänglich"
+
+msgid "Galdov has dropped the crystal! Quick! Get it!!"
+msgstr "Galdov hat den Kristall verloren! Schnell! Nimm ihn!!"
+
+msgid "Got the Aqua Lung! You can now swim forever!"
+msgstr "Aqualunge gefunden! Jetzt kannst du beliebig lange tauchen!"
+
+msgid "Got the Jetpack! Press SPACE to Activate!"
+msgstr "Jetpack gefunden! Drücke LEERTASTE zum Aktivieren!"
+
+msgid "Grenades"
+msgstr "Granaten"
+
+msgid "Hard"
+msgstr "Schwer"
+
+msgid "Health"
+msgstr "Zustand"
+
+msgid "%d Hit Combo!"
+msgstr "%d-Treffer-Combo!"
+
+msgid "%d Hits"
+msgstr "%d Treffer"
+
+msgid "Incomplete"
+msgstr "Unvollständig"
+
+msgid "Information for %s"
+msgstr "Informationen über %s"
+
+msgid "++ Inventory ++"
+msgstr "++ Inventar ++"
+
+msgid "Items"
+msgstr "Gegenstände"
+
+msgid "Items Collected"
+msgstr "Gegenstände gesammelt"
+
+msgid "Items Collected:"
+msgstr "Gegenstände gesammelt:"
+
+msgid "Jetpack"
+msgstr "Jetpack"
+
+msgid "Jetpack cannot be used underwater"
+msgstr "Jetpack kann unter Wasser nicht benutzt werden"
+
+msgid "Jetpack is recharging..."
+msgstr "Jetpack lädt auf..."
+
+msgid "Key Released"
+msgstr "Schlüssel freigegeben"
+
+msgid "Keycard Released"
+msgstr "Zugangskarte freigegeben"
+
+msgid "Laser Cannon"
+msgstr "Laserkanone"
+
+msgid "Lift Activated"
+msgstr "Fahrstuhl aktiviert"
+
+msgid "Lift activated"
+msgstr "Fahrstuhl aktiviert"
+
+msgid "Lift is not currently active"
+msgstr "Fahrstuhl ist momentan nicht aktiv"
+
+msgid "Lifts Activated"
+msgstr "Fahrstühle aktiviert"
+
+msgid "Loading..."
+msgstr "Laden..."
+
+msgid "Location"
+msgstr "Ort"
+
+msgid "Locks Released"
+msgstr "Verriegelungen geöffnet"
+
+msgid "Machine Gun"
+msgstr "Maschinengewehr"
+
+msgid "Main Lift Activated"
+msgstr "Hauptfahrstuhl aktiviert"
+
+msgid "Maintenance Room is now accessible"
+msgstr "Wartungsraum ist jetzt zugänglich"
+
+msgid "Metal Blob Solid : Statistics"
+msgstr "Metal Blob Solid: Statistiken"
+
+msgid "MIA Statistics"
+msgstr "Vermisstenstatistik"
+
+msgid "MIAs"
+msgstr "Vermisste"
+
+msgid "MIAs in Area"
+msgstr "Vermisste im Areal"
+
+msgid "MIAs Rescued"
+msgstr "Vermisste gerettet"
+
+msgid "MIAs Saved:"
+msgstr "Vermisste gerettet:"
+
+msgid "Mines Disabled"
+msgstr "Minen entschärft"
+
+msgid "Missing"
+msgstr "Vermisst"
+
+msgid "Mission Failed! Time Up!"
+msgstr "Mission gescheitert! Zeit abgelaufen!"
+
+msgid "Mission Time"
+msgstr "Missionszeit"
+
+msgid "Missions Started:"
+msgstr "Missionen begonnen:"
+
+msgid "%s - %d more to go..."
+msgstr "%s - noch %d weitere..."
+
+msgid "Most Used Weapon"
+msgstr "Meistgebrauchte Waffe"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "%s - need %d more"
+msgstr "%s - %d mehr benötigt"
+
+msgid "Normal"
+msgstr "Normal"
+
+msgid "Northern passage is now accessible"
+msgstr "Nordkorridor ist jetzt zugänglich"
+
+msgid "Not carrying anything"
+msgstr "Du hast nichts bei dir"
+
+msgid "%s - Objective Completed"
+msgstr "%s - Ziel erreicht"
+
+msgid "%s - Objective Completed - Check Point Reached!"
+msgstr "%s - Ziel erreicht - Kontrollpunkt erreicht!"
+
+msgid "Objectives Completed:"
+msgstr "Ziele erreicht:"
+
+msgid "Obstacles Reset"
+msgstr "Hindernisse zurückgesetzt"
+
+msgid "%s - %d of %d"
+msgstr "%s - %d von %d"
+
+msgid "(optional)"
+msgstr "(freiwillig)"
+
+msgid "Oxygen"
+msgstr "Sauerstoff"
+
+msgid "*** PAUSED ***"
+msgstr "*** PAUSE ***"
+
+msgid "Percentage Complete:"
+msgstr "Prozent komplett:"
+
+msgid "Pistol"
+msgstr "Pistole"
+
+msgid "Position = %d:%d"
+msgstr "Position = %d:%d"
+
+msgid "Presents"
+msgstr "Präsentiert"
+
+msgid "Press Button to Continue..."
+msgstr "Taste drücken um fortzufahren"
+
+msgid "Press Fire to Continue"
+msgstr "Feuertaste drücken um fortzufahren"
+
+msgid "Press Space to Continue..."
+msgstr "Leertaste drücken um fortzufahren..."
+
+msgid "Rescue %d MIAs - Objective Complete - Checkpoint Reached!"
+msgstr "Rette %d Vermisste - Ziel erreicht - Kontrollpunkt erreicht!"
+
+msgid "Rescued %s!"
+msgstr "%s gerettet!"
+
+msgid "Rescued %s - Checkpoint Reached!"
+msgstr "%s gerettet - Kontrollpunkt erreicht!"
+
+msgid "Save Complete"
+msgstr "Speichern abgeschlossen"
+
+msgid "Saving Game to Save Slot #%d. Please Wait..."
+msgstr "Speichere Spiel in Slot #%d. Bitte warten..."
+
+msgid "Score:"
+msgstr "Punktestand:"
+
+msgid "Second Crystal Door Opened"
+msgstr "Zweites Kristalltor geöffnet"
+
+msgid "Second floor is now accessible"
+msgstr "Zweite Ebene ist jetzt zugänglich"
+
+msgid "Selected Destination"
+msgstr "Ziel wählen"
+
+msgid "Skill Level:"
+msgstr "Schwierigkeitsgrad:"
+
+msgid "Skipping Mission..."
+msgstr "Überspringe Mission..."
+
+msgid "Spike Balls Disabled"
+msgstr "Morgensterne entschärft"
+
+msgid "Spikes Disabled"
+msgstr "Speere entschärft"
+
+msgid "Spread Gun"
+msgstr "Schrotflinte"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Teleporter Activated"
+msgstr "Teleporter aktiviert"
+
+msgid "That Auto Cannon is guarding the entrance to the forest..."
+msgstr "Diese Automatikkanone bewacht den Waldrand..."
+
+msgid "Third Crystal Door Opened"
+msgstr "Drittes Kristalltor geöffnet"
+
+msgid "Three bronze keys are needed to open these doors..."
+msgstr "Drei bronzene Schlüssel sind nötig, um diese Tore zu öffnen..."
+
+msgid "Throw a grenade on the switch and recieve a present..."
+msgstr "Wirf eine Granate auf den Schalter und empfange ein Geschenk..."
+
+msgid "Throw a grenade onto that switch to trigger it"
+msgstr "Wirf eine Granate auf diesen Schalter um ihn zu betätigen"
+
+msgid "Time Limit - %d:%.2d Minutes"
+msgstr "Zeitlimit - %d:%.2d Minuten"
+
+msgid "Time Remaining: %.2d:%.2d"
+msgstr "Verbleibende Zeit: %.2d:%.2d"
+
+msgid "Time your movement through Energy Barriers like these..."
+msgstr "Bei solchen Energiebarrieren kommt es auf das Timing an..."
+
+msgid "Tomb Door Opened"
+msgstr "Tor der Grabstätte geöffnet"
+
+msgid "Total"
+msgstr "Gesamt"
+
+msgid "Total Game Time"
+msgstr "Gesamte Spielzeit"
+
+msgid "Trap Activated"
+msgstr "Falle aktiviert"
+
+msgid "Trap deactivated"
+msgstr "Falle deaktiviert"
+
+msgid "Traps Deactivated"
+msgstr "Fallen deaktiviert"
+
+msgid "Used Bronze Key"
+msgstr "Bronzenen Schlüssel benutzt"
+
+msgid "Used Gold Key"
+msgstr "Goldenen Schlüssel benutzt"
+
+msgid "Used Silver Key"
+msgstr "Silbernen Schlüssel benutzt"
+
+msgid "Version %s"
+msgstr "Version %s"
+
+msgid "WARNING: ACTIVE BOOBY TRAP AHEAD!! DEACTIVATE WITH SWITCH EASTWARD !!"
+msgstr "WARNUNG: AKTIVE SPRENGFALLE VORAUS!! MIT ÖSTLICHEM SCHALTER DEAKTIVIEREN!!"
+
+msgid "WARNING: ACTIVE BOOBY TRAP AHEAD!! DO NOT PROCEED UNTIL DEACTIVATED!!"
+msgstr "WARNUNG: AKTIVE SPRENGFALLE VORAUS!! KEIN DURCHGANG VOR DEAKTIVIERUNG"
+
+msgid "WARNING: ACTIVE BOOBY TRAP AHEAD!! MINES *WILL* KILL YOU IF TRIPPED!!"
+msgstr "WARNUNG: AKTIVE SPRENGFALLE VORAUS!! AUSGELÖSTE MINEN *SIND* TÖDLICH!!"
+
+msgid "Water Door Opened"
+msgstr "Wassertor geöffnet"
+
+msgid "Water level is rising"
+msgstr "Wasserspiegel steigt"
+
+msgid "Weapon"
+msgstr "Waffe"
+
+msgid "Weapon:"
+msgstr "Waffe:"
+
+msgid "Western passage is now accessible"
+msgstr "Westkorridor ist jetzt zugänglich"
+
+msgid "You got the Aqua Lung!"
+msgstr "Du hast die Aqualunge gefunden!"
+
+msgid "You got the Jet Pack!"
+msgstr "Du hast den Jetpack gefunden!"
+
+msgid "You'll need to 'Kill Two Birds with One Stone' here..."
+msgstr "Hier musst du 'zwei Fliegen mit einer Klappe schlagen' ..."
+
+# Keys
+
+msgid "backspace"
+msgstr "backspace"
+
+msgid "caps lock"
+msgstr "feststelltaste"
+
+msgid "delete"
+msgstr "entfernen"
+
+msgid "down"
+msgstr "runter"
+
+msgid "end"
+msgstr "ende"
+
+msgid "enter"
+msgstr "eingabe"
+
+msgid "home"
+msgstr "pos1"
+
+msgid "insert"
+msgstr "einfügen"
+
+msgid "left"
+msgstr "links"
+
+msgid "left alt"
+msgstr "linke alt"
+
+msgid "left ctrl"
+msgstr "linke strg"
+
+msgid "left shift"
+msgstr "linke shift"
+
+msgid "left super"
+msgstr "linke super"
+
+msgid "menu"
+msgstr "menü"
+
+msgid "numlock"
+msgstr "num lock"
+
+msgid "page down"
+msgstr "bild ab"
+
+msgid "page up"
+msgstr "bild auf"
+
+msgid "pause"
+msgstr "pause"
+
+msgid "print screen"
+msgstr "print screen"
+
+msgid "return"
+msgstr "return"
+
+msgid "right"
+msgstr "rechts"
+
+msgid "right ctrl"
+msgstr "rechte strg"
+
+msgid "right shift"
+msgstr "rechte shift"
+
+msgid "scroll lock"
+msgstr "scroll lock"
+
+msgid "space"
+msgstr "leertaste"
+
+msgid "up"
+msgstr "hoch"

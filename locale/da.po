@@ -1,0 +1,1079 @@
+# translation of da.po to danish
+# Janus Troelsen <ysangkok@gmail.com>, 2007.
+msgid ""
+msgstr ""
+"Project-Id-Version: da\n"
+"PO-Revision-Date: 2007-05-10 22:38+0200\n"
+"Last-Translator: Janus Troelsen <ysangkok@gmail.com>\n"
+"Language-Team: danish <da@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+
+# Files
+msgid "data/LICENSE"
+msgstr "data/da/LICENSE"
+
+msgid "data/cheatWidgets"
+msgstr "data/da/cheatWidgets"
+
+msgid "data/credits"
+msgstr "data/da/credits"
+
+msgid "data/ending"
+msgstr "data/da/ending"
+
+msgid "data/gameOverWidgets"
+msgstr "data/da/gameOverWidgets"
+
+msgid "data/inGameWidgets"
+msgstr "data/da/inGameWidgets"
+
+msgid "data/introText"
+msgstr "data/da/introText"
+
+msgid "data/joystickWidgets"
+msgstr "data/da/joystickWidgets"
+
+msgid "data/keyboardWidgets"
+msgstr "data/da/keyboardWidgets"
+
+msgid "data/levelBrief"
+msgstr "data/da/levelBrief"
+
+msgid "data/optionWidgets"
+msgstr "data/da/optionWidgets"
+
+msgid "data/titleWidgets"
+msgstr "data/da/titleWidgets"
+
+# Areas
+msgid "Ancient Tomb #1"
+msgstr "Ældgammel grav #1"
+
+msgid "Ancient Tomb #2"
+msgstr "Ældgammel grav #2"
+
+msgid "Ancient Tomb #3"
+msgstr "Ældgammel grav #3"
+
+msgid "Ancient Tomb #4"
+msgstr "Ældgammel grav #4"
+
+msgid "Arctic Wastes"
+msgstr "Arktisk affald"
+
+msgid "BioMech Assimilator"
+msgstr "BioMech assimilator"
+
+msgid "BioMech Communications"
+msgstr "BioMech kommunikationer"
+
+msgid "BioMech HQ"
+msgstr "BioMech hovedkvarter"
+
+msgid "BioMech Supply Depot"
+msgstr "BioMech forsyningsdepot"
+
+msgid "Flooded Tunnel"
+msgstr "Oversvømmet tunnel"
+
+msgid "Flooded Tunnel #2"
+msgstr "Oversvømmet tunnel #2"
+
+msgid "Flooded Tunnel #3"
+msgstr "Oversvømmet tunnel #3"
+
+msgid "Flooded Tunnel #4"
+msgstr "Oversvømmet tunnel #4"
+
+msgid "Forgotten Caves"
+msgstr "Forglemte grotter"
+
+msgid "Grasslands"
+msgstr "Græsland"
+
+msgid "Grasslands #2"
+msgstr "Græsland #2"
+
+msgid "Grasslands #3"
+msgstr "Græsland #3"
+
+msgid "Ice Cave #1"
+msgstr "Isgrotte #1"
+
+msgid "Ice Cave #2"
+msgstr "Isgrotte #2"
+
+msgid "Inner Cave Network, Part 1"
+msgstr "Inderste grottenetværk, del 1"
+
+msgid "Inner Cave Network, Part 2"
+msgstr "Inderste grottenetværk, del 1"
+
+msgid "Space Station"
+msgstr "Rumstation"
+
+msgid "Training Mission"
+msgstr "Træningsmission"
+
+msgid "Uncharted Cavern"
+msgstr "Ukendt grotte"
+
+# Objectives
+msgid "4 Hit Combo with Grenades"
+msgstr "4 hit combo med granater"
+
+msgid "6 Hit Combo with Spread Gun"
+msgstr "7 hit combo med spredningsgevær"
+
+msgid "8 Hit Combo with Grenades"
+msgstr "8 hit combo med granater"
+
+msgid "10 Hit Combo with Machine Gun"
+msgstr "10 hit combo med maskingevær"
+
+msgid "12 Hit Combo with Spread Gun"
+msgstr "12 hit combo med spedningsgevær"
+
+msgid "20 Hit Combo with Machine Gun"
+msgstr "20 hit combo med maskingevær"
+
+msgid "Access Eastern Passage"
+msgstr "Tilgå østlig passage"
+
+msgid "Access Fourth Floor"
+msgstr "Tilgå fjerde etage"
+
+msgid "Access Northern Passage"
+msgstr "Tilgå nordlig passage"
+
+msgid "Access Second Floor"
+msgstr "Tilgå anden etage"
+
+msgid "Access Third Floor"
+msgstr "Tilgå tredje tal"
+
+msgid "Access Western Passage"
+msgstr "Tilgå vestlig passage"
+
+msgid "Access Upper Cave System"
+msgstr "Tilgå øverste grottesystem"
+
+msgid "Access Upper Floor"
+msgstr "Tilgå øverste etage"
+
+msgid "Activate 2 Security Points"
+msgstr "Aktivér 2 sikkerhedspunkter"
+
+msgid "Activate 4 Security Points"
+msgstr "Aktivér 4 sikkerhedspunkter"
+
+msgid "Battle Galdov"
+msgstr "Kamp mod Galdov"
+
+msgid "Collect 10 Cherry Plants"
+msgstr "Indsaml 10 kirsebærplanter"
+
+msgid "Collect 20 Cherry Plants"
+msgstr "Indsaml 20 kirsebærplanter"
+
+msgid "Collect 25 Boxes of Orichalcum Beads"
+msgstr "Indsaml 25 kasser orkidéperler"
+
+msgid "Collect the Blueprints"
+msgstr "Indsaml arbejdstegningerne"
+
+msgid "Collect three keys"
+msgstr "Indsaml tre nøgler"
+
+msgid "Deactivate Security Systems"
+msgstr "Deaktivér sikkerhedssystemer"
+
+msgid "Defeat 10 Hard Hide Blobs"
+msgstr "Nedlæg 10 hårdnakkede blobs"
+
+msgid "Defeat 15 Machine Gun Droids"
+msgstr "Nedlæg 15 maskingeværsdruider"
+
+msgid "Defeat 25 Machine Gun Droids"
+msgstr "Nedlæg 25 maskingeværsdruider"
+
+msgid "Defeat 30 enemies"
+msgstr "Nedlæg 30 fjender"
+
+msgid "Defeat 50 Enemies"
+msgstr "Nedlæg 50 fjender"
+
+msgid "Defeat 100 Enemies"
+msgstr "Nedlæg 100 fjender"
+
+msgid "Defeat 200 Enemies"
+msgstr "Nedlæg 200 fjender"
+
+msgid "Defeat BioMech Jetpack Blob"
+msgstr "Nedlæg BioMech Jetpackblob"
+
+msgid "Defeat Galdov"
+msgstr "Nedlæg Galdov"
+
+msgid "Destroy 5 Power Generators"
+msgstr "Ødelæg 5 strømgeneratorer"
+
+msgid "Destroy 5 Satellite Dishes"
+msgstr "Ødelæg 5 paraboler"
+
+msgid "Destroy 6 Power Generators"
+msgstr "Ødelæg 6 strømgeneratorer"
+
+msgid "Destroy 10 Sentry Guns"
+msgstr "Ødelæg 10 automatiske vagtgeværer"
+
+msgid "Destroy 10 Spider Blobs"
+msgstr "Ødelæg 10 edderkop-blobs"
+
+msgid "Destroy BioMech Aqua Blob"
+msgstr "Ødelæg BioMech Aquablob"
+
+msgid "Destroy BioMech Tank V1.1"
+msgstr "Ødelæg BioMech Tank V1.1"
+
+msgid "Destroy BioMech Tank V2.6"
+msgstr "Ødelæg BioMech Tank V2.6"
+
+msgid "Destroy the Ice Blobs"
+msgstr "Ødelæg  is-blobsne"
+
+msgid "Disable Booby Traps"
+msgstr "Deaktivér fælderne"
+
+msgid "Disable the Auto Cannon"
+msgstr "Slå den automatiske kanon fra"
+
+msgid "Enter Ancient Tomb"
+msgstr "Gå ind i ældgammel grotte"
+
+msgid "Exit the Ice Caves"
+msgstr "Forlad isgrotterne"
+
+msgid "Exit the Tunnel System"
+msgstr "Forlad tunnelsystemet"
+
+msgid "Explore the Flooded Area"
+msgstr "Udforsk det oversvømmede land"
+
+msgid "Fight Galdov"
+msgstr "Slås mod Galdov"
+
+msgid "Find 1st Cypher Piece"
+msgstr "Find første kodestump"
+
+msgid "Find 2 Sticks of Dynamite"
+msgstr "Find 2 stænger dynamit"
+
+msgid "Find 2nd Cypher Piece"
+msgstr "Find anden kodestump"
+
+msgid "Find 3 Ancient Cogs"
+msgstr "Find 3 ældgamle tandhjul"
+
+msgid "Find 3 Ancient Keys"
+msgstr "Find 3 ældgamle nøgler"
+
+msgid "Find 4 Ancient Keys"
+msgstr "Find 4 ældgamle nøgler"
+
+msgid "Find 5 Earth Crystal Shards"
+msgstr "Find 5 jordkrystalskår"
+
+msgid "Find 10 Diamonds"
+msgstr "Find 10 diamanter"
+
+msgid "Find Galdov"
+msgstr "Find Galdov"
+
+msgid "Find L.R.T.S. Part"
+msgstr "Find L.R.T.S. del"
+
+# Find L.R.T.S. Part
+msgid "???? ???????? ????"
+msgstr "???? ???????? ????"
+
+msgid "Find the 4 Map Pieces"
+msgstr "Find de 4 kortstykker"
+
+msgid "Find the 5 Crystal Shards"
+msgstr "Find de 5 krystalskår"
+
+msgid "Find the Dynamite"
+msgstr "Find dynamitten"
+
+msgid "Find the Transmitter"
+msgstr "Find transmitteren"
+
+msgid "Find Two Ancient Keys"
+msgstr "Find to ældgamle nøgler"
+
+msgid "Find Water Orb Shards"
+msgstr "Find vandkugle skår"
+
+msgid "Get the Ancient Fire Crystal"
+msgstr "Få fat i den ældgamle ildkrystal"
+
+msgid "Get the Ancient Reality Crystal"
+msgstr "Få fat i den ældgamle realitetskrystal"
+
+msgid "Get the Ancient Space Crystal"
+msgstr "Få fat i den ældgamle rumkrystal"
+
+msgid "Get the Ancient Time Crystal"
+msgstr "Få fat i den ældgamle tidskrystal"
+
+msgid "Get the Aqua Lung"
+msgstr "Få fat i aqualungen"
+
+msgid "Get the Jetpack"
+msgstr "Få fat i jetpacken"
+
+msgid "Get the Reality Crystal"
+msgstr "Få fat i realitetskrystallen"
+
+msgid "Get to the Exit"
+msgstr "Gå til udgangen"
+
+msgid "Get to the exit"
+msgstr "Gå til udgangen"
+
+msgid "Get to the Forest"
+msgstr "Gå til skoven"
+
+msgid "Get to the Main Pump Room"
+msgstr "Gå til hovedpumperummet"
+
+msgid "Get to the Maintenance Room"
+msgstr "Gå til vedligeholdelsesrummet"
+
+msgid "Get to the Tomb Entrance"
+msgstr "Gå til grotteindgangen"
+
+msgid "Locate 10 Sticks of Dynamite"
+msgstr "Find 10 stænger dynamit"
+
+msgid "Locate Tomb Entrance"
+msgstr "Find grotteindgangen"
+
+msgid "Open Exit Door"
+msgstr "Åben udgangsdøren"
+
+msgid "Plant 10 Sticks of Dynamite"
+msgstr "Plant 10 stænger dynamit"
+
+msgid "Raise Water Level"
+msgstr "Hæv vandniveauet"
+
+msgid "Rescue %d MIAs"
+msgstr "Red %d MIA'er"
+
+msgid "Stop the Cave in"
+msgstr "Sørg for at man ikke kan komme ind i grotten"
+
+# Picked up...
+msgid "Picked up an Ancient Cog"
+msgstr "Samlede et ældgammelt tandhjul op"
+
+msgid "Picked up an Ancient Key"
+msgstr "Samlede en ældgammel nøgle op"
+
+msgid "Picked up a Blue Keycard"
+msgstr "Samlede et blå nøglekort op"
+
+msgid "Picked up a Bronze Key"
+msgstr "Samlede et bronze nøglekort op"
+
+msgid "Picked up a bunch of Cherries"
+msgstr "Samlede en klase kirsebær op"
+
+msgid "Picked up a Cherry"
+msgstr "Samlede et kirsebær op"
+
+msgid "Picked up a Crystal Shard"
+msgstr "Samlede et krystalskår op"
+
+msgid "Picked up a Cyan Keycard"
+msgstr "Samlede et cyan nøglekort op"
+
+msgid "Picked up a Gold Key"
+msgstr "Samlede et guld nøglekort op"
+
+msgid "Picked up a Green Keycard"
+msgstr "Samlede et grønt nøglekort op"
+
+msgid "Picked up a Grenades"
+msgstr "Samlede nogle granater op"
+
+msgid "Picked up a Keycard"
+msgstr "Samlede et nøglekort op"
+
+msgid "Picked up a Laser Gun"
+msgstr "Samlede et lasergevær op"
+
+msgid "Picked up a Machine Gun"
+msgstr "Samlede et maskingevær op"
+
+msgid "Picked up a pair of Cherries"
+msgstr "Samlede et par kirsebær op"
+
+msgid "Picked up a Pistol"
+msgstr "Samlede en pistol op"
+
+msgid "Picked up a Purple Keycard"
+msgstr "Samlede et violet nøglekort op"
+
+msgid "Picked up a Red Keycard"
+msgstr "Samlede et rødt nøglekort op"
+
+msgid "Picked up a set of Grenades"
+msgstr "Samlede et set granater op"
+
+msgid "Picked up a Silver Key"
+msgstr "Samlede en sølv nøgle op"
+
+msgid "Picked up a Three Way Spread"
+msgstr "Samlede et 3-løbsgevær op"
+
+# ... required
+msgid "Ancient Cog required"
+msgstr "Ældegammelt tandhjul påkrævet"
+
+msgid "Ancient Key required"
+msgstr "Ældgammel nøgle påkrævet"
+
+msgid "Blue Keycard required"
+msgstr "Blåt nøglekort påkrævet"
+
+msgid "Bronze Key Required"
+msgstr "Bronze nøgle påkrævet"
+
+msgid "Cyan Keycard required"
+msgstr "Cyan nøgle påkrævet"
+
+msgid "Cypher Piece #1 required"
+msgstr "Kodestump 1 påkrævet"
+
+msgid "Cypher Piece #2 required"
+msgstr "Kodestump 2 påkrævet"
+
+msgid "Dynamite required"
+msgstr "Dynamit påkrævet"
+
+msgid "Gold Key Required"
+msgstr "Guld nøgle påkrævet"
+
+msgid "Green Keycard required"
+msgstr "Grønt nøglekort påkrævet"
+
+msgid "Keycard required"
+msgstr "Nøglekort påkrævet"
+
+msgid "Pack of Dynamite required"
+msgstr "En pakke dynamit påkrævet"
+
+msgid "Purple Keycard required"
+msgstr "Violet nøglekort påkrævet"
+
+msgid "Red Keycard required"
+msgstr "Rødt nøglekort påkrævet"
+
+msgid "Silver Key Required"
+msgstr "Sølv nøgle påkrævet"
+
+# Speech
+msgid "help me..."
+msgstr "hjælp mig..."
+
+msgid "i don't like it here..."
+msgstr "jeg kan ikke lide det her..."
+
+msgid "i don't wanna die..."
+msgstr "jeg vil ikke dø..."
+
+msgid "i... i'm scared..."
+msgstr "j... jeg er bange..."
+
+msgid "i wanna go home..."
+msgstr "jeg vil hjem..."
+
+msgid "please... someone help..."
+msgstr "jeg beder... en eller anden, hjælp mig..."
+
+msgid "what was that?!"
+msgstr "hvad var det?!"
+
+msgid "Galdov: And this is the best the Blob Army can offer?"
+msgstr "Galdov: Og det her er det bedste Blob-hæren kan byde mig?"
+
+msgid "Galdov: Stupid creature!! Give up and join us!"
+msgstr "Galdov: Dumme bæst! Giv op og slut dig til os!"
+
+msgid "Galdov: We WILL have the crystals! NOTHING will stop us!!"
+msgstr "Galdov: Vi VIL have krystallerne! INTET kan stoppe os!"
+
+msgid "Galdov: Why do you persist in fighting us?!"
+msgstr "Galdov: Hvorfor bliver du ved med at udfordre os?!"
+
+msgid "Galdov: You're mine now!!!"
+msgstr "Galdov: Du er min nu!"
+
+# Misc
+msgid "Access Confirmed"
+msgstr "Adgang bekræftet"
+
+msgid "Access Granted"
+msgstr "Adgang godtaget"
+
+msgid "Accuracy"
+msgstr "Præcision"
+
+msgid "All Required Objectives Met - Mission Complete"
+msgstr "Alle påkrævede delmissioner løst – Mission fuldført"
+
+msgid "Ammo Used"
+msgstr "Ikke mere ammunition"
+
+msgid "An SDL Game"
+msgstr "Et SDL-spil"
+
+msgid "Automap is not available!"
+msgstr "Automap er ikke tilgængeligt!"
+
+msgid "Average Continue Usage:"
+msgstr "Gennemsnitligt kontinuert brug:"
+
+msgid "Best Combo"
+msgstr "Bedste kombo:"
+
+msgid "Best Combo:"
+msgstr "Beste kombo:"
+
+msgid "BioMech Aqua Blob"
+msgstr "BioMech Aqua Blob"
+
+msgid "BioMech Jetpack Blob"
+msgstr "BioMech Jetpack Blob"
+
+msgid "BioMech Tank V1.1"
+msgstr "BioMech Tank V1.1"
+
+msgid "BioMech Tank V2.6"
+msgstr "BioMech Tank V2.6"
+
+msgid "Blob Wars : Episode I"
+msgstr "Blob Wars: Episode I"
+
+msgid "Bonuses Picked Up:"
+msgstr "Opsamlede bonusser:"
+
+msgid "Bridge Activated"
+msgstr "Bro aktiveret"
+
+msgid "Bridge Deployed"
+msgstr "Bro udfoldet"
+
+msgid "Can't Exit Yet - Objectives Not Met"
+msgstr "Kan ikke gå ud endnu – Delmissioner ikke fuldførte"
+
+msgid "Cave In!! Looks like it might be controlled by that switch..."
+msgstr "Nedstyrtningsfare! Det ser ud som om det er styret ved hjælp af den kontakt..."
+
+msgid "Cell Door #1 Opened"
+msgstr "Celledør 1 åbnet"
+
+msgid "Cell Door #2 Opened"
+msgstr "Celledør 2 åbnet"
+
+msgid "Checkpoint Reached"
+msgstr "Et gemmepunkt er nået"
+
+msgid "Cogs Released"
+msgstr "Tandhjul løsnet"
+
+msgid "Completed"
+msgstr "Fuldført"
+
+msgid "Continues Used:"
+msgstr "Forsættelseschancer brugt:"
+
+msgid "Copyright (C) 2004, 2005 Parallel Realities"
+msgstr "Ophavsretsomfattet © 2004, 2005 Parallel Realities"
+
+# as in Corrupt Save Data
+msgid "Corrupt"
+msgstr "Korrupt"
+
+msgid "Corrupt Save Data"
+msgstr "Korrupt gemmedata"
+
+msgid "Crystal Defence System Activated"
+msgstr "Krystalforsvarssystem aktiveret"
+
+msgid "Crystal Room is now accessible"
+msgstr "Krystalkammeret er nu tilgængeligt"
+
+msgid "Crystal Room Open"
+msgstr "Krystalkammeret åbnet"
+
+msgid "Detonation Started..."
+msgstr "Detonation startet..."
+
+msgid "Don't have jetpack!"
+msgstr "Har ingen jetpack!"
+
+msgid "Door is locked"
+msgstr "Døren er låst"
+
+msgid "Door Opened"
+msgstr "Døren er åbnet"
+
+msgid "Door opened"
+msgstr "Døren er åbnet"
+
+msgid "Doors Opened"
+msgstr "Dørene er åbnede"
+
+msgid "Eastern passage is now accessible"
+msgstr "Østlig passage er nu tilgængelig"
+
+msgid "Easy"
+msgstr "Let"
+
+msgid "Empty"
+msgstr "Tom"
+
+msgid "Enemies"
+msgstr "Fjender"
+
+msgid "Enemies Defeated"
+msgstr "Fjender besejret"
+
+msgid "Enemies Defeated:"
+msgstr "Fjender besejret:"
+
+msgid "Escapes Used:"
+msgstr "Flugtforsøg brugt:"
+
+msgid "Extreme"
+msgstr "Ekstrem"
+
+msgid "First Crystal Door Opened"
+msgstr "Første krystaldør åbnet"
+
+msgid "Found"
+msgstr "Fundet"
+
+msgid "Fourth floor is now accessible"
+msgstr "Fjerde etage er nu tilgængelig"
+
+msgid "Galdov has dropped the crystal! Quick! Get it!!"
+msgstr "Galdov har tabet krystallen! Hurtugt, tag den!"
+
+msgid "Got the Aqua Lung! You can now swim forever!"
+msgstr "Du fik aqualungen! Du kan nu svømme for evigt."
+
+msgid "Got the Jetpack! Press SPACE to Activate!"
+msgstr "Fik jetpacken! Tryk MELLEMRUM for at aktivere."
+
+msgid "Grenades"
+msgstr "Granater"
+
+msgid "Hard"
+msgstr "Svært"
+
+msgid "Health"
+msgstr "Helbred"
+
+msgid "%d Hit Combo!"
+msgstr "%d-slags kombo!"
+
+msgid "%d Hits"
+msgstr "%d slag"
+
+msgid "Incomplete"
+msgstr "Ufuldstændig"
+
+msgid "Information for %s"
+msgstr "Information for %s"
+
+msgid "++ Inventory ++"
+msgstr "++ Indhold ++"
+
+msgid "Items"
+msgstr "Ting"
+
+msgid "Items Collected"
+msgstr "Opsamlede ting"
+
+msgid "Items Collected:"
+msgstr "Opsamlede ting:"
+
+msgid "Jetpack"
+msgstr "Jetpack"
+
+msgid "Jetpack cannot be used underwater"
+msgstr "Jetpacken kan ikke bruges under vandet"
+
+msgid "Jetpack is recharging..."
+msgstr "Jetpacken oplader..."
+
+msgid "Key Released"
+msgstr "Tast sluppet"
+
+msgid "Keycard Released"
+msgstr "Nøglekort sluppet"
+
+msgid "Laser Cannon"
+msgstr "Laserkanon"
+
+msgid "Lift Activated"
+msgstr "Elevator aktiveret"
+
+msgid "Lift activated"
+msgstr "Elevator aktiveret"
+
+msgid "Lift is not currently active"
+msgstr "Elevatoren er ikke slået til i øjeblikket"
+
+msgid "Lifts Activated"
+msgstr "Elevatorer aktiverede"
+
+msgid "Loading..."
+msgstr "Indlæser..."
+
+msgid "Location"
+msgstr "Sted"
+
+msgid "Locks Released"
+msgstr "Låse er låst op"
+
+msgid "Machine Gun"
+msgstr "Maskingevær"
+
+msgid "Main Lift Activated"
+msgstr "Hovedelevator aktiveret"
+
+msgid "Maintenance Room is now accessible"
+msgstr "Vedligeholdelsesrummet er nu tilgængeligt"
+
+msgid "Metal Blob Solid : Statistics"
+msgstr "Metal Blob Solid: Statistik"
+
+msgid "MIA Statistics"
+msgstr "MIA statistik"
+
+msgid "MIAs"
+msgstr "MIA'er"
+
+msgid "MIAs in Area"
+msgstr "MIA'er i dette område"
+
+msgid "MIAs Rescued"
+msgstr "MIA'er reddet"
+
+msgid "MIAs Saved:"
+msgstr "MIA'er reddet:"
+
+msgid "Mines Disabled"
+msgstr "Minerne er desarmeret"
+
+msgid "Missing"
+msgstr "Mangler"
+
+msgid "Mission Failed! Time Up!"
+msgstr "Missionen er slået fejl! Tiden gik."
+
+msgid "Mission Time"
+msgstr "Missionstid"
+
+msgid "Missions Started:"
+msgstr "Missioner startet:"
+
+msgid "%s - %d more to go..."
+msgstr "%s – endnu %d igen..."
+
+msgid "Most Used Weapon"
+msgstr "Mest brugte våben"
+
+msgid "Name"
+msgstr "Navn"
+
+msgid "%s - need %d more"
+msgstr "%s – skal bruge %d flere"
+
+msgid "Normal"
+msgstr "Normal"
+
+msgid "Northern passage is now accessible"
+msgstr "Den nordlige passage er nu tilgængelig"
+
+msgid "Not carrying anything"
+msgstr "Bærer ikke på noget"
+
+msgid "%s - Objective Completed"
+msgstr "%s – Submissioner fuldført"
+
+msgid "%s - Objective Completed - Check Point Reached!"
+msgstr "%s – Submission fuldført – Gemmepunkt nået!"
+
+msgid "Objectives Completed:"
+msgstr "Submissioner fuldført:"
+
+msgid "Obstacles Reset"
+msgstr "Forhindringer nulstillet"
+
+msgid "%s - %d of %d"
+msgstr "%s – %d fra %d"
+
+msgid "(optional)"
+msgstr "(valgfri)"
+
+msgid "Oxygen"
+msgstr "Ilt"
+
+msgid "*** PAUSED ***"
+msgstr "*** PAUSE ***"
+
+msgid "Percentage Complete:"
+msgstr "Procent komplet:"
+
+msgid "Pistol"
+msgstr "Pistol"
+
+msgid "Position = %d:%d"
+msgstr "Position = %d:%d"
+
+msgid "Presents"
+msgstr "Præsenterer"
+
+msgid "Press Button to Continue..."
+msgstr "Tryk en tast for at fortsætte..."
+
+msgid "Press Fire to Continue"
+msgstr "Tryk på \"skyd\"-tasten for at fortsætte"
+
+msgid "Press Space to Continue..."
+msgstr "Tryk mellemrum for at fortsætte..."
+
+msgid "Rescue %d MIAs - Objective Complete - Checkpoint Reached!"
+msgstr "Red %d MIA'er – Submission fuldført – Gemmepunkt nået!"
+
+msgid "Rescued %s!"
+msgstr "Reddede %s!"
+
+msgid "Rescued %s - Checkpoint Reached!"
+msgstr "Reddede %s – Gemmepunkt nået!"
+
+msgid "Save Complete"
+msgstr "Gemning komplet"
+
+msgid "Saving Game to Save Slot #%d. Please Wait..."
+msgstr "Gemmer spil til gemme-slot %d. Vent venligst..."
+
+msgid "Score:"
+msgstr "Point:"
+
+msgid "Second Crystal Door Opened"
+msgstr "Anden krystaldør åbnet"
+
+msgid "Second floor is now accessible"
+msgstr "Anden etage er nu tilgængelig"
+
+msgid "Selected Destination"
+msgstr "Valgt destination"
+
+msgid "Skill Level:"
+msgstr "Sværhedsgrad:"
+
+msgid "Skipping Mission..."
+msgstr "Springer missionen over..."
+
+msgid "Spike Balls Disabled"
+msgstr "Bolde med pikke deaktiveret"
+
+msgid "Spikes Disabled"
+msgstr "Pikke deaktiveret"
+
+msgid "Spread Gun"
+msgstr "Spredegevær"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Teleporter Activated"
+msgstr "Teleporter aktiveret"
+
+msgid "That Auto Cannon is guarding the entrance to the forest..."
+msgstr "Den automatiske kanon garderer indgangen til skoven..."
+
+msgid "Third Crystal Door Opened"
+msgstr "Tredje krystaldør åbnet"
+
+msgid "Three bronze keys are needed to open these doors..."
+msgstr "Tre bronzenøgler er nødvendige for at åbne disse døre..."
+
+msgid "Throw a grenade on the switch and recieve a present..."
+msgstr "Kast en granat på kontakten for at få en gave..."
+
+msgid "Throw a grenade onto that switch to trigger it"
+msgstr "Kast en granat på den kontakt for at aktivere den"
+
+msgid "Time Limit - %d:%.2d Minutes"
+msgstr "Tidsbegrænsning – %d:%.2d minutter"
+
+msgid "Time Remaining: %.2d:%.2d"
+msgstr "Resterende tid: %.2d:%.2d"
+
+msgid "Time your movement through Energy Barriers like these..."
+msgstr "Tilpas dine bevægelser når du skal igennem energibarrierer som disse..."
+
+msgid "Tomb Door Opened"
+msgstr "Grottedør åbnet"
+
+msgid "Total"
+msgstr "Total"
+
+msgid "Total Game Time"
+msgstr "Total spilletid"
+
+msgid "Trap Activated"
+msgstr "Fælden er aktiveret"
+
+msgid "Trap deactivated"
+msgstr "Fælden er deaktiveret"
+
+msgid "Traps Deactivated"
+msgstr "Fælderne er deaktiverede"
+
+msgid "Used Bronze Key"
+msgstr "Bronzenøgle brugt"
+
+msgid "Used Gold Key"
+msgstr "Guldnøgle brugt"
+
+msgid "Used Silver Key"
+msgstr "Sølvnøgle brugt"
+
+msgid "Version %s"
+msgstr "Version %s"
+
+msgid "WARNING: ACTIVE BOOBY TRAP AHEAD!! DEACTIVATE WITH SWITCH EASTWARD !!"
+msgstr "ADVARSEL: AKTIV FÆLDE FORUDE! DEAKTIVER VED HJÆLP AF KONTAKTEN MOD ØST!"
+
+msgid "WARNING: ACTIVE BOOBY TRAP AHEAD!! DO NOT PROCEED UNTIL DEACTIVATED!!"
+msgstr "ADVARSEL: AKTIV FÆLDE FORUDE! FORTSÆT IKKE FØR DEN ER DEAKTIVERET!"
+
+msgid "WARNING: ACTIVE BOOBY TRAP AHEAD!! MINES *WILL* KILL YOU IF TRIPPED!!"
+msgstr "ADVARSEL: AKTIV FÆLDE FORUDE! MINER *VIL* SLÅ DIG IHJEL HVIS DU TRÆDER FORKERT!"
+
+msgid "Water Door Opened"
+msgstr "Vanddør åbnet"
+
+msgid "Water level is rising"
+msgstr "Vandniveauet stiger"
+
+msgid "Weapon"
+msgstr "Våben"
+
+msgid "Weapon:"
+msgstr "Våben:"
+
+msgid "Western passage is now accessible"
+msgstr "Vestlig passage er nu tilgængelig"
+
+msgid "You got the Aqua Lung!"
+msgstr "Du fik aqualungen!"
+
+msgid "You got the Jet Pack!"
+msgstr "Du fik jetpacken!"
+
+msgid "You'll need to 'Kill Two Birds with One Stone' here..."
+msgstr "Du bliver nødt til at slå to fluer med et smæk..."
+
+# Keys
+msgid "backspace"
+msgstr "backspace"
+
+msgid "caps lock"
+msgstr "caps lock"
+
+msgid "delete"
+msgstr "delete"
+
+msgid "down"
+msgstr "ned"
+
+msgid "end"
+msgstr "end"
+
+msgid "enter"
+msgstr "enter"
+
+msgid "home"
+msgstr "home"
+
+msgid "insert"
+msgstr "insert"
+
+msgid "left"
+msgstr "venstre"
+
+msgid "left alt"
+msgstr "venstre \"alt\""
+
+msgid "left ctrl"
+msgstr "venstre \"ctrl\""
+
+msgid "left shift"
+msgstr "venstre \"shift\""
+
+msgid "left super"
+msgstr "venstre \"super\""
+
+msgid "menu"
+msgstr "menu"
+
+msgid "numlock"
+msgstr "numlock"
+
+msgid "page down"
+msgstr "page down"
+
+msgid "page up"
+msgstr "page up"
+
+msgid "pause"
+msgstr "pause"
+
+msgid "print screen"
+msgstr "print screen"
+
+msgid "return"
+msgstr "return"
+
+msgid "right"
+msgstr "højre"
+
+msgid "right ctrl"
+msgstr "røjre \"ctrl\""
+
+msgid "right shift"
+msgstr "højre \"shift\""
+
+msgid "scroll lock"
+msgstr "scroll lock"
+
+msgid "space"
+msgstr "mellemrum"
+
+msgid "up"
+msgstr "op"
+

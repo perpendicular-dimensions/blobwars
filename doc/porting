@@ -1,0 +1,46 @@
+PORTING
+
+Updated: March 2005
+
+In order to successfully port Metal Blob Solid to another platform you will need,
+
+* SDL
+* SDL Image
+* SDL Mixer
+* SDL TTF
+
+There are a few considerations when porting to other platforms,
+
+- In the makefile you should remove the -DUNIX define if you are not running 
+  on a *nix system. If you don't it is likely you will only get compile time errors
+  so you'll be reminded to remove it.
+  
+- Most non *nix systems do not have access to a function called strtok_r() which, to
+  my knowledge, is a threaded version of the strtok() function. Since MBS makes some
+  small use of this function I've had a try and replicate it. The replicated version
+  is very half arsed and is only intended to work. Speed and efficiency aren't a 
+  concern here. If you get some grief about "flag tokens" to it is most likely to
+  be related to this function. It can be found in CEngine.cpp
+  
+- On a similar note there is a define called IGNORE_FLAGTOKEN_ERRORS which can also
+  be set to hopefully aid in the pharsing of the flag tokens whilst also ignoring
+  any errors thrown. Consider adding to this the build script if you experience
+  issues.
+  
+- To create the PAK file you can run "make buildpak" after running "make". This will
+  be required if you are building the game from source on non *nix platforms (note that
+  make install builds the pak file).
+  
+When you've successfully ported the game to another platform drop me an email and let me
+know. Please DO NOT email me the port without asking permission.
+  
+After having said all that, please report gameplay problems as well! Because of the 
+nature of the game (a platform game with multiple objectives and the ability to 
+return to previous missions), there are likely to be a few problems. Just let me know
+what the problem is, what level it is on and where abouts you encountered it.
+
+Stephen Sweeney
+stephen.sweeney@parallelrealities.co.uk
+http://www.parallelrealities.co.uk
+
+(NB: This email address does not accept HTML formatted messages. Plain text only)

@@ -1,0 +1,1080 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: blobwars 1.06\n"
+"PO-Revision-Date: 2007-03-18 02:04+0100\n"
+"Last-Translator: Javier Serrano Polo <jasp00@terra.es>\n"
+"Language-Team: Catalan Localization <debian-l10n-catalan@lists.debian.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# Files
+
+msgid "data/cheatWidgets"
+msgstr "data/ca/cheatWidgets"
+
+msgid "data/credits"
+msgstr "data/ca/credits"
+
+msgid "data/ending"
+msgstr "data/ca/ending"
+
+msgid "data/gameOverWidgets"
+msgstr "data/ca/gameOverWidgets"
+
+msgid "data/inGameWidgets"
+msgstr "data/ca/inGameWidgets"
+
+msgid "data/introText"
+msgstr "data/ca/introText"
+
+msgid "data/joystickWidgets"
+msgstr "data/ca/joystickWidgets"
+
+msgid "data/keyboardWidgets"
+msgstr "data/ca/keyboardWidgets"
+
+msgid "data/levelBrief"
+msgstr "data/ca/levelBrief"
+
+msgid "data/optionWidgets"
+msgstr "data/ca/optionWidgets"
+
+msgid "data/titleWidgets"
+msgstr "data/ca/titleWidgets"
+
+# Areas
+
+msgid "Ancient Tomb #1"
+msgstr "Tomba Antiga #1"
+
+msgid "Ancient Tomb #2"
+msgstr "Tomba Antiga #2"
+
+msgid "Ancient Tomb #3"
+msgstr "Tomba Antiga #3"
+
+msgid "Ancient Tomb #4"
+msgstr "Tomba Antiga #4"
+
+msgid "Arctic Wastes"
+msgstr "Erm Àrtic"
+
+msgid "BioMech Assimilator"
+msgstr "Assimilador BioMec"
+
+msgid "BioMech Communications"
+msgstr "Comunicacions BioMec"
+
+msgid "BioMech HQ"
+msgstr "QG BioMec"
+
+msgid "BioMech Supply Depot"
+msgstr "Subministraments BioMec"
+
+msgid "Flooded Tunnel"
+msgstr "Túnel Inundat"
+
+msgid "Flooded Tunnel #2"
+msgstr "Túnel Inundat #2"
+
+msgid "Flooded Tunnel #3"
+msgstr "Túnel Inundat #3"
+
+msgid "Flooded Tunnel #4"
+msgstr "Túnel Inundat #4"
+
+msgid "Forgotten Caves"
+msgstr "Coves Oblidades"
+
+msgid "Grasslands"
+msgstr "Prats"
+
+msgid "Grasslands #2"
+msgstr "Prats #2"
+
+msgid "Grasslands #3"
+msgstr "Prats #3"
+
+msgid "Ice Cave #1"
+msgstr "Cova de Gel #1"
+
+msgid "Ice Cave #2"
+msgstr "Cova de Gel #2"
+
+msgid "Inner Cave Network, Part 1"
+msgstr "Xarxa Interior de Coves (1)"
+
+msgid "Inner Cave Network, Part 2"
+msgstr "Xarxa Interior de Coves (2)"
+
+msgid "Space Station"
+msgstr "Estació Espacial"
+
+msgid "Training Mission"
+msgstr "Missió d'Entrenament"
+
+msgid "Uncharted Cavern"
+msgstr "Caverna Desconeguda"
+
+# Objectives
+
+msgid "4 Hit Combo with Grenades"
+msgstr "Combo de 4 Impactes de Granada"
+
+msgid "6 Hit Combo with Spread Gun"
+msgstr "Combo de 6 Impactes de Rifle Estès"
+
+msgid "8 Hit Combo with Grenades"
+msgstr "Combo de 8 Impactes de Granada"
+
+msgid "10 Hit Combo with Machine Gun"
+msgstr "Combo de 10 Impactes de Metralladora"
+
+msgid "12 Hit Combo with Spread Gun"
+msgstr "Combo de 12 Impactes de Rifle Estès"
+
+msgid "20 Hit Combo with Machine Gun"
+msgstr "Combo de 20 Impactes de Metralladora"
+
+msgid "Access Eastern Passage"
+msgstr "Accedir al Passadís Est"
+
+msgid "Access Fourth Floor"
+msgstr "Accedir al Quart Pis"
+
+msgid "Access Northern Passage"
+msgstr "Accedir al Passadís Nord"
+
+msgid "Access Second Floor"
+msgstr "Accedir al Segon Pis"
+
+msgid "Access Third Floor"
+msgstr "Accedir al Tercer Pis"
+
+msgid "Access Western Passage"
+msgstr "Accedir al Passadís Oest"
+
+msgid "Access Upper Cave System"
+msgstr "Accedir al Sistema de Coves Superior"
+
+msgid "Access Upper Floor"
+msgstr "Accedir al Pis Superior"
+
+msgid "Activate 2 Security Points"
+msgstr "Activar 2 Punts de Seguretat"
+
+msgid "Activate 4 Security Points"
+msgstr "Activar 4 Punts de Seguretat"
+
+msgid "Battle Galdov"
+msgstr "Combatre Galdov"
+
+msgid "Collect 10 Cherry Plants"
+msgstr "Recollir 10 Plantes de Cireres"
+
+msgid "Collect 20 Cherry Plants"
+msgstr "Recollir 20 Plantes de Cireres"
+
+msgid "Collect 25 Boxes of Orichalcum Beads"
+msgstr "Recollir 25 Caixes de Boles d'Oricalc"
+
+msgid "Collect the Blueprints"
+msgstr "Robar els Plànols"
+
+msgid "Collect three keys"
+msgstr "Recollir tres claus"
+
+msgid "Deactivate Security Systems"
+msgstr "Desactivar Sistemes de Seguretat"
+
+msgid "Defeat 10 Hard Hide Blobs"
+msgstr "Derrotar 10 Blobs de Pell Dura"
+
+msgid "Defeat 15 Machine Gun Droids"
+msgstr "Derrotar 15 Droides amb Metralladora"
+
+msgid "Defeat 25 Machine Gun Droids"
+msgstr "Derrotar 25 Droides amb Metralladora"
+
+msgid "Defeat 30 enemies"
+msgstr "Derrotar 30 enemics"
+
+msgid "Defeat 50 Enemies"
+msgstr "Derrotar 50 Enemics"
+
+msgid "Defeat 100 Enemies"
+msgstr "Derrotar 100 Enemics"
+
+msgid "Defeat 200 Enemies"
+msgstr "Derrotar 200 Enemics"
+
+msgid "Defeat BioMech Jetpack Blob"
+msgstr "Derrotar Blob BioMec amb Motxilla Jet"
+
+msgid "Defeat Galdov"
+msgstr "Derrotar Galdov"
+
+msgid "Destroy 5 Power Generators"
+msgstr "Destruir 5 Generadors d'Energia"
+
+msgid "Destroy 5 Satellite Dishes"
+msgstr "Destruir 5 Antenes Parabòliques"
+
+msgid "Destroy 6 Power Generators"
+msgstr "Destruir 6 Generadors d'Energia"
+
+msgid "Destroy 10 Sentry Guns"
+msgstr "Destruir 10 Canons Sentinella"
+
+msgid "Destroy 10 Spider Blobs"
+msgstr "Destruir 10 Blobs Aranya"
+
+msgid "Destroy BioMech Aqua Blob"
+msgstr "Destruir Blob Aquàtic BioMec"
+
+msgid "Destroy BioMech Tank V1.1"
+msgstr "Destruir Tanc BioMec V1.1"
+
+msgid "Destroy BioMech Tank V2.6"
+msgstr "Destruir Tanc BioMec V2.6"
+
+msgid "Destroy the Ice Blobs"
+msgstr "Destruir els Blobs de Gel"
+
+msgid "Disable Booby Traps"
+msgstr "Inhabilitar Trampes"
+
+msgid "Disable the Auto Cannon"
+msgstr "Inhabilitar el Canó Automàtic"
+
+msgid "Enter Ancient Tomb"
+msgstr "Entrar a la Tomba Antiga"
+
+msgid "Exit the Ice Caves"
+msgstr "Sortir de les Coves de Gel"
+
+msgid "Exit the Tunnel System"
+msgstr "Sortir del Sistema de Túnels"
+
+msgid "Explore the Flooded Area"
+msgstr "Explorar l'Àrea Inundada"
+
+msgid "Fight Galdov"
+msgstr "Lluitar contra Galdov"
+
+msgid "Find 1st Cypher Piece"
+msgstr "Trobar 1a Peça Clau"
+
+msgid "Find 2 Sticks of Dynamite"
+msgstr "Trobar 2 Cartutxos de Dinamita"
+
+msgid "Find 2nd Cypher Piece"
+msgstr "Trobar 2a Peça Clau"
+
+msgid "Find 3 Ancient Cogs"
+msgstr "Trobar 3 Rodes Dentades Antigues"
+
+msgid "Find 3 Ancient Keys"
+msgstr "Trobar 3 Claus Antigues"
+
+msgid "Find 4 Ancient Keys"
+msgstr "Trobar 4 Claus Antigues"
+
+msgid "Find 5 Earth Crystal Shards"
+msgstr "Trobar 5 Fragments del Cristall de la Terra"
+
+msgid "Find 10 Diamonds"
+msgstr "Trobar 10 Diamants"
+
+msgid "Find Galdov"
+msgstr "Trobar Galdov"
+
+msgid "Find L.R.T.S. Part"
+msgstr "Trobar Part del S.T.L.A."
+
+# Find L.R.T.S. Part
+msgid "???? ???????? ????"
+msgstr "?????? ???? ??? ????????"
+
+msgid "Find the 4 Map Pieces"
+msgstr "Trobar les 4 Parts del Mapa"
+
+msgid "Find the 5 Crystal Shards"
+msgstr "Trobar els 5 Fragments del Cristall"
+
+msgid "Find the Dynamite"
+msgstr "Trobar la Dinamita"
+
+msgid "Find the Transmitter"
+msgstr "Trobar el Transmissor"
+
+msgid "Find Two Ancient Keys"
+msgstr "Trobar Dues Claus Antigues"
+
+msgid "Find Water Orb Shards"
+msgstr "Trobar Fragments de l'Orbe de l'Aigua"
+
+msgid "Get the Ancient Fire Crystal"
+msgstr "Agafar l'Antic Cristall del Foc"
+
+msgid "Get the Ancient Reality Crystal"
+msgstr "Agafar l'Antic Cristall de la Realitat"
+
+msgid "Get the Ancient Space Crystal"
+msgstr "Agafar l'Antic Cristall de l'Espai"
+
+msgid "Get the Ancient Time Crystal"
+msgstr "Agafar l'Antic Cristall del Temps"
+
+msgid "Get the Aqua Lung"
+msgstr "Agafar el Pulmó Aquàtic"
+
+msgid "Get the Jetpack"
+msgstr "Agafar la Motxilla Jet"
+
+msgid "Get the Reality Crystal"
+msgstr "Agafar el Cristall de la Realitat"
+
+msgid "Get to the Exit"
+msgstr "Arribar a la Sortida"
+
+msgid "Get to the exit"
+msgstr "Arribar a la sortida"
+
+msgid "Get to the Forest"
+msgstr "Arribar al Bosc"
+
+msgid "Get to the Main Pump Room"
+msgstr "Arribar a la Sala Principal de Bombament"
+
+msgid "Get to the Maintenance Room"
+msgstr "Arribar a la Sala de Manteniment"
+
+msgid "Get to the Tomb Entrance"
+msgstr "Arribar a l'Entrada de la Tomba"
+
+msgid "Locate 10 Sticks of Dynamite"
+msgstr "Localitzar 10 Cartutxos de Dinamita"
+
+msgid "Locate Tomb Entrance"
+msgstr "Localitzar l'Entrada a la Tomba"
+
+msgid "Open Exit Door"
+msgstr "Obrir la Porta de Sortida"
+
+msgid "Plant 10 Sticks of Dynamite"
+msgstr "Posar 10 Cartutxos de Dinamita"
+
+msgid "Raise Water Level"
+msgstr "Pujar el Nivell de l'Aigua"
+
+msgid "Rescue %d MIAs"
+msgstr "Rescatar %d PEAs"
+
+msgid "Stop the Cave in"
+msgstr "Aturar el Despreniment"
+
+# Picked up...
+
+msgid "Picked up an Ancient Cog"
+msgstr "Has agafat una Roda Dentada Antiga"
+
+msgid "Picked up an Ancient Key"
+msgstr "Has agafat una Clau Antiga"
+
+msgid "Picked up a Blue Keycard"
+msgstr "Has agafat una Targeta Blava"
+
+msgid "Picked up a Bronze Key"
+msgstr "Has agafat una Clau de Bronze"
+
+msgid "Picked up a bunch of Cherries"
+msgstr "T'has pres un penjoll de Cireres"
+
+msgid "Picked up a Cherry"
+msgstr "T'has pres una Cirera"
+
+msgid "Picked up a Crystal Shard"
+msgstr "Has agafat un Fragment de Cristall"
+
+msgid "Picked up a Cyan Keycard"
+msgstr "Has agafat una Targeta Cian"
+
+msgid "Picked up a Gold Key"
+msgstr "Has agafat una Clau d'Or"
+
+msgid "Picked up a Green Keycard"
+msgstr "Has agafat una Targeta Verda"
+
+msgid "Picked up a Grenades"
+msgstr "Has aconseguit Granades"
+
+msgid "Picked up a Keycard"
+msgstr "Has agafat una Targeta"
+
+msgid "Picked up a Laser Gun"
+msgstr "Has aconseguit un Canó Làser"
+
+msgid "Picked up a Machine Gun"
+msgstr "Has aconseguit una Metralladora"
+
+msgid "Picked up a pair of Cherries"
+msgstr "T'has pres un parell de Cireres"
+
+msgid "Picked up a Pistol"
+msgstr "Has aconseguit una Pistola"
+
+msgid "Picked up a Purple Keycard"
+msgstr "Has agafat una Targeta Morada"
+
+msgid "Picked up a Red Keycard"
+msgstr "Has agafat una Targeta Vermella"
+
+msgid "Picked up a set of Grenades"
+msgstr "Has aconseguit un joc de Granades"
+
+msgid "Picked up a Silver Key"
+msgstr "Has agafat una Clau d'Argent"
+
+msgid "Picked up a Three Way Spread"
+msgstr "Has aconseguit un Rifle a Tres Bandes"
+
+# ... required
+
+msgid "Ancient Cog required"
+msgstr "Requereix una Roda Dentada Antiga"
+
+msgid "Ancient Key required"
+msgstr "Requereix una Clau Antiga"
+
+msgid "Blue Keycard required"
+msgstr "Requereix una Targeta Blava"
+
+msgid "Bronze Key Required"
+msgstr "Requereix una Clau de Bronze"
+
+msgid "Cyan Keycard required"
+msgstr "Requereix una Targeta Cian"
+
+msgid "Cypher Piece #1 required"
+msgstr "Requereix la 1a Peça Clau"
+
+msgid "Cypher Piece #2 required"
+msgstr "Requereix la 2a Peça Clau"
+
+msgid "Dynamite required"
+msgstr "Requereix Dinamita"
+
+msgid "Gold Key Required"
+msgstr "Requereix una Clau d'Or"
+
+msgid "Green Keycard required"
+msgstr "Requereix una Targeta Verda"
+
+msgid "Keycard required"
+msgstr "Requereix una Targeta"
+
+msgid "Pack of Dynamite required"
+msgstr "Requereix un Cartutx de Dinamita"
+
+msgid "Purple Keycard required"
+msgstr "Requereix una Targeta Morada"
+
+msgid "Red Keycard required"
+msgstr "Requereix una Targeta Vermella"
+
+msgid "Silver Key Required"
+msgstr "Requereix una Clau d'Argent"
+
+# Speech
+
+msgid "help me..."
+msgstr "ajudeu-me..."
+
+msgid "i don't like it here..."
+msgstr "no vull estar aquí..."
+
+msgid "i don't wanna die..."
+msgstr "no vull morir..."
+
+msgid "i... i'm scared..."
+msgstr "tinc... tinc por..."
+
+msgid "i wanna go home..."
+msgstr "vull tornar a casa..."
+
+msgid "please... someone help..."
+msgstr "per favor... ajuda..."
+
+msgid "what was that?!"
+msgstr "què ha estat allò?!"
+
+msgid "Galdov: And this is the best the Blob Army can offer?"
+msgstr "Galdov: I això és el millor que té l'Exèrcit Blob?"
+
+msgid "Galdov: Stupid creature!! Give up and join us!"
+msgstr "Galdov: Criatura estúpida!! Abandona i uneix-te a nosaltres!"
+
+msgid "Galdov: We WILL have the crystals! NOTHING will stop us!!"
+msgstr "Galdov: TINDREM els cristalls! RES ens aturarà!!"
+
+msgid "Galdov: Why do you persist in fighting us?!"
+msgstr "Galdov: Per què persisteixes en combatre'ns?!"
+
+msgid "Galdov: You're mine now!!!"
+msgstr "Galdov: Ja ets meu!!!"
+
+# Misc
+
+msgid "Access Confirmed"
+msgstr "Accés Confirmat"
+
+msgid "Access Granted"
+msgstr "Accés Concedit"
+
+msgid "Accuracy"
+msgstr "Precisió"
+
+msgid "All Required Objectives Met - Mission Complete"
+msgstr "Completats Tots els Objectius Requerits - Missió Complerta"
+
+msgid "Ammo Used"
+msgstr "Munició Emprada"
+
+msgid "An SDL Game"
+msgstr "Un Joc SDL"
+
+msgid "Automap is not available!"
+msgstr "Mapa automàtic no disponible!"
+
+msgid "Average Continue Usage:"
+msgstr "Mitjana de Continuacions:"
+
+msgid "Best Combo"
+msgstr "Millor Combo"
+
+msgid "Best Combo:"
+msgstr "Millor Combo:"
+
+msgid "BioMech Aqua Blob"
+msgstr "Blob Aquàtic BioMec"
+
+msgid "BioMech Jetpack Blob"
+msgstr "Blob BioMec amb Motxilla Jet"
+
+msgid "BioMech Tank V1.1"
+msgstr "Tanc BioMec V1.1"
+
+msgid "BioMech Tank V2.6"
+msgstr "Tanc BioMec V2.6"
+
+msgid "Blob Wars : Episode I"
+msgstr "Blob Wars : Episodi I"
+
+msgid "Bonuses Picked Up:"
+msgstr "Bonificacions Agafades:"
+
+msgid "Bridge Activated"
+msgstr "Pont Activat"
+
+msgid "Bridge Deployed"
+msgstr "Pont Desplegat"
+
+msgid "Can't Exit Yet - Objectives Not Met"
+msgstr "Encara No Pots Sortir - Objectius Pendents"
+
+msgid "Cave In!! Looks like it might be controlled by that switch..."
+msgstr "Despreniment!! Sembla que està controlat per aquell interruptor..."
+
+msgid "Cell Door #1 Opened"
+msgstr "Porta de la Cel·la #1 Oberta"
+
+msgid "Cell Door #2 Opened"
+msgstr "Porta de la Cel·la #2 Oberta"
+
+msgid "Checkpoint Reached"
+msgstr "Punt de Control Assolit"
+
+msgid "Cogs Released"
+msgstr "Rodes Dentades Alliberades"
+
+msgid "Completed"
+msgstr "Completat"
+
+msgid "Continues Used:"
+msgstr "Continuacions Fetes:"
+
+msgid "Copyright (C) 2004, 2005 Parallel Realities"
+msgstr "Copyright © 2004, 2005 Parallel Realities"
+
+# as in Corrupt Save Data
+msgid "Corrupt"
+msgstr "Corruptes"
+
+msgid "Corrupt Save Data"
+msgstr "Dades Corruptes"
+
+msgid "Crystal Defence System Activated"
+msgstr "Sistema de Defensa del Cristall Activat"
+
+msgid "Crystal Room is now accessible"
+msgstr "La Cambra del Cristall ja és accessible"
+
+msgid "Crystal Room Open"
+msgstr "Cambra del Cristall Oberta"
+
+msgid "Detonation Started..."
+msgstr "Detonació Iniciada..."
+
+msgid "Don't have jetpack!"
+msgstr "No tens motxilla jet!"
+
+msgid "Door is locked"
+msgstr "La porta està ben tancada"
+
+msgid "Door Opened"
+msgstr "Porta Oberta"
+
+msgid "Door opened"
+msgstr "Porta oberta"
+
+msgid "Doors Opened"
+msgstr "Portes Obertes"
+
+msgid "Eastern passage is now accessible"
+msgstr "El passadís est ja és accessible"
+
+msgid "Easy"
+msgstr "Fàcil"
+
+msgid "Empty"
+msgstr "Buit"
+
+msgid "Enemies"
+msgstr "Enemics"
+
+msgid "Enemies Defeated"
+msgstr "Enemics Derrotats"
+
+msgid "Enemies Defeated:"
+msgstr "Enemics Derrotats:"
+
+msgid "Escapes Used:"
+msgstr "Fugides Fetes:"
+
+msgid "Extreme"
+msgstr "Extrem"
+
+msgid "First Crystal Door Opened"
+msgstr "Primera Porta Oberta"
+
+msgid "Found"
+msgstr "Trobat"
+
+msgid "Fourth floor is now accessible"
+msgstr "El quart pis ja és accessible"
+
+msgid "Galdov has dropped the crystal! Quick! Get it!!"
+msgstr "Galdov ha perdut el cristall! Ràpid! Agafa'l!!"
+
+msgid "Got the Aqua Lung! You can now swim forever!"
+msgstr "Ja tens el Pulmó Aquàtic! Ara pots nedar per sempre!"
+
+msgid "Got the Jetpack! Press SPACE to Activate!"
+msgstr "Ja tens la Motxilla Jet! Activa-la per a volar!"
+
+msgid "Grenades"
+msgstr "Granades"
+
+msgid "Hard"
+msgstr "Difícil"
+
+msgid "Health"
+msgstr "Salut"
+
+msgid "%d Hit Combo!"
+msgstr "Combo de %d Impactes!"
+
+msgid "%d Hits"
+msgstr "%d Impactes"
+
+msgid "Incomplete"
+msgstr "Incomplet"
+
+msgid "Information for %s"
+msgstr "Informació per a %s"
+
+msgid "++ Inventory ++"
+msgstr "++ Inventari ++"
+
+msgid "Items"
+msgstr "Objectes"
+
+msgid "Items Collected"
+msgstr "Objectes Recollits"
+
+msgid "Items Collected:"
+msgstr "Objectes Recollits:"
+
+msgid "Jetpack"
+msgstr "Motxilla Jet"
+
+msgid "Jetpack cannot be used underwater"
+msgstr "No pots usar la motxilla jet sota l'aigua"
+
+msgid "Jetpack is recharging..."
+msgstr "La motxilla jet s'està recarregant..."
+
+msgid "Key Released"
+msgstr "Targeta Alliberada"
+
+msgid "Keycard Released"
+msgstr "Targeta Alliberada"
+
+msgid "Laser Cannon"
+msgstr "Canó Làser"
+
+msgid "Lift Activated"
+msgstr "Ascensor Activat"
+
+msgid "Lift activated"
+msgstr "Ascensor activat"
+
+msgid "Lift is not currently active"
+msgstr "L'ascensor no està activat"
+
+msgid "Lifts Activated"
+msgstr "Ascensors Activats"
+
+msgid "Loading..."
+msgstr "Carregant..."
+
+msgid "Location"
+msgstr "Localització"
+
+msgid "Locks Released"
+msgstr "Bloqueig Desactivat"
+
+msgid "Machine Gun"
+msgstr "Metralladora"
+
+msgid "Main Lift Activated"
+msgstr "Ascensor Principal Activat"
+
+msgid "Maintenance Room is now accessible"
+msgstr "La Sala de Manteniment ja és accessible"
+
+msgid "Metal Blob Solid : Statistics"
+msgstr "Metal Blob Solid : Estadístiques"
+
+msgid "MIA Statistics"
+msgstr "Perduts En Acció"
+
+msgid "MIAs"
+msgstr "PEAs"
+
+msgid "MIAs in Area"
+msgstr "PEAs a l'Àrea"
+
+msgid "MIAs Rescued"
+msgstr "PEAs Rescatats"
+
+msgid "MIAs Saved:"
+msgstr "PEAs Salvats:"
+
+msgid "Mines Disabled"
+msgstr "Mines Inhabilitades"
+
+msgid "Missing"
+msgstr "Perdut"
+
+msgid "Mission Failed! Time Up!"
+msgstr "Missió Fracassada! Temps Esgotat!"
+
+msgid "Mission Time"
+msgstr "Temps de Missió"
+
+msgid "Missions Started:"
+msgstr "Missions Iniciades:"
+
+msgid "%s - %d more to go..."
+msgstr "%s - en falten %d més..."
+
+msgid "Most Used Weapon"
+msgstr "Arma Més Usada"
+
+msgid "Name"
+msgstr "Nom"
+
+msgid "%s - need %d more"
+msgstr "%s - necessites %d més"
+
+msgid "Normal"
+msgstr "Normal"
+
+msgid "Northern passage is now accessible"
+msgstr "El passadís nord ja és accessible"
+
+msgid "Not carrying anything"
+msgstr "No portes res"
+
+msgid "%s - Objective Completed"
+msgstr "%s - Objectiu Completat"
+
+msgid "%s - Objective Completed - Check Point Reached!"
+msgstr "%s - Objectiu Completat - Punt de Control Assolit!"
+
+msgid "Objectives Completed:"
+msgstr "Objectius Completats:"
+
+msgid "Obstacles Reset"
+msgstr "Obstacles Reiniciats"
+
+msgid "%s - %d of %d"
+msgstr "%s - %d de %d"
+
+msgid "(optional)"
+msgstr "(opcional)"
+
+msgid "Oxygen"
+msgstr "Oxigen"
+
+msgid "*** PAUSED ***"
+msgstr "*** PAUSA ***"
+
+msgid "Percentage Complete:"
+msgstr "Percentatge Fet:"
+
+msgid "Pistol"
+msgstr "Pistola"
+
+msgid "Position = %d:%d"
+msgstr "Posició = %d:%d"
+
+msgid "Presents"
+msgstr "Presenta"
+
+msgid "Press Button to Continue..."
+msgstr "Pitja Botó per a Continuar..."
+
+msgid "Press Fire to Continue"
+msgstr "Pitja Espai per a Continuar"
+
+msgid "Press Space to Continue..."
+msgstr "Pitja Espai per a Continuar..."
+
+msgid "Rescue %d MIAs - Objective Complete - Checkpoint Reached!"
+msgstr "Rescatar %d PEAs - Objectiu Completat - Punt de Control Assolit!"
+
+msgid "Rescued %s!"
+msgstr "Has rescatat %s!"
+
+msgid "Rescued %s - Checkpoint Reached!"
+msgstr "Has rescatat %s - Punt de Control Assolit!"
+
+msgid "Save Complete"
+msgstr "Joc Desat"
+
+msgid "Saving Game to Save Slot #%d. Please Wait..."
+msgstr "Desant Joc a la Ranura #%d. Un Moment..."
+
+msgid "Score:"
+msgstr "Puntuació:"
+
+msgid "Second Crystal Door Opened"
+msgstr "Segona Porta Oberta"
+
+msgid "Second floor is now accessible"
+msgstr "El segon pis ja és accessible"
+
+msgid "Selected Destination"
+msgstr "Destí Seleccionat"
+
+msgid "Skill Level:"
+msgstr "Nivell de Dificultat:"
+
+msgid "Skipping Mission..."
+msgstr "Ometent Missió..."
+
+msgid "Spike Balls Disabled"
+msgstr "Boles amb Punxes Inhabilitades"
+
+msgid "Spikes Disabled"
+msgstr "Punxes Inhabilitades"
+
+msgid "Spread Gun"
+msgstr "Rifle Estès"
+
+msgid "Status"
+msgstr "Estat"
+
+msgid "Teleporter Activated"
+msgstr "Teletransportador Activat"
+
+msgid "That Auto Cannon is guarding the entrance to the forest..."
+msgstr "Aquell Canó Automàtic està protegint l'entrada al bosc..."
+
+msgid "Third Crystal Door Opened"
+msgstr "Tercera Porta Oberta"
+
+msgid "Three bronze keys are needed to open these doors..."
+msgstr "Necessites tres claus de bronze per a obrir aquestes portes..."
+
+msgid "Throw a grenade on the switch and recieve a present..."
+msgstr "Llança una granada a l'interruptor i rep un regal..."
+
+msgid "Throw a grenade onto that switch to trigger it"
+msgstr "Llança una granada a aquell interruptor per a accionar-lo"
+
+msgid "Time Limit - %d:%.2d Minutes"
+msgstr "Límit de Temps - %d:%.2d Minuts"
+
+msgid "Time Remaining: %.2d:%.2d"
+msgstr "Temps Restant: %.2d:%.2d"
+
+msgid "Time your movement through Energy Barriers like these..."
+msgstr "Calcula els moviments quan travessis Barreres d'Energia com aquestes..."
+
+msgid "Tomb Door Opened"
+msgstr "Porta de la Tomba Oberta"
+
+msgid "Total"
+msgstr "Total"
+
+msgid "Total Game Time"
+msgstr "Temps Total de Joc"
+
+msgid "Trap Activated"
+msgstr "Trampa Activada"
+
+msgid "Trap deactivated"
+msgstr "Trampa desactivada"
+
+msgid "Traps Deactivated"
+msgstr "Trampes Desactivades"
+
+msgid "Used Bronze Key"
+msgstr "Has emprat una Clau de Bronze"
+
+msgid "Used Gold Key"
+msgstr "Has emprat una Clau d'Or"
+
+msgid "Used Silver Key"
+msgstr "Has emprat una Clau d'Argent"
+
+msgid "Version %s"
+msgstr "Versió %s"
+
+msgid "WARNING: ACTIVE BOOBY TRAP AHEAD!! DEACTIVATE WITH SWITCH EASTWARD !!"
+msgstr "AVÍS: TRAMPA ACTIVA ENDAVANT!! DESACTIVA-LA AMB L'INTERRUPTOR A L'EST!!"
+
+msgid "WARNING: ACTIVE BOOBY TRAP AHEAD!! DO NOT PROCEED UNTIL DEACTIVATED!!"
+msgstr "AVÍS: TRAMPA ACTIVA ENDAVANT!! NO CONTINUÏS FINS DESACTIVAR-LA!!"
+
+msgid "WARNING: ACTIVE BOOBY TRAP AHEAD!! MINES *WILL* KILL YOU IF TRIPPED!!"
+msgstr "AVÍS: TRAMPA ACTIVA ENDAVANT!! LES MINES ET *MATARAN* SI LES TREPITGES!!"
+
+msgid "Water Door Opened"
+msgstr "Porta sota l'Aigua Oberta"
+
+msgid "Water level is rising"
+msgstr "El nivell de l'aigua està pujant"
+
+msgid "Weapon"
+msgstr "Arma"
+
+msgid "Weapon:"
+msgstr "Arma:"
+
+msgid "Western passage is now accessible"
+msgstr "El passadís oest ja és accessible"
+
+msgid "You got the Aqua Lung!"
+msgstr "Ja tens el Pulmó Aquàtic!"
+
+msgid "You got the Jet Pack!"
+msgstr "Ja tens la Motxilla Jet!"
+
+msgid "You'll need to 'Kill Two Birds with One Stone' here..."
+msgstr "Aquí hauràs de \"Matar Dos Ocells d'Una Pedrada\"..."
+
+# Keys
+
+msgid "backspace"
+msgstr "retrocés"
+
+msgid "caps lock"
+msgstr "bloca majúscules"
+
+msgid "delete"
+msgstr "suprimeix"
+
+msgid "down"
+msgstr "avall"
+
+msgid "end"
+msgstr "fi"
+
+msgid "enter"
+msgstr "intro"
+
+msgid "home"
+msgstr "inici"
+
+msgid "insert"
+msgstr "insereix"
+
+msgid "left"
+msgstr "esquerra"
+
+msgid "left alt"
+msgstr "alt esquerra"
+
+msgid "left ctrl"
+msgstr "control esquerra"
+
+msgid "left shift"
+msgstr "majúscules esquerra"
+
+msgid "left super"
+msgstr "súper esquerra"
+
+msgid "menu"
+msgstr "menú"
+
+msgid "numlock"
+msgstr "bloca números"
+
+msgid "page down"
+msgstr "pàgina avall"
+
+msgid "page up"
+msgstr "pàgina amunt"
+
+msgid "pause"
+msgstr "pausa"
+
+msgid "print screen"
+msgstr "imprimeix pantalla"
+
+msgid "return"
+msgstr "retorn"
+
+msgid "right"
+msgstr "dreta"
+
+msgid "right ctrl"
+msgstr "control dreta"
+
+msgid "right shift"
+msgstr "majúscules dreta"
+
+msgid "scroll lock"
+msgstr "bloca desplaçament"
+
+msgid "space"
+msgstr "espai"
+
+msgid "up"
+msgstr "amunt"

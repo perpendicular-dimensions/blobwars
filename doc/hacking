@@ -1,0 +1,416 @@
+Blob Wars : Metal Blob Solid
+Copyright Parallel Realities 2004
+Licensed under the GNU General Public License
+
+Last Updated: 9th December 2004
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ Contents
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+1) Introduction
+2) The PAK File
+3) The FileData Object
+4) The Map File
+5) Map Entites
+6) Other Files
+7) FAQ
+8) Closing comments
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ Introduction
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Contained within are pieces of information to do with the game, the map structure
+and the structure of the pak file that is used in BW:MBS. I have created this
+document for educational purposes.
+
+This document is completely unsupported.
+
+Thank you in advance for understanding.
+
+To build the game without needing to recreate the PAK file each time to can 
+build using the following command,
+
+make USEPAK=0
+
+The binary created will load files from the directory it resides within (so it
+will look for data, sound, gfx and music in the local dir). When building the
+game without using the PAK file you will get debug information to the console
+and an FPS counter. You may also use the following additional command line
+options,
+
+-map <filename> Start the game using the specified map
+
+-skill <skill level> Start the game using the specified skill (0, 1, 2, 3)
+
+-showsprites Show the sprites that have been loaded. Use in conjunction with
+			 a map file for best results
+			 
+-hub Jump directory to the hub. Will automatically load the first available game
+
+-randomscreens Takes random screenshots and dumps them into a directory called
+			   screenshots. You might not want to use this(!)
+			   
+-nomonsters	   Does not add monsters to levels (does not affect Boss missions)
+
+-credits	   Show the credits
+
+Stephen Sweeney
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ The PAK File
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The PAK file used in BW:MBS differs from the one used in Project: Starfighter where
+as it is compressed and contains a lot more metadata making it a lot more effecient.
+The format is as follows,
+
+NB: All binary data is little endian
+
+<variable length data> (char)
+<varibale number of binary strutures> (FileData)
+<offset of FileData structures> (unsigned long)
+<number of file data structures in archive> (unsigned long)
+
+BW:MBS will open the pak file, seek to the end, two back two unsigned longs and read
+them. It then have information regarding the file structure and can read in all the
+FileData objects that exist. These are stored in memory for the duration of the 
+program and stepped through when a file needs to be loaded from the PAK.
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ The FileData Object 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The FileData object holds the metadata for each file in the PAK archive. The object
+itself has the following format,
+
+NB: All binary data is little endian
+
+char filename[60];
+uLongf cSize;
+uLongf fSize;
+uLongf location;
+
+Filename is the filename of the file (including the path). It is limited to 56 characters
+since it is loosely based on the original PAK file spec for Quake. This could obviously
+be changed if more characters were required.
+
+cSize is the compressed size of the data. All the data in the PAK file is compressed using
+zlib compress at a strength of 9. This number is used to tell uncompress how much data there
+is and also used by CPak.cpp when loading the data from the pak file into a buffer in
+memory.
+
+fSize is the full uncompressed size of the data. This is used by uncompress and also when
+allocating a memory buffer save uncompress the data into.
+
+location is the offset of the data within the PAK archive. When a match for the filename
+has been found in stepping through the filedata array, the PAK file is opened and then
+seeked to the appropriate location. The appropriate amount of data is then read.
+
+When working with big endian machines it is neccessary to convert the values in the FileData
+object o little endian so they may of proper use.
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ The Map Files
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The maps are BW:MBS are plain text. They contain the data for the map, the objectives,
+enemies, doors, and pretty much everything else you see during the game. Sprites and
+new enemies can also be configured within the map data.
+
+The map data beings with a large set of numbers. 400 columns and 300 rows allowing for
+very large maps. This, in hindsight, was overkill. But the reason this was because the
+map blocks used to be 16 x 16 pixels whilst they are now 32 x 32 pixels. After these
+rows the entity data starts.
+
+The map entities take the following format,
+
+<skilllevel> <entityname> <entity arguments>
+
+Skill level is required and should contain a combination of E, M or H to represent
+whether that entity should appear on Easy Medium or Hard. Pretty much all the entities
+appear on Hard. For example,
+
+MH ENEMY "SpiderBlob V1.0" 1000 1000
+
+This will place a Spider Blob enemy at 1000, 1000 on the map on difficulities Medium
+and Hard, but not Easy.
+
+Comments can be represented with C++ still slashes,
+
+// here is a comment
+
+Note: Bosses are hard coded. They do not live in the map data.
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ Map Entities
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+STAGENAME <"stagename">
+
+The stage name of the map. Must have within quotes.
+
+
+BACKGROUND <filename>
+
+The filename of the background to be used in this level.
+
+
+MUSIC <filename>
+
+The music to be used in this level.
+
+
+TILESET <path>
+
+The path to the tiles to be used in this level.
+
+
+REQUIRED_MIAS <initial number to rescue>
+
+The initial number of MIAs required to complete the stage.
+
+
+MIA <"name"> <x> <y> <type>
+
+Defines an MIA for this level. The type of MIA is either MIA_NORMAL or MIA_AQUA
+
+
+START <x> <y>
+
+Determines where Bob will initially start on this level. Ignored when returning to a
+level.
+
+
+CLIPPING <x1> <x2> <y1> <y2>
+
+Determines the scroll limit for the map. The map will not scroll further than the 
+specified coordinates.
+
+
+AMBIENCE <sound file>
+
+The sound effect that will be played in the background to represent the ambient sound
+in the level (like the bubbling sound in the Caves levels).
+
+
+ALPHATILES <variable length list>
+
+Tile numbers that should be made transparent. Ideally this should have been in the tileset
+directory. Numbers should be seperated by spaces with -1 to determine the end of the list.
+
+
+OBJECTIVE <"description"> <"target"> <requiredAmount> <optional>
+
+Defines an objective for the level.
+
+
+ITEM <type> <"name"> <x> <y> <sprite>
+
+Creates an item of given type, name and sprite at the given coordinates. Types 0 - 4 are
+used for weapons. 5 - 7 for cherries and 8 - 14 for points pods. Types 100 and 101 are items
+that can be picked up and carried in the inventory. Items are type 101 are not shown in
+the inventory (for example, Crystals and Cherry Plants).
+
+
+ENEMY <"name"> <x> <y>
+
+Places the specified enemy (via their name) at the specified coordinates.
+
+
+SPAWN_POINT <name> <x> <y> <type> <subtype> <min wait> <max wait> <active / inactive>
+
+Used to spawn an item / entity at a random interval. For example, the lava balls that jump
+out of the lava in Inner Cave Network, Part 1 are spawned by having a type of SPW_HAZARD
+and a subtype of HAZARD_LAVABALL. They appear every 1 to 10 seconds. The type and subtype
+are dealt with in defines.h and processed in spawnPoints.cpp. x and y coordinates are also
+supplied to tell the game where the item should be spawned. The only exception to the rule
+are enemies. They have an x and y as -1 and -1 since they simply teleport in around the 
+player's location.
+
+
+TELEPORTER <name> <x> <y> <destination x> <destination y> <on / off>
+
+Simply sets up a teleporter with an origin and a destination. Can be on or off by default.
+
+
+LINEDEF <"type"> <related object> <"message"> <x> <y> <width> <height> <active / inactive>
+
+Sets up a line that is actived when the player crosses it. Common types can be of "Checkpoint", 
+"Message, "Exit". "Exit" will prevent the player from crossing until it is the last required
+objective remaining on the level.
+
+
+SWITCH <"name"> <target object> <required item> <"message"> <switch type> <x> <y> <active / inactive>
+
+Creates a switch that can be triggered by the player (or other entities depending on the type)
+to toggle activate an object. Possible switch types are, 
+
+SWT_NORMAL 
+SWT_TOGGLE
+SWT_TIMED
+SWT_PRESSURE
+SWT_RESET 
+and SWT_WATERLEVEL. 
+
+Note that for switches that reset Obstacles the obstacle name should
+be placed into the "message". SWT_RESET switches are timed by default. Also, SWT_NORMALs become SWT_USEDs
+when they are activated. This is to aid in the persistence of the level.
+
+
+TRAIN <name> <start x> <start y> <end x> <end y> <wait time> <start location> <active / inactive>
+
+Creates a train (a moving platform) with start and end locations as specified. The wait time states
+how long the platform will wait (in 60ths of a second) at each end before changing direction. Start
+location specifies which end the train will start at (either TR_AT_START or TR_AT_END). Note that
+end locations must be the same value as or greater values than the start locations.
+
+
+DOOR <"name"> <type> <open x> <open y> <closed x> <close y> <open / closed>
+
+Creates a door with the specified open and close coordinates. Available door types are,
+
+TR_DOOR
+TR_LOCKED_DOOR
+TR_GOLD_DOOR
+TR_SILVER_DOOR
+TR_BRONZE_DOOR
+TR_SLIDEDOOR
+TR_LOCKED_SLIDEDOOR
+TR_GOLD_SLIDEDOOR
+TR_SILVER_SLIDEDOOR
+TR_BRONZE_SLIDEDOOR
+
+As their names suggest the doors are either normal doors, locked or require a certain key to 
+open them. Locked doors can be in conjunction with switches and other triggers in order to make
+them open. Like trains, the closed x and y coordinates much be greater than or equal in value to
+the open coordinates.
+
+
+OBSTACLE <"name"> <x> <y> <sprite>
+
+Sets up an obstacle with the given name and sprite than can be pushed. The name of the obstacle
+can be used in conjunction with reset type switches to return them to their original location.
+
+
+TRAP <name> <type> <damage> <speed> <startX> <startY> <endX> <endY> <wait1> <wait2> <sprite> <active>
+
+Creates a trap in the location specified by start X and start Y. For traps such as the swinging ball
+and spikes, the end X and end Y specifies the second location to move to. Wait 1 and Wait 2 tell
+the trap how long to wait for each state (the energy beams have off and on times for example). Trap
+types available are,
+
+TRAP_TYPE_SPIKE
+TRAP_TYPE_MINE
+TRAP_TYPE_SWING
+TRAP_TYPE_CRUSHER
+TRAP_TYPE_BARRIER
+TRAP_TYPE_FLAME
+
+
+SPAWNABLE_ENEMY <"name">
+
+Only ten of these may be defined. Used with enemy spawn points this list details which enemies
+can be spawned on the map.
+
+
+SPRITE <name> <frame name> <wait time> * 8
+
+Can be used to define a new sprite to be used specifically on this level. It supports up
+to 8 frames and wait times. When there are no more frames to be read, @none@ -1 is used
+to denote no more reading it required.
+
+
+DEFENEMY <"name"> <left sprite> <right sprite> <death sprite> <"weapon name"> <health> <score> <flags>
+
+Create an enemy. Flags should be from the ENT_* flags are defined in defines.h
+
+
+WATER_LEVEL <level>
+
+Specifies the water level within the level. Use in conjunction with water level switches to 
+raise the water level
+
+
+TIME_LIMIT <minutes> <seconds>
+
+The time limit for this level when playing on Extreme Mode.
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ FAQ
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Q. 	Can you give me some help modifying the source?
+
+A. 	Unfortunately I have other commitments, mainly in the real world, that would prevent me
+	from setting aside the time the do so. In the time I do have spare I prefer to work on
+	new projects.
+	
+
+Q.	Why package up all the data into one file instead of leaving it loose?
+
+A.	Three reasons - 1) It takes up less room on disc ; 2) It's easier to deal with one large
+	data file rather than lots of file scattered all over the place ; 3) It stops people 
+	digging around in the data and potentially spoiling the game for themselves.
+	
+
+Q.	How long did the game take to make?
+
+A.	About 18 months from beginning to end.
+
+
+Q.	Why did so much change during the game, like the saves becoming incompatible around 0.91?
+
+A.	Metal Blob Solid was very much a make-it-up-as-you-go-along game. It was only decided later
+	on that the levels should be kept within a persistant state so as to not force the player
+	to reopen doors, redo puzzles, etc. This in itself was a bit of a headache and due to a
+	small cockup when creating the persistance data the game would crash if you returned to a
+	previous level, left, saved, quit the game and reloaded.
+	
+
+Q.	Why can't you see all the game or fight the bosses on Easy?
+
+A.	It's easy mode(!) The bosses aren't exactly a walk in the park and bits of the game (such as
+	battling Galdov for the Reality Crystal) are part of the game's plot. Because on Easy there
+	is nothing to do except rescue MIAs, it was decided that you should get an ending, but not
+	*the* ending after finishing the game on Easy. Also, a hell of a lot of work went into the
+	bosses, other objectives, cutscenes, etc so it also has to do with appreciation.
+	
+
+Q.	Are there any secrets in the game?
+
+A.	No. If you finish the game on Normal or Hard you see everything the game has to offer.
+	Although you do unlock Extreme mode which is the whole game again but with a time limit on
+	each mission.
+	
+
+Q.	Are you going to make any other games?
+
+A.	There are plans, but nothing set in stone. Again, real life commitments can change
+	everything.
+	
+
+Q.	Will there be a sequel to Metal Blob Solid?
+
+A.	See above.
+	
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ Closing Comments
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Metal Blob Solid was fun to make more often than not. There was some hair pulling and
+frustation involved in making the game, but that's natural in any project. In the end
+I grew quite fond of the bandana wearing Blob and decided to give his adventure more
+meaning, which was why the plot suddenly appeared, along with the bosses and cutscenes.
+
+I hope you've all enjoyed playing the game and I hope to bring you some more games in the
+future.
+
