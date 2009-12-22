@@ -89,7 +89,7 @@ mapeditor: $(MAPOBJS)
 clean:
 	$(RM) $(GAMEOBJS) mapEditor.o pak.o $(PROG) $(PAKNAME) pak mapeditor $(LOCALE_MO)
 	
-buildpak:
+buildpak: pak
 	./pak data gfx music sound $(PAKNAME)
 
 # install
