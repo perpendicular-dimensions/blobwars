@@ -22,8 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 void loadSound(int index, const char *filename)
 {
-	if (!audio.loadSound(index, filename))
-		graphics.showErrorAndExit(ERR_FILE, filename);
+	audio.loadSound(index, filename);
 
 	graphics.showLoading(1, 30);
 }
