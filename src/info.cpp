@@ -213,10 +213,8 @@ void doPauseInfo()
 	
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 
-	//#if !USEPAK
 	sprintf(string, _("Position = %d:%d"), (int)player.x, (int)player.y);
 	graphics.drawString(string, 5, 25, false, graphics.screen);
-	//#endif
 
 	graphics.drawString(_("*** PAUSED ***"), 320, y, TXT_CENTERED, graphics.screen);
 

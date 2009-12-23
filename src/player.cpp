@@ -352,7 +352,7 @@ void doPlayer()
 		}
 	}
 	
-	#if !USEPAK
+	#if DEBUG
 	if (engine.keyState[SDLK_1])
 		player.currentWeapon = &weapon[WP_PISTOL];
 	else if (engine.keyState[SDLK_2])

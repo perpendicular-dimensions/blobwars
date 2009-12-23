@@ -568,7 +568,7 @@ int doGame()
 
 	Uint32 then, frames, frameLimit, millis, frameCounter;
 
-	#if !USEPAK
+	#if DEBUG
 	Uint32 now;
 	char fps[10];
 	strcpy(fps, "fps");
@@ -584,12 +584,10 @@ int doGame()
 	{
 		player.health = -99;
 
-		//#if USEPAK
 		if ((!map.isBossMission) && (replayData.replayMode == REPLAY_MODE::NONE))
 		{
 			showMissionInformation();
 		}
-		//#endif
 
 		game.levelsStarted++;
 	}
@@ -810,7 +808,7 @@ int doGame()
 			engine.setInfoMessage("Skipping Mission...", 2, INFO_OBJECTIVE);
 		}
 		
-		#if !USEPAK
+		#if DEBUG
 		if (engine.keyState[SDLK_F1])
 		{
 			autoCompleteAllObjectives(false);
@@ -837,7 +835,7 @@ int doGame()
 		if (game.missionOverReason == MIS_GAMECOMPLETE)
 			frameLimit = SDL_GetTicks() + 64;
 
-		#if !USEPAK
+		#if DEBUG
 		graphics.drawString(fps, 600, 30, true, graphics.screen);
 
 		if (SDL_GetTicks() > frameCounter + 500)

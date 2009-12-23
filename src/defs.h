@@ -371,10 +371,10 @@ enum {
 
 /* ############# debug ################## */
 
-#if USEPAK
-	#define debug(x) {}
-#else
+#if DEBUG
 	#define debug(x) {printf("*** DEBUG: "); printf x;}
+#else
+	#define debug(x) {}
 #endif
 
 #ifndef IGNORE_FLAGTOKEN_ERRORS
