@@ -328,6 +328,7 @@ void saveGame()
 		return;
 
 	graphics.setFontSize(1);
+	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 	sprintf(message, _("Saving Game to Save Slot #%d. Please Wait..."), slot + 1);
 	graphics.drawString(message, 320, 220, true, graphics.screen);
 	graphics.updateScreen();

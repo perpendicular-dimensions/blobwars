@@ -405,6 +405,18 @@ void createMIAPanel(int start, int max)
 
 bool requirementMet(const char *requiredLevel)
 {
+	if (strstr(requiredLevel, "Stages"))
+	{
+		int stages = 0;
+		sscanf(requiredLevel, "%*s %d", &stages);
+
+		if (game.stagesCleared >= stages)
+		{
+			presentPlayerMedal(requiredLevel);
+			return true;
+		}
+	}
+	
 	if (engine.cheatLevels)
 	{
 		return true;
@@ -413,17 +425,6 @@ bool requirementMet(const char *requiredLevel)
 	if (strcmp(requiredLevel, "@none@") == 0)
 	{
 		return true;
-	}
-
-	if (strstr(requiredLevel, "Stages"))
-	{
-		int stages = 0;
-		sscanf(requiredLevel, "%*s %d", &stages);
-
-		if (game.stagesCleared >= stages)
-		{
-			return true;
-		}
 	}
 
 	return gameData.requiredLevelCleared(requiredLevel);
@@ -439,6 +440,9 @@ int doHub()
 
 	graphics.loadBackground("gfx/main/worldMap.jpg");
 	audio.loadMusic("music/forAFriend.mod");
+	
+	// we might want this now, for medals
+	audio.loadSound(SND_ITEM, "sound/item.wav");
 	
 	graphics.quickSprite("cheatHeader", graphics.loadImage("gfx/main/cheats.png"));
 	graphics.quickSprite("optionsHeader", graphics.loadImage("gfx/main/options.png"));
@@ -491,7 +495,7 @@ int doHub()
 	char name[50], level[50], requiredLevel[50];
 	int x, y;
 
-	#if DEBUG
+	#if !USEPAK
 	char pos[50];
 	#endif
 
@@ -583,6 +587,8 @@ int doHub()
 			hubList.clear();
 			return SECTION_EASYOVER;
 		}
+		
+		presentPlayerMedal("World_Complete");
 	}
 	
 	audio.playMusic();
@@ -609,7 +615,7 @@ int doHub()
 		
 		graphics.drawRect(10, 430, 620, 40, graphics.black, graphics.white, graphics.screen);
 
-		#if DEBUG
+		#if !USEPAK
 		sprintf(pos, "%.3d:%.3d", engine.getMouseX(), engine.getMouseY());
 		graphics.drawString(pos, 320, 15, true, graphics.screen);
 		#endif

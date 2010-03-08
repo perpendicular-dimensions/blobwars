@@ -153,6 +153,24 @@ void doMIAs()
 						sprintf(message, _("Rescue %d MIAs - Objective Complete - Checkpoint Reached!"), map.requiredMIAs);
 						game.setObjectiveCheckPoint();
 					}
+					
+					// MIA Medals
+					if (game.totalMIAsRescued == 50)
+					{
+						presentPlayerMedal("50_MIA");
+					}
+					else if (game.totalMIAsRescued == 100)
+					{
+						presentPlayerMedal("100_MIA");
+					}
+					else if (game.totalMIAsRescued == 200)
+					{
+						presentPlayerMedal("200_MIA");
+					}
+					else if (game.totalMIAsRescued == 227)
+					{
+						presentPlayerMedal("ALL_MIA");
+					}
 
 					engine.setInfoMessage(message, 1, INFO_OBJECTIVE);
 				}

@@ -113,6 +113,11 @@ void addBullet(Entity *owner, float dx, float dy)
 		{
 			owner->reload = 4;
 		}
+		
+		if (game.bulletsFired[game.currentWeapon] == 10000)
+		{
+			presentPlayerMedal("10000_Bullets");
+		}
 	}
 }
 

@@ -33,6 +33,7 @@ extern Weapon *getRandomGaldovWeapon();
 extern Weapon *getRandomAimedWeapon();
 extern void dropItems(int x, int y);
 extern void addItem(int itemType, const char *name, int x, int y, const char *spriteName, int health, int value, int flags, bool randomMovement);
+extern void presentPlayerMedal(const char *tname);
 
 extern Audio audio;
 extern Engine engine;

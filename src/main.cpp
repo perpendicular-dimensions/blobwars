@@ -94,7 +94,7 @@ void showVersion()
 	printf("Blob Wars, Episode I - Metal Blob Solid (Version %.2f, Release %d)\n", VERSION, RELEASE);
 	printf("Copyright (C) 2004 Parallel Realities\n");
 	printf("Licensed under the GNU General Public License (GPL)\n\n");
-	exit(0);
+// 	exit(0);
 }
 
 int main(int argc, char *argv[])
@@ -131,7 +131,7 @@ int main(int argc, char *argv[])
 		else if (strcmp(argv[i], "-map") == 0) {game.setMapName(argv[++i]); requiredSection = SECTION_GAME;}
 		else if (strcmp(argv[i], "-listmaps") == 0) listMaps();
 		
-		#if DEBUG
+		#if !USEPAK
 		else if (strcmp(argv[i], "-showsprites") == 0) showSprites = true;
 		else if (strcmp(argv[i], "-hub") == 0) hub = true;
 		else if (strcmp(argv[i], "-randomscreens") == 0) graphics.takeRandomScreenShots = true;

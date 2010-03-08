@@ -27,6 +27,8 @@ extern bool checkBrickContact(Entity *object);
 extern void moveEntity(Entity *ent);
 extern void checkObjectives(const char *name, bool alwaysInform);
 extern void addTeleportParticles(float x, float y, int amount, int soundToPlay);
+extern void addPlayerScore(int score);
+extern void presentPlayerMedal(const char *tname);
 
 extern Audio audio;
 extern Engine engine;

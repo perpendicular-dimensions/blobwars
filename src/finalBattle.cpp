@@ -230,6 +230,7 @@ void galdovFinalDie()
 		self->react = NULL;
 		Math::removeBit(&self->flags, ENT_FLIES);
 		Math::removeBit(&self->flags, ENT_FIRETRAIL);
+		presentPlayerMedal("Final_Battle");
 	}
 	
 	self->setActionFinished(1);

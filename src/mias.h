@@ -30,3 +30,4 @@ extern Map map;
 extern Entity player;
 
 extern void moveEntity(Entity *ent);
+extern void presentPlayerMedal(const char *tname);

@@ -20,6 +20,83 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "player.h"
 
+int medalWorker(void *data)
+{
+	char *tname = (char*)data;
+	
+	SDL_mutexP(medalServer.lock);
+	
+	int type = medalServer.postMedal(tname);
+	
+	while (!graphics.canShowMedalMessage())
+	{
+		SDL_Delay(100);
+	}
+	
+	SDL_Delay(100);
+	
+	if (type >= 1 && type <= 3)
+	{
+		audio.playSound(SND_ITEM, CH_ANY);
+		graphics.showMedalMessage(type, medalServer.getMessage());
+		
+		if (medalServer.hasRuby())
+		{
+			while (!graphics.canShowMedalMessage())
+			{
+				SDL_Delay(100);
+			}
+			
+			SDL_Delay(100);
+			
+			audio.playSound(SND_ITEM, CH_ANY);
+			graphics.showMedalMessage(4, medalServer.getRubyMessage());
+		}
+	}
+	
+	SDL_mutexV(medalServer.lock);
+	
+	delete tname;
+	
+	return type;
+}
+
+void presentPlayerMedal(const char *tname)
+{
+	// Copy the input, so that threading
+	// doesn't trip us up!
+	char *data = new char[128];
+	strcpy(data, tname);
+	
+	SDL_Thread *thread = SDL_CreateThread(medalWorker, (void*)data);
+	
+	if (thread == NULL)
+	{
+		printf("Unable to create thread: %s\n", SDL_GetError());
+		printf("Calling medal server directly\n");
+		medalWorker((void*)data);
+		return;
+	}
+}
+
+void addPlayerScore(int score)
+{
+	if (game.score < 100000 && game.score + score >= 100000)
+	{
+		presentPlayerMedal("Score_100000");
+	}
+	else if (game.score < 250000 && game.score + score >= 250000)
+	{
+		presentPlayerMedal("Score_250000");
+	}
+	else if (game.score < 500000 && game.score + score >= 500000)
+	{
+		presentPlayerMedal("Score_500000");
+	}
+	
+	game.score += score;
+}
+
 void resetPlayer()
 {
 	game.getCheckPoint(&player.x, &player.y);
@@ -352,7 +429,7 @@ void doPlayer()
 		}
 	}
 	
-	#if DEBUG
+	#if !USEPAK
 	if (engine.keyState[SDLK_1])
 		player.currentWeapon = &weapon[WP_PISTOL];
 	else if (engine.keyState[SDLK_2])

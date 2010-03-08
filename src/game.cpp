@@ -296,6 +296,7 @@ int gameover()
 	}
 
 	SDL_Surface *gameover = graphics.quickSprite("Game Over", graphics.loadImage("gfx/main/gameover.png"));
+	graphics.setTransparent(gameover);
 
 	audio.loadGameOverMusic();
 	audio.playMusic();
@@ -568,7 +569,7 @@ int doGame()
 
 	Uint32 then, frames, frameLimit, millis, frameCounter;
 
-	#if DEBUG
+	#if !USEPAK
 	Uint32 now;
 	char fps[10];
 	strcpy(fps, "fps");
@@ -584,10 +585,12 @@ int doGame()
 	{
 		player.health = -99;
 
+		//#if USEPAK
 		if ((!map.isBossMission) && (replayData.replayMode == REPLAY_MODE::NONE))
 		{
 			showMissionInformation();
 		}
+		//#endif
 
 		game.levelsStarted++;
 	}
@@ -805,10 +808,11 @@ int doGame()
 		if ((engine.keyState[SDLK_F3]) && (engine.cheatSkipLevel))
 		{
 			autoCompleteAllObjectives(true);
+			engine.keyState[SDLK_F3] = 0;
 			engine.setInfoMessage("Skipping Mission...", 2, INFO_OBJECTIVE);
 		}
 		
-		#if DEBUG
+		#if !USEPAK
 		if (engine.keyState[SDLK_F1])
 		{
 			autoCompleteAllObjectives(false);
@@ -835,7 +839,7 @@ int doGame()
 		if (game.missionOverReason == MIS_GAMECOMPLETE)
 			frameLimit = SDL_GetTicks() + 64;
 
-		#if DEBUG
+		#if !USEPAK
 		graphics.drawString(fps, 600, 30, true, graphics.screen);
 
 		if (SDL_GetTicks() > frameCounter + 500)

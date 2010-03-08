@@ -31,6 +31,9 @@ Graphics::Graphics()
 	infoMessage = NULL;
 
 	fontSize = 0;
+	
+	medalMessageTimer = 0;
+	medalType = 0;
 
 	currentLoading = 0;
 
@@ -88,7 +91,11 @@ void Graphics::destroy()
 			TTF_CloseFont(font[i]);
 		}
 	}
-
+	
+	if (medalMessage != NULL)
+	{
+		SDL_FreeSurface(medalMessage);
+	}
 
 	if (fadeBlack)
 	{
@@ -98,6 +105,15 @@ void Graphics::destroy()
 	if (infoBar)
 	{
 		SDL_FreeSurface(infoBar);
+	}
+	
+	for (int i = 0 ; i < 4 ; i++)
+	{
+		if (medal[i] != NULL)
+		{
+			SDL_FreeSurface(medal[i]);
+			medal[i] = NULL;
+		}
 	}
 }
 
@@ -129,6 +145,8 @@ void Graphics::mapColors()
 	fadeBlack = alphaRect(640, 480, 0x00, 0x00, 0x00);
 
 	infoBar = alphaRect(640, 25, 0x00, 0x00, 0x00);
+	
+	medalMessage = NULL;
 }
 
 Sprite *Graphics::getSpriteHead()
@@ -141,8 +159,34 @@ void Graphics::setTransparent(SDL_Surface *sprite)
 	SDL_SetColorKey(sprite, (SDL_SRCCOLORKEY|SDL_RLEACCEL), SDL_MapRGB(sprite->format, 0, 0, 0));
 }
 
+bool Graphics::canShowMedalMessage()
+{
+	return (medalMessageTimer <= 0);
+}
+
 void Graphics::updateScreen()
 {
+	if (medalMessageTimer > 0)
+	{
+		int padding = 0;
+		
+		medalMessageTimer--;
+		
+		if (medalType >= 0)
+		{
+			padding = 18;
+		}
+		
+		drawRect(screen->w - (medalMessage->w + 5 + padding), 5, medalMessage->w + padding - 2, 20, grey, screen);
+		drawRect(screen->w - (medalMessage->w + 5 + padding - 1), 6, medalMessage->w + padding - 4, 18, black, screen);
+		blit(medalMessage, screen->w - (medalMessage->w + 5), 7, screen, false);
+		
+		if (medalType >= 0)
+		{
+			blit(medal[medalType], screen->w - (medalMessage->w + 5 + 16), 7, screen, false);
+		}
+	}
+	
 	SDL_Flip(screen);
 	SDL_Delay(1);
 
@@ -921,6 +965,54 @@ void Graphics::drawChatString(SDL_Surface *surface, int y)
 
 		word = strtok(NULL, " ");
 	}
+}
+
+void Graphics::showMedalMessage(int type, const char *in)
+{
+	char message[1024];
+	
+	if (medalMessage != NULL)
+	{
+		SDL_FreeSurface(medalMessage);
+	}
+	
+	setFontSize(0);
+	
+	switch (type)
+	{
+		// Bronze
+		case 1:
+			setFontColor(0xA6, 0x7D, 0x3D, 0x00, 0x00, 0x00);
+			break;
+		
+		// Silver
+		case 2:
+			setFontColor(0xC0, 0xC0, 0xC0, 0x00, 0x00, 0x00);
+			break;
+			
+		// Gold
+		case 3:
+			setFontColor(0xFF, 0xCC, 0x33, 0x00, 0x00, 0x00);
+			break;
+			
+		// Ruby
+		case 4:
+			setFontColor(0xFF, 0x11, 0x55, 0x00, 0x00, 0x00);
+			break;
+	}
+	
+	medalType = type - 1; // for indexing on the image
+	if (type != -1)
+	{
+		sprintf(message, "  Medal Earned - %s  ", in);
+		medalMessage = getString(message, true);
+	}
+	else
+	{
+		sprintf(message, "  %s  ", in);
+		medalMessage = getString(message, true);
+	}
+	medalMessageTimer = (5 * 60);
 }
 
 void Graphics::drawWidgetRect(int x, int y, int w, int h)

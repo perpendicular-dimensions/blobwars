@@ -359,6 +359,12 @@ enum {
 #ifndef GAMEPLAYMANUAL
 	#define GAMEPLAYMANUAL "manual.html"
 #endif
+#ifndef MEDAL_SERVER_HOST
+	#define MEDAL_SERVER_HOST "localhost"
+#endif
+#ifndef MEDAL_SERVER_PORT
+	#define MEDAL_SERVER_PORT 80
+#endif
 
 enum {
 
@@ -371,10 +377,10 @@ enum {
 
 /* ############# debug ################## */
 
-#if DEBUG
-	#define debug(x) {printf("*** DEBUG: "); printf x;}
-#else
+#if USEPAK
 	#define debug(x) {}
+#else
+	#define debug(x) {printf("*** DEBUG: "); printf x;}
 #endif
 
 #ifndef IGNORE_FLAGTOKEN_ERRORS

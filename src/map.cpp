@@ -51,7 +51,7 @@ void drawMap()
 			{
 				graphics.blit(graphics.tile[brick], r.x, r.y, graphics.screen, false);
 				
-				#if DEBUG
+				#if !USEPAK
 				if ((brick >= MAP_NORESET) && (brick < MAP_DECORATION))
 				{
 					graphics.drawRect(r.x, r.y, 32, 4, graphics.yellow, graphics.screen);

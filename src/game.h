@@ -67,6 +67,8 @@ extern void processPostMissionData();
 extern void clearAllMissionData();
 extern void saveGame();
 
+extern void presentPlayerMedal(const char *tname);
+
 extern Audio audio;
 extern Config config;
 extern Engine engine;

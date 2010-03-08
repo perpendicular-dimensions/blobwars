@@ -268,9 +268,8 @@ void doAI(Entity *enemy)
 	// Don't enter areas you're not supposed to
 	if (enemy->tx != (int)enemy->x)
 	{
-		if (!(enemy->flags & ENT_FLIES))
+		if (!(enemy->flags & (ENT_FLIES|ENT_SWIMS)))
 		{
-			//if ((map.data[x][y] == MAP_AIR) || (map.data[x][y] >= MAP_DECORATION))
 			if (!map.isSolid(x, y))
 			{
 				enemy->tx = (int)enemy->x;
@@ -342,6 +341,18 @@ void doAI(Entity *enemy)
 	}
 
 	lookForPlayer(enemy);
+}
+
+void checkCombo()
+{
+	int old = game.currentComboHits;
+	
+	game.doCombo();
+	
+	if (old == 24 && game.currentComboHits == 25)
+	{
+		presentPlayerMedal("25_Hit_Combo");
+	}
 }
 
 void enemyBulletCollisions(Entity *bullet)
@@ -439,12 +450,12 @@ void enemyBulletCollisions(Entity *bullet)
 					{	
 						if (bullet->owner == &player)
 						{
-							game.score += enemy->value;
+							addPlayerScore(enemy->value);
 							game.currentMissionEnemiesDefeated++;
 	
 							if (player.currentWeapon != &weapon[WP_LASER])
 							{
-								game.doCombo();
+								checkCombo();
 							}
 							
 							checkObjectives(comboString, false);
@@ -494,7 +505,7 @@ void enemyBulletCollisions(Entity *bullet)
 					{
 						if (player.currentWeapon != &weapon[WP_LASER])
 						{
-							game.doCombo();
+							checkCombo();
 							checkObjectives(comboString, false);
 						}
 					}

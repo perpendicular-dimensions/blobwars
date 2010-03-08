@@ -90,7 +90,7 @@ void addExplosion(float x, float y, int radius, Entity *owner)
 				
 				if (owner == &player)
 				{
-					game.score += enemy->value;
+					addPlayerScore(enemy->value);
 				}
 			}
 			

@@ -34,6 +34,8 @@ extern void addSmokeAndFire(Entity *ent, float dx, float dy, int amount);
 extern void checkObjectives(const char *name, bool alwaysInform);
 extern Weapon *getWeaponByName(const char *name);
 extern void addFireTrailParticle(float x, float y);
+extern void addPlayerScore(int score);
+extern void presentPlayerMedal(const char *tname);
 
 extern void doGaldovAI(Entity *galdov);
 extern void addTeleportParticles(float x, float y, int amount, int soundToPlay);

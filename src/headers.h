@@ -39,6 +39,7 @@ extern DECLSPEC int SDLCALL SDL_GetGamma(float *red, float *green, float *blue);
 #include "SDL/SDL_image.h"
 #include "SDL/SDL_mixer.h"
 #include "SDL/SDL_ttf.h"
+#include "SDL/SDL_net.h"
 #endif
 
 #include <libintl.h>
@@ -96,3 +97,4 @@ extern DECLSPEC int SDLCALL SDL_GetGamma(float *red, float *green, float *blue);
 #include "CReplayDataHeader.h"
 #include "CReplayData.h"
 #include "CConfig.h"
+#include "CMedalServer.h"

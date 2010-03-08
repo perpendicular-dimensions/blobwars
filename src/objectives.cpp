@@ -281,12 +281,14 @@ void checkObjectives(const char *name, bool alwaysInform)
 					{
 						sprintf(message, "Got the Aqua Lung! You can now swim forever!");
 						game.hasAquaLung = true;
+						presentPlayerMedal("Aqua_Lung");
 					}
 
 					if (strcmp(objective->description, "Get the Jetpack") == 0)
 					{
 						sprintf(message, "Got the Jetpack! Press SPACE to Activate!");
 						game.hasJetPack = true;
+						presentPlayerMedal("Jetpack");
 					}
 
 					engine.setInfoMessage(message, 9, INFO_OBJECTIVE);

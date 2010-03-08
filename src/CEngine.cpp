@@ -84,6 +84,11 @@ Engine::Engine()
 
 	// Cheats
 	memset(lastKeyEvents, ' ', 25);
+	#if USEPAK
+		cheats = false;
+	#else
+		cheats = true;
+	#endif
 	cheatHealth = cheatExtras = cheatFuel = cheatLevels = false;
 	cheatBlood = cheatInvulnerable = cheatReload = cheatSpeed = cheatSkipLevel = false;
 	

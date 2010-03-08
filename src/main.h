@@ -44,6 +44,8 @@ extern void showMissionClear();
 extern void checkStartCutscene();
 extern void easyGameFinished();
 
+extern void presentPlayerMedal(const char *tname);
+
 Audio audio;
 Config config;
 Engine engine;
@@ -52,6 +54,7 @@ GameData gameData;
 Graphics graphics;
 Map map;
 ReplayData replayData;
+MedalServer medalServer;
 
 Entity defEnemy[MAX_ENEMIES];
 Entity defItem[MAX_ITEMS];

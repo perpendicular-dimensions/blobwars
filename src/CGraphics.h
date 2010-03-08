@@ -40,6 +40,10 @@ class Graphics {
 		int screenShotNumber;
 		char screenshot[100];
 		char chatString[1024];
+		
+		SDL_Surface *medalMessage;
+		int medalMessageTimer;
+		int medalType;
 
 		SDL_Surface *fadeBlack;
 		SDL_Surface *infoMessage;
@@ -50,6 +54,8 @@ class Graphics {
 
 		SDL_Surface *screen, *background;
 		SDL_Surface *tile[MAX_TILES];
+		
+		SDL_Surface *medal[4];
 		
 		SDL_Surface *infoBar;
 
@@ -63,6 +69,7 @@ class Graphics {
 	Sprite *getSpriteHead();
 	void setTransparent(SDL_Surface *sprite);
 	void updateScreen();
+	bool canShowMedalMessage();
 	void delay(int time);
 	void RGBtoHSV(float r, float g, float b, float *h, float *s, float *v);
 	void HSVtoRGB(float *r, float *g, float *b, float h, float s, float v);
@@ -95,6 +102,7 @@ class Graphics {
 	void drawString(const char *in, int x, int y, int alignment, SDL_Surface *dest);
 	void clearChatString();
 	void createChatString(const char *in);
+	void showMedalMessage(int type, const char *in);
 	void drawChatString(SDL_Surface *surface, int y);
 	void drawWidgetRect(int x, int y, int w, int h);
 	SDL_Surface *createSurface(int width, int height);

@@ -20,9 +20,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "mapEditor.h"
 
-Config config;
-ReplayData replayData;
-
 void drawMap(int mapX, int mapY)
 {
 	SDL_Rect r;
@@ -434,10 +431,6 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 
-	config.engine = &engine;
-
-	replayData.reset();
-
 	atexit(cleanup);
 	
 	engine.useAudio = 0;
@@ -476,7 +469,7 @@ int main(int argc, char *argv[])
 	{
 		engine.getInput();
 		config.populate();
-		config.doPause();
+		engine.doPause();
 		engine.doFrameLoop();
 
 		graphics.updateScreen();

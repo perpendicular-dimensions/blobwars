@@ -152,15 +152,6 @@ bool Config::loadKeyConfig()
 		fclose(fp);
 		return false;
 	}
-
-	for (int i = 0; i < CONTROL::MAX; i++)
-	{
-		if (keyboard.control[i] < 0 || keyboard.control[i] >= 350)
-		{
-			fclose(fp);
-			return false;
-		}
-	}
 		
 	fclose(fp);
 	

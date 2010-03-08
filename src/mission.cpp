@@ -66,6 +66,7 @@ void processPostMissionData()
 	
 	if (!gameData.stagePreviouslyCleared(game.stageName))
 	{
+		presentPlayerMedal(game.stageName);
 		game.stagesCleared++;
 	}
 	
@@ -110,6 +111,16 @@ void processPostMissionData()
 	}
 
 	game.totalUpStats();
+	
+	if (game.totalEnemiesDefeated >= 1000)
+	{
+		presentPlayerMedal("1000_Enemies");
+	}
+	
+	if (game.totalEnemiesDefeated >= 2500)
+	{
+		presentPlayerMedal("2500_Enemies");
+	}
 }
 
 void clearAllMissionData()

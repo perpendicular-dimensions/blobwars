@@ -32,6 +32,7 @@ extern void addFireParticles(float x, float y, int amount);
 extern void checkSwitchContact(Entity *ent);
 extern void throwBrickParticles(float x, float y);
 extern void throwStalagParticles(float x, float y);
+extern void presentPlayerMedal(const char *tname);
 
 extern Audio audio;
 extern Engine engine;

@@ -195,6 +195,51 @@ void saveConfig()
 	debug(("Output Type = %d\n", game.output));
 }
 
+//
+// see if we can load the private keyState
+//
+int initMedalService(void *data)
+{
+	SDL_mutexP(medalServer.lock);
+	
+	char connectMessage[1024];
+	sprintf(connectMessage, "Contacting Medal Server - %s:%d", MEDAL_SERVER_HOST, MEDAL_SERVER_PORT);
+	
+	graphics.showMedalMessage(-1, connectMessage);
+	
+	char keyPath[PATH_MAX];
+	char privateKey[20];
+
+	sprintf(keyPath, "%smedalKey", engine.userHomeDirectory);
+	
+	debug(("Loading private key from %s\n", keyPath));
+	
+	FILE *fp = fopen(keyPath, "rb");
+	
+	if (!fp)
+	{
+		graphics.showMedalMessage(-1, "No Medal Key found - Online functions disabled");
+		SDL_mutexV(medalServer.lock);
+		return 0;
+	}
+	
+	fscanf(fp, "%s", privateKey);
+	
+	fclose(fp);
+		
+	if (!medalServer.connect(privateKey))
+	{
+		graphics.showMedalMessage(-1, "Medal Server Connection Failed - Online functions disabled");
+		return 0;
+	}
+	
+	graphics.showMedalMessage(-1, "Connected to Medal Server");
+	
+	SDL_mutexV(medalServer.lock);
+	
+	return 1;
+}
+
 /*
 Chugg chugg chugg.... brrr... chugg chugg chugg...brrrrrr... chugg ch..
 BRRRRRRRRRRRRRRRRRMMMMMMMMMMMMMMMMMMM!! Well, hopefully anyway! ;)
@@ -255,7 +300,7 @@ void initSystem()
 	{
 		if (Mix_OpenAudio(22050, AUDIO_S16, engine.useAudio, 1024) < 0)
 		{
-			printf("Warning: Couldn't set 22050 Hz 16-bit audio - Reason: %s\n", Mix_GetError());
+			printf("Warning: Couldn't set 44100 Hz 16-bit audio - Reason: %s\n", Mix_GetError());
 			printf("Sound and Music will be disabled\n");
 			engine.useAudio = 0;
 		}
@@ -317,6 +362,11 @@ void initSystem()
 	audio.loadSound(SND_CHEAT, "sound/Lock And Load!!!");
 	audio.loadSound(SND_HIGHLIGHT, "sound/menu.wav");
 	audio.loadSound(SND_SELECT, "sound/select.wav");
+	
+	graphics.medal[0] = graphics.loadImage("gfx/main/medal_bronze_1.png");
+	graphics.medal[1] = graphics.loadImage("gfx/main/award_star_silver_3.png");
+	graphics.medal[2] = graphics.loadImage("gfx/main/shield.png");
+	graphics.medal[3] = graphics.loadImage("gfx/main/ruby.png");
 
 	SDL_Surface *device = graphics.loadImage("gfx/main/alienDevice.png");
 
@@ -340,6 +390,23 @@ void initSystem()
 	else
 	{
 		checkForLicense();
+	}
+	
+	if (SDLNet_Init() < 0)
+	{
+		printf("SDLNet_Init: %s\n", SDLNet_GetError());
+	}
+	else
+	{
+		SDL_Thread *thread = SDL_CreateThread(initMedalService, NULL);
+	
+		if (thread == NULL)
+		{
+			printf("Unable to create thread: %s\n", SDL_GetError());
+			printf("Calling medal server directly\n");
+			initMedalService(NULL);
+			return;
+		}
 	}
 	
 	engine.saveConfig = true;
@@ -408,6 +475,9 @@ void cleanup()
 
 	debug(("Closing TTF...\n"));
 	TTF_Quit();
+	
+	debug(("Closing NET...\n"));
+	SDLNet_Quit();
 
 	debug(("Closing SDL Sub System...\n"));
 	SDL_Quit();

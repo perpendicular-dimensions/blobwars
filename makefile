@@ -3,7 +3,7 @@ PAKNAME = blobwars.pak
 DOCS = doc/*
 ICONS = icons/
 
-VERSION = 1.14
+VERSION = 1.17
 RELEASE = 1
 USEPAK = 1
 
@@ -14,12 +14,15 @@ DOCDIR = $(PREFIX)/share/doc/$(PROG)/
 ICONDIR = $(PREFIX)/share/icons/hicolor/
 DESKTOPDIR = $(PREFIX)/share/applications/
 LOCALEDIR = $(PREFIX)/share/locale/
+MEDAL_SERVER_HOST = www.parallelrealities.co.uk
+#MEDAL_SERVER_HOST = localhost
+MEDAL_SERVER_PORT = 80
 
 CXXFLAGS += `sdl-config --cflags` -DVERSION=$(VERSION) -DRELEASE=$(RELEASE) -DUSEPAK=$(USEPAK)
 CXXFLAGS += -DPAKNAME=\"$(PAKNAME)\" -DPAKLOCATION=\"$(DATADIR)\" -DUNIX -DGAMEPLAYMANUAL=\"$(DOCDIR)index.html\" -Wall
-CXXFLAGS += -DLOCALEDIR=\"$(LOCALEDIR)\"
+CXXFLAGS += -DLOCALEDIR=\"$(LOCALEDIR)\" -DMEDAL_SERVER_HOST=\"$(MEDAL_SERVER_HOST)\" -DMEDAL_SERVER_PORT=$(MEDAL_SERVER_PORT)
 CXXFLAGS += $(CFLAGS) -Werror
-LIBS = `sdl-config --libs` -lSDL_mixer -lSDL_image -lSDL_ttf -lz
+LIBS = `sdl-config --libs` -lSDL_mixer -lSDL_image -lSDL_ttf -lSDL_net -lz
 
 OBJS += CAudio.o
 OBJS += CBoss.o
@@ -33,7 +36,7 @@ OBJS += CKeyboard.o
 OBJS += CJoystick.o 
 OBJS += CLineDef.o
 OBJS += CList.o
-OBJS += CMap.o CMath.o
+OBJS += CMap.o CMath.o CMedalServer.o
 OBJS += CObjective.o
 OBJS += CPak.o CParticle.o CPersistant.o CPersistData.o
 OBJS += CRadarBlip.o CReplayData.o
@@ -89,7 +92,7 @@ mapeditor: $(MAPOBJS)
 clean:
 	$(RM) $(GAMEOBJS) mapEditor.o pak.o $(PROG) $(PAKNAME) pak mapeditor $(LOCALE_MO)
 	
-buildpak: pak
+buildpak:
 	./pak data gfx music sound $(PAKNAME)
 
 # install

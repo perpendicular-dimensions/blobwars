@@ -247,7 +247,8 @@ void getMapTokens()
 			else if (strcmp("AMBIENCE", mapEntity) == 0)
 			{
 				sscanf(token, "%*s %*s %s", string[0]);
-				audio.loadSound(SND_AMBIANCE, string[0]);
+				if (!audio.loadSound(SND_AMBIANCE, string[0]))
+					graphics.showErrorAndExit(ERR_FILE, string[0]);
 			}
 			else if (strcmp("WATERLEVEL", mapEntity) == 0)
 			{

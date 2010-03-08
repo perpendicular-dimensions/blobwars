@@ -243,7 +243,7 @@ void pickUpItem(Entity *item)
 		case ITEM_POINTS5:
 		case ITEM_POINTS6:
 		case ITEM_POINTS7:
-			game.score += item->value;
+			addPlayerScore(item->value);
 			audio.playSound(SND_ITEM, CH_ITEM);
 			break;
 		case ITEM_CHERRY:
@@ -289,6 +289,11 @@ void pickUpItem(Entity *item)
 			engine.setInfoMessage(string, 0, INFO_NORMAL);
 
 		checkObjectives(item->name, true);
+		
+		if (strcmp(item->name, "LRTS") == 0)
+		{
+			presentPlayerMedal("LRTS_PART");
+		}
 	}
 }
 
