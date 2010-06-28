@@ -494,7 +494,7 @@ int doHub()
 	char name[50], level[50], requiredLevel[50];
 	int x, y;
 
-	#if !USEPAK
+	#if DEBUG
 	char pos[50];
 	#endif
 
@@ -613,7 +613,7 @@ int doHub()
 		
 		graphics.drawRect(10, 430, 620, 40, graphics.black, graphics.white, graphics.screen);
 
-		#if !USEPAK
+		#if DEBUG
 		snprintf(pos, sizeof pos, "%.3d:%.3d", engine.getMouseX(), engine.getMouseY());
 		graphics.drawString(pos, 320, 15, true, graphics.screen);
 		#endif
