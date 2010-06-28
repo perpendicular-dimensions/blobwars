@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 SpawnPoint::SpawnPoint()
 {
-	strcpy(name, "");
+	name[0] = 0;
 	active = false;
 	x = y = 0;
 
@@ -42,7 +42,7 @@ void SpawnPoint::reset()
 
 void SpawnPoint::create(const char *name, int x, int y, int spawnType, int spawnSubType, int minInterval, int maxInterval, bool active)
 {
-	strcpy(this->name, name);
+	strncpy(this->name, name, sizeof this->name);
 	this->x = x;
 	this->y = y;
 	this->spawnType = spawnType;

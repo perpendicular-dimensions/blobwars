@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 PersistData::PersistData()
 {
-	strcpy(data, "");
+	data[0] = 0;
 }
 
 PersistData::~PersistData()
@@ -37,7 +37,7 @@ bool PersistData::setData(const char *data)
 		return false;
 	}
 	
-	strcpy(this->data, data);
+	strncpy(this->data, data, sizeof this->data);
 	
 	return true;
 }

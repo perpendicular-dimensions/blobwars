@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 FileData::FileData()
 {
-	strcpy(filename, "");
+	filename[0] = 0;
 	fSize = 0;
 	cSize = 0;
 	location = 0;
@@ -36,7 +36,7 @@ void FileData::set(const char *filename, Uint32 fSize, Uint32 cSize, Uint32 loca
 		return;
 	}
 	
-	strcpy(this->filename, filename);
+	strncpy(this->filename, filename, sizeof this->filename);
 	
 	this->fSize = fSize;
 	this->cSize = cSize;

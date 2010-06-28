@@ -44,7 +44,7 @@ void Map::clear()
 	limitRight = ((MAPWIDTH - 40) * BRICKSIZE);
 	limitDown = ((MAPHEIGHT - 30) * BRICKSIZE);
 
-	strcpy(name, "");
+	name[0] = 0;
 
 	for (int x = 0 ; x < MAPWIDTH ; x++)
 		for (int y = 0 ; y < MAPHEIGHT ; y++)
@@ -220,7 +220,7 @@ void Map::destroyPersistant(const char *name)
 		
 		if (strcmp(p->stageName, name) == 0)
 		{
-			strcpy(p->stageName, "@none@");
+			strncpy(p->stageName, "@none@", sizeof p->stageName);
 			p->clear();
 			return;
 		}
@@ -229,7 +229,7 @@ void Map::destroyPersistant(const char *name)
 
 void Map::setName(const char *name)
 {
-	strcpy(this->name, name);
+	strncpy(this->name, name, sizeof this->name);
 	
 	if (strstr(name, "BioMech"))
 	{

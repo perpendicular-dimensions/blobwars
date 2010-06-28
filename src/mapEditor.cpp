@@ -264,7 +264,7 @@ void collectMapData()
 		if (!strstr(string, " ENEMY \""))
 		{
 			str = new String;
-			strcpy(str->string, string);
+			strncpy(str->string, string, sizeof str->string);
 			stringTail->next = str;
 			stringTail = str;
 		}
@@ -617,11 +617,11 @@ int main(int argc, char *argv[])
 		if (mapY > MAPHEIGHT - 30) mapY = MAPHEIGHT - 30;
 
 		if (editing == 0)
-			sprintf(string, "Index : %d:%d ; Screen %d:%d ; Tile %d", mapX + x, mapY + y, (mapX + x) * BRICKSIZE, (mapY + y) * BRICKSIZE, currentBlock);
+			snprintf(string, sizeof string, "Index : %d:%d ; Screen %d:%d ; Tile %d", mapX + x, mapY + y, (mapX + x) * BRICKSIZE, (mapY + y) * BRICKSIZE, currentBlock);
 		else if (editing == 1)
-			sprintf(string, "Index : %d:%d ; Screen %d:%d ; %s", mapX + x, mapY + y, (mapX + x) * BRICKSIZE, (mapY + y) * BRICKSIZE, defEnemy[currentMonster].name);
+			snprintf(string, sizeof string, "Index : %d:%d ; Screen %d:%d ; %s", mapX + x, mapY + y, (mapX + x) * BRICKSIZE, (mapY + y) * BRICKSIZE, defEnemy[currentMonster].name);
 		else if (editing == 2)
-			sprintf(string, "Index : %d:%d ; Screen %d:%d ; %s", mapX + x, mapY + y, (mapX + x) * BRICKSIZE, (mapY + y) * BRICKSIZE, defItem[currentItem].name);
+			snprintf(string, sizeof string, "Index : %d:%d ; Screen %d:%d ; %s", mapX + x, mapY + y, (mapX + x) * BRICKSIZE, (mapY + y) * BRICKSIZE, defItem[currentItem].name);
 
 		r.x = 0;
 		r.w = 640;

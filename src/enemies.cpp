@@ -377,7 +377,7 @@ void enemyBulletCollisions(Entity *bullet)
 
 		if ((bullet->owner == &player) || (bullet->owner == &engine.world) || (bullet->flags & ENT_BOSS))
 		{
-			sprintf(comboString, "Combo-%s", bullet->name);
+			snprintf(comboString, sizeof comboString, "Combo-%s", bullet->name);
 
 			if (Collision::collision(enemy, bullet))
 			{
@@ -514,7 +514,7 @@ void enemyBulletCollisions(Entity *bullet)
 				if (game.currentComboHits >= 3)
 				{
 					char message[50];
-					sprintf(message, _("%d Hit Combo!"), game.currentComboHits);
+					snprintf(message, sizeof message, _("%d Hit Combo!"), game.currentComboHits);
 					engine.setInfoMessage(message, 0, INFO_NORMAL);
 				}
 
@@ -848,7 +848,7 @@ void loadDefEnemies()
 {
 	for (int i = 0 ; i < MAX_ENEMIES ; i++)
 	{
-		strcpy(defEnemy[i].name, "");
+		defEnemy[i].name[0] = 0;
 	}
 
 	int enemy = 0;

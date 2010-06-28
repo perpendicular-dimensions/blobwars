@@ -34,7 +34,7 @@ Audio::Audio()
 	music = NULL;
 	quickSound = NULL;
 	
-	strcpy(levelMusicName, "");
+	levelMusicName[0] = 0;
 }
 
 void Audio::setSoundVolume(int soundVolume)
@@ -97,7 +97,7 @@ bool Audio::loadMusic(const char *filename)
 {
 	char tempPath[PATH_MAX];
 	
-	sprintf(tempPath, "%smusic.mod", engine->userHomeDirectory);
+	snprintf(tempPath, sizeof tempPath, "%smusic.mod", engine->userHomeDirectory);
 	
 	if (!engine->useAudio)
 	{
@@ -129,7 +129,7 @@ bool Audio::loadMusic(const char *filename)
 		return false;
 	}
 		
-	strcpy(levelMusicName, filename);
+	strncpy(levelMusicName, filename, sizeof levelMusicName);
 
 	return true;
 }
@@ -183,7 +183,7 @@ bool Audio::loadGameOverMusic()
 {
 	char tempPath[PATH_MAX];
 	
-	sprintf(tempPath, "%smusic.mod", engine->userHomeDirectory);
+	snprintf(tempPath, sizeof tempPath, "%smusic.mod", engine->userHomeDirectory);
 	
 	if (!engine->useAudio)
 	{

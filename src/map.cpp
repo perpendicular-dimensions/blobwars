@@ -393,7 +393,7 @@ void showMap(int centerX, int centerY)
 	graphics.drawString(_("Enemies"), 430, 410, TXT_LEFT, graphics.screen);
 
 	graphics.setFontSize(1);
-	sprintf(string, "%s - %.2d:%.2d:%.2d", _("Mission Time"), game.currentMissionHours, game.currentMissionMinutes, game.currentMissionSeconds);
+	snprintf(string, sizeof string, "%s - %.2d:%.2d:%.2d", _("Mission Time"), game.currentMissionHours, game.currentMissionMinutes, game.currentMissionSeconds);
 	graphics.drawString(string, 320, 60, TXT_CENTERED, graphics.screen);
 	graphics.drawString(_("Press Button to Continue..."), 320, 450, TXT_CENTERED, graphics.screen);
 

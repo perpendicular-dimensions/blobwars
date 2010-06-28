@@ -194,7 +194,7 @@ void Graphics::updateScreen()
 	{
 		if ((Math::prand() % 500) == 0)
 		{
-			sprintf(screenshot, "screenshots/screenshot%.3d.bmp", screenShotNumber);
+			snprintf(screenshot, sizeof screenshot, "screenshots/screenshot%.3d.bmp", screenShotNumber);
 			SDL_SaveBMP(screen, screenshot);
 			screenShotNumber++;
 		}
@@ -204,7 +204,7 @@ void Graphics::updateScreen()
 
 	if (engine->keyState[SDLK_F12])
 	{
-		sprintf(screenshot, "screenshots/screenshot%.3d.bmp", screenShotNumber);
+		snprintf(screenshot, sizeof screenshot, "screenshots/screenshot%.3d.bmp", screenShotNumber);
 		SDL_SaveBMP(screen, screenshot);
 		screenShotNumber++;
 
@@ -476,7 +476,7 @@ void Graphics::loadMapTiles(const char *baseDir)
 {
 	bool found, autoAlpha;
 	char filename[255];
-	strcpy(filename, "");
+	filename[0] = 0;
 
 	autoAlpha = false;
 	
@@ -493,7 +493,7 @@ void Graphics::loadMapTiles(const char *baseDir)
 	{
 		found = true;
 
-		sprintf(filename, "%s/%d.png", baseDir, i);
+		snprintf(filename, sizeof filename, "%s/%d.png", baseDir, i);
 
 		#if USEPAK
 		
@@ -551,7 +551,7 @@ void Graphics::loadFont(int i, const char *filename, int pixelSize)
 	
 	char tempPath[PATH_MAX];
 	
-	sprintf(tempPath, "%sfont.ttf", engine->userHomeDirectory);
+	snprintf(tempPath, sizeof tempPath, "%sfont.ttf", engine->userHomeDirectory);
 
 	bool found = false;
 	int size = 0;
@@ -613,7 +613,7 @@ void Graphics::loadFont(int i, const char *filename, int pixelSize)
 Sprite *Graphics::addSprite(const char *name)
 {
 	Sprite *sprite = new Sprite;
-	strcpy(sprite->name, name);
+	strncpy(sprite->name, name, sizeof sprite->name);
 
 	spriteList.add(sprite);
 
@@ -906,12 +906,12 @@ void Graphics::drawString(const char *in, int x, int y, int alignment, SDL_Surfa
 
 void Graphics::clearChatString()
 {
-	strcpy(chatString, "");
+	chatString[0] = 0;
 }
 
 void Graphics::createChatString(const char *in)
 {
-	sprintf(chatString, "%s %s", chatString, in);
+	snprintf(chatString, sizeof chatString, "%s %s", chatString, in);
 }
 
 void Graphics::drawChatString(SDL_Surface *surface, int y)
@@ -947,7 +947,7 @@ void Graphics::drawChatString(SDL_Surface *surface, int y)
 			continue;
 		}
 
-		sprintf(wordWithSpace, "%s ", word);
+		snprintf(wordWithSpace, sizeof wordWithSpace, "%s ", word);
 
 		wordSurface = getString(wordWithSpace, false);
 
@@ -1004,12 +1004,12 @@ void Graphics::showMedalMessage(int type, const char *in)
 	medalType = type - 1; // for indexing on the image
 	if (type != -1)
 	{
-		sprintf(message, "  Medal Earned - %s  ", in);
+		snprintf(message, sizeof message, "  Medal Earned - %s  ", in);
 		medalMessage = getString(message, true);
 	}
 	else
 	{
-		sprintf(message, "  %s  ", in);
+		snprintf(message, sizeof message, "  %s  ", in);
 		medalMessage = getString(message, true);
 	}
 	medalMessageTimer = (5 * 60);
@@ -1136,7 +1136,7 @@ void Graphics::showErrorAndExit(const char *error, const char *param)
 	}
 
 	char message[256];
-	sprintf(message, error, param);
+	snprintf(message, sizeof message, error, param);
 
 	setFontSize(3); setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
 	drawString("An unforseen error has occurred", 320, 50, true, screen);

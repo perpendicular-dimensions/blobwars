@@ -98,7 +98,7 @@ void processPostMissionData()
 		if (mia->health > 0)
 			miaFound = false;
 
-		sprintf(string, "MIA_%s", mia->name);
+		snprintf(string, sizeof string, "MIA_%s", mia->name);
 		
 		if (miaFound)
 		{
@@ -127,7 +127,7 @@ void clearAllMissionData()
 {
 	char levelMIAKey[100];
 	
-	sprintf(levelMIAKey, "%s MIAs", game.stageName);
+	snprintf(levelMIAKey, sizeof levelMIAKey, "%s MIAs", game.stageName);
 	
 	Data *data = (Data*)gameData.dataList.getHead();
 	Data *previous = data;
@@ -231,13 +231,13 @@ void showMissionClear()
 	if (map.totalMIAs > 0)
 	{
 		graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
-		sprintf(message, _("Rescue %d MIAs"), map.requiredMIAs);
+		snprintf(message, sizeof message, _("Rescue %d MIAs"), map.requiredMIAs);
 		graphics.drawString(message, col1, y, TXT_RIGHT, graphics.background);
 
 		if (map.foundMIAs < map.requiredMIAs)
 		{
 			graphics.setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
-			sprintf(message, "%d / %d", map.foundMIAs, map.requiredMIAs);
+			snprintf(message, sizeof message, "%d / %d", map.foundMIAs, map.requiredMIAs);
 			graphics.drawString(message, col2, y, TXT_LEFT, graphics.background);
 		}
 		else
@@ -278,7 +278,7 @@ void showMissionClear()
 			else
 			{
 				graphics.setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
-				sprintf(message, "%d / %d", objective->currentValue, objective->targetValue);
+				snprintf(message, sizeof message, "%d / %d", objective->currentValue, objective->targetValue);
 				graphics.drawString(message, col2, y, TXT_LEFT, graphics.background);
 			}
 		}
@@ -365,7 +365,7 @@ void showMissionClear()
 			}
 		}
 
-		sprintf(message, "%s - %.2d:%.2d:%.2d", _("Mission Time"), game.currentMissionHours, game.currentMissionMinutes, game.currentMissionSeconds);
+		snprintf(message, sizeof message, "%s - %.2d:%.2d:%.2d", _("Mission Time"), game.currentMissionHours, game.currentMissionMinutes, game.currentMissionSeconds);
 		graphics.drawString(message, 320, 420, true, graphics.screen);
 
 		engine.delay(frameLimit);

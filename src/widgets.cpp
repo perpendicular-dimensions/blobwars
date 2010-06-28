@@ -126,21 +126,21 @@ void drawJoypadButtonOption(Widget *widget)
 	int x = 300;
 	
 	char text[25];
-	strcpy(text, "");
+	text[0] = 0;
 	
 	// joysticks have a button 0 so we can't
 	// do the same thing as the keyboard(!)
 	if (*widget->value <= -1000)
 	{
-		sprintf(text, "...");
+		snprintf(text, sizeof text, "...");
 	}
 	else if (*widget->value == -2)
 	{
-		sprintf(text, "N/A");
+		snprintf(text, sizeof text, "N/A");
 	}
 	else
 	{
-		sprintf(text, "Button #%d", *widget->value);
+		snprintf(text, sizeof text, "Button #%d", *widget->value);
 	}
 	
 	graphics.drawString(text, x, widget->y, TXT_LEFT, graphics.screen);

@@ -140,13 +140,13 @@ char *Math::formatTime(int t)
 {
 	static char time[1024];
 	
-	strcpy(time, "");
+	time[0] = 0;
 	
 	int hours = t / 3600;
 	int minutes = (t % 3600) / 60;
 	int seconds = (t % 60);
 	
-	sprintf(time, "%dh %dm %ds", hours, minutes, seconds);
+	snprintf(time, sizeof time, "%dh %dm %ds", hours, minutes, seconds);
 	
 	return time;
 }

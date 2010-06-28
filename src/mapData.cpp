@@ -364,7 +364,7 @@ void createPersistantMapData()
 	}
 	
 	char line[1024];
-	strcpy(line, "");
+	line[0] = 0;
 	
 	char skill;
 	
@@ -381,7 +381,7 @@ void createPersistantMapData()
 			break;
 	}
 	
-	sprintf(line, "%c START %d %d\n", skill, (int)game.checkPointX, (int)game.checkPointY);
+	snprintf(line, sizeof line, "%c START %d %d\n", skill, (int)game.checkPointX, (int)game.checkPointY);
 	persistant->addLine(line);
 
 	Entity *ent;
@@ -399,7 +399,7 @@ void createPersistantMapData()
 	while (ent->next != NULL)
 	{
 		ent = (Entity*)ent->next;
-		sprintf(line, "%c ENEMY \"%s\" %d %d\n", skill, ent->name, (int)ent->x, (int)ent->y);
+		snprintf(line, sizeof line, "%c ENEMY \"%s\" %d %d\n", skill, ent->name, (int)ent->x, (int)ent->y);
 		persistant->addLine(line);
 	}
 	
@@ -415,7 +415,7 @@ void createPersistantMapData()
 			continue;
 		}
 		
-		sprintf(line, "%c ITEM %d \"%s\" %d %d %s\n", skill, ent->id, ent->name, (int)ent->x, (int)ent->y, ent->sprite[0]->name);
+		snprintf(line, sizeof line, "%c ITEM %d \"%s\" %d %d %s\n", skill, ent->id, ent->name, (int)ent->x, (int)ent->y, ent->sprite[0]->name);
 		persistant->addLine(line);
 	}
 	
@@ -424,7 +424,7 @@ void createPersistantMapData()
 	while (ent->next != NULL)
 	{
 		ent = (Entity*)ent->next;
-		sprintf(line, "%c OBSTACLE \"%s\" %d %d %s\n", skill, ent->name, (int)ent->x, (int)ent->y, ent->sprite[0]->name);
+		snprintf(line, sizeof line, "%c OBSTACLE \"%s\" %d %d %s\n", skill, ent->name, (int)ent->x, (int)ent->y, ent->sprite[0]->name);
 		persistant->addLine(line);
 	}
 	
@@ -436,7 +436,7 @@ void createPersistantMapData()
 		define[0] = engine.getDefineOfValue("SWT_", swt->type);
 		define[1] = (char*)getActiveState(swt->activated);
 		
-		sprintf(line, "%c SWITCH \"%s\" %s \"%s\" \"%s\" %s %d %d %s\n", skill, swt->name, swt->linkName, swt->requiredObjectName, swt->activateMessage, define[0], (int)swt->x, (int)swt->y, define[1]);
+		snprintf(line, sizeof line, "%c SWITCH \"%s\" %s \"%s\" \"%s\" %s %d %d %s\n", skill, swt->name, swt->linkName, swt->requiredObjectName, swt->activateMessage, define[0], (int)swt->x, (int)swt->y, define[1]);
 		
 		persistant->addLine(line);
 	}
@@ -459,13 +459,13 @@ void createPersistantMapData()
 			}
 			
 			define[1] = (char*)getActiveState(train->active);
-			sprintf(line, "%c DOOR %s %s %d %d %d %d %s\n", skill, train->name, define[0], train->startX, train->startY, train->endX, train->endY, define[1]);
+			snprintf(line, sizeof line, "%c DOOR %s %s %d %d %d %d %s\n", skill, train->name, define[0], train->startX, train->startY, train->endX, train->endY, define[1]);
 		}
 		else
 		{
 			define[0] = engine.getDefineOfValue("TR_A", train->waitAtStart);
 			define[1] = (char*)getActiveState(train->active);
-			sprintf(line, "%c TRAIN %s %d %d %d %d %d %s %s\n", skill, train->name, train->startX, train->startY, train->endX, train->endY, train->getPause(), define[0], define[1]);
+			snprintf(line, sizeof line, "%c TRAIN %s %d %d %d %d %d %s %s\n", skill, train->name, train->startX, train->startY, train->endX, train->endY, train->getPause(), define[0], define[1]);
 		}
 				
 		persistant->addLine(line);
@@ -478,7 +478,7 @@ void createPersistantMapData()
 		trap = (Trap*)trap->next;
 		define[0] = engine.getDefineOfValue("TRAP_TYPE", trap->type);
 		define[1] = (char*)getActiveState(trap->active);
-		sprintf(line, "%c TRAP %s %s %d %d %d %d %d %d %d %d %s %s\n", skill, trap->name, define[0], (int)trap->damage, (int)trap->speed, (int)trap->startX, (int)trap->startY, (int)trap->endX, (int)trap->endY, (int)trap->waitTime[0], (int)trap->waitTime[1], trap->sprite->name, define[1]);
+		snprintf(line, sizeof line, "%c TRAP %s %s %d %d %d %d %d %d %d %d %s %s\n", skill, trap->name, define[0], (int)trap->damage, (int)trap->speed, (int)trap->startX, (int)trap->startY, (int)trap->endX, (int)trap->endY, (int)trap->waitTime[0], (int)trap->waitTime[1], trap->sprite->name, define[1]);
 		persistant->addLine(line);
 	}
 	
@@ -488,7 +488,7 @@ void createPersistantMapData()
 	{
 		teleporter = (Teleporter*)teleporter->next;
 		define[0] = (char*)getActiveState(teleporter->active);
-		sprintf(line, "%c TELEPORTER %s %d %d %d %d %s\n", skill, teleporter->name, (int)teleporter->x, (int)teleporter->y, (int)teleporter->destX, (int)teleporter->destY, define[0]);
+		snprintf(line, sizeof line, "%c TELEPORTER %s %d %d %d %d %s\n", skill, teleporter->name, (int)teleporter->x, (int)teleporter->y, (int)teleporter->destX, (int)teleporter->destY, define[0]);
 		persistant->addLine(line);
 	}
 	
@@ -498,7 +498,7 @@ void createPersistantMapData()
 	{
 		lineDef = (LineDef*)lineDef->next;
 		define[0] = (char*)getActiveState(lineDef->activated);
-		sprintf(line, "%c LINEDEF \"%s\" %s \"%s\" %d %d %d %d %s\n", skill, lineDef->name, lineDef->linkName, lineDef->activateMessage, (int)lineDef->x, (int)lineDef->y, (int)lineDef->width, (int)lineDef->height, define[0]);
+		snprintf(line, sizeof line, "%c LINEDEF \"%s\" %s \"%s\" %d %d %d %d %s\n", skill, lineDef->name, lineDef->linkName, lineDef->activateMessage, (int)lineDef->x, (int)lineDef->y, (int)lineDef->width, (int)lineDef->height, define[0]);
 		persistant->addLine(line);
 	}
 	
@@ -519,7 +519,7 @@ void createPersistantMapData()
 		}
 			
 		define[2] = (char*)getActiveState(spawnPoint->active);
-		sprintf(line, "%c SPAWNPOINT %s %d %d %s %s %d %d %s\n", skill, spawnPoint->name, (int)spawnPoint->x, (int)spawnPoint->y, define[0], define[1], (int)(spawnPoint->minInterval / 60), (int)(spawnPoint->maxInterval / 60), define[2]);
+		snprintf(line, sizeof line, "%c SPAWNPOINT %s %d %d %s %s %d %d %s\n", skill, spawnPoint->name, (int)spawnPoint->x, (int)spawnPoint->y, define[0], define[1], (int)(spawnPoint->minInterval / 60), (int)(spawnPoint->maxInterval / 60), define[2]);
 		persistant->addLine(line);
 	}
 	
@@ -527,14 +527,14 @@ void createPersistantMapData()
 	{
 		if (map.getSpawnableEnemy(i) != NULL)
 		{
-			sprintf(line, "%c SPAWNABLE_ENEMY \"%s\"\n", skill, map.getSpawnableEnemy(i));
+			snprintf(line, sizeof line, "%c SPAWNABLE_ENEMY \"%s\"\n", skill, map.getSpawnableEnemy(i));
 			persistant->addLine(line);
 		}
 	}
 	
 	if (map.waterLevel != -1)
 	{
-		sprintf(line, "%c WATERLEVEL %d\n", skill, (int)map.waterLevel);
+		snprintf(line, sizeof line, "%c WATERLEVEL %d\n", skill, (int)map.waterLevel);
 		persistant->addLine(line);
 	}
 	

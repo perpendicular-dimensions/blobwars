@@ -55,7 +55,7 @@ void countFiles(const char *dirName)
 			continue;
 		}
 
-		sprintf(filename, "%s/%s", dirName, dfile->d_name);
+		snprintf(filename, sizeof filename, "%s/%s", dirName, dfile->d_name);
 		
 		if (strlen(filename) > PAK_MAX_FILENAME - 1)
 		{
@@ -108,7 +108,7 @@ void recurseDirectory(const char *dirName)
 			continue;
 		}
 
-		sprintf(filename, "%s/%s", dirName, dfile->d_name);
+		snprintf(filename, sizeof filename, "%s/%s", dirName, dfile->d_name);
 
 		dirp2 = opendir(filename);
 

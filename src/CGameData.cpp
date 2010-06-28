@@ -83,14 +83,14 @@ void GameData::setMIARescueCount(const char *key, int rescues, int total)
 	Data *data = (Data*)dataList.getHead();
 
 	char newKey[100];
-	sprintf(newKey, "%s MIAs", key);
+	snprintf(newKey, sizeof newKey, "%s MIAs", key);
 
 	while (data->next != NULL)
 	{
 		data = (Data*)data->next;
 		if (strcmp(newKey, data->key) == 0)
 		{
-			strcpy(data->value, "MIAs");
+			strncpy(data->value, "MIAs", sizeof data->value);
 			data->current = rescues;
 			data->target = total;
 			return;
@@ -109,7 +109,7 @@ bool GameData::MIARescued(const char *stageName, char *name)
 	Data *data = (Data*)dataList.getHead();
 
 	char newName[100];
-	sprintf(newName, "MIA_%s", name);
+	snprintf(newName, sizeof newName, "MIA_%s", name);
 
 	while (data->next != NULL)
 	{

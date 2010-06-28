@@ -89,7 +89,7 @@ void Config::doPause()
 bool Config::loadJoystickConfig()
 {
 	char filename[PATH_MAX];
-	sprintf(filename, "%sjoystick.cfg", engine->userHomeDirectory);
+	snprintf(filename, sizeof filename, "%sjoystick.cfg", engine->userHomeDirectory);
 	
 	debug(("Loading joystick config from %s\n", filename));
 	
@@ -114,7 +114,7 @@ bool Config::loadJoystickConfig()
 bool Config::saveJoystickConfig()
 {
 	char filename[PATH_MAX];
-	sprintf(filename, "%sjoystick.cfg", engine->userHomeDirectory);
+	snprintf(filename, sizeof filename, "%sjoystick.cfg", engine->userHomeDirectory);
 	
 	debug(("Saving joystick config to %s\n", filename));
 	
@@ -136,7 +136,7 @@ bool Config::saveJoystickConfig()
 bool Config::loadKeyConfig()
 {
 	char filename[PATH_MAX];
-	sprintf(filename, "%skeyboard.cfg", engine->userHomeDirectory);
+	snprintf(filename, sizeof filename, "%skeyboard.cfg", engine->userHomeDirectory);
 	
 	debug(("Loading keyboard config from %s\n", filename));
 	
@@ -164,7 +164,7 @@ bool Config::loadKeyConfig()
 bool Config::saveKeyConfig()
 {
 	char filename[PATH_MAX];
-	sprintf(filename, "%skeyboard.cfg", engine->userHomeDirectory);
+	snprintf(filename, sizeof filename, "%skeyboard.cfg", engine->userHomeDirectory);
 	
 	debug(("Saving keyboard config to %s\n", filename));
 	

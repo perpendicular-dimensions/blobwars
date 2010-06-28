@@ -40,7 +40,7 @@ Engine::Engine()
 	
 	allowJoypad = true;
 
-	strcpy(lastKeyPressed, "");
+	lastKeyPressed[0] = 0;
 
 	fullScreen = 0;
 
@@ -54,7 +54,7 @@ Engine::Engine()
 
 	highlightedWidget = NULL;
 
-	strcpy(message, "");
+	message[0] = 0;
 	messageTime = -1;
 
 	// Development Stuff
@@ -234,7 +234,7 @@ void Engine::getInput()
 				}
 
 				keyState[event.key.keysym.sym] = 1;
-				strcpy(lastKeyPressed, SDL_GetKeyName(event.key.keysym.sym));
+				strncpy(lastKeyPressed, SDL_GetKeyName(event.key.keysym.sym), sizeof lastKeyPressed);
 				addKeyEvent();
 				break;
 
@@ -319,7 +319,7 @@ void Engine::clearInput()
 
 void Engine::setUserHome(const char *path)
 {
-	strcpy(userHomeDirectory, path);
+	strncpy(userHomeDirectory, path, sizeof userHomeDirectory);
 	debug(("User Home = %s\n", path));
 }
 
@@ -384,13 +384,13 @@ bool Engine::unpack(const char *filename, int fileType)
 
 		if (fileType == PAK_MUSIC)
 		{
-			sprintf(tempPath, "%smusic.mod", userHomeDirectory);
+			snprintf(tempPath, sizeof tempPath, "%smusic.mod", userHomeDirectory);
 			fp = fopen(tempPath, "wb");
 		}
 
 		if (fileType == PAK_FONT)
 		{
-			sprintf(tempPath, "%sfont.ttf", userHomeDirectory);
+			snprintf(tempPath, sizeof tempPath, "%sfont.ttf", userHomeDirectory);
 			fp = fopen(tempPath, "wb");
 		}
 
@@ -493,7 +493,7 @@ void Engine::setInfoMessage(const char *message, int priority, int type)
 {
 	if (priority >= messagePriority)
 	{
-		strcpy(this->message, message);
+		strncpy(this->message, message, sizeof this->message);
 		messageTime = 180;
 		messagePriority = priority;
 		messageType = type;
@@ -961,7 +961,7 @@ int Engine::getValueOfFlagTokens(const char *realLine)
 	char line[1024];
 	bool found;
 	int value;
-	strcpy(line, realLine);
+	strncpy(line, realLine, sizeof line);
 
 	int flags = 0;
 

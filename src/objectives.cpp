@@ -269,24 +269,24 @@ void checkObjectives(const char *name, bool alwaysInform)
 				{
 					if (!map.isBossMission)
 					{
-						sprintf(message, _("%s - Objective Completed - Check Point Reached!"), _(objective->description));
+						snprintf(message, sizeof message, _("%s - Objective Completed - Check Point Reached!"), _(objective->description));
 						game.setObjectiveCheckPoint();
 					}
 					else
 					{
-						sprintf(message, _("%s - Objective Completed"), _(objective->description));
+						snprintf(message, sizeof message, _("%s - Objective Completed"), _(objective->description));
 					}
 
 					if (strcmp(objective->description, "Get the Aqua Lung") == 0)
 					{
-						sprintf(message, "Got the Aqua Lung! You can now swim forever!");
+						snprintf(message, sizeof message, "Got the Aqua Lung! You can now swim forever!");
 						game.hasAquaLung = true;
 						presentPlayerMedal("Aqua_Lung");
 					}
 
 					if (strcmp(objective->description, "Get the Jetpack") == 0)
 					{
-						sprintf(message, "Got the Jetpack! Press SPACE to Activate!");
+						snprintf(message, sizeof message, "Got the Jetpack! Press SPACE to Activate!");
 						game.hasJetPack = true;
 						presentPlayerMedal("Jetpack");
 					}
@@ -303,13 +303,13 @@ void checkObjectives(const char *name, bool alwaysInform)
 						switch (Math::prand() % 3)
 						{
 							case 0:
-								sprintf(message, _("%s - %d more to go..."), _(objective->description), requiredValue);
+								snprintf(message, sizeof message, _("%s - %d more to go..."), _(objective->description), requiredValue);
 								break;
 							case 1:
-								sprintf(message, _("%s - need %d more"), _(objective->description), requiredValue);
+								snprintf(message, sizeof message, _("%s - need %d more"), _(objective->description), requiredValue);
 								break;
 							case 2:
-								sprintf(message, _("%s - %d of %d"), _(objective->description), objective->currentValue, objective->targetValue);
+								snprintf(message, sizeof message, _("%s - %d of %d"), _(objective->description), objective->currentValue, objective->targetValue);
 								break;
 						}
 						

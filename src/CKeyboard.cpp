@@ -41,7 +41,7 @@ void Keyboard::setDefaultKeys()
 const char *Keyboard::translateKey(int key)
 {
 	static char keyName[50];
-	strcpy(keyName, "");
+	keyName[0] = 0;
 	keyName[0] = '\0';
 	
 	if (key <= 0)
@@ -49,7 +49,7 @@ const char *Keyboard::translateKey(int key)
 		return "...";
 	}
 	
-	strcpy(keyName, _(SDL_GetKeyName((SDLKey)key)));
+	strncpy(keyName, _(SDL_GetKeyName((SDLKey)key)), sizeof keyName);
 	
 	/*
 	This is not really neccessary, but it just makes

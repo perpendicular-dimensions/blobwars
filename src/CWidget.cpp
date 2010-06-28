@@ -22,10 +22,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 Widget::Widget()
 {
-	strcpy(name, "");
-	strcpy(groupName, "");
-	strcpy(label, "");
-	strcpy(options, "");
+	name[0] = 0;
+	groupName[0] = 0;
+	label[0] = 0;
+	options[0] = 0;
 	x = y = type = min = max = 0;
 	enabled = visible = true;
 	changed = false;
@@ -43,10 +43,10 @@ void Widget::setProperties(const char *name, const char *groupName, const char *
 		exit(1);
 	}
 
-	strcpy(this->name, name);
-	strcpy(this->groupName, groupName);
-	strcpy(this->label, label);
-	strcpy(this->options, options);
+	strncpy(this->name, name, sizeof this->name);
+	strncpy(this->groupName, groupName, sizeof this->groupName);
+	strncpy(this->label, label, sizeof this->label);
+	strncpy(this->options, options, sizeof this->options);
 	this->x = x;
 	this->y = y;
 	this->min = min;

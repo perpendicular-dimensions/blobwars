@@ -31,7 +31,7 @@ String::String(char *text)
 
 	this->text = new char[size + 1];
 
-	strcpy(this->text, text);
+	strncpy(this->text, text, sizeof this->text);
 
 	this->length = size;
 }
@@ -65,7 +65,7 @@ void String::trim()
 		c++; // LOL!!! :)
 	}
 
-	strcpy(tempText, c);
+	strncpy(tempText, c, sizeof tempText);
 
 	int len = strlen(tempText);
 	
@@ -97,7 +97,7 @@ void String::operator= (char *text)
 
 	this->text = new char[size + 1];
 
-	strcpy(this->text, text);
+	strncpy(this->text, text, sizeof this->text);
 
 	this->length = size;
 }
@@ -144,18 +144,18 @@ bool String::operator!= (String string)
 
 void String::setText(char *text, ...)
 {
-	strcpy(tmpString, "");
+	tmpString[0] = 0;
 	
 	va_list argp;
 	va_start(argp, text);
-	vsprintf(tmpString, text, argp);
+	vsnprintf(tmpString, sizeof tmpString, text, argp);
 	va_end(argp);
 	
 	int size = strlen(tmpString);
 
 	this->text = new char[size + 1];
 
-	strcpy(this->text,  tmpString);
+	strncpy(this->text,  tmpString, sizeof this->text);
 }
 
 char *String::getText()

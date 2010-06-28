@@ -278,10 +278,10 @@ void pickUpItem(Entity *item)
 			case 'o':
 			case 'U':
 			case 'u':
-				sprintf(string, _("Picked up an %s"), item->name);
+				snprintf(string, sizeof string, _("Picked up an %s"), item->name);
 				break;
 			default:
-				sprintf(string, _("Picked up a %s"), item->name);
+				snprintf(string, sizeof string, _("Picked up a %s"), item->name);
 				break;
 		}
 

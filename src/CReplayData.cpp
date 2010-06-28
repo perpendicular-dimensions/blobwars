@@ -13,7 +13,7 @@ ReplayData::ReplayData()
 	header.version = VERSION;
 	header.release = RELEASE;
 	
-	strcpy(filename, "");
+	filename[0] = 0;
 }
 
 ReplayData::~ReplayData()

@@ -22,8 +22,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 Objective::Objective()
 {
-	strcpy(this->description, "");
-	strcpy(this->target, "");
+	this->description[0] = 0;
+	this->target[0] = 0;
 	this->currentValue = 0;
 	this->targetValue = 0;
 	this->required = false;
@@ -34,8 +34,8 @@ Objective::Objective()
 
 Objective::Objective(const char *description, const char *target, int targetValue, bool required)
 {
-	strcpy(this->description, description);
-	strcpy(this->target, target);
+	strncpy(this->description, description, sizeof this->description);
+	strncpy(this->target, target, sizeof this->target);
 	this->targetValue = targetValue;
 	this->required = required;
 

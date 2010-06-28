@@ -36,25 +36,25 @@ void initSaveSlots()
 	//READ SAVE GAME DATA
 	for (int i = 0 ; i < 5 ; i++)
 	{
-		sprintf(filename, "%ssave%d.dat", engine.userHomeDirectory, i);
+		snprintf(filename, sizeof filename, "%ssave%d.dat", engine.userHomeDirectory, i);
 
 		fp = fopen(filename, "rb");
 
 		if (!fp)
 		{
-			strcpy(string, "%.2d - %s");
-			sprintf(engine.saveSlot[i], string, (i + 1), _("Empty"));
+			strncpy(string, "%.2d - %s", sizeof string);
+			snprintf(engine.saveSlot[i], sizeof engine.saveSlot[i], string, (i + 1), _("Empty"));
 		}
 		else
 		{
 			if (fread(&tempGame, sizeof(Game), 1, fp) != 1)
 			{
-				strcpy(string, "%.2d - %s");
-				sprintf(engine.saveSlot[i], string, (i + 1), _("Corrupt Save Data"));
+				strncpy(string, "%.2d - %s", sizeof string);
+				snprintf(engine.saveSlot[i], sizeof engine.saveSlot[i], string, (i + 1), _("Corrupt Save Data"));
 			}
 			else
 			{
-				sprintf(engine.saveSlot[i], "%.2d - %s (%.2d:%.2d:%.2d)", (i + 1), _(tempGame.stageName), tempGame.totalHours, tempGame.totalMinutes, tempGame.totalSeconds);
+				snprintf(engine.saveSlot[i], sizeof engine.saveSlot[i], "%.2d - %s (%.2d:%.2d:%.2d)", (i + 1), _(tempGame.stageName), tempGame.totalHours, tempGame.totalMinutes, tempGame.totalSeconds);
 			}
 
 			if (stat(filename, &fileInfo) != -1)
@@ -94,7 +94,7 @@ bool loadGame(int slot)
 	
 	int sanity = 0;
 
-	sprintf(filename, "%ssave%d.dat", engine.userHomeDirectory, slot);
+	snprintf(filename, sizeof filename, "%ssave%d.dat", engine.userHomeDirectory, slot);
 
 	fp = fopen(filename, "rb");
 	
@@ -111,7 +111,7 @@ bool loadGame(int slot)
 	
 	fclose(fp);
 	
-	sprintf(filename, "%spersistant%d.dat", engine.userHomeDirectory, slot);
+	snprintf(filename, sizeof filename, "%spersistant%d.dat", engine.userHomeDirectory, slot);
 
 	fp = fopen(filename, "rb");
 	
@@ -163,7 +163,7 @@ bool loadGame(int slot)
 		fgets(line, 1024, fp);
 		
 		sscanf(line, "%[^\n\r]", string[0]);
-		strcpy(stageName, string[0]);
+		strncpy(stageName, string[0], sizeof stageName);
 		
 		if (strcmp(stageName, "@EOF@") == 0)
 		{
@@ -183,7 +183,7 @@ bool loadGame(int slot)
 			
 			fgets(line, 1024, fp);
 			
-			strcpy(persistData->data, line);
+			strncpy(persistData->data, line, sizeof persistData->data);
 			
 			//debug(("Read %d: %s", i, persistData->data));
 			
@@ -232,12 +232,12 @@ int confirmSave()
 	engine.setWidgetVariable("contno", &quitNo);
 	
 	char widgetName[10];
-	strcpy(widgetName, "");
+	widgetName[0] = 0;
 	
 	for (int i = 0 ; i < 5 ; i++)
 	{
-		sprintf(widgetName, "slot%d", i + 1);
-		strcpy(engine.getWidgetByName(widgetName)->label, engine.saveSlot[i]);
+		snprintf(widgetName, sizeof widgetName, "slot%d", i + 1);
+		strncpy(engine.getWidgetByName(widgetName)->label, engine.saveSlot[i], sizeof engine.getWidgetByName(widgetName)->label);
 	}
 	
 	engine.highlightWidget("slot1");
@@ -329,7 +329,7 @@ void saveGame()
 
 	graphics.setFontSize(1);
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
-	sprintf(message, _("Saving Game to Save Slot #%d. Please Wait..."), slot + 1);
+	snprintf(message, sizeof message, _("Saving Game to Save Slot #%d. Please Wait..."), slot + 1);
 	graphics.drawString(message, 320, 220, true, graphics.screen);
 	graphics.updateScreen();
 
@@ -337,7 +337,7 @@ void saveGame()
 
 	FILE *fp;
 
-	sprintf(filename, "%ssave%d.dat", engine.userHomeDirectory, slot);
+	snprintf(filename, sizeof filename, "%ssave%d.dat", engine.userHomeDirectory, slot);
 
 	fp = fopen(filename, "wb");
 	
@@ -350,7 +350,7 @@ void saveGame()
 	
 	fclose(fp);
 	
-	sprintf(filename, "%spersistant%d.dat", engine.userHomeDirectory, slot);
+	snprintf(filename, sizeof filename, "%spersistant%d.dat", engine.userHomeDirectory, slot);
 
 	fp = fopen(filename, "wt");
 	

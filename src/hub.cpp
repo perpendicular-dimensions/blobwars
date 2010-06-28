@@ -43,31 +43,31 @@ void createStatsPanel(int page)
 	{
 		case 0:
 			graphics.drawString(_("Skill Level:"), x1, y += 20, false, image);
-			sprintf(string, "%s", _(skill[game.skill]));
+			snprintf(string, sizeof string, "%s", _(skill[game.skill]));
 			graphics.drawString(string, x2, y, false, image);
 
 			graphics.drawString(_("Score:"), x1, y += 20, false, image);
-			sprintf(string, "%d", game.score);
+			snprintf(string, sizeof string, "%d", game.score);
 			graphics.drawString(string, x2, y, false, image);
 
 			graphics.drawString(_("MIAs Saved:"), x1, y += 20, false, image);
-			sprintf(string, "%d", game.totalMIAsRescued);
+			snprintf(string, sizeof string, "%d", game.totalMIAsRescued);
 			graphics.drawString(string, x2, y, false, image);
 
 			graphics.drawString(_("Objectives Completed:"), x1, y += 20, false, image);
-			sprintf(string, "%d", game.totalObjectivesCompleted);
+			snprintf(string, sizeof string, "%d", game.totalObjectivesCompleted);
 			graphics.drawString(string, x2, y, false, image);
 
 			// Don't do this on Extreme or it will always say 100%
 			if (game.skill < 3)
 			{
 				graphics.drawString(_("Percentage Complete:"), x1, y += 20, false, image);
-				sprintf(string, "%d%%", gameData.getPercentageComplete());
+				snprintf(string, sizeof string, "%d%%", gameData.getPercentageComplete());
 				graphics.drawString(string, x2, y, false, image);
 			}
 
-			sprintf(string, "%s", _("Total Game Time"));
-			sprintf(string, "%s - %.2d:%.2d:%.2d", string, game.totalHours, game.totalMinutes, game.totalSeconds);
+			snprintf(string, sizeof string, "%s", _("Total Game Time"));
+			snprintf(string, sizeof string, "%s - %.2d:%.2d:%.2d", string, game.totalHours, game.totalMinutes, game.totalSeconds);
 			graphics.drawString(string, 200, y += 110, true, image);
 
 			break;
@@ -75,38 +75,38 @@ void createStatsPanel(int page)
 		case 1:
 
 			graphics.drawString(_("Enemies Defeated:"), x1, y += 20, false, image);
-			sprintf(string, "%d", game.totalEnemiesDefeated);
+			snprintf(string, sizeof string, "%d", game.totalEnemiesDefeated);
 			graphics.drawString(string, x2, y, false, image);
 
 			graphics.drawString(_("Items Collected:"), x1, y += 20, false, image);
-			sprintf(string, "%d", game.totalItemsCollected);
+			snprintf(string, sizeof string, "%d", game.totalItemsCollected);
 			graphics.drawString(string, x2, y, false, image);
 
 			graphics.drawString(_("Bonuses Picked Up:"), x1, y += 20, false, image);
-			sprintf(string, "%d", game.totalBonusesCollected);
+			snprintf(string, sizeof string, "%d", game.totalBonusesCollected);
 			graphics.drawString(string, x2, y, false, image);
 
 			graphics.drawString(_("Best Combo:"), x1, y += 20, false, image);
-			sprintf(string, _("%d Hits"), game.maxComboHits);
+			snprintf(string, sizeof string, _("%d Hits"), game.maxComboHits);
 			graphics.drawString(string, x2, y, false, image);
 			
 			graphics.drawString(_("Missions Started:"), x1, y += 20, false, image);
-			sprintf(string, "%d", game.levelsStarted);
+			snprintf(string, sizeof string, "%d", game.levelsStarted);
 			graphics.drawString(string, x2, y, false, image);
 
 			graphics.drawString(_("Continues Used:"), x1, y += 20, false, image);
-			sprintf(string, "%d", game.continuesUsed);
+			snprintf(string, sizeof string, "%d", game.continuesUsed);
 			graphics.drawString(string, x2, y, false, image);
 			
 			if ((game.continuesUsed > 0) && (game.levelsStarted > 0))
 			{
 				graphics.drawString(_("Average Continue Usage:"), x1, y += 20, false, image);
-				sprintf(string, "%d", (game.continuesUsed / game.levelsStarted));
+				snprintf(string, sizeof string, "%d", (game.continuesUsed / game.levelsStarted));
 				graphics.drawString(string, x2, y, false, image);
 			}
 
 			graphics.drawString(_("Escapes Used:"), x1, y += 20, false, image);
-			sprintf(string, "%d", game.escapes);
+			snprintf(string, sizeof string, "%d", game.escapes);
 			graphics.drawString(string, x2, y, false, image);
 
 			break;
@@ -122,42 +122,42 @@ void createStatsPanel(int page)
 			graphics.drawString(_("Accuracy"), x3, y, false, image);
 
 			graphics.drawString(_("Pistol"), x1, y += 30, false, image);
-			sprintf(string, "%d", game.bulletsFired[WP_PISTOL]);
+			snprintf(string, sizeof string, "%d", game.bulletsFired[WP_PISTOL]);
 			graphics.drawString(string, x2, y, false, image);
-			sprintf(string, "%d%%", game.getWeaponAccuracy(WP_PISTOL));
+			snprintf(string, sizeof string, "%d%%", game.getWeaponAccuracy(WP_PISTOL));
 			graphics.drawString(string, x3, y, false, image);
 
 			graphics.drawString(_("Machine Gun"), x1, y += 20, false, image);
-			sprintf(string, "%d", game.bulletsFired[WP_MACHINEGUN]);
+			snprintf(string, sizeof string, "%d", game.bulletsFired[WP_MACHINEGUN]);
 			graphics.drawString(string, x2, y, false, image);
-			sprintf(string, "%d%%", game.getWeaponAccuracy(WP_MACHINEGUN));
+			snprintf(string, sizeof string, "%d%%", game.getWeaponAccuracy(WP_MACHINEGUN));
 			graphics.drawString(string, x3, y, false, image);
 
 			graphics.drawString(_("Laser Cannon"), x1, y += 20, false, image);
-			sprintf(string, "%d", game.bulletsFired[WP_LASER]);
+			snprintf(string, sizeof string, "%d", game.bulletsFired[WP_LASER]);
 			graphics.drawString(string, x2, y, false, image);
-			sprintf(string, "%d%%", game.getWeaponAccuracy(WP_LASER));
+			snprintf(string, sizeof string, "%d%%", game.getWeaponAccuracy(WP_LASER));
 			graphics.drawString(string, x3, y, false, image);
 			
 			graphics.drawString(_("Grenades"), x1, y += 20, false, image);
-			sprintf(string, "%d", game.bulletsFired[WP_GRENADES]);
+			snprintf(string, sizeof string, "%d", game.bulletsFired[WP_GRENADES]);
 			graphics.drawString(string, x2, y, false, image);
-			sprintf(string, "%d%%", game.getWeaponAccuracy(WP_GRENADES));
+			snprintf(string, sizeof string, "%d%%", game.getWeaponAccuracy(WP_GRENADES));
 			graphics.drawString(string, x3, y, false, image);
 
 			graphics.drawString(_("Spread Gun"), x1, y += 20, false, image);
-			sprintf(string, "%d", game.bulletsFired[WP_SPREAD]);
+			snprintf(string, sizeof string, "%d", game.bulletsFired[WP_SPREAD]);
 			graphics.drawString(string, x2, y, false, image);
-			sprintf(string, "%d%%", game.getWeaponAccuracy(WP_SPREAD));
+			snprintf(string, sizeof string, "%d%%", game.getWeaponAccuracy(WP_SPREAD));
 			graphics.drawString(string, x3, y, false, image);
 			
 			graphics.drawString(_("Total"), x1, y += 30, false, image);
-			sprintf(string, "%d", game.getTotalBulletsFired());
+			snprintf(string, sizeof string, "%d", game.getTotalBulletsFired());
 			graphics.drawString(string, x2, y, false, image);
-			sprintf(string, "%d%%", game.getTotalAccuracy());
+			snprintf(string, sizeof string, "%d%%", game.getTotalAccuracy());
 			graphics.drawString(string, x3, y, false, image);
 
-			sprintf(string, "%s - %s", _("Most Used Weapon"), _(weapon[game.getMostUsedWeapon()].name));
+			snprintf(string, sizeof string, "%s - %s", _("Most Used Weapon"), _(weapon[game.getMostUsedWeapon()].name));
 			graphics.drawString(string, 200, y += 50, true, image);
 
 			break;
@@ -244,11 +244,11 @@ void createObjectivesPanel(const char *levelName)
 	int x2 = 260;
 	int y = 15;
 	
-	sprintf(levelMIAKey, "%s MIAs", levelName);
+	snprintf(levelMIAKey, sizeof levelMIAKey, "%s MIAs", levelName);
 
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 
-	sprintf(string, _("Information for %s"), _(levelName));
+	snprintf(string, sizeof string, _("Information for %s"), _(levelName));
 	graphics.drawString(string, 200, y, true, image);
 	y += 10;
 
@@ -266,7 +266,7 @@ void createObjectivesPanel(const char *levelName)
 				if (strcmp(data->value, "0 / 0"))
 				{
 					graphics.drawString(_("MIAs Rescued"), x1, y += 20, false, image);
-					sprintf(string, "%d / %d", data->current, data->target);
+					snprintf(string, sizeof string, "%d / %d", data->current, data->target);
 					(data->isComplete()) ? graphics.setFontColor(0x00, 0xff, 0x00, 0x00, 0x00, 0x00) : graphics.setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
 					graphics.drawString(string, x2, y, false, image);
 				}
@@ -279,7 +279,7 @@ void createObjectivesPanel(const char *levelName)
 				}
 				else
 				{
-					strcpy(string, _(data->value));
+					strncpy(string, _(data->value), sizeof string);
 					
 					if (strlen(string) >= 25)
 					{
@@ -301,11 +301,11 @@ void createObjectivesPanel(const char *levelName)
 				
 				if (data->target == 1)
 				{
-					sprintf(string, "%s", (data->isComplete()) ? _("Completed") : _("Incomplete"));
+					snprintf(string, sizeof string, "%s", (data->isComplete()) ? _("Completed") : _("Incomplete"));
 				}
 				else
 				{
-					sprintf(string, "%d / %d", data->current, data->target);
+					snprintf(string, sizeof string, "%d / %d", data->current, data->target);
 				}
 				
 				(data->isComplete()) ? graphics.setFontColor(0x00, 0xff, 0x00, 0x00, 0x00, 0x00) : graphics.setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
@@ -360,22 +360,22 @@ void createMIAPanel(int start, int max)
 				continue;
 			}
 
-			sprintf(name, "%s", data->value);
+			snprintf(name, sizeof name, "%s", data->value);
 			strtok(name, "_");
 
-			sprintf(string, "%s", strtok(NULL, "_"));
+			snprintf(string, sizeof string, "%s", strtok(NULL, "_"));
 			graphics.drawString(string, x1, y += 20, false, image);
 
 			graphics.drawString(_(data->key), x2, y, false, image);
 
 			if (data->isComplete())
 			{
-				sprintf(string, "%s", _("Found"));
+				snprintf(string, sizeof string, "%s", _("Found"));
 				graphics.setFontColor(0x00, 0xff, 0x00, 0x00, 0x00, 0x00);
 			}
 			else
 			{
-				sprintf(string, "%s", _("Missing"));
+				snprintf(string, sizeof string, "%s", _("Missing"));
 				graphics.setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
 			}
 
@@ -455,7 +455,7 @@ int doHub()
 	Sprite *cursor = graphics.addSprite("Cursor");
 	for (int i = 0 ; i < 6 ; i++)
 	{
-		sprintf(string, "gfx/main/cursor%d.png", i + 1);
+		snprintf(string, sizeof string, "gfx/main/cursor%d.png", i + 1);
 		cursor->setFrame(i, graphics.loadImage(string), 10);
 	}
 
@@ -464,7 +464,7 @@ int doHub()
 	
 	for (int i = 0 ; i < 5 ; i++)
 	{
-		sprintf(string, "gfx/sprites/miaSignal%d.png", i + 1);
+		snprintf(string, sizeof string, "gfx/sprites/miaSignal%d.png", i + 1);
 		
 		newTarget->setFrame(i, graphics.loadImage(string, -60, 0, 0), 15);
 		visitedTarget->setFrame(i, graphics.loadImage(string, 0, 0, 0), 15);
@@ -473,7 +473,7 @@ int doHub()
 	Sprite *hubIcons = graphics.addSprite("HubIcons");
 	for (int i = 0 ; i < 6 ; i++)
 	{
-		sprintf(string, "gfx/main/hubIcon%d.png", i + 1);
+		snprintf(string, sizeof string, "gfx/main/hubIcon%d.png", i + 1);
 		hubIcons->setFrame(i, graphics.loadImage(string), 60);
 	}
 
@@ -545,8 +545,8 @@ int doHub()
 
 	int rtn = -1;
 	
-	strcpy(level, "@none@");
-	strcpy(game.stageName, "@none@");
+	strncpy(level, "@none@", sizeof level);
+	strncpy(game.stageName, "@none@", sizeof game.stageName);
 
 	bool showData = false;
 	bool showStats = false;
@@ -575,7 +575,7 @@ int doHub()
 	if ((numberOfHubs == 0) && (gameData.completedWorld))
 	{
 		game.setMapName("data/spaceStation");
-		strcpy(game.stageName, "Space Station");
+		strncpy(game.stageName, "Space Station", sizeof game.stageName);
 		createObjectivesPanel("Space Station");
 		showData = true;
 		showStats = showMIAs = false;
@@ -608,15 +608,15 @@ int doHub()
 		if (validStage)
 		{
 			graphics.drawRect(10, 400, 620, 20, graphics.black, graphics.white, graphics.screen);
-			sprintf(string, "%s", _("Selected Destination"));
-			sprintf(string, "%s : %s", string, _(game.stageName));
+			snprintf(string, sizeof string, "%s", _("Selected Destination"));
+			snprintf(string, sizeof string, "%s : %s", string, _(game.stageName));
 			graphics.drawString(string, 320, 409, true, graphics.screen);
 		}
 		
 		graphics.drawRect(10, 430, 620, 40, graphics.black, graphics.white, graphics.screen);
 
 		#if !USEPAK
-		sprintf(pos, "%.3d:%.3d", engine.getMouseX(), engine.getMouseY());
+		snprintf(pos, sizeof pos, "%.3d:%.3d", engine.getMouseX(), engine.getMouseY());
 		graphics.drawString(pos, 320, 15, true, graphics.screen);
 		#endif
 

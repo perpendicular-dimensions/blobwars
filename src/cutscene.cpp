@@ -51,7 +51,7 @@ void createSceneList()
 			line = strtok(NULL, "\n");
 			if (strcmp(line, "@none@") != 0)
 			{
-				strcpy(scene->sprite, line);
+				strncpy(scene->sprite, line, sizeof scene->sprite);
 				debug(("Loading cutscene image %s\n", scene->sprite));
 				graphics.quickSprite(scene->sprite, graphics.loadImage(scene->sprite));
 			}
@@ -219,7 +219,7 @@ void checkStartCutscene()
 	audio.loadMusic("music/daisyChain2.mod");
 	
 	char sceneName[1024];
-	sprintf(sceneName, "%s Start", game.stageName);
+	snprintf(sceneName, sizeof sceneName, "%s Start", game.stageName);
 	
 	if (setupScene(sceneName))
 	{
@@ -248,7 +248,7 @@ void checkEndCutscene()
 	}
 	
 	char sceneName[1024];
-	sprintf(sceneName, "%s End", game.stageName);
+	snprintf(sceneName, sizeof sceneName, "%s End", game.stageName);
 	
 	debug(("%s\n", sceneName));
 	

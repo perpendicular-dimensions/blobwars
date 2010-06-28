@@ -29,8 +29,8 @@ Pak::Pak()
 	listPos = 0;
 	currentFile = NULL;
 
-	strcpy(pakFilename, "");
-	strcpy(filename, "");
+	pakFilename[0] = 0;
+	filename[0] = 0;
 }
 
 Pak::~Pak()
@@ -61,7 +61,7 @@ void Pak::showPakErrorAndExit()
 void Pak::setPakFile(const char *pakFilename)
 {
 	#if USEPAK
-	strcpy(this->pakFilename, pakFilename);
+	strncpy(this->pakFilename, pakFilename, sizeof this->pakFilename);
 	
 	debug(("Pak : Filename set to %s\n", pakFilename));
 

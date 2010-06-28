@@ -111,20 +111,20 @@ void showTitleWidgets()
 void setupSaveWidgets()
 {
 	char widgetName[10];
-	strcpy(widgetName, "");
+	widgetName[0] = 0;
 	
 	for (int i = 0 ; i < 5 ; i++)
 	{
-		sprintf(widgetName, "save%d", i + 1);
-		strcpy(engine.getWidgetByName(widgetName)->label, engine.saveSlot[i]);
+		snprintf(widgetName, sizeof widgetName, "save%d", i + 1);
+		strncpy(engine.getWidgetByName(widgetName)->label, engine.saveSlot[i], sizeof engine.getWidgetByName(widgetName)->label);
 		
 		if ((strstr(engine.saveSlot[i], _("Empty"))) || (strstr(engine.saveSlot[i], _("Corrupt"))))
 		{
 			engine.enableWidget(widgetName, false);
 		}
 		
-		sprintf(widgetName, "slot%d", i + 1);
-		strcpy(engine.getWidgetByName(widgetName)->label, engine.saveSlot[i]);
+		snprintf(widgetName, sizeof widgetName, "slot%d", i + 1);
+		strncpy(engine.getWidgetByName(widgetName)->label, engine.saveSlot[i], sizeof engine.getWidgetByName(widgetName)->label);
 	}
 }
 
@@ -143,7 +143,7 @@ void loadTitleWidgets()
 	setupSaveWidgets();
 	
 	Widget *widget = engine.getWidgetByName("labelManual");
-	strcpy(widget->label, GAMEPLAYMANUAL);
+	strncpy(widget->label, GAMEPLAYMANUAL, sizeof widget->label);
 
 	showTitleWidgets();
 }
@@ -192,7 +192,7 @@ int title()
 	char v[50];
 	#define STRINGIFY_VALUE(x) STRINGIFY(x)
 	#define STRINGIFY(x) #x
-	sprintf(v, _("Version %s"), STRINGIFY_VALUE(VERSION));
+	snprintf(v, sizeof v, _("Version %s"), STRINGIFY_VALUE(VERSION));
 	SDL_Surface *version = graphics.quickSprite("Version", graphics.getString(v, true));
 
 	SDL_SetAlpha(title, SDL_SRCALPHA|SDL_RLEACCEL, 0);

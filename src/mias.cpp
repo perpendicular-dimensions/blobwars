@@ -22,20 +22,20 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 void initMIAPhrases()
 {
-	strcpy(mia_scared[0], "help me...");
-	strcpy(mia_scared[1], "i don't wanna die...");
-	strcpy(mia_scared[2], "please... someone help...");
-	strcpy(mia_scared[3], "i... i'm scared...");
-	strcpy(mia_scared[4], "i wanna go home...");
-	strcpy(mia_scared[5], "what was that?!");
-	strcpy(mia_scared[6], "i don't like it here...");
+	strncpy(mia_scared[0], "help me...", sizeof mia_scared[0]);
+	strncpy(mia_scared[1], "i don't wanna die...", sizeof mia_scared[1]);
+	strncpy(mia_scared[2], "please... someone help...", sizeof mia_scared[2]);
+	strncpy(mia_scared[3], "i... i'm scared...", sizeof mia_scared[3]);
+	strncpy(mia_scared[4], "i wanna go home...", sizeof mia_scared[4]);
+	strncpy(mia_scared[5], "what was that?!", sizeof mia_scared[5]);
+	strncpy(mia_scared[6], "i don't like it here...", sizeof mia_scared[6]);
 }
 
 void addMIA(const char *name, int x, int y, int type)
 {
 	Entity *mia = new Entity();
 
-	strcpy(mia->name, name);
+	strncpy(mia->name, name, sizeof mia->name);
 	mia->id = type;
 	mia->baseThink = 60;
 	mia->health = 180;
@@ -140,17 +140,17 @@ void doMIAs()
 
 					if ((map.foundMIAs == (map.requiredMIAs / 2)) || (game.skill == 0))
 					{
-						sprintf(message, _("Rescued %s - Checkpoint Reached!"), mia->name);
+						snprintf(message, sizeof message, _("Rescued %s - Checkpoint Reached!"), mia->name);
 						game.setObjectiveCheckPoint();
 					}
 					else
 					{
-						sprintf(message, _("Rescued %s!"), mia->name);
+						snprintf(message, sizeof message, _("Rescued %s!"), mia->name);
 					}
 
 					if (map.foundMIAs == map.requiredMIAs)
 					{
-						sprintf(message, _("Rescue %d MIAs - Objective Complete - Checkpoint Reached!"), map.requiredMIAs);
+						snprintf(message, sizeof message, _("Rescue %d MIAs - Objective Complete - Checkpoint Reached!"), map.requiredMIAs);
 						game.setObjectiveCheckPoint();
 					}
 					

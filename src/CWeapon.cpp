@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 Weapon::Weapon()
 {
-	strcpy(name, "");
+	name[0] = 0;
 	id = 0;
 	damage = 0;
 	reload = 0;
@@ -34,7 +34,7 @@ Weapon::Weapon()
 
 void Weapon::setName(const char *name)
 {
-	strcpy(this->name, name);
+	strncpy(this->name, name, sizeof this->name);
 }
 
 int Weapon::getSpeed(int face)

@@ -138,7 +138,7 @@ void doStatusBar()
 			if (engine.messageTime == -1)
 			{
 				engine.messagePriority = -1;
-				strcpy(engine.message, "");
+				engine.message[0] = 0;
 			}
 	
 			graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
@@ -161,12 +161,12 @@ void doStatusBar()
 		}
 	}
 
-	sprintf(string, "%s %s", _("Weapon:"), _(player.currentWeapon->name));
+	snprintf(string, sizeof string, "%s %s", _("Weapon:"), _(player.currentWeapon->name));
 	graphics.drawString(string, 630, 5, TXT_RIGHT, graphics.screen);
 	
 	if (game.skill == 3)
 	{
-		sprintf(string, _("Time Remaining: %.2d:%.2d"), map.remainingMinutes, map.remainingSeconds);
+		snprintf(string, sizeof string, _("Time Remaining: %.2d:%.2d"), map.remainingMinutes, map.remainingSeconds);
 		graphics.blit(graphics.infoBar, 0, 25, graphics.screen, false);
 		
 		if ((map.remainingMinutes > 0) || (map.remainingSeconds > 0))
@@ -209,31 +209,31 @@ void doPauseInfo()
 	graphics.fade(130);
 
 	char string[1024];
-	strcpy(string, "");
+	string[0] = 0;
 	
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 
 	//#if !USEPAK
-	sprintf(string, _("Position = %d:%d"), (int)player.x, (int)player.y);
+	snprintf(string, sizeof string, _("Position = %d:%d"), (int)player.x, (int)player.y);
 	graphics.drawString(string, 5, 25, false, graphics.screen);
 	//#endif
 
 	graphics.drawString(_("*** PAUSED ***"), 320, y, TXT_CENTERED, graphics.screen);
 
 	graphics.drawString(_("MIAs in Area"), col1, y += 30, TXT_RIGHT, graphics.screen);
-	sprintf(string, "%d", map.totalMIAs - map.foundMIAs);
+	snprintf(string, sizeof string, "%d", map.totalMIAs - map.foundMIAs);
 	graphics.drawString(string, col2, y, TXT_LEFT, graphics.screen);
 
 	graphics.drawString(_("Enemies Defeated"), col1, y += 20, TXT_RIGHT, graphics.screen);
-	sprintf(string, "%d", game.currentMissionEnemiesDefeated);
+	snprintf(string, sizeof string, "%d", game.currentMissionEnemiesDefeated);
 	graphics.drawString(string, col2, y, TXT_LEFT, graphics.screen);
 
 	graphics.drawString(_("Items Collected"), col1, y += 20, TXT_RIGHT, graphics.screen);
-	sprintf(string, "%d / %d", map.foundItems, map.totalItems);
+	snprintf(string, sizeof string, "%d / %d", map.foundItems, map.totalItems);
 	graphics.drawString(string, col2, y, TXT_LEFT, graphics.screen);
 
 	graphics.drawString(_("Best Combo"), col1, y += 20, TXT_RIGHT, graphics.screen);
-	sprintf(string, _("%d Hits"), game.maxComboHits);
+	snprintf(string, sizeof string, _("%d Hits"), game.maxComboHits);
 	graphics.drawString(string, col2, y, TXT_LEFT, graphics.screen);
 
 	graphics.drawString(_("++ Inventory ++"), 320, y += 40, TXT_CENTERED, graphics.screen);
@@ -248,13 +248,13 @@ void doPauseInfo()
 	if (map.totalMIAs > 0)
 	{
 		graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
-		sprintf(message, _("Rescue %d MIAs"), map.requiredMIAs);
+		snprintf(message, sizeof message, _("Rescue %d MIAs"), map.requiredMIAs);
 		graphics.drawString(message, col1, y, TXT_RIGHT, graphics.screen);
 
 		if (map.foundMIAs < map.requiredMIAs)
 		{
 			graphics.setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
-			sprintf(message, "%d / %d", map.foundMIAs, map.requiredMIAs);
+			snprintf(message, sizeof message, "%d / %d", map.foundMIAs, map.requiredMIAs);
 			graphics.drawString(message, col2, y, TXT_LEFT, graphics.screen);
 		}
 		else
@@ -296,7 +296,7 @@ void doPauseInfo()
 			}
 			else
 			{
-				sprintf(message, "%d / %d", objective->currentValue, objective->targetValue);
+				snprintf(message, sizeof message, "%d / %d", objective->currentValue, objective->targetValue);
     			graphics.drawString(message, col2, y, TXT_LEFT, graphics.screen);
 			}
 
@@ -317,6 +317,6 @@ void doPauseInfo()
 
 	y += 10;
 
-	sprintf(string, "%s - %.2d:%.2d:%.2d", _("Mission Time"), game.currentMissionHours, game.currentMissionMinutes, game.currentMissionSeconds);
+	snprintf(string, sizeof string, "%s - %.2d:%.2d:%.2d", _("Mission Time"), game.currentMissionHours, game.currentMissionMinutes, game.currentMissionSeconds);
 	graphics.drawString(string, 320, 430, TXT_CENTERED, graphics.screen);
 }

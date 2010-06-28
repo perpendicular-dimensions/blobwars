@@ -103,16 +103,16 @@ void setupUserHomeDirectory()
 	debug(("User Home = %s\n", userHome));
 	
 	char dir[PATH_MAX];
-	strcpy(dir, "");
+	dir[0] = 0;
 
-	sprintf(dir, "%s/.parallelrealities", userHome);
+	snprintf(dir, sizeof dir, "%s/.parallelrealities", userHome);
 	if ((mkdir(dir, S_IRWXU|S_IRWXG|S_IROTH|S_IXOTH) != 0) && (errno != EEXIST))
 	{
 		printf("Couldn't create required directory '%s'", dir);
 		exit(1);
 	}
 
-	sprintf(dir, "%s/.parallelrealities/blobwars", userHome);
+	snprintf(dir, sizeof dir, "%s/.parallelrealities/blobwars", userHome);
 	if ((mkdir(dir, S_IRWXU|S_IRWXG|S_IROTH|S_IXOTH) != 0) && (errno != EEXIST))
 	{
 		printf("Couldn't create required directory '%s'", dir);
@@ -120,7 +120,7 @@ void setupUserHomeDirectory()
 	}
 
 	char gameSavePath[PATH_MAX];
-	sprintf(gameSavePath, "%s/.parallelrealities/blobwars/", userHome);
+	snprintf(gameSavePath, sizeof gameSavePath, "%s/.parallelrealities/blobwars/", userHome);
 	engine.setUserHome(gameSavePath);
 }
 #endif
@@ -133,7 +133,7 @@ bool loadConfig()
 
 	char configPath[PATH_MAX];
 
-	sprintf(configPath, "%sconfig", engine.userHomeDirectory);
+	snprintf(configPath, sizeof configPath, "%sconfig", engine.userHomeDirectory);
 
 	debug(("Loading Config from %s\n", configPath));
 
@@ -177,7 +177,7 @@ void saveConfig()
 {
 	char configPath[PATH_MAX];
 
-	sprintf(configPath, "%sconfig", engine.userHomeDirectory);
+	snprintf(configPath, sizeof configPath, "%sconfig", engine.userHomeDirectory);
 
 	FILE *fp = fopen(configPath, "wb");
 
@@ -203,14 +203,14 @@ int initMedalService(void *data)
 	SDL_mutexP(medalServer.lock);
 	
 	char connectMessage[1024];
-	sprintf(connectMessage, "Contacting Medal Server - %s:%d", MEDAL_SERVER_HOST, MEDAL_SERVER_PORT);
+	snprintf(connectMessage, sizeof connectMessage, "Contacting Medal Server - %s:%d", MEDAL_SERVER_HOST, MEDAL_SERVER_PORT);
 	
 	graphics.showMedalMessage(-1, connectMessage);
 	
 	char keyPath[PATH_MAX];
 	char privateKey[20];
 
-	sprintf(keyPath, "%smedalKey", engine.userHomeDirectory);
+	snprintf(keyPath, sizeof keyPath, "%smedalKey", engine.userHomeDirectory);
 	
 	debug(("Loading private key from %s\n", keyPath));
 	
@@ -337,7 +337,7 @@ void initSystem()
 	#if USEPAK
 			
 		char tempPath[PATH_MAX];
-		sprintf(tempPath, "%sfont.ttf", engine.userHomeDirectory);	
+		snprintf(tempPath, sizeof tempPath, "%sfont.ttf", engine.userHomeDirectory);	
 		remove(tempPath);
 		
 		SDL_Delay(1000); // wait one second, just to be sure!
@@ -432,7 +432,7 @@ void cleanup()
 	audio.destroy();
 
 	debug(("Removing Music...\n"));
-	sprintf(tempPath, "%smusic.mod", engine.userHomeDirectory);
+	snprintf(tempPath, sizeof tempPath, "%smusic.mod", engine.userHomeDirectory);
 	remove(tempPath);
 
 	debug(("Freeing Game Info...\n"));
@@ -454,7 +454,7 @@ void cleanup()
 	}
 
 	debug(("Removing Font File...\n"));
-	sprintf(tempPath, "%sfont.ttf", engine.userHomeDirectory);
+	snprintf(tempPath, sizeof tempPath, "%sfont.ttf", engine.userHomeDirectory);
 	remove(tempPath);
 	
 	if (SDL_NumJoysticks() > 0)

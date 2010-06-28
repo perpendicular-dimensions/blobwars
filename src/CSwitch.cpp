@@ -22,10 +22,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 Switch::Switch()
 {
-	strcpy(this->name, "");
-	strcpy(this->linkName, "");
-	strcpy(this->requiredObjectName, "");
-	strcpy(this->activateMessage, "");
+	this->name[0] = 0;
+	this->linkName[0] = 0;
+	this->requiredObjectName[0] = 0;
+	this->activateMessage[0] = 0;
 
 	type = 0;
 	x = y = 0;
@@ -37,10 +37,10 @@ Switch::Switch()
 
 void Switch::set(const char *name, const char *linkName, const char *requiredObjectName, const char *activateMessage, int type, int x, int y, bool activated)
 {
-	strcpy(this->name, name);
-	strcpy(this->linkName, linkName);
-	strcpy(this->requiredObjectName, requiredObjectName);
-	strcpy(this->activateMessage, activateMessage);
+	strncpy(this->name, name, sizeof this->name);
+	strncpy(this->linkName, linkName, sizeof this->linkName);
+	strncpy(this->requiredObjectName, requiredObjectName, sizeof this->requiredObjectName);
+	strncpy(this->activateMessage, activateMessage, sizeof this->activateMessage);
 	this->type = type;
 	this->x = x;
 	this->y = y;

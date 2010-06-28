@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 Persistant::Persistant()
 {
-	strcpy(stageName, "");
+	stageName[0] = 0;
 	numberOfLines = 0;
 }
 
@@ -34,7 +34,7 @@ Persistant::~Persistant()
 
 void Persistant::setName(const char *name)
 {
-	strcpy(this->stageName, name);
+	strncpy(this->stageName, name, sizeof this->stageName);
 }
 
 void Persistant::clear()

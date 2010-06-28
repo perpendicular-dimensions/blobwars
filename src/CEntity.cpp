@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 Entity::Entity()
 {
-	strcpy(name, "");
+	name[0] = 0;
 	x = y = dx = dy = tx = ty = width = height = 0;
 	id = 0;
 	health = 0;
@@ -52,7 +52,7 @@ Entity::Entity()
 
 void Entity::setName(const char *name)
 {
-	strcpy(this->name, name);
+	strncpy(this->name, name, sizeof this->name);
 }
 
 void Entity::setSprites(Sprite *sprite1, Sprite *sprite2, Sprite *sprite3)

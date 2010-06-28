@@ -24,18 +24,18 @@ LineDef::LineDef()
 {
 	x = y = 0;
 	width = height = 0;
-	strcpy(name, "");
-	strcpy(linkName, "");
-	strcpy(activateMessage, "");
+	name[0] = 0;
+	linkName[0] = 0;
+	activateMessage[0] = 0;
 	activated = false;
 	next = NULL;
 }
 
 void LineDef::set(const char *name, const char *linkName, const char *activateMessage, int x, int y, int width, int height)
 {
-	strcpy(this->name, name);
-	strcpy(this->linkName, linkName);
-	strcpy(this->activateMessage, activateMessage);
+	strncpy(this->name, name, sizeof this->name);
+	strncpy(this->linkName, linkName, sizeof this->linkName);
+	strncpy(this->activateMessage, activateMessage, sizeof this->activateMessage);
 	this->x = x;
 	this->y = y;
 	this->width = width;

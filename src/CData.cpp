@@ -22,8 +22,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 Data::Data()
 {
-	strcpy(key, "");
-	strcpy(value, "");
+	key[0] = 0;
+	value[0] = 0;
 	current = 0;
 	target = 1;
 }
@@ -36,8 +36,8 @@ void Data::set(const char *key, const char *value, int current, int target)
 		return;
 	}
 
-	strcpy(this->key, key);
-	strcpy(this->value, value);
+	strncpy(this->key, key, sizeof this->key);
+	strncpy(this->value, value, sizeof this->value);
 	this->current = current;
 	this->target = target;
 }

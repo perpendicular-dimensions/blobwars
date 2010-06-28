@@ -65,15 +65,15 @@ void checkSwitchContact(Entity *ent)
 					
 					if (swt->type == SWT_PRESSURE)
 					{
-						strcpy(swt->requiredObjectName, "@none@");
+						strncpy(swt->requiredObjectName, "@none@", sizeof swt->requiredObjectName);
 					}
 					
 					checkObjectives(swt->name, true);
-					strcpy(swt->name, "Switch");
+					strncpy(swt->name, "Switch", sizeof swt->name);
 				}
 				else
 				{
-					sprintf(message, "%s required", swt->requiredObjectName);
+					snprintf(message, sizeof message, "%s required", swt->requiredObjectName);
 					engine.setInfoMessage(message, 1, INFO_HINT);
 				}
 			}

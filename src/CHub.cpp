@@ -22,8 +22,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 HubLevel::HubLevel()
 {
-	strcpy(stageName, "");
-	strcpy(filename, "");
+	stageName[0] = 0;
+	filename[0] = 0;
 	x = y = 0;
 
 	levelNameImage = NULL;
@@ -33,8 +33,8 @@ HubLevel::HubLevel()
 
 void HubLevel::set(const char *stageName, const char *filename, int x, int y)
 {
-	strcpy(this->stageName, stageName);
-	strcpy(this->filename, filename);
+	strncpy(this->stageName, stageName, sizeof this->stageName);
+	strncpy(this->filename, filename, sizeof this->filename);
 	this->x = x;
 	this->y = y;
 }

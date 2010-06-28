@@ -316,7 +316,7 @@ int gameover()
 	if (game.canContinue > 1)
 	{
 		Widget *widget = engine.getWidgetByName("gameOverNo");
-		sprintf(widget->label, "%s (%d)", widget->label, game.canContinue);
+		snprintf(widget->label, sizeof widget->label, "%s (%d)", widget->label, game.canContinue);
 	}
 
 	while (true)
@@ -408,13 +408,13 @@ void showMissionInformation()
 	if (map.totalMIAs > 0)
 	{
 		graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
-		sprintf(message, _("Rescue %d MIAs"), map.requiredMIAs);
+		snprintf(message, sizeof message, _("Rescue %d MIAs"), map.requiredMIAs);
 		graphics.drawString(message, col1, y, TXT_LEFT, panel);
 
 		if (map.foundMIAs < map.requiredMIAs)
 		{
 			graphics.setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
-			sprintf(message, "%d / %d", map.foundMIAs, map.requiredMIAs);
+			snprintf(message, sizeof message, "%d / %d", map.foundMIAs, map.requiredMIAs);
 			graphics.drawString(message, col2, y, TXT_RIGHT, panel);
 		}
 		else
@@ -458,7 +458,7 @@ void showMissionInformation()
 			}
 			else
 			{
-				sprintf(message, "%d / %d", objective->currentValue, objective->targetValue);
+				snprintf(message, sizeof message, "%d / %d", objective->currentValue, objective->targetValue);
 				graphics.drawString(message, col2, y, TXT_RIGHT, panel);
 			}
 		}
@@ -472,7 +472,7 @@ void showMissionInformation()
 	if (game.skill == 3)
 	{
 		graphics.setFontColor(0xff, 0xff, 0x00, 0x00, 0x00, 0x00);
-		sprintf(message, _("Time Limit - %d:%.2d Minutes"), map.remainingMinutes, map.remainingSeconds);
+		snprintf(message, sizeof message, _("Time Limit - %d:%.2d Minutes"), map.remainingMinutes, map.remainingSeconds);
 		graphics.drawString(message, 200, 260, TXT_CENTERED, panel);
 	}
 	
@@ -572,7 +572,7 @@ int doGame()
 	#if !USEPAK
 	Uint32 now;
 	char fps[10];
-	strcpy(fps, "fps");
+	strncpy(fps, "fps", sizeof fps);
 	#endif
 
 	engine.messageTime = -1;
@@ -845,7 +845,7 @@ int doGame()
 		if (SDL_GetTicks() > frameCounter + 500)
 		{
 			now = SDL_GetTicks();
-			sprintf(fps, "%2.2f fps", ((double)frames*1000)/(now - then));
+			snprintf(fps, sizeof fps, "%2.2f fps", ((double)frames*1000)/(now - then));
 			then = frameCounter = SDL_GetTicks();
 			frames = 0;
 		}

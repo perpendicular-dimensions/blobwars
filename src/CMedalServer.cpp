@@ -28,8 +28,8 @@ MedalServer::MedalServer()
 	connected = false;
 	gotRuby = false;
 	
-	strcpy(message, "");
-	strcpy(rubyMessage, "");
+	message[0] = 0;
+	rubyMessage[0] = 0;
 }
 
 MedalServer::~MedalServer()
@@ -50,7 +50,7 @@ bool MedalServer::connect(const char *privateKey)
 	
 	debug(("Connected %s to %s:%d\n", privateKey, MEDAL_SERVER_HOST, MEDAL_SERVER_PORT));
 	
-	strcpy(this->privateKey, privateKey);
+	strncpy(this->privateKey, privateKey, sizeof this->privateKey);
 	connected = true;
 	
 	return true;
@@ -70,7 +70,7 @@ int MedalServer::postMedal(const char *str)
 	char *store;
 	
 	char medal[128];
-	strcpy(medal, str);
+	strncpy(medal, str, sizeof medal);
 	
 	for (unsigned int i = 0 ; i < strlen(medal) ; i++)
 	{
@@ -93,7 +93,7 @@ int MedalServer::postMedal(const char *str)
 	char *in = new char[1024];
 	char out[1024];
 	
-	sprintf(out, "GET /addMedal/%s/MBS_%s HTTP/1.1\nHost: %s\nUser-Agent:BWMBS%.2f-%d\n\n", privateKey, medal, MEDAL_SERVER_HOST, VERSION, RELEASE);
+	snprintf(out, sizeof out, "GET /addMedal/%s/MBS_%s HTTP/1.1\nHost: %s\nUser-Agent:BWMBS%.2f-%d\n\n", privateKey, medal, MEDAL_SERVER_HOST, VERSION, RELEASE);
 	
 	//printf("%s\n", out);
 	
@@ -123,7 +123,7 @@ int MedalServer::postMedal(const char *str)
 			
 			if (response == 4)
 			{
-				strcpy(rubyMessage, message);
+				strncpy(rubyMessage, message, sizeof rubyMessage);
 				gotRuby = true;
 			}
 			else
