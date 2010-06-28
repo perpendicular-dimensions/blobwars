@@ -911,7 +911,8 @@ void Graphics::clearChatString()
 
 void Graphics::createChatString(const char *in)
 {
-	snprintf(chatString, sizeof chatString, "%s %s", chatString, in);
+	strncat(chatString, " ", sizeof chatString);
+	strncat(chatString, in, sizeof chatString);
 }
 
 void Graphics::drawChatString(SDL_Surface *surface, int y)

@@ -316,7 +316,9 @@ int gameover()
 	if (game.canContinue > 1)
 	{
 		Widget *widget = engine.getWidgetByName("gameOverNo");
-		snprintf(widget->label, sizeof widget->label, "%s (%d)", widget->label, game.canContinue);
+		char postfix[100];
+		snprintf(postfix, sizeof postfix, " (%d)", game.canContinue);
+		strncat(widget->label, postfix, sizeof widget->label);
 	}
 
 	while (true)

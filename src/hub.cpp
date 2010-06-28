@@ -66,8 +66,7 @@ void createStatsPanel(int page)
 				graphics.drawString(string, x2, y, false, image);
 			}
 
-			snprintf(string, sizeof string, "%s", _("Total Game Time"));
-			snprintf(string, sizeof string, "%s - %.2d:%.2d:%.2d", string, game.totalHours, game.totalMinutes, game.totalSeconds);
+			snprintf(string, sizeof string, "%s - %.2d:%.2d:%.2d", _("Total Game Time"), game.totalHours, game.totalMinutes, game.totalSeconds);
 			graphics.drawString(string, 200, y += 110, true, image);
 
 			break;
@@ -608,8 +607,7 @@ int doHub()
 		if (validStage)
 		{
 			graphics.drawRect(10, 400, 620, 20, graphics.black, graphics.white, graphics.screen);
-			snprintf(string, sizeof string, "%s", _("Selected Destination"));
-			snprintf(string, sizeof string, "%s : %s", string, _(game.stageName));
+			snprintf(string, sizeof string, "%s : %s", _("Selected Destination"), _(game.stageName));
 			graphics.drawString(string, 320, 409, true, graphics.screen);
 		}
 		
