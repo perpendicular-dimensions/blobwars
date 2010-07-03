@@ -302,7 +302,7 @@
 EMH STAGENAME "Forgotten Caves"
 EMH TILESET gfx/caves
 EMH BACKGROUND gfx/caves/background.jpg
-EMH MUSIC music/thugLive.mod
+EMH MUSIC music/cave
 EMH AMBIENCE sound/lava.wav
 
 EMH START 75 50

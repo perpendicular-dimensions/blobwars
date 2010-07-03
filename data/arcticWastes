@@ -302,7 +302,7 @@
 EMH STAGENAME "Arctic Wastes"
 EMH TILESET gfx/arctic
 EMH BACKGROUND gfx/arctic/wasteland.png
-EMH MUSIC music/cosmicMotion.xm
+EMH MUSIC music/arctic
 
 EMH AMBIENCE sound/blizzard.wav
 

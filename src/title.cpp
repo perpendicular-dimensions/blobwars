@@ -197,7 +197,7 @@ int title()
 
 	SDL_SetAlpha(title, SDL_SRCALPHA|SDL_RLEACCEL, 0);
 
-	audio.loadMusic("music/helmet-shake.mod");
+	audio.loadMusic("music/title");
 
 	graphics.loadBackground("gfx/main/CircuitBoard.jpg");
 	SDL_SetAlpha(graphics.background, SDL_SRCALPHA|SDL_RLEACCEL, 0);
@@ -512,7 +512,7 @@ void doCredits()
 	SDL_Surface *device = graphics.quickSprite("credit", graphics.loadImage("gfx/main/creditsDevice.png"));
 	float deviceY = y[numberOfCredits - 7] - 50;
 
-	audio.loadMusic("music/autumnsDawning.s3m");
+	audio.loadMusic("music/credits");
 	audio.playMusic();
 
 	engine.resetTimeDifference();

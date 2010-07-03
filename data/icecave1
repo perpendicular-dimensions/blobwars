@@ -302,7 +302,7 @@
 EMH STAGENAME "Ice Cave #1"
 EMH TILESET gfx/arctic
 EMH BACKGROUND gfx/arctic/icecave.png
-EMH MUSIC music/iceCave.s3m
+EMH MUSIC music/ice
 
 EMH SPRITE IceBlock 0 0 0 gfx/sprites/iceRock.png 60 @none@ 0
 EMH SPRITE AncientKey 0 0 0 gfx/sprites/ancientKey1.png 10 gfx/sprites/ancientKey2.png 10 gfx/sprites/ancientKey3.png 10 gfx/sprites/ancientKey4.png 10 gfx/sprites/ancientKey5.png 10 gfx/sprites/ancientKey6.png 10 @none@ 0

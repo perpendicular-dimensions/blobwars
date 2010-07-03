@@ -304,7 +304,7 @@ EMH STAGENAME "BioMech Communications"
 EMH TILESET gfx/mech
 EMH ALPHATILES 221 222 223 224 -1
 EMH BACKGROUND gfx/mech/bossBackground.png
-EMH MUSIC music/condomCorruption.mod
+EMH MUSIC music/biomech
 
 EMH START 64 224
 

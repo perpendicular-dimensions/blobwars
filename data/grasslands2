@@ -303,7 +303,7 @@ EMH STAGENAME "Grasslands #2"
 
 EMH TILESET gfx/grasslands
 EMH BACKGROUND gfx/grasslands/day.jpg
-EMH MUSIC music/commando.xm
+EMH MUSIC music/grasslands
 EMH ALPHATILES 244 245 246 -1
 
 EMH START 5820 4060

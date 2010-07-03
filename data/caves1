@@ -303,7 +303,7 @@ EMH STAGENAME "Inner Cave Network, Part 1"
 
 EMH TILESET gfx/caves
 EMH BACKGROUND gfx/caves/background.jpg
-EMH MUSIC music/thugLive.mod
+EMH MUSIC music/cave
 
 EMH AMBIENCE sound/lava.wav
 

@@ -202,10 +202,10 @@ bool Audio::loadGameOverMusic()
 	}
 
 	#if USEPAK
-		engine->unpack("music/friendDied.mod", PAK_MUSIC);
+		engine->unpack("music/gameover", PAK_MUSIC);
 		music = Mix_LoadMUS(tempPath);
 	#else
-		music = Mix_LoadMUS("music/friendDied.mod");
+		music = Mix_LoadMUS("music/gameover");
 	#endif
 
 	if (!music)

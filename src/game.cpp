@@ -870,7 +870,7 @@ int doGame()
 			if (strcmp(map.name, "Space Station"))
 			{
 				graphics.delay(1000);
-				audio.loadMusic("music/commando.xm");
+				audio.loadMusic("music/grasslands");
 				audio.playMusic();
 				graphics.fadeToBlack();
 				

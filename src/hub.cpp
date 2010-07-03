@@ -438,7 +438,7 @@ int doHub()
 	audio.free();
 
 	graphics.loadBackground("gfx/main/worldMap.jpg");
-	audio.loadMusic("music/forAFriend.mod");
+	audio.loadMusic("music/hub");
 	
 	// we might want this now, for medals
 	audio.loadSound(SND_ITEM, "sound/item.wav");

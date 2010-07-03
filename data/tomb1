@@ -305,7 +305,7 @@ EMH TILESET gfx/ancient
 
 EMH BACKGROUND gfx/ancient/background.jpg
 
-EMH MUSIC music/mustDie.s3m
+EMH MUSIC music/tomb
 
 EMH ALPHATILES 1 2 3 200 201 202 203 204 214 215 216 217 218 219 -1
 

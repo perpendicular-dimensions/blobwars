@@ -216,7 +216,7 @@ void checkStartCutscene()
 		return;
 	}
 	
-	audio.loadMusic("music/daisyChain2.mod");
+	audio.loadMusic("music/cutscene");
 	
 	char sceneName[1024];
 	snprintf(sceneName, sizeof sceneName, "%s Start", game.stageName);
@@ -240,11 +240,11 @@ void checkEndCutscene()
 	
 	if (strcmp(game.stageName, "Final Battle") != 0)
 	{
-		audio.loadMusic("music/daisyChain2.mod");
+		audio.loadMusic("music/cutscene");
 	}
 	else
 	{
-		audio.loadMusic("music/sweetDreams.xm");
+		audio.loadMusic("music/end");
 	}
 	
 	char sceneName[1024];
@@ -275,7 +275,7 @@ void easyGameFinished()
 	graphics.free();
 	audio.free();
 	
-	audio.loadMusic("music/friendDied.mod");
+	audio.loadMusic("music/gameover");
 	setupScene("Easy Game Finished");
 	showScene(true);
 	audio.fadeMusic();

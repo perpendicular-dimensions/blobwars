@@ -302,7 +302,7 @@
 EMH STAGENAME "Flooded Tunnel #3"
 EMH TILESET gfx/grasslands
 EMH BACKGROUND gfx/grasslands/stone.jpg
-EMH MUSIC music/viking.mod
+EMH MUSIC music/tunnel
 EMH AMBIENCE sound/floodedTunnel.wav
 EMH ALPHATILES 1 2 3 200 201 202 203 204 244 245 246 -1
 

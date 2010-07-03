@@ -305,7 +305,7 @@ EMH TILESET gfx/mech
 
 EMH BACKGROUND gfx/mech/space.png
 
-EMH MUSIC music/circuitOverlode.xm
+EMH MUSIC music/final
 
 EMH ALPHATILES -1
 

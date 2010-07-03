@@ -303,7 +303,7 @@ EMH STAGENAME "Flooded Tunnel"
 
 EMH TILESET gfx/grasslands
 EMH BACKGROUND gfx/grasslands/stone.jpg
-EMH MUSIC music/viking.mod
+EMH MUSIC music/tunnel
 EMH AMBIENCE sound/floodedTunnel.wav
 
 EMH SPRITE PowerGen 0 0 0 gfx/sprites/powerGen1.png 10 gfx/sprites/powerGen2.png 10 gfx/sprites/powerGen3.png 10 gfx/sprites/powerGen2.png 10 gfx/sprites/powerGen1.png 10 @none@ 0

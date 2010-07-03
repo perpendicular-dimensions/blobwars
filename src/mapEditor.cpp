@@ -320,7 +320,7 @@ void newMap(const char *name)
 
 		fprintf(fp, "EMH TILESET gfx/grasslands\n");
 		fprintf(fp, "EMH BACKGROUND gfx/grasslands/stone.jpg\n");
-		fprintf(fp, "EMH MUSIC music/viking.mod\n");
+		fprintf(fp, "EMH MUSIC music/tunnel\n");
 
 		fprintf(fp, "EMH ALPHATILES 1 2 3 200 201 202 203 204 244 245 246 -1\n");
 

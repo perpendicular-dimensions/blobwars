@@ -302,7 +302,7 @@
 EMH STAGENAME "Grasslands #3"
 EMH TILESET gfx/grasslands
 EMH BACKGROUND gfx/grasslands/day.jpg
-EMH MUSIC music/commando.xm
+EMH MUSIC music/grasslands
 
 EMH SPRITE CherryPlant 0 0 0 gfx/sprites/cherryPlant.png 60 @none@ 0
 MH SPRITE LRTS 0 0 0 gfx/sprites/LRTS1.png 15 gfx/sprites/LRTS2.png 15 gfx/sprites/LRTS3.png 15 gfx/sprites/LRTS4.png 15 gfx/sprites/LRTS5.png 15 gfx/sprites/LRTS4.png 15 gfx/sprites/LRTS3.png 15 gfx/sprites/LRTS2.png 15 @none@ 0

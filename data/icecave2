@@ -302,7 +302,7 @@
 EMH STAGENAME "Ice Cave #2"
 EMH TILESET gfx/arctic
 EMH BACKGROUND gfx/arctic/icecave.png
-EMH MUSIC music/iceCave.s3m
+EMH MUSIC music/ice
 
 EMH CLIPPING 1568 9152 7808 -1
 

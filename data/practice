@@ -304,7 +304,7 @@ EMH STAGENAME "Training Mission"
 EMH TILESET gfx/grasslands
 EMH ALPHATILES 244 245 246 -1
 EMH BACKGROUND gfx/grasslands/day.jpg
-EMH MUSIC music/commando.xm
+EMH MUSIC music/grasslands
 
 EMH CLIPPING 1770 8928 8000 -1
 
