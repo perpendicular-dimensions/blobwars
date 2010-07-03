@@ -25,18 +25,18 @@ void addWindParticles()
 	int c = graphics.white;
 	float x, y, dx, dy;
 	
-	if (player.x < 320)
-	{
-		x = Math::rrand(-100, 700);
-	}
-	else
-	{
-		x = player.x + Math::rrand(-450, 450);
-	}
-	
+
 	for (int i = 0 ; i < 50 ; i++)
 	{
-		
+		if (player.x < 320)
+		{
+			x = Math::rrand(-100, 700);
+		}
+		else
+		{
+			x = player.x + Math::rrand(-450, 450);
+		}
+			
 		c = Math::prand() % 4;
 		switch (c)
 		{
