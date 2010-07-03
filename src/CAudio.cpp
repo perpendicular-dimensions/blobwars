@@ -163,8 +163,6 @@ bool Audio::loadMusic(const char *filename)
 		}
 	}
 
-	fprintf(stderr, "%s\n%s\n\"%s\"\n%d\n", songartist, songalbum, songtitle, songlicense);
-
 	if(fp)
 		fclose(fp);
 	
