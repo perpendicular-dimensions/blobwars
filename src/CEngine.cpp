@@ -426,9 +426,10 @@ bool Engine::loadData(const char *filename)
 
 	rewind(fp);
 
-	dataBuffer = new unsigned char[fSize];
+	dataBuffer = new unsigned char[fSize + 1];
 
 	fread(dataBuffer, 1, fSize, fp);
+	dataBuffer[fSize] = 0;
 
 	fclose(fp);
 

@@ -398,11 +398,12 @@ void doBosses()
 				{
 					debug(("Deleting unreferenced Boss...\n"));
 					
+					if(map.mainBossPart == map.boss[i])
+						map.mainBossPart = NULL;
 					delete map.boss[i];
 					map.boss[i] = NULL;
-				}
-				
-				self->referenced = false;
+				} else
+					self->referenced = false;
 			}
 		}
 		else if (self->actionFinished())

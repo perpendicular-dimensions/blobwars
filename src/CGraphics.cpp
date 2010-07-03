@@ -963,9 +963,9 @@ void Graphics::drawChatString(SDL_Surface *surface, int y)
 
 		blit(wordSurface, x, y, surface, false);
 
-		SDL_FreeSurface(wordSurface);
-
 		x += wordSurface->w;
+
+		SDL_FreeSurface(wordSurface);
 
 		word = strtok(NULL, " ");
 	}

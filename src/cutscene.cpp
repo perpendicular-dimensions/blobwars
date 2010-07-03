@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 void createSceneList()
 {
-	char sceneLine[1024];
+	char sceneLine[1024] = "";
 	char *line = NULL;
 	int waitTime = 0;
 	Cutscene *scene = NULL;

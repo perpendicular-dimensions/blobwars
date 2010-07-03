@@ -56,7 +56,7 @@ int medalWorker(void *data)
 	
 	SDL_mutexV(medalServer.lock);
 	
-	delete tname;
+	delete[] tname;
 	
 	return type;
 }
