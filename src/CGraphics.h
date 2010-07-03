@@ -56,6 +56,7 @@ class Graphics {
 		SDL_Surface *tile[MAX_TILES];
 		
 		SDL_Surface *medal[4];
+		SDL_Surface *license[2];
 		
 		SDL_Surface *infoBar;
 
@@ -73,7 +74,7 @@ class Graphics {
 	void delay(int time);
 	void RGBtoHSV(float r, float g, float b, float *h, float *s, float *v);
 	void HSVtoRGB(float *r, float *g, float *b, float h, float s, float v);
-	SDL_Surface *loadImage(const char *filename);
+	SDL_Surface *loadImage(const char *filename, bool srcalpha = false);
 	SDL_Surface *loadImage(const char *filename, int hue, int sat, int value);
 	SDL_Surface *quickSprite(const char *name, SDL_Surface *image);
 	void fade(int amount);

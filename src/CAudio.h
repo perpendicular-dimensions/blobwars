@@ -35,6 +35,10 @@ class Audio {
 		Mix_Music *music;
 
 	public:
+		char songtitle[128];
+		char songalbum[128];
+		char songartist[128];
+		int songlicense;
 
 		int output;
 		bool useSound, useMusic;

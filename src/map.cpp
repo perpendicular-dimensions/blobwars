@@ -400,6 +400,8 @@ void showMap(int centerX, int centerY)
 	engine.flushInput();
 	engine.clearInput();
 
+	doMusicInfo(-1);
+
 	while (true)
 	{
 		engine.getInput();

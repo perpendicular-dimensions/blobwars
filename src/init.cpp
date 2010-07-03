@@ -368,6 +368,9 @@ void initSystem()
 	graphics.medal[2] = graphics.loadImage("gfx/main/shield.png");
 	graphics.medal[3] = graphics.loadImage("gfx/main/ruby.png");
 
+	graphics.license[0] = graphics.loadImage("gfx/main/cc-by.png", true);
+	graphics.license[1] = graphics.loadImage("gfx/main/cc-by-sa.png", true);
+
 	SDL_Surface *device = graphics.loadImage("gfx/main/alienDevice.png");
 
 #ifndef SDL_FRAMEWORK

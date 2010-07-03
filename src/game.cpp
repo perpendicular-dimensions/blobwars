@@ -570,6 +570,7 @@ int doGame()
 	graphics.delay(1000);
 
 	Uint32 then, frames, frameLimit, millis, frameCounter;
+	Uint32 start, cur;
 
 	#if DEBUG
 	Uint32 now;
@@ -617,7 +618,7 @@ int doGame()
 
 	frameLimit = SDL_GetTicks() + 16;
 	frames = millis = 0;
-	then = SDL_GetTicks();
+	start = then = SDL_GetTicks();
 	frameCounter = SDL_GetTicks();
 
 	if ((strcmp(map.name, "Space Station") == 0) && (!game.continueFromCheckPoint))
@@ -642,6 +643,7 @@ int doGame()
 	{
 		++frames;
 		++millis;
+		cur = SDL_GetTicks();
 
 		if (game.missionOverReason != MIS_PLAYEROUT)
 		{
@@ -683,6 +685,7 @@ int doGame()
 
 		drawMapTopLayer();
 		doStatusBar();
+		doMusicInfo(cur - start);
 
 		if ((engine.keyState[SDLK_ESCAPE]) && (game.missionOver == 0))
 		{

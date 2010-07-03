@@ -35,6 +35,10 @@ Audio::Audio()
 	quickSound = NULL;
 	
 	levelMusicName[0] = 0;
+	songtitle[0] = 0;
+	songalbum[0] = 0;
+	songartist[0] = 0;
+	songlicense = -1;
 }
 
 void Audio::setSoundVolume(int soundVolume)
@@ -123,12 +127,47 @@ bool Audio::loadMusic(const char *filename)
 		music = Mix_LoadMUS(filename);
 	#endif
 
+	songtitle[0] = 0;
+	songalbum[0] = 0;
+	songartist[0] = 0;
+	songlicense = -1;
+
 	if (!music)
 	{
 		debug(("WARNING - Failed to load %s\n", filename));
 		return false;
 	}
-		
+
+	snprintf(tempPath, sizeof tempPath, "%s.tags", filename);
+	FILE *fp = fopen(tempPath, "r");
+	char line[1024];
+	
+	while(fp && fgets(line, sizeof line, fp))
+	{
+		int l = strlen(line);
+		if(line[l - 1] == '\n')
+			line[l - 1] = 0;
+
+		if(!strncasecmp(line, "title=", 6))
+			 strncpy(songtitle, line + 6, sizeof songtitle);
+		else if(!strncasecmp(line, "album=", 6))
+			 strncpy(songalbum, line + 6, sizeof songalbum);
+		else if(!strncasecmp(line, "artist=", 7))
+			 strncpy(songartist, line + 7, sizeof songartist);
+		else if(!strncasecmp(line, "license=", 8))
+		{
+			if(!strncasecmp(line + 8, "CC-BY ", 6))
+				songlicense = 0;
+			else if(!strncasecmp(line + 8, "CC-BY-SA ", 9))
+				songlicense = 1;
+		}
+	}
+
+	fprintf(stderr, "%s\n%s\n\"%s\"\n%d\n", songartist, songalbum, songtitle, songlicense);
+
+	if(fp)
+		fclose(fp);
+	
 	strncpy(levelMusicName, filename, sizeof levelMusicName);
 
 	return true;

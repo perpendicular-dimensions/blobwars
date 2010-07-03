@@ -320,3 +320,49 @@ void doPauseInfo()
 	snprintf(string, sizeof string, "%s - %.2d:%.2d:%.2d", _("Mission Time"), game.currentMissionHours, game.currentMissionMinutes, game.currentMissionSeconds);
 	graphics.drawString(string, 320, 430, TXT_CENTERED, graphics.screen);
 }
+
+void doMusicInfo(unsigned int ticks)
+{
+	if(!audio.songtitle[0])
+		return;
+
+	if(ticks != (unsigned int)-1) {
+		if(ticks > 12000 || ticks < 5000)
+			return;
+
+		unsigned int r = rand() & 0x3ff;
+
+		if(ticks - 5000 < r || 12000 - ticks < r)
+			return;
+	}
+
+	graphics.setFontSize(0);
+	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
+
+	const int x = 620;
+	int y = 420;
+
+	graphics.drawString(audio.songtitle, x, y, TXT_RIGHT, graphics.screen);
+	y -= 16;
+
+	if(audio.songalbum[0])
+	{
+		graphics.setFontColor(0x80, 0xc0, 0xff, 0x00, 0x00, 0x00);
+		graphics.drawString(audio.songalbum, x, y, TXT_RIGHT, graphics.screen);
+		y -= 16;
+	}
+
+	if(audio.songartist[0])
+	{
+		graphics.setFontColor(0xff, 0xc0, 0x80, 0x00, 0x00, 0x00);
+		graphics.drawString(audio.songartist, x, y, TXT_RIGHT, graphics.screen);
+		y -= 16;
+	}
+
+	if(audio.songlicense >= 0)
+	{
+		SDL_Surface *icon = graphics.license[audio.songlicense];
+		graphics.blit(icon, x - icon->w, y - icon->h, graphics.screen, false);
+	}
+}
+

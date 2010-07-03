@@ -343,7 +343,7 @@ void Graphics::HSVtoRGB(float *r, float *g, float *b, float h, float s, float v)
 	}
 }
 
-SDL_Surface *Graphics::loadImage(const char *filename)
+SDL_Surface *Graphics::loadImage(const char *filename, bool srcalpha)
 {
 	SDL_Surface *image, *newImage;
 
@@ -370,7 +370,10 @@ SDL_Surface *Graphics::loadImage(const char *filename)
 		newImage = image;
 	}
 
-	setTransparent(newImage);
+	if(srcalpha)
+		SDL_SetAlpha(newImage, SDL_SRCALPHA, 255);
+	else
+		setTransparent(newImage);
 
 	return newImage;
 }

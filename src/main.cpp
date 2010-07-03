@@ -130,13 +130,13 @@ int main(int argc, char *argv[])
 		else if (strcmp(argv[i], "-playback") == 0) {recordMode = REPLAY_MODE::PLAYBACK; strncpy(replayData.filename, argv[++i], sizeof replayData.filename);}
 		else if (strcmp(argv[i], "-map") == 0) {game.setMapName(argv[++i]); requiredSection = SECTION_GAME;}
 		else if (strcmp(argv[i], "-listmaps") == 0) listMaps();
+		else if (strcmp(argv[i], "-credits") == 0) requiredSection = SECTION_CREDITS;
 		
 		#if DEBUG
 		else if (strcmp(argv[i], "-showsprites") == 0) showSprites = true;
 		else if (strcmp(argv[i], "-hub") == 0) hub = true;
 		else if (strcmp(argv[i], "-randomscreens") == 0) graphics.takeRandomScreenShots = true;
 		else if (strcmp(argv[i], "-nomonsters") == 0) engine.devNoMonsters = true;
-		else if (strcmp(argv[i], "-credits") == 0) requiredSection = SECTION_CREDITS;
 		#endif
 	}
 	

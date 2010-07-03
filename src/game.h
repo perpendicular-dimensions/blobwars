@@ -28,6 +28,7 @@ extern void doWind();
 
 extern void doTimeRemaining();
 extern void doStatusBar();
+extern void doMusicInfo(unsigned int);
 extern void doPauseInfo();
 
 extern void doItems();

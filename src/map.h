@@ -26,6 +26,7 @@ extern void adjustObjectives();
 extern void initMIAPhrases();
 extern void addWindParticles();
 extern void getMapTokens();
+extern void doMusicInfo(unsigned int);
 
 extern Audio audio;
 extern Config config;
