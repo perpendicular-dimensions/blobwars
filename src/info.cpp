@@ -337,32 +337,67 @@ void doMusicInfo(unsigned int ticks)
 	}
 
 	graphics.setFontSize(0);
-	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
+	graphics.setFontColor(0xff, 0xff, 0xff, 0x40, 0x40, 0x40);
+
+	SDL_Surface *text;
 
 	const int x = 620;
 	int y = 420;
 
-	graphics.drawString(audio.songtitle, x, y, TXT_RIGHT, graphics.screen);
-	y -= 16;
+	static int w = 0;
+	static int h = 0;
+
+	if(w && h)
+		graphics.drawRect(x - w - 5, y - h - 5, w + 10, h + 10, graphics.darkGrey, graphics.screen);
+
+	w = h = 0;
+
+	text = graphics.getString(audio.songtitle, true);
+	y -= text->h;
+	h = text->h;
+	w = text->w;
+
+	graphics.blit(text, x - text->w, y, graphics.screen, false);
+	SDL_FreeSurface(text);
 
 	if(audio.songalbum[0])
 	{
-		graphics.setFontColor(0x80, 0xc0, 0xff, 0x00, 0x00, 0x00);
-		graphics.drawString(audio.songalbum, x, y, TXT_RIGHT, graphics.screen);
-		y -= 16;
+		graphics.setFontColor(0x80, 0xc0, 0xff, 0x40, 0x40, 0x40);
+		
+		text = graphics.getString(audio.songalbum, true);
+		y -= text->h + 4;
+		h += text->h + 4;
+		if(text->w > w)
+			w = text->w;
+
+		graphics.blit(text, x - text->w, y, graphics.screen, false);
+		SDL_FreeSurface(text);
 	}
 
 	if(audio.songartist[0])
 	{
-		graphics.setFontColor(0xff, 0xc0, 0x80, 0x00, 0x00, 0x00);
-		graphics.drawString(audio.songartist, x, y, TXT_RIGHT, graphics.screen);
-		y -= 16;
+		graphics.setFontColor(0xff, 0xc0, 0x80, 0x40, 0x40, 0x40);
+
+		text = graphics.getString(audio.songartist, true);
+		y -= text->h + 4;
+		h += text->h + 4;
+		if(text->w > w)
+			w = text->w;
+
+		graphics.blit(text, x - text->w, y, graphics.screen, false);
+		SDL_FreeSurface(text);
 	}
 
 	if(audio.songlicense >= 0)
 	{
 		SDL_Surface *icon = graphics.license[audio.songlicense];
-		graphics.blit(icon, x - icon->w, y - icon->h, graphics.screen, false);
+
+		y -= icon->h + 8;
+		h += icon->h + 8;
+		if(icon->w > w)
+			w = icon->w;
+
+		graphics.blit(icon, x - icon->w, y, graphics.screen, false);
 	}
 }
 
