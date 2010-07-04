@@ -20,6 +20,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "title.h"
 
+extern void doMusicInfo(unsigned int);
+
 /**
 * Displays the skill level widgets and hide the others
 */
@@ -294,6 +296,8 @@ int title()
 				graphics.blit(version, (630 - version->w), 460, graphics.screen, false);
 				allFadedOn = true;
 			}
+
+			doMusicInfo(SDL_GetTicks() - (now + 39000));
 		}
 
 		Math::wrapFloat(&(offX -= 0.25), -graphics.background->w, 0);
@@ -516,6 +520,7 @@ void doCredits()
 	audio.playMusic();
 
 	engine.resetTimeDifference();
+	Uint32 now = SDL_GetTicks();
 
 	while (y[numberOfCredits - 1] > 350)
 	{
@@ -547,6 +552,8 @@ void doCredits()
 			graphics.drawRect(0, 450, 640, 30, graphics.black, graphics.screen);
 			graphics.drawRect(0, 0, 640, 30, graphics.black, graphics.screen);
 		}
+
+		doMusicInfo(SDL_GetTicks() - (now + 10000));
 
 		SDL_Delay(16);
 	}

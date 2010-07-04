@@ -20,6 +20,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "hub.h"
 
+extern void doMusicInfo(unsigned int);
+
 void createStatsPanel(int page)
 {
 	SDL_Surface *image = graphics.getSprite("infoPanel", true)->image[0];
@@ -594,6 +596,7 @@ int doHub()
 
 	int labelWidth = 0;
 	Uint32 frameLimit = SDL_GetTicks() + 16;
+	Uint32 now = SDL_GetTicks();
 	
 	int mouseXDelta = 0;
 	int mouseYDelta = 0;
@@ -796,6 +799,7 @@ int doHub()
 
 		graphics.blit(cursor->getCurrentFrame(), engine.getMouseX(), engine.getMouseY(), graphics.screen, true);
 
+		doMusicInfo(SDL_GetTicks() - (now + 60000));
 		engine.delay(frameLimit);
 		frameLimit = SDL_GetTicks() + 16;
 	}
