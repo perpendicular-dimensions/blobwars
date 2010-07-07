@@ -49,6 +49,11 @@ class Graphics {
 		SDL_Surface *infoMessage;
 
 	public:
+		struct SurfaceCache {
+			char *text;
+			SDL_Surface *surface;
+			SurfaceCache(): text(NULL), surface(NULL) {}	
+		};
 
 		bool takeRandomScreenShots;
 
@@ -101,6 +106,7 @@ class Graphics {
 	void setFontSize(int size);
 	SDL_Surface *getString(const char *in, bool transparent);
 	void drawString(const char *in, int x, int y, int alignment, SDL_Surface *dest);
+	void drawString(const char *in, int x, int y, int alignment, SDL_Surface *dest, SurfaceCache &cache);
 	void clearChatString();
 	void createChatString(const char *in);
 	void showMedalMessage(int type, const char *in);

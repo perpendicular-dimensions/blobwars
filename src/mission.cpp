@@ -365,8 +365,9 @@ void showMissionClear()
 			}
 		}
 
+		static Graphics::SurfaceCache cache;
 		snprintf(message, sizeof message, "%s - %.2d:%.2d:%.2d", _("Mission Time"), game.currentMissionHours, game.currentMissionMinutes, game.currentMissionSeconds);
-		graphics.drawString(message, 320, 420, true, graphics.screen);
+		graphics.drawString(message, 320, 420, true, graphics.screen, cache);
 
 		engine.delay(frameLimit);
 		frameLimit = SDL_GetTicks() + 16;

@@ -609,16 +609,18 @@ int doHub()
 
 		if (validStage)
 		{
+			static Graphics::SurfaceCache cache;
 			graphics.drawRect(10, 400, 620, 20, graphics.black, graphics.white, graphics.screen);
 			snprintf(string, sizeof string, "%s : %s", _("Selected Destination"), _(game.stageName));
-			graphics.drawString(string, 320, 409, true, graphics.screen);
+			graphics.drawString(string, 320, 409, true, graphics.screen, cache);
 		}
 		
 		graphics.drawRect(10, 430, 620, 40, graphics.black, graphics.white, graphics.screen);
 
 		#if DEBUG
+		static Graphics::SurfaceCache posCache;
 		snprintf(pos, sizeof pos, "%.3d:%.3d", engine.getMouseX(), engine.getMouseY());
-		graphics.drawString(pos, 320, 15, true, graphics.screen);
+		graphics.drawString(pos, 320, 15, true, graphics.screen, posCache);
 		#endif
 
 		engine.getInput();

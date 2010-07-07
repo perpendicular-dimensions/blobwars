@@ -843,7 +843,8 @@ int doGame()
 			frameLimit = SDL_GetTicks() + 64;
 
 		#if DEBUG
-		graphics.drawString(fps, 600, 30, true, graphics.screen);
+		static Graphics::SurfaceCache fpsCache;
+		graphics.drawString(fps, 600, 30, true, graphics.screen, fpsCache);
 
 		if (SDL_GetTicks() > frameCounter + 500)
 		{

@@ -51,6 +51,10 @@ void doTimeRemaining()
 
 void doStatusBar()
 {
+	static Graphics::SurfaceCache healthCache;
+	static Graphics::SurfaceCache oxygenCache;
+	static Graphics::SurfaceCache jetpackCache;
+
 	graphics.setFontSize(0);
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 
@@ -58,7 +62,7 @@ void doStatusBar()
 
 	graphics.blit(graphics.infoBar, 0, 0, graphics.screen, false);
 
-	graphics.drawString(_("Health"), 50, 5, TXT_RIGHT, graphics.screen);
+	graphics.drawString(_("Health"), 50, 5, TXT_RIGHT, graphics.screen, healthCache);
 
 	for (int i = 0 ; i < MAX_HEALTH ; i++)
 	{
@@ -75,7 +79,7 @@ void doStatusBar()
 
 	if ((!game.hasAquaLung) && (!engine.cheatExtras))
 	{
-		graphics.drawString(_("Oxygen"), 305, 5, TXT_RIGHT, graphics.screen);
+		graphics.drawString(_("Oxygen"), 305, 5, TXT_RIGHT, graphics.screen, oxygenCache);
 
 		for (int i = 0 ; i < 7 ; i++)
 		{
@@ -92,7 +96,7 @@ void doStatusBar()
 	}
 	else if ((game.hasJetPack) || (engine.cheatExtras))
 	{
-		graphics.drawString(_("Jetpack"), 305, 5, TXT_RIGHT, graphics.screen);
+		graphics.drawString(_("Jetpack"), 305, 5, TXT_RIGHT, graphics.screen, jetpackCache);
 
 		for (int i = 0 ; i < 7 ; i++)
 		{
@@ -131,8 +135,9 @@ void doStatusBar()
 					break;
 			}
 	
+			static Graphics::SurfaceCache cache;
 			graphics.blit(graphics.infoBar, 0, 455, graphics.screen, false);
-			graphics.drawString(_(engine.message), 320, 466, true, graphics.screen);
+			graphics.drawString(_(engine.message), 320, 466, true, graphics.screen, cache);
 			
 			engine.messageTime--;
 			if (engine.messageTime == -1)
@@ -150,7 +155,8 @@ void doStatusBar()
 		{
 			graphics.blit(graphics.infoBar, 0, 455, graphics.screen, false);
 			
-			graphics.drawString(_(map.mainBossPart->name), 255, 460, TXT_RIGHT, graphics.screen);
+			static Graphics::SurfaceCache cache;
+			graphics.drawString(_(map.mainBossPart->name), 255, 460, TXT_RIGHT, graphics.screen, cache);
 			graphics.drawRect(265 - 1, 463 - 1, 200 + 2, 10 + 2, graphics.white, graphics.screen);
 			graphics.drawRect(265, 463, 200, 10, graphics.black, graphics.screen);
 			
@@ -161,8 +167,9 @@ void doStatusBar()
 		}
 	}
 
+	static Graphics::SurfaceCache weaponCache;
 	snprintf(string, sizeof string, "%s %s", _("Weapon:"), _(player.currentWeapon->name));
-	graphics.drawString(string, 630, 5, TXT_RIGHT, graphics.screen);
+	graphics.drawString(string, 630, 5, TXT_RIGHT, graphics.screen, weaponCache);
 	
 	if (game.skill == 3)
 	{
@@ -185,13 +192,15 @@ void doStatusBar()
 					}
 				}
 			}
-			graphics.drawString(string, 320, 35, TXT_CENTERED, graphics.screen);
+			static Graphics::SurfaceCache cache;
+			graphics.drawString(string, 320, 35, TXT_CENTERED, graphics.screen, cache);
 		}
 		else
 		{
+			static Graphics::SurfaceCache cache;
 			graphics.setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
 			graphics.setFontSize(3);
-			graphics.drawString(_("Mission Failed! Time Up!"), 320, 220, TXT_CENTERED, graphics.screen);
+			graphics.drawString(_("Mission Failed! Time Up!"), 320, 220, TXT_CENTERED, graphics.screen, cache);
 			graphics.setFontSize(0);
 			game.canContinue = 0;
 		}

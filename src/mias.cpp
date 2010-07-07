@@ -99,8 +99,9 @@ void doMIAs()
 
 				if ((mia->value != 100) && (!(mia->flags & ENT_DYING)))
 				{
+					static Graphics::SurfaceCache cache;
 					graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
-					graphics.drawString(_((char*)mia_scared[mia->value]), x + 10, y - 10, true, graphics.screen);
+					graphics.drawString(_((char*)mia_scared[mia->value]), x + 10, y - 10, true, graphics.screen, cache);
 				}
 
 				graphics.blit(mia->getFaceImage(), x, y, graphics.screen, false);

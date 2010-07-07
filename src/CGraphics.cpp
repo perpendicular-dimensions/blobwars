@@ -895,16 +895,48 @@ void Graphics::drawString(const char *in, int x, int y, int alignment, SDL_Surfa
 	SDL_Surface *text = TTF_RenderUTF8_Shaded(font[fontSize], in, fontForeground, fontBackground);
 
 	if (!text)
-	{
 		text = TTF_RenderUTF8_Shaded(font[fontSize], "FONT_ERROR", fontForeground, fontBackground);
-	}
+
+	if (!text)
+		return;
+
+	setTransparent(text);
 
 	if (alignment == TXT_RIGHT) x -= text->w;
 	if (alignment == TXT_CENTERED) center = true;
 
-	setTransparent(text);
 	blit(text, x, y, dest, center);
 	SDL_FreeSurface(text);
+}
+
+void Graphics::drawString(const char *in, int x, int y, int alignment, SDL_Surface *dest, SurfaceCache &cache)
+{
+	bool center = false;
+
+	if(!cache.text || strcmp(in, cache.text)) {
+		if(cache.surface)
+			SDL_FreeSurface(cache.surface);
+
+		if(cache.text)
+			::free(cache.text);
+
+		cache.text = strdup(in);
+
+		cache.surface = TTF_RenderUTF8_Shaded(font[fontSize], in, fontForeground, fontBackground);
+
+		if (!cache.surface)
+			cache.surface = TTF_RenderUTF8_Shaded(font[fontSize], "FONT_ERROR", fontForeground, fontBackground);
+
+		if(!cache.surface)
+			return;
+
+		setTransparent(cache.surface);
+	}
+
+	if (alignment == TXT_RIGHT) x -= cache.surface->w;
+	if (alignment == TXT_CENTERED) center = true;
+
+	blit(cache.surface, x, y, dest, center);
 }
 
 void Graphics::clearChatString()
