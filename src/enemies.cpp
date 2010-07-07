@@ -377,8 +377,6 @@ void enemyBulletCollisions(Entity *bullet)
 
 		if ((bullet->owner == &player) || (bullet->owner == &engine.world) || (bullet->flags & ENT_BOSS))
 		{
-			snprintf(comboString, sizeof comboString, "Combo-%s", bullet->name);
-
 			if (Collision::collision(enemy, bullet))
 			{
 				if (bullet->id != WP_LASER)
@@ -458,6 +456,7 @@ void enemyBulletCollisions(Entity *bullet)
 								checkCombo();
 							}
 							
+							snprintf(comboString, sizeof comboString, "Combo-%s", bullet->name);
 							checkObjectives(comboString, false);
 							checkObjectives("Enemy", false);
 							checkObjectives(enemy->name, false);
@@ -505,6 +504,7 @@ void enemyBulletCollisions(Entity *bullet)
 					{
 						if (player.currentWeapon != &weapon[WP_LASER])
 						{
+							snprintf(comboString, sizeof comboString, "Combo-%s", bullet->name);
 							checkCombo();
 							checkObjectives(comboString, false);
 						}
