@@ -616,7 +616,7 @@ void Graphics::loadFont(int i, const char *filename, int pixelSize)
 Sprite *Graphics::addSprite(const char *name)
 {
 	Sprite *sprite = new Sprite;
-	strncpy(sprite->name, name, sizeof sprite->name);
+	strlcpy(sprite->name, name, sizeof sprite->name);
 
 	spriteList.add(sprite);
 
@@ -946,8 +946,8 @@ void Graphics::clearChatString()
 
 void Graphics::createChatString(const char *in)
 {
-	strncat(chatString, " ", sizeof chatString);
-	strncat(chatString, in, sizeof chatString);
+	strlcat(chatString, " ", sizeof chatString);
+	strlcat(chatString, in, sizeof chatString);
 }
 
 void Graphics::drawChatString(SDL_Surface *surface, int y)

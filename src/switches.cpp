@@ -65,11 +65,11 @@ void checkSwitchContact(Entity *ent)
 					
 					if (swt->type == SWT_PRESSURE)
 					{
-						strncpy(swt->requiredObjectName, "@none@", sizeof swt->requiredObjectName);
+						strlcpy(swt->requiredObjectName, "@none@", sizeof swt->requiredObjectName);
 					}
 					
 					checkObjectives(swt->name, true);
-					strncpy(swt->name, "Switch", sizeof swt->name);
+					strlcpy(swt->name, "Switch", sizeof swt->name);
 				}
 				else
 				{

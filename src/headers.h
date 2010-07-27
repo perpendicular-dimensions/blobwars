@@ -45,6 +45,11 @@ extern DECLSPEC int SDLCALL SDL_GetGamma(float *red, float *green, float *blue);
 #include <libintl.h>
 #define _(string) gettext(string)
 
+#if !defined(OpenBSD) && !defined(FreeBSD)
+#define strlcat(dest, src, n) strncat((dest), (src), (n) - 1)
+#define strlcpy(dest, src, n) do {strncpy((dest), (src), (n)); (dest)[(n) - 1] = 0;} while(false)
+#endif
+
 #include "defs.h"
 
 #include "CMath.h"

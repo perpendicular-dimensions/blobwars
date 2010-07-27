@@ -34,8 +34,8 @@ Objective::Objective()
 
 Objective::Objective(const char *description, const char *target, int targetValue, bool required)
 {
-	strncpy(this->description, description, sizeof this->description);
-	strncpy(this->target, target, sizeof this->target);
+	strlcpy(this->description, description, sizeof this->description);
+	strlcpy(this->target, target, sizeof this->target);
 	this->targetValue = targetValue;
 	this->required = required;
 

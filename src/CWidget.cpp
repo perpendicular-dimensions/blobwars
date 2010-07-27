@@ -43,10 +43,10 @@ void Widget::setProperties(const char *name, const char *groupName, const char *
 		exit(1);
 	}
 
-	strncpy(this->name, name, sizeof this->name);
-	strncpy(this->groupName, groupName, sizeof this->groupName);
-	strncpy(this->label, label, sizeof this->label);
-	strncpy(this->options, options, sizeof this->options);
+	strlcpy(this->name, name, sizeof this->name);
+	strlcpy(this->groupName, groupName, sizeof this->groupName);
+	strlcpy(this->label, label, sizeof this->label);
+	strlcpy(this->options, options, sizeof this->options);
 	this->x = x;
 	this->y = y;
 	this->min = min;

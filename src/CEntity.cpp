@@ -52,7 +52,7 @@ Entity::Entity()
 
 void Entity::setName(const char *name)
 {
-	strncpy(this->name, name, sizeof this->name);
+	strlcpy(this->name, name, sizeof this->name);
 }
 
 void Entity::setSprites(Sprite *sprite1, Sprite *sprite2, Sprite *sprite3)

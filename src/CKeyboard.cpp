@@ -49,7 +49,7 @@ const char *Keyboard::translateKey(int key)
 		return "...";
 	}
 	
-	strncpy(keyName, _(SDL_GetKeyName((SDLKey)key)), sizeof keyName);
+	strlcpy(keyName, _(SDL_GetKeyName((SDLKey)key)), sizeof keyName);
 	
 	/*
 	This is not really neccessary, but it just makes

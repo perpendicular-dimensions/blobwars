@@ -280,7 +280,7 @@ void createObjectivesPanel(const char *levelName)
 				}
 				else
 				{
-					strncpy(string, _(data->value), sizeof string);
+					strlcpy(string, _(data->value), sizeof string);
 					
 					if (strlen(string) >= 25)
 					{
@@ -546,8 +546,8 @@ int doHub()
 
 	int rtn = -1;
 	
-	strncpy(level, "@none@", sizeof level);
-	strncpy(game.stageName, "@none@", sizeof game.stageName);
+	strlcpy(level, "@none@", sizeof level);
+	strlcpy(game.stageName, "@none@", sizeof game.stageName);
 
 	bool showData = false;
 	bool showStats = false;
@@ -576,7 +576,7 @@ int doHub()
 	if ((numberOfHubs == 0) && (gameData.completedWorld))
 	{
 		game.setMapName("data/spaceStation");
-		strncpy(game.stageName, "Space Station", sizeof game.stageName);
+		strlcpy(game.stageName, "Space Station", sizeof game.stageName);
 		createObjectivesPanel("Space Station");
 		showData = true;
 		showStats = showMIAs = false;

@@ -29,7 +29,7 @@ Teleporter::Teleporter()
 
 void Teleporter::setName(const char *name)
 {
-	strncpy(this->name, name, sizeof this->name);
+	strlcpy(this->name, name, sizeof this->name);
 }
 
 void Teleporter::set(int x, int y, int destX, int destY)

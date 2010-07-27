@@ -37,10 +37,10 @@ Switch::Switch()
 
 void Switch::set(const char *name, const char *linkName, const char *requiredObjectName, const char *activateMessage, int type, int x, int y, bool activated)
 {
-	strncpy(this->name, name, sizeof this->name);
-	strncpy(this->linkName, linkName, sizeof this->linkName);
-	strncpy(this->requiredObjectName, requiredObjectName, sizeof this->requiredObjectName);
-	strncpy(this->activateMessage, activateMessage, sizeof this->activateMessage);
+	strlcpy(this->name, name, sizeof this->name);
+	strlcpy(this->linkName, linkName, sizeof this->linkName);
+	strlcpy(this->requiredObjectName, requiredObjectName, sizeof this->requiredObjectName);
+	strlcpy(this->activateMessage, activateMessage, sizeof this->activateMessage);
 	this->type = type;
 	this->x = x;
 	this->y = y;

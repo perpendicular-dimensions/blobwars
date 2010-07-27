@@ -36,7 +36,7 @@ void FileData::set(const char *filename, Uint32 fSize, Uint32 cSize, Uint32 loca
 		return;
 	}
 	
-	strncpy(this->filename, filename, sizeof this->filename);
+	strlcpy(this->filename, filename, sizeof this->filename);
 	
 	this->fSize = fSize;
 	this->cSize = cSize;

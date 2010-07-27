@@ -66,7 +66,7 @@ void presentPlayerMedal(const char *tname)
 	// Copy the input, so that threading
 	// doesn't trip us up!
 	char *data = new char[128];
-	strncpy(data, tname, sizeof data);
+	strlcpy(data, tname, sizeof data);
 	
 	SDL_Thread *thread = SDL_CreateThread(medalWorker, (void*)data);
 	

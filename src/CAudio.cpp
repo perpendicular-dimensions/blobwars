@@ -149,11 +149,11 @@ bool Audio::loadMusic(const char *filename)
 			line[l - 1] = 0;
 
 		if(!strncasecmp(line, "title=", 6))
-			 strncpy(songtitle, line + 6, sizeof songtitle);
+			 strlcpy(songtitle, line + 6, sizeof songtitle);
 		else if(!strncasecmp(line, "album=", 6))
-			 strncpy(songalbum, line + 6, sizeof songalbum);
+			 strlcpy(songalbum, line + 6, sizeof songalbum);
 		else if(!strncasecmp(line, "artist=", 7))
-			 strncpy(songartist, line + 7, sizeof songartist);
+			 strlcpy(songartist, line + 7, sizeof songartist);
 		else if(!strncasecmp(line, "license=", 8))
 		{
 			if(!strncasecmp(line + 8, "CC-BY ", 6))
@@ -166,7 +166,7 @@ bool Audio::loadMusic(const char *filename)
 	if(fp)
 		fclose(fp);
 	
-	strncpy(levelMusicName, filename, sizeof levelMusicName);
+	strlcpy(levelMusicName, filename, sizeof levelMusicName);
 
 	return true;
 }

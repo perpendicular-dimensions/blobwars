@@ -22,20 +22,20 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 void initMIAPhrases()
 {
-	strncpy(mia_scared[0], "help me...", sizeof mia_scared[0]);
-	strncpy(mia_scared[1], "i don't wanna die...", sizeof mia_scared[1]);
-	strncpy(mia_scared[2], "please... someone help...", sizeof mia_scared[2]);
-	strncpy(mia_scared[3], "i... i'm scared...", sizeof mia_scared[3]);
-	strncpy(mia_scared[4], "i wanna go home...", sizeof mia_scared[4]);
-	strncpy(mia_scared[5], "what was that?!", sizeof mia_scared[5]);
-	strncpy(mia_scared[6], "i don't like it here...", sizeof mia_scared[6]);
+	strlcpy(mia_scared[0], "help me...", sizeof mia_scared[0]);
+	strlcpy(mia_scared[1], "i don't wanna die...", sizeof mia_scared[1]);
+	strlcpy(mia_scared[2], "please... someone help...", sizeof mia_scared[2]);
+	strlcpy(mia_scared[3], "i... i'm scared...", sizeof mia_scared[3]);
+	strlcpy(mia_scared[4], "i wanna go home...", sizeof mia_scared[4]);
+	strlcpy(mia_scared[5], "what was that?!", sizeof mia_scared[5]);
+	strlcpy(mia_scared[6], "i don't like it here...", sizeof mia_scared[6]);
 }
 
 void addMIA(const char *name, int x, int y, int type)
 {
 	Entity *mia = new Entity();
 
-	strncpy(mia->name, name, sizeof mia->name);
+	strlcpy(mia->name, name, sizeof mia->name);
 	mia->id = type;
 	mia->baseThink = 60;
 	mia->health = 180;

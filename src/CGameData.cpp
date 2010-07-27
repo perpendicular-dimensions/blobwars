@@ -90,7 +90,7 @@ void GameData::setMIARescueCount(const char *key, int rescues, int total)
 		data = (Data*)data->next;
 		if (strcmp(newKey, data->key) == 0)
 		{
-			strncpy(data->value, "MIAs", sizeof data->value);
+			strlcpy(data->value, "MIAs", sizeof data->value);
 			data->current = rescues;
 			data->target = total;
 			return;

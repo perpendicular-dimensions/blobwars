@@ -61,7 +61,7 @@ void Pak::showPakErrorAndExit()
 void Pak::setPakFile(const char *pakFilename)
 {
 	#if USEPAK
-	strncpy(this->pakFilename, pakFilename, sizeof this->pakFilename);
+	strlcpy(this->pakFilename, pakFilename, sizeof this->pakFilename);
 	
 	debug(("Pak : Filename set to %s\n", pakFilename));
 

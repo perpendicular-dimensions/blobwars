@@ -37,7 +37,7 @@ bool PersistData::setData(const char *data)
 		return false;
 	}
 	
-	strncpy(this->data, data, sizeof this->data);
+	strlcpy(this->data, data, sizeof this->data);
 	
 	return true;
 }

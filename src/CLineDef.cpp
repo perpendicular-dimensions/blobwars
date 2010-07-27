@@ -33,9 +33,9 @@ LineDef::LineDef()
 
 void LineDef::set(const char *name, const char *linkName, const char *activateMessage, int x, int y, int width, int height)
 {
-	strncpy(this->name, name, sizeof this->name);
-	strncpy(this->linkName, linkName, sizeof this->linkName);
-	strncpy(this->activateMessage, activateMessage, sizeof this->activateMessage);
+	strlcpy(this->name, name, sizeof this->name);
+	strlcpy(this->linkName, linkName, sizeof this->linkName);
+	strlcpy(this->activateMessage, activateMessage, sizeof this->activateMessage);
 	this->x = x;
 	this->y = y;
 	this->width = width;

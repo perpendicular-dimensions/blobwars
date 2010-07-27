@@ -118,7 +118,7 @@ void setupSaveWidgets()
 	for (int i = 0 ; i < 5 ; i++)
 	{
 		snprintf(widgetName, sizeof widgetName, "save%d", i + 1);
-		strncpy(engine.getWidgetByName(widgetName)->label, engine.saveSlot[i], sizeof engine.getWidgetByName(widgetName)->label);
+		strlcpy(engine.getWidgetByName(widgetName)->label, engine.saveSlot[i], sizeof engine.getWidgetByName(widgetName)->label);
 		
 		if ((strstr(engine.saveSlot[i], _("Empty"))) || (strstr(engine.saveSlot[i], _("Corrupt"))))
 		{
@@ -126,7 +126,7 @@ void setupSaveWidgets()
 		}
 		
 		snprintf(widgetName, sizeof widgetName, "slot%d", i + 1);
-		strncpy(engine.getWidgetByName(widgetName)->label, engine.saveSlot[i], sizeof engine.getWidgetByName(widgetName)->label);
+		strlcpy(engine.getWidgetByName(widgetName)->label, engine.saveSlot[i], sizeof engine.getWidgetByName(widgetName)->label);
 	}
 }
 
@@ -145,7 +145,7 @@ void loadTitleWidgets()
 	setupSaveWidgets();
 	
 	Widget *widget = engine.getWidgetByName("labelManual");
-	strncpy(widget->label, GAMEPLAYMANUAL, sizeof widget->label);
+	strlcpy(widget->label, GAMEPLAYMANUAL, sizeof widget->label);
 
 	showTitleWidgets();
 }

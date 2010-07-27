@@ -147,7 +147,7 @@ void galdovInitBlackDroids()
 			map.boss[i] = new Boss();
 		}
 		debug(("BlackDroid %d init\n", i));
-		strncpy(map.boss[i]->name, "BlackDrod", sizeof map.boss[i]->name);
+		strlcpy(map.boss[i]->name, "BlackDrod", sizeof map.boss[i]->name);
 		map.boss[i]->health = -90;
 		map.boss[i]->maxHealth = -90;
 		map.boss[i]->setSprites(graphics.getSprite("BlackDroidRight", true), graphics.getSprite("BlackDroidLeft", true), graphics.getSprite("BlackDroidDie", true));
@@ -493,7 +493,7 @@ void galdovFinalSplit()
 		if (map.boss[i] == NULL)
 		{
 			map.boss[i] = new Boss();
-			strncpy(map.boss[i]->name, "MiniGaldov", sizeof map.boss[i]->name);
+			strlcpy(map.boss[i]->name, "MiniGaldov", sizeof map.boss[i]->name);
 			map.boss[i]->health = 10 * game.skill;
 			map.boss[i]->maxHealth = 10 * game.skill;
 		}
@@ -556,7 +556,7 @@ void galdovFinalInit()
 	debug(("galdovFinalInit\n"));
 	
 	map.boss[0] = new Boss();
-	strncpy(map.boss[0]->name, "Galdov", sizeof map.boss[0]->name);
+	strlcpy(map.boss[0]->name, "Galdov", sizeof map.boss[0]->name);
 	map.boss[0]->health = 45 * game.skill;
 	map.boss[0]->maxHealth = 45 * game.skill;
 	map.boss[0]->setSprites(graphics.getSprite("GaldovRight", true), graphics.getSprite("GaldovLeft", true), graphics.getSprite("GaldovDie", true));
@@ -680,7 +680,7 @@ void galdovFinalShieldInit()
 			delete map.boss[i];
 		}
 		map.boss[i] = new Boss();
-		strncpy(map.boss[i]->name, "OrbBomb", sizeof map.boss[i]->name);
+		strlcpy(map.boss[i]->name, "OrbBomb", sizeof map.boss[i]->name);
 		map.boss[i]->setSprites(graphics.getSprite("DroidOrb", true), graphics.getSprite("DroidOrb", true), graphics.getSprite("DroidOrb", true));
 		map.boss[i]->health = 999999;
 		map.boss[i]->maxHealth = 99999;

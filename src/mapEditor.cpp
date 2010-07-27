@@ -268,7 +268,7 @@ void collectMapData()
 		if (!strstr(string, " ENEMY \""))
 		{
 			str = new String;
-			strncpy(str->string, string, sizeof str->string);
+			strlcpy(str->string, string, sizeof str->string);
 			stringTail->next = str;
 			stringTail = str;
 		}

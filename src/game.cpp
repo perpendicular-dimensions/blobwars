@@ -318,7 +318,7 @@ int gameover()
 		Widget *widget = engine.getWidgetByName("gameOverNo");
 		char postfix[100];
 		snprintf(postfix, sizeof postfix, " (%d)", game.canContinue);
-		strncat(widget->label, postfix, sizeof widget->label);
+		strlcat(widget->label, postfix, sizeof widget->label);
 	}
 
 	while (true)
@@ -575,7 +575,7 @@ int doGame()
 	#if DEBUG
 	Uint32 now;
 	char fps[10];
-	strncpy(fps, "fps", sizeof fps);
+	strlcpy(fps, "fps", sizeof fps);
 	#endif
 
 	engine.messageTime = -1;

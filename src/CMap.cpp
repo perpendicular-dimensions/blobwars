@@ -220,7 +220,7 @@ void Map::destroyPersistant(const char *name)
 		
 		if (strcmp(p->stageName, name) == 0)
 		{
-			strncpy(p->stageName, "@none@", sizeof p->stageName);
+			strlcpy(p->stageName, "@none@", sizeof p->stageName);
 			p->clear();
 			return;
 		}
@@ -229,7 +229,7 @@ void Map::destroyPersistant(const char *name)
 
 void Map::setName(const char *name)
 {
-	strncpy(this->name, name, sizeof this->name);
+	strlcpy(this->name, name, sizeof this->name);
 	
 	if (strstr(name, "BioMech"))
 	{

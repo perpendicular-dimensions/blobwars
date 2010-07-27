@@ -36,8 +36,8 @@ void Data::set(const char *key, const char *value, int current, int target)
 		return;
 	}
 
-	strncpy(this->key, key, sizeof this->key);
-	strncpy(this->value, value, sizeof this->value);
+	strlcpy(this->key, key, sizeof this->key);
+	strlcpy(this->value, value, sizeof this->value);
 	this->current = current;
 	this->target = target;
 }

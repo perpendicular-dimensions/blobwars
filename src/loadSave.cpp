@@ -42,14 +42,14 @@ void initSaveSlots()
 
 		if (!fp)
 		{
-			strncpy(string, "%.2d - %s", sizeof string);
+			strlcpy(string, "%.2d - %s", sizeof string);
 			snprintf(engine.saveSlot[i], sizeof engine.saveSlot[i], string, (i + 1), _("Empty"));
 		}
 		else
 		{
 			if (fread(&tempGame, sizeof(Game), 1, fp) != 1)
 			{
-				strncpy(string, "%.2d - %s", sizeof string);
+				strlcpy(string, "%.2d - %s", sizeof string);
 				snprintf(engine.saveSlot[i], sizeof engine.saveSlot[i], string, (i + 1), _("Corrupt Save Data"));
 			}
 			else
@@ -163,7 +163,7 @@ bool loadGame(int slot)
 		fgets(line, 1024, fp);
 		
 		sscanf(line, "%[^\n\r]", string[0]);
-		strncpy(stageName, string[0], sizeof stageName);
+		strlcpy(stageName, string[0], sizeof stageName);
 		
 		if (strcmp(stageName, "@EOF@") == 0)
 		{
@@ -183,7 +183,7 @@ bool loadGame(int slot)
 			
 			fgets(line, 1024, fp);
 			
-			strncpy(persistData->data, line, sizeof persistData->data);
+			strlcpy(persistData->data, line, sizeof persistData->data);
 			
 			//debug(("Read %d: %s", i, persistData->data));
 			
@@ -237,7 +237,7 @@ int confirmSave()
 	for (int i = 0 ; i < 5 ; i++)
 	{
 		snprintf(widgetName, sizeof widgetName, "slot%d", i + 1);
-		strncpy(engine.getWidgetByName(widgetName)->label, engine.saveSlot[i], sizeof engine.getWidgetByName(widgetName)->label);
+		strlcpy(engine.getWidgetByName(widgetName)->label, engine.saveSlot[i], sizeof engine.getWidgetByName(widgetName)->label);
 	}
 	
 	engine.highlightWidget("slot1");

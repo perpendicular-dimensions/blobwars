@@ -51,7 +51,7 @@ void createSceneList()
 			line = strtok(NULL, "\n");
 			if (strcmp(line, "@none@") != 0)
 			{
-				strncpy(scene->sprite, line, sizeof scene->sprite);
+				strlcpy(scene->sprite, line, sizeof scene->sprite);
 				debug(("Loading cutscene image %s\n", scene->sprite));
 				graphics.quickSprite(scene->sprite, graphics.loadImage(scene->sprite));
 			}

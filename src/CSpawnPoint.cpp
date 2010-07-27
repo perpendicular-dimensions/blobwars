@@ -42,7 +42,7 @@ void SpawnPoint::reset()
 
 void SpawnPoint::create(const char *name, int x, int y, int spawnType, int spawnSubType, int minInterval, int maxInterval, bool active)
 {
-	strncpy(this->name, name, sizeof this->name);
+	strlcpy(this->name, name, sizeof this->name);
 	this->x = x;
 	this->y = y;
 	this->spawnType = spawnType;

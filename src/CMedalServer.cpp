@@ -50,7 +50,7 @@ bool MedalServer::connect(const char *privateKey)
 	
 	debug(("Connected %s to %s:%d\n", privateKey, MEDAL_SERVER_HOST, MEDAL_SERVER_PORT));
 	
-	strncpy(this->privateKey, privateKey, sizeof this->privateKey);
+	strlcpy(this->privateKey, privateKey, sizeof this->privateKey);
 	connected = true;
 	
 	return true;
@@ -70,7 +70,7 @@ int MedalServer::postMedal(const char *str)
 	char *store;
 	
 	char medal[128];
-	strncpy(medal, str, sizeof medal);
+	strlcpy(medal, str, sizeof medal);
 	
 	for (unsigned int i = 0 ; i < strlen(medal) ; i++)
 	{
@@ -123,7 +123,7 @@ int MedalServer::postMedal(const char *str)
 			
 			if (response == 4)
 			{
-				strncpy(rubyMessage, message, sizeof rubyMessage);
+				strlcpy(rubyMessage, message, sizeof rubyMessage);
 				gotRuby = true;
 			}
 			else

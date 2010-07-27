@@ -29,6 +29,6 @@ Cutscene::Cutscene()
 
 void Cutscene::appendText(const char *line)
 {
-	strncat(text, " ", sizeof text);
-	strncat(text, line, sizeof text);
+	strlcat(text, " ", sizeof text);
+	strlcat(text, line, sizeof text);
 }

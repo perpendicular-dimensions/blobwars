@@ -64,7 +64,7 @@ Engine::Engine()
 	binaryBuffer = NULL;
 	#ifdef FRAMEWORK_SDL
 	char pakPath[PATH_MAX];
-	strncpy(pakPath, PAKFULLPATH, sizeof(pakPath));
+	strlcpy(pakPath, PAKFULLPATH, sizeof(pakPath));
 	if (CFBundleGetMainBundle() != NULL) {
 		CFURLRef pakURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), CFSTR(PAKNAME), NULL, NULL);
 		if (pakURL != NULL) {
@@ -229,7 +229,7 @@ void Engine::getInput()
 				}
 
 				keyState[event.key.keysym.sym] = 1;
-				strncpy(lastKeyPressed, SDL_GetKeyName(event.key.keysym.sym), sizeof lastKeyPressed);
+				strlcpy(lastKeyPressed, SDL_GetKeyName(event.key.keysym.sym), sizeof lastKeyPressed);
 				addKeyEvent();
 				break;
 
@@ -314,7 +314,7 @@ void Engine::clearInput()
 
 void Engine::setUserHome(const char *path)
 {
-	strncpy(userHomeDirectory, path, sizeof userHomeDirectory);
+	strlcpy(userHomeDirectory, path, sizeof userHomeDirectory);
 	debug(("User Home = %s\n", path));
 }
 
@@ -489,7 +489,7 @@ void Engine::setInfoMessage(const char *message, int priority, int type)
 {
 	if (priority >= messagePriority)
 	{
-		strncpy(this->message, message, sizeof this->message);
+		strlcpy(this->message, message, sizeof this->message);
 		messageTime = 180;
 		messagePriority = priority;
 		messageType = type;
@@ -957,7 +957,7 @@ int Engine::getValueOfFlagTokens(const char *realLine)
 	char line[1024];
 	bool found;
 	int value;
-	strncpy(line, realLine, sizeof line);
+	strlcpy(line, realLine, sizeof line);
 
 	int flags = 0;
 

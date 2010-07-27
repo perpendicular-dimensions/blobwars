@@ -34,7 +34,7 @@ Persistant::~Persistant()
 
 void Persistant::setName(const char *name)
 {
-	strncpy(this->stageName, name, sizeof this->stageName);
+	strlcpy(this->stageName, name, sizeof this->stageName);
 }
 
 void Persistant::clear()

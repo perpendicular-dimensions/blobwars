@@ -33,8 +33,8 @@ HubLevel::HubLevel()
 
 void HubLevel::set(const char *stageName, const char *filename, int x, int y)
 {
-	strncpy(this->stageName, stageName, sizeof this->stageName);
-	strncpy(this->filename, filename, sizeof this->filename);
+	strlcpy(this->stageName, stageName, sizeof this->stageName);
+	strlcpy(this->filename, filename, sizeof this->filename);
 	this->x = x;
 	this->y = y;
 }

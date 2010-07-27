@@ -382,7 +382,7 @@ void tankBossMGInit()
 	debug(("tankBossMGInit\n"));
 	
 	map.boss[0] = new Boss();
-	strncpy(map.boss[0]->name, "BioMech Tank V1.1", sizeof map.boss[0]->name);
+	strlcpy(map.boss[0]->name, "BioMech Tank V1.1", sizeof map.boss[0]->name);
 	map.boss[0]->health = 65 * game.skill;
 	map.boss[0]->maxHealth = 65 * game.skill;
 	map.boss[0]->setSprites(graphics.getSprite("BlobTankCannonRight", true), graphics.getSprite("BlobTankCannonLeft", true), graphics.getSprite("BlobTankCannonLeft", true));
@@ -604,7 +604,7 @@ void tankBossGLInit()
 	debug(("tankBossGLInit\n"));
 	
 	map.boss[1] = new Boss();
-	strncpy(map.boss[1]->name, "BioMech Tank V2.6", sizeof map.boss[1]->name);
+	strlcpy(map.boss[1]->name, "BioMech Tank V2.6", sizeof map.boss[1]->name);
 	map.boss[1]->health = 65 * game.skill;
 	map.boss[1]->maxHealth = 65 * game.skill;
 	map.boss[1]->setSprites(graphics.getSprite("BlobTankGrenadeRight", true), graphics.getSprite("BlobTankGrenadeLeft", true), graphics.getSprite("BlobTankGrenadeLeft", true));
