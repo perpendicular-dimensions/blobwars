@@ -316,7 +316,7 @@ int confirmSave()
 
 void saveGame()
 {
-	char message[100];
+	char message[256];
 
 	SDL_FillRect(graphics.screen, NULL, graphics.black);
 	graphics.updateScreen();

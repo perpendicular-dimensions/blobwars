@@ -62,7 +62,7 @@ void doMIAs()
 
 	int x, y;
 
-	char message[100];
+	char message[256];
 
 	while (mia->next != NULL)
 	{

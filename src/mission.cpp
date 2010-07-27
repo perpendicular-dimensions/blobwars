@@ -179,7 +179,7 @@ void showMissionClear()
 	Objective *objective = (Objective*)map.objectiveList.getHead();
 	Entity *mia = (Entity*)map.miaList.getHead();
 	Sprite *teleportStar = graphics.getSprite("TeleportStar", true);
-	char message[100];
+	char message[256];
 	int col1 = 360;
 	int col2 = 380;
 	int count = 0;

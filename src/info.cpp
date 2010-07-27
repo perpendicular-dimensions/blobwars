@@ -250,7 +250,7 @@ void doPauseInfo()
 
 	// Do the objectives list
 	Objective *objective = (Objective*)map.objectiveList.getHead();
-	char message[100];
+	char message[256];
 
 	y += 60;
 

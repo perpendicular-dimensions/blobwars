@@ -390,7 +390,7 @@ void showMissionInformation()
 
 	graphics.drawRect(1, 1, 398, 298, graphics.black, graphics.white, panelBack);
 
-	char message[100];
+	char message[256];
 	int col1 = 25;
 	int col2 = 375;
 	int y = 30;

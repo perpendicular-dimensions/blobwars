@@ -25,7 +25,7 @@ void checkSwitchContact(Entity *ent)
 	Switch *swt = (Switch*)map.switchList.getHead();
 	bool okayToActivate = false;
 
-	char message[100];
+	char message[256];
 
 	while (swt->next != NULL)
 	{

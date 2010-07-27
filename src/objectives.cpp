@@ -241,7 +241,7 @@ void checkObjectives(const char *name, bool alwaysInform)
 {
 	Objective *objective = (Objective*)map.objectiveList.getHead();
 
-	char message[100];
+	char message[256];
 	
 	int requiredValue;
 
