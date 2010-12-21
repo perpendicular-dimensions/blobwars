@@ -90,7 +90,6 @@ int MedalServer::postMedal(const char *str)
 		return 0;
 	}
 	
-	char *in = new char[1024];
 	char out[1024];
 	
 	snprintf(out, sizeof out, "GET /addMedal/%s/MBS_%s HTTP/1.1\nHost: %s\nUser-Agent:BWMBS%.2f-%d\n\n", privateKey, medal, MEDAL_SERVER_HOST, VERSION, RELEASE);
@@ -108,6 +107,8 @@ int MedalServer::postMedal(const char *str)
 		return 0;
 	}
 	
+	char *in = new char[1024];
+
 	SDLNet_TCP_Recv(socket, in, 512);
 	
 	//printf("%s\n", in);
@@ -137,7 +138,7 @@ int MedalServer::postMedal(const char *str)
 	
 	debug(("MedalServer Response: %d '%s'\n", response, message))
 	
-	delete in;
+	delete[] in;
 	
 	SDLNet_TCP_Close(socket);
 	
