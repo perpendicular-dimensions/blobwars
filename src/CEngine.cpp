@@ -145,7 +145,7 @@ void Engine::addKeyEvent()
 
 	if (index == -1)
 	{
-		for (int i = 0 ; i < 25 ; i++)
+		for (int i = 0 ; i < 24 ; i++)
 		{
 			lastKeyEvents[i] = lastKeyEvents[i + 1];
 		}
