@@ -73,7 +73,7 @@ void aquaBossRecharge()
 		{
 			if (enemy->health > -100)
 			{
-				enemy->dx = enemy->dx = 0;
+				enemy->dx = enemy->dy = 0;
 				enemy->health = -1;
 				if (enemy->health % 10)
 				{
