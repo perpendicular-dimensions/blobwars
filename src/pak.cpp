@@ -75,6 +75,8 @@ void countFiles(const char *dirName)
 			totalFiles++;
 		}
 	}
+
+	closedir(dirp);
 	
 	fileData = new FileData[totalFiles];
 }
