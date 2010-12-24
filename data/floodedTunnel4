@@ -303,7 +303,7 @@ EMH STAGENAME "Flooded Tunnel #4"
 EMH TILESET gfx/grasslands
 EMH BACKGROUND gfx/grasslands/stone.jpg
 EMH MUSIC music/tunnel
-EMH AMBIENCE sound/floodedTunnel.wav
+EMH AMBIENCE sound/floodedTunnel
 
 EMH SPRITE Dynamite 0 0 0 gfx/sprites/dynamite.png 60 @none@ 0
 EMH SPRITE Cog 0 0 0 gfx/sprites/ancientCog.png 60 @none@ 0

@@ -304,7 +304,7 @@ EMH TILESET gfx/arctic
 EMH BACKGROUND gfx/arctic/wasteland.png
 EMH MUSIC music/arctic
 
-EMH AMBIENCE sound/blizzard.wav
+EMH AMBIENCE sound/blizzard
 
 EMH CLIPPING -1 -1 7616 -1
 

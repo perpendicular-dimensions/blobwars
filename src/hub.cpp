@@ -443,7 +443,7 @@ int doHub()
 	audio.loadMusic("music/hub");
 	
 	// we might want this now, for medals
-	audio.loadSound(SND_ITEM, "sound/item.wav");
+	audio.loadSound(SND_ITEM, "sound/item");
 	
 	graphics.quickSprite("cheatHeader", graphics.loadImage("gfx/main/cheats.png"));
 	graphics.quickSprite("optionsHeader", graphics.loadImage("gfx/main/options.png"));

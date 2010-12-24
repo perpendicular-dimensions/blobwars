@@ -167,8 +167,8 @@ void showMissionClear()
 
 	graphics.blit(panel, (640 - panel->w) / 2, (480 - panel->h) / 2, graphics.background, false);
 
-	audio.loadSound(0, "sound/pop1.wav");
-	audio.loadSound(1, "sound/cheer.wav");
+	audio.loadSound(0, "sound/pop1");
+	audio.loadSound(1, "sound/cheer");
 
 	SDL_FillRect(graphics.screen, NULL, graphics.black);
 	graphics.updateScreen();

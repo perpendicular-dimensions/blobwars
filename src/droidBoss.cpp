@@ -397,8 +397,8 @@ void droidBossInit()
 		Math::addBit(&map.boss[i]->flags, ENT_FLIES);
 	}
 	
-	audio.loadSound(SND_BOSSCUSTOM1, "sound/droidChangeFreq.wav");
-	audio.loadSound(SND_BOSSCUSTOM2, "sound/droidFreakOut.wav");
+	audio.loadSound(SND_BOSSCUSTOM1, "sound/droidChangeFreq");
+	audio.loadSound(SND_BOSSCUSTOM2, "sound/droidFreakOut");
 	
 	debug(("droidBossInit: Done\n"));
 }

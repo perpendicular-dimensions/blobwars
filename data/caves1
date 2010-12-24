@@ -305,7 +305,7 @@ EMH TILESET gfx/caves
 EMH BACKGROUND gfx/caves/background.jpg
 EMH MUSIC music/cave
 
-EMH AMBIENCE sound/lava.wav
+EMH AMBIENCE sound/lava
 
 EMH ALPHATILES 245 246 247 -1
 

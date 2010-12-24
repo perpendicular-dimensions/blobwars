@@ -399,8 +399,8 @@ void tankBossMGInit()
 	map.boss[0]->die = &tankBossMGDie;
 	Math::addBit(&map.boss[0]->flags, ENT_AIMS);
 	
-	audio.loadSound(SND_BOSSCUSTOM1, "sound/tankBeam.wav");
-	audio.loadSound(SND_BOSSCUSTOM2, "sound/tankBeamFire.wav");
+	audio.loadSound(SND_BOSSCUSTOM1, "sound/tankBeam");
+	audio.loadSound(SND_BOSSCUSTOM2, "sound/tankBeamFire");
 	
 	map.setMainBossPart(map.boss[0]);
 	

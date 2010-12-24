@@ -492,8 +492,8 @@ void galdovInit()
 	
 	map.setMainBossPart(map.boss[0]);
 	
-	audio.loadSound(SND_BOSSCUSTOM1, "sound/galdovSplit.wav");
-	audio.loadSound(SND_BOSSCUSTOM2, "sound/galdovPain.wav");
+	audio.loadSound(SND_BOSSCUSTOM1, "sound/galdovSplit");
+	audio.loadSound(SND_BOSSCUSTOM2, "sound/galdovPain");
 	
 	debug(("galdovInit: Done\n"));
 }

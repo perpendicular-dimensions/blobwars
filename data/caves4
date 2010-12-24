@@ -303,7 +303,7 @@ EMH STAGENAME "Uncharted Cavern"
 EMH TILESET gfx/caves
 EMH BACKGROUND gfx/caves/background.jpg
 EMH MUSIC music/cave
-EMH AMBIENCE sound/lava.wav
+EMH AMBIENCE sound/lava
 
 EMH START 5664 4160
 

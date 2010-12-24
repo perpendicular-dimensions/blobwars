@@ -574,9 +574,9 @@ void galdovFinalInit()
 	map.boss[0]->die = &galdovFinalDie;
 	Math::addBit(&map.boss[0]->flags, ENT_AIMS);
 	
-	audio.loadSound(SND_BOSSCUSTOM1, "sound/galdovSplit.wav");
-	audio.loadSound(SND_BOSSCUSTOM2, "sound/galdovPain.wav");
-	audio.loadSound(SND_BOSSCUSTOM3, "sound/galdovDie.wav");
+	audio.loadSound(SND_BOSSCUSTOM1, "sound/galdovSplit");
+	audio.loadSound(SND_BOSSCUSTOM2, "sound/galdovPain");
+	audio.loadSound(SND_BOSSCUSTOM3, "sound/galdovDie");
 	
 	map.setMainBossPart(map.boss[0]);
 	

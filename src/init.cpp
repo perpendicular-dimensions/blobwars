@@ -360,8 +360,8 @@ void initSystem()
 	debug(("Font sizes all loaded!!\n"));
 
 	audio.loadSound(SND_CHEAT, "sound/Lock And Load!!!");
-	audio.loadSound(SND_HIGHLIGHT, "sound/menu.wav");
-	audio.loadSound(SND_SELECT, "sound/select.wav");
+	audio.loadSound(SND_HIGHLIGHT, "sound/menu");
+	audio.loadSound(SND_SELECT, "sound/select");
 	
 	graphics.medal[0] = graphics.loadImage("gfx/main/medal_bronze_1.png");
 	graphics.medal[1] = graphics.loadImage("gfx/main/award_star_silver_3.png");
