@@ -22,8 +22,8 @@ SDLC=/home/steve/Windows/bin/sdl-config
 
 CXXFLAGS += `$(SDLC) --cflags` -DVERSION=$(VERSION) -DRELEASE=$(RELEASE) -DUSEPAK=$(USEPAK)
 CXXFLAGS += -DPAKNAME=\"$(PAKNAME)\" -DPAKLOCATION=\"\" -DGAMEPLAYMANUAL=\"doc/index.html\" -Wall
-CXXFLAGS += -DLOCALEDIR=\"\" $(CFLAGS)  -DMEDAL_SERVER_HOST=\"$(MEDAL_SERVER_HOST)\" -DMEDAL_SERVER_PORT=$(MEDAL_SERVER_PORT) -pg -Werror
-LIBS = `$(SDLC) --libs` -lintl -lz -lSDL_mixer -lSDL_image -lSDL_ttf -lSDL_net -pg -lSDLmain
+CXXFLAGS += -DLOCALEDIR=\"\" $(CFLAGS)  -DMEDAL_SERVER_HOST=\"$(MEDAL_SERVER_HOST)\" -DMEDAL_SERVER_PORT=$(MEDAL_SERVER_PORT) -Werror
+LIBS = -lmingw32 `$(SDLC) --libs` -lintl -lz -lSDL_mixer -lSDL_image -lSDL_ttf -lSDL_net -lSDL -lSDLmain -lwinmm -lgdi32 -mwindows
 
 OBJS += CAudio.o
 OBJS += CBoss.o
