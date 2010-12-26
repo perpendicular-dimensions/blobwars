@@ -30,15 +30,8 @@ FileData *fileData = NULL;
 
 void cleanup()
 {
-	if (buffer != NULL)
-	{
-		delete[] buffer;
-	}
-	
-	if (output != NULL)
-	{
-		delete[] output;
-	}
+	delete[] buffer;
+	delete[] output;
 }
 
 void countFiles(const char *dirName)
@@ -136,20 +129,10 @@ void recurseDirectory(const char *dirName)
 			
 			fclose(infile);
 			
-			if (buffer != NULL)
-			{
-				delete[] buffer;
-				buffer = NULL;
-			}
-			
+			delete[] buffer;
 			buffer = new unsigned char[filesize];
 			
-			if (output != NULL)
-			{
-				delete[] output;
-				output = NULL;
-			}
-			
+			delete[] output;
 			output = new unsigned char[(int)(filesize * 1.01) + 12];
 			
 			fp = gzopen(filename, "rb");

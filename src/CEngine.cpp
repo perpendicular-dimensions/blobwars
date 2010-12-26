@@ -96,12 +96,10 @@ void Engine::destroy()
 	deleteWidgets();
 
 	debug(("engine: free databuffer\n"));
-	if (dataBuffer != NULL)
-		delete[] dataBuffer;
+	delete[] dataBuffer;
 
 	debug(("engine: free binarybuffer\n"));
-	if (binaryBuffer != NULL)
-		delete[] binaryBuffer;
+	delete[] binaryBuffer;
 
 	debug(("Clearing Define List...\n"));
 	defineList.clear();
@@ -333,16 +331,12 @@ bool Engine::unpack(const char *filename, int fileType)
 {
 	if (fileType == PAK_DATA)
 	{
-		if (dataBuffer != NULL)
-			delete[] dataBuffer;
-
+		delete[] dataBuffer;
 		dataBuffer = NULL;
 	}
 	else
 	{
-		if (binaryBuffer != NULL)
-			delete[] binaryBuffer;
-
+		delete[] binaryBuffer;
 		binaryBuffer = NULL;
 	}
 
@@ -405,11 +399,8 @@ bool Engine::unpack(const char *filename, int fileType)
 
 bool Engine::loadData(const char *filename)
 {
-	if (dataBuffer != NULL)
-	{
-		delete[] dataBuffer;
-		dataBuffer = NULL;
-	}
+	delete[] dataBuffer;
+	dataBuffer = NULL;
 	
 	#if USEPAK
 		return unpack(filename, PAK_DATA);

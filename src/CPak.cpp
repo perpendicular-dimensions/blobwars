@@ -35,15 +35,8 @@ Pak::Pak()
 
 Pak::~Pak()
 {
-	if (input != NULL)
-		delete[] input;
-		
-	input = NULL;
-	
-	if (fd != NULL)
-		delete[] fd;
-	
-	fd = NULL;
+	delete[] input;
+	delete[] fd;
 }
 
 void Pak::showPakErrorAndExit()
@@ -131,11 +124,7 @@ bool Pak::unpack(const char *filename, unsigned char **buffer)
 	
 	fseek(pak, currentFile->location, SEEK_SET);
 
-	if (input != NULL)
-	{
-		delete[] input;
-	}
-
+	delete[] input;
 	input = NULL;
 	
 	input = new unsigned char[(int)(currentFile->cSize * 1.01) + 12];
@@ -150,9 +139,7 @@ bool Pak::unpack(const char *filename, unsigned char **buffer)
 
 	fclose(pak);
 	
-	if (input != NULL)
-		delete[] input;
-
+	delete[] input;
 	input = NULL;
 	
 	debug(("Pak : Unpack %s...Done\n", filename));
