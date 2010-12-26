@@ -1,4 +1,4 @@
-109
+99
 000 1 HOOFD PROGRAMMERING
 020 0 Stephen Sweeney
 040 1 ADDITIONELE PROGRAMMERING
@@ -39,49 +39,48 @@
 020 0 Wesley Whitmore, Faye Price, Ceri Done
 020 0 Emma Hamilton, Ian Bisset, Rob Jones
 020 0 Neil Ellis
+050 1 VALGRIND
+020 0 http://valgrind.org
+050 1 CPPCHECK
+020 0 http://cppcheck.sf.net
 050 1 PORTING EN PATCHES
 020 0 LouiSe, Richard June, Bas Wijnen
 020 0 Ondrej Sury, Bob Ippolito
 050 1 MUZIEK
-040 0 “Helmet Shake”
-020 0 Gecomponeerd door Jogeir / Spaceballs
-020 0 Copyright © Jogeir
-040 0 “For a Friend”
-020 0 Gecomponeerd door David Elfstrom
-020 0 Copyright © 1991 David Elfstrom
-040 0 “Commando”
-020 0 Gecomponeerd door Kaizsu
-020 0 Copyright © Kaizsu
-040 0 “Do Viking”
-020 0 Gecomponeerd door Scorpik
-020 0 Copyright © Scorpik
-040 0 “Thug Live”
-020 0 Gecomponeerd door Gryzor
-020 0 Copyright © Gryzor
-040 0 “Daisy Chain”
-020 0 Onbekende auteur
-040 0 “Condom Corruption”
-020 0 Gecomponeerd door Travolta / Spaceballs
-020 0 Copyright © 1992 Travolta
-040 0 “Ice Cave”
-020 0 Onbekende auteur
-040 0 “Doctor Must Die”
-020 0 Onbekende auteur
-040 0 “A Friend Has Died”
-020 0 Gecomponeerd door Scorpik
-020 0 Copyright © 1995 Scorpik
-040 0 “Ice World”
-020 0 Onbekende auteur
-040 0 “Circuit Overlode”
-020 0 Gecomponeerd door HellTrot Co
-020 0 Copyright © 1998 HellTrot Co
-020 0 Alle rechten gereserveerd
-040 0 “Sweet Dreams”
-020 0 Gecomponeerd door Jussi Salemla
-020 0 Copyright © Jussi Salemla
-040 0 “Autumns Dawning”
-020 0 Gecomponeerd door Andy Carlson
-020 0 Copyright © 1995 Andy Carlson
+040 0 "Adventure"
+020 0 "Electricity"
+020 0 "Frogmusic"
+020 0 "Dishy"
+020 0 "Watching"
+020 0 "Party"
+020 0 "Swallow water"
+020 0 Gecomponeerd door DJ Sjors
+020 0 Copyright (c) 2005 Lennaert van Driel
+020 0 Gelicenseerd onder CC-BY-SA 3.0
+040 0 "Frustration"
+020 0 "Speezkeek"
+020 0 "Herbs"
+020 0 "I have something to say"
+020 0 "Happy"
+020 0 "Xylophonia"
+020 0 Gecomponeerd door Ambick
+020 0 Copyright (c) 2005 Dick Huijer
+020 0 Gelicenseerd onder CC-BY-SA 3.0
+040 0 "Desperate"
+020 0 "Credits"
+020 0 Gecomponeerd door SinQ
+020 0 Copyright (c) 2005 Sander van Oirschot
+020 0 Gelicenseerd onder CC-BY 3.0
+050 1 GELUID
+020 0 Samples zijn gebruikt van verschillende Free Software spellen:
+020 0 BZFlag - LGPL versie 2.1
+020 0 FreeDoom - BSD
+020 0 Nexuiz - GPL versie 2
+020 0 OpenArena - GPL versie 2
+020 0 OpenQuartz - GPL versie 2
+020 0 Scorhed3D - GPL versie 2
+020 0 SuperTux - GPL versie 2
+020 0 Word War VI - CC-BY-SA 3.0
 050 1 SPECIALE BEDANKINGEN
 020 0 Mijn ouders voor het aanmoedigen van het “Kleine-Gele-Ballenproject”
 020 0 De Debian gemeenschap voor hun grondige bughunting
@@ -89,15 +88,6 @@
 020 0 Allan Crain voor het corrigeren van spelling en grammatica
 020 0 De vele mensen die tijd hebben genomen in het testen en bugs raporteren
 020 0 En allen op de SDL mailing list
-050 1 BITSTREAM VERA FONT
-020 0 Copyright © 2003 door Bitstream, Inc.
-020 0 Alle rechten gereserveerd.
-020 0 Bitstream Vera is een handelsmerk van Bitstream, Inc.
-100 0 Alle muziek en geluidseffecten in dit spel zijn overgenomen van vrijelijk
-020 0 toegankelijke websites. In alle gevallen is aangenomen dat de muziek en het
-020 0 geluid onder public domain valt en daardoor vrij distribueerbaar is. We
-020 0 accepteren geen verantwoordelijkheid voor audio die vrijelijk beschikbaar is
-020 0 gesteld zonder medeweten en goedkeuring van de auteur.
 100 0 Alle karakternamen gebruikt in het spel vallen onder de copyrights en/of
 020 0 merkrechten van de betreffende eigenaren. Zij zijn op geen enkele manier
 020 0 geassocieerd met Blob Wars: Metal Blob Solid of Parallel Realities.

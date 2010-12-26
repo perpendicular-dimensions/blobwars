@@ -1,4 +1,4 @@
-109
+99
 000 1 MAIN PROGRAMMING
 020 0 Stephen Sweeney
 040 1 ADDITIONAL PROGRAMMING
@@ -39,44 +39,48 @@
 020 0 Wesley Whitmore, Faye Price, Ceri Done
 020 0 Emma Hamilton, Ian Bisset, Rob Jones
 020 0 Neil Ellis
+050 1 VALGRIND
+020 0 http://valgrind.org
+050 1 CPPCHECK
+020 0 http://cppcheck.sf.net
 050 1 PORTING AND PATCHES
 020 0 LouiSe, Richard June, Bas Wijnen
 020 0 Ondrej Sury, Bob Ippolito
 050 1 MUSIC
 040 0 "Adventure"
-040 0 "Electricity"
-040 0 "Frogmusic"
-040 0 "Dishy"
-040 0 "Watching"
-040 0 "Party"
-040 0 "Swallow water"
-020 0 Licensed under CC-BY-SA 3.0
+020 0 "Electricity"
+020 0 "Frogmusic"
+020 0 "Dishy"
+020 0 "Watching"
+020 0 "Party"
+020 0 "Swallow water"
 020 0 Composed by DJ Sjors
 020 0 Copyright (c) 2005 Lennaert van Driel
+020 0 Licensed under CC-BY-SA 3.0
 040 0 "Frustration"
-040 0 "Speezkeek"
-040 0 "Herbs"
-040 0 "I have something to say"
-040 0 "Happy"
-040 0 "Xylophonia"
+020 0 "Speezkeek"
+020 0 "Herbs"
+020 0 "I have something to say"
+020 0 "Happy"
+020 0 "Xylophonia"
 020 0 Composed by Ambick
 020 0 Copyright (c) 2005 Dick Huijer
 020 0 Licensed under CC-BY-SA 3.0
 040 0 "Desperate"
-040 0 "Credits"
+020 0 "Credits"
 020 0 Composed by SinQ
 020 0 Copyright (c) 2005 Sander van Oirschot
 020 0 Licensed under CC-BY 3.0
 050 1 SOUND
 020 0 Samples have been taken from various other Free Software games:
-040 0 BZFlag - LGPL version 2.1
-040 0 FreeDoom - BSD
-040 0 Nexuiz - GPL version 2
-040 0 OpenArena - GPL version 2
-040 0 OpenQuartz - GPL version 2
-040 0 Scorhed3D - GPL version 2
-040 0 SuperTux - GPL version 2
-040 0 Word War VI - CC-BY-SA 3.0
+020 0 BZFlag - LGPL version 2.1
+020 0 FreeDoom - BSD
+020 0 Nexuiz - GPL version 2
+020 0 OpenArena - GPL version 2
+020 0 OpenQuartz - GPL version 2
+020 0 Scorhed3D - GPL version 2
+020 0 SuperTux - GPL version 2
+020 0 Word War VI - CC-BY-SA 3.0
 050 1 SPECIAL THANKS
 020 0 My parents for their encouragement on "The Little Yellow Balls" project
 020 0 The Debian community for their diligent bug hunting
