@@ -144,7 +144,7 @@ bool loadConfig()
 		return true;
 	}
 
-	fscanf(fp, "%f %d", &version, &release);
+	fscanf(fp, "%10f %10d", &version, &release);
 
 	debug(("Version = %.2f - Expected %.2f\n", version, VERSION));
 	debug(("Release = %d - Expected %d\n", release, RELEASE));
@@ -154,7 +154,7 @@ bool loadConfig()
 		rtn = true;
 	}
 
-	fscanf(fp, "%d %d %d %d %d %d %d", &engine.fullScreen, &game.musicVol, &game.soundVol, &game.output, &game.brightness, &engine.extremeAvailable, &game.gore);
+	fscanf(fp, "%10d %10d %10d %10d %10d %10d %10d", &engine.fullScreen, &game.musicVol, &game.soundVol, &game.output, &game.brightness, &engine.extremeAvailable, &game.gore);
 
 	fclose(fp);
 
@@ -223,7 +223,7 @@ int initMedalService(void *data)
 		return 0;
 	}
 	
-	fscanf(fp, "%s", privateKey);
+	fscanf(fp, "%19s", privateKey);
 	
 	fclose(fp);
 		
