@@ -274,12 +274,12 @@ void Engine::getInput()
 	}
 }
 
-int Engine::getMouseX()
+int Engine::getMouseX() const
 {
 	return mouseX;
 }
 
-int Engine::getMouseY()
+int Engine::getMouseY() const
 {
 	return mouseY;
 }
@@ -458,7 +458,7 @@ void Engine::setPlayerPosition(int x, int y, int limitLeft, int limitRight, int 
 	Math::limitInt(&playerPosY, limitUp, limitDown);
 }
 
-int Engine::getFrameLoop()
+int Engine::getFrameLoop() const
 {
 	return frameLoop;
 }
@@ -475,7 +475,7 @@ void Engine::doTimeDifference()
 	time2 = SDL_GetTicks();
 }
 
-float Engine::getTimeDifference()
+float Engine::getTimeDifference() const
 {
 	return timeDifference;
 }

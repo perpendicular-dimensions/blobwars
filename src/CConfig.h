@@ -17,7 +17,7 @@ class Config
 	void populate();
 	void populate(int *data);
 	
-	bool isControl(CONTROL::TYPE type);
+	bool isControl(CONTROL::TYPE type) const;
 	void resetControl(CONTROL::TYPE type);
 	
 	void doPause();

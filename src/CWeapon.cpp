@@ -37,7 +37,7 @@ void Weapon::setName(const char *name)
 	strlcpy(this->name, name, sizeof this->name);
 }
 
-int Weapon::getSpeed(int face)
+int Weapon::getSpeed(int face) const
 {
 	return (dx - ((dx * 2) * face));
 }

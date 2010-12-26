@@ -117,7 +117,7 @@ void Game::setCheckPoint(float x, float y)
 	checkPointY = (int)y;
 }
 
-void Game::getCheckPoint(float *x, float *y)
+void Game::getCheckPoint(float *x, float *y) const
 {
 	*x = checkPointX;
 	*y = checkPointY;
@@ -159,7 +159,7 @@ int Game::getWeaponAccuracy(int weapon)
 	return 0;
 }
 
-int Game::getTotalBulletsFired()
+int Game::getTotalBulletsFired() const
 {
 	return bulletsFired[0] + bulletsFired[1] + bulletsFired[2] + bulletsFired[3] + bulletsFired[4];
 }

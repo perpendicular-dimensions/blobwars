@@ -63,14 +63,14 @@ class Game {
 		void destroy();
 		void incrementMissionTime();
 		void setCheckPoint(float x, float y);
-		void getCheckPoint(float *x, float *y);
+		void getCheckPoint(float *x, float *y) const;
 		void setObjectiveCheckPoint();
 		void useObjectiveCheckPoint();
 		void doCombo();
 		void incBulletsFired();
 		void incBulletsHit();
 		int getWeaponAccuracy(int weapon);
-		int getTotalBulletsFired();
+		int getTotalBulletsFired() const;
 		int getTotalAccuracy();
 		int getMostUsedWeapon();
 		void totalUpStats();

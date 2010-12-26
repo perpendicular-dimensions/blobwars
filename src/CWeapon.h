@@ -30,6 +30,6 @@ class Weapon {
 
 	Weapon();
 	void setName(const char *name);
-	int getSpeed(int face);
+	int getSpeed(int face) const;
 
 };

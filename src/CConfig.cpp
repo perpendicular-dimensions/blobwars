@@ -43,7 +43,7 @@ void Config::populate(int *data)
 	command[CONTROL::PAUSE] = 0;
 }
 
-bool Config::isControl(CONTROL::TYPE type)
+bool Config::isControl(CONTROL::TYPE type) const
 {
 	return command[type];
 }

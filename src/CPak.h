@@ -42,6 +42,6 @@ class Pak {
 	void setPakFile(const char *pakFilename);
 	bool unpack(const char *filename, unsigned char **buffer);
 	bool fileExists(const char *filename);
-	unsigned int getUncompressedSize();
+	unsigned int getUncompressedSize() const;
 
 };

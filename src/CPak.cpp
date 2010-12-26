@@ -181,7 +181,7 @@ bool Pak::fileExists(const char *filename)
 	return false;
 }
 
-unsigned int Pak::getUncompressedSize()
+unsigned int Pak::getUncompressedSize() const
 {
 	return (unsigned int)currentFile->fSize;
 }

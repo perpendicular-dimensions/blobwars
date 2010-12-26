@@ -159,7 +159,7 @@ void Graphics::setTransparent(SDL_Surface *sprite)
 	SDL_SetColorKey(sprite, (SDL_SRCCOLORKEY|SDL_RLEACCEL), SDL_MapRGB(sprite->format, 0, 0, 0));
 }
 
-bool Graphics::canShowMedalMessage()
+bool Graphics::canShowMedalMessage() const
 {
 	return (medalMessageTimer <= 0);
 }
@@ -662,17 +662,17 @@ void Graphics::animateSprites()
 	}
 }
 
-int Graphics::getWaterAnim()
+int Graphics::getWaterAnim() const
 {
 	return waterAnim;
 }
 
-int Graphics::getSlimeAnim()
+int Graphics::getSlimeAnim() const
 {
 	return slimeAnim;
 }
 
-int Graphics::getLavaAnim()
+int Graphics::getLavaAnim() const
 {
 	return lavaAnim;
 }

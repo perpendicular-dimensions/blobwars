@@ -75,7 +75,7 @@ class Graphics {
 	Sprite *getSpriteHead();
 	void setTransparent(SDL_Surface *sprite);
 	void updateScreen();
-	bool canShowMedalMessage();
+	bool canShowMedalMessage() const;
 	void delay(int time);
 	void RGBtoHSV(float r, float g, float b, float *h, float *s, float *v);
 	void HSVtoRGB(float *r, float *g, float *b, float h, float s, float v);
@@ -89,9 +89,9 @@ class Graphics {
 	Sprite *addSprite(const char *name);
 	Sprite *getSprite(const char *name, bool required);
 	void animateSprites();
-	int getWaterAnim();
-	int getSlimeAnim();
-	int getLavaAnim();
+	int getWaterAnim() const;
+	int getSlimeAnim() const;
+	int getLavaAnim() const;
 	int getLavaAnim(int current);
 	void loadBackground(const char *filename);
 	void putPixel(int x, int y, Uint32 pixel, SDL_Surface *dest);

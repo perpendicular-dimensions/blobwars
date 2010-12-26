@@ -97,8 +97,8 @@ class Engine {
 	Engine();
 	void destroy();
 	void getInput();
-	int getMouseX();
-	int getMouseY();
+	int getMouseX() const;
+	int getMouseY() const;
 
 	void setMouse(int x, int y);
 	bool userAccepts();
@@ -114,10 +114,10 @@ class Engine {
 	bool loadData(const char *filename);
 	void reportFontFailure();
 	void setPlayerPosition(int x, int y, int limitLeft, int limitRight, int limitUp, int limitDown);
-	int getFrameLoop();
+	int getFrameLoop() const;
 	void doFrameLoop();
 	void doTimeDifference();
-	float getTimeDifference();
+	float getTimeDifference() const;
 	void resetTimeDifference();
 	void setInfoMessage(const char *message, int priority, int type);
 	void deleteWidgets();
