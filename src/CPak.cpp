@@ -149,14 +149,6 @@ bool Pak::unpack(const char *filename, unsigned char **buffer)
 
 bool Pak::fileExists(const char *filename)
 {
-	unsigned int hashcode = 0;
-	unsigned int length = strlen(filename);
-	
-	for (unsigned int i = 0 ; i < length ; i++)
-	{
-		hashcode = hashcode + (filename[i] * 31 ^ (length - i));
-	}
-	
 	for (unsigned int i = 0 ; i < numberOfFiles ; i++)
 	{
 		if (strcmp(fd[i].filename, filename) == 0)
