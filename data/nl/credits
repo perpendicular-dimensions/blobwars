@@ -1,4 +1,4 @@
-99
+149
 000 1 HOOFD PROGRAMMERING
 020 0 Stephen Sweeney
 040 1 ADDITIONELE PROGRAMMERING
@@ -72,15 +72,65 @@
 020 0 Copyright (c) 2005 Sander van Oirschot
 020 0 Gelicenseerd onder CC-BY 3.0
 050 1 GELUID
-020 0 Samples zijn gebruikt van verschillende Free Software spellen:
-020 0 BZFlag - LGPL versie 2.1
-020 0 FreeDoom - BSD
-020 0 Nexuiz - GPL versie 2
-020 0 OpenArena - GPL versie 2
-020 0 OpenQuartz - GPL versie 2
-020 0 Scorhed3D - GPL versie 2
-020 0 SuperTux - GPL versie 2
-020 0 Word War VI - CC-BY-SA 3.0
+040 0 pop1
+020 0 Gehaald uit BZFlag
+020 0 Gelicenseerd onder LGPL version 2.1
+040 0 weaponPickup, death1, death2, death3, galdovSplit
+020 0 Gehaald uit FreeDoom
+020 0 Gelicenseerd onder de BSD licentie
+040 0 machinegun, plasma, rocket, teleport1
+020 0 Gehaald uit Nexuiz
+020 0 Gelicenseerd onder GPL version 2
+040 0 menu, select, pistol, switch
+020 0 Gehaald uit OpenArena
+020 0 Gelicenseerd onder GPL version 2
+040 0 rico2, teleport2, teleport3, waterOut
+020 0 Gehaald uit OpenQuartz
+020 0 Gelicenseerd onder GPL version 2
+040 0 laser
+020 0 Gehaald uit Scorched3D
+020 0 Gelicenseerd onder GPL version 2
+040 0 clang, electricity1, stoneBreak
+020 0 Gehaald uit Word War VI
+020 0 Copyright (c) Stephen M. Cameron
+020 0 Gelicenseerd onder CC-BY-SA 3.0
+040 0 drowning, gulp
+020 0 Gehaald uit http://pdsounds.org
+020 0 Public Domain
+040 0 rico1
+020 0 Gehaald uit http://simplythebest.net/sounds
+020 0 Public Domain
+040 0 lava
+020 0 Gehaald uit http://soundbible.com
+020 0 Copyright (c) Amanda
+020 0 Gelicenseerd onder CC-BY 3.0
+040 0 grenadeBounce
+020 0 Gehaald uit http://soundbible.com
+020 0 Copyright (c) Caroline Ford
+020 0 Gelicenseerd onder CC-BY 3.0
+040 0 doorLocked
+020 0 Gehaald uit http://soundbible.com
+020 0 Copyright (c) BlastwaveFx.com
+020 0 Gelicenseerd onder CC-BY 3.0
+040 0 blizzard, cheer, clock, doorOpened, electricity2, electricity3,
+020 0 elecDeath3, fireCrackle, fireball, floodedTunnel, galdovDie,
+020 0 galdovPain, punch, rain, spike, splat, switch1, switch2, throw
+020 0 Gehaald uit http://soundbible.com
+020 0 Copyright (c) Mike Koenig
+020 0 Gelicenseerd onder CC-BY 3.0
+040 0 blizzard2, droidFreakOut, eat
+020 0 Gehaald uit http://soundbible.com
+020 0 Public Domain
+040 0 computer, doorOpen, tankBeam, tankBeamFire, waterIn
+020 0 Gehaald uit the OLPC sound samples collection version 2
+020 0 Gelicenseerd onder CC-BY 3.0
+040 0 droid1, droid2, droidChangeFreq, elecDeath1, elecDeath2
+020 0 Created using sfxr
+020 0 Copyright (c) Hans de Goede
+020 0 Gelicenseerd onder CC-BY 3.0
+040 0 Lock and Load!!
+020 0 Gehaald uit "Family Guy"
+020 0 Fair use
 050 1 SPECIALE BEDANKINGEN
 020 0 Mijn ouders voor het aanmoedigen van het “Kleine-Gele-Ballenproject”
 020 0 De Debian gemeenschap voor hun grondige bughunting
