@@ -29,6 +29,8 @@ extern bool loadGame(int slot);
 
 extern void showOptions();
 
+extern void doQuit();
+
 extern Audio audio;
 extern Config config;
 extern Engine engine;

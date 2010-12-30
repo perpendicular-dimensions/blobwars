@@ -420,10 +420,7 @@ int title()
 	
 	if (quit)
 	{
-		if (engine.useAudio)
-		{
-			SDL_Delay(1000);
-		}
+		doQuit();
 		exit(0);
 	}
 	
@@ -564,4 +561,34 @@ void doCredits()
 
 	delete[] y;
 	delete[] credit;
+}
+
+/**
+* Shows the exit screen, mentioning the sequel and the book by Stephen Sweeney
+*/
+void doQuit()
+{
+	SDL_FillRect(graphics.screen, NULL, graphics.black);
+	SDL_Surface *sequel = graphics.loadImage("gfx/main/sequel.png");
+	SDL_Surface *book = graphics.loadImage("gfx/main/book.png");
+
+	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
+	graphics.setFontSize(1);
+	graphics.drawString("If you like Blobwars: Blob and Conquer, you might also like:", 320, 20, true, graphics.screen);
+	graphics.blit(sequel, 160, 200, graphics.screen, true);
+	graphics.blit(book, 480, 200, graphics.screen, true);
+	graphics.setFontSize(0);
+	graphics.drawString("http://blobandconquer.sf.net", 160, 380, true, graphics.screen);
+	graphics.drawString("http://www.battleforthesolarsystem.com", 480, 380, true, graphics.screen);
+	graphics.setFontSize(3);
+	graphics.drawString("Thank you for playing Blobwars!", 320, 430, true, graphics.screen);
+	graphics.setFontSize(0);
+	graphics.drawString("Press Space to Exit.", 320, 460, true, graphics.screen);
+
+	graphics.updateScreen();
+
+	do {
+		SDL_Delay(16);
+		engine.getInput();
+	} while(!engine.userAccepts());
 }
