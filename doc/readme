@@ -4,7 +4,101 @@ Version 1.04
 
 LICENSE
 
-	GNU GPL - Please read LICENSE for more information
+	All code and graphics are released under the GNU GPL version 2 or later.
+	Please read the file "license" for more information.
+
+	The music and sound has been created by others:
+
+	"Adventure", "Electricity", "Frogmusic", "Dishy", "Watching", "Party", "Swallow water",
+	Composed by DJ Sjors
+	Copyright (c) 2005 Lennaert van Driel
+	Licensed under CC-BY-SA 3.0
+
+	"Frustration", "Speezkeek", "Herbs", "I have something to say", "Happy", "Xylophonia"
+	Composed by Ambick
+	Copyright (c) 2005 Dick Huijer
+	Licensed under CC-BY-SA 3.0
+
+	"Desperate", "Credits"
+	Composed by SinQ
+	Copyright (c) 2005 Sander van Oirschot
+	Licensed under CC-BY 3.0
+
+	pop1
+	Taken from BZFlag
+	Licensed under LGPL version 2.1
+
+	weaponPickup, death1, death2, death3, galdovSplit
+	Taken from FreeDoom
+	Licensed under the BSD license
+
+	machinegun, plasma, rocket, teleport1
+	Taken from Nexuiz
+	Licensed under GPL version 2
+
+	menu, select, pistol, switch
+	Taken from OpenArena
+	Licensed under GPL version 2
+
+	rico2, teleport2, teleport3, waterOut
+	Taken from OpenQuartz
+	Licensed under GPL version 2
+
+	laser
+	Taken from Scorched3D
+	Licensed under GPL version 2
+
+	clang, electricity1, stoneBreak
+	Taken from Word War VI
+	Copyright (c) Stephen M. Cameron
+	Licensed under CC-BY-SA 3.0
+
+	drowning, gulp
+	Taken from http://pdsounds.org
+	Public Domain
+
+	rico1
+	Taken from http://simplythebest.net/sounds
+	Public Domain
+
+	lava
+	Taken from http://soundbible.com
+	Copyright (c) Amanda
+	Licensed under CC-BY 3.0
+
+	grenadeBounce
+	Taken from http://soundbible.com
+	Copyright (c) Caroline Ford
+	Licensed under CC-BY 3.0
+
+	doorLocked
+	Taken from http://soundbible.com
+	Copyright (c) BlastwaveFx.com
+	Licensed under CC-BY 3.0
+
+	blizzard, cheer, clock, doorOpened, electricity2, electricity3,
+	elecDeath3, fireCrackle, fireball, floodedTunnel, galdovDie,
+	galdovPain, punch, rain, spike, splat, switch1, switch2, throw
+	Taken from http://soundbible.com
+	Copyright (c) Mike Koenig
+	Licensed under CC-BY 3.0
+
+	blizzard2, droidFreakOut, eat
+	Taken from http://soundbible.com
+	Public Domain
+
+	computer, doorOpen, tankBeam, tankBeamFire, waterIn
+	Taken from the OLPC sound samples collection version 2
+	Licensed under CC-BY 3.0
+
+	droid1, droid2, droidChangeFreq, elecDeath1, elecDeath2
+	Created using sfxr
+	Copyright (c) Hans de Goede
+	Licensed under CC-BY 3.0
+
+	Lock and Load!!
+	Taken from "Family Guy"
+	Fair use
 
 
 INSTALLATION
