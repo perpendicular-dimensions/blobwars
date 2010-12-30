@@ -602,8 +602,8 @@ msgstr "Färdigt"
 msgid "Continues Used:"
 msgstr "Använda continues:"
 
-msgid "Copyright (C) 2004, 2005 Parallel Realities"
-msgstr "Copyright © 2004, 2005 Parallel Realities"
+msgid "Copyright (C) 2004-2010 Parallel Realities"
+msgstr "Copyright © 2004-2010 Parallel Realities"
 
 # as in Corrupt Save Data
 msgid "Corrupt"
