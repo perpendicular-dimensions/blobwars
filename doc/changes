@@ -1,6 +1,45 @@
 CHANGE LOG
 ----------
 
+Version 1.18
+
+* Updated Catalan and Dutch translations.
+
+* Minor spelling errors fixed.
+
+* Moved desktop entry from Applicaitons to ArcadeGame section.
+
+* Perform a sanitiy check when loading keyboard.cfg.
+
+* Allow the game to run without music and sounds.
+
+* Fixed bug preventing long messages to be seen.
+
+* Briefly show music credits at the start of a level.
+
+* Fixed bugs found by Valgrind and Cppcheck.
+
+* Prevent the player from getting the JetPack too early.
+
+* Added Free music and sound effects.
+
+* Added exit screen.
+
+Version 1.17
+
+* Add medal support.
+
+Version 1.06
+
+* Fixed behaviour of decorative tiles in certain maps.
+
+* Fixed item placements with tall objects.
+
+* Fixed MIA placement on a lift while moving around.
+
+* Ensure killing all bosses completes the objective.
+
+
 Version 1.05
 
 * Fixed endian issue with PAK file creation code. PAK file is now created using
