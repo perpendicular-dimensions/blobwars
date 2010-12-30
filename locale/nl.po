@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: blobwars 1.06\n"
-"PO-Revision-Date: 2007-04-22 14:12+0200\n"
+"Project-Id-Version: blobwars 1.17\n"
+"PO-Revision-Date: 2010-12-30 15:33+0100\n"
 "Last-Translator: Guus Sliepen <guus@debian.org>\n"
 "Language-Team: Dutch Localization <debian-l10n-dutch@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -652,6 +652,15 @@ msgstr "Doorgaan gebruikt:"
 
 msgid "Copyright (C) 2004, 2005 Parallel Realities"
 msgstr "Copyright © 2004, 2005 Parallel Realities"
+
+msgid "If you like Blob Wars: Metal Blob Solid, you might also like:"
+msgstr "Als je Blob Wars: Metal Blob Solid leuk vindt, kijk dan ook eens naar:"
+
+msgid "Thank you for playing Blob Wars!"
+msgstr "Bedankt voor het spelen van Blob Wars!"
+
+msgid "Press Space to Exit."
+msgstr "Druk op Spatie om af te sluiten."
 
 # as in Corrupt Save Data
 msgid "Corrupt"
