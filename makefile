@@ -5,7 +5,7 @@ ICONS = icons/
 
 VERSION = 1.17
 RELEASE = 1
-USEPAK = 1
+USEPAK = 0
 
 PREFIX=$(DESTDIR)/usr
 BINDIR = $(PREFIX)/games/
@@ -15,7 +15,6 @@ ICONDIR = $(PREFIX)/share/icons/hicolor/
 DESKTOPDIR = $(PREFIX)/share/applications/
 LOCALEDIR = $(PREFIX)/share/locale/
 MEDAL_SERVER_HOST = www.parallelrealities.co.uk
-#MEDAL_SERVER_HOST = localhost
 MEDAL_SERVER_PORT = 80
 
 CXXFLAGS += `sdl-config --cflags` -DVERSION=$(VERSION) -DRELEASE=$(RELEASE) -DUSEPAK=$(USEPAK)
