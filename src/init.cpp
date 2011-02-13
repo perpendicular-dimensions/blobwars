@@ -340,8 +340,6 @@ void initSystem()
 		snprintf(tempPath, sizeof tempPath, "%sfont.ttf", engine.userHomeDirectory);	
 		remove(tempPath);
 		
-		SDL_Delay(1000); // wait one second, just to be sure!
-		
 		if (!engine.unpack("data/vera.ttf", PAK_FONT))
 		{
 			engine.reportFontFailure();
