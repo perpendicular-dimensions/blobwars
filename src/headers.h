@@ -42,8 +42,15 @@ extern DECLSPEC int SDLCALL SDL_GetGamma(float *red, float *green, float *blue);
 #include "SDL/SDL_net.h"
 #endif
 
+#ifndef WIN32
 #include <libintl.h>
 #define _(string) gettext(string)
+#else
+#define _(x) (x)
+#define gettext(x) (x)
+#define bindtextdomain(x, y) while(false)
+#define textdomain(x) while(false)
+#endif
 
 #if !defined(OpenBSD) && !defined(FreeBSD)
 #define strlcat(dest, src, n) strncat((dest), (src), (n) - 1)
