@@ -273,7 +273,7 @@ void getMapTokens()
 			else if (strcmp("ALPHATILES", mapEntity) == 0)
 			{
 				for (int i = 0 ; i < 15 ; i++)
-					*token++;
+					token++;
 
 				while (true)
 				{
@@ -288,7 +288,7 @@ void getMapTokens()
 
 					while (true)
 					{
-						*token++;
+						token++;
 
 						if (*token == ' ')
 							break;

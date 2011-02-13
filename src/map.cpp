@@ -649,7 +649,7 @@ void parseMapDataLine(const char *line, int y)
 
 		while (true)
 		{
-			*line++;
+			line++;
 
 			if (*line == ' ')
 				break;

@@ -569,11 +569,11 @@ int doGame()
 	SDL_FillRect(graphics.screen, NULL, graphics.black);
 	graphics.delay(1000);
 
-	Uint32 then, frames, frameLimit, millis, frameCounter;
+	Uint32 then, frames, frameLimit, millis;
 	Uint32 start, cur;
 
 	#if DEBUG
-	Uint32 now;
+	Uint32 now, frameCounter;
 	char fps[10];
 	strlcpy(fps, "fps", sizeof fps);
 	#endif
@@ -619,7 +619,9 @@ int doGame()
 	frameLimit = SDL_GetTicks() + 16;
 	frames = millis = 0;
 	start = then = SDL_GetTicks();
+#ifdef DEBUG
 	frameCounter = SDL_GetTicks();
+#endif
 
 	if ((strcmp(map.name, "Space Station") == 0) && (!game.continueFromCheckPoint))
 	{
