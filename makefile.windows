@@ -17,13 +17,13 @@ LOCALEDIR = $(PREFIX)/share/locale/
 MEDAL_SERVER_HOST = www.parallelrealities.co.uk
 MEDAL_SERVER_PORT = 80
 
-CXX=i586-mingw32msvc-g++
-SDLC=/home/steve/Windows/bin/sdl-config
+CXX = i586-mingw32msvc-g++
+SDLC ?= sdl-config
 
 CXXFLAGS += `$(SDLC) --cflags` -DVERSION=$(VERSION) -DRELEASE=$(RELEASE) -DUSEPAK=$(USEPAK)
 CXXFLAGS += -DPAKNAME=\"$(PAKNAME)\" -DPAKLOCATION=\"\" -DGAMEPLAYMANUAL=\"doc/index.html\" -Wall
 CXXFLAGS += -DLOCALEDIR=\"\" $(CFLAGS)  -DMEDAL_SERVER_HOST=\"$(MEDAL_SERVER_HOST)\" -DMEDAL_SERVER_PORT=$(MEDAL_SERVER_PORT) -Werror
-LIBS = -lmingw32 `$(SDLC) --libs` -lintl -lz -lSDL_mixer -lSDL_image -lSDL_ttf -lSDL_net -lSDL -lSDLmain -lwinmm -lgdi32 -mwindows
+LIBS = -lmingw32 `$(SDLC) --libs` -lz -lSDL_mixer -lSDL_image -lSDL_ttf -lSDL_net -lSDLmain -lSDL -lwinmm -lgdi32 -mwindows
 
 OBJS += CAudio.o
 OBJS += CBoss.o
@@ -82,6 +82,9 @@ $(PROG): $(GAMEOBJS)
 	
 pak: $(PAKOBJS)
 	$(CXX) $(PAKOBJS) $(LIBS) -o pak.exe
+
+buildpak: pak
+	./pak data gfx music sound $(PAKNAME)
 
 %.mo: %.po
 	msgfmt -c -o $@ $<
