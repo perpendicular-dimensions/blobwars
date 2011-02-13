@@ -110,8 +110,6 @@ bool Audio::loadMusic(const char *filename)
 
 	remove(tempPath);
 	
-	SDL_Delay(250); // wait a bit, just to be sure!
-
 	if (music != NULL)
 	{
 		Mix_HaltMusic();
@@ -138,7 +136,15 @@ bool Audio::loadMusic(const char *filename)
 		return false;
 	}
 
-	snprintf(tempPath, sizeof tempPath, "%s.tags", filename);
+	#if USEPAK
+		snprintf(tempPath, sizeof tempPath, "%smusic.tags", engine->userHomeDirectory);
+		remove(tempPath);
+		char tagfilename[PATH_MAX];
+		snprintf(tagfilename, sizeof tagfilename, "%s.tags", filename);
+		engine->unpack(tagfilename, PAK_TAGS);
+	#else
+		snprintf(tempPath, sizeof tempPath, "%s.tags", filename);
+	#endif
 	FILE *fp = fopen(tempPath, "r");
 	char line[1024];
 	

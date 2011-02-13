@@ -19,6 +19,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
 #include "headers.h"
+#include <errno.h>
 
 Engine::Engine()
 {
@@ -365,7 +366,7 @@ bool Engine::unpack(const char *filename, int fileType)
 		}
 	}
 
-	if ((fileType == PAK_MUSIC) || (fileType == PAK_FONT))
+	if ((fileType == PAK_MUSIC) || (fileType == PAK_FONT) || (fileType == PAK_TAGS))
 	{
 		char tempPath[PATH_MAX];
 		
@@ -377,6 +378,12 @@ bool Engine::unpack(const char *filename, int fileType)
 			fp = fopen(tempPath, "wb");
 		}
 
+		if (fileType == PAK_TAGS)
+		{
+			snprintf(tempPath, sizeof tempPath, "%smusic.tags", userHomeDirectory);
+			fp = fopen(tempPath, "wb");
+		}
+
 		if (fileType == PAK_FONT)
 		{
 			snprintf(tempPath, sizeof tempPath, "%sfont.ttf", userHomeDirectory);
@@ -385,6 +392,7 @@ bool Engine::unpack(const char *filename, int fileType)
 
 		if (!fp)
 		{
+			printf("Fatal Error: could not open %s for writing: %s", tempPath, strerror(errno));
 			return false;
 		}
 

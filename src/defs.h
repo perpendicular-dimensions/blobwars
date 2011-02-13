@@ -372,7 +372,8 @@ enum {
 	PAK_SOUND,
 	PAK_MUSIC,
 	PAK_DATA,
-	PAK_FONT
+	PAK_FONT,
+	PAK_TAGS
 };
 
 /* ############# debug ################## */
