@@ -1,0 +1,156 @@
+Origin of sfx / samples used in blobwars
+----------------------------------------
+
+Note all samples have been made mono
+
+From other games:
+-----------------
+
+From bzflag, LGPLv2.1:
+pop1.wav          bzflag/pop.wav
+
+From freedoom, BSD:
+weaponPickup.wav  freedoom/sounds/dswpnup.wav
+death1.wav        freedoom/sounds/dspodth1.wav
+death2.wav        freedoom/sounds/dspodth2.wav
+death3.wav        freedoom/sounds/dspodth3.wav
+galdovSplit.wav   freedoom/sounds/dstelept.wav
+
+From nexuiz, GPLv2:
+machinegun.wav    nexuiz-20091001/sound/weapons/uzi_fire.ogg
+                  (begin copy pasted 3x, end removed)
+plasma.wav        nexuiz-20091001/sound/weapons/hook_fire.ogg
+                  (silence at the end removed)
+rocket.wav        nexuiz-20091001/sound/weapons/rocket_fire.ogg
+                  (slightly (15%) sped up)
+teleport1.wav     nexuiz-20091001/sound/misc/teleport.ogg
+
+From openarena, GPLv2:
+menu.wav          baseoa/sound/misc/menu1.wav
+select.wav        baseoa/sound/items/m_health.wav
+pistol.wav        baseoa/sound/weapons/machinegun/machgf1b.wav
+                  (made 1.0 db louder with clipping in audacity)
+switch.wav        baseoa/sound/movers/switches/butn2.wav
+
+From openquartz, GPLv2:
+rico2.wav         pak0/sound/weapons/ric2.wav
+teleport2.wav     pak0/sound/misc/r_tele3.wav
+teleport3.wav     pak0/sound/misc/r_tele4.wav
+waterOut.wav      pak0/sound/misc/outwater.wav
+                  (shortened)
+
+From scorched3d, GPLv2:
+laser.wav         data/wav/shoot/laser1.wav
+
+From supertux, GPLv2:
+item.wav          supertux2/sounds/lifeup.wav
+                  (somewhat shortened)
+
+From wordwarvi, CC AT SA unported 3.0, By: Stephen M. Cameron
+clang.wav         clang.ogg
+electricity1.wav  tesla_tower.ogg
+stoneBreak.wav    bombexplosion.ogg
+
+
+From sounds websites with good licenses:
+----------------------------------------
+
+From pdsounds.org, public domain:
+drowning.wav      http://www.pdsounds.org/sounds/water_bubbles_chortling
+                  (small part in the middle cut out + short fade out)
+gulp.wav          http://www.pdsounds.org/sounds/swallowing_gulp
+
+From http://simplythebest.net/sounds, public domain:
+rico1.wav         http://simplythebest.net/sounds/MP3/sound_effects_MP3/sound_effect_MP3_files/bullet_ricochet.zip
+                  (with explosion at the start removed)
+
+From soundbible.com, CC AT 3.0, Recorded by amanda:
+lava.wav          http://soundbible.com/1571-Fishtank-Bubbles-2.html
+                  (piece from the middle, with the speed slowed)
+
+From soundbible.com, CC AT 3.0, Recorded by Caroline Ford:
+grenadeBounce.wav http://soundbible.com/947-Metal-Bang.html
+
+From soundbible.com, CC AT 3.0, Recorded by BlastwaveFx.com:
+doorLocked.wav    http://soundbible.com/559-Chain-Dropped.html
+                  (with silence at the end removed)
+
+From soundbible.com, CC AT 3.0, Recorded by Mike Koenig:
+blizzard.wav      http://soundbible.com/1062-Tornado.html
+cheer.wav         http://soundbible.com/989-10-Second-Applause.html
+clock.wav         http://soundbible.com/187-IM-Reply-Computer.html
+                  (with silence at the end removed)
+doorOpened.wav    http://soundbible.com/1354-Opening-Casket.html
+electricity2.wav  http://soundbible.com/1107-Electricity.html
+electricity3.wav  http://soundbible.com/1308-Fizzle.html
+                  (middle piece copy and pasted a bit)
+elecDeath3.wav    http://soundbible.com/1610-Power-Failure.html
+                  (middle piece shortened considerably)
+fireCrackle.wav   http://soundbible.com/1356-Flame-Arrow.html
+fireball.wav      http://soundbible.com/1348-Large-Fireball.html
+floodedTunnel.wav http://soundbible.com/380-Spooky-Water-Drops.html
+galdovDie.wav     http://soundbible.com/1042-Zombie-Long-Death.html
+galdovPain.wav    http://soundbible.com/1033-Zombie-In-Pain.html
+punch.wav         http://soundbible.com/992-Right-Cross.html
+rain.wav          http://soundbible.com/1158-Rain.html
+                  (2.5 seconds near the end)
+spike.wav         http://soundbible.com/1479-Splitting-Wood.html
+                  (second chop only)
+splat.wav         http://soundbible.com/1081-Splat-And-Squirt.html
+switch1.wav       http://soundbible.com/772-Button.html
+switch2.wav       http://soundbible.com/893-Button-Click.html
+throw.wav         http://soundbible.com/1622-Spear-Throw.html
+                  (made louder)
+
+From soundbible.com, public domain:
+blizzard2.wav     http://soundbible.com/1247-Wind.html
+droidFreakOut.wav http://soundbible.com/1361-Dying-Robot.html
+                  (with high pitch beep in middle removed)
+eat.wav           http://soundbible.com/1394-Dragon-Bite.html
+
+
+From misc. sources (with good licenses):
+----------------------------------------
+
+From olpc-sound-samples-v2, CC AT 3.0:
+computer.wav      Berklee44v7/computer_mania2.wav
+doorOpen.wav      Berklee44v10/door_hangar1.wav
+tankBeam.wav      Berklee44v13/synth_laser4.wav
+tankBeamFire.wav  Berklee44v13/laser_2.wav
+waterIn.wav       Berklee44v10/water_plunge1.wav
+                  (only the first part)
+
+Made by Hans de Goede, CC AT 3.0:
+droid1.wav        Made in sfxr, can be opened in sfxr by opening droid1.sfxr
+droid2.wav        Made in sfxr, can be opened in sfxr by opening droid2.sfxr
+elecDeath1.wav    explo1.sfxr + last part of
+                  http://soundbible.com/1276-Robot-Computing.html
+                  By: Mike Koenig
+elecDeath2.wav    explo1.sfxr + a part of Berklee44v13/synth_computer_fax3.wav
+Note: The sfxr files were made with sfxr on a x86_64 machine and the .sfxr
+format is likely arch dependent.
+
+Unmodified from original blobwars:
+Lock And Load!!!  Short voice sample from move, fair use
+
+Copies of other sound effects
+droidChangeFreq.wav Copy of droid1.wav (just like with the original sounds)
+
+
+Possible alternative replacement sounds:
+----------------------------------------
+
+blizzard.wav      OLPC: GabrielPulido44/kind_ofwind.wav
+blizzard.wav      baseoa/sounds/world/wind[12].wav
+blizzard.wav      baseoa/sounds/world/demonwind01.wav 
+computer.wav      OLPC: Berklee44v13/synth_computer_fax[34].wav
+computer.wav      http://soundbible.com/1276-Robot-Computing.html
+doorLocked.wav    OLPC: Berklee44v10/locker3.wav, Berklee44v8/locker1.wav
+eat.wav           OLPC: Berklee44v10/eating_chips_[23].wav
+floodedTunnel.wav OLPC: tam44all/waterdroplet.wav, LouCohen44/miscWater.wav,
+floodedTunnel.wav OLPC: Berklee44v10/waterpump_electric[23].wav 
+lava.wav:         OLPC: JeanLucCohen44/texture_Bubbles_coffee_bubbles_3.wav
+pistol.wav        freedoom/sounds/dspistol.wav
+rico1.wav         openquartz-pak0/sound/weapons/ric1.wav
+splat.wav         http://soundbible.com/1079-Bir-Poop-Splat.html
+splat.wav         baseoa/sound/le/splat5.wav
