@@ -107,9 +107,8 @@ install:
 	mkdir -p $(ICONDIR)64x64/apps
 	mkdir -p $(DESKTOPDIR)
 
-	install -o root -g games -m 755 $(PROG) $(BINDIR)$(PROG)
-	install -o root -g games -m 644 $(PAKNAME) $(DATADIR)$(PAKNAME)
-	install -o root -g games -m 644 $(DOCS) $(DOCDIR)
+	install -m 755 $(PROG) $(BINDIR)$(PROG)
+	install -m 644 $(PAKNAME) $(DATADIR)$(PAKNAME)
 	cp $(ICONS)$(PROG).png $(ICONDIR)32x32/apps/
 	cp $(ICONS)$(PROG)-mini.png $(ICONDIR)16x16/apps/$(PROG).png
 	cp $(ICONS)$(PROG)-large.png $(ICONDIR)64x64/apps/$(PROG).png
