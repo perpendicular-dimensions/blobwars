@@ -154,7 +154,12 @@ void recurseDirectory(const char *dirName)
 				
 				fileData[files].set(filename, fSize, cSize, ftell(pak));
 
-				fwrite(output, 1, cSize, pak);
+				if (fwrite(output, 1, cSize, pak) != cSize)
+				{
+					fprintf(stderr, "Error writing to pakfile: %s\n", strerror(errno));
+					fclose(pak);
+					exit(1);
+				}
 
 				files++;
 				
@@ -183,6 +188,11 @@ int main(int argc, char *argv[])
 	}
 
 	pak = fopen(argv[argc - 1], "wb");
+	if (!pak)
+	{
+		fprintf(stderr, "Error opening %s: %s\n", argv[argc - 1], strerror(errno));
+		return 1;
+	}
 	
 	for (int i = 1 ; i < (argc - 1) ; i++)
 	{
@@ -211,13 +221,28 @@ int main(int argc, char *argv[])
 			break;
 		}
 
-		fwrite(&fileData[i], sizeof(FileData), 1, pak);
+		if (fwrite(&fileData[i], sizeof(FileData), 1, pak) != 1)
+		{
+			fprintf(stderr, "Error writing to %s: %s\n", argv[argc - 1], strerror(errno));
+			fclose(pak);
+			return 1;
+		}
 	}
 	
 	unsigned int numberOfFiles = totalFiles;
 
-	fwrite(&pos, sizeof(unsigned int), 1, pak);
-	fwrite(&numberOfFiles, sizeof(unsigned int), 1, pak);
+	if (fwrite(&pos, sizeof(unsigned int), 1, pak) != 1)
+	{
+		fprintf(stderr, "Error writing to %s: %s\n", argv[argc - 1], strerror(errno));
+		fclose(pak);
+		return 1;
+	}
+	if (fwrite(&numberOfFiles, sizeof(unsigned int), 1, pak) != 1)
+	{
+		fprintf(stderr, "Error writing to %s: %s\n", argv[argc - 1], strerror(errno));
+		fclose(pak);
+		return 1;
+	}
 
 	fclose(pak);
 

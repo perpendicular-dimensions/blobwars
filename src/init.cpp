@@ -144,7 +144,10 @@ bool loadConfig()
 		return true;
 	}
 
-	fscanf(fp, "%10f %10d", &version, &release);
+	if (fscanf(fp, "%10f %10d", &version, &release) != 2)
+	{
+		rtn = true;
+	}
 
 	debug(("Version = %.2f - Expected %.2f\n", version, VERSION));
 	debug(("Release = %d - Expected %d\n", release, RELEASE));
@@ -154,7 +157,10 @@ bool loadConfig()
 		rtn = true;
 	}
 
-	fscanf(fp, "%10d %10d %10d %10d %10d %10d %10d", &engine.fullScreen, &game.musicVol, &game.soundVol, &game.output, &game.brightness, &engine.extremeAvailable, &game.gore);
+	if (fscanf(fp, "%10d %10d %10d %10d %10d %10d %10d", &engine.fullScreen, &game.musicVol, &game.soundVol, &game.output, &game.brightness, &engine.extremeAvailable, &game.gore) != 7)
+	{
+		rtn = true;
+	}
 
 	fclose(fp);
 
@@ -223,7 +229,13 @@ int initMedalService(void *data)
 		return 0;
 	}
 	
-	fscanf(fp, "%19s", privateKey);
+	if (fscanf(fp, "%19s", privateKey) != 1)
+	{
+		graphics.showMedalMessage(-1, "Medal Key file corrupt - Online functions disabled");
+		SDL_mutexV(medalServer.lock);
+		fclose(fp);
+		return 0;
+	}
 	
 	fclose(fp);
 		

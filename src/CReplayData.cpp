@@ -22,7 +22,12 @@ ReplayData::~ReplayData()
 	{
 		save();
 		rewind(fp);
-		fwrite(&header, sizeof(ReplayDataHeader), 1, fp);
+		int size = fwrite(&header, sizeof(ReplayDataHeader), 1, fp);
+		if (size != 1)
+		{
+			printf("Error saving replay data: %s\n", strerror(errno));
+			exit(1);
+		}
 	}
 	
 	if (replayMode != REPLAY_MODE::NONE)
@@ -98,7 +103,15 @@ void ReplayData::setMode(REPLAY_MODE::TYPE replayMode)
 		
 		swapHeaderEndians();
 		
-		fwrite(&header, sizeof(ReplayDataHeader), 1, fp);
+		int size = fwrite(&header, sizeof(ReplayDataHeader), 1, fp);
+		if (size != 1)
+		{
+			printf("Error writing replay data header: %s\n", strerror(errno));
+			replayMode = REPLAY_MODE::NONE;
+			fclose(fp);
+			fp = NULL;
+			return;
+		}
 		
 		reset();
 	}

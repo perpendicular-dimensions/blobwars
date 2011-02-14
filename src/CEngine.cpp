@@ -330,6 +330,8 @@ since SDL currently provides no means to load music directly from memory
 */
 bool Engine::unpack(const char *filename, int fileType)
 {
+	bool ret = true;
+
 	if (fileType == PAK_DATA)
 	{
 		delete[] dataBuffer;
@@ -396,17 +398,23 @@ bool Engine::unpack(const char *filename, int fileType)
 			return false;
 		}
 
-		fwrite(binaryBuffer, 1, pak.getUncompressedSize(), fp);
+		if (fwrite(binaryBuffer, 1, pak.getUncompressedSize(), fp) != pak.getUncompressedSize())
+		{
+			printf("Fatal Error: could not write to %s: %s", tempPath, strerror(errno));
+			ret = false;
+		}
 		fclose(fp);
 	}
 
-	debug(("unpack() : Loaded %s (%d)\n", filename, pak.getUncompressedSize()));
+	debug(("unpack() : Loaded %s (%d), ret: %d\n", filename, pak.getUncompressedSize(), (int)ret));
 
-	return true;
+	return ret;
 }
 
 bool Engine::loadData(const char *filename)
 {
+	bool ret = true;
+
 	delete[] dataBuffer;
 	dataBuffer = NULL;
 	
@@ -427,14 +435,16 @@ bool Engine::loadData(const char *filename)
 
 	dataBuffer = new unsigned char[fSize + 1];
 
-	fread(dataBuffer, 1, fSize, fp);
+	if (fread(dataBuffer, 1, fSize, fp) != (size_t)fSize)
+		ret = false;
+
 	dataBuffer[fSize] = 0;
 
 	fclose(fp);
 
-	debug(("loadData() : Loaded %s (%d)\n", filename, fSize));
+	debug(("loadData() : Loaded %s (%d), ret: %d\n", filename, fSize, (int)ret));
 
-	return true;
+	return ret;
 }
 
 void Engine::reportFontFailure()

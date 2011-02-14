@@ -122,8 +122,11 @@ bool loadGame(int slot)
 	
 	while (true)
 	{
-		fgets(line, 1024, fp);
-		
+		if (!fgets(line, 1024, fp)) {
+			fclose(fp);
+			graphics.showErrorAndExit("Unexpected end of file reading save data", "");
+		}
+
 		sscanf(line, "%*c %[^\"] %*c %*c %[^\"] %*c %d %d", string[0], string[1], &param[0], &param[1]);
 		
 		data = new Data();
@@ -160,8 +163,11 @@ bool loadGame(int slot)
 	
 	while (true)
 	{
-		fgets(line, 1024, fp);
-		
+		if (!fgets(line, 1024, fp)) {
+			fclose(fp);
+			graphics.showErrorAndExit("Unexpected end of file reading save data", "");
+		}
+
 		sscanf(line, "%[^\n\r]", string[0]);
 		strlcpy(stageName, string[0], sizeof stageName);
 		
@@ -169,8 +175,11 @@ bool loadGame(int slot)
 		{
 			break;
 		}
-		
-		fgets(line, 1024, fp);
+
+		if (!fgets(line, 1024, fp)) {
+			fclose(fp);
+			graphics.showErrorAndExit("Unexpected end of file reading save data", "");
+		}
 		sscanf(line, "%d", &numberOfLines);
 		
 		debug(("Read %s with %d lines.\n", stageName, numberOfLines));
@@ -180,9 +189,12 @@ bool loadGame(int slot)
 		for (int i = 0 ; i < numberOfLines ; i++)
 		{
 			persistData = new PersistData();
-			
-			fgets(line, 1024, fp);
-			
+
+			if (!fgets(line, 1024, fp)) {
+				fclose(fp);
+				graphics.showErrorAndExit("Unexpected end of file reading save data", "");
+			}
+
 			strlcpy(persistData->data, line, sizeof persistData->data);
 			
 			//debug(("Read %d: %s", i, persistData->data));
@@ -346,7 +358,11 @@ void saveGame()
 		graphics.showErrorAndExit("File write error whilst saving game", "");
 	}
 
-	fwrite(&game, sizeof(Game), 1, fp);
+	if (fwrite(&game, sizeof(Game), 1, fp) != 1)
+	{
+		fclose(fp);
+		graphics.showErrorAndExit("File write error whilst saving game", strerror(errno));
+	}
 	
 	fclose(fp);
 	

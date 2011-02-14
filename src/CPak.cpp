@@ -66,8 +66,16 @@ void Pak::setPakFile(const char *pakFilename)
 	}
 
 	fseek(pak, (-sizeof(Uint32)) * 2, SEEK_END);
-	fread(&listPos, sizeof(Uint32), 1, pak);
-	fread(&numberOfFiles, sizeof(Uint32), 1, pak);
+	if (fread(&listPos, sizeof(Uint32), 1, pak) != 1)
+	{
+		fclose(pak);
+		showPakErrorAndExit();
+	}
+	if (fread(&numberOfFiles, sizeof(Uint32), 1, pak) != 1)
+	{
+		fclose(pak);
+		showPakErrorAndExit();
+	}
 	
 	debug(("Pak : File list resides at %d\n", (int)listPos));
 	debug(("Pak : Number of files are %d\n", (int)numberOfFiles));
@@ -130,7 +138,11 @@ bool Pak::unpack(const char *filename, unsigned char **buffer)
 	input = new unsigned char[(int)(currentFile->cSize * 1.01) + 12];
 	*buffer = new unsigned char[currentFile->fSize + 1];
 
-	fread(input, 1, currentFile->cSize, pak);
+	if (fread(input, 1, currentFile->cSize, pak) != currentFile->cSize)
+	{
+		fclose(pak);
+		showPakErrorAndExit();
+	}
 	
 	uLongf fSize = (uLongf)currentFile->fSize;
 	

@@ -113,6 +113,7 @@ bool Config::loadJoystickConfig()
 
 bool Config::saveJoystickConfig()
 {
+	bool ret = true;
 	char filename[PATH_MAX];
 	snprintf(filename, sizeof filename, "%sjoystick.cfg", engine->userHomeDirectory);
 	
@@ -122,15 +123,19 @@ bool Config::saveJoystickConfig()
 	
 	if (!fp)
 	{
-		debug(("WARNING: Couldn't save joystick config\n"));
+		debug(("WARNING: Couldn't save joystick config: %s\n", strerror(errno)));
 		return false;
 	}
-		
-	fwrite(&joystick, sizeof(Joystick), 1, fp);
-		
+
+	if (fwrite(&joystick, sizeof(Joystick), 1, fp) != 1)
+	{
+		debug(("WARNING: Couldn't save joystick config: %s\n", strerror(errno)));
+		ret = false;
+	}
+
 	fclose(fp);
 	
-	return true;
+	return ret;
 }
 
 bool Config::loadKeyConfig()
@@ -163,6 +168,7 @@ bool Config::loadKeyConfig()
 
 bool Config::saveKeyConfig()
 {
+	bool ret = true;
 	char filename[PATH_MAX];
 	snprintf(filename, sizeof filename, "%skeyboard.cfg", engine->userHomeDirectory);
 	
@@ -172,14 +178,19 @@ bool Config::saveKeyConfig()
 	
 	if (!fp)
 	{
+		debug(("WARNING: Couldn't save keyboard config: %s\n", strerror(errno)));
 		return false;
 	}
-		
-	fwrite(&keyboard, sizeof(keyboard), 1, fp);
-		
+
+	if (fwrite(&keyboard, sizeof(keyboard), 1, fp) != 1)
+	{
+		debug(("WARNING: Couldn't save keyboard config: %s\n", strerror(errno)));
+		ret = false;
+	}
+
 	fclose(fp);
 	
-	return true;
+	return ret;
 }
 
 void Config::restoreKeyDefaults()
