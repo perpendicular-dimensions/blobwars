@@ -5,16 +5,16 @@ ICONS = icons/
 DATA = data gfx sound music
 
 VERSION = 1.18
-RELEASE = 1
-USEPAK = 0
+RELEASE ?= 0
+USEPAK ?= 0
 
-PREFIX = /usr
-BINDIR = $(PREFIX)/games/
-DATADIR = $(PREFIX)/share/games/blobwars/
-DOCDIR = $(PREFIX)/share/doc/$(PROG)/
-ICONDIR = $(PREFIX)/share/icons/hicolor/
-DESKTOPDIR = $(PREFIX)/share/applications/
-LOCALEDIR = $(PREFIX)/share/locale/
+PREFIX ?= /usr
+BINDIR ?= $(PREFIX)/games/
+DATADIR ?= $(PREFIX)/share/games/blobwars/
+DOCDIR ?= $(PREFIX)/share/doc/$(PROG)/
+ICONDIR ?= $(PREFIX)/share/icons/hicolor/
+DESKTOPDIR ?= $(PREFIX)/share/applications/
+LOCALEDIR ?= $(PREFIX)/share/locale/
 MEDAL_SERVER_HOST = www.parallelrealities.co.uk
 MEDAL_SERVER_PORT = 80
 
