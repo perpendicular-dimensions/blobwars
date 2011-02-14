@@ -8,7 +8,7 @@ VERSION = 1.18
 RELEASE = 1
 USEPAK = 0
 
-PREFIX=$(DESTDIR)/usr
+PREFIX = /usr
 BINDIR = $(PREFIX)/games/
 DATADIR = $(PREFIX)/share/games/blobwars/
 DOCDIR = $(PREFIX)/share/doc/$(PROG)/
@@ -104,30 +104,30 @@ buildpak: $(PAKNAME)
 
 # install
 install: $(ALL)
-	mkdir -p $(BINDIR)
-	mkdir -p $(DATADIR)
-	mkdir -p $(DOCDIR)
-	mkdir -p $(ICONDIR)16x16/apps
-	mkdir -p $(ICONDIR)32x32/apps
-	mkdir -p $(ICONDIR)64x64/apps
-	mkdir -p $(DESKTOPDIR)
+	mkdir -p $(DESTDIR)$(BINDIR)
+	mkdir -p $(DESTDIR)$(DATADIR)
+	mkdir -p $(DESTDIR)$(DOCDIR)
+	mkdir -p $(DESTDIR)$(ICONDIR)16x16/apps
+	mkdir -p $(DESTDIR)$(ICONDIR)32x32/apps
+	mkdir -p $(DESTDIR)$(ICONDIR)64x64/apps
+	mkdir -p $(DESTDIR)$(DESKTOPDIR)
 
-	install -m 755 $(PROG) $(BINDIR)$(PROG)
+	install -m 755 $(PROG) $(DESTDIR)$(BINDIR)$(PROG)
 ifeq ($(USEPAK), 1)
-	install -m 644 $(PAKNAME) $(DATADIR)$(PAKNAME)
+	install -m 644 $(PAKNAME) $(DESTDIR)$(DATADIR)$(PAKNAME)
 else
-	cp -r $(DATA) $(DATADIR)
+	cp -r $(DATA) $(DESTDIR)$(DATADIR)
 endif
-	cp $(ICONS)$(PROG).png $(ICONDIR)32x32/apps/
-	cp $(ICONS)$(PROG)-mini.png $(ICONDIR)16x16/apps/$(PROG).png
-	cp $(ICONS)$(PROG)-large.png $(ICONDIR)64x64/apps/$(PROG).png
-	cp $(ICONS)$(PROG).desktop $(DESKTOPDIR)
+	cp $(ICONS)$(PROG).png $(DESTDIR)$(ICONDIR)32x32/apps/
+	cp $(ICONS)$(PROG)-mini.png $(DESTDIR)$(ICONDIR)16x16/apps/$(PROG).png
+	cp $(ICONS)$(PROG)-large.png $(DESTDIR)$(ICONDIR)64x64/apps/$(PROG).png
+	cp $(ICONS)$(PROG).desktop $(DESTDIR)$(DESKTOPDIR)
 
 	@for f in $(LOCALE_MO); do \
 		lang=`echo $$f | sed -e 's/^locale\///;s/\.mo$$//'`; \
-		mkdir -p $(LOCALEDIR)$$lang/LC_MESSAGES; \
-		echo "cp $$f $(LOCALEDIR)$$lang/LC_MESSAGES/$(PROG).mo"; \
-		cp $$f $(LOCALEDIR)$$lang/LC_MESSAGES/$(PROG).mo; \
+		mkdir -p $(DESTDIR)$(LOCALEDIR)$$lang/LC_MESSAGES; \
+		echo "cp $$f $(DESTDIR)$(LOCALEDIR)$$lang/LC_MESSAGES/$(PROG).mo"; \
+		cp $$f $(DESTDIR)$(LOCALEDIR)$$lang/LC_MESSAGES/$(PROG).mo; \
 	done
 
 uninstall:
