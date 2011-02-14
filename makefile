@@ -146,3 +146,4 @@ uninstall:
 		$(RM) $(LOCALEDIR)$$lang/LC_MESSAGES/$(PROG).mo; \
 	done
 
+.PHONY: all install uninstall clean buildpak
