@@ -102,6 +102,10 @@ int main(int argc, char *argv[])
 	#if !USEPAK
 	debug(("Not Using PAK...\n"));
 	#endif
+
+	#if RELEASE
+	chdir(PAKLOCATION);
+	#endif
 	
 	config.engine = &engine;
 	
