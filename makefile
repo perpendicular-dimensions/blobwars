@@ -2,6 +2,7 @@ PROG = blobwars
 PAKNAME = blobwars.pak
 DOCS = doc/*
 ICONS = icons/
+DATA = data gfx sound music
 
 VERSION = 1.18
 RELEASE = 1
@@ -67,8 +68,13 @@ PAKOBJS = CFileData.o pak.o
 
 LOCALE_MO = $(patsubst %.po,%.mo,$(wildcard locale/*.po))
 
+ALL = $(PROG) $(LOCALE_MO)
+ifeq ($(USEPAK), 1)
+	ALL += $(PAKNAME)
+endif
+
 # top-level rule to create the program.
-all: $(PROG) pak $(LOCALE_MO)
+all: $(ALL)
 
 # compiling other source files.
 %.o: src/%.cpp src/%.h src/defs.h src/defines.h src/headers.h
@@ -91,14 +97,13 @@ mapeditor: $(MAPOBJS)
 clean:
 	$(RM) $(GAMEOBJS) mapEditor.o pak.o $(PROG) $(PAKNAME) pak mapeditor $(LOCALE_MO)
 	
-buildpak: pak
-	./pak data gfx music sound $(PAKNAME)
+$(PAKNAME): pak
+	./pak $(DATA) $(PAKNAME)
+
+buildpak: $(PAKNAME)
 
 # install
-install:
-
-	./pak data gfx music sound $(PAKNAME)
-
+install: $(ALL)
 	mkdir -p $(BINDIR)
 	mkdir -p $(DATADIR)
 	mkdir -p $(DOCDIR)
@@ -108,7 +113,11 @@ install:
 	mkdir -p $(DESKTOPDIR)
 
 	install -m 755 $(PROG) $(BINDIR)$(PROG)
+ifeq ($(USEPAK), 1)
 	install -m 644 $(PAKNAME) $(DATADIR)$(PAKNAME)
+else
+	cp -r $(DATA) $(DATADIR)
+endif
 	cp $(ICONS)$(PROG).png $(ICONDIR)32x32/apps/
 	cp $(ICONS)$(PROG)-mini.png $(ICONDIR)16x16/apps/$(PROG).png
 	cp $(ICONS)$(PROG)-large.png $(ICONDIR)64x64/apps/$(PROG).png
