@@ -1,8 +1,8 @@
 [Desktop Entry]
 Encoding=UTF-8
-Categories=ArcadeGame;Game;
-X-Desktop-File-Install-Version=1.0
-Name=Metal Blob Solid
+Categories=Game;ActionGame;
+Name=Blob Wars : Metal Blob Solid
+Comment=Mission and Objective based 2D Platform Game
 Icon=blobwars
 Exec=blobwars
 Terminal=false
