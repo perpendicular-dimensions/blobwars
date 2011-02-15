@@ -116,12 +116,12 @@ install: $(ALL)
 ifeq ($(USEPAK), 1)
 	install -m 644 $(PAKNAME) $(DESTDIR)$(DATADIR)$(PAKNAME)
 else
-	cp -r $(DATA) $(DESTDIR)$(DATADIR)
+	cp -pr $(DATA) $(DESTDIR)$(DATADIR)
 endif
-	cp $(ICONS)$(PROG).png $(DESTDIR)$(ICONDIR)32x32/apps/
-	cp $(ICONS)$(PROG)-mini.png $(DESTDIR)$(ICONDIR)16x16/apps/$(PROG).png
-	cp $(ICONS)$(PROG)-large.png $(DESTDIR)$(ICONDIR)64x64/apps/$(PROG).png
-	cp $(ICONS)$(PROG).desktop $(DESTDIR)$(DESKTOPDIR)
+	cp -p $(ICONS)$(PROG).png $(DESTDIR)$(ICONDIR)32x32/apps/
+	cp -p $(ICONS)$(PROG)-mini.png $(DESTDIR)$(ICONDIR)16x16/apps/$(PROG).png
+	cp -p $(ICONS)$(PROG)-large.png $(DESTDIR)$(ICONDIR)64x64/apps/$(PROG).png
+	cp -p $(ICONS)$(PROG).desktop $(DESTDIR)$(DESKTOPDIR)
 
 	@for f in $(LOCALE_MO); do \
 		lang=`echo $$f | sed -e 's/^locale\///;s/\.mo$$//'`; \
