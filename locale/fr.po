@@ -596,8 +596,8 @@ msgstr "Terminé"
 msgid "Continues Used:"
 msgstr "Continues utilisés:"
 
-msgid "Copyright (C) 2004-2010 Parallel Realities"
-msgstr "Copyright (C) 2004-2010 Parallel Realities"
+msgid "Copyright (C) 2004-2011 Parallel Realities"
+msgstr "Copyright (C) 2004-2011 Parallel Realities"
 
 msgid "Corrupt"
 msgstr "Corrupt"

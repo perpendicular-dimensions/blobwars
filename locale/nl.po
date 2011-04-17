@@ -650,8 +650,8 @@ msgstr "Afgerond"
 msgid "Continues Used:"
 msgstr "Doorgaan gebruikt:"
 
-msgid "Copyright (C) 2004-2010 Parallel Realities"
-msgstr "Copyright © 2004-2010 Parallel Realities"
+msgid "Copyright (C) 2004-2011 Parallel Realities"
+msgstr "Copyright © 2004-2011 Parallel Realities"
 
 msgid "If you like Blob Wars: Metal Blob Solid, you might also like:"
 msgstr "Als je Blob Wars: Metal Blob Solid leuk vindt, kijk dan ook eens naar:"

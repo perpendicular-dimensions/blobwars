@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2004-2010 Parallel Realities
+Copyright (C) 2004-2011 Parallel Realities
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -189,7 +189,7 @@ int title()
 	SDL_Surface *subTitle = graphics.quickSprite("SubTitle", graphics.getString(_("Blob Wars : Episode I"), true));
 
 	graphics.setFontSize(0);
-	SDL_Surface *copyright = graphics.quickSprite("Copyright", graphics.getString(_("Copyright (C) 2004-2010 Parallel Realities"), true));
+	SDL_Surface *copyright = graphics.quickSprite("Copyright", graphics.getString(_("Copyright (C) 2004-2011 Parallel Realities"), true));
 
 	char v[50];
 	#define STRINGIFY_VALUE(x) STRINGIFY(x)

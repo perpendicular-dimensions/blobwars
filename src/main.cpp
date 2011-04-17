@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2004-2010 Parallel Realities
+Copyright (C) 2004-2011 Parallel Realities
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -26,7 +26,7 @@ void showHelp()
 {
 	printf("\n");
 	printf("Blob Wars, Episode I - Metal Blob Solid (Version %.2f, Release %d)\n", VERSION, RELEASE);
-	printf("Copyright (C) 2004-2010 Parallel Realities\n");
+	printf("Copyright (C) 2004-2011 Parallel Realities\n");
 	printf("Licensed under the GNU General Public License (GPL)\n\n");
 
 	printf("The Metal Blob Solid gameplay manual can be found in,\n");
@@ -56,7 +56,7 @@ void listMaps()
 {
 	printf("\n");
 	printf("Blob Wars, Episode I - Metal Blob Solid (Version %.2f, Release %d)\n", VERSION, RELEASE);
-	printf("Copyright (C) 2004-2010 Parallel Realities\n");
+	printf("Copyright (C) 2004-2011 Parallel Realities\n");
 	printf("Licensed under the GNU General Public License (GPL)\n\n");
 	
 	printf("Available Maps\n");
@@ -92,7 +92,7 @@ void showVersion()
 {
 	printf("\n");
 	printf("Blob Wars, Episode I - Metal Blob Solid (Version %.2f, Release %d)\n", VERSION, RELEASE);
-	printf("Copyright (C) 2004-2010 Parallel Realities\n");
+	printf("Copyright (C) 2004-2011 Parallel Realities\n");
 	printf("Licensed under the GNU General Public License (GPL)\n\n");
 // 	exit(0);
 }

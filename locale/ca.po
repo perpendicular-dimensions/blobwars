@@ -647,8 +647,8 @@ msgstr "Completat"
 msgid "Continues Used:"
 msgstr "Continuacions Fetes:"
 
-msgid "Copyright (C) 2004-2010 Parallel Realities"
-msgstr "Copyright © 2004-2010 Parallel Realities"
+msgid "Copyright (C) 2004-2011 Parallel Realities"
+msgstr "Copyright © 2004-2011 Parallel Realities"
 
 # as in Corrupt Save Data
 msgid "Corrupt"
