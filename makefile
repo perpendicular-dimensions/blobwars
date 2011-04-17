@@ -118,6 +118,7 @@ ifeq ($(USEPAK), 1)
 else
 	cp -pr $(DATA) $(DESTDIR)$(DATADIR)
 endif
+	cp -p $(DOCS) $(DESTDIR)$(DOCDIR)
 	cp -p $(ICONS)$(PROG).png $(DESTDIR)$(ICONDIR)32x32/apps/
 	cp -p $(ICONS)$(PROG)-mini.png $(DESTDIR)$(ICONDIR)16x16/apps/$(PROG).png
 	cp -p $(ICONS)$(PROG)-large.png $(DESTDIR)$(ICONDIR)64x64/apps/$(PROG).png
