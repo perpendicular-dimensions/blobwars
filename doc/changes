@@ -1,13 +1,24 @@
 CHANGE LOG
 ----------
 
+Version 1.19
+
+* Fixed medal support that was broken in 1.18.
+
+* Correct credits for the song "Claustrophobia" by LizardKing.
+
+* Added doc/samples with information about origins of samples.
+
+* Minor fixes for compiling blobwars.
+
+
 Version 1.18
 
 * Updated Catalan and Dutch translations.
 
 * Minor spelling errors fixed.
 
-* Moved desktop entry from Applicaitons to ArcadeGame section.
+* Moved desktop entry from Applications to ArcadeGame section.
 
 * Perform a sanitiy check when loading keyboard.cfg.
 
@@ -25,9 +36,11 @@ Version 1.18
 
 * Added exit screen.
 
+
 Version 1.17
 
 * Add medal support.
+
 
 Version 1.06
 

@@ -4,7 +4,7 @@ DOCS = doc/*
 ICONS = icons/
 DATA = data gfx sound music
 
-VERSION = 1.18
+VERSION = 1.19
 RELEASE ?= 0
 USEPAK ?= 0
 

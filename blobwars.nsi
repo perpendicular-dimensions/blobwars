@@ -1,7 +1,7 @@
 # Blob Wars : Metal Blob Solid script
 
 Name "Blob Wars : Metal Blob Solid"
-OutFile "blobwars-1.18-1.installer.exe"
+OutFile "blobwars-1.19-1.installer.exe"
 InstallDir "$PROGRAMFILES\Parallel Realities\BlobWars"
 Page Directory
 Page InstFiles
