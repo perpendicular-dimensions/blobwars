@@ -104,7 +104,11 @@ int main(int argc, char *argv[])
 	#endif
 
 	#if RELEASE
-	chdir(PAKLOCATION);
+	if (chdir(PAKLOCATION))
+	{
+		perror("Could not chdir to " PAKLOCATION ":");
+		return 1;
+	}
 	#endif
 	
 	config.engine = &engine;
