@@ -30,6 +30,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <SDL_image/SDL_image.h>
 #include <SDL_mixer/SDL_mixer.h>
 #include <SDL_ttf/SDL_ttf.h>
+#include <SDL_net/SDL_net.h>
 #include <CoreFoundation/CoreFoundation.h>
 extern C_LINKAGE void openHelpURL();
 #ifndef SDL_GetGamma
