@@ -23,6 +23,7 @@ CXXFLAGS += -DPAKNAME=\"$(PAKNAME)\" -DPAKLOCATION=\"$(DATADIR)\" -DUNIX -DGAMEP
 CXXFLAGS += -DLOCALEDIR=\"$(LOCALEDIR)\" -DMEDAL_SERVER_HOST=\"$(MEDAL_SERVER_HOST)\" -DMEDAL_SERVER_PORT=$(MEDAL_SERVER_PORT)
 CXXFLAGS += $(CFLAGS) -Werror
 LIBS = `sdl-config --libs` -lSDL_mixer -lSDL_image -lSDL_ttf -lSDL_net -lz
+PAKLIBS = -lz
 
 OBJS += CAudio.o
 OBJS += CBoss.o
@@ -85,7 +86,7 @@ $(PROG): $(GAMEOBJS)
 	$(CXX) $(GAMEOBJS) -o $(PROG) $(LIBS)
 	
 pak: $(PAKOBJS)
-	$(CXX) $(PAKOBJS) -o pak $(LIBS)
+	$(CXX) $(PAKOBJS) -o pak $(PAKLIBS)
 
 %.mo: %.po
 	msgfmt -c -o $@ $<
