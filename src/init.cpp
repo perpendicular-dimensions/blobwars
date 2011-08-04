@@ -383,7 +383,7 @@ void initSystem()
 
 	SDL_Surface *device = graphics.loadImage("gfx/main/alienDevice.png");
 
-#ifndef SDL_FRAMEWORK
+#ifndef FRAMEWORK_SDL
 	SDL_WM_SetIcon(device, NULL);
 #endif
 	SDL_WM_SetCaption("Blob Wars : Metal Blob Solid", "Blob Wars");

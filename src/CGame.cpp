@@ -29,16 +29,6 @@ Game::Game()
 
 	gore = 1;
 	skill = 1;
-#ifdef SDL_FRAMEWORK
-	float r,g,b;
-	if (SDL_GetGamma(&r, &g, &b) != -1) {
-		if (r != g || g != b) {
-			brightness = -1;
-		} else {
-			brightness = 10 * r;
-		}
-	}
-#endif
 
 	clear();
 }
