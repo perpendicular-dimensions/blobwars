@@ -83,16 +83,16 @@ all: $(ALL)
 
 # linking the program.
 $(PROG): $(GAMEOBJS)
-	$(CXX) $(GAMEOBJS) -o $(PROG) $(LIBS)
+	$(CXX) $(LDFLAGS) $(GAMEOBJS) -o $(PROG) $(LIBS)
 	
 pak: $(PAKOBJS)
-	$(CXX) $(PAKOBJS) -o pak $(PAKLIBS)
+	$(CXX) $(LDFLAGS) $(PAKOBJS) -o pak $(PAKLIBS)
 
 %.mo: %.po
 	msgfmt -c -o $@ $<
 
 mapeditor: $(MAPOBJS)
-	$(CXX) $(MAPOBJS) -o mapeditor $(LIBS)
+	$(CXX) $(LDFLAGS) $(MAPOBJS) -o mapeditor $(LIBS)
 
 # cleaning everything that can be automatically recreated with "make".
 clean:
