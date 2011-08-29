@@ -280,11 +280,11 @@ void initSystem()
 
 	if (!engine.fullScreen)
 	{
-		graphics.screen = SDL_SetVideoMode(640, 480, 0, SDL_HWPALETTE);
+		graphics.screen = SDL_SetVideoMode(640, 480, 0, SDL_DOUBLEBUF | SDL_HWPALETTE);
 	}
 	else
 	{
-		graphics.screen = SDL_SetVideoMode(640, 480, 0, SDL_HWPALETTE | SDL_FULLSCREEN);
+		graphics.screen = SDL_SetVideoMode(640, 480, 0, SDL_DOUBLEBUF | SDL_HWPALETTE | SDL_FULLSCREEN);
 	}
 
 	if (graphics.screen == NULL)
