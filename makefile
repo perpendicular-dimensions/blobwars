@@ -110,6 +110,7 @@ install: $(ALL)
 	mkdir -p $(DESTDIR)$(DOCDIR)
 	mkdir -p $(DESTDIR)$(ICONDIR)16x16/apps
 	mkdir -p $(DESTDIR)$(ICONDIR)32x32/apps
+	mkdir -p $(DESTDIR)$(ICONDIR)48x48/apps
 	mkdir -p $(DESTDIR)$(ICONDIR)64x64/apps
 	mkdir -p $(DESTDIR)$(DESKTOPDIR)
 
@@ -120,9 +121,10 @@ else
 	cp -pr $(DATA) $(DESTDIR)$(DATADIR)
 endif
 	cp -p $(DOCS) $(DESTDIR)$(DOCDIR)
-	cp -p $(ICONS)$(PROG).png $(DESTDIR)$(ICONDIR)32x32/apps/
-	cp -p $(ICONS)$(PROG)-mini.png $(DESTDIR)$(ICONDIR)16x16/apps/$(PROG).png
-	cp -p $(ICONS)$(PROG)-large.png $(DESTDIR)$(ICONDIR)64x64/apps/$(PROG).png
+	cp -p $(ICONS)$(PROG)16x16.png $(DESTDIR)$(ICONDIR)16x16/apps/$(PROG).png
+	cp -p $(ICONS)$(PROG)32x32.png $(DESTDIR)$(ICONDIR)32x32/apps/$(PROG).png
+	cp -p $(ICONS)$(PROG)48x48.png $(DESTDIR)$(ICONDIR)48x48/apps/$(PROG).png
+	cp -p $(ICONS)$(PROG)64x64.png $(DESTDIR)$(ICONDIR)64x64/apps/$(PROG).png
 	cp -p $(ICONS)$(PROG).desktop $(DESTDIR)$(DESKTOPDIR)
 
 	@for f in $(LOCALE_MO); do \
