@@ -119,7 +119,7 @@ void recurseDirectory(const char *dirName)
 			{
 				printf("Couldn't open %s for reading!\n", filename);
 				closedir(dirp);
-				gzclose(pak);
+				fclose(pak);
 				exit(1);
 			}
 			
@@ -141,7 +141,7 @@ void recurseDirectory(const char *dirName)
 			{
 				printf("Couldn't open %s for reading!\n", filename);
 				closedir(dirp);
-				gzclose(pak);
+				fclose(pak);
 				exit(1);
 			}
 			else
