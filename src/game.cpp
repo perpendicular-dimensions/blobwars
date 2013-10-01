@@ -381,7 +381,7 @@ void showMissionInformation()
 
 	SDL_Surface *panel = graphics.createSurface(400, 300);
 	SDL_Surface *panelBack = graphics.alphaRect(400, 300, 0x00, 0x00, 0x00);
-	SDL_SetColorKey(panel, SDL_RLEACCEL, SDL_MapRGB(panel->format, 0, 0, 0));
+	SDL_SetColorKey(panel, SDL_TRUE, SDL_MapRGB(panel->format, 0, 0, 0));
 
 	graphics.drawRect(1, 1, 398, 298, graphics.black, graphics.white, panelBack);
 

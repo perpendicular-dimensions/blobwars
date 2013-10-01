@@ -162,7 +162,7 @@ void showMissionClear()
 	graphics.loadBackground("gfx/main/areaClearBackGround.jpg");
 
 	SDL_Surface *panel = graphics.alphaRect(550, 420, 0x00, 0x00, 0x00);
-	SDL_SetSurfaceAlphaMod(panel, 180);
+	SDL_SetAlpha(panel, 180);
 	graphics.drawRect(1, 1, panel->w - 2, panel->h - 2 , graphics.black, graphics.white, panel);
 
 	graphics.blit(panel, (640 - panel->w) / 2, (480 - panel->h) / 2, graphics.background, false);

@@ -284,7 +284,7 @@ void getMapTokens()
 						
 					debug(("Setting Alpha for Tile %d\n", param[0]));
 
-					SDL_SetSurfaceAlphaMod(graphics.tile[param[0]], 130);
+					SDL_SetAlpha(graphics.tile[param[0]], 130);
 
 					while (true)
 					{

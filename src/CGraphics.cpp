@@ -20,6 +20,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
+void SDL_SetAlpha(SDL_Surface *surface, uint8_t value) {
+	SDL_SetSurfaceBlendMode(surface, SDL_BLENDMODE_BLEND);
+	SDL_SetSurfaceAlphaMod(surface, value);
+}
+
 Graphics::Graphics()
 {
 	for (int i = 0 ; i < MAX_TILES ; i++)
@@ -154,7 +159,7 @@ Sprite *Graphics::getSpriteHead()
 
 void Graphics::setTransparent(SDL_Surface *sprite)
 {
-	SDL_SetColorKey(sprite, SDL_RLEACCEL, SDL_MapRGB(sprite->format, 0, 0, 0));
+	SDL_SetColorKey(sprite, SDL_TRUE, SDL_MapRGB(sprite->format, 0, 0, 0));
 }
 
 bool Graphics::canShowMedalMessage() const
@@ -370,7 +375,7 @@ SDL_Surface *Graphics::loadImage(const char *filename, bool srcalpha)
 	}
 
 	if(srcalpha)
-		SDL_SetSurfaceAlphaMod(newImage, 255);
+		SDL_SetAlpha(newImage, 255);
 	else
 		setTransparent(newImage);
 
@@ -457,7 +462,7 @@ SDL_Surface *Graphics::quickSprite(const char *name, SDL_Surface *image)
 
 void Graphics::fade(int amount)
 {
-	SDL_SetSurfaceAlphaMod(fadeBlack, amount);
+	SDL_SetAlpha(fadeBlack, amount);
 	blit(fadeBlack, 0, 0, screen, false);
 }
 
@@ -467,7 +472,7 @@ void Graphics::fadeToBlack()
 
 	while (start < 50)
 	{
-		SDL_SetSurfaceAlphaMod(fadeBlack, start);
+		SDL_SetAlpha(fadeBlack, start);
 		blit(fadeBlack, 0, 0, screen, false);
 		delay(60);
 		start++;
@@ -519,7 +524,7 @@ void Graphics::loadMapTiles(const char *baseDir)
 			{
 				if ((i < MAP_EXITSIGN) || (i >= MAP_WATERANIM))
 				{
-					SDL_SetSurfaceAlphaMod(tile[i], 130);
+					SDL_SetAlpha(tile[i], 130);
 				}
 			}
 			else
@@ -1077,7 +1082,7 @@ SDL_Surface *Graphics::alphaRect(int width, int height, Uint8 red, Uint8 green, 
 
 	SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, red, green, blue));
 
-	SDL_SetSurfaceAlphaMod(surface, 130);
+	SDL_SetAlpha(surface, 130);
 
 	return surface;
 }
@@ -1088,7 +1093,7 @@ void Graphics::colorize(SDL_Surface *image, int red, int green, int blue)
 
 	blit(alpha, 0, 0, image, false);
 
-	SDL_SetColorKey(image, SDL_RLEACCEL, SDL_MapRGB(image->format, red / 2, green / 2, blue / 2));
+	SDL_SetColorKey(image, SDL_TRUE, SDL_MapRGB(image->format, red / 2, green / 2, blue / 2));
 }
 
 void Graphics::lock(SDL_Surface *surface)

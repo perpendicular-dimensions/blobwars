@@ -474,8 +474,8 @@ void galdovInit()
 	
 	Math::addBit(&map.boss[0]->flags, ENT_AIMS);
 	
-	SDL_SetSurfaceAlphaMod(graphics.getSprite("GaldovInvsLeft", true)->image[0], 100);
-	SDL_SetSurfaceAlphaMod(graphics.getSprite("GaldovInvsRight", true)->image[0], 100);
+	SDL_SetAlpha(graphics.getSprite("GaldovInvsLeft", true)->image[0], 100);
+	SDL_SetAlpha(graphics.getSprite("GaldovInvsRight", true)->image[0], 100);
 	
 	for (int i = 1 ; i < 10 ; i++)
 	{
