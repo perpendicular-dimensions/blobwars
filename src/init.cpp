@@ -281,7 +281,6 @@ void initSystem()
 	graphics.screen = SDL_CreateRGBSurface(0, 640, 480, 32, 0xff0000, 0xff00, 0xff, 0xff000000);
 
 	graphics.window = SDL_CreateWindow("Blobwars: Metal Blob Solid", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, graphics.screen->w, graphics.screen->h, 0);
-	SDL_SetWindowFullscreen(graphics.window, engine.fullScreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
 	graphics.renderer = SDL_CreateRenderer(graphics.window, -1, 0);
 	SDL_RenderSetLogicalSize(graphics.renderer, graphics.screen->w, graphics.screen->h);
 	graphics.texture = SDL_CreateTexture(graphics.renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, graphics.screen->w, graphics.screen->h);
@@ -291,6 +290,8 @@ void initSystem()
 		printf("Couldn't set 640x480 video mode: %s\n", SDL_GetError());
 		exit(1);
 	}
+
+	SDL_SetWindowFullscreen(graphics.window, engine.fullScreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
 
 	// This (attempts to) set the gamma correction. We attempt to catch an error here
 	// in case someone has done something really stupid in the config file(!!)
