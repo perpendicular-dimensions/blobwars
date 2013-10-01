@@ -197,12 +197,12 @@ int title()
 	snprintf(v, sizeof v, _("Version %s"), STRINGIFY_VALUE(VERSION));
 	SDL_Surface *version = graphics.quickSprite("Version", graphics.getString(v, true));
 
-	SDL_SetAlpha(title, SDL_SRCALPHA|SDL_RLEACCEL, 0);
+	SDL_SetSurfaceAlphaMod(title, 0);
 
 	audio.loadMusic("music/title");
 
 	graphics.loadBackground("gfx/main/CircuitBoard.jpg");
-	SDL_SetAlpha(graphics.background, SDL_SRCALPHA|SDL_RLEACCEL, 0);
+	SDL_SetSurfaceAlphaMod(graphics.background, 0);
 
 	int startNewGame, options, quit, help, easy, normal, hard, extreme, back, practice;
 	int load, cont, save[5], slot[6];
@@ -268,8 +268,8 @@ int title()
 				engine.clearInput();
 				backAlpha = 255;
 				titleAlpha = 255;
-				SDL_SetAlpha(graphics.background, SDL_SRCALPHA|SDL_RLEACCEL, (int)backAlpha);
-				SDL_SetAlpha(title, SDL_SRCALPHA|SDL_RLEACCEL, (int)titleAlpha);
+				SDL_SetSurfaceAlphaMod(graphics.background, backAlpha);
+				SDL_SetSurfaceAlphaMod(title, titleAlpha);
 			}
 		}
 
@@ -278,7 +278,7 @@ int title()
 			if (backAlpha < 255)
 			{
 				backAlpha++;
-				SDL_SetAlpha(graphics.background, SDL_SRCALPHA|SDL_RLEACCEL, (int)backAlpha);
+				SDL_SetSurfaceAlphaMod(graphics.background, backAlpha);
 			}
 		}
 
@@ -287,7 +287,7 @@ int title()
 			if (titleAlpha < 255)
 			{
 				titleAlpha++;
-				SDL_SetAlpha(title, SDL_SRCALPHA|SDL_RLEACCEL, (int)titleAlpha);
+				SDL_SetSurfaceAlphaMod(title, titleAlpha);
 			}
 			else
 			{
@@ -389,7 +389,7 @@ int title()
 		if (save[3]) {load = 4; break;}
 		if (save[4]) {load = 5; break;}
 
-		if (engine.keyState[SDLK_ESCAPE])
+		if (engine.keyState[SDL_SCANCODE_ESCAPE])
 		{
 			audio.playMenuSound(2);
 			back = 1;

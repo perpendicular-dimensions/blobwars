@@ -135,7 +135,7 @@ void showScene(bool allowSkip)
 	
 	float panelAlpha = 0;
 	
-	SDL_SetAlpha(panel, SDL_SRCALPHA|SDL_RLEACCEL, 0);
+	SDL_SetSurfaceAlphaMod(panel, 0);
 	
 	engine.clearInput();
 	engine.flushInput();
@@ -164,10 +164,10 @@ void showScene(bool allowSkip)
 		if (panelAlpha < 256)
 		{
 			panelAlpha += (1 * engine.getTimeDifference());
-			SDL_SetAlpha(panel, SDL_SRCALPHA|SDL_RLEACCEL, (int)panelAlpha);
+			SDL_SetSurfaceAlphaMod(panel, panelAlpha);
 			if (image != NULL)
 			{
-				SDL_SetAlpha(image, SDL_SRCALPHA|SDL_RLEACCEL, (int)panelAlpha);
+				SDL_SetSurfaceAlphaMod(image, panelAlpha);
 				graphics.blit(image, 0, 0, graphics.screen, false);
 			}
 			graphics.blit(panel, 0, 390, graphics.screen, false);

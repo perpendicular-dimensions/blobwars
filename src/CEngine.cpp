@@ -20,18 +20,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 #include <errno.h>
+extern Graphics graphics;
 
 Engine::Engine()
 {
-	for (int i = 0 ; i < 350 ; i++)
-	{
-		keyState[i] = 0;
-	}
-	
-	for (int i = 0 ; i < 32 ; i++)
-	{
-		joystickState[i] = 0;
-	}
+	memset(keyState, 0, sizeof keyState);
+
+	memset(joystickState, 0, sizeof joystickState);
 
 	joyX = joyY = 0;
 
@@ -186,7 +181,7 @@ void Engine::getInput()
 				
 				if (waitForButton)
 				{
-					if (event.key.keysym.sym == SDLK_ESCAPE)
+					if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
 					{
 						lastButtonPressed = -1;
 						*highlightedWidget->value = abs(*highlightedWidget->value) - 1000;
@@ -195,7 +190,7 @@ void Engine::getInput()
 						allowJoypad = false;
 					}
 					
-					if (event.key.keysym.sym == SDLK_BACKSPACE)
+					if (event.key.keysym.scancode == SDL_SCANCODE_BACKSPACE)
 					{
 						lastButtonPressed = -2;
 						*highlightedWidget->value = -2;
@@ -209,13 +204,13 @@ void Engine::getInput()
 				
 				if (waitForKey)
 				{
-					if (event.key.keysym.sym == SDLK_ESCAPE)
+					if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
 					{
 						*highlightedWidget->value = -*highlightedWidget->value;
 					}
 					else
 					{
-						*highlightedWidget->value = event.key.keysym.sym;
+						*highlightedWidget->value = event.key.keysym.scancode;
 					}
 					
 					lastButtonPressed = -1;
@@ -227,13 +222,13 @@ void Engine::getInput()
 					return;
 				}
 
-				keyState[event.key.keysym.sym] = 1;
-				strlcpy(lastKeyPressed, SDL_GetKeyName(event.key.keysym.sym), sizeof lastKeyPressed);
+				keyState[event.key.keysym.scancode] = 1;
+				strlcpy(lastKeyPressed, SDL_GetKeyName(event.key.keysym.scancode), sizeof lastKeyPressed);
 				addKeyEvent();
 				break;
 
 			case SDL_KEYUP:
-				keyState[event.key.keysym.sym] = 0;
+				keyState[event.key.keysym.scancode] = 0;
 				break;
 
 			case SDL_JOYAXISMOTION:
@@ -267,6 +262,11 @@ void Engine::getInput()
 				joystickState[event.jbutton.button] = 0;
 				break;
 
+			case SDL_WINDOWEVENT:
+				if (event.window.event == SDL_WINDOWEVENT_FOCUS_LOST)
+					paused = true;
+				break;
+
 			default:
 				break;
 		}
@@ -285,12 +285,12 @@ int Engine::getMouseY() const
 
 void Engine::setMouse(int x, int y)
 {
-	SDL_WarpMouse(x, y);
+	SDL_WarpMouseInWindow(graphics.window, x, y);
 }
 
 bool Engine::userAccepts()
 {
-	if ((keyState[SDLK_SPACE]) || (keyState[SDLK_ESCAPE]) || (keyState[SDLK_LCTRL]) || (keyState[SDLK_RCTRL]) || (keyState[SDLK_RETURN]) || (keyState[SDLK_LCTRL]))
+	if ((keyState[SDL_SCANCODE_SPACE]) || (keyState[SDL_SCANCODE_ESCAPE]) || (keyState[SDL_SCANCODE_LCTRL]) || (keyState[SDL_SCANCODE_RCTRL]) || (keyState[SDL_SCANCODE_RETURN]) || (keyState[SDL_SCANCODE_LCTRL]))
 	{
 		return true;
 	}
@@ -305,8 +305,7 @@ void Engine::flushInput()
 
 void Engine::clearInput()
 {
-	for (int i = 0 ; i < 350 ; i++)
-		keyState[i] = 0;
+	memset(keyState, 0, sizeof keyState);
 
 	mouseLeft = mouseRight = 0;
 }
@@ -732,21 +731,21 @@ int Engine::processWidgets()
 {
 	int update = 0;
 
-	if (keyState[SDLK_UP])
+	if (keyState[SDL_SCANCODE_UP])
 	{
 		highlightWidget(-1);
 		update = 1;
 		clearInput();
 	}
 
-	if (keyState[SDLK_DOWN])
+	if (keyState[SDL_SCANCODE_DOWN])
 	{
 		highlightWidget(1);
 		update = 1;
 		clearInput();
 	}
 
-	if (keyState[SDLK_LEFT] && (highlightedWidget->type != WG_BUTTON && highlightedWidget->type != WG_JOYPAD))
+	if (keyState[SDL_SCANCODE_LEFT] && (highlightedWidget->type != WG_BUTTON && highlightedWidget->type != WG_JOYPAD))
 	{
 		SDL_Delay(1);
 
@@ -763,7 +762,7 @@ int Engine::processWidgets()
 			clearInput();
 	}
 
-	if (keyState[SDLK_RIGHT] && (highlightedWidget->type != WG_BUTTON && highlightedWidget->type != WG_JOYPAD))
+	if (keyState[SDL_SCANCODE_RIGHT] && (highlightedWidget->type != WG_BUTTON && highlightedWidget->type != WG_JOYPAD))
 	{
 		SDL_Delay(1);
 
@@ -780,7 +779,7 @@ int Engine::processWidgets()
 			clearInput();
 	}
 
-	if ((keyState[SDLK_RETURN]) || (keyState[SDLK_SPACE]) || (keyState[SDLK_LCTRL]))
+	if ((keyState[SDL_SCANCODE_RETURN]) || (keyState[SDL_SCANCODE_SPACE]) || (keyState[SDL_SCANCODE_LCTRL]))
 	{
 		if (highlightedWidget->value == NULL)
 		{

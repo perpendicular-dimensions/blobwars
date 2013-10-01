@@ -140,8 +140,6 @@ void Graphics::mapColors()
 	fontForeground.r = fontForeground.g = fontForeground.b = 0xff;
 	fontBackground.r = fontBackground.g = fontBackground.b = 0x00;
 
-	fontForeground.unused = fontBackground.unused = 0;
-
 	fadeBlack = alphaRect(640, 480, 0x00, 0x00, 0x00);
 
 	infoBar = alphaRect(640, 25, 0x00, 0x00, 0x00);
@@ -156,7 +154,7 @@ Sprite *Graphics::getSpriteHead()
 
 void Graphics::setTransparent(SDL_Surface *sprite)
 {
-	SDL_SetColorKey(sprite, (SDL_SRCCOLORKEY|SDL_RLEACCEL), SDL_MapRGB(sprite->format, 0, 0, 0));
+	SDL_SetColorKey(sprite, SDL_RLEACCEL, SDL_MapRGB(sprite->format, 0, 0, 0));
 }
 
 bool Graphics::canShowMedalMessage() const
@@ -187,8 +185,9 @@ void Graphics::updateScreen()
 		}
 	}
 	
-	SDL_Flip(screen);
-	SDL_Delay(1);
+	SDL_UpdateTexture(texture, NULL, screen->pixels, screen->w * 4);
+	SDL_RenderCopy(renderer, texture, NULL, NULL);
+	SDL_RenderPresent(renderer);
 
 	if (takeRandomScreenShots)
 	{
@@ -202,21 +201,21 @@ void Graphics::updateScreen()
 		SDL_Delay(16);
 	}
 
-	if (engine->keyState[SDLK_F12])
+	if (engine->keyState[SDL_SCANCODE_F12])
 	{
 		snprintf(screenshot, sizeof screenshot, "screenshots/screenshot%.3d.bmp", screenShotNumber);
 		SDL_SaveBMP(screen, screenshot);
 		screenShotNumber++;
 
-		engine->keyState[SDLK_F12] = 0;
+		engine->keyState[SDL_SCANCODE_F12] = 0;
 	}
 
-	if ((engine->keyState[SDLK_F10]) || ((engine->keyState[SDLK_RETURN]) && (engine->keyState[SDLK_LALT])))
+	if ((engine->keyState[SDL_SCANCODE_F10]) || ((engine->keyState[SDL_SCANCODE_RETURN]) && (engine->keyState[SDL_SCANCODE_LALT])))
 	{
-		SDL_WM_ToggleFullScreen(screen);
 		engine->fullScreen = !engine->fullScreen;
+		SDL_SetWindowFullscreen(window, engine->fullScreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
 
-		engine->keyState[SDLK_F10] = engine->keyState[SDLK_LALT] = engine->keyState[SDLK_RETURN] = 0;
+		engine->keyState[SDL_SCANCODE_F10] = engine->keyState[SDL_SCANCODE_LALT] = engine->keyState[SDL_SCANCODE_RETURN] = 0;
 	}
 }
 
@@ -224,7 +223,7 @@ void Graphics::delay(int time)
 {
 	unsigned long then = SDL_GetTicks();
 
-	engine->keyState[SDLK_ESCAPE] = 0;
+	engine->keyState[SDL_SCANCODE_ESCAPE] = 0;
 
 	while (true)
 	{
@@ -238,7 +237,7 @@ void Graphics::delay(int time)
 		engine->getInput();
 		
 		/*
-		if (engine->keyState[SDLK_ESCAPE])
+		if (engine->keyState[SDL_SCANCODE_ESCAPE])
 		{
 			break;
 		}
@@ -358,7 +357,7 @@ SDL_Surface *Graphics::loadImage(const char *filename, bool srcalpha)
 	if (!image)
 		showErrorAndExit(ERR_FILE, filename);
 
-	newImage = SDL_DisplayFormat(image);
+	newImage = SDL_ConvertSurface(image, screen->format, 0);
 
 	if (newImage)
 	{
@@ -371,7 +370,7 @@ SDL_Surface *Graphics::loadImage(const char *filename, bool srcalpha)
 	}
 
 	if(srcalpha)
-		SDL_SetAlpha(newImage, SDL_SRCALPHA, 255);
+		SDL_SetSurfaceAlphaMod(newImage, 255);
 	else
 		setTransparent(newImage);
 
@@ -431,7 +430,7 @@ SDL_Surface *Graphics::loadImage(const char *filename, int hue, int sat, int val
 		}
 	}
 
-	newImage = SDL_DisplayFormat(image);
+	newImage = SDL_ConvertSurface(image, screen->format, 0);
 
 	if (newImage)
 	{
@@ -458,7 +457,7 @@ SDL_Surface *Graphics::quickSprite(const char *name, SDL_Surface *image)
 
 void Graphics::fade(int amount)
 {
-	SDL_SetAlpha(fadeBlack, SDL_SRCALPHA|SDL_RLEACCEL, amount);
+	SDL_SetSurfaceAlphaMod(fadeBlack, amount);
 	blit(fadeBlack, 0, 0, screen, false);
 }
 
@@ -468,7 +467,7 @@ void Graphics::fadeToBlack()
 
 	while (start < 50)
 	{
-		SDL_SetAlpha(fadeBlack, SDL_SRCALPHA|SDL_RLEACCEL, start);
+		SDL_SetSurfaceAlphaMod(fadeBlack, start);
 		blit(fadeBlack, 0, 0, screen, false);
 		delay(60);
 		start++;
@@ -520,7 +519,7 @@ void Graphics::loadMapTiles(const char *baseDir)
 			{
 				if ((i < MAP_EXITSIGN) || (i >= MAP_WATERANIM))
 				{
-					SDL_SetAlpha(tile[i], SDL_SRCALPHA|SDL_RLEACCEL, 130);
+					SDL_SetSurfaceAlphaMod(tile[i], 130);
 				}
 			}
 			else
@@ -863,8 +862,6 @@ void Graphics::setFontColor(int red, int green, int blue, int red2, int green2, 
 	fontBackground.r = red2;
 	fontBackground.g = green2;
 	fontBackground.b = blue2;
-
-	fontForeground.unused = fontBackground.unused = 0;
 }
 
 void Graphics::setFontSize(int size)
@@ -1067,7 +1064,7 @@ SDL_Surface *Graphics::createSurface(int width, int height)
 	if (surface == NULL)
 		showErrorAndExit("CreateRGBSurface failed: %s\n", SDL_GetError());
 
-	newImage = SDL_DisplayFormat(surface);
+	newImage = SDL_ConvertSurface(surface, screen->format, 0);
 
 	SDL_FreeSurface(surface);
 
@@ -1080,7 +1077,7 @@ SDL_Surface *Graphics::alphaRect(int width, int height, Uint8 red, Uint8 green, 
 
 	SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, red, green, blue));
 
-	SDL_SetAlpha(surface, SDL_SRCALPHA|SDL_RLEACCEL, 130);
+	SDL_SetSurfaceAlphaMod(surface, 130);
 
 	return surface;
 }
@@ -1091,7 +1088,7 @@ void Graphics::colorize(SDL_Surface *image, int red, int green, int blue)
 
 	blit(alpha, 0, 0, image, false);
 
-	SDL_SetColorKey(image, (SDL_SRCCOLORKEY|SDL_RLEACCEL), SDL_MapRGB(image->format, red / 2, green / 2, blue / 2));
+	SDL_SetColorKey(image, SDL_RLEACCEL, SDL_MapRGB(image->format, red / 2, green / 2, blue / 2));
 }
 
 void Graphics::lock(SDL_Surface *surface)
@@ -1156,7 +1153,7 @@ void Graphics::showLicenseErrorAndExit()
 	{
 		updateScreen();
 		engine->getInput();
-		if (engine->keyState[SDLK_ESCAPE])
+		if (engine->keyState[SDL_SCANCODE_ESCAPE])
 			exit(1);
 		SDL_Delay(16);
 	}
@@ -1203,7 +1200,7 @@ void Graphics::showErrorAndExit(const char *error, const char *param)
 	{
 		updateScreen();
 		engine->getInput();
-		if (engine->keyState[SDLK_ESCAPE])
+		if (engine->keyState[SDL_SCANCODE_ESCAPE])
 		{
 			exit(1);
 		}
@@ -1232,11 +1229,11 @@ void Graphics::showRootWarning()
 		updateScreen();
 		engine->getInput();
 		
-		if (engine->keyState[SDLK_ESCAPE])
+		if (engine->keyState[SDL_SCANCODE_ESCAPE])
 		{
 			return;
 		}
-		else if (engine->keyState[SDLK_SPACE])
+		else if (engine->keyState[SDL_SCANCODE_SPACE])
 		{
 			exit(0);
 		}

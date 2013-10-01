@@ -109,7 +109,7 @@ void showIntroError()
 		graphics.updateScreen();
 		engine.getInput();
 		config.populate();
-		if (engine.keyState[SDLK_ESCAPE])
+		if (engine.keyState[SDL_SCANCODE_ESCAPE])
 			break;
 		SDL_Delay(16);
 	}

@@ -99,9 +99,9 @@ void showInGameOptions()
 		engine.getInput();
 		config.populate();
 
-		if ((config.isControl(CONTROL::PAUSE)) || (engine.keyState[SDLK_ESCAPE]))
+		if ((config.isControl(CONTROL::PAUSE)) || (engine.keyState[SDL_SCANCODE_ESCAPE]))
 		{
-			engine.keyState[SDLK_ESCAPE] = 0;
+			engine.keyState[SDL_SCANCODE_ESCAPE] = 0;
 			config.resetControl(CONTROL::PAUSE);
 			break;
 		}
@@ -276,11 +276,6 @@ void doGameStuff()
 	
 	doParticles();
 	
-	if ((SDL_GetAppState() & SDL_APPINPUTFOCUS) == 0)
-	{
-		engine.paused = true;
-	}
-	
 	replayData.set(config.command);	
 	replayData.commit();
 }
@@ -386,7 +381,7 @@ void showMissionInformation()
 
 	SDL_Surface *panel = graphics.createSurface(400, 300);
 	SDL_Surface *panelBack = graphics.alphaRect(400, 300, 0x00, 0x00, 0x00);
-	SDL_SetColorKey(panel, (SDL_SRCCOLORKEY|SDL_RLEACCEL), SDL_MapRGB(panel->format, 0, 0, 0));
+	SDL_SetColorKey(panel, SDL_RLEACCEL, SDL_MapRGB(panel->format, 0, 0, 0));
 
 	graphics.drawRect(1, 1, 398, 298, graphics.black, graphics.white, panelBack);
 
@@ -689,7 +684,7 @@ int doGame()
 		doStatusBar();
 		doMusicInfo(cur - start);
 
-		if ((engine.keyState[SDLK_ESCAPE]) && (game.missionOver == 0))
+		if ((engine.keyState[SDL_SCANCODE_ESCAPE]) && (game.missionOver == 0))
 		{
 			if (replayData.replayMode == REPLAY_MODE::NONE)
 			{
@@ -810,15 +805,15 @@ int doGame()
 			SDL_Delay(16);
 		}
 		
-		if ((engine.keyState[SDLK_F3]) && (engine.cheatSkipLevel))
+		if ((engine.keyState[SDL_SCANCODE_F3]) && (engine.cheatSkipLevel))
 		{
 			autoCompleteAllObjectives(true);
-			engine.keyState[SDLK_F3] = 0;
+			engine.keyState[SDL_SCANCODE_F3] = 0;
 			engine.setInfoMessage("Skipping Mission...", 2, INFO_OBJECTIVE);
 		}
 		
 		#if DEBUG
-		if (engine.keyState[SDLK_F1])
+		if (engine.keyState[SDL_SCANCODE_F1])
 		{
 			autoCompleteAllObjectives(false);
 		}		
@@ -833,10 +828,10 @@ int doGame()
 			engine.delay(frameLimit);
 		}
 		
-		if (engine.keyState[SDLK_F5])
+		if (engine.keyState[SDL_SCANCODE_F5])
 		{
 			replayData.fast = !replayData.fast;
-			engine.keyState[SDLK_F5] = 0;
+			engine.keyState[SDL_SCANCODE_F5] = 0;
 		}
 		
 		frameLimit = SDL_GetTicks()  + 16;

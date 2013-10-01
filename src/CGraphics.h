@@ -57,6 +57,9 @@ class Graphics {
 
 		bool takeRandomScreenShots;
 
+		SDL_Window *window;
+		SDL_Renderer *renderer;
+		SDL_Texture *texture;
 		SDL_Surface *screen, *background;
 		SDL_Surface *tile[MAX_TILES];
 		

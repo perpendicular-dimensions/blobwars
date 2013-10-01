@@ -37,11 +37,11 @@ extern C_LINKAGE void openHelpURL();
 extern DECLSPEC int SDLCALL SDL_GetGamma(float *red, float *green, float *blue);
 #endif
 #else
-#include "SDL/SDL.h"
-#include "SDL/SDL_image.h"
-#include "SDL/SDL_mixer.h"
-#include "SDL/SDL_ttf.h"
-#include "SDL/SDL_net.h"
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_image.h"
+#include "SDL2/SDL_mixer.h"
+#include "SDL2/SDL_ttf.h"
+#include "SDL2/SDL_net.h"
 #endif
 
 #ifndef WIN32

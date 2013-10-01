@@ -293,7 +293,7 @@ void showMap(int centerX, int centerY)
 	
 	SDL_Surface *panel = graphics.createSurface(320, 240);
 	SDL_Surface *background = graphics.loadImage("gfx/main/mapBackground.png");
-	SDL_SetAlpha(background, SDL_SRCALPHA|SDL_RLEACCEL, 130);
+	SDL_SetSurfaceAlphaMod(background, 130);
 	
 	graphics.blit(background, 0, 0, panel, false);
 	
@@ -412,7 +412,7 @@ void showMap(int centerX, int centerY)
 		graphics.drawRect(160, 120, 320, 240, graphics.black, graphics.white, graphics.screen);
 		graphics.blit(panel, 160, 120, graphics.screen, false);
 
-		if ((config.isControl(CONTROL::MAP)) || (config.isControl(CONTROL::PAUSE)) || (engine.keyState[SDLK_ESCAPE]))
+		if ((config.isControl(CONTROL::MAP)) || (config.isControl(CONTROL::PAUSE)) || (engine.keyState[SDL_SCANCODE_ESCAPE]))
 		{
 			break;
 		}

@@ -77,11 +77,11 @@ void Config::doPause()
 	}
 	else
 	{
-		if ((engine->keyState[keyboard.control[CONTROL::PAUSE]]) || (engine->keyState[SDLK_ESCAPE]))
+		if ((engine->keyState[keyboard.control[CONTROL::PAUSE]]) || (engine->keyState[SDL_SCANCODE_ESCAPE]))
 		{
 			engine->paused = false;
 			engine->keyState[keyboard.control[CONTROL::PAUSE]] = 0;
-			engine->keyState[SDLK_ESCAPE] = 0;
+			engine->keyState[SDL_SCANCODE_ESCAPE] = 0;
 		}
 	}
 }

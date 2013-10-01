@@ -61,7 +61,7 @@ void showMap(int *mapX, int *mapY)
 {
 	SDL_FillRect(graphics.screen, NULL, graphics.black);
 
-	engine.keyState[SDLK_SPACE] = 0;
+	engine.keyState[SDL_SCANCODE_SPACE] = 0;
 	int moveTimer = 0;
 
 	while (true)
@@ -70,7 +70,7 @@ void showMap(int *mapX, int *mapY)
 		engine.getInput();
 		config.populate();
 
-		if (engine.keyState[SDLK_SPACE])
+		if (engine.keyState[SDL_SCANCODE_SPACE])
 			break;
 			
 		for (int x = 0 ; x < MAPWIDTH ; x++)
@@ -100,16 +100,16 @@ void showMap(int *mapX, int *mapY)
 
 		if (moveTimer == 0)
 		{
-			if (engine.keyState[SDLK_LEFT])
+			if (engine.keyState[SDL_SCANCODE_LEFT])
 				*mapX -= 1;
 
-			if (engine.keyState[SDLK_RIGHT])
+			if (engine.keyState[SDL_SCANCODE_RIGHT])
 				*mapX += 1;
 
-			if (engine.keyState[SDLK_UP])
+			if (engine.keyState[SDL_SCANCODE_UP])
 				*mapY -= 1;
 
-			if (engine.keyState[SDLK_DOWN])
+			if (engine.keyState[SDL_SCANCODE_DOWN])
 				*mapY += 1;
 		}
 
@@ -124,7 +124,7 @@ void showMap(int *mapX, int *mapY)
 		SDL_Delay(16);
 	}
 
-	engine.keyState[SDLK_SPACE] = 0;
+	engine.keyState[SDL_SCANCODE_SPACE] = 0;
 }
 
 int nextBlock(int current, int dir)
@@ -364,7 +364,7 @@ void addTileDecoration()
 		}
 	}
 	
-	engine.keyState[SDLK_F1] = 0;
+	engine.keyState[SDL_SCANCODE_F1] = 0;
 }
 
 void fillHorizontal(int block, int x, int y)
@@ -551,26 +551,26 @@ int main(int argc, char *argv[])
 
 		if (allowMove == 0)
 		{
-			if (engine.keyState[SDLK_UP]) {mapY--; allowMove = MOVESPEED;}
-			if (engine.keyState[SDLK_DOWN]) {mapY++; allowMove = MOVESPEED;}
-			if (engine.keyState[SDLK_LEFT]) {mapX--; allowMove = MOVESPEED;}
-			if (engine.keyState[SDLK_RIGHT]) {mapX++; allowMove = MOVESPEED;}
+			if (engine.keyState[SDL_SCANCODE_UP]) {mapY--; allowMove = MOVESPEED;}
+			if (engine.keyState[SDL_SCANCODE_DOWN]) {mapY++; allowMove = MOVESPEED;}
+			if (engine.keyState[SDL_SCANCODE_LEFT]) {mapX--; allowMove = MOVESPEED;}
+			if (engine.keyState[SDL_SCANCODE_RIGHT]) {mapX++; allowMove = MOVESPEED;}
 
-			if (engine.keyState[SDLK_PAGEDOWN]) {mapY += 10; allowMove = MOVESPEED;}
-			if (engine.keyState[SDLK_PAGEUP]) {mapY -= 10; allowMove = MOVESPEED;}
+			if (engine.keyState[SDL_SCANCODE_PAGEDOWN]) {mapY += 10; allowMove = MOVESPEED;}
+			if (engine.keyState[SDL_SCANCODE_PAGEUP]) {mapY -= 10; allowMove = MOVESPEED;}
 
-			if (engine.keyState[SDLK_1]) editing = 0;
-			if (engine.keyState[SDLK_2]) editing = 1;
-			if (engine.keyState[SDLK_3]) editing = 2;
+			if (engine.keyState[SDL_SCANCODE_1]) editing = 0;
+			if (engine.keyState[SDL_SCANCODE_2]) editing = 1;
+			if (engine.keyState[SDL_SCANCODE_3]) editing = 2;
 			
-			if (engine.keyState[SDLK_0]) fillHorizontal(currentBlock, mapX + x, mapY + y);
+			if (engine.keyState[SDL_SCANCODE_0]) fillHorizontal(currentBlock, mapX + x, mapY + y);
 
-			if (engine.keyState[SDLK_F1]) addTileDecoration();
+			if (engine.keyState[SDL_SCANCODE_F1]) addTileDecoration();
 
-			if (engine.keyState[SDLK_ESCAPE]) break;
+			if (engine.keyState[SDL_SCANCODE_ESCAPE]) break;
 		}
 
-		if (engine.keyState[SDLK_PERIOD])
+		if (engine.keyState[SDL_SCANCODE_PERIOD])
 		{
 			switch (editing)
 			{
@@ -585,10 +585,10 @@ int main(int argc, char *argv[])
 					break;
 			}
 
-			engine.keyState[SDLK_PERIOD] = 0;
+			engine.keyState[SDL_SCANCODE_PERIOD] = 0;
 		}
 
-		if (engine.keyState[SDLK_COMMA])
+		if (engine.keyState[SDL_SCANCODE_COMMA])
 		{
 			switch (editing)
 			{
@@ -603,7 +603,7 @@ int main(int argc, char *argv[])
 					break;
 			}
 
-			engine.keyState[SDLK_COMMA] = 0;
+			engine.keyState[SDL_SCANCODE_COMMA] = 0;
 		}
 
 		Math::limitInt(&currentMonster, 0, MAX_ENEMIES - 1);
@@ -615,9 +615,9 @@ int main(int argc, char *argv[])
 		if (defItem[currentItem].sprite[0] == NULL)
 			currentItem = 0;
 
-		if (engine.keyState[SDLK_SPACE]) {showMap(&mapX, &mapY);}
+		if (engine.keyState[SDL_SCANCODE_SPACE]) {showMap(&mapX, &mapY);}
 
-		if (engine.keyState[SDLK_s]) {saveMap(game.mapName); engine.keyState[SDLK_s] = 0;}
+		if (engine.keyState[SDL_SCANCODE_s]) {saveMap(game.mapName); engine.keyState[SDL_SCANCODE_s] = 0;}
 
 		if (mapX < 0) mapX = 0;
 		if (mapY < 0) mapY = 0;

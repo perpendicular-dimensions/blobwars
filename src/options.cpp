@@ -75,7 +75,7 @@ void showCheatConfig()
 			drawWidgets();
 		}
 
-		if (engine.keyState[SDLK_ESCAPE])
+		if (engine.keyState[SDL_SCANCODE_ESCAPE])
 		{
 			engine.clearInput();
 			engine.flushInput();
@@ -163,7 +163,7 @@ void showKeyConfig()
 			defaults = 0;
 		}
 
-		if (engine.keyState[SDLK_ESCAPE])
+		if (engine.keyState[SDL_SCANCODE_ESCAPE])
 		{
 			engine.clearInput();
 			engine.flushInput();
@@ -247,7 +247,7 @@ void showJoystickConfig()
 		graphics.blit(header, 320, 25, graphics.screen, true);
 		drawWidgets();
 
-		if (engine.keyState[SDLK_ESCAPE])
+		if (engine.keyState[SDL_SCANCODE_ESCAPE])
 		{
 			engine.clearInput();
 			engine.flushInput();
@@ -365,15 +365,17 @@ void showOptions()
 				audio.setMusicVolume(game.musicVol);
 
 			if (engine.widgetChanged("fullscreen"))
-				SDL_WM_ToggleFullScreen(graphics.screen);
+				SDL_SetWindowFullscreen(graphics.window, engine.fullScreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
 
 			if (engine.widgetChanged("gamma"))
 			{
 				brightness = game.brightness;
-                if (brightness > 0) {
-                    brightness /= 10;
-                    SDL_SetGamma(brightness, brightness, brightness);
-                }
+				if (brightness > 0) {
+					brightness /= 10;
+					uint16_t ramp[256];
+					SDL_CalculateGammaRamp(brightness, ramp);
+					SDL_SetWindowGammaRamp(graphics.window, ramp, ramp, ramp);
+				}
 			}
 			
 			if ((joysticks) || (cheats) || (keys))
@@ -428,7 +430,7 @@ void showOptions()
 			drawWidgets();
 		}
 
-		if (engine.keyState[SDLK_ESCAPE])
+		if (engine.keyState[SDL_SCANCODE_ESCAPE])
 		{
 			engine.clearInput();
 			engine.flushInput();

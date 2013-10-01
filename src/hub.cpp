@@ -742,7 +742,7 @@ int doHub()
 		// Collisions for Panel Buttons
 		if ((showMIAs) || (showStats))
 		{
-		    // SDLK_LCTRL is the "fire" button.
+		    // SDL_SCANCODE_LCTRL is the "fire" button.
 			if (engine.mouseLeft || config.isControl(CONTROL::FIRE))
 			{
 				if (Collision::collision(engine.getMouseX(), engine.getMouseY(), 1, 1, 270, 310, 32, 32))

@@ -44,7 +44,7 @@ class Engine {
 		
 		int extremeAvailable;
 
-		char keyState[350];
+		char keyState[SDL_NUM_SCANCODES];
 		char mouseLeft, mouseRight;
 		
 		int joyX, joyY;

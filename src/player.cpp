@@ -68,7 +68,7 @@ void presentPlayerMedal(const char *tname)
 	char *data = new char[128];
 	strlcpy(data, tname, 128);
 	
-	SDL_Thread *thread = SDL_CreateThread(medalWorker, (void*)data);
+	SDL_Thread *thread = SDL_CreateThread(medalWorker, "MedalWorker", (void*)data);
 	
 	if (thread == NULL)
 	{
@@ -430,15 +430,15 @@ void doPlayer()
 	}
 	
 	#if DEBUG
-	if (engine.keyState[SDLK_1])
+	if (engine.keyState[SDL_SCANCODE_1])
 		player.currentWeapon = &weapon[WP_PISTOL];
-	else if (engine.keyState[SDLK_2])
+	else if (engine.keyState[SDL_SCANCODE_2])
 		player.currentWeapon = &weapon[WP_MACHINEGUN];
-	else if (engine.keyState[SDLK_3])
+	else if (engine.keyState[SDL_SCANCODE_3])
 		player.currentWeapon = &weapon[WP_GRENADES];
-	else if (engine.keyState[SDLK_4])
+	else if (engine.keyState[SDL_SCANCODE_4])
 		player.currentWeapon = &weapon[WP_LASER];
-	else if (engine.keyState[SDLK_5])
+	else if (engine.keyState[SDL_SCANCODE_5])
 		player.currentWeapon = &weapon[WP_SPREAD];
 	#endif
 	

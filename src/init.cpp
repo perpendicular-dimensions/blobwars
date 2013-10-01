@@ -80,7 +80,7 @@ void showLicense()
 		graphics.updateScreen();
 		engine.getInput();
 		config.populate();
-		if (engine.keyState[SDLK_SPACE])
+		if (engine.keyState[SDL_SCANCODE_SPACE])
 			break;
 		SDL_Delay(16);
 	}
@@ -278,16 +278,15 @@ void initSystem()
 		exit(1);
 	}
 
-	if (!engine.fullScreen)
-	{
-		graphics.screen = SDL_SetVideoMode(640, 480, 0, SDL_DOUBLEBUF | SDL_HWPALETTE);
-	}
-	else
-	{
-		graphics.screen = SDL_SetVideoMode(640, 480, 0, SDL_DOUBLEBUF | SDL_HWPALETTE | SDL_FULLSCREEN);
-	}
+	graphics.screen = SDL_CreateRGBSurface(0, 640, 480, 32, 0xff0000, 0xff00, 0xff, 0xff000000);
 
-	if (graphics.screen == NULL)
+	graphics.window = SDL_CreateWindow("Blobwars: Metal Blob Solid", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, graphics.screen->w, graphics.screen->h, 0);
+	SDL_SetWindowFullscreen(graphics.window, engine.fullScreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
+	graphics.renderer = SDL_CreateRenderer(graphics.window, -1, 0);
+	SDL_RenderSetLogicalSize(graphics.renderer, graphics.screen->w, graphics.screen->h);
+	graphics.texture = SDL_CreateTexture(graphics.renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, graphics.screen->w, graphics.screen->h);
+
+	if (graphics.window == NULL)
 	{
 		printf("Couldn't set 640x480 video mode: %s\n", SDL_GetError());
 		exit(1);
@@ -295,12 +294,14 @@ void initSystem()
 
 	// This (attempts to) set the gamma correction. We attempt to catch an error here
 	// in case someone has done something really stupid in the config file(!!)
-    if (game.brightness != -1) {
-        Math::limitInt(&game.brightness, 1, 20);
-        float brightness = game.brightness;
-        brightness /= 10;
-        SDL_SetGamma(brightness, brightness, brightness);
-    }
+	if (game.brightness != -1) {
+		Math::limitInt(&game.brightness, 1, 20);
+		float brightness = game.brightness;
+		brightness /= 10;
+		uint16_t ramp[256];
+		SDL_CalculateGammaRamp(brightness, ramp);
+		SDL_SetWindowGammaRamp(graphics.window, ramp, ramp, ramp);
+	}
 
 	if (TTF_Init() < 0)
 	{
@@ -383,12 +384,6 @@ void initSystem()
 
 	SDL_Surface *device = graphics.loadImage("gfx/main/alienDevice.png");
 
-#ifndef FRAMEWORK_SDL
-	SDL_WM_SetIcon(device, NULL);
-#endif
-	SDL_WM_SetCaption("Blob Wars : Metal Blob Solid", "Blob Wars");
-	SDL_EnableKeyRepeat(350, 80);
-
 	SDL_FreeSurface(device);
 	
 	if (strstr(engine.userHomeDirectory, "/root"))
@@ -411,7 +406,7 @@ void initSystem()
 	}
 	else
 	{
-		SDL_Thread *thread = SDL_CreateThread(initMedalService, NULL);
+		SDL_Thread *thread = SDL_CreateThread(initMedalService, "MedalService", NULL);
 	
 		if (thread == NULL)
 		{
@@ -475,7 +470,7 @@ void cleanup()
 		SDL_JoystickEventState(SDL_DISABLE);
 		for (int i = 0 ; i < SDL_NumJoysticks() ; i++)
 		{
-			debug(("Closing Joystick #%d - %s...\n", i, SDL_JoystickName(i)));
+			debug(("Closing Joystick #%d\n", i));
 			SDL_JoystickClose(config.sdlJoystick);
 		}
 	}

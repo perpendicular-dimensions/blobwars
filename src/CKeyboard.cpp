@@ -27,15 +27,15 @@ Keyboard::Keyboard()
 
 void Keyboard::setDefaultKeys()
 {
-	control[CONTROL::LEFT] = SDLK_LEFT;
-	control[CONTROL::RIGHT] = SDLK_RIGHT;
-	control[CONTROL::DOWN] = SDLK_DOWN;
-	control[CONTROL::JUMP] = SDLK_UP;
+	control[CONTROL::LEFT] = SDL_SCANCODE_LEFT;
+	control[CONTROL::RIGHT] = SDL_SCANCODE_RIGHT;
+	control[CONTROL::DOWN] = SDL_SCANCODE_DOWN;
+	control[CONTROL::JUMP] = SDL_SCANCODE_UP;
 	control[CONTROL::UP] = 0;
-	control[CONTROL::FIRE] = SDLK_LCTRL;
-	control[CONTROL::JETPACK] = SDLK_SPACE;
-	control[CONTROL::PAUSE] = SDLK_p;
-	control[CONTROL::MAP] = SDLK_TAB;
+	control[CONTROL::FIRE] = SDL_SCANCODE_LCTRL;
+	control[CONTROL::JETPACK] = SDL_SCANCODE_SPACE;
+	control[CONTROL::PAUSE] = SDL_SCANCODE_P;
+	control[CONTROL::MAP] = SDL_SCANCODE_TAB;
 }
 
 const char *Keyboard::translateKey(int key)
@@ -49,7 +49,7 @@ const char *Keyboard::translateKey(int key)
 		return "...";
 	}
 	
-	strlcpy(keyName, _(SDL_GetKeyName((SDLKey)key)), sizeof keyName);
+	strlcpy(keyName, _(SDL_GetKeyName(key)), sizeof keyName);
 	
 	/*
 	This is not really neccessary, but it just makes
@@ -63,7 +63,7 @@ const char *Keyboard::translateKey(int key)
 	
 	while (*c != '\0')
 	{
-		if ((*c >= SDLK_a) && (*c <= SDLK_z))
+		if ((*c >= SDL_SCANCODE_A) && (*c <= SDL_SCANCODE_Z))
 		{
 			if (uppercase)
 			{
@@ -71,7 +71,7 @@ const char *Keyboard::translateKey(int key)
 				uppercase = false;
 			}
 		}
-		else if (*c == SDLK_SPACE)
+		else if (*c == SDL_SCANCODE_SPACE)
 		{
 			uppercase = true;
 		}
