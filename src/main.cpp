@@ -24,36 +24,42 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 void showVersion()
 {
-	printf("\n");
-	printf("Blob Wars, Episode I - Metal Blob Solid (Version %.2f, Release %d)\n", VERSION, RELEASE);
-	printf("Copyright (C) 2004-2011 Parallel Realities\n");
-	printf("Licensed under the GNU General Public License (GPL)\n\n");
+	printf(_(
+		"\n"
+		"Blob Wars, Episode I - Metal Blob Solid (Version %.2f, Release %d)\n"
+		"Copyright (C) 2004-2011 Parallel Realities\n"
+		"Licensed under the GNU General Public License (GPL)\n"
+		"\n"),
+		VERSION, RELEASE);
 }
 
 void showHelp()
 {
 	showVersion();
 
-	printf("The Metal Blob Solid gameplay manual can be found in,\n");
-	printf("\t%s\n\n", GAMEPLAYMANUAL);
-	
-	printf("Replay Commands\n");
-	printf("\t-map <filename>       Play the specified map (use -listmaps to see maps)\n");
-	printf("\t-record <filename>    Record a game and output to the specified file\n");
-	printf("\t-playback <filename>  Playback the specified recording\n");
-	printf("\t-listmaps             List the available maps for playing\n\n");
-	
-	printf("Replay Examples\n");
-	printf("\tblobwars -map data/grasslands1 -record replay.dat\n");
-	printf("\tblobwars -playback replay.dat\n\n");
-
-	printf("Additional Commands\n");
-	printf("\t-fullscreen         Start the game in Full Screen mode\n");
-	printf("\t-window             Start the game in Window mode\n");
-	printf("\t-mono               Use mono sound output instead of stereo\n");
-	printf("\t-noaudio            Disables audio\n");
-	printf("\t-version            Display version number\n");
-	printf("\t--help              This help\n\n");
+	printf(_(
+		"The Metal Blob Solid gameplay manual can be found in,\n"
+		"\t%s\n"
+		"\n"
+		"Replay Commands\n"
+		"\t-map <filename>       Play the specified map (use -listmaps to see maps)\n"
+		"\t-record <filename>    Record a game and output to the specified file\n"
+		"\t-playback <filename>  Playback the specified recording\n"
+		"\t-listmaps             List the available maps for playing\n"
+		"\n"
+		"Replay Examples\n"
+		"\tblobwars -map data/grasslands1 -record replay.dat\n"
+		"\tblobwars -playback replay.dat\n"
+		"\n"
+		"Additional Commands\n"
+		"\t-fullscreen         Start the game in Full Screen mode\n"
+		"\t-window             Start the game in Window mode\n"
+		"\t-mono               Use mono sound output instead of stereo\n"
+		"\t-noaudio            Disables audio\n"
+		"\t-version            Display version number\n"
+		"\t--help              This help\n"
+		"\n"),
+		GAMEPLAYMANUAL);
 
 	exit(0);
 }
@@ -62,31 +68,33 @@ void listMaps()
 {
 	showVersion();
 	
-	printf("Available Maps\n");
-	printf("\tdata/arcticWastes\n");
-	printf("\tdata/assimilator\n");
-	printf("\tdata/caves1\n");
-	printf("\tdata/caves2\n");
-	printf("\tdata/caves3\n");
-	printf("\tdata/caves4\n");
-	printf("\tdata/comm\n");
-	printf("\tdata/finalBattle\n");
-	printf("\tdata/floodedTunnel1\n");
-	printf("\tdata/floodedTunnel2\n");
-	printf("\tdata/floodedTunnel3\n");
-	printf("\tdata/floodedTunnel4\n");
-	printf("\tdata/grasslands1\n");
-	printf("\tdata/grasslands2\n");
-	printf("\tdata/grasslands3\n");
-	printf("\tdata/hq\n");
-	printf("\tdata/icecave1\n");
-	printf("\tdata/icecave2\n");
-	printf("\tdata/spaceStation\n");
-	printf("\tdata/supply\n");
-	printf("\tdata/tomb1\n");
-	printf("\tdata/tomb2\n");
-	printf("\tdata/tomb3\n");
-	printf("\tdata/tomb4\n\n");
+	printf(_(
+		"Available Maps\n"
+		"\tdata/arcticWastes\n"
+		"\tdata/assimilator\n"
+		"\tdata/caves1\n"
+		"\tdata/caves2\n"
+		"\tdata/caves3\n"
+		"\tdata/caves4\n"
+		"\tdata/comm\n"
+		"\tdata/finalBattle\n"
+		"\tdata/floodedTunnel1\n"
+		"\tdata/floodedTunnel2\n"
+		"\tdata/floodedTunnel3\n"
+		"\tdata/floodedTunnel4\n"
+		"\tdata/grasslands1\n"
+		"\tdata/grasslands2\n"
+		"\tdata/grasslands3\n"
+		"\tdata/hq\n"
+		"\tdata/icecave1\n"
+		"\tdata/icecave2\n"
+		"\tdata/spaceStation\n"
+		"\tdata/supply\n"
+		"\tdata/tomb1\n"
+		"\tdata/tomb2\n"
+		"\tdata/tomb3\n"
+		"\tdata/tomb4\n"
+		"\n"));
 	
 	exit(0);
 }
