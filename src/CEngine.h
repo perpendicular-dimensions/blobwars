@@ -49,6 +49,9 @@ class Engine {
 		char mouseLeft, mouseRight;
 		
 		int joyX, joyY;
+		int joyprevX, joyprevY;
+		int joykeyX, joykeyY;
+		bool joykeyFire;
 		int joystickState[32]; // hopefully no one has a joystick with this many buttons(!)
 		bool waitForButton;
 		bool waitForKey;

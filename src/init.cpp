@@ -83,7 +83,7 @@ void showLicense()
 		graphics.updateScreen();
 		engine.getInput();
 		config.populate();
-		if (engine.keyState[SDL_SCANCODE_SPACE])
+		if (engine.userAccepts())
 			break;
 		SDL_Delay(16);
 	}

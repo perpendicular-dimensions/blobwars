@@ -241,17 +241,21 @@ void Engine::getInput()
 			case SDL_JOYAXISMOTION:
 				if (event.jaxis.axis == 0)
 				{
-				  joyX = event.jaxis.value;
+					joyX = event.jaxis.value;
+					int joycurX = joyX < -25000 ? -1 : joyX > 25000 ? 1 : 0;
+					if (joycurX != joyprevX)
+						joykeyX = joyprevX = joycurX;
 				}
 				else if (event.jaxis.axis == 1)
 				{
-				  joyY = event.jaxis.value;
+					joyY = event.jaxis.value;
+					int joycurY = joyY < -25000 ? -1 : joyY > 25000 ? 1 : 0;
+					if (joycurY != joyprevY)
+						joykeyY = joyprevY = joycurY;
 				}
-				
 				break;
 
 			case SDL_JOYBUTTONDOWN:
-			
 				if (waitForButton)
 				{
 					lastButtonPressed = event.jbutton.button;
@@ -263,10 +267,12 @@ void Engine::getInput()
 				}
 				
 				joystickState[event.jbutton.button] = 1;
+				joykeyFire = true;
 				break;
 
 			case SDL_JOYBUTTONUP:
 				joystickState[event.jbutton.button] = 0;
+				joykeyFire = false;
 				break;
 
 			case SDL_WINDOWEVENT:
@@ -297,7 +303,7 @@ void Engine::setMouse(int x, int y)
 
 bool Engine::userAccepts()
 {
-	if ((keyState[SDL_SCANCODE_SPACE]) || (keyState[SDL_SCANCODE_ESCAPE]) || (keyState[SDL_SCANCODE_LCTRL]) || (keyState[SDL_SCANCODE_RCTRL]) || (keyState[SDL_SCANCODE_RETURN]) || (keyState[SDL_SCANCODE_LCTRL]))
+	if ((keyState[SDL_SCANCODE_SPACE]) || (keyState[SDL_SCANCODE_ESCAPE]) || (keyState[SDL_SCANCODE_LCTRL]) || (keyState[SDL_SCANCODE_RCTRL]) || (keyState[SDL_SCANCODE_RETURN]) || (keyState[SDL_SCANCODE_LCTRL]) || joykeyFire)
 	{
 		return true;
 	}
@@ -315,6 +321,8 @@ void Engine::clearInput()
 	memset(keyState, 0, sizeof keyState);
 
 	mouseLeft = mouseRight = 0;
+	joykeyX = joykeyY = 0;
+	joykeyFire = false;
 }
 
 void Engine::setUserHome(const char *path)
@@ -738,21 +746,21 @@ int Engine::processWidgets()
 {
 	int update = 0;
 
-	if (keyState[SDL_SCANCODE_UP])
+	if (keyState[SDL_SCANCODE_UP] || joykeyY < 0)
 	{
 		highlightWidget(-1);
 		update = 1;
 		clearInput();
 	}
 
-	if (keyState[SDL_SCANCODE_DOWN])
+	if (keyState[SDL_SCANCODE_DOWN] || joykeyY > 0)
 	{
 		highlightWidget(1);
 		update = 1;
 		clearInput();
 	}
 
-	if (keyState[SDL_SCANCODE_LEFT] && (highlightedWidget->type != WG_BUTTON && highlightedWidget->type != WG_JOYPAD))
+	if ((keyState[SDL_SCANCODE_LEFT] || joykeyX < 0) && (highlightedWidget->type != WG_BUTTON && highlightedWidget->type != WG_JOYPAD))
 	{
 		SDL_Delay(1);
 
@@ -769,7 +777,7 @@ int Engine::processWidgets()
 			clearInput();
 	}
 
-	if (keyState[SDL_SCANCODE_RIGHT] && (highlightedWidget->type != WG_BUTTON && highlightedWidget->type != WG_JOYPAD))
+	if ((keyState[SDL_SCANCODE_RIGHT] || joykeyX > 0) && (highlightedWidget->type != WG_BUTTON && highlightedWidget->type != WG_JOYPAD))
 	{
 		SDL_Delay(1);
 
@@ -786,7 +794,7 @@ int Engine::processWidgets()
 			clearInput();
 	}
 
-	if ((keyState[SDL_SCANCODE_RETURN]) || (keyState[SDL_SCANCODE_SPACE]) || (keyState[SDL_SCANCODE_LCTRL]))
+	if ((keyState[SDL_SCANCODE_RETURN]) || (keyState[SDL_SCANCODE_SPACE]) || (keyState[SDL_SCANCODE_LCTRL]) || (joykeyFire && highlightedWidget->type != WG_JOYPAD))
 	{
 		if (highlightedWidget->value == NULL)
 		{
@@ -823,6 +831,39 @@ int Engine::processWidgets()
 		
 
 		flushInput();
+		clearInput();
+	}
+
+	if (joykeyX > 0 && highlightedWidget->type == WG_JOYPAD)
+	{
+		waitForButton = true;
+		waitForKey = false;
+		allowJoypad = true;
+
+		if (*highlightedWidget->value > -1000)
+		{
+			*highlightedWidget->value = (-1000 - *highlightedWidget->value);
+		}
+
+		clearInput();
+	}
+
+	if (joykeyX < 0 && highlightedWidget->type == WG_JOYPAD)
+	{
+		if (waitForButton)
+		{
+			lastButtonPressed = -1;
+			*highlightedWidget->value = abs(*highlightedWidget->value) - 1000;
+		}
+		else
+		{
+			lastButtonPressed = -2;
+			*highlightedWidget->value = -2;
+		}
+
+		waitForButton = false;
+		allowJoypad = false;
+		highlightedWidget->redraw();
 		clearInput();
 	}
 
