@@ -22,12 +22,17 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include <locale.h>
 
-void showHelp()
+void showVersion()
 {
 	printf("\n");
 	printf("Blob Wars, Episode I - Metal Blob Solid (Version %.2f, Release %d)\n", VERSION, RELEASE);
 	printf("Copyright (C) 2004-2011 Parallel Realities\n");
 	printf("Licensed under the GNU General Public License (GPL)\n\n");
+}
+
+void showHelp()
+{
+	showVersion();
 
 	printf("The Metal Blob Solid gameplay manual can be found in,\n");
 	printf("\t%s\n\n", GAMEPLAYMANUAL);
@@ -55,10 +60,7 @@ void showHelp()
 
 void listMaps()
 {
-	printf("\n");
-	printf("Blob Wars, Episode I - Metal Blob Solid (Version %.2f, Release %d)\n", VERSION, RELEASE);
-	printf("Copyright (C) 2004-2011 Parallel Realities\n");
-	printf("Licensed under the GNU General Public License (GPL)\n\n");
+	showVersion();
 	
 	printf("Available Maps\n");
 	printf("\tdata/arcticWastes\n");
@@ -87,15 +89,6 @@ void listMaps()
 	printf("\tdata/tomb4\n\n");
 	
 	exit(0);
-}
-
-void showVersion()
-{
-	printf("\n");
-	printf("Blob Wars, Episode I - Metal Blob Solid (Version %.2f, Release %d)\n", VERSION, RELEASE);
-	printf("Copyright (C) 2004-2011 Parallel Realities\n");
-	printf("Licensed under the GNU General Public License (GPL)\n\n");
-// 	exit(0);
 }
 
 int main(int argc, char *argv[])
@@ -136,7 +129,7 @@ int main(int argc, char *argv[])
 		else if (strcmp(argv[i], "-window") == 0) engine.fullScreen = false;
 		else if (strcmp(argv[i], "-noaudio") == 0) engine.useAudio = 0;
 		else if (strcmp(argv[i], "-mono") == 0) engine.useAudio = 1;
-		else if (strcmp(argv[i], "-version") == 0) showVersion();
+		else if (strcmp(argv[i], "-version") == 0) {showVersion(); exit(0);}
 		else if (strcmp(argv[i], "--help") == 0) showHelp();
 		else if (strcmp(argv[i], "-record") == 0) {recordMode = REPLAY_MODE::RECORD; strlcpy(replayData.filename, argv[++i], sizeof replayData.filename);}
 		else if (strcmp(argv[i], "-playback") == 0) {recordMode = REPLAY_MODE::PLAYBACK; strlcpy(replayData.filename, argv[++i], sizeof replayData.filename);}
