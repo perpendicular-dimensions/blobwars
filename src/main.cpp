@@ -146,6 +146,8 @@ int main(int argc, char *argv[])
 		else if (strcmp(argv[i], "-randomscreens") == 0) graphics.takeRandomScreenShots = true;
 		else if (strcmp(argv[i], "-nomonsters") == 0) engine.devNoMonsters = true;
 		#endif
+
+		else {fprintf(stderr, "Unknown argument '%s'\n", argv[i]); showHelp();}
 	}
 	
 	switch (recordMode)
