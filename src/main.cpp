@@ -44,6 +44,7 @@ void showHelp()
 
 	printf("Additional Commands\n");
 	printf("\t-fullscreen         Start the game in Full Screen mode\n");
+	printf("\t-window             Start the game in Window mode\n");
 	printf("\t-mono               Use mono sound output instead of stereo\n");
 	printf("\t-noaudio            Disables audio\n");
 	printf("\t-version            Display version number\n");
@@ -132,6 +133,7 @@ int main(int argc, char *argv[])
 	for (int i = 1 ; i < argc ; i++)
 	{
 		if (strcmp(argv[i], "-fullscreen") == 0) engine.fullScreen = true;
+		else if (strcmp(argv[i], "-window") == 0) engine.fullScreen = false;
 		else if (strcmp(argv[i], "-noaudio") == 0) engine.useAudio = 0;
 		else if (strcmp(argv[i], "-mono") == 0) engine.useAudio = 1;
 		else if (strcmp(argv[i], "-version") == 0) showVersion();
