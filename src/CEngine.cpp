@@ -157,6 +157,12 @@ void Engine::getInput()
 {
 	SDL_GetMouseState(&mouseX, &mouseY);
 
+	// Scale from window coordinates to graphics coordinates
+	int w, h;
+	SDL_GetWindowSize(graphics.window, &w, &h);
+	mouseX = mouseX * 640 / w;
+	mouseY = mouseY * 480 / h;
+
 	while (SDL_PollEvent(&event))
 	{
 		switch (event.type)
