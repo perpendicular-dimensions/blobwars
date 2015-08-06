@@ -19,7 +19,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
 #include "headers.h"
-#include <SDL/SDL_thread.h>
 
 extern void throwAndDamageEntity(Entity *ent, int damage, int minDX, int maxDX, int DY);
 extern void moveEntity(Entity *ent);

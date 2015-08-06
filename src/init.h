@@ -26,7 +26,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #endif
 #include <time.h>
 #include "headers.h"
-#include <SDL/SDL_thread.h>
 
 extern SDL_Surface *loadImage(const char *filename);
 
