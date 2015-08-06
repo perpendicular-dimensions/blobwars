@@ -131,7 +131,7 @@ void drawJoypadButtonOption(Widget *widget)
 	
 	// joysticks have a button 0 so we can't
 	// do the same thing as the keyboard(!)
-	if (*widget->value <= -1000)
+	if (*widget->value < -2)
 	{
 		snprintf(text, sizeof text, "...");
 	}

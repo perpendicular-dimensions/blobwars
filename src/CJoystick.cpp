@@ -21,12 +21,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-Joystick::Joystick()
+Joystick::Joystick():
+	sensitivity(25000),
+	control{-2, -2, -2, -2, 1, 0, 3, 7 ,6}
 {
-	sensitivity = 25000;
-
-	for (int i = 0 ; i < CONTROL::MAX ; i++)
-	{
-		control[i] = i;
-	}
 }
