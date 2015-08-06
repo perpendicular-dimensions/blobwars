@@ -20,6 +20,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "init.h"
 
+static bool displayLicense;
+
 void checkForLicense()
 {
 	if (!engine.loadData(_("data/license")))
@@ -252,18 +254,21 @@ int initMedalService(void *data)
 	return 1;
 }
 
+void initConfig()
+{
+	#if UNIX
+	setupUserHomeDirectory();
+	#endif
+
+	displayLicense = loadConfig();
+}
+
 /*
 Chugg chugg chugg.... brrr... chugg chugg chugg...brrrrrr... chugg ch..
 BRRRRRRRRRRRRRRRRRMMMMMMMMMMMMMMMMMMM!! Well, hopefully anyway! ;)
 */
 void initSystem()
 {
-	#if UNIX
-	setupUserHomeDirectory();
-	#endif
-
-	bool displayLicense = loadConfig();
-	
 	long flags = SDL_INIT_VIDEO|SDL_INIT_JOYSTICK;
 			
 	if (engine.useAudio)

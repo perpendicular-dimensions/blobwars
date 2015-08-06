@@ -127,6 +127,8 @@ int main(int argc, char *argv[])
 	int recordMode = REPLAY_MODE::NONE;
 	int requiredSection = SECTION_INTRO;
 
+	initConfig();
+
 	for (int i = 1 ; i < argc ; i++)
 	{
 		if (strcmp(argv[i], "-fullscreen") == 0) engine.fullScreen = true;
