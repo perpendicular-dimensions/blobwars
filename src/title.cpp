@@ -1,5 +1,6 @@
 /*
 Copyright (C) 2004-2011 Parallel Realities
+Copyright (C) 2011-2015 Perpendicular Dimensions
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -189,7 +190,11 @@ int title()
 	SDL_Surface *subTitle = graphics.quickSprite("SubTitle", graphics.getString(_("Blob Wars : Episode I"), true));
 
 	graphics.setFontSize(0);
-	SDL_Surface *copyright = graphics.quickSprite("Copyright", graphics.getString(_("Copyright (C) 2004-2011 Parallel Realities"), true));
+	SDL_Surface *copyright[] = {
+		graphics.quickSprite("Copyright1", graphics.getString(_("Copyright (C) 2011-2015 Perpendicular Dimensions"), true)),
+		graphics.quickSprite("Copyright2", graphics.getString(_("Copyright (C) 2004-2011 Parallel Realities"), true)),
+		NULL,
+	};
 
 	char v[50];
 	#define STRINGIFY_VALUE(x) STRINGIFY(x)
@@ -233,6 +238,7 @@ int title()
 
 	while (true)
 	{
+		unsigned int ticks = SDL_GetTicks();
 		graphics.updateScreen();
 
 		engine.getInput();
@@ -248,15 +254,15 @@ int title()
 
 		if (!allFadedOn)
 		{
-			if ((SDL_GetTicks() >= now + 2000) && (SDL_GetTicks() <= now + 10000))
+			if ((ticks >= now + 2000) && (ticks <= now + 10000))
 			{
 				graphics.blit(prlogo, 320, 240, graphics.screen, true);
 			}
-			else if ((SDL_GetTicks() >= now + 13000) && (SDL_GetTicks() <= now + 19000))
+			else if ((ticks >= now + 13000) && (ticks <= now + 19000))
 			{
 				graphics.blit(presents, 320, 240, graphics.screen, true);
 			}
-			else if ((SDL_GetTicks() >= now + 22000) && (SDL_GetTicks() <= now + 27000))
+			else if ((ticks >= now + 22000) && (ticks <= now + 27000))
 			{
 				graphics.blit(sdl, 320, 240, graphics.screen, true);
 			}
@@ -273,7 +279,7 @@ int title()
 			}
 		}
 
-		if ((SDL_GetTicks() >= now + 4000) || (allFadedOn))
+		if ((ticks >= now + 4000) || (allFadedOn))
 		{
 			if (backAlpha < 255)
 			{
@@ -282,7 +288,7 @@ int title()
 			}
 		}
 
-		if ((SDL_GetTicks() >= now + 29000) || (allFadedOn))
+		if ((ticks >= now + 29000) || (allFadedOn))
 		{
 			if (titleAlpha < 255)
 			{
@@ -292,12 +298,13 @@ int title()
 			else
 			{
 				graphics.blit(subTitle, 320, 180, graphics.screen, true);
-				graphics.blit(copyright, 10, 460, graphics.screen, false);
+				for (int i = 0; copyright[i]; i++)
+					graphics.blit(copyright[i], 10, 460 - i * 18, graphics.screen, false);
 				graphics.blit(version, (630 - version->w), 460, graphics.screen, false);
 				allFadedOn = true;
 			}
 
-			doMusicInfo(SDL_GetTicks() - (now + 39000));
+			doMusicInfo(ticks - (now + 39000));
 		}
 
 		Math::wrapFloat(&(offX -= 0.25), -graphics.background->w, 0);
@@ -409,7 +416,7 @@ int title()
 		}
 
 		engine.delay(frameLimit);
-		frameLimit = SDL_GetTicks()  + 16;
+		frameLimit = SDL_GetTicks() + 16;
 	}
 
 	engine.deleteWidgets();

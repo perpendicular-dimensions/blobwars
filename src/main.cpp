@@ -1,5 +1,7 @@
 /*
 Copyright (C) 2004-2011 Parallel Realities
+Copyright (C) 2011-2015 Perpendicular Dimensions
+Copyright (C) 2011-2015 Perpendicular Dimensions
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -28,6 +30,7 @@ void showVersion()
 		"\n"
 		"Blob Wars, Episode I - Metal Blob Solid (Version %.2f, Release %d)\n"
 		"Copyright (C) 2004-2011 Parallel Realities\n"
+		"Copyright (C) 2011-2015 Perpendicular Dimensions\n"
 		"Licensed under the GNU General Public License (GPL)\n"
 		"\n"),
 		VERSION, RELEASE);

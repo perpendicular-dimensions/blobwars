@@ -1,8 +1,9 @@
-156
+159
 000 1 MAIN PROGRAMMING
 020 0 Stephen Sweeney
 040 1 ADDITIONAL PROGRAMMING
 020 0 Richard Sweeney
+020 0 Guus Sliepen
 040 1 GRAPHICS
 020 0 Stephen Sweeney
 020 0 Richard Sweeney
@@ -150,8 +151,10 @@
 020 0 Blob Wars : Metal Blob Solid or Parallel Realities.
 220 1 Parallel Realities and the Alien Device
 020 1 Copyright (c) 2004-2011 Parallel Realities
+020 1 Copyright (c) 2011-2015 Perpendicular Dimensions
 020 1 All Rights Reserved
 450 1 Blob Wars : Metal Blob Solid
 020 1 Copyright (c) 2004-2011 Parallel Realities
+020 1 Copyright (c) 2011-2015 Perpendicular Dimentions
 020 1 Licensed under the GNU General Public License
 120 1 http://www.parallelrealities.co.uk
