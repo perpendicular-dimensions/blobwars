@@ -39,16 +39,18 @@ void Keyboard::setDefaultKeys()
 	control[CONTROL::MAP] = SDL_SCANCODE_TAB;
 }
 
-const char *Keyboard::translateKey(int key)
+const char *Keyboard::translateKey(int scancode)
 {
 	static char keyName[50];
 	keyName[0] = 0;
 	keyName[0] = '\0';
 	
-	if (key <= 0)
+	if (scancode <= 0)
 	{
 		return "...";
 	}
+
+	SDL_Keycode key = SDL_GetKeyFromScancode((SDL_Scancode)scancode);
 	
 	strlcpy(keyName, _(SDL_GetKeyName(key)), sizeof keyName);
 	
