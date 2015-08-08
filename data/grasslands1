@@ -303,7 +303,7 @@ EMH STAGENAME "Grasslands"
 
 EMH TILESET gfx/grasslands
 EMH ALPHATILES 244 245 246 -1
-EMH BACKGROUND gfx/grasslands/day.jpg
+EMH BACKGROUND gfx/grasslands/day.png
 EMH MUSIC music/grasslands
 
 EMH SPRITE Transmitter 0 0 0 gfx/sprites/transmitter1.png 5 gfx/sprites/transmitter2.png 5 gfx/sprites/transmitter3.png 5 gfx/sprites/transmitter4.png 5 gfx/sprites/transmitter5.png 5 gfx/sprites/transmitter6.png 120 @none@ 0

@@ -302,7 +302,7 @@
 EMH STAGENAME "Intro"
 
 EMH TILESET gfx/grasslands
-EMH BACKGROUND gfx/grasslands/day.jpg
+EMH BACKGROUND gfx/grasslands/day.png
 EMH ALPHATILES -1
 
 EMH SPRITE GoodBlobRight 0 0 0 gfx/sprites/goodBlobRight.png 60 @none@ 0
