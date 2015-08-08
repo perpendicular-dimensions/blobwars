@@ -4,10 +4,11 @@ Updated: March 2005
 
 In order to successfully port Metal Blob Solid to another platform you will need,
 
-* SDL
-* SDL Image
-* SDL Mixer
-* SDL TTF
+* SDL2
+* SDL2 Image
+* SDL2 Mixer
+* SDL2 Net
+* SDL2 TTF
 
 There are a few considerations when porting to other platforms,
 

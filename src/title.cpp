@@ -184,7 +184,7 @@ int title()
 
 	graphics.setFontSize(3);
 	SDL_Surface *presents = graphics.quickSprite("Presents", graphics.getString(_("Presents"), true));
-	SDL_Surface *sdl = graphics.quickSprite("SDL", graphics.getString(_("An SDL Game"), true));
+	SDL_Surface *sdl = graphics.quickSprite("SDL", graphics.getString(_("An SDL2 Game"), true));
 
 	graphics.setFontSize(2);
 	SDL_Surface *subTitle = graphics.quickSprite("SubTitle", graphics.getString(_("Blob Wars : Episode I"), true));
