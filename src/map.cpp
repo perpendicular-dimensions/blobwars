@@ -317,15 +317,15 @@ void showMap(int centerX, int centerY)
 	{
 		for (int x = 0 ; x < 64 ; x++)
 		{
-			color = -1;
+			color = graphics.black;
 
 			if (map.data[x1 + x][y1 + y] == MAP_AIR)
 			{
-				color = -1;
+				color = graphics.black;
 			}
 			else if (map.data[x1 + x][y1 + y] == MAP_WATER)
 			{
-				color = -1;
+				color = graphics.black;
 			}
 			else if (map.data[x1 + x][y1 + y] == MAP_SLIME)
 			{
@@ -337,7 +337,7 @@ void showMap(int centerX, int centerY)
 			}
 			else if (map.data[x1 + x][y1 + y] >= MAP_DECORATION)
 			{
-				color = -1;
+				color = graphics.black;
 				
 				if (map.data[x1 + x][y1 + y - 1] == MAP_WATER)
 				{
@@ -353,7 +353,7 @@ void showMap(int centerX, int centerY)
 				color = graphics.darkGreen;
 			}
 
-			if (color > -1)
+			if (color != graphics.black)
 			{
 				graphics.drawRect(x * 5, y * 5, 5, 5, color, panel);
 			}
