@@ -81,7 +81,7 @@ void addBullet(Entity *owner, float dx, float dy)
 
 	if (owner->currentWeapon->fireSound > -1)
 	{
-		audio.playSound(owner->currentWeapon->fireSound, CH_WEAPON);
+		audio.playSound(owner->currentWeapon->fireSound, CH_WEAPON, owner->x);
 	}
 
 	if (owner->flags & ENT_AIMS)
@@ -133,7 +133,7 @@ void destroyBullet(Entity *bullet)
 
 	if (bullet->flags & ENT_SPARKS)
 	{
-		audio.playSound(bullet->deathSound, CH_TOUCH);
+		audio.playSound(bullet->deathSound, CH_TOUCH, bullet->x);
 	}
 
 	if (bullet->flags & ENT_EXPLODES)
@@ -183,7 +183,7 @@ void bounceBullet(Entity *bullet, float dx, float dy)
 		if (bullet->id != WP_LASER)
 		{
 			bullet->dx *= 0.75;
-			audio.playSound(SND_GRBOUNCE, CH_TOUCH);
+			audio.playSound(SND_GRBOUNCE, CH_TOUCH, bullet->x);
 		}
 		bullet->face = !bullet->face;
 	}
@@ -201,7 +201,7 @@ void bounceBullet(Entity *bullet, float dx, float dy)
 		if (bullet->id != WP_LASER)
 		{
 			bullet->dy *= 0.75;
-			audio.playSound(SND_GRBOUNCE, CH_TOUCH);
+			audio.playSound(SND_GRBOUNCE, CH_TOUCH, bullet->x);
 		}
 
 		if ((bullet->dy > -2) && (bullet->dy <= 0)) bullet->dy = -2;
@@ -233,7 +233,7 @@ bool bulletHasCollided(Entity *bullet, float dx, float dy)
 				{
 					Math::removeBit(&bullet->flags, ENT_BOUNCES);
 					map.data[x][y] = MAP_AIR;
-					audio.playSound(SND_STONEBREAK, CH_EXPLODE);
+					audio.playSound(SND_STONEBREAK, CH_EXPLODE, bullet->x);
 					throwBrickParticles(x << BRICKSHIFT, y << BRICKSHIFT);
 				}
 				else
@@ -241,7 +241,7 @@ bool bulletHasCollided(Entity *bullet, float dx, float dy)
 					if ((Math::prand() % 2) == 0)
 					{
 						map.data[x][y] = MAP_AIR;
-						audio.playSound(SND_STONEBREAK, CH_EXPLODE);
+						audio.playSound(SND_STONEBREAK, CH_EXPLODE, bullet->x);
 						throwBrickParticles(x << BRICKSHIFT, y << BRICKSHIFT);
 					}
 				}

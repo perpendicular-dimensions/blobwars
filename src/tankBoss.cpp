@@ -173,7 +173,7 @@ void tankBossMGCannonChargeFire()
 	if (self->custom == 0)
 	{
 		self->think = tankBossMGCannonFire;
-		audio.playSound(SND_BOSSCUSTOM2, CH_AMBIANCE);
+		audio.playSound(SND_BOSSCUSTOM2, CH_AMBIANCE, self->x);
 	}
 }
 
@@ -267,7 +267,7 @@ void tankBossMGAttack()
 		self->think = &tankBossMGCannonChargeFire;
 		self->setThinkTime(0);
 		self->setActionFinished(2);
-		audio.playSound(SND_BOSSCUSTOM1, CH_AMBIANCE);
+		audio.playSound(SND_BOSSCUSTOM1, CH_AMBIANCE, self->x);
 		Math::addBit(&self->flags, ENT_IMMUNE);
 	}
 	else

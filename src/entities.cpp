@@ -30,7 +30,7 @@ void throwAndDamageEntity(Entity *ent, int damage, int minDX, int maxDX, int DY)
 
 	if (!(ent->flags & ENT_EXPLODES))
 	{
-		audio.playSound(SND_HIT, CH_ANY);
+		audio.playSound(SND_HIT, CH_ANY, ent->x);
 		for (int i = 0 ; i < 4 ; i++)
 		{
 			addBlood(ent, Math::rrand(-5, 5), Math::rrand(-6, -3), i);
@@ -38,7 +38,7 @@ void throwAndDamageEntity(Entity *ent, int damage, int minDX, int maxDX, int DY)
 	}
 	else
 	{
-		audio.playSound(SND_CLANG, CH_ANY);
+		audio.playSound(SND_CLANG, CH_ANY, ent->x);
 		addColorParticles(ent->x, ent->y, Math::rrand(25, 75), -1);
 	}
 
@@ -62,7 +62,7 @@ void throwAndDamageEntity(Entity *ent, int damage, int minDX, int maxDX, int DY)
 
 		if (player.health <= 0)
 		{
-			audio.playSound(SND_DEATH1 + Math::prand() % 3, CH_DEATH);
+			audio.playSound(SND_DEATH1 + Math::prand() % 3, CH_DEATH, player.x);
 			player.health = 0;
 		}
 

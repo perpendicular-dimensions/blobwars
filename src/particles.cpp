@@ -137,7 +137,7 @@ void addTeleportParticles(float x, float y, int amount, int soundToPlay)
 
 	if (soundToPlay != -1)
 	{
-		audio.playSound(soundToPlay, CH_SPAWN);
+		audio.playSound(soundToPlay, CH_SPAWN, x);
 	}
 }
 

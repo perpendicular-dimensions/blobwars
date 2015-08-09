@@ -131,7 +131,7 @@ void galdovReact()
 
 void galdovSplit(int i)
 {
-	audio.playSound(SND_BOSSCUSTOM1, CH_AMBIANCE);
+	audio.playSound(SND_BOSSCUSTOM1, CH_AMBIANCE, map.boss[0]->x);
 	
 	map.boss[i]->active = true;
 	map.boss[i]->health = 4 * game.skill;
@@ -389,7 +389,7 @@ void galdovDie()
 	if (map.mainBossPart != NULL)
 	{
 		map.mainBossPart = NULL;
-		audio.playSound(SND_BOSSCUSTOM2, CH_AMBIANCE);
+		audio.playSound(SND_BOSSCUSTOM2, CH_AMBIANCE, self->x);
 	}
 	
 	if ((self->health % 5) == 0)

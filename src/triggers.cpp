@@ -93,7 +93,7 @@ void activateTrigger(const char *linkName, const char *activateMessage, bool act
 				engine.setInfoMessage(activateMessage, 1, INFO_ACTIVATE);
 
 			if (train->type != TR_TRAIN)
-				audio.playSound(SND_OPENDOOR, CH_TOUCH);
+				audio.playSound(SND_OPENDOOR, CH_TOUCH, train->x);
 
 			linkOkay = true;
 		}

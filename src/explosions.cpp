@@ -23,7 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 void addExplosion(float x, float y, int radius, Entity *owner)
 {
-	audio.playSound(SND_GRENADE, CH_EXPLODE);
+	audio.playSound(SND_GRENADE, CH_EXPLODE, x);
 
 	float dx, dy;
 	int distX, distY;
@@ -78,13 +78,13 @@ void addExplosion(float x, float y, int radius, Entity *owner)
 				{
 					if (enemy->flags & ENT_EXPLODES)
 					{
-						audio.playSound(SND_ELECDEATH1 + Math::prand() % 3, CH_DEATH);
+						audio.playSound(SND_ELECDEATH1 + Math::prand() % 3, CH_DEATH, enemy->x);
 					}
 					else
 					{
 						if (game.gore)
 						{
-							audio.playSound(SND_DEATH1 + Math::prand() % 3, CH_DEATH);
+							audio.playSound(SND_DEATH1 + Math::prand() % 3, CH_DEATH, enemy->x);
 						}
 					}
 				}

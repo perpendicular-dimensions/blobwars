@@ -63,7 +63,7 @@ void openDoor(Train *train)
 
 	train->active = true;
 
-	audio.playSound(SND_OPENDOOR, CH_TOUCH);
+	audio.playSound(SND_OPENDOOR, CH_TOUCH, train->x);
 }
 
 /**
@@ -81,7 +81,7 @@ void trainBlockEntity(Entity *ent, const char *message, Train *train, int dir)
 		if ((train->isReady()) && (!train->active))
 		{
 			engine.setInfoMessage(message, 1, INFO_NORMAL);
-			audio.playSound(SND_LOCKEDDOOR, CH_TOUCH);
+			audio.playSound(SND_LOCKEDDOOR, CH_TOUCH, train->x);
 		}
 	}
 	
@@ -355,7 +355,7 @@ void doTrains()
 				}
 				else if (playSound)
 				{
-					audio.playSound(SND_DOOROPENED, CH_TOUCH);
+					audio.playSound(SND_DOOROPENED, CH_TOUCH, train->x);
 				}
 			}
 		}

@@ -116,7 +116,7 @@ void doMIAs()
 				{
 					Math::addBit(&mia->flags, ENT_WEIGHTLESS);
 					Math::addBit(&mia->flags, ENT_DYING);
-					audio.playSound(SND_TELEPORT1, CH_ANY);
+					audio.playSound(SND_TELEPORT1, CH_ANY, mia->x);
 				}
 			}
 			

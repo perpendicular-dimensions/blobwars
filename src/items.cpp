@@ -235,7 +235,7 @@ void pickUpItem(Entity *item)
 		case ITEM_SPREAD:
 			player.currentWeapon = &weapon[item->id];
 			game.currentWeapon = item->id;
-			audio.playSound(SND_GETWEAPON, CH_ITEM);
+			audio.playSound(SND_GETWEAPON, CH_ITEM, item->x);
 			break;
 		case ITEM_POINTS:
 		case ITEM_POINTS2:
@@ -245,18 +245,18 @@ void pickUpItem(Entity *item)
 		case ITEM_POINTS6:
 		case ITEM_POINTS7:
 			addPlayerScore(item->value);
-			audio.playSound(SND_ITEM, CH_ITEM);
+			audio.playSound(SND_ITEM, CH_ITEM, item->x);
 			break;
 		case ITEM_CHERRY:
 		case ITEM_DOUBLECHERRY:
 		case ITEM_TRIPLECHERRY:
 			Math::limitInt(&(player.health += item->value), 0, MAX_HEALTH);
-			audio.playSound(SND_GULP + (Math::prand() % 2), CH_ITEM);
+			audio.playSound(SND_GULP + (Math::prand() % 2), CH_ITEM, item->x);
 			break;
 		case ITEM_MISC:
 			item->owner = &player;
 		case ITEM_MISC_NOSHOW:
-			audio.playSound(SND_ITEM, CH_ITEM);
+			audio.playSound(SND_ITEM, CH_ITEM, item->x);
 			break;
 	}
 

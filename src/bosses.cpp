@@ -438,7 +438,7 @@ bool isCorrectShieldFrequency(Entity *bullet)
 		Math::removeBit(&bullet->flags, ENT_WEIGHTLESS);
 		Math::removeBit(&bullet->flags, ENT_BOUNCES);
 		
-		audio.playSound(SND_RICO1, CH_ANY);
+		audio.playSound(SND_RICO1, CH_ANY, bullet->x);
 		
 		return false;
 	}
@@ -485,7 +485,7 @@ void checkBossBulletCollisions(Entity *bullet)
 				if (!(self->flags & ENT_IMMUNE))
 				{
 					self->health -= bullet->damage;
-					audio.playSound(SND_CLANG, CH_ANY);
+					audio.playSound(SND_CLANG, CH_ANY, bullet->x);
 					addColorParticles(bullet->x, bullet->y, Math::rrand(25, 75), -1);
 					Math::removeBit(&bullet->flags, ENT_SPARKS);
 					Math::removeBit(&bullet->flags, ENT_PUFFS);

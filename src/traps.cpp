@@ -219,24 +219,24 @@ void doTraps()
 				switch (trap->type)
 				{
 					case TRAP_TYPE_MINE:
-						audio.playSound(SND_ROCKET, CH_SPAWN);
+						audio.playSound(SND_ROCKET, CH_SPAWN, trap->x);
 						break;
 					case TRAP_TYPE_SPIKE:
-						audio.playSound(SND_ROCKET, CH_SPAWN);
+						audio.playSound(SND_ROCKET, CH_SPAWN, trap->x);
 						break;
 					case TRAP_TYPE_SWING:
-						audio.playSound(SND_THROW, CH_SPAWN);
+						audio.playSound(SND_THROW, CH_SPAWN, trap->x);
 						break;
 					case TRAP_TYPE_BARRIER:
 						if ((absX <= 640) && (absY <= 480))
 						{
-							audio.playSound(SND_ELECTRICITY1 + Math::prand() % 3, CH_SPAWN);
+							audio.playSound(SND_ELECTRICITY1 + Math::prand() % 3, CH_SPAWN, trap->x);
 						}
 						break;
 					case TRAP_TYPE_FLAME:
 						if ((absX <= 640) && (absY <= 480))
 						{
-							audio.playSound(SND_FIRECRACKLE, CH_SPAWN);
+							audio.playSound(SND_FIRECRACKLE, CH_SPAWN, trap->x);
 						}
 						break;
 				}

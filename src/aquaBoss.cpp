@@ -78,7 +78,7 @@ void aquaBossRecharge()
 				enemy->health = -1;
 				if (enemy->health % 10)
 				{
-					audio.playSound(SND_DEATH1 + Math::prand() % 3, CH_DEATH);
+					audio.playSound(SND_DEATH1 + Math::prand() % 3, CH_DEATH, enemy->x);
 				}
 				
 				Math::limitInt(&(++self->health), 0, self->maxHealth);

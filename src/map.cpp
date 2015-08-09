@@ -512,7 +512,7 @@ void evaluateMapAttribute(Entity *ent, int mapAttribute)
 					
 					if (ent->dy < 0)
 					{
-						audio.playSound(SND_WATEROUT, CH_TOUCH);
+						audio.playSound(SND_WATEROUT, CH_TOUCH, ent->x);
 					}
 
 					ent->checkEnvironment();
@@ -529,7 +529,7 @@ void evaluateMapAttribute(Entity *ent, int mapAttribute)
 
 			if (ent->environment == ENV_AIR)
 			{
-				audio.playSound(SND_WATERIN, CH_TOUCH);
+				audio.playSound(SND_WATERIN, CH_TOUCH, ent->x);
 				if ((mapAttribute == MAP_SLIME) || (mapAttribute == MAP_LAVA))
 					ent->thinktime = 1;
 			}

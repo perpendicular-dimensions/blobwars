@@ -130,7 +130,7 @@ void droidBossChangeFrequency()
 			break;
 	}
 	
-	audio.playSound(SND_BOSSCUSTOM1, CH_AMBIANCE);
+	audio.playSound(SND_BOSSCUSTOM1, CH_AMBIANCE, self->x);
 }
 
 void droidBossDie()
@@ -183,7 +183,7 @@ void droidBossReact()
 	if ((Math::prand() % 10) == 0)
 	{
 		Math::addBit(&self->flags, ENT_IMMUNE);
-		audio.playSound(SND_BOSSCUSTOM2, CH_SPAWN);
+		audio.playSound(SND_BOSSCUSTOM2, CH_SPAWN, self->x);
 		self->custom = 5;
 		self->think = &droidGoCrazy;
 		self->setActionFinished(2);

@@ -85,7 +85,7 @@ void checkSwitchContact(Entity *ent)
 				{
 					if ((swt->type == SWT_NORMAL) || (swt->type == SWT_WATERLEVEL))
 					{
-						audio.playSound(SND_SWITCH1, CH_TOUCH);
+						audio.playSound(SND_SWITCH1, CH_TOUCH, swt->x);
 						swt->activated = !swt->activated;
 						activateTrigger(swt->linkName, swt->activateMessage, swt->activated);
 						swt->health = 1;
@@ -93,20 +93,20 @@ void checkSwitchContact(Entity *ent)
 					}
 					else if (swt->type == SWT_TOGGLE)
 					{
-						audio.playSound(SND_SWITCH1, CH_TOUCH);
+						audio.playSound(SND_SWITCH1, CH_TOUCH, swt->x);
 						activateTrigger(swt->linkName, swt->activateMessage, !swt->activated);
 						swt->activated = !swt->activated;
 					}
 					else if (swt->type == SWT_PRESSURE)
 					{
-						audio.playSound(SND_SWITCH1, CH_TOUCH);
+						audio.playSound(SND_SWITCH1, CH_TOUCH, swt->x);
 						swt->activated = true;
 						activateTrigger(swt->linkName, swt->activateMessage, true);
 						swt->health = 2;
 					}
 					else if ((swt->type == SWT_TIMED) || (swt->type == SWT_RESET))
 					{
-						audio.playSound(SND_SWITCH1, CH_TOUCH);
+						audio.playSound(SND_SWITCH1, CH_TOUCH, swt->x);
 						activateTrigger(swt->linkName, swt->activateMessage, true);
 						swt->activated = !swt->activated;
 						swt->health = 240;

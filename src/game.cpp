@@ -529,7 +529,7 @@ void beamInPlayer()
 	
 	unsigned int frameLimit = SDL_GetTicks() + 16;
 	
-	audio.playSound(SND_TELEPORT1, CH_ANY);
+	audio.playSound(SND_TELEPORT1, CH_ANY, player.x);
 	
 	engine.setPlayerPosition((int)player.x, (int)player.y, map.limitLeft, map.limitRight, map.limitUp, map.limitDown);
 	

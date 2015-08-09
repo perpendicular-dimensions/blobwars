@@ -214,7 +214,7 @@ void galdovFinalDropCrystal()
 		map.boss[0]->health = 30 * game.skill;
 		map.boss[0]->setSprites(graphics.getSprite("GaldovPain", true), graphics.getSprite("GaldovPain", true), graphics.getSprite("GaldovPain", true));
 		engine.setInfoMessage("Galdov has dropped the crystal! Quick! Get it!!", 99, INFO_HINT);
-		audio.playSound(SND_BOSSCUSTOM2, CH_AMBIANCE);
+		audio.playSound(SND_BOSSCUSTOM2, CH_AMBIANCE, x);
 	}
 }
 
@@ -224,7 +224,7 @@ void galdovFinalDie()
 	{
 		game.missionOverReason = MIS_GAMECOMPLETE;
 		audio.stopMusic();
-		audio.playSound(SND_BOSSCUSTOM3, CH_AMBIANCE);
+		audio.playSound(SND_BOSSCUSTOM3, CH_AMBIANCE, self->x);
 		player.health = 10;
 		self->dx = 5;
 		self->dy = -6;
@@ -466,7 +466,7 @@ void galdovRejoin()
 	self->think = &galdovFinalTeleport;
 	self->currentWeapon = getRandomGaldovWeapon();
 	
-	audio.playSound(SND_BOSSCUSTOM1, CH_AMBIANCE);
+	audio.playSound(SND_BOSSCUSTOM1, CH_AMBIANCE, self->x);
 	
 	map.setMainBossPart(map.boss[0]);
 	
@@ -528,13 +528,14 @@ void galdovFinalSplit()
 		addTeleportParticles(map.boss[i]->x + 10 + map.boss[i]->dx, map.boss[i]->y + 10 + map.boss[i]->dy, 75, -1);
 	}
 	
+	audio.playSound(SND_BOSSCUSTOM1, CH_AMBIANCE, map.boss[0]->x);
+
 	map.boss[0]->place(9999, 9999);
 	map.boss[0]->setThinkTime(2);
 	map.boss[0]->setActionFinished(Math::rrand(10, 15) * 60);
 	map.boss[0]->think = &galdovRejoin;
 	map.boss[0]->active = true;
 	
-	audio.playSound(SND_BOSSCUSTOM1, CH_AMBIANCE);
 	map.setMainBossPart(NULL);
 	
 	debug(("galdovFinalSplit: Done\n"));
@@ -655,13 +656,13 @@ void orbSeekGaldov()
 		self->setActionFinished(60);
 		self->setThinkTime(60);
 		addExplosion(self->x, self->y, 75, &player);
+		audio.playSound(SND_BOSSCUSTOM2, CH_AMBIANCE, self->x);
 		self->place(9999, 9999);
 		map.boss[0]->setSprites(graphics.getSprite("GaldovPain", true), graphics.getSprite("GaldovPain", true), graphics.getSprite("GaldovPain", true));
 		map.boss[0]->think = &galdovFinalPainThrow2;
 		map.boss[0]->health -= (3 * game.skill);
 		Math::removeBit(&map.boss[0]->flags, ENT_FLIES);
 		Math::removeBit(&map.boss[0]->flags, ENT_FIRETRAIL);
-		audio.playSound(SND_BOSSCUSTOM2, CH_AMBIANCE);
 	}
 }
 

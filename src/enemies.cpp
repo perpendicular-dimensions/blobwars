@@ -422,7 +422,7 @@ void enemyBulletCollisions(Entity *bullet)
 
 				if (!(enemy->flags & ENT_EXPLODES))
 				{
-					audio.playSound(SND_HIT, CH_ANY);
+					audio.playSound(SND_HIT, CH_ANY, enemy->x);
 					if (game.gore)
 					{
 						addBlood(enemy, bullet->dx / 4, Math::rrand(-6, -3), 1);
@@ -434,7 +434,7 @@ void enemyBulletCollisions(Entity *bullet)
 				}
 				else
 				{
-					audio.playSound(SND_CLANG, CH_ANY);
+					audio.playSound(SND_CLANG, CH_ANY, enemy->x);
 					addColorParticles(bullet->x, bullet->y, Math::rrand(25, 75), -1);
 				}
 
@@ -470,11 +470,11 @@ void enemyBulletCollisions(Entity *bullet)
 							
 							if (enemy->flags & ENT_EXPLODES)
 							{
-								audio.playSound(SND_ELECDEATH1 + Math::prand() % 3, CH_DEATH);
+								audio.playSound(SND_ELECDEATH1 + Math::prand() % 3, CH_DEATH, enemy->x);
 							}
 							else if (game.gore)
 							{
-								audio.playSound(SND_DEATH1 + Math::prand() % 3, CH_DEATH);
+								audio.playSound(SND_DEATH1 + Math::prand() % 3, CH_DEATH, enemy->x);
 							}
 						}
 					}
@@ -494,11 +494,11 @@ void enemyBulletCollisions(Entity *bullet)
 					
 					if (enemy->flags & ENT_EXPLODES)
 					{
-						audio.playSound(SND_ELECDEATH1 + Math::prand() % 3, CH_DEATH);
+						audio.playSound(SND_ELECDEATH1 + Math::prand() % 3, CH_DEATH, enemy->x);
 					}
 					else if (game.gore)
 					{
-						audio.playSound(SND_DEATH1 + Math::prand() % 3, CH_DEATH);
+						audio.playSound(SND_DEATH1 + Math::prand() % 3, CH_DEATH, enemy->x);
 					}
 
 					if (bullet->owner == &player)
@@ -591,7 +591,7 @@ void gibEnemy(Entity *enemy)
 		}
 	}
 	
-	(game.gore) ? audio.playSound(SND_SPLAT, CH_ANY) : audio.playSound(SND_POP, CH_ANY);
+	(game.gore) ? audio.playSound(SND_SPLAT, CH_ANY) : audio.playSound(SND_POP, CH_ANY, enemy->x);
 }
 
 void doEnemies()
@@ -739,7 +739,7 @@ void doEnemies()
 					{
 						if (game.gore)
 						{
-							audio.playSound(SND_DEATH1 + Math::prand() % 3, CH_DEATH);
+							audio.playSound(SND_DEATH1 + Math::prand() % 3, CH_DEATH, enemy->x);
 						}
 					}
 				}
