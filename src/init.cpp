@@ -286,14 +286,45 @@ void initSystem()
 
 	graphics.screen = SDL_CreateRGBSurface(0, 640, 480, 32, 0xff0000, 0xff00, 0xff, 0xff000000);
 
-	graphics.window = SDL_CreateWindow("Blobwars: Metal Blob Solid", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, graphics.screen->w, graphics.screen->h, 0);
-	graphics.renderer = SDL_CreateRenderer(graphics.window, -1, SDL_RENDERER_PRESENTVSYNC);
-	SDL_RenderSetLogicalSize(graphics.renderer, graphics.screen->w, graphics.screen->h);
-	graphics.texture = SDL_CreateTexture(graphics.renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, graphics.screen->w, graphics.screen->h);
+	if (graphics.screen == NULL)
+	{
+		printf("Couldn't set 640x480 video mode: %s\n", SDL_GetError());
+		exit(1);
+	}
+
+	// Increase the size of the window if we have large desktop resolutions
+	SDL_DisplayMode displayMode{0};
+	SDL_GetDesktopDisplayMode(0, &displayMode);
+	int w = graphics.screen->w;
+	int h = graphics.screen->h;
+	while (displayMode.w > w * 2 && displayMode.h > h * 2)
+	{
+		w *= 2;
+		h *= 2;
+	}
+
+	graphics.window = SDL_CreateWindow("Blobwars: Metal Blob Solid", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, SDL_WINDOW_RESIZABLE);
 
 	if (graphics.window == NULL)
 	{
-		printf("Couldn't set 640x480 video mode: %s\n", SDL_GetError());
+		printf("Couldn't create %dx%d window: %s\n", w, h, SDL_GetError());
+		exit(1);
+	}
+
+	graphics.renderer = SDL_CreateRenderer(graphics.window, -1, SDL_RENDERER_PRESENTVSYNC);
+
+	if (graphics.renderer == NULL)
+	{
+		printf("Couldn't create renderer: %s\n", SDL_GetError());
+		exit(1);
+	}
+
+	SDL_RenderSetLogicalSize(graphics.renderer, graphics.screen->w, graphics.screen->h);
+	graphics.texture = SDL_CreateTexture(graphics.renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, graphics.screen->w, graphics.screen->h);
+
+	if (graphics.texture == NULL)
+	{
+		printf("Could not create %dx%d texture: %s\n", graphics.screen->w, graphics.screen->h, SDL_GetError());
 		exit(1);
 	}
 
