@@ -104,6 +104,22 @@ void trainBlockEntity(Entity *ent, const char *message, Train *train, int dir)
 	}
 }
 
+void getTrainMotion(Entity *ent, int &dx, int &dy)
+{
+	dx = 0;
+	dy = 0;
+	Train *train = (Train*)map.trainList.getHead();
+	while (train->next != NULL) {
+		train = (Train*)train->next;
+		bool collision = (Collision::collision(ent->x, ent->y + ent->dy, ent->width, ent->height - 1, train->x, train->y, train->width, train->height));
+		if(collision) {
+			dx = train->getDX();
+			dy = train->getDY();
+			break;
+		}
+	}
+}
+
 /**
 * Checks to see if an entity has touched this train. Depending on
 * the trains status certain other functions will be invoked

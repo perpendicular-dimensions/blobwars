@@ -49,6 +49,16 @@ void addBullet(Entity *owner, float dx, float dy)
 	bullet->id = owner->currentWeapon->id;
 	bullet->dx = dx;
 	bullet->dy = owner->currentWeapon->dy + dy;
+
+	// Add motion of the player and any platform he/she is on to grenades
+	if (owner->currentWeapon->dy)
+	{
+		int tdx, tdy;
+		getTrainMotion(owner, tdx, tdy);
+		bullet->dx += owner->dx - tdx;
+		bullet->dy += -tdy;
+	}
+
 	bullet->next = NULL;
 	bullet->health = owner->currentWeapon->health;
 	bullet->damage = owner->currentWeapon->damage;

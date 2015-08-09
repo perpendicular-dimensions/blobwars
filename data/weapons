@@ -1,7 +1,7 @@
 0 "Pistol" 					0 1 60 10 0 15 FlameBulletRight FlameBulletLeft 3 ENT_WEIGHTLESS
 1 "Machine Gun"				1 1 60 10 0 4 FlameBulletRight FlameBulletLeft 6 ENT_WEIGHTLESS
 2 "Laser Cannon" 			2 1 120 13 0 40 LaserBolt LaserBolt 19 ENT_WEIGHTLESS+ENT_BOUNCES
-3 "Grenades"				3 50 240 3 -2 20 Grenade Grenade 31 ENT_BOUNCES+ENT_EXPLODES
+3 "Grenades"				3 50 240 1 -2 20 Grenade Grenade 31 ENT_BOUNCES+ENT_EXPLODES
 4 "Spread Gun"				4 1 240 15 0 15 PlasmaBolt PlasmaBolt 34 ENT_WEIGHTLESS+ENT_PARTICLETRAIL
 
 5 "Rocket Launcher"			5 75 240 8 8 45 FlameBulletRight FlameBulletLeft 11 ENT_WEIGHTLESS+ENT_FIRETRAIL+ENT_EXPLODES

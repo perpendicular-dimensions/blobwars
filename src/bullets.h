@@ -22,6 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "headers.h"
 
 extern bool checkTrainContact(Entity *ent, int dir);
+extern void getTrainMotion(Entity *ent, int &dx, int &dy);
 extern bool checkObstacleContact(Entity *ent, int dir);
 extern void enemyBulletCollisions(Entity *bullet);
 extern void checkPlayerBulletCollisions(Entity *bullet);
