@@ -386,26 +386,18 @@ void initSystem()
 	debug(("Loading Fonts...\n"));
 
 	#if USEPAK
-			
-		char tempPath[PATH_MAX];
-		snprintf(tempPath, sizeof tempPath, "%sfont.ttf", engine.userHomeDirectory);	
-		remove(tempPath);
-		
 		if (!engine.unpack("data/vera.ttf", PAK_FONT))
 		{
 			engine.reportFontFailure();
 		}
 	#endif
 
-	debug(("Trying to load correct font pixel sizes using a really half arsed routine!\n"));
-	debug(("If it crashes then you'll know why!\n"));
-			
-	graphics.loadFont(0, "data/vera.ttf", 7);
-	graphics.loadFont(1, "data/vera.ttf", 9);
-	graphics.loadFont(2, "data/vera.ttf", 11);
-	graphics.loadFont(3, "data/vera.ttf", 13);
-	graphics.loadFont(4, "data/vera.ttf", 15);
-	
+	graphics.loadFont(0, "data/vera.ttf", 12);
+	graphics.loadFont(1, "data/vera.ttf", 15);
+	graphics.loadFont(2, "data/vera.ttf", 19);
+	graphics.loadFont(3, "data/vera.ttf", 23);
+	graphics.loadFont(4, "data/vera.ttf", 24);
+
 	debug(("Font sizes all loaded!!\n"));
 
 	audio.loadSound(SND_CHEAT, "sound/Lock And Load!!!");

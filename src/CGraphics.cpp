@@ -539,17 +539,9 @@ void Graphics::loadMapTiles(const char *baseDir)
 	}
 }
 
-/*
-Note : We need to search for the right >>> PIXEL SIZE <<< and NOT point size!!
-If a user has a resolution other than approximately 72dpi then
-they will get a small or larger font and this won't work. This might look
-weird since we'll load and delete multiple fonts, but it works...
-*/
-void Graphics::loadFont(int i, const char *filename, int pixelSize)
+void Graphics::loadFont(int i, const char *filename, int pointSize)
 {
-	int minx, maxx, miny, maxy, advance;
-	
-	debug(("Attempting to load a font with pixel size of %d...\n", pixelSize));
+	debug(("Attempting to load font %s with point size of %d...\n", filename, pointSize));
 	
 	if (font[i])
 	{
@@ -557,65 +549,20 @@ void Graphics::loadFont(int i, const char *filename, int pixelSize)
 		TTF_CloseFont(font[i]);
 	}
 	
-	char tempPath[PATH_MAX];
-	
-	snprintf(tempPath, sizeof tempPath, "%sfont.ttf", engine->userHomeDirectory);
+	#if USEPAK
+		char tempPath[PATH_MAX];
+		snprintf(tempPath, sizeof tempPath, "%sfont.ttf", engine->userHomeDirectory);
+		font[i] = TTF_OpenFont(tempPath, pointSize);
+	#else
+		font[i] = TTF_OpenFont("data/vera.ttf", pointSize);
+	#endif
 
-	bool found = false;
-	int size = 0;
-	
-	while (!found)
+	if (!font[i])
 	{
-		if (font[i])
-		{
-			TTF_CloseFont(font[i]);
-		}
-		
-		#if USEPAK
-			font[i] = TTF_OpenFont(tempPath, ++size);
-		#else
-			font[i] = TTF_OpenFont("data/vera.ttf", ++size);
-		#endif
-	
-		if (!font[i])
-		{
-			engine->reportFontFailure();
-		}
-		
-		TTF_GlyphMetrics(font[i], '8', &minx, &maxx, &miny, &maxy, &advance);
-		
-		// great! we have an exact match
-		if (maxx == pixelSize)
-		{
-			break;
-		}
-		
-		// we've overshot, so we'll use the previous size!
-		if (maxx > pixelSize)
-		{
-			TTF_CloseFont(font[i]);
-			
-			#if USEPAK
-				font[i] = TTF_OpenFont(tempPath, size - 1);
-			#else
-				font[i] = TTF_OpenFont("data/vera.ttf", size - 1);
-			#endif
-					
-			TTF_GlyphMetrics(font[i], '8', &minx, &maxx, &miny, &maxy, &advance);
-			
-			break;
-		}
-		
-		if (size >= 100)
-		{
-			debug(("Pixel size has exceeded 99 pixels! I'm giving up!\n"));
-			engine->reportFontFailure();
-		}
+		engine->reportFontFailure();
 	}
 	
 	TTF_SetFontStyle(font[i], TTF_STYLE_NORMAL);
-	
-	debug(("Got a match for font size %d - Nearest = %d\n", pixelSize, maxx));
 }
 
 Sprite *Graphics::addSprite(const char *name)
@@ -883,6 +830,12 @@ SDL_Surface *Graphics::getString(const char *in, bool transparent)
 	if (!text)
 	{
 		text = TTF_RenderUTF8_Shaded(font[fontSize], "FONT_ERROR", fontForeground, fontBackground);
+	}
+
+	if (!text)
+	{
+		fprintf(stderr, "Unable to render text: %s\n", SDL_GetError());
+		abort();
 	}
 
 	if (transparent)
