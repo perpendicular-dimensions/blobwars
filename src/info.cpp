@@ -331,83 +331,121 @@ void doPauseInfo()
 	graphics.drawString(string, 320, 430, TXT_CENTERED, graphics.screen);
 }
 
-void doMusicInfo(unsigned int ticks)
+SDL_Surface *createMusicInfo(void)
 {
-	if(!audio.songtitle[0])
-		return;
-
-	if(ticks != (unsigned int)-1) {
-		if(ticks > 12000 || ticks < 5000)
-			return;
-
-		unsigned int r = rand() & 0x3ff;
-
-		if(ticks - 5000 < r || 12000 - ticks < r)
-			return;
-	}
-
 	graphics.setFontSize(0);
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x40, 0x40, 0x40);
 
-	SDL_Surface *text;
+	SDL_Surface *text1;
+	SDL_Surface *text2 = NULL;
+	SDL_Surface *text3 = NULL;
+	SDL_Surface *icon;
+	SDL_Surface *panel;
 
-	const int x = 620;
-	int y = 420;
+	int w = 0;
+	int h = 0;
 
-	static int w = 0;
-	static int h = 0;
-
-	if(w && h)
-		graphics.drawRect(x - w - 5, y - h - 5, w + 10, h + 10, graphics.darkGrey, graphics.screen);
-
-	w = h = 0;
-
-	text = graphics.getString(audio.songtitle, true);
-	y -= text->h;
-	h = text->h;
-	w = text->w;
-
-	graphics.blit(text, x - text->w, y, graphics.screen, false);
-	SDL_FreeSurface(text);
+	text1 = graphics.getString(audio.songtitle, true);
+	h = text1->h;
+	w = text1->w;
 
 	if(audio.songalbum[0])
 	{
 		graphics.setFontColor(0x80, 0xc0, 0xff, 0x40, 0x40, 0x40);
 		
-		text = graphics.getString(audio.songalbum, true);
-		y -= text->h + 4;
-		h += text->h + 4;
-		if(text->w > w)
-			w = text->w;
+		text2 = graphics.getString(audio.songalbum, true);
+		h += text2->h + 4;
+		if(text2->w > w)
+			w = text2->w;
 
-		graphics.blit(text, x - text->w, y, graphics.screen, false);
-		SDL_FreeSurface(text);
 	}
 
 	if(audio.songartist[0])
 	{
 		graphics.setFontColor(0xff, 0xc0, 0x80, 0x40, 0x40, 0x40);
 
-		text = graphics.getString(audio.songartist, true);
-		y -= text->h + 4;
-		h += text->h + 4;
-		if(text->w > w)
-			w = text->w;
-
-		graphics.blit(text, x - text->w, y, graphics.screen, false);
-		SDL_FreeSurface(text);
+		text3 = graphics.getString(audio.songartist, true);
+		h += text3->h + 4;
+		if(text3->w > w)
+			w = text3->w;
 	}
 
 	if(audio.songlicense >= 0)
 	{
-		SDL_Surface *icon = graphics.license[audio.songlicense];
+		icon = graphics.license[audio.songlicense];
 
-		y -= icon->h + 8;
 		h += icon->h + 8;
 		if(icon->w > w)
 			w = icon->w;
-
-		graphics.blit(icon, x - icon->w, y, graphics.screen, false);
 	}
+
+	int y = h + 5;
+	int x = w + 5;
+
+	panel = graphics.createSurface(w + 10, h + 10);
+	SDL_FillRect(panel, NULL, SDL_MapRGBA(panel->format, 0, 0, 0, 128));
+
+	if (text1) {
+		y -= text1->h;
+		graphics.blit(text1, x - text1->w, y, panel, false);
+		SDL_FreeSurface(text1);
+	}
+
+	if (text2) {
+		y -= text2->h + 4;
+		graphics.blit(text2, x - text2->w, y, panel, false);
+		SDL_FreeSurface(text2);
+	}
+
+	if (text3) {
+		y -= text3->h + 4;
+		graphics.blit(text3, x - text3->w, y, panel, false);
+		SDL_FreeSurface(text3);
+	}
+
+	if (icon) {
+		y -= icon->h + 8;
+		graphics.blit(icon, x - icon->w, y, panel, false);
+	}
+
+	return panel;
 }
 
+void doMusicInfo(unsigned int ticks)
+{
+	if(!audio.songtitle[0])
+		return;
+
+	static SDL_Surface *panel;
+	float alpha = 1;
+
+	if (ticks != -1U)
+	{
+		if (ticks > 12000 || ticks < 5000)
+		{
+			if (panel)
+			{
+				SDL_FreeSurface(panel);
+				panel = NULL;
+			}
+
+			return;
+		}
+
+		if(ticks < 6000)
+			alpha = 1 - (6000 - ticks) / 1000.0f;
+		else if(ticks > 11000)
+			alpha = (12000 - ticks) / 1000.0f;
+	}
+
+	if (alpha > 0.99)
+		alpha = 0.99;
+
+	if (!panel)
+		panel = createMusicInfo();
+	if (!panel)
+		return;
+
+	SDL_SetAlpha(panel, 255 * alpha);
+	graphics.blit(panel, 620 - panel->w, 420 - panel->h, graphics.screen, false);
+}
