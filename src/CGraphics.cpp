@@ -1134,8 +1134,6 @@ void Graphics::showLoading(int amount, int max)
 
 	drawRect(120, 420, 400, 10, black, white, screen);
 	drawRect(121, 421, currentLoading, 8, red, screen);
-
-	SDL_UpdateRect(screen, 120, 420, 400, 10);
 	#endif
 }
 
