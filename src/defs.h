@@ -252,6 +252,7 @@ const char skill[][10] = {
 
 #define PAR_WEIGHTLESS	1
 #define PAR_COLLIDES	2
+#define PAR_LIQUID      4
 
 /* ######### effect flags ########### */
 

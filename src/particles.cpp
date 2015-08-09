@@ -94,7 +94,7 @@ void addBubble(float x, float y)
 {
 	if ((Math::prand() % 50) == 0)
 	{
-		map.addParticle(x + Math::prand() % BRICKSIZE, y + 19, 0, Math::rrand(-3, -1), Math::rrand(30, 90), graphics.red, graphics.getSprite("Bubble", true), PAR_COLLIDES + PAR_WEIGHTLESS);
+		map.addParticle(x + Math::prand() % BRICKSIZE, y + 19, 0, Math::rrand(-3, -1), Math::rrand(30, 90), graphics.red, graphics.getSprite("Bubble", true), PAR_COLLIDES | PAR_WEIGHTLESS | PAR_LIQUID);
 	}
 }
 
@@ -182,6 +182,14 @@ void doParticles()
 		if (particle->flags & PAR_COLLIDES)
 		{
 			if (map.isSolid(x, y))
+			{
+				particle->health = 0;
+			}
+		}
+
+		if (particle->flags & PAR_LIQUID)
+		{
+			if (!map.isLiquid(x, y))
 			{
 				particle->health = 0;
 			}
