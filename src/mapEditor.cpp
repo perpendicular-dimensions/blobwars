@@ -618,7 +618,7 @@ int main(int argc, char *argv[])
 
 		if (engine.keyState[SDL_SCANCODE_SPACE]) {showMap(&mapX, &mapY);}
 
-		if (engine.keyState[SDL_SCANCODE_s]) {saveMap(game.mapName); engine.keyState[SDL_SCANCODE_s] = 0;}
+		if (engine.keyState[SDL_SCANCODE_S]) {saveMap(game.mapName); engine.keyState[SDL_SCANCODE_S] = 0;}
 
 		if (mapX < 0) mapX = 0;
 		if (mapY < 0) mapY = 0;
