@@ -111,7 +111,7 @@ void Engine::clearCheatVars()
 
 bool Engine::compareLastKeyInputs()
 {
-	if (strstr(lastKeyEvents, "lockandload"))
+	if (strstr(lastKeyEvents, "LOCKANDLOAD"))
 	{
 		cheats = true;
 		return true;
@@ -230,7 +230,7 @@ void Engine::getInput()
 				}
 
 				keyState[event.key.keysym.scancode] = 1;
-				strlcpy(lastKeyPressed, SDL_GetKeyName(event.key.keysym.scancode), sizeof lastKeyPressed);
+				strlcpy(lastKeyPressed, SDL_GetKeyName(SDL_GetKeyFromScancode(event.key.keysym.scancode)), sizeof lastKeyPressed);
 				addKeyEvent();
 				break;
 
