@@ -178,7 +178,7 @@ bool Audio::loadMusic(const char *filename)
 	return true;
 }
 
-void Audio::playSound(int snd, int channel)
+void Audio::playSoundRelative(int snd, int channel, float x)
 {
 	if ((!engine->useAudio) || (soundVolume == 0))
 		return;
@@ -188,9 +188,29 @@ void Audio::playSound(int snd, int channel)
 		return;
 	}
 
-	Mix_Volume(channel, soundVolume);
+	int angle = atanf(x / 320) * 180 / M_PI;
+	int attenuation = fabsf(x) / 40;
 
+	if (angle < 0)
+	        angle += 360;
+
+	if (attenuation > 255)
+	        attenuation = 255;
+
+	Mix_Volume(channel, soundVolume);
 	Mix_PlayChannel(channel, sound[snd], 0);
+	Mix_SetPosition(channel, angle, attenuation);
+}
+
+void Audio::playSound(int snd, int channel, float x)
+{
+	x -= (engine->playerPosX + 320);
+	playSoundRelative(snd, channel, x);
+}
+
+void Audio::playSound(int snd, int channel)
+{
+	playSoundRelative(snd, channel, 0);
 }
 
 void Audio::playMusic()

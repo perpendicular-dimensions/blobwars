@@ -50,6 +50,8 @@ class Audio {
 	void registerEngine(Engine *engine);
 	bool loadSound(int i, const char *filename);
 	bool loadMusic(const char *filename);
+	void playSoundRelative(int snd, int channel, float x);
+	void playSound(int snd, int channel, float x);
 	void playSound(int snd, int channel);
 	void playMusic();
 	void playMusicOnce();
