@@ -321,7 +321,7 @@ void moveEntity(Entity *ent)
 
 	if (ent->dx != 0)
 	{		
-		if ((checkBrickContactX(ent)) || (checkObstacleContact(ent, 0)) || (checkTrainContact(ent, 0)))
+		if ((checkBrickContactX(ent)) || (checkObstacleContact(ent, DIR_X)) || (checkTrainContact(ent, DIR_X)))
 		{
 			ent->dx = 0;
 		}
@@ -336,7 +336,7 @@ void moveEntity(Entity *ent)
 
 	if (ent->dy != 0)
 	{
-		if ((checkBrickContactY(ent)) || (checkObstacleContact(ent, 1)) || (checkTrainContact(ent, 1)))
+		if ((checkBrickContactY(ent)) || (checkObstacleContact(ent, DIR_Y)) || (checkTrainContact(ent, DIR_Y)))
 		{
 			if ((ent->flags & ENT_BOUNCES) && (ent->dy >= 3))
 			{

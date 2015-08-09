@@ -87,14 +87,14 @@ void trainBlockEntity(Entity *ent, const char *message, Train *train, int dir)
 	
 	if ((ent->flags & ENT_BULLET) && (!(ent->flags & ENT_BOUNCES)))
 	{
-		if (dir == 0)
+		if (dir & DIR_X)
 		{
 			if (ent->dx < 0) ent->x = train->x + train->sprite->image[0]->w;
 			if (ent->dx > 0) ent->x = train->x - ent->width;
 		}
 	}
 
-	if (dir == 1)
+	if (dir & DIR_Y)
 	{
 		if ((ent->dy >= 0) && (train->type >= TR_SLIDEDOOR))
 		{
@@ -122,13 +122,17 @@ bool checkTrainContact(Entity *ent, int dir)
 	{
 		train = (Train*)train->next;
 
-		if (dir == 0)
+		if (dir == DIR_X)
 		{
 			collision = (Collision::collision(ent->x + ent->dx, ent->y, ent->width, ent->height - 1, train->x, train->y, train->width, train->height));
 		}
-		else
+		else if (dir == DIR_Y)
 		{
 			collision = (Collision::collision(ent->x, ent->y + ent->dy, ent->width, ent->height - 1, train->x, train->y, train->width, train->height));
+		}
+		else
+		{
+			collision = (Collision::collision(ent->x + ent->dx, ent->y + ent->dy, ent->width, ent->height - 1, train->x, train->y, train->width, train->height));
 		}
 
 		if (collision)
@@ -185,7 +189,7 @@ bool checkTrainContact(Entity *ent, int dir)
 						openDoor(train);
 					}
 					
-					if (dir == 1)
+					if (dir & DIR_Y)
 					{
 						ent->dy = 0;
 						ent->falling = false;

@@ -378,6 +378,12 @@ enum {
 	PAK_TAGS
 };
 
+/* ######### miscellaneous ############## */
+
+#define DIR_X 1
+#define DIR_Y 2
+#define DIR_XY 3
+
 /* ############# debug ################## */
 
 #if DEBUG

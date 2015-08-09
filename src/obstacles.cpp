@@ -57,18 +57,22 @@ bool checkObstacleContact(Entity *ent, int dir)
 			continue;
 		}
 			
-		if (dir == 0)
+		if (dir == DIR_X)
 		{
 			collision = Collision::collision(ent->x + ent->dx, ent->y, ent->width, ent->height - 1, obstacle->x, obstacle->y, obstacle->width, obstacle->height);
 		}
-		else
+		else if (dir == DIR_Y)
 		{
 			collision = Collision::collision(ent->x, ent->y + ent->dy, ent->width, ent->height - 1, obstacle->x, obstacle->y, obstacle->width, obstacle->height);
+		}
+		else
+		{
+			collision = Collision::collision(ent->x + ent->dx, ent->y + ent->dy, ent->width, ent->height - 1, obstacle->x, obstacle->y, obstacle->width, obstacle->height);
 		}
 
 		if (collision)
 		{
-			if (dir == 0)
+			if (dir & DIR_X)
 			{
 				if ((ent->y + ent->height == obstacle->y + obstacle->height) || ((ent->flags & ENT_BULLET) && (ent->owner == &player)))
 				{
@@ -79,7 +83,7 @@ bool checkObstacleContact(Entity *ent, int dir)
 				}
 			}
 
-			if (dir == 1)
+			if (dir & DIR_Y)
 			{
 				ent->falling = false;
 				ent->dy = 0;

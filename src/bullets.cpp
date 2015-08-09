@@ -264,7 +264,7 @@ bool bulletHasCollided(Entity *bullet, float dx, float dy)
 	
 	checkSwitchContact(bullet);
 
-	if ((checkTrainContact(bullet, 0)) || (checkObstacleContact(bullet, 0)))
+	if ((checkTrainContact(bullet, DIR_XY)) || (checkObstacleContact(bullet, DIR_XY)))
 	{
 		if (bullet->flags & ENT_BOUNCES)
 			bounceBullet(bullet, dx, dy);
