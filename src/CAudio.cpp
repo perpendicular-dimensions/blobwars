@@ -188,7 +188,7 @@ void Audio::playSoundRelative(int snd, int channel, float x)
 		return;
 	}
 
-	int angle = atanf(x / 320) * 180 / M_PI;
+	int angle = atanf(x / 480) * 180 / M_PI;
 	int attenuation = fabsf(x) / 40;
 
 	if (angle < 0)
