@@ -63,16 +63,15 @@ void addColorParticles(float x, float y, int amount, int color)
 	for (int i = 0 ; i < amount ; i++)
 	{
 		if (color == -1)
-		{
 			c = Math::prand() % 5;
-			switch (c)
-			{
-				case 0: c = graphics.white; break;
-				case 1: c = graphics.grey; break;
-				case 2: c = graphics.blue; break;
-				case 3: c = graphics.cyan; break;
-				case 4: c = graphics.red; break;
-			}
+
+		switch (c)
+		{
+			case 0: c = graphics.white; break;
+			case 1: c = graphics.grey; break;
+			case 2: c = graphics.blue; break;
+			case 3: c = graphics.cyan; break;
+			case 4: c = graphics.red; break;
 		}
 
 		dx = Math::rrand(-30, 30); dx /= 30;
