@@ -34,7 +34,7 @@ bool PersistData::setData(const char *data)
 {
 	if (strlen(data) > 149)
 	{
-		debug(("ERROR: PERSISTANT DATA LINE EXCEEDS 150 CHARACTERS! IS %zd!\n", strlen(data)));
+		debug(("ERROR: PERSISTANT DATA LINE EXCEEDS 150 CHARACTERS! IS %lu!\n", (unsigned long)strlen(data)));
 		return false;
 	}
 	

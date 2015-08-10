@@ -2,28 +2,32 @@ PROG = blobwars.exe
 PAKNAME = blobwars.pak
 DOCS = doc/*
 ICONS = icons/
+DATA = data gfx sound music
 
 VERSION = 1.19
-RELEASE = 1
-USEPAK = 1
+RELEASE ?= 1
+USEPAK ?= 1
 
-PREFIX=$(DESTDIR)/usr
-BINDIR = $(PREFIX)/games/
-DATADIR = $(PREFIX)/share/games/blobwars/
-DOCDIR = $(PREFIX)/share/doc/$(PROG)/
-ICONDIR = $(PREFIX)/share/icons/hicolor/
-DESKTOPDIR = $(PREFIX)/share/applications/
-LOCALEDIR = $(PREFIX)/share/locale/
+PREFIX ?= /usr
+BINDIR ?= $(PREFIX)/games/
+DATADIR ?= $(PREFIX)/share/games/blobwars/
+DOCDIR ?= $(PREFIX)/share/doc/$(PROG)/
+ICONDIR ?= $(PREFIX)/share/icons/hicolor/
+DESKTOPDIR ?= $(PREFIX)/share/applications/
+LOCALEDIR ?= $(PREFIX)/share/locale/
 MEDAL_SERVER_HOST = www.parallelrealities.co.uk
 MEDAL_SERVER_PORT = 80
 
-CXX = i586-mingw32msvc-g++
-SDLC ?= sdl-config
+CXX = i686-w64-mingw32-g++
 
-CXXFLAGS += `$(SDLC) --cflags` -DVERSION=$(VERSION) -DRELEASE=$(RELEASE) -DUSEPAK=$(USEPAK)
+CXXFLAGS += -std=c++11 -Dmain=SDL_main
+CXXFLAGS += -I/your/mingw/include
+CXXFLAGS += -DVERSION=$(VERSION) -DRELEASE=$(RELEASE) -DUSEPAK=$(USEPAK)
 CXXFLAGS += -DPAKNAME=\"$(PAKNAME)\" -DPAKLOCATION=\"\" -DGAMEPLAYMANUAL=\"doc/index.html\" -Wall
 CXXFLAGS += -DLOCALEDIR=\"\" $(CFLAGS)  -DMEDAL_SERVER_HOST=\"$(MEDAL_SERVER_HOST)\" -DMEDAL_SERVER_PORT=$(MEDAL_SERVER_PORT) -Werror
-LIBS = -lmingw32 `$(SDLC) --libs` -lz -lSDL_mixer -lSDL_image -lSDL_ttf -lSDL_net -lSDLmain -lSDL -lwinmm -lgdi32 -mwindows
+LIBS = -lmingw32 -lz -lSDL2_mixer -lSDL2_image -lSDL2_ttf -lSDL2_net -lSDL2main -lSDL2 -lwinmm -lgdi32
+PAKLIBS = -lmingw32 -lz
+LDFLAGS = -L/your/mingw/lib -mwindows
 
 OBJS += CAudio.o
 OBJS += CBoss.o
@@ -69,6 +73,11 @@ PAKOBJS = CFileData.o pak.o
 
 LOCALE_MO = $(patsubst %.po,%.mo,$(wildcard locale/*.po))
 
+ALL = $(PROG) $(LOCALE_MO)
+ifeq ($(USEPAK), 1)
+	ALL += $(PAKNAME)
+endif
+
 # top-level rule to create the program.
 all: $(PROG) $(LOCALE_MO)
 
@@ -78,20 +87,22 @@ all: $(PROG) $(LOCALE_MO)
 
 # linking the program.
 $(PROG): $(GAMEOBJS)
-	$(CXX) $(GAMEOBJS) $(LIBS) -o $(PROG)
-	
-pak: $(PAKOBJS)
-	$(CXX) $(PAKOBJS) $(LIBS) -o pak.exe
+	$(CXX) $(LDFLAGS) $(GAMEOBJS) -o $(PROG) $(LIBS)
 
-buildpak: pak
-	./pak data gfx music sound $(PAKNAME)
+pak: $(PAKOBJS)
+	$(CXX) $(LDFLAGS) $(PAKOBJS) -o pak.exe $(PAKLIBS)
 
 %.mo: %.po
 	msgfmt -c -o $@ $<
 
-mapeditor: $(MAPOBJS)
-	$(CXX) $(LIBS) $(MAPOBJS) -o mapeditor
+mapeditor.exe: $(MAPOBJS)
+	$(CXX) $(LDFLAGS) $(MAPOBJS) -o mapeditor.exe $(LIBS)
 
 # cleaning everything that can be automatically recreated with "make".
 clean:
-	$(RM) $(GAMEOBJS) mapEditor.o pak.o $(PROG) $(PAKNAME) pak mapeditor $(LOCALE_MO)
+	$(RM) $(GAMEOBJS) mapEditor.o pak.o $(PROG) $(PAKNAME) pak.exe mapeditor.exe $(LOCALE_MO)
+
+$(PAKNAME): pak
+	./pak $(DATA) $(PAKNAME)
+
+buildpak: $(PAKNAME)
