@@ -821,7 +821,7 @@ void loadEnemy(const char *token)
 {
 	int enemy = -1;
 
-	for (int i = MAX_ENEMIES ; i > -1 ; i--)
+	for (int i = MAX_ENEMIES - 1; i >= 0; i--)
 		if (strcmp(defEnemy[i].name, "") == 0)
 			enemy = i;
 
