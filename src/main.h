@@ -47,18 +47,3 @@ extern void checkStartCutscene();
 extern void easyGameFinished();
 
 extern void presentPlayerMedal(const char *tname);
-
-Audio audio;
-Config config;
-Engine engine;
-Game game;
-GameData gameData;
-Graphics graphics;
-Map map;
-ReplayData replayData;
-MedalServer medalServer;
-
-Entity defEnemy[MAX_ENEMIES];
-Entity defItem[MAX_ITEMS];
-Entity player;
-Weapon weapon[MAX_WEAPONS];

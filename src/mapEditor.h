@@ -55,18 +55,3 @@ class String {
 		}
 
 };
-
-String *stringHead = new String;
-String *stringTail = stringHead;
-
-Audio audio;
-Engine engine;
-Game game;
-GameData gameData;
-Graphics graphics;
-Map map;
-
-Entity defEnemy[MAX_ENEMIES];
-Entity defItem[MAX_ITEMS];
-Entity player;
-Weapon weapon[MAX_WEAPONS];

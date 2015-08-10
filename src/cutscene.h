@@ -28,5 +28,3 @@ extern GameData gameData;
 extern Graphics graphics;
 
 extern Game game;
-
-List sceneList;

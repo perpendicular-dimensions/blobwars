@@ -21,6 +21,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "cutscene.h"
 
+List sceneList;
+
 void createSceneList()
 {
 	char sceneLine[1024] = "";

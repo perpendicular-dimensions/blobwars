@@ -50,6 +50,3 @@ extern Map map;
 
 extern Entity player;
 extern Entity defItem[MAX_ITEMS];
-
-// this is used exclusively by the bosses
-Boss *self;
