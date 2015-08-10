@@ -293,7 +293,7 @@ void initSystem()
 	}
 
 	// Increase the size of the window if we have large desktop resolutions
-	SDL_DisplayMode displayMode{0};
+	SDL_DisplayMode displayMode = {0};
 	SDL_GetDesktopDisplayMode(0, &displayMode);
 	int w = graphics.screen->w;
 	int h = graphics.screen->h;
