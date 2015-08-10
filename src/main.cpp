@@ -137,6 +137,7 @@ int main(int argc, char *argv[])
 
 	bindtextdomain("blobwars", LOCALEDIR);
 	setlocale(LC_ALL, "");
+	setlocale(LC_NUMERIC, "C");
 	textdomain("blobwars");
 
 	atexit(cleanup);
