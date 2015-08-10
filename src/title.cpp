@@ -477,7 +477,7 @@ void doCredits()
 	int i = 0;
 	int numberOfCredits = 0;
 	int pos1 = 0, pos2 = 0, size = 0;
-	float *y;
+	float *y, deviceY;
 
 	SDL_Surface *backdrop = graphics.quickSprite("CreditsBackGround", graphics.loadImage("gfx/main/creditsBack.png"));
 
@@ -504,6 +504,9 @@ void doCredits()
 
 		y[i] = pos1;
 
+		if (pos2 == 220)
+			deviceY = pos1 - 50;
+
 		graphics.setFontSize(size);
 		credit[i] = graphics.quickSprite("credit", graphics.getString(string, true));
 
@@ -518,7 +521,9 @@ void doCredits()
 	}
 	
 	SDL_Surface *device = graphics.quickSprite("credit", graphics.loadImage("gfx/main/creditsDevice.png"));
-	float deviceY = y[numberOfCredits - 7] - 50;
+
+	if (!deviceY)
+		deviceY = y[numberOfCredits - 7] - 50;
 
 	audio.loadMusic("music/credits");
 	audio.playMusic();
