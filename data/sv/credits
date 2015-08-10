@@ -1,4 +1,4 @@
-159
+160
 000 1 HUVUDPROGRAMMERING
 020 0 Stephen Sweeney
 040 1 YTTERLIGARE PROGRAMMERING
@@ -45,8 +45,9 @@
 050 1 CPPCHECK
 020 0 http://cppcheck.sf.net
 050 1 PORTING OCH PATCHAR
-020 0 LouiSe, Richard June, Bas Wijnen
-020 0 Ondrej Sury, Bob Ippolito
+020 0 LouiSe, Richard June, Bas Wijnen, Ondrej Sury, Bob Ippolito,
+020 0 Alan Trulock Andreas Moog, Cyril Roelandt, Hans de Goede,
+020 0 Pacho Ramos, Tim Dickson
 050 1 MUSIK
 040 0 "Adventure"
 020 0 "Electricity"
@@ -77,7 +78,7 @@
 020 0 Komponerad av SinQ
 020 0 Copyright © 2005 Sander van Oirschot
 020 0 Licenserad under CC-BY 3.0
-050 1 SOUND
+050 1 LJUD
 040 0 pop1
 020 0 Tågit från BZFlag
 020 0 Licenserad under LGPL version 2.1

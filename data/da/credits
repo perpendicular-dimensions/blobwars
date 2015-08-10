@@ -1,8 +1,9 @@
-109
+160
 000 1 HOVEDSAGLIG PROGRAMMING
 020 0 Stephen Sweeney
 040 1 EKSTRA PROGRAMMING
 020 0 Richard Sweeney
+020 0 Guus Sliepen
 040 1 GRAFIK
 020 0 Stephen Sweeney
 020 0 Richard Sweeney
@@ -39,49 +40,107 @@
 020 0 Wesley Whitmore, Faye Price, Ceri Done
 020 0 Emma Hamilton, Ian Bisset, Rob Jones
 020 0 Neil Ellis
+050 1 VALGRIND
+020 0 http://valgrind.org
+050 1 CPPCHECK
+020 0 http://cppcheck.sf.net
 050 1 PORTING OG RETTELSER
-020 0 LouiSe, Richard June, Bas Wijnen
-020 0 Ondrej Sury, Bob Ippolito
+020 0 LouiSe, Richard June, Bas Wijnen, Ondrej Sury, Bob Ippolito,
+020 0 Alan Trulock Andreas Moog, Cyril Roelandt, Hans de Goede,
+020 0 Pacho Ramos, Tim Dickson
 050 1 MUSIK
-040 0 "Helmet Shake"
-020 0 Komponeret af Jogeir/Spaceballs
-020 0 Ophavsret (c) Jogeir
-040 0 "For a Friend"
-020 0 Komponeret af David Elfstrom
-020 0 Ophavsret (c) 1991 David Elfstrom
-040 0 "Commando"
-020 0 Komponeret af Kaizsu
-020 0 Ophavsret (c) Kaizsu
-040 0 "Do Viking"
-020 0 Komponeret af Scorpik
-020 0 Ophavsret (c) Scorpik
-040 0 "Thug Live"
-020 0 Komponeret af Gryzor
-020 0 Ophavsret (c) Gryzor
-040 0 "Daisy Chain"
-020 0 Ukendt forfatter
-040 0 "Condom Corruption"
-020 0 Komponeret by Travolta/Spaceballs
-020 0 Ophavsret (c) 1992 Travolta
-040 0 "Ice Cave"
-020 0 Ukendt forfatter
-040 0 "Doctor Must Die"
-020 0 Ukendt forfatter
-040 0 "A Friend Has Died"
-020 0 Komponeret by Scorpik
-020 0 Ophavsret (c) 1995 Scorpik
-040 0 "Ice World"
-020 0 Ukendt forfatter
-040 0 "Circuit Overlode"
-020 0 Komponeret by HellTrot Co
-020 0 Ophavsret (c) 1998 HellTrot Co
-020 0 Alle rettigheder forbeholdt
-040 0 "Sweet Dreams"
-020 0 Komponeret by Jussi Salemla
-020 0 Ophavsret (c) Jussi Salemla
-040 0 "Autumns Dawning"
-020 0 Komponeret by Andy Carlson
-020 0 Ophavsret (c) 1995 Andy Carlson
+040 0 "Adventure"
+020 0 "Electricity"
+020 0 "Frogmusic"
+020 0 "Dishy"
+020 0 "Watching"
+020 0 "Party"
+020 0 "Swallow water"
+020 0 Komponerat af DJ Sjors
+020 0 Ophavsret (c) 2005 Lennaert van Driel
+020 0 Licensed under CC-BY-SA 3.0
+040 0 "Frustration"
+020 0 "Speezkeek"
+020 0 "I have something to say"
+020 0 "Happy"
+020 0 "Xylophonia"
+020 0 Komponerat af Ambick
+020 0 Ophavsret (c) 2005 Dick Huijer
+020 0 Licensed under CC-BY-SA 3.0
+040 0 "Herbs" (originally "Claustrophobia")
+020 0 Originally composed by LizardKing
+020 0 Minor changes by Ambick
+020 0 Ophavsret (c) 1992 Gustaf Grefberg
+020 0 Ophavsret (c) 2005 Dick Huijer
+020 0 Licensed under CC-BY-SA 3.0
+040 0 "Desperate"
+020 0 "Credits"
+020 0 Komponerat af SinQ
+020 0 Ophavsret (c) 2005 Sander van Oirschot
+020 0 Licensed under CC-BY 3.0
+050 1 SOUND
+040 0 pop1
+020 0 Taken from BZFlag
+020 0 Licensed under LGPL version 2.1
+040 0 weaponPickup, death1, death2, death3, galdovSplit
+020 0 Taken from FreeDoom
+020 0 Licensed under the BSD license
+040 0 machinegun, plasma, rocket, teleport1
+020 0 Taken from Nexuiz
+020 0 Licensed under GPL version 2
+040 0 menu, select, pistol, switch
+020 0 Taken from OpenArena
+020 0 Licensed under GPL version 2
+040 0 rico2, teleport2, teleport3, waterOut
+020 0 Taken from OpenQuartz
+020 0 Licensed under GPL version 2
+040 0 laser
+020 0 Taken from Scorched3D
+020 0 Licensed under GPL version 2
+040 0 item
+020 0 Taken from SuperTux
+020 0 Licensed under GPL version 2
+040 0 clang, electricity1, stoneBreak
+020 0 Taken from Word War VI
+020 0 Ophavsret (c) Stephen M. Cameron
+020 0 Licensed under CC-BY-SA 3.0
+040 0 drowning, gulp
+020 0 Taken from http://pdsounds.org
+020 0 Public Domain
+040 0 rico1
+020 0 Taken from http://simplythebest.net/sounds
+020 0 Public Domain
+040 0 lava
+020 0 Taken from http://soundbible.com
+020 0 Ophavsret (c) Amanda
+020 0 Licensed under CC-BY 3.0
+040 0 grenadeBounce
+020 0 Taken from http://soundbible.com
+020 0 Ophavsret (c) Caroline Ford
+020 0 Licensed under CC-BY 3.0
+040 0 doorLocked
+020 0 Taken from http://soundbible.com
+020 0 Ophavsret (c) BlastwaveFx.com
+020 0 Licensed under CC-BY 3.0
+040 0 blizzard, cheer, clock, doorOpened, electricity2, electricity3,
+020 0 elecDeath3, fireCrackle, fireball, floodedTunnel, galdovDie,
+020 0 galdovPain, punch, rain, spike, splat, switch1, switch2, throw
+020 0 Taken from http://soundbible.com
+020 0 Ophavsret (c) Mike Koenig
+020 0 Licensed under CC-BY 3.0
+040 0 blizzard2, droidFreakOut, eat
+020 0 Taken from http://soundbible.com
+020 0 Public Domain
+040 0 computer, doorOpen, tankBeam, tankBeamFire, waterIn
+020 0 Taken from the OLPC sound samples collection version 2
+020 0 Licensed under CC-BY 3.0
+040 0 droid1, droid2, droidChangeFreq, elecDeath1, elecDeath2
+020 0 Created using sfxr
+020 0 Ophavsret (c) Hans de Goede
+020 0 Licensed under CC-BY 3.0
+040 0 Lock and Load!!
+020 0 Taken from "Family Guy"
+020 0 Fair use
 050 1 SÆRLIGE TAKSIGELSER
 020 0 Mine forældre for deres støtte mht. "The Little Yellow Balls" projektet
 020 0 Debian-brugerbasen for deres tålmodige fejlsøgninger
@@ -89,15 +148,6 @@
 020 0 Allan Crain for at rette stave- og grammatikfejl
 020 0 Alle de mennesker som tog sig tid til at teste og rapportere fejl
 020 0 Og alle dem på SDL mailing-listen
-050 1 BITSTREAM VERA FONT
-020 0 Ophavsret (c) 2003 af Bitstream, Inc.
-020 0 Alle rettigheder forbeholdes.
-020 0 Bitstream Vera er et registreret varemærke af Bitstream, Inc.
-100 0 Al musik og alle lydeffekter i dette spil blev taget fra forskellige
-020 0 frit tilgængelige hjemmesider. I alle tilfælde er denne musik og lyd
-020 0 antaget at være offentlig ejendom og derfor fri at distribuere.
-020 0 Vi påtager os intet ansvar for lyden som var stillet frit tilgængeligt
-020 0 uden ejerens samtykke.
 100 0 Alle karakternavne i dette spil er omfattet af ophavsret og/eller varemærker
 020 0 af deres respektive ejere. De er ikke forbundet på nogen måde med enten
 020 0 Blob Wars: Metal Blob Solid eller Parallel Realities.
@@ -106,5 +156,6 @@
 020 1 Alle rettigheder forbeholdes
 450 1 Blob Wars: Metal Blob Solid
 020 1 Ophavsret (c) 2004-2011 Parallel Realities
+020 1 Ophavsret (c) 2011-2015 Perpendicular Dimentions
 020 1 Licenseret under GNU General Public License
 120 1 http://www.parallelrealities.co.uk

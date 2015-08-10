@@ -1,4 +1,4 @@
-159
+160
 000 1 HOOFD PROGRAMMERING
 020 0 Stephen Sweeney
 040 1 ADDITIONELE PROGRAMMERING
@@ -45,8 +45,9 @@
 050 1 CPPCHECK
 020 0 http://cppcheck.sf.net
 050 1 PORTING EN PATCHES
-020 0 LouiSe, Richard June, Bas Wijnen
-020 0 Ondrej Sury, Bob Ippolito
+020 0 LouiSe, Richard June, Bas Wijnen, Ondrej Sury, Bob Ippolito,
+020 0 Alan Trulock Andreas Moog, Cyril Roelandt, Hans de Goede,
+020 0 Pacho Ramos, Tim Dickson
 050 1 MUZIEK
 040 0 "Adventure"
 020 0 "Electricity"
