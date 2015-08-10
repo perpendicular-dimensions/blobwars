@@ -533,6 +533,8 @@ void doCredits()
 
 	while (y[numberOfCredits - 1] > 350)
 	{
+		unsigned int frameLimit = SDL_GetTicks() + 16;
+
 		graphics.updateScreen();
 		engine.getInput();
 		config.populate();
@@ -541,8 +543,15 @@ void doCredits()
 
 		SDL_FillRect(graphics.screen, NULL, graphics.black);
 		graphics.blit(backdrop, 0, 365, graphics.screen, false);
+
+		float speed = 0.25;
+
+		if (engine.keyState[SDL_SCANCODE_DOWN] || engine.joyY > 25000)
+			speed = 1.0;
+		else if (engine.keyState[SDL_SCANCODE_UP] || engine.joyY < -25000)
+			speed = -1.0;
 		
-		deviceY -= (0.25 * engine.getTimeDifference());
+		deviceY -= (speed* engine.getTimeDifference());
 		
 		if ((deviceY > 10) && (deviceY < 470))
 		{
@@ -551,7 +560,7 @@ void doCredits()
 
 		for (i = 0 ; i < numberOfCredits ; i++)
 		{
-			y[i] -= (0.25 * engine.getTimeDifference());
+			y[i] -= (speed * engine.getTimeDifference());
 			
 			if ((y[i] > 10) && (y[i] < 470))
 			{
@@ -564,7 +573,7 @@ void doCredits()
 
 		doMusicInfo(SDL_GetTicks() - (now + 10000));
 
-		SDL_Delay(16);
+		engine.delay(frameLimit);
 	}
 
 	graphics.delay(12000);
