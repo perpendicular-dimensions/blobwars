@@ -582,8 +582,8 @@ msgstr "Completats Tots els Objectius Requerits - Missió Complerta"
 msgid "Ammo Used"
 msgstr "Munició Emprada"
 
-msgid "An SDL Game"
-msgstr "Un Joc SDL"
+msgid "An SDL2 Game"
+msgstr "Un Joc SDL2"
 
 msgid "Automap is not available!"
 msgstr "Mapa automàtic no disponible!"
@@ -650,6 +650,9 @@ msgstr "Continuacions Fetes:"
 
 msgid "Copyright (C) 2004-2011 Parallel Realities"
 msgstr "Copyright © 2004-2011 Parallel Realities"
+
+msgid "Copyright (C) 2011-2015 Perpendicular Dimensions"
+msgstr "Copyright © 2011-2015 Perpendicular Dimensions"
 
 # as in Corrupt Save Data
 msgid "Corrupt"

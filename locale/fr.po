@@ -534,8 +534,8 @@ msgstr "Tous les objectifs requis sont accomplis - Mission terminée"
 msgid "Ammo Used"
 msgstr "Balles tirées"
 
-msgid "An SDL Game"
-msgstr "Un jeu SDL"
+msgid "An SDL2 Game"
+msgstr "Un jeu SDL2"
 
 msgid "Automap is not available!"
 msgstr "L'Automap n'est pas disponible!"
@@ -599,6 +599,9 @@ msgstr "Continues utilisés:"
 
 msgid "Copyright (C) 2004-2011 Parallel Realities"
 msgstr "Copyright (C) 2004-2011 Parallel Realities"
+
+msgid "Copyright (C) 2011-2015 Perpendicular Dimensions"
+msgstr "Copyright (C) 2011-2015 Perpendicular Dimensions"
 
 msgid "Corrupt"
 msgstr "Corrupt"

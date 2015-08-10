@@ -540,8 +540,8 @@ msgstr "All krävda uppgifter avklarade - uppdrag slutfört"
 msgid "Ammo Used"
 msgstr "Använd ammunition"
 
-msgid "An SDL Game"
-msgstr "Ett SDL-spel"
+msgid "An SDL2 Game"
+msgstr "Ett SDL2-spel"
 
 msgid "Automap is not available!"
 msgstr "Automap är inte tillgänglig!"
@@ -605,6 +605,9 @@ msgstr "Använda continues:"
 
 msgid "Copyright (C) 2004-2011 Parallel Realities"
 msgstr "Copyright © 2004-2011 Parallel Realities"
+
+msgid "Copyright (C) 2011-2015 Perpendicular Dimensions"
+msgstr "Copyright © 2011-2015 Perpendicular Dimensions"
 
 # as in Corrupt Save Data
 msgid "Corrupt"

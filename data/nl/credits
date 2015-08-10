@@ -1,8 +1,9 @@
-149
+159
 000 1 HOOFD PROGRAMMERING
 020 0 Stephen Sweeney
 040 1 ADDITIONELE PROGRAMMERING
 020 0 Richard Sweeney
+020 0 Guus Sliepen
 040 1 BEELDMATERIAAL
 020 0 Stephen Sweeney
 020 0 Richard Sweeney
@@ -55,21 +56,26 @@
 020 0 "Party"
 020 0 "Swallow water"
 020 0 Gecomponeerd door DJ Sjors
-020 0 Copyright (c) 2005 Lennaert van Driel
+020 0 Copyright © 2005 Lennaert van Driel
 020 0 Gelicenseerd onder CC-BY-SA 3.0
 040 0 "Frustration"
 020 0 "Speezkeek"
-020 0 "Herbs"
 020 0 "I have something to say"
 020 0 "Happy"
 020 0 "Xylophonia"
 020 0 Gecomponeerd door Ambick
-020 0 Copyright (c) 2005 Dick Huijer
+020 0 Copyright © 2005 Dick Huijer
 020 0 Gelicenseerd onder CC-BY-SA 3.0
+040 0 "Herbs" (originally "Claustrophobia")
+020 0 Oorspronkelijk gecomponeerd door LizardKing
+020 0 Kleine wijzigingen door Ambick
+020 0 Copyright © 1992 Gustaf Grefberg
+020 0 Copyright © 2005 Dick Huijer
+020 0 Licensed under CC-BY-SA 3.0
 040 0 "Desperate"
 020 0 "Credits"
 020 0 Gecomponeerd door SinQ
-020 0 Copyright (c) 2005 Sander van Oirschot
+020 0 Copyright © 2005 Sander van Oirschot
 020 0 Gelicenseerd onder CC-BY 3.0
 050 1 GELUID
 040 0 pop1
@@ -95,7 +101,7 @@
 020 0 Gelicenseerd onder GPL version 2
 040 0 clang, electricity1, stoneBreak
 020 0 Gehaald uit Word War VI
-020 0 Copyright (c) Stephen M. Cameron
+020 0 Copyright © Stephen M. Cameron
 020 0 Gelicenseerd onder CC-BY-SA 3.0
 040 0 drowning, gulp
 020 0 Gehaald uit http://pdsounds.org
@@ -105,21 +111,21 @@
 020 0 Public Domain
 040 0 lava
 020 0 Gehaald uit http://soundbible.com
-020 0 Copyright (c) Amanda
+020 0 Copyright © Amanda
 020 0 Gelicenseerd onder CC-BY 3.0
 040 0 grenadeBounce
 020 0 Gehaald uit http://soundbible.com
-020 0 Copyright (c) Caroline Ford
+020 0 Copyright © Caroline Ford
 020 0 Gelicenseerd onder CC-BY 3.0
 040 0 doorLocked
 020 0 Gehaald uit http://soundbible.com
-020 0 Copyright (c) BlastwaveFx.com
+020 0 Copyright © BlastwaveFx.com
 020 0 Gelicenseerd onder CC-BY 3.0
 040 0 blizzard, cheer, clock, doorOpened, electricity2, electricity3,
 020 0 elecDeath3, fireCrackle, fireball, floodedTunnel, galdovDie,
 020 0 galdovPain, punch, rain, spike, splat, switch1, switch2, throw
 020 0 Gehaald uit http://soundbible.com
-020 0 Copyright (c) Mike Koenig
+020 0 Copyright © Mike Koenig
 020 0 Gelicenseerd onder CC-BY 3.0
 040 0 blizzard2, droidFreakOut, eat
 020 0 Gehaald uit http://soundbible.com
@@ -129,7 +135,7 @@
 020 0 Gelicenseerd onder CC-BY 3.0
 040 0 droid1, droid2, droidChangeFreq, elecDeath1, elecDeath2
 020 0 Created using sfxr
-020 0 Copyright (c) Hans de Goede
+020 0 Copyright © Hans de Goede
 020 0 Gelicenseerd onder CC-BY 3.0
 040 0 Lock and Load!!
 020 0 Gehaald uit "Family Guy"
@@ -149,5 +155,6 @@
 020 1 Alle rechten gereserveerd
 450 1 Blob Wars: Metal Blob Solid
 020 1 Copyright © 2004-2011 Parallel Realities
+020 1 Copyright © 2011-2015 Perpendicular Dimentions
 020 1 Gelicenseerd onder de GNU General Public License
 120 1 http://www.parallelrealities.co.uk

@@ -542,8 +542,8 @@ msgstr "Alle påkrævede delmissioner løst – Mission fuldført"
 msgid "Ammo Used"
 msgstr "Ikke mere ammunition"
 
-msgid "An SDL Game"
-msgstr "Et SDL-spil"
+msgid "An SDL2 Game"
+msgstr "Et SDL2-spil"
 
 msgid "Automap is not available!"
 msgstr "Automap er ikke tilgængeligt!"
@@ -607,6 +607,9 @@ msgstr "Forsættelseschancer brugt:"
 
 msgid "Copyright (C) 2004-2011 Parallel Realities"
 msgstr "Ophavsretsomfattet © 2004-2011 Parallel Realities"
+
+msgid "Copyright (C) 2011-2015 Perpendicular Dimensions"
+msgstr "Ophavsretsomfattet © 2011-2015 Perpendicular Dimensions"
 
 # as in Corrupt Save Data
 msgid "Corrupt"

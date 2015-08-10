@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: blobwars 1.17\n"
-"PO-Revision-Date: 2010-12-30 15:33+0100\n"
+"Project-Id-Version: blobwars 1.19\n"
+"PO-Revision-Date: 2015-08-10 14:19+0200\n"
 "Language: nl\n"
 "Last-Translator: Guus Sliepen <guus@debian.org>\n"
 "Language-Team: Dutch Localization <debian-l10n-dutch@lists.debian.org>\n"
@@ -585,8 +585,8 @@ msgstr "Alle vereiste doelen bereikt - Missie geslaagd"
 msgid "Ammo Used"
 msgstr "Ammunitie verbruikt"
 
-msgid "An SDL Game"
-msgstr "Een SDL spel"
+msgid "An SDL2 Game"
+msgstr "Een SDL2 spel"
 
 msgid "Automap is not available!"
 msgstr "Automap is niet beschikbaar!"
@@ -653,6 +653,9 @@ msgstr "Doorgaan gebruikt:"
 
 msgid "Copyright (C) 2004-2011 Parallel Realities"
 msgstr "Copyright © 2004-2011 Parallel Realities"
+
+msgid "Copyright (C) 2011-2015 Perpendicular Dimensions"
+msgstr "Copyright © 2011-2015 Perpendicular Dimensions"
 
 msgid "If you like Blob Wars: Metal Blob Solid, you might also like:"
 msgstr "Als je Blob Wars: Metal Blob Solid leuk vindt, kijk dan ook eens naar:"
