@@ -155,14 +155,6 @@ void Engine::addKeyEvent()
 
 void Engine::getInput()
 {
-	SDL_GetMouseState(&mouseX, &mouseY);
-
-	// Scale from window coordinates to graphics coordinates
-	int w, h;
-	SDL_GetWindowSize(graphics.window, &w, &h);
-	mouseX = mouseX * 640 / w;
-	mouseY = mouseY * 480 / h;
-
 	while (SDL_PollEvent(&event))
 	{
 		switch (event.type)
@@ -182,6 +174,11 @@ void Engine::getInput()
 			case SDL_MOUSEBUTTONUP:
 				if (event.button.button == SDL_BUTTON_LEFT) mouseLeft = 0;
 				if (event.button.button == SDL_BUTTON_RIGHT) mouseRight = 0;
+				break;
+
+			case SDL_MOUSEMOTION:
+				mouseX = event.motion.x;
+				mouseY = event.motion.y;
 				break;
 
 			case SDL_KEYDOWN:
@@ -325,9 +322,12 @@ int Engine::getMouseY() const
 	return mouseY;
 }
 
-void Engine::setMouse(int x, int y)
+void Engine::moveMouse(int dx, int dy)
 {
-	SDL_WarpMouseInWindow(graphics.window, x, y);
+	mouseX += dx;
+	mouseY += dy;
+	Math::limitInt(&mouseX, 0, 640);
+	Math::limitInt(&mouseY, 0, 480);
 }
 
 bool Engine::userAccepts()

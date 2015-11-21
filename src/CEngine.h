@@ -104,7 +104,7 @@ class Engine {
 	int getMouseX() const;
 	int getMouseY() const;
 
-	void setMouse(int x, int y);
+	void moveMouse(int dx, int dy);
 	bool userAccepts();
 	
 	void clearCheatVars();

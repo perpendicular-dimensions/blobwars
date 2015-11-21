@@ -369,7 +369,6 @@ void initSystem()
 	}
 
 	SDL_ShowCursor(SDL_DISABLE);
-	SDL_EventState(SDL_MOUSEMOTION, SDL_DISABLE);
 
 	graphics.registerEngine(&engine);
 	graphics.mapColors();

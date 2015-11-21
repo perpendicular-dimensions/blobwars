@@ -599,9 +599,6 @@ int doHub()
 	Uint32 frameLimit = SDL_GetTicks() + 16;
 	Uint32 now = SDL_GetTicks();
 	
-	int mouseXDelta = 0;
-	int mouseYDelta = 0;
-
 	while (rtn == -1)
 	{
 		graphics.updateScreen();
@@ -627,31 +624,32 @@ int doHub()
 		engine.getInput();
 		config.populate();
 		
+		int mouseXDelta = 0;
+		int mouseYDelta = 0;
+
 		if (config.isControl(CONTROL::RIGHT))
 		{
-			mouseXDelta = 5;
+			mouseXDelta += 5;
 		}
 		
 		if (config.isControl(CONTROL::LEFT))
 		{
-			mouseXDelta = -5;
+			mouseXDelta -= 5;
 		}
 		
 		if (config.isControl(CONTROL::DOWN))
 		{
-			mouseYDelta = 5;
+			mouseYDelta += 5;
 		}
 		
 		if (config.isControl(CONTROL::UP) || config.isControl(CONTROL::JUMP))
 		{
-			mouseYDelta = -5;
+			mouseYDelta -= 5;
 		}
 
 		if ((mouseXDelta != 0) || (mouseYDelta != 0))
 		{
-			engine.setMouse(engine.getMouseX() + (int)mouseXDelta, engine.getMouseY() + (int)mouseYDelta);
-			mouseXDelta = 0;
-			mouseYDelta = 0;
+			engine.moveMouse(mouseXDelta, mouseYDelta);
 		}
 
 		hubPoint = (HubLevel*)hubList.getHead();
