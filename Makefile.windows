@@ -26,7 +26,7 @@ CXXFLAGS += -DVERSION=$(VERSION) -DRELEASE=$(RELEASE) -DUSEPAK=$(USEPAK)
 CXXFLAGS += -DPAKNAME=\"$(PAKNAME)\" -DPAKLOCATION=\".\" -DGAMEPLAYMANUAL=\"doc/index.html\" -Wall
 CXXFLAGS += -DLOCALEDIR=\"\" $(CFLAGS)  -DMEDAL_SERVER_HOST=\"$(MEDAL_SERVER_HOST)\" -DMEDAL_SERVER_PORT=$(MEDAL_SERVER_PORT) -Werror
 LIBS = -lmingw32 -lz -lSDL2_mixer -lSDL2_image -lSDL2_ttf -lSDL2_net -lSDL2main -lSDL2 -lwinmm -lgdi32
-LDFLAGS = -L/your/mingw/lib -mwindows
+LDFLAGS = -L/your/mingw/lib
 
 OBJS += CAudio.o
 OBJS += CBoss.o
@@ -86,7 +86,7 @@ all: $(PROG) $(LOCALE_MO)
 
 # linking the program.
 $(PROG): $(GAMEOBJS)
-	$(CXX) $(LDFLAGS) $(GAMEOBJS) -o $(PROG) $(LIBS)
+	$(CXX) $(LDFLAGS) $(GAMEOBJS) -o $(PROG) $(LIBS) -mwindows
 
 pak.exe: $(PAKOBJS)
 	$(CXX) $(LDFLAGS) $(PAKOBJS) -o pak.exe $(LIBS)
@@ -95,7 +95,7 @@ pak.exe: $(PAKOBJS)
 	msgfmt -c -o $@ $<
 
 mapeditor.exe: $(MAPOBJS)
-	$(CXX) $(LDFLAGS) $(MAPOBJS) -o mapeditor.exe $(LIBS)
+	$(CXX) $(LDFLAGS) $(MAPOBJS) -o mapeditor.exe $(LIBS) -mwindows
 
 # cleaning everything that can be automatically recreated with "make".
 clean:
