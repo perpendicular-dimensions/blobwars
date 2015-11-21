@@ -26,7 +26,6 @@ CXXFLAGS += -DVERSION=$(VERSION) -DRELEASE=$(RELEASE) -DUSEPAK=$(USEPAK)
 CXXFLAGS += -DPAKNAME=\"$(PAKNAME)\" -DPAKLOCATION=\".\" -DGAMEPLAYMANUAL=\"doc/index.html\" -Wall
 CXXFLAGS += -DLOCALEDIR=\"\" $(CFLAGS)  -DMEDAL_SERVER_HOST=\"$(MEDAL_SERVER_HOST)\" -DMEDAL_SERVER_PORT=$(MEDAL_SERVER_PORT) -Werror
 LIBS = -lmingw32 -lz -lSDL2_mixer -lSDL2_image -lSDL2_ttf -lSDL2_net -lSDL2main -lSDL2 -lwinmm -lgdi32
-PAKLIBS = -lmingw32 -lz
 LDFLAGS = -L/your/mingw/lib -mwindows
 
 OBJS += CAudio.o
@@ -89,8 +88,8 @@ all: $(PROG) $(LOCALE_MO)
 $(PROG): $(GAMEOBJS)
 	$(CXX) $(LDFLAGS) $(GAMEOBJS) -o $(PROG) $(LIBS)
 
-pak: $(PAKOBJS)
-	$(CXX) $(LDFLAGS) $(PAKOBJS) -o pak.exe $(PAKLIBS)
+pak.exe: $(PAKOBJS)
+	$(CXX) $(LDFLAGS) $(PAKOBJS) -o pak.exe $(LIBS)
 
 %.mo: %.po
 	msgfmt -c -o $@ $<
@@ -102,7 +101,7 @@ mapeditor.exe: $(MAPOBJS)
 clean:
 	$(RM) $(GAMEOBJS) mapEditor.o pak.o $(PROG) $(PAKNAME) pak.exe mapeditor.exe $(LOCALE_MO)
 
-$(PAKNAME): pak
+$(PAKNAME): pak.exe
 	./pak $(DATA) $(PAKNAME)
 
 buildpak: $(PAKNAME)
