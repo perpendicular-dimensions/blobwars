@@ -195,6 +195,7 @@ void Graphics::updateScreen()
 	SDL_UpdateTexture(texture, NULL, screen->pixels, screen->w * 4);
 	SDL_RenderCopy(renderer, texture, NULL, NULL);
 	SDL_RenderPresent(renderer);
+	SDL_RenderClear(renderer);
 
 	if (takeRandomScreenShots)
 	{
