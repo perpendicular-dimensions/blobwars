@@ -46,7 +46,7 @@ extern DECLSPEC int SDLCALL SDL_GetGamma(float *red, float *green, float *blue);
 #include "SDL2/SDL_net.h"
 #endif
 
-#ifndef WIN32
+#if !defined(_WIN32) && !defined(__APPLE__)
 #include <libintl.h>
 #define _(string) gettext(string)
 #else
