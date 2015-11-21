@@ -339,7 +339,7 @@ SDL_Surface *createMusicInfo(void)
 	SDL_Surface *text1;
 	SDL_Surface *text2 = NULL;
 	SDL_Surface *text3 = NULL;
-	SDL_Surface *icon;
+	SDL_Surface *icon = NULL;
 	SDL_Surface *panel;
 
 	int w = 0;
