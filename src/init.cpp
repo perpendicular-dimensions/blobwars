@@ -414,7 +414,7 @@ void initSystem()
 	graphics.license[1] = graphics.loadImage("gfx/main/cc-by-sa.png", true);
 
 	SDL_Surface *device = graphics.loadImage("gfx/main/alienDevice.png");
-
+	SDL_SetWindowIcon(graphics.window, device);
 	SDL_FreeSurface(device);
 	
 	if (strstr(engine.userHomeDirectory, "/root"))
