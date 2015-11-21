@@ -91,6 +91,7 @@ class Map {
 	void destroy();
 	
 	bool isPracticeMission();
+	bool isValid(int x, int y);
 	bool isSolid(int x, int y);
 	bool isBreakable(int x, int y);
 	bool isNoReset(int x, int y);

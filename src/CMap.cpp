@@ -112,8 +112,19 @@ bool Map::isPracticeMission()
 	return false;
 }
 
+bool Map::isValid(int x, int y)
+{
+	if (x >= 0 && y >= 0 && x < MAPWIDTH && y < MAPHEIGHT)
+		return true;
+
+	return false;
+}
+
 bool Map::isSolid(int x, int y)
 {
+	if (!isValid(x, y))
+		return false;
+
 	if ((data[x][y] >= MAP_BREAKABLE) && (data[x][y] < MAP_DECORATION))
 	{
 		return true;
@@ -124,6 +135,9 @@ bool Map::isSolid(int x, int y)
 
 bool Map::isBreakable(int x, int y)
 {
+	if (!isValid(x, y))
+		return false;
+
 	if ((data[x][y] >= MAP_BREAKABLE) && (data[x][y] <= MAP_BREAKABLE2))
 	{
 		return true;
@@ -134,6 +148,9 @@ bool Map::isBreakable(int x, int y)
 
 bool Map::isNoReset(int x, int y)
 {
+	if (!isValid(x, y))
+		return false;
+
 	if ((data[x][y] >= MAP_NORESET) && (data[x][y] < MAP_DECORATION))
 	{
 		return true;
@@ -144,6 +161,9 @@ bool Map::isNoReset(int x, int y)
 
 bool Map::isLiquid(int x, int y)
 {
+	if (!isValid(x, y))
+		return false;
+
 	if (data[x][y] == 0)
 	{
 		return false;
@@ -162,6 +182,9 @@ bool Map::isLiquid(int x, int y)
 
 bool Map::isTopLayer(int x, int y)
 {
+	if (!isValid(x, y))
+		return false;
+
 	if (data[x][y] >= MAP_TOPLAYER)
 	{
 		return true;
