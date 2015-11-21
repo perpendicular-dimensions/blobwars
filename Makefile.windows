@@ -86,7 +86,7 @@ all: $(PROG) $(LOCALE_MO)
 
 # linking the program.
 $(PROG): $(GAMEOBJS)
-	$(CXX) $(LDFLAGS) $(GAMEOBJS) -o $(PROG) $(LIBS) -mwindows
+	$(CXX) $(LDFLAGS) $(GAMEOBJS) -o $(PROG) $(LIBS) -mwindows -static-libgcc
 
 pak.exe: $(PAKOBJS)
 	$(CXX) $(LDFLAGS) $(PAKOBJS) -o pak.exe $(LIBS)
