@@ -87,7 +87,10 @@ void addFireTrailParticle(float x, float y)
 
 void addFireParticles(float x, float y, int amount)
 {
-	map.addParticle(x + Math::rrand(-2, 2), y + Math::rrand(-2, 2), 0, 1, Math::rrand(5, 30), graphics.red, graphics.getSprite("Explosion", true), PAR_COLLIDES);
+	for (int i = 0 ; i < amount ; i++)
+	{
+		map.addParticle(x + Math::rrand(-2, 2), y + Math::rrand(-2, 2), 0, 1, Math::rrand(5, 30), graphics.red, graphics.getSprite("Explosion", true), PAR_COLLIDES);
+	}
 }
 
 void addBubble(float x, float y)

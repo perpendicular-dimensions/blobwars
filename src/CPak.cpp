@@ -101,7 +101,9 @@ void Pak::setPakFile(const char *pakFilename)
 	}
 	
 	fclose(pak);
-	
+
+	#else
+	(void)pakFilename;
 	#endif
 }
 

@@ -550,11 +550,12 @@ void Graphics::loadFont(int i, const char *filename, int pointSize)
 	}
 	
 	#if USEPAK
+		(void)filename;
 		char tempPath[PATH_MAX];
 		snprintf(tempPath, sizeof tempPath, "%sfont.ttf", engine->userHomeDirectory);
 		font[i] = TTF_OpenFont(tempPath, pointSize);
 	#else
-		font[i] = TTF_OpenFont("data/vera.ttf", pointSize);
+		font[i] = TTF_OpenFont(filename, pointSize);
 	#endif
 
 	if (!font[i])
@@ -1087,6 +1088,9 @@ void Graphics::showLoading(int amount, int max)
 
 	drawRect(120, 420, 400, 10, black, white, screen);
 	drawRect(121, 421, currentLoading, 8, red, screen);
+	#else
+	(void)amount;
+	(void)max;
 	#endif
 }
 

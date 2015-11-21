@@ -209,6 +209,8 @@ void saveConfig()
 //
 int initMedalService(void *data)
 {
+	(void)data;
+
 	SDL_mutexP(medalServer.lock);
 	
 	char connectMessage[1024];
@@ -293,7 +295,7 @@ void initSystem()
 	}
 
 	// Increase the size of the window if we have large desktop resolutions
-	SDL_DisplayMode displayMode = {0};
+	SDL_DisplayMode displayMode = {};
 	SDL_GetDesktopDisplayMode(0, &displayMode);
 	int w = graphics.screen->w;
 	int h = graphics.screen->h;
