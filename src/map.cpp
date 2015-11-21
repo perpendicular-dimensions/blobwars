@@ -413,6 +413,9 @@ void showMap(int centerX, int centerY)
 
 		if ((config.isControl(CONTROL::MAP)) || (config.isControl(CONTROL::PAUSE)) || (engine.keyState[SDL_SCANCODE_ESCAPE]))
 		{
+			engine.keyState[SDL_SCANCODE_ESCAPE] = 0;
+			config.resetControl(CONTROL::MAP);
+			config.resetControl(CONTROL::PAUSE);
 			break;
 		}
 

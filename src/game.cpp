@@ -671,6 +671,7 @@ int doGame()
 
 		if (config.isControl(CONTROL::MAP))
 		{
+			config.resetControl(CONTROL::MAP);
 			if (!map.isBossMission)
 			{
 				showMap((int)(player.x / 32), (int)(player.y / 32));
