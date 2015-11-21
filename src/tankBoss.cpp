@@ -92,7 +92,7 @@ void traceTankBossMGFireLine()
 		dx = -1;
 	}
 	
-	int x = (int)self->x;
+	int x;
 	int y = (int)self->y + 10;
 	
 	Entity *enemy = NULL;

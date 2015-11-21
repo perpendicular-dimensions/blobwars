@@ -64,7 +64,7 @@ void createSceneList()
 			line = strtok(NULL, "\n");
 		}
 		
-		if (strcmp(line, "@none@") != 0)
+		if (scene && strcmp(line, "@none@") != 0)
 		{
 			scene->appendText(line);
 		}
@@ -78,7 +78,7 @@ bool setupScene(const char *stagename)
 	char sceneLine[1024];
 
 	if (!engine.loadData(_("data/ending")))
-		graphics.showErrorAndExit("Couldn't load cutscene data file (%s)", _("data/ending"));
+		return graphics.showErrorAndExit("Couldn't load cutscene data file (%s)", _("data/ending")), false;
 
 	char *line = strtok((char*)engine.dataBuffer, "\n");
 	int i = 0;

@@ -160,7 +160,8 @@ Sprite *Graphics::getSpriteHead()
 
 void Graphics::setTransparent(SDL_Surface *sprite)
 {
-	SDL_SetColorKey(sprite, SDL_TRUE, SDL_MapRGB(sprite->format, 0, 0, 0));
+	if (sprite)
+		SDL_SetColorKey(sprite, SDL_TRUE, SDL_MapRGB(sprite->format, 0, 0, 0));
 }
 
 bool Graphics::canShowMedalMessage() const
@@ -361,7 +362,7 @@ SDL_Surface *Graphics::loadImage(const char *filename, bool srcalpha)
 	#endif
 
 	if (!image)
-		showErrorAndExit(ERR_FILE, filename);
+		return showErrorAndExit(ERR_FILE, filename), image;
 
 	newImage = SDL_ConvertSurface(image, screen->format, 0);
 
@@ -396,7 +397,7 @@ SDL_Surface *Graphics::loadImage(const char *filename, int hue, int sat, int val
 	#endif
 
 	if (!image)
-		showErrorAndExit(ERR_FILE, filename);
+		return showErrorAndExit(ERR_FILE, filename), image;
 
 	if ((hue != 0) || (sat != 0) || (value != 0))
 	{
@@ -520,6 +521,9 @@ void Graphics::loadMapTiles(const char *baseDir)
 		if (found)
 		{
 			tile[i] = loadImage(filename);
+
+			if (!tile[i])
+				abort();
 
 			if (autoAlpha)
 			{
@@ -746,7 +750,7 @@ void Graphics::blit(SDL_Surface *image, int x, int y, SDL_Surface *dest, bool ce
 {
 	if (!image)
 	{
-		showErrorAndExit("graphics::blit() - NULL pointer", SDL_GetError());
+		return showErrorAndExit("graphics::blit() - NULL pointer", SDL_GetError());
 	}
 
 	if ((x < -image->w) || (x > 640 + image->w))

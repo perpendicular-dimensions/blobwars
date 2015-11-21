@@ -38,7 +38,7 @@ void playIntro(int tx, int ty, int delay)
 
 		if (!line[i])
 		{
-			graphics.showErrorAndExit("Malformed Intro Data", "");
+			return graphics.showErrorAndExit("Malformed Intro Data", "");
 		}
 
 		text[i] = NULL;
@@ -163,11 +163,11 @@ int doIntro()
 
 	audio.playMusic();
 
-	char *line = strtok((char*)engine.dataBuffer, "\n");
+	strtok((char*)engine.dataBuffer, "\n");
 
 	while (true)
 	{
-		line = strtok(NULL, "\n");
+		char *line = strtok(NULL, "\n");
 		sscanf(line, "%d %d %d", &x, &y, &delay);
 
 		if (delay == -1)

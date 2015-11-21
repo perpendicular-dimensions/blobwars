@@ -477,7 +477,7 @@ void doCredits()
 	int i = 0;
 	int numberOfCredits = 0;
 	int pos1 = 0, pos2 = 0, size = 0;
-	float *y, deviceY;
+	float *y, deviceY = 0;
 
 	SDL_Surface *backdrop = graphics.quickSprite("CreditsBackGround", graphics.loadImage("gfx/main/creditsBack.png"));
 

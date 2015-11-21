@@ -67,14 +67,14 @@ void ReplayData::setMode(REPLAY_MODE::TYPE replayMode)
 		if (!fp)
 		{
 			printf("ERROR: Replay file '%s' could not be loaded.\n", filename);
-			replayMode = REPLAY_MODE::NONE;
+			this->replayMode = REPLAY_MODE::NONE;
 			return;
 		}
 		
 		if (fread(&header, sizeof(ReplayDataHeader), 1, fp) != 1)
 		{
 			printf("ERROR: Replay file '%s' is corrupt\n", filename);
-			replayMode = REPLAY_MODE::NONE;
+			this->replayMode = REPLAY_MODE::NONE;
 			fclose(fp);
 			return;
 		}
@@ -97,7 +97,7 @@ void ReplayData::setMode(REPLAY_MODE::TYPE replayMode)
 		if (!fp)
 		{
 			printf("ERROR: Replay file '%s' could not be opened for writing.\n", filename);
-			replayMode = REPLAY_MODE::NONE;
+			this->replayMode = REPLAY_MODE::NONE;
 			return;
 		}
 		
@@ -107,7 +107,7 @@ void ReplayData::setMode(REPLAY_MODE::TYPE replayMode)
 		if (size != 1)
 		{
 			printf("Error writing replay data header: %s\n", strerror(errno));
-			replayMode = REPLAY_MODE::NONE;
+			this->replayMode = REPLAY_MODE::NONE;
 			fclose(fp);
 			fp = NULL;
 			return;

@@ -362,13 +362,10 @@ void showCarriedItems()
 void doItems()
 {
 	Entity *item = (Entity*)map.itemList.getHead();
-	Entity *previous = item;
-
-	int x, y;
 
 	while (item->next != NULL)
 	{
-		previous = item;
+		Entity *previous = item;
 		
 		item = (Entity*)item->next;
 		
@@ -377,8 +374,8 @@ void doItems()
 			continue;
 		}
 
-		x = (int)(item->x - engine.playerPosX);
-		y = (int)(item->y - engine.playerPosY);
+		int x = (int)(item->x - engine.playerPosX);
+		int y = (int)(item->y - engine.playerPosY);
 
 		item->think();
 

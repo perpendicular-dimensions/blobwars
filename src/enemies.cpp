@@ -57,7 +57,6 @@ Entity *getEnemy(const char *name)
 
 void addEnemy(const char *name, int x, int y, int flags)
 {
-	Entity *enemy = new Entity();
 	Entity *defEnemy = getDefinedEnemy(name);
 
 	if (defEnemy == NULL)
@@ -66,6 +65,7 @@ void addEnemy(const char *name, int x, int y, int flags)
 		return;
 	}
 
+	Entity *enemy = new Entity();
 	enemy->setName(defEnemy->name);
 	enemy->setSprites(defEnemy->sprite[0], defEnemy->sprite[1], defEnemy->sprite[2]);
 	enemy->currentWeapon = defEnemy->currentWeapon;
@@ -856,7 +856,7 @@ void loadDefEnemies()
 
 	if (!engine.loadData("data/defEnemies"))
 	{
-		graphics.showErrorAndExit("Couldn't load enemy definitions file (%s)", "data/defEnemies");
+		return graphics.showErrorAndExit("Couldn't load enemy definitions file (%s)", "data/defEnemies");
 	}
 
 	char *token = strtok((char*)engine.dataBuffer, "\n");

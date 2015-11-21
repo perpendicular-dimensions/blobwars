@@ -25,8 +25,6 @@ void showAllSprites()
 {
 	loadResources();
 
-	Sprite *sprite = graphics.getSpriteHead();
-
 	int x, y, h;
 
 	unsigned int frameLimit = SDL_GetTicks() + 16;
@@ -42,7 +40,7 @@ void showAllSprites()
 
 		SDL_FillRect(graphics.screen, NULL, graphics.black);
 
-		sprite = graphics.getSpriteHead();
+		Sprite *sprite = graphics.getSpriteHead();
 
 		while (sprite->next != NULL)
 		{

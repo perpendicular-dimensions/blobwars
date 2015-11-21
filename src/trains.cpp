@@ -361,7 +361,6 @@ void doTrains()
 		{
 			oldX = (int)train->x;
 			oldY = (int)train->y;
-			playSound = false;
 			
 			playSound = train->openClose();
 			
@@ -385,7 +384,7 @@ void doTrains()
 			setTrainSprite(train);
 		}
 
-		if ((abs(x) <= 800) && (abs(y) <= 600))
+		if (train->sprite && (abs(x) <= 800) && (abs(y) <= 600))
 		{
 			graphics.blit(train->sprite->getCurrentFrame(), x, y, graphics.screen, false);
 		}

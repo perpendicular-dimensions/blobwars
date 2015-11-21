@@ -177,7 +177,6 @@ void showMissionClear()
 	int y = 520;
 	int miaY = 335;
 	int clearY = 520;
-	Objective *objective = (Objective*)map.objectiveList.getHead();
 	Entity *mia = (Entity*)map.miaList.getHead();
 	Sprite *teleportStar = graphics.getSprite("TeleportStar", true);
 	char message[256];
@@ -212,9 +211,6 @@ void showMissionClear()
 		place += 25;
 	}
 
-	if (count > colCount)
-		count = colCount;
-
 	if (place > (colCount * 25))
 		place = colCount * 25;
 
@@ -248,7 +244,7 @@ void showMissionClear()
 		}
 	}
 
-	objective = (Objective*)map.objectiveList.getHead();
+	Objective *objective = (Objective*)map.objectiveList.getHead();
 
 	engine.setPlayerPosition(0, 0, -1, -1, -1, -1);
 

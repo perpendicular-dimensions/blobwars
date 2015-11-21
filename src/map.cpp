@@ -298,8 +298,6 @@ void showMap(int centerX, int centerY)
 	
 	graphics.blit(background, 0, 0, panel, false);
 	
-	int color = graphics.black;
-	
 	for (int y = 0 ; y < 48 ; y++)
 	{
 		for (int x = 0 ; x < 64 ; x++)
@@ -317,7 +315,7 @@ void showMap(int centerX, int centerY)
 	{
 		for (int x = 0 ; x < 64 ; x++)
 		{
-			color = graphics.black;
+			int color = graphics.black;
 
 			if (map.data[x1 + x][y1 + y] == MAP_AIR)
 			{

@@ -918,20 +918,18 @@ bool Engine::loadDefines()
 	if (!loadData("data/defines.h"))
 		return false;
 
-	char *token = strtok((char*)dataBuffer, "\n");
-
-	Data *data;
+	strtok((char*)dataBuffer, "\n");
 
 	while (true)
 	{
-		token = strtok(NULL, "\n");
+		char *token = strtok(NULL, "\n");
 		if (!token)
 			break;
 
 		if (!strstr(token, "/*"))
 		{
 			sscanf(token, "%*s %s %[^\n\r]", string[0], string[1]);
-			data = new Data();
+			Data *data = new Data();
 			data->set(string[0], string[1], 1, 1);
 			defineList.add(data);
 		}

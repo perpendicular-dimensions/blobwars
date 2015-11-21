@@ -325,8 +325,6 @@ void doPauseInfo()
 
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 
-	y += 10;
-
 	snprintf(string, sizeof string, "%s - %.2d:%.2d:%.2d", _("Mission Time"), game.currentMissionHours, game.currentMissionMinutes, game.currentMissionSeconds);
 	graphics.drawString(string, 320, 430, TXT_CENTERED, graphics.screen);
 }
