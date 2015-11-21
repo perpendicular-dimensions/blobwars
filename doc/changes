@@ -1,6 +1,27 @@
 CHANGE LOG
 ----------
 
+Version 2.00
+
+* Changed to SDL 2.0. This also allows the window to be scaled to an arbitrary
+  size, and doesn't change the desktop resolution anymore when going to
+  fullscreen.
+
+* The joystick/gamepad can now also be used in the menus and on the hub.
+
+* Updated credits and copyright notices.
+
+* Added stereo to the sound effects.
+
+* Cleaned up some graphics.
+
+* Fixed the machinegun sound.
+
+* Fixed the behaviour of grenades.
+
+* Many small fixes.
+
+
 Version 1.19
 
 * Fixed medal support that was broken in 1.18.
