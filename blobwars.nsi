@@ -10,7 +10,7 @@ Section "Main"
   SetOutPath $INSTDIR
   File blobwars.exe
   File blobwars.pak
-  File blobwars.ico
+  File icons/blobwars.ico
   File *.dll
   File /r locale
   File /r doc

@@ -23,7 +23,7 @@ CXX = i686-w64-mingw32-g++
 CXXFLAGS += -Dmain=SDL_main
 CXXFLAGS += -I/your/mingw/include
 CXXFLAGS += -DVERSION=$(VERSION) -DRELEASE=$(RELEASE) -DUSEPAK=$(USEPAK)
-CXXFLAGS += -DPAKNAME=\"$(PAKNAME)\" -DPAKLOCATION=\".\" -DGAMEPLAYMANUAL=\"doc/index.html\" -Wall
+CXXFLAGS += -DPAKNAME=\"$(PAKNAME)\" -DPAKLOCATION=\".\\\\\" -DGAMEPLAYMANUAL=\"doc/index.html\" -Wall
 CXXFLAGS += -DLOCALEDIR=\"\" $(CFLAGS)  -DMEDAL_SERVER_HOST=\"$(MEDAL_SERVER_HOST)\" -DMEDAL_SERVER_PORT=$(MEDAL_SERVER_PORT) -Werror
 LIBS = -lmingw32 -lz -lSDL2_mixer -lSDL2_image -lSDL2_ttf -lSDL2_net -lSDL2main -lSDL2 -lwinmm -lgdi32
 LDFLAGS = -L/your/mingw/lib
