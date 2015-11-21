@@ -107,7 +107,7 @@ bool loadGame(int slot)
 	if (fread(&game, sizeof(Game), 1, fp) != 1)
 	{
 		fclose(fp);
-		graphics.showErrorAndExit("The save data loaded was not in the format expected", "");
+		return graphics.showErrorAndExit("The save data loaded was not in the format expected", ""), false;
 	}
 	
 	fclose(fp);
@@ -125,7 +125,7 @@ bool loadGame(int slot)
 	{
 		if (!fgets(line, 1024, fp)) {
 			fclose(fp);
-			graphics.showErrorAndExit("Unexpected end of file reading save data", "");
+			return graphics.showErrorAndExit("Unexpected end of file reading save data", ""), false;
 		}
 
 		sscanf(line, "%*c %[^\"] %*c %*c %[^\"] %*c %d %d", string[0], string[1], &param[0], &param[1]);
@@ -356,13 +356,13 @@ void saveGame()
 	
 	if (!fp)
 	{
-		graphics.showErrorAndExit("File write error whilst saving game", "");
+		return graphics.showErrorAndExit("File write error whilst saving game", "");
 	}
 
 	if (fwrite(&game, sizeof(Game), 1, fp) != 1)
 	{
 		fclose(fp);
-		graphics.showErrorAndExit("File write error whilst saving game", strerror(errno));
+		return graphics.showErrorAndExit("File write error whilst saving game", strerror(errno));
 	}
 	
 	fclose(fp);
@@ -373,7 +373,7 @@ void saveGame()
 	
 	if (!fp)
 	{
-		graphics.showErrorAndExit("File write error whilst saving game", "");
+		return graphics.showErrorAndExit("File write error whilst saving game", "");
 	}
 	
 	createPersistantMapData();

@@ -63,19 +63,19 @@ void Pak::setPakFile(const char *pakFilename)
 
 	if (!pak)
 	{
-		showPakErrorAndExit();
+		return showPakErrorAndExit();
 	}
 
 	fseek(pak, (-sizeof(Uint32)) * 2, SEEK_END);
 	if (fread(&listPos, sizeof(Uint32), 1, pak) != 1)
 	{
 		fclose(pak);
-		showPakErrorAndExit();
+		return showPakErrorAndExit();
 	}
 	if (fread(&numberOfFiles, sizeof(Uint32), 1, pak) != 1)
 	{
 		fclose(pak);
-		showPakErrorAndExit();
+		return showPakErrorAndExit();
 	}
 	
 	debug(("Pak : File list resides at %d\n", (int)listPos));
@@ -94,7 +94,7 @@ void Pak::setPakFile(const char *pakFilename)
 		if (!result)
 		{
 			fclose(pak);
-			showPakErrorAndExit();
+			return showPakErrorAndExit();
 		}
 		
 		debug(("Read FileData #%d / %d : %s\n", (i + 1), numberOfFiles, fd[i].filename));
@@ -144,7 +144,7 @@ bool Pak::unpack(const char *filename, unsigned char **buffer)
 	if (fread(input, 1, currentFile->cSize, pak) != currentFile->cSize)
 	{
 		fclose(pak);
-		showPakErrorAndExit();
+		return showPakErrorAndExit(), false;
 	}
 	
 	uLongf fSize = (uLongf)currentFile->fSize;

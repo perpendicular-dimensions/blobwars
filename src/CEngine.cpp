@@ -393,14 +393,12 @@ bool Engine::unpack(const char *filename, int fileType)
 			snprintf(tempPath, sizeof tempPath, "%smusic.mod", userHomeDirectory);
 			fp = fopen(tempPath, "wb");
 		}
-
-		if (fileType == PAK_TAGS)
+		else if (fileType == PAK_TAGS)
 		{
 			snprintf(tempPath, sizeof tempPath, "%smusic.tags", userHomeDirectory);
 			fp = fopen(tempPath, "wb");
 		}
-
-		if (fileType == PAK_FONT)
+		else if (fileType == PAK_FONT)
 		{
 			snprintf(tempPath, sizeof tempPath, "%sfont.ttf", userHomeDirectory);
 			fp = fopen(tempPath, "wb");
