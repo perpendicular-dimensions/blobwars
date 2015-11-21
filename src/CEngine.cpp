@@ -275,6 +275,35 @@ void Engine::getInput()
 				joykeyFire = false;
 				break;
 
+			case SDL_JOYHATMOTION:
+				switch (event.jhat.value) {
+				case SDL_HAT_CENTERED:
+					joyX = 0,      joyY = 0;      break;
+				case SDL_HAT_LEFT:
+					joyX = -32768, joyY = 0;      break;
+				case SDL_HAT_LEFTUP:
+					joyX = -32768, joyY = -32768; break;
+				case SDL_HAT_UP:
+					joyX = 0,      joyY = -32768; break;
+				case SDL_HAT_RIGHTUP:
+					joyX = 32767,  joyY = -32768; break;
+				case SDL_HAT_RIGHT:
+					joyX = 32767,  joyY = 0;      break;
+				case SDL_HAT_RIGHTDOWN:
+					joyX = 32767,  joyY = 32767;  break;
+				case SDL_HAT_DOWN:
+					joyX = 0,      joyY = 32767;  break;
+				case SDL_HAT_LEFTDOWN:
+					joyX = -32768, joyY = 32767;  break;
+				}
+
+				if (joyX != joyprevX)
+					joykeyX = joyprevX = joyX;
+				if (joyY != joyprevY)
+					joykeyY = joyprevY = joyY;
+
+				break;
+
 			case SDL_WINDOWEVENT:
 				if (event.window.event == SDL_WINDOWEVENT_FOCUS_LOST)
 					paused = true;
