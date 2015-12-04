@@ -1,7 +1,7 @@
 struct ReplayDataHeader
 {
 	char map[PATH_MAX];
-	long randomSeed;
+	time_t randomSeed;
 	float version;
 	int release;
 	int skill;
