@@ -15,7 +15,7 @@ DOCDIR ?= $(PREFIX)/share/doc/$(PROG)/
 ICONDIR ?= $(PREFIX)/share/icons/hicolor/
 DESKTOPDIR ?= $(PREFIX)/share/applications/
 LOCALEDIR ?= $(PREFIX)/share/locale/
-MEDAL_SERVER_HOST = www.parallelrealities.co.uk
+MEDAL_SERVER_HOST = www.stephenjsweeney.com
 MEDAL_SERVER_PORT = 80
 
 CXXFLAGS += `pkg-config --cflags sdl2 SDL2_mixer SDL2_image SDL2_ttf SDL2_net` -DVERSION=$(VERSION) -DRELEASE=$(RELEASE) -DUSEPAK=$(USEPAK)
