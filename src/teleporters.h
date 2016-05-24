@@ -25,7 +25,5 @@ extern void addTeleportParticles(float x, float y, int amount, int soundToPlay);
 
 extern Engine engine;
 extern Graphics graphics;
-extern Game game;
 extern Map map;
 
-extern Entity player;

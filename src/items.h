@@ -21,10 +21,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-extern void initSystem();
-extern void drawMap(int offsetX, int offsetY);
-extern void cleanup();
-extern bool checkBrickContact(Entity *object);
 extern void moveEntity(Entity *ent);
 extern void checkObjectives(const char *name, bool alwaysInform);
 extern void addTeleportParticles(float x, float y, int amount, int soundToPlay);

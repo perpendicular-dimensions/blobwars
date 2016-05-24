@@ -22,13 +22,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "headers.h"
 
 extern void addTeleportParticles(float x, float y, int amount, int soundToPlay);
-extern void addBlood(Entity *ent, float dx, float dy, int amount);
 extern void checkObjectives(const char *name, bool alwaysInform);
-extern void addColorParticles(float x, float y, int amount, int color);
 extern void addBullet(Entity *owner, float dx, float dy);
 extern void addExplosion(float x, float y, int radius, Entity *owner);
 extern void addSmokeAndFire(Entity *ent, float dx, float dy, int amount);
-extern void throwAndDamageEntity(Entity *ent, int damage, int minDX, int maxDX, int DY);
 extern bool hasClearShot(Entity *enemy);
 extern Weapon *getRandomAimedWeapon();
 extern Weapon *getRandomStraightWeapon();
@@ -37,7 +34,6 @@ extern Weapon *getRandomGaldovWeapon();
 extern void addItem(int itemType, const char *name, int x, int y, const char *spriteName, int health, int value, int flags, bool randomMovement);
 
 extern Audio audio;
-extern Engine engine;
 extern Graphics graphics;
 extern Game game;
 extern Map map;

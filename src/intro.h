@@ -35,5 +35,4 @@ extern Audio audio;
 
 extern Entity player;
 extern Game game;
-extern GameData gameData;
 extern Weapon weapon[MAX_WEAPONS];

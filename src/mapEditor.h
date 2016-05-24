@@ -26,7 +26,6 @@ extern void cleanup();
 extern void loadResources();
 
 extern void doItems();
-extern void doPlayer();
 extern void doTrains();
 extern void doSwitches();
 extern void doBullets();

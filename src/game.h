@@ -62,14 +62,12 @@ extern void showMissionInformation();
 extern bool allObjectivesCompleted();
 extern void showMissionClear();
 extern void autoCompleteAllObjectives(bool allObjectives);
-extern void doCredits();
 
 extern void checkEndCutscene();
 extern void processPostMissionData();
 extern void clearAllMissionData();
 extern void saveGame();
 
-extern void presentPlayerMedal(const char *tname);
 
 extern Audio audio;
 extern Config config;

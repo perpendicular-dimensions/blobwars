@@ -25,7 +25,6 @@ extern void initConfig();
 extern void initSystem();
 extern void cleanup();
 
-extern void newGame();
 extern bool loadGame(int slot);
 
 extern int doIntro();
@@ -36,14 +35,11 @@ extern void doCredits();
 
 extern int gameover();
 
-extern void showMissionInformation(int mission);
 
 extern void loadResources();
 
 extern void showAllSprites();
-extern void showMissionClear();
 
 extern void checkStartCutscene();
 extern void easyGameFinished();
 
-extern void presentPlayerMedal(const char *tname);

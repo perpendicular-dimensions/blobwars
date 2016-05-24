@@ -26,7 +26,6 @@ extern bool requiredObjectivesCompleted();
 extern void activateTrigger(const char *linkName, const char *activateMessage, bool active);
 extern void stealCrystal();
 
-extern Audio audio;
 extern Config config;
 extern Engine engine;
 extern Game game;

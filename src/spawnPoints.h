@@ -28,10 +28,8 @@ extern void addTeleportParticles(float x, float y, int amount, int soundToPlay);
 extern void addExplosion(float x, float y, int radius, Entity *owner);
 extern void dropHelperItems(int x, int y);
 
-extern Audio audio;
 extern Engine engine;
 extern Game game;
-extern Graphics graphics;
 extern Map map;
 
 extern Entity defEnemy[MAX_ENEMIES];

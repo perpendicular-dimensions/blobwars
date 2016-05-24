@@ -21,7 +21,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-extern void drawMap(int offsetX, int offsetY);
 extern void evaluateMapAttribute(Entity *ent, int mapAttribute);
 extern bool checkTrainContact(Entity *ent, int dir);
 extern void checkSwitchContact(Entity *ent);

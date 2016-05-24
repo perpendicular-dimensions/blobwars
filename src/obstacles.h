@@ -21,13 +21,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-extern void addTeleportParticles(float x, float y, int amount, int soundToPlay);
-extern void activateTrigger(const char *linkName, const char *activateMessage, bool active);
 extern void moveEntity(Entity *ent);
 
-extern Audio audio;
 extern Engine engine;
-extern Game game;
 extern Graphics graphics;
 extern Map map;
 

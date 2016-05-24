@@ -24,15 +24,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 extern void addItem(int itemType, const char *name, int x, int y, const char *spriteName, int health, int value, int flags, bool randomMovement);
 extern void addTeleportParticles(float x, float y, int amount, int soundToPlay);
 extern void addColorParticles(float x, float y, int amount, int color);
-extern bool okayToSpawnEnemy(const char *name, int x, int y);
 extern void addEnemy(const char *name, int x, int y, int flags);
 extern void moveEntity(Entity *entity);
 extern void addFireTrailParticle(float x, float y);
 extern void checkObjectives(const char *name, bool alwaysInform);
 
-extern Entity *getEnemy(const char *name);
-extern Weapon *getRandomAimedWeapon();
-extern Weapon *getRandomStraightWeapon();
 extern Weapon *getRandomGaldovWeapon();
 
 extern void tankBossMGInit();

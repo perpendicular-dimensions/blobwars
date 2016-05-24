@@ -33,6 +33,5 @@ extern Audio audio;
 extern Engine engine;
 extern Game game;
 extern Graphics graphics;
-extern Map map;
 
 extern Entity player;

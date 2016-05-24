@@ -27,5 +27,4 @@ extern void showMessageLineDef(const char *linkName, bool show);
 
 extern Audio audio;
 extern Engine engine;
-extern Graphics graphics;
 extern Map map;

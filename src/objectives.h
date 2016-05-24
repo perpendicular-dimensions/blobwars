@@ -23,9 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 extern void presentPlayerMedal(const char *tname);
 
-extern Audio audio;
 extern Engine engine;
 extern Game game;
 extern GameData gameData;
-extern Graphics graphics;
 extern Map map;

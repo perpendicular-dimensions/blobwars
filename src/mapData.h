@@ -39,6 +39,5 @@ extern Game game;
 extern GameData gameData;
 extern Graphics graphics;
 extern Map map;
-extern ReplayData replayData;
 
 extern Entity player;

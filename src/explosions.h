@@ -25,11 +25,9 @@ extern void checkObjectives(const char *name, bool alwaysInform);
 extern void throwAndDamageEntity(Entity *ent, int damage, int minDX, int maxDX, int DY);
 extern void addSmokeAndFire(Entity *ent, float dx, float dy, int amount);
 extern void addBlood(Entity *ent, float dx, float dy, int amount);
-extern void gibPlayer();
 extern void addPlayerScore(int score);
 
 extern Audio audio;
-extern Engine engine;
 extern Game game;
 extern Graphics graphics;
 extern Map map;

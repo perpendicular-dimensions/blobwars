@@ -21,11 +21,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-extern bool checkBrickContact(Entity *object);
 extern void moveEntity(Entity *ent);
 extern void addColorParticles(float x, float y, int amount, int color);
 extern void addBullet(Entity *owner, float dx, float dy);
-extern void addItem(int itemType, char *name, int x, int y, int imageIndex, int health, int value, int flags, bool randomMovement);
 extern void dropRandomItems(int x, int y);
 extern void addEffect(float x, float y, float dx, float dy, int flags);
 extern void addColoredEffect(float x, float y, float dx, float dy, int color, int flags);

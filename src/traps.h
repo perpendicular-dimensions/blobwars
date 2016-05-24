@@ -24,11 +24,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 extern void addBullet(Entity *owner, float dx, float dy);
 extern void addExplosion(float x, float y, int radius, Entity *owner);
 extern void throwAndDamageEntity(Entity *ent, int damage, int minDX, int maxDX, int DY);
-extern void addBlood(Entity *ent, float dx, float dy, int amount);
 
 extern Audio audio;
 extern Engine engine;
-extern Game game;
 extern Graphics graphics;
 extern Map map;
 
