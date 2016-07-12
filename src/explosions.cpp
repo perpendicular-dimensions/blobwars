@@ -19,7 +19,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include "explosions.h"
+#include "headers.h"
 
 void addExplosion(float x, float y, int radius, Entity *owner)
 {

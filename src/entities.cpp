@@ -19,7 +19,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include "entities.h"
+#include "headers.h"
 
 void throwAndDamageEntity(Entity *ent, int damage, int minDX, int maxDX, int DY)
 {
@@ -87,7 +87,7 @@ void throwAndDamageEntity(Entity *ent, int damage, int minDX, int maxDX, int DY)
 	}
 }
 
-bool checkBrickContactX(Entity *ent)
+static bool checkBrickContactX(Entity *ent)
 {
 	int new_ent_x = (int)round((ent->x + ent->dx) * 100) / 100;
 	int ent_y = (int)round(ent->y * 100) / 100;
@@ -140,7 +140,7 @@ bool checkBrickContactX(Entity *ent)
 	return false;
 }
 
-bool checkBrickContactY(Entity *ent)
+static bool checkBrickContactY(Entity *ent)
 {
 	int ent_x = (int)round(ent->x * 100) / 100;
 	int new_ent_y = (int)round((ent->y + ent->dy) * 100) / 100;

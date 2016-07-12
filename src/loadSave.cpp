@@ -19,7 +19,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include "loadSave.h"
+#include "headers.h"
 
 void initSaveSlots()
 {
@@ -220,7 +220,7 @@ bool loadGame(int slot)
 	return true;
 }
 
-int confirmSave()
+static int confirmSave()
 {
 	if (game.autoSave)
 	{

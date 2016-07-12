@@ -19,12 +19,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include "bosses.h"
+#include "headers.h"
 
 // this is used exclusively by the bosses
 Boss *self;
 
-void tankBossLevel()
+static void tankBossLevel()
 {
 	if (player.health < 1)
 		return;
@@ -118,7 +118,7 @@ void tankBossLevel()
 	map.bossNextThink = Math::rrand(10, 15) * 60;
 }
 
-void aquaBossLevel()
+static void aquaBossLevel()
 {
 	if (player.health < 1)
 		return;
@@ -150,7 +150,7 @@ void aquaBossLevel()
 		map.bossNextThink = Math::rrand(2, 6) * 60;
 }
 
-void droidBossLevel()
+static void droidBossLevel()
 {
 	if (player.health < 1)
 		return;
@@ -244,11 +244,11 @@ void droidBossLevel()
 	map.bossNextThink = Math::rrand(10, 15) * 60;
 }
 
-void galdovLevel()
+static void galdovLevel()
 {
 }
 
-void galdovFinalLevel()
+static void galdovFinalLevel()
 {
 	if (player.health < 1)
 		return;
@@ -422,7 +422,7 @@ void doBosses()
 	map.doBossLevelAction();
 }
 
-bool isCorrectShieldFrequency(Entity *bullet)
+static bool isCorrectShieldFrequency(Entity *bullet)
 {	
 	if (bullet->id != self->shieldFrequency)
 	{

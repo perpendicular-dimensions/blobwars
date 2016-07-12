@@ -19,7 +19,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include "mias.h"
+char mia_scared[7][50];
+
+#include "headers.h"
 
 void initMIAPhrases()
 {

@@ -19,15 +19,15 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include "finalBattle.h"
+#include "headers.h"
 
-void galdovMiniAttack();
-void galdovFinalFlee1();
-void blackDroidAttack();
+static void galdovMiniAttack();
+static void galdovFinalFlee1();
+static void blackDroidAttack();
 
 // ************************ Black Droids for Part 2 *************************************
 
-void blackDroidFire()
+static void blackDroidFire()
 {	
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
 	
@@ -47,7 +47,7 @@ void blackDroidFire()
 	}
 }
 
-void blackDroidDie()
+static void blackDroidDie()
 {
 	self->health--;
 	Math::removeBit(&self->flags, ENT_FLIES);
@@ -77,7 +77,7 @@ void blackDroidDie()
 	}
 }
 
-void blackDroidChasePlayer()
+static void blackDroidChasePlayer()
 {
 	self->think = &blackDroidAttack;
 	
@@ -94,7 +94,7 @@ void blackDroidChasePlayer()
 	self->setActionFinished(10);
 }
 
-void blackDroidMoveRandom()
+static void blackDroidMoveRandom()
 {
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
 	
@@ -110,7 +110,7 @@ void blackDroidMoveRandom()
 	self->setActionFinished(Math::rrand(60, 90));
 }
 
-void blackDroidAttack()
+static void blackDroidAttack()
 {
 	self->think = blackDroidAttack;
 	self->setThinkTime(2);
@@ -139,7 +139,7 @@ void blackDroidAttack()
 	}
 }
 
-void galdovInitBlackDroids()
+static void galdovInitBlackDroids()
 {
 	for (int i = 6 ; i < 10 ; i++)
 	{
@@ -170,12 +170,12 @@ void galdovInitBlackDroids()
 
 // ************************ First part of final battle **********************************
 
-void galdovFinalKeepAlive1()
+static void galdovFinalKeepAlive1()
 {
 	map.boss[0]->health = 30 * game.skill;
 }
 
-void galdovFinalPainThrow()
+static void galdovFinalPainThrow()
 {
 	self->dx = -3;
 	self->dy = -12;
@@ -185,7 +185,7 @@ void galdovFinalPainThrow()
 	self->setActionFinished(140);
 }
 
-void galdovFinalDropCrystal()
+static void galdovFinalDropCrystal()
 {
 	self->setThinkTime(2);
 	self->setActionFinished(2);
@@ -218,7 +218,7 @@ void galdovFinalDropCrystal()
 	}
 }
 
-void galdovFinalDie()
+static void galdovFinalDie()
 {
 	if (game.missionOverReason == MIS_INPROGRESS)
 	{
@@ -262,7 +262,7 @@ void galdovFinalDie()
 	}
 }
 
-void galdovMiniFire()
+static void galdovMiniFire()
 {	
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
 	
@@ -282,7 +282,7 @@ void galdovMiniFire()
 	}
 }
 
-void galdovFinalTeleport()
+static void galdovFinalTeleport()
 {
 	self->setThinkTime(2);
 	self->setActionFinished(2);
@@ -316,7 +316,7 @@ void galdovFinalTeleport()
 	}
 }
 
-void galdovMiniChasePlayer()
+static void galdovMiniChasePlayer()
 {
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
 	
@@ -332,7 +332,7 @@ void galdovMiniChasePlayer()
 	self->think = &galdovMiniAttack;
 }
 
-void galdovMiniMoveRandom()
+static void galdovMiniMoveRandom()
 {
 	self->think = &galdovMiniAttack;
 	
@@ -358,7 +358,7 @@ void galdovMiniMoveRandom()
 	}
 }
 
-void galdovMiniAttack()
+static void galdovMiniAttack()
 {
 	if (player.health < 1)
 	{
@@ -411,7 +411,7 @@ void galdovMiniAttack()
 	}
 }
 
-void galdovMiniDie()
+static void galdovMiniDie()
 {
 	addExplosion(self->x, self->y, 5, self);
 	dropItems((int)self->x, (int)self->y);
@@ -441,7 +441,7 @@ void galdovMiniDie()
 	}
 }
 
-void galdovRejoin()
+static void galdovRejoin()
 {
 	debug(("galdovRejoin\n"));
 	
@@ -473,7 +473,7 @@ void galdovRejoin()
 	debug(("galdovRejoin: Done\n"));
 }
 
-void galdovFinalMiniReact()
+static void galdovFinalMiniReact()
 {
 	if (self->health > 0)
 	{
@@ -485,7 +485,7 @@ void galdovFinalMiniReact()
 	}
 }
 
-void galdovFinalSplit()
+static void galdovFinalSplit()
 {
 	debug(("galdovFinalSplit\n"));
 	
@@ -541,7 +541,7 @@ void galdovFinalSplit()
 	debug(("galdovFinalSplit: Done\n"));
 }
 
-void galdovFinalReact()
+static void galdovFinalReact()
 {
 	map.boss[0]->health = 45 * game.skill;
 	
@@ -587,7 +587,7 @@ void galdovFinalInit()
 
 // ******************** Second part of Final Battle *********************************
 
-void galdovFinalReact2()
+static void galdovFinalReact2()
 {
 	if (self->health < 1)
 		return;
@@ -601,7 +601,7 @@ void galdovFinalReact2()
 	}
 }
 
-void galdovFinalStandUp()
+static void galdovFinalStandUp()
 {
 	map.boss[0]->setSprites(graphics.getSprite("GaldovShieldRight", true), graphics.getSprite("GaldovShieldLeft", true), graphics.getSprite("GaldovShieldLeft", true));
 	self->setThinkTime(2);
@@ -617,7 +617,7 @@ void galdovFinalStandUp()
 	}
 }
 
-void galdovFinalPainThrow2()
+static void galdovFinalPainThrow2()
 {
 	self->dx = -3;
 	self->dy = -12;
@@ -627,7 +627,7 @@ void galdovFinalPainThrow2()
 	self->setActionFinished(90);
 }
 
-void orbSeekGaldov()
+static void orbSeekGaldov()
 {
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
 	
@@ -666,7 +666,7 @@ void orbSeekGaldov()
 	}
 }
 
-void galdovFinalShieldInit()
+static void galdovFinalShieldInit()
 {
 	self->setActionFinished(60);
 	self->setThinkTime(60);
@@ -705,7 +705,7 @@ void galdovFinalShieldInit()
 	galdovInitBlackDroids();
 }
 
-void galdovFinalWaitForObjective()
+static void galdovFinalWaitForObjective()
 {
 	self->setActionFinished(120);
 	self->setThinkTime(2);
@@ -733,7 +733,7 @@ void galdovFinalWaitForObjective()
 	}
 }
 
-void galdovFinalFlee1()
+static void galdovFinalFlee1()
 {
 	self->dx = 800;
 	self->dy = 1408;

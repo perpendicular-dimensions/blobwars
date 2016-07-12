@@ -19,7 +19,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include "bullets.h"
+#include "headers.h"
 
 void addBullet(Entity *owner, float dx, float dy)
 {
@@ -132,7 +132,7 @@ void addBullet(Entity *owner, float dx, float dy)
 	}
 }
 
-void destroyBullet(Entity *bullet)
+static void destroyBullet(Entity *bullet)
 {
 	if (bullet->deathSound == -1)
 	{
@@ -175,7 +175,7 @@ void destroyBullet(Entity *bullet)
 }
 
 // Just a little convinence function!
-void removeBullet(Entity *bullet)
+static void removeBullet(Entity *bullet)
 {
 	bullet->health = 0;
 	bullet->deathSound = -1;
@@ -184,7 +184,7 @@ void removeBullet(Entity *bullet)
 	Math::removeBit(&bullet->flags, ENT_EXPLODES);
 }
 
-void bounceBullet(Entity *bullet, float dx, float dy)
+static void bounceBullet(Entity *bullet, float dx, float dy)
 {
 	if (dx)
 	{
@@ -221,7 +221,7 @@ void bounceBullet(Entity *bullet, float dx, float dy)
 	}
 }
 
-bool bulletHasCollided(Entity *bullet, float dx, float dy)
+static bool bulletHasCollided(Entity *bullet, float dx, float dy)
 {
 	bullet->x += dx;
 	bullet->y += dy;

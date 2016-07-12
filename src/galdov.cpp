@@ -19,12 +19,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include "galdov.h"
+#include "headers.h"
 
-void galdovAttack();
-void galdovCheckSplit();
+static void galdovAttack();
+static void galdovCheckSplit();
 
-void splitParticles()
+static void splitParticles()
 {
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
 	
@@ -81,7 +81,7 @@ void splitParticles()
 	}
 }
 
-void galdovTeleport()
+static void galdovTeleport()
 {
 	self->setThinkTime(2);
 	self->setActionFinished(2);
@@ -105,7 +105,7 @@ void galdovTeleport()
 	}
 }
 
-void galdovReact()
+static void galdovReact()
 {
 	if (self->health < 0)
 		return;
@@ -178,7 +178,7 @@ void galdovSplit(int i)
 	map.boss[i]->custom = 60;
 }
 
-void galdovCheckSplit()
+static void galdovCheckSplit()
 {
 	for (int i = 1 ; i < 10 ; i++)
 	{
@@ -190,7 +190,7 @@ void galdovCheckSplit()
 	}
 }
 
-void galdovFire()
+static void galdovFire()
 {	
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
 	
@@ -216,7 +216,7 @@ void galdovFire()
 	}
 }
 
-void galdovRocketAttack()
+static void galdovRocketAttack()
 {
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
 	
@@ -238,7 +238,7 @@ void galdovRocketAttack()
 	}
 }
 
-void galdovChasePlayer()
+static void galdovChasePlayer()
 {
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
 	
@@ -254,7 +254,7 @@ void galdovChasePlayer()
 	self->think = &galdovAttack;
 }
 
-void galdovMoveRandom()
+static void galdovMoveRandom()
 {
 	self->think = &galdovAttack;
 	
@@ -280,7 +280,7 @@ void galdovMoveRandom()
 	}
 }
 
-void galdovDoInvisible()
+static void galdovDoInvisible()
 {
 	if ((Math::prand() % 2) == 0)
 	{
@@ -296,7 +296,7 @@ void galdovDoInvisible()
 	self->think = &galdovAttack;
 }
 
-void galdovAttack()
+static void galdovAttack()
 {	
 	if (player.health < 1)
 	{
@@ -439,7 +439,7 @@ void dropItems(int x, int y)
 	}
 }
 
-void fakeDie()
+static void fakeDie()
 {
 	dropItems((int)self->x, (int)self->y);
 	

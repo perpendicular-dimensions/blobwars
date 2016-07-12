@@ -19,7 +19,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include "map.h"
+#include "headers.h"
 
 void drawMap()
 {
@@ -123,7 +123,7 @@ void drawMapTopLayer()
 	}
 }
 
-void addBlips(List *blipList, int mapX, int mapY, int type)
+static void addBlips(List *blipList, int mapX, int mapY, int type)
 {
 	Sprite *blipType;
 	Entity *ent;
@@ -202,7 +202,7 @@ void addBlips(List *blipList, int mapX, int mapY, int type)
 	}
 }
 
-void addMiniMapDoors(SDL_Surface *panel, int mapX, int mapY)
+static void addMiniMapDoors(SDL_Surface *panel, int mapX, int mapY)
 {
 	Train *train = (Train*)map.trainList.getHead();
 
@@ -638,7 +638,7 @@ void doWind()
 	addWindParticles();
 }
 
-void parseMapDataLine(const char *line, int y)
+static void parseMapDataLine(const char *line, int y)
 {
 	int tileIndex = 0;
 	int x = 0;

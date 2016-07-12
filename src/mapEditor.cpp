@@ -19,7 +19,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include "mapEditor.h"
+#include "headers.h"
 
 String *stringHead = new String;
 String *stringTail = stringHead;
@@ -40,7 +40,7 @@ MedalServer medalServer;
 Config config;
 ReplayData replayData;
 
-void drawMap(int mapX, int mapY)
+static void drawMap(int mapX, int mapY)
 {
 	SDL_Rect r;
 	int tile = 0;
@@ -73,7 +73,7 @@ void drawMap(int mapX, int mapY)
 	}
 }
 
-void showMap(int *mapX, int *mapY)
+static void showMap(int *mapX, int *mapY)
 {
 	SDL_FillRect(graphics.screen, NULL, graphics.black);
 
@@ -143,7 +143,7 @@ void showMap(int *mapX, int *mapY)
 	engine.keyState[SDL_SCANCODE_SPACE] = 0;
 }
 
-int nextBlock(int current, int dir)
+static int nextBlock(int current, int dir)
 {
 	if ((current + dir) > 255)
 		return current;
@@ -165,7 +165,7 @@ int nextBlock(int current, int dir)
 	}
 }
 
-void drawEnemies()
+static void drawEnemies()
 {
 	Entity *enemy = (Entity*)map.enemyList.getHead();
 
@@ -199,7 +199,7 @@ void drawEnemies()
 	}
 }
 
-void deleteEnemy(int x, int y)
+static void deleteEnemy(int x, int y)
 {
 	x *= BRICKSIZE;
 	y *= BRICKSIZE;
@@ -223,7 +223,7 @@ void deleteEnemy(int x, int y)
 	}
 }
 
-void saveMap(const char *name)
+static void saveMap(const char *name)
 {
 	FILE *fp = fopen(name, "wb");
 	Entity *enemy = (Entity*)map.enemyList.getHead();
@@ -261,7 +261,7 @@ void saveMap(const char *name)
 	printf("Saved %s (%d)\n", name, SDL_GetTicks());
 }
 
-void collectMapData()
+static void collectMapData()
 {
 	FILE *fp = fopen(game.mapName, "rb");
 	if (!fp)
@@ -317,7 +317,7 @@ void collectMapData()
 	fclose(fp);
 }
 
-void newMap(const char *name)
+static void newMap(const char *name)
 {
 	FILE *fp = fopen(name, "wb");
 
@@ -352,7 +352,7 @@ void newMap(const char *name)
 	}
 }
 
-void addTileDecoration()
+static void addTileDecoration()
 {
 	printf("Adding Tile Decoration...\n");
 
@@ -383,7 +383,7 @@ void addTileDecoration()
 	engine.keyState[SDL_SCANCODE_F1] = 0;
 }
 
-void fillHorizontal(int block, int x, int y)
+static void fillHorizontal(int block, int x, int y)
 {
 	bool moveLeft = true;
 	bool moveRight = true;

@@ -19,14 +19,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include "title.h"
-
-extern void doMusicInfo(unsigned int);
+#include "headers.h"
 
 /**
 * Displays the skill level widgets and hide the others
 */
-void showSkillLevels()
+static void showSkillLevels()
 {
 	engine.showWidgetGroup("skill", true);
 	engine.showWidgetGroup("mainMenu", false);
@@ -42,7 +40,7 @@ void showSkillLevels()
 /**
 * Displays the save game widgets and hide the others
 */
-void showGameSlots()
+static void showGameSlots()
 {
 	engine.showWidgetGroup("gameSlots", true);
 	engine.showWidgetGroup("mainMenu", false);
@@ -52,7 +50,7 @@ void showGameSlots()
 	engine.highlightWidget("slot1");
 }
 
-void showSaves()
+static void showSaves()
 {
 	engine.showWidgetGroup("saveGames", true);
 	engine.showWidgetGroup("mainMenu", false);
@@ -65,7 +63,7 @@ void showSaves()
 /**
 * Displays the manual widgets and hide the others
 */
-void showManualHelp()
+static void showManualHelp()
 {
 	#ifdef FRAMEWORK_SDL
 	openHelpURL();
@@ -84,7 +82,7 @@ void showManualHelp()
 * Also disables Continue and Load Game if games are not
 * available to be loaded.
 */
-void showTitleWidgets()
+static void showTitleWidgets()
 {
 	engine.showWidgetGroup("skill", false);
 	engine.showWidgetGroup("saveGames", false);
@@ -111,7 +109,7 @@ void showTitleWidgets()
 * Creates the data labels for the save game slots
 * according to the save game data available
 */
-void setupSaveWidgets()
+static void setupSaveWidgets()
 {
 	char widgetName[10];
 	widgetName[0] = 0;
@@ -134,7 +132,7 @@ void setupSaveWidgets()
 /**
 * Loads the title widgets
 */
-void loadTitleWidgets()
+static void loadTitleWidgets()
 {
 	if (!engine.loadWidgets(_("data/titleWidgets")))
 	{
@@ -149,6 +147,36 @@ void loadTitleWidgets()
 	strlcpy(widget->label, GAMEPLAYMANUAL, sizeof widget->label);
 
 	showTitleWidgets();
+}
+
+/**
+* Shows the exit screen, mentioning the sequel and the book by Stephen Sweeney
+*/
+static void doQuit()
+{
+	SDL_FillRect(graphics.screen, NULL, graphics.black);
+	SDL_Surface *sequel = graphics.loadImage("gfx/main/sequel.png");
+	SDL_Surface *book = graphics.loadImage("gfx/main/book.png");
+
+	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
+	graphics.setFontSize(1);
+	graphics.drawString(_("If you like Blob Wars: Metal Blob Solid, you might also like:"), 320, 20, true, graphics.screen);
+	graphics.blit(sequel, 160, 200, graphics.screen, true);
+	graphics.blit(book, 480, 200, graphics.screen, true);
+	graphics.setFontSize(0);
+	graphics.drawString("http://blobandconquer.sf.net", 160, 380, true, graphics.screen);
+	graphics.drawString("http://www.battleforthesolarsystem.com", 480, 380, true, graphics.screen);
+	graphics.setFontSize(3);
+	graphics.drawString(_("Thank you for playing Blob Wars!"), 320, 430, true, graphics.screen);
+	graphics.setFontSize(0);
+	graphics.drawString(_("Press Space to Exit."), 320, 460, true, graphics.screen);
+
+	graphics.updateScreen();
+
+	do {
+		SDL_Delay(16);
+		engine.getInput();
+	} while(!engine.userAccepts());
 }
 
 /**
@@ -582,34 +610,4 @@ void doCredits()
 
 	delete[] y;
 	delete[] credit;
-}
-
-/**
-* Shows the exit screen, mentioning the sequel and the book by Stephen Sweeney
-*/
-void doQuit()
-{
-	SDL_FillRect(graphics.screen, NULL, graphics.black);
-	SDL_Surface *sequel = graphics.loadImage("gfx/main/sequel.png");
-	SDL_Surface *book = graphics.loadImage("gfx/main/book.png");
-
-	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
-	graphics.setFontSize(1);
-	graphics.drawString(_("If you like Blob Wars: Metal Blob Solid, you might also like:"), 320, 20, true, graphics.screen);
-	graphics.blit(sequel, 160, 200, graphics.screen, true);
-	graphics.blit(book, 480, 200, graphics.screen, true);
-	graphics.setFontSize(0);
-	graphics.drawString("http://blobandconquer.sf.net", 160, 380, true, graphics.screen);
-	graphics.drawString("http://www.battleforthesolarsystem.com", 480, 380, true, graphics.screen);
-	graphics.setFontSize(3);
-	graphics.drawString(_("Thank you for playing Blob Wars!"), 320, 430, true, graphics.screen);
-	graphics.setFontSize(0);
-	graphics.drawString(_("Press Space to Exit."), 320, 460, true, graphics.screen);
-
-	graphics.updateScreen();
-
-	do {
-		SDL_Delay(16);
-		engine.getInput();
-	} while(!engine.userAccepts());
 }

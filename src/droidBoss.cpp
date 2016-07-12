@@ -19,11 +19,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include "droidBoss.h"
+#include "headers.h"
 
-void droidBossAttack();
+static void droidBossAttack();
 
-void droidBossChangeParticles()
+static void droidBossChangeParticles()
 {
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
 	
@@ -71,7 +71,7 @@ void droidBossChangeParticles()
 	}
 }
 
-void droidBossChasePlayer()
+static void droidBossChasePlayer()
 {
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
 	
@@ -87,7 +87,7 @@ void droidBossChasePlayer()
 	self->think = &droidBossAttack;
 }
 
-void droidBossChangeFrequency()
+static void droidBossChangeFrequency()
 {
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
 	
@@ -133,7 +133,7 @@ void droidBossChangeFrequency()
 	audio.playSound(SND_BOSSCUSTOM1, CH_AMBIANCE, self->x);
 }
 
-void droidBossDie()
+static void droidBossDie()
 {
 	self->health -= Math::rrand(1, 2);
 	self->setActionFinished(30);
@@ -153,7 +153,7 @@ void droidBossDie()
 	}
 }
 
-void droidGoCrazy()
+static void droidGoCrazy()
 {
 	self->dx = Math::rrand(-8, 8);
 	self->dy = Math::rrand(-8, 8);
@@ -178,7 +178,7 @@ void droidGoCrazy()
 	}
 }
 
-void droidBossReact()
+static void droidBossReact()
 {
 	if ((Math::prand() % 10) == 0)
 	{
@@ -191,7 +191,7 @@ void droidBossReact()
 	}
 }
 
-void droidBossFire()
+static void droidBossFire()
 {	
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
 	
@@ -214,13 +214,13 @@ void droidBossFire()
 		self->think = &droidBossAttack;
 }
 
-void orbWait()
+static void orbWait()
 {
 	self->setThinkTime(60);
 	self->setActionFinished(60);
 }
 
-void orbExplode()
+static void orbExplode()
 {
 	addExplosion(self->x, self->y, 50, self);
 	self->setThinkTime(2);
@@ -232,7 +232,7 @@ void orbExplode()
 	self->y = 9999;
 }
 
-void doOrb()
+static void doOrb()
 {
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
 	
@@ -265,7 +265,7 @@ void doOrb()
 		self->health = -1;
 }
 
-void fireOrb(int i)
+static void fireOrb(int i)
 {
 	debug(("fireOrb()\n"));
 	
@@ -280,7 +280,7 @@ void fireOrb(int i)
 	map.boss[i]->setThinkTime(2);
 }
 
-void droidBossOrbAttack()
+static void droidBossOrbAttack()
 {
 	debug(("droidBossClawAttack\n"));
 	
@@ -300,7 +300,7 @@ void droidBossOrbAttack()
 	self->think = &droidBossAttack;
 }
 
-void droidBossMoveRandomly()
+static void droidBossMoveRandomly()
 {
 	self->dx = Math::rrand(-200, 200);
 	self->dy = Math::rrand(-200, 200);
@@ -313,7 +313,7 @@ void droidBossMoveRandomly()
 	self->think = &droidBossAttack;
 }
 
-void droidBossAttack()
+static void droidBossAttack()
 {
 	if (player.health < 1)
 	{

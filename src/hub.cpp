@@ -19,11 +19,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include "hub.h"
+#include "headers.h"
 
-extern void doMusicInfo(unsigned int);
-
-void createStatsPanel(int page)
+static void createStatsPanel(int page)
 {
 	SDL_Surface *image = graphics.getSprite("infoPanel", true)->image[0];
 
@@ -175,7 +173,7 @@ void createStatsPanel(int page)
 		graphics.blit(arrows->image[3], 200, 260, image, false);
 }
 
-void loadLevelBrief(const char *levelName)
+static void loadLevelBrief(const char *levelName)
 {
 	char briefLine[1024];
 
@@ -230,7 +228,7 @@ void loadLevelBrief(const char *levelName)
 	graphics.drawChatString(image, 40);
 }
 
-void createObjectivesPanel(const char *levelName)
+static void createObjectivesPanel(const char *levelName)
 {
 	SDL_Surface *image = graphics.getSprite("infoPanel", true)->image[0];
 
@@ -322,7 +320,7 @@ void createObjectivesPanel(const char *levelName)
 		loadLevelBrief(levelName);
 }
 
-void createMIAPanel(int start, int max)
+static void createMIAPanel(int start, int max)
 {
 	char string[100];
 	char name[100];
@@ -405,7 +403,7 @@ void createMIAPanel(int start, int max)
 		graphics.blit(arrows->image[3], 200, 260, image, false);
 }
 
-bool requirementMet(const char *requiredLevel)
+static bool requirementMet(const char *requiredLevel)
 {
 	if (strstr(requiredLevel, "Stages"))
 	{

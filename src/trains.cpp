@@ -19,14 +19,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include "trains.h"
+#include "headers.h"
 
 /**
 * Opens a door and converts it into a normal door (TR_DOOR)
 * at the same time. Uses up keys if needed
 * @param train The door to open.
 */
-void openDoor(Train *train)
+static void openDoor(Train *train)
 {
 	if (train->active)
 	{
@@ -74,7 +74,7 @@ void openDoor(Train *train)
 * @param train The door that performs the blocking
 * @param dir The direction the entity was moving in (required for clipping)
 */
-void trainBlockEntity(Entity *ent, const char *message, Train *train, int dir)
+static void trainBlockEntity(Entity *ent, const char *message, Train *train, int dir)
 {
 	if (ent == &player)
 	{
@@ -268,7 +268,7 @@ bool checkTrainContact(Entity *ent, int dir)
 * Lazy way of setting the sprite for the train
 * @param train The train to set the Sprite for
 */
-void setTrainSprite(Train *train)
+static void setTrainSprite(Train *train)
 {
 	switch (train->type)
 	{
@@ -310,7 +310,7 @@ void setTrainSprite(Train *train)
 * @param train The door to perform the check on
 * @return Whether an entity was in the path of the door
 */
-bool doorClosedOnEntity(Train *train)
+static bool doorClosedOnEntity(Train *train)
 {
 	// allow entities to stand on an horizontal moving door without blocking its movement.
 	int y = (train->type < TR_SLIDEDOOR) ? (int)train->y : (int)train->y + 1;

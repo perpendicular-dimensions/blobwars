@@ -19,7 +19,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include "game.h"
+#include "headers.h"
 
 void newGame()
 {
@@ -31,7 +31,7 @@ void newGame()
 	game.skill = engine.skill;
 }
 
-void showInGameOptions()
+static void showInGameOptions()
 {
 	if (!engine.loadWidgets(_("data/inGameWidgets")))
 	{
@@ -521,7 +521,7 @@ void showMissionInformation()
 	graphics.delay(1000);
 }
 
-void beamInPlayer()
+static void beamInPlayer()
 {
 	game.getCheckPoint(&player.x, &player.y);
 	

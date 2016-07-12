@@ -19,9 +19,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include "intro.h"
+#include "headers.h"
 
-void playIntro(int tx, int ty, int delay)
+static void playIntro(int tx, int ty, int delay)
 {
 	unsigned int frameLimit = SDL_GetTicks() + 16;
 	unsigned int time = 0;
@@ -91,7 +91,7 @@ void playIntro(int tx, int ty, int delay)
 			SDL_FreeSurface(text[i]);
 }
 
-void showIntroError()
+static void showIntroError()
 {
 	SDL_FillRect(graphics.screen, NULL, graphics.black);
 
@@ -116,7 +116,7 @@ void showIntroError()
 	}
 }
 
-void parseIntroCommand()
+static void parseIntroCommand()
 {
 	char *line;
 	char command[25], param[25];

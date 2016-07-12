@@ -19,11 +19,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include "init.h"
+#include "headers.h"
 
 static bool displayLicense;
 
-void checkForLicense()
+static void checkForLicense()
 {
 	if (!engine.loadData(_("data/license")))
 	{
@@ -128,7 +128,7 @@ void setupUserHomeDirectory()
 }
 #endif
 
-bool loadConfig()
+static bool loadConfig()
 {
 	float version = 0;
 	int release = 0;
@@ -207,7 +207,7 @@ void saveConfig()
 //
 // see if we can load the private keyState
 //
-int initMedalService(void *data)
+static int initMedalService(void *data)
 {
 	(void)data;
 

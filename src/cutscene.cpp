@@ -19,11 +19,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include "cutscene.h"
+#include "headers.h"
 
-List sceneList;
+static List sceneList;
 
-void createSceneList()
+static void createSceneList()
 {
 	char sceneLine[1024] = "";
 	char *line = NULL;
@@ -71,7 +71,7 @@ void createSceneList()
 	}
 }
 
-bool setupScene(const char *stagename)
+static bool setupScene(const char *stagename)
 {
 	sceneList.clear();
 	
@@ -122,7 +122,7 @@ bool setupScene(const char *stagename)
 	return found;
 }
 
-void showScene(bool allowSkip)
+static void showScene(bool allowSkip)
 {
 	graphics.setFontSize(0);
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);

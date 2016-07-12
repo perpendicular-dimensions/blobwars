@@ -19,7 +19,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include "traps.h"
+#include "headers.h"
 
 /**
 * Adds a trap to the map
@@ -89,7 +89,7 @@ void toggleTrap(Trap *trap)
 * Draws the chain link for the spiked ball traps.
 * @param trap The trap that the chain link should be drawn from
 */
-void drawTrapChain(Trap *trap)
+static void drawTrapChain(Trap *trap)
 {
 	float x = trap->startX;
 	float y = trap->startY;
@@ -124,7 +124,7 @@ void drawTrapChain(Trap *trap)
 * @param trap The trap to perform the check
 * @return Whether the trap made contact with an enemy or the Player
 */
-bool doTrapCollisions(Trap *trap)
+static bool doTrapCollisions(Trap *trap)
 {
 	bool hit = false;
 

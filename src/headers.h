@@ -24,6 +24,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <locale.h>
+#include <dirent.h>
 
 #include <zlib.h>
 
@@ -114,3 +118,47 @@ static inline void strlcpy(char *dest, const char *src, size_t n) { strncpy(dest
 #include "CReplayData.h"
 #include "CConfig.h"
 #include "CMedalServer.h"
+
+#include "aquaBoss.h"
+#include "bosses.h"
+#include "bullets.h"
+#include "cutscene.h"
+#include "droidBoss.h"
+#include "effects.h"
+#include "enemies.h"
+#include "entities.h"
+#include "explosions.h"
+#include "finalBattle.h"
+#include "galdov.h"
+#include "game.h"
+#include "graphics.h"
+#include "hub.h"
+#include "info.h"
+#include "init.h"
+#include "intro.h"
+#include "items.h"
+#include "lineDefs.h"
+#include "loadSave.h"
+#include "main.h"
+#include "map.h"
+#include "mapData.h"
+#include "mias.h"
+#include "mission.h"
+#include "objectives.h"
+#include "obstacles.h"
+#include "options.h"
+#include "pak.h"
+#include "particles.h"
+#include "player.h"
+#include "resources.h"
+#include "spawnPoints.h"
+#include "switches.h"
+#include "tankBoss.h"
+#include "teleporters.h"
+#include "title.h"
+#include "trains.h"
+#include "traps.h"
+#include "triggers.h"
+#include "weapons.h"
+#include "widgets.h"
+

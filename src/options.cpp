@@ -19,9 +19,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include "options.h"
+#include "headers.h"
 
-void showCheatConfig()
+static void showCheatConfig()
 {
 	SDL_FillRect(graphics.screen, NULL, graphics.black);
 	graphics.delay(500);
@@ -99,7 +99,7 @@ void showCheatConfig()
 	engine.highlightWidget("cheats");
 }
 
-void showKeyConfig()
+static void showKeyConfig()
 {
 	SDL_FillRect(graphics.screen, NULL, graphics.black);
 	graphics.delay(500);
@@ -191,7 +191,7 @@ void showKeyConfig()
 	engine.highlightWidget("keys");
 }
 
-void showJoystickConfig()
+static void showJoystickConfig()
 {
 	SDL_FillRect(graphics.screen, NULL, graphics.black);
 	graphics.delay(500);

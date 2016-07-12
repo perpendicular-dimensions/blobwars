@@ -19,7 +19,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include "enemies.h"
+#include "headers.h"
 
 Entity *getDefinedEnemy(const char *name)
 {
@@ -31,25 +31,6 @@ Entity *getDefinedEnemy(const char *name)
 		}
 	}
 
-	debug(("No Such Enemy '%s'\n", name));
-
-	return NULL;
-}
-
-Entity *getEnemy(const char *name)
-{
-	Entity *enemy = (Entity*)map.enemyList.getHead();
-
-	while (enemy->next != NULL)
-	{
-		enemy = (Entity*)enemy->next;
-
-		if (strcmp(name, enemy->name) == 0)
-		{
-			return enemy;
-		}
-	}
-	
 	debug(("No Such Enemy '%s'\n", name));
 
 	return NULL;
@@ -124,7 +105,7 @@ bool hasClearShot(Entity *enemy)
 	return true;
 }
 
-void lookForPlayer(Entity *enemy)
+static void lookForPlayer(Entity *enemy)
 {
 	// player is dead
 	if (player.health <= -60)
@@ -243,7 +224,7 @@ void lookForPlayer(Entity *enemy)
 	}
 }
 
-void doAI(Entity *enemy)
+static void doAI(Entity *enemy)
 {
 	if (enemy->flags & ENT_GALDOV)
 	{
@@ -344,7 +325,7 @@ void doAI(Entity *enemy)
 	lookForPlayer(enemy);
 }
 
-void checkCombo()
+static void checkCombo()
 {
 	int old = game.currentComboHits;
 	
@@ -525,7 +506,7 @@ void enemyBulletCollisions(Entity *bullet)
 	}
 }
 
-int getNonGoreParticleColor(const char *name)
+static int getNonGoreParticleColor(const char *name)
 {
 	int rtn = graphics.yellow;
 	
@@ -553,7 +534,7 @@ int getNonGoreParticleColor(const char *name)
 	return rtn;
 }
 
-void gibEnemy(Entity *enemy)
+static void gibEnemy(Entity *enemy)
 {
 	if (enemy->flags & ENT_GALDOV)
 	{

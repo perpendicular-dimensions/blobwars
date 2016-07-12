@@ -19,20 +19,20 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include "tankBoss.h"
+#include "headers.h"
 
 // **************** Machine Gun Boss ***********************
 
-void tankBossMGFight();
-void tankBossGLFight();
-void activateGLBoss();
+static void tankBossMGFight();
+static void tankBossGLFight();
+static void activateGLBoss();
 
 /**
 * Adds a load of particles within an area of the specified location
 * @param x The x location
 * @param y The y location
 */
-void plasmaBurstTraceParticles(int x, int y)
+static void plasmaBurstTraceParticles(int x, int y)
 {
 	int color[7];
 	
@@ -59,7 +59,7 @@ void plasmaBurstTraceParticles(int x, int y)
 /**
 * Adds particles to the front of the MG Tank Boss's gun
 */
-void plasmaChargeParticles()
+static void plasmaChargeParticles()
 {
 	int x = (int)self->x;
 	int y = (int)self->y + 10;
@@ -83,7 +83,7 @@ void plasmaChargeParticles()
 * Traces a line from the MG Tank Boss to 800 pixel in the
 * direction it is facing. Anything in the path is killed immediately.
 */
-void traceTankBossMGFireLine()
+static void traceTankBossMGFireLine()
 {
 	int dx = 1;
 	
@@ -149,7 +149,7 @@ void traceTankBossMGFireLine()
 /**
 * Tells the Machine Gun Tank to fire it's beam laser
 */
-void tankBossMGCannonFire()
+static void tankBossMGCannonFire()
 {
 	self->setThinkTime(2);
 	self->setActionFinished(2);
@@ -162,7 +162,7 @@ void tankBossMGCannonFire()
 * Tells the Machine Gun boss to begin charging it's
 * cannon and play the appropriate sound
 */
-void tankBossMGCannonChargeFire()
+static void tankBossMGCannonChargeFire()
 {
 	plasmaChargeParticles();
 	
@@ -177,7 +177,7 @@ void tankBossMGCannonChargeFire()
 	}
 }
 
-void tankBossMGRapidFire()
+static void tankBossMGRapidFire()
 {
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
 	
@@ -195,7 +195,7 @@ void tankBossMGRapidFire()
 	}
 }
 
-void tankBossMGFire()
+static void tankBossMGFire()
 {
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
 	
@@ -213,7 +213,7 @@ void tankBossMGFire()
 	}
 }
 
-void tankBossMGJump()
+static void tankBossMGJump()
 {
 	self->dy = -12;
 	
@@ -223,7 +223,7 @@ void tankBossMGJump()
 	self->setActionFinished(45);
 }
 
-void tankBossMGDie()
+static void tankBossMGDie()
 {
 	self->setThinkTime(60);
 	self->setActionFinished(60);
@@ -248,7 +248,7 @@ void tankBossMGDie()
 	}
 }
 
-void tankBossMGAttack()
+static void tankBossMGAttack()
 {
 	(player.x > self->x) ? self->face = 0 : self->face = 1;
 	
@@ -279,7 +279,7 @@ void tankBossMGAttack()
 	}
 }
 
-void tankBossMGFight()
+static void tankBossMGFight()
 {
 	if (player.health < 1)
 	{
@@ -316,7 +316,7 @@ void tankBossMGFight()
 	}
 }
 
-void activateGLBoss()
+static void activateGLBoss()
 {
 	if (map.boss[1] == NULL)
 	{
@@ -335,7 +335,7 @@ void activateGLBoss()
 	map.setMainBossPart(map.boss[1]);
 }
 
-void tankBossMGSwap()
+static void tankBossMGSwap()
 {
 	// Machine Gun Boss wait state
 	self->active = false;
@@ -345,7 +345,7 @@ void tankBossMGSwap()
 	activateGLBoss();
 }
 
-void tankBossMGReact()
+static void tankBossMGReact()
 {
 	if (map.boss[1] == NULL)
 	{
@@ -370,7 +370,7 @@ void tankBossMGReact()
 	Math::addBit(&self->flags, ENT_TELEPORTING);
 }
 
-void tankBossMGStart()
+static void tankBossMGStart()
 {
 	self->dx = Math::rrand(416, 928);
 	self->dy = 8576;
@@ -410,7 +410,7 @@ void tankBossMGInit()
 
 // **************** Grenade Launcher Boss ***********************
 
-void tankBossGLJump()
+static void tankBossGLJump()
 {
 	self->dy = -12;
 	
@@ -420,7 +420,7 @@ void tankBossGLJump()
 	self->setActionFinished(45);
 }
 
-void tankBossGLRapidFire()
+static void tankBossGLRapidFire()
 {
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
 	
@@ -438,7 +438,7 @@ void tankBossGLRapidFire()
 	}
 }
 
-void tankBossGLMortor()
+static void tankBossGLMortor()
 {
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
 	
@@ -460,7 +460,7 @@ void tankBossGLMortor()
 	}
 }
 
-void tankBossGLAttack()
+static void tankBossGLAttack()
 {
 	(player.x > self->x) ? self->face = 0 : self->face = 1;
 	
@@ -493,7 +493,7 @@ void tankBossGLAttack()
 	}
 }
 
-void tankBossGLFight()
+static void tankBossGLFight()
 {
 	if (player.health < 1)
 	{
@@ -530,7 +530,7 @@ void tankBossGLFight()
 	}
 }
 
-void activateMGBoss()
+static void activateMGBoss()
 {
 	if (map.boss[0] == NULL)
 	{
@@ -549,7 +549,7 @@ void activateMGBoss()
 	map.setMainBossPart(map.boss[0]);
 }
 
-void tankBossGLSwap()
+static void tankBossGLSwap()
 {
 	// Grenade launcher Boss wait state
 	self->active = false;
@@ -559,7 +559,7 @@ void tankBossGLSwap()
 	activateMGBoss();
 }
 
-void tankBossGLReact()
+static void tankBossGLReact()
 {
 	if (map.boss[0] == NULL)
 		return;
@@ -575,7 +575,7 @@ void tankBossGLReact()
 	Math::addBit(&self->flags, ENT_TELEPORTING);
 }
 
-void tankBossGLDie()
+static void tankBossGLDie()
 {
 	self->setThinkTime(60);
 	self->setActionFinished(60);

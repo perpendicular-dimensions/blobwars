@@ -20,9 +20,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include "main.h"
-
-#include <locale.h>
+#include "headers.h"
 
 Audio audio;
 Config config;
@@ -39,7 +37,7 @@ Entity defItem[MAX_ITEMS];
 Entity player;
 Weapon weapon[MAX_WEAPONS];
 
-void showVersion()
+static void showVersion()
 {
 	printf(_(
 		"\n"
@@ -51,7 +49,7 @@ void showVersion()
 		VERSION, RELEASE);
 }
 
-void showHelp()
+static void showHelp()
 {
 	showVersion();
 
@@ -82,7 +80,7 @@ void showHelp()
 	exit(0);
 }
 
-void listMaps()
+static void listMaps()
 {
 	showVersion();
 	

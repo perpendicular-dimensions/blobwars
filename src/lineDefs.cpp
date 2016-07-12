@@ -19,7 +19,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include "lineDefs.h"
+#include "headers.h"
 
 void addLineDef(const char *name, const char *linkName, const char *message, int x, int y, int width, int height, bool active)
 {

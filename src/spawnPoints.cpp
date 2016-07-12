@@ -19,9 +19,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include "spawnPoints.h"
+#include "headers.h"
 
-bool okayToSpawnEnemy(const char *name, int x, int y)
+static bool okayToSpawnEnemy(const char *name, int x, int y)
 {
 	// Don't summon other monsters!!
 	if (map.fightingGaldov)

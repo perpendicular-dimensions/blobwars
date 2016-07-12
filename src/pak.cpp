@@ -18,15 +18,15 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include "pak.h"
+#include "headers.h"
 
-FILE *pak;
-int dirs = 0, files = 0;
-int totalFiles = 0;
-Bytef *buffer;
-Bytef *output;
+static FILE *pak;
+static int dirs = 0, files = 0;
+static int totalFiles = 0;
+static Bytef *buffer;
+static Bytef *output;
 
-FileData *fileData = NULL;
+static FileData *fileData = NULL;
 
 void cleanup()
 {
@@ -34,7 +34,7 @@ void cleanup()
 	delete[] output;
 }
 
-void countFiles(const char *dirName)
+static void countFiles(const char *dirName)
 {
 	DIR *dirp, *dirp2;
 	dirent *dfile;
@@ -74,7 +74,7 @@ void countFiles(const char *dirName)
 	fileData = new FileData[totalFiles];
 }
 
-void recurseDirectory(const char *dirName)
+static void recurseDirectory(const char *dirName)
 {
 	DIR *dirp, *dirp2;
 	dirent *dfile;

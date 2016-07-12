@@ -19,7 +19,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include "items.h"
+#include "headers.h"
 
 void addItem(int itemType, const char *name, int x, int y, const char *spriteName, int health, int value, int flags, bool randomMovement)
 {
@@ -62,7 +62,7 @@ void addItem(int itemType, const char *name, int x, int y, const char *spriteNam
 	map.addItem(item);
 }
 
-void dropBossItems(int x, int y)
+static void dropBossItems(int x, int y)
 {
 	if ((Math::prand() % 5) > 0)
 	{
@@ -207,7 +207,7 @@ void dropCarriedItems()
 	}
 }
 
-void pickUpItem(Entity *item)
+static void pickUpItem(Entity *item)
 {
 	char string[100];
 

@@ -19,7 +19,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include "widgets.h"
+#include "headers.h"
 
 /**
 * Draws the options for a radio button widget with the currently selected
@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 * @param widget The radio button widget
 * @param maxWidth The width of the largest widget (used for spacing)
 */
-void drawOptions(Widget *widget, int maxWidth)
+static void drawOptions(Widget *widget, int maxWidth)
 {
 	int x = widget->x + maxWidth + 55;
 
@@ -85,7 +85,7 @@ void drawOptions(Widget *widget, int maxWidth)
 * @param widget The slider widget
 * @param maxWidth The width of the largest widget (used for spacing)
 */
-void drawSlider(Widget *widget, int maxWidth)
+static void drawSlider(Widget *widget, int maxWidth)
 {
 	int x = widget->x + maxWidth + 50;
 
@@ -120,7 +120,7 @@ void drawSlider(Widget *widget, int maxWidth)
 * -1000 or less appears as ...
 * @param widget The Joypad Button widget
 */
-void drawJoypadButtonOption(Widget *widget)
+static void drawJoypadButtonOption(Widget *widget)
 {
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 	
@@ -151,7 +151,7 @@ void drawJoypadButtonOption(Widget *widget)
 * Draws a widget used to represent a key based on the widget's current value
 * @param widget The Widget
 */
-void drawKeyOption(Widget *widget)
+static void drawKeyOption(Widget *widget)
 {
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 	
@@ -166,7 +166,7 @@ void drawKeyOption(Widget *widget)
 * colour as set depending on the status of the widget
 * @param widget The Widget to create the image for
 */
-void generateWidgetImage(Widget *widget)
+static void generateWidgetImage(Widget *widget)
 {
 	if (widget == engine.highlightedWidget)
 	{

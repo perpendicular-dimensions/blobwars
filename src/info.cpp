@@ -19,7 +19,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include "info.h"
+#include "headers.h"
 
 void doTimeRemaining()
 {		
@@ -329,7 +329,7 @@ void doPauseInfo()
 	graphics.drawString(string, 320, 430, TXT_CENTERED, graphics.screen);
 }
 
-SDL_Surface *createMusicInfo(void)
+static SDL_Surface *createMusicInfo(void)
 {
 	graphics.setFontSize(0);
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x40, 0x40, 0x40);

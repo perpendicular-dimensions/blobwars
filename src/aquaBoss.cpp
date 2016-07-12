@@ -1,3 +1,4 @@
+
 /*
 Copyright (C) 2004-2011 Parallel Realities
 Copyright (C) 2011-2015 Perpendicular Dimensions
@@ -19,11 +20,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include "aquaBoss.h"
+#include "headers.h"
 
-void aquaBossAttack();
+static void aquaBossAttack(); // break circular dependency
 
-void leachParticles(Entity *enemy)
+static void leachParticles(Entity *enemy)
 {
 	float dx, dy;
 	
@@ -42,7 +43,7 @@ void leachParticles(Entity *enemy)
 	addBlood(enemy, 0, 0, 1);
 }
 
-void aquaBossRecharge()
+static void aquaBossRecharge()
 {
 	debug(("aquaBossRecharge\n"));
 	
@@ -99,14 +100,16 @@ void aquaBossRecharge()
 	}
 }
 
-void aquaBossCircleStrafe()
+static void aquaBossCircleStrafe()
 {
+	// TODO: needs implementation
+
 	debug(("aquaBossCircleStrafe\n"));
 	
 	self->think = &aquaBossAttack;
 }
 
-void aquaBossRapidLaserFire()
+static void aquaBossRapidLaserFire()
 {
 	debug(("aquaBossRapidLaserFire\n"));
 	
@@ -127,7 +130,7 @@ void aquaBossRapidLaserFire()
 	}
 }
 
-void aquaBossRapidPreLaserFire()
+static void aquaBossRapidPreLaserFire()
 {
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
 	
@@ -183,7 +186,7 @@ void aquaBossFire()
 	}
 }
 
-void aquaBossUnProtect()
+static void aquaBossUnProtect()
 {
 	debug(("aquaBossUnProtect\n"));
 	
@@ -193,7 +196,7 @@ void aquaBossUnProtect()
 	self->setSprites(graphics.getSprite("AquaBossRight", true), graphics.getSprite("AquaBossLeft", true), graphics.getSprite("AquaBossLeft", true));
 }
 
-void aquaBossProtect()
+static void aquaBossProtect()
 {
 	debug(("aquaBossProtect\n"));
 	
@@ -204,7 +207,7 @@ void aquaBossProtect()
 	self->setSprites(graphics.getSprite("AquaBossProtectRight", true), graphics.getSprite("AquaBossProtectLeft", true), graphics.getSprite("AquaBossProtectLeft", true));
 }
 
-void aquaBossReact()
+static void aquaBossReact()
 {
 	// They can keep firing as much as they want, but it won't drop its shield now!
 	if (self->flags & ENT_IMMUNE)
@@ -217,7 +220,7 @@ void aquaBossReact()
 		aquaBossProtect();
 }
 
-void aquaBossDie()
+static void aquaBossDie()
 {
 	self->health -= Math::rrand(1, 2);
 	self->setActionFinished(30);
@@ -238,7 +241,7 @@ void aquaBossDie()
 	}
 }
 
-void aquaBossAttack()
+static void aquaBossAttack()
 {
 	if (player.health < 1)
 	{
@@ -274,7 +277,7 @@ void aquaBossAttack()
 	}
 	else if (r == 9)
 	{
-		//self->think = &aquaBossCircleStrafe;
+		self->think = &aquaBossCircleStrafe;
 	}
 	else
 	{
@@ -283,9 +286,9 @@ void aquaBossAttack()
 	}
 }
 
-void aquaBossMainInit()
+void aquaBossInit()
 {
-	debug(("aquaBossMainInit\n"));
+	debug(("aquaBossInit\n"));
 	
 	map.boss[0] = new Boss();
 	strlcpy(map.boss[0]->name, "BioMech Aqua Blob", sizeof map.boss[0]->name);
@@ -308,10 +311,5 @@ void aquaBossMainInit()
 	
 	map.setMainBossPart(map.boss[0]);
 	
-	debug(("aquaBossMainInit: Done\n"));
-}
-
-void aquaBossInit()
-{
-	aquaBossMainInit();
+	debug(("aquaBossInit: Done\n"));
 }
