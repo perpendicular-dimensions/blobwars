@@ -18,11 +18,12 @@ LOCALEDIR ?= $(PREFIX)/share/locale/
 MEDAL_SERVER_HOST = www.stephenjsweeney.com
 MEDAL_SERVER_PORT = 80
 
-CXXFLAGS += `pkg-config --cflags sdl2 SDL2_mixer SDL2_image SDL2_ttf SDL2_net` -DVERSION=$(VERSION) -DRELEASE=$(RELEASE) -DUSEPAK=$(USEPAK)
+PKG_CONFIG ?= pkg-config
+CXXFLAGS += `$(PKG_CONFIG) --cflags sdl2 SDL2_mixer SDL2_image SDL2_ttf SDL2_net` -DVERSION=$(VERSION) -DRELEASE=$(RELEASE) -DUSEPAK=$(USEPAK)
 CXXFLAGS += -DPAKNAME=\"$(PAKNAME)\" -DPAKLOCATION=\"$(DATADIR)\" -DUNIX -DGAMEPLAYMANUAL=\"$(DOCDIR)index.html\" -Wall
 CXXFLAGS += -DLOCALEDIR=\"$(LOCALEDIR)\" -DMEDAL_SERVER_HOST=\"$(MEDAL_SERVER_HOST)\" -DMEDAL_SERVER_PORT=$(MEDAL_SERVER_PORT)
 CXXFLAGS += $(CFLAGS) -Werror
-LIBS = `pkg-config --libs sdl2 SDL2_mixer SDL2_image SDL2_ttf SDL2_net` -lz
+LIBS = `$(PKG_CONFIG) --libs sdl2 SDL2_mixer SDL2_image SDL2_ttf SDL2_net` -lz
 PAKLIBS = -lz
 
 OBJS += CAudio.o
