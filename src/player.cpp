@@ -64,23 +64,23 @@ static int medalWorker(void *data)
 
 void presentPlayerMedal(const char *tname)
 {
+	if (engine.cheats)
+		return;
+
 	// Copy the input, so that threading
 	// doesn't trip us up!
 	char *data = new char[128];
 	
-	if (!engine.cheats)
+	strlcpy(data, tname, 128);
+
+	SDL_Thread *thread = SDL_CreateThread(medalWorker, "MedalWorker", (void*)data);
+
+	if (thread == NULL)
 	{
-		strlcpy(data, tname, 128);
-		
-		SDL_Thread *thread = SDL_CreateThread(medalWorker, "MedalWorker", (void*)data);
-		
-		if (thread == NULL)
-		{
-			printf("Unable to create thread: %s\n", SDL_GetError());
-			printf("Calling medal server directly\n");
-			medalWorker((void*)data);
-			return;
-		}
+		printf("Unable to create thread: %s\n", SDL_GetError());
+		printf("Calling medal server directly\n");
+		medalWorker((void*)data);
+		return;
 	}
 }
 
