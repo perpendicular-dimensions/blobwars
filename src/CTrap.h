@@ -23,7 +23,7 @@ class Trap : public GameObject {
 
 	public:
 
-		char name[50];
+		std::string name;
 		bool active;
 		unsigned char type, damage;
 		unsigned char thinktime, waitTime[2];
@@ -37,7 +37,7 @@ class Trap : public GameObject {
 		Sprite *sprite;
 
 	Trap();
-	void setName(const char *name);
+	void setName(const std::string &name);
 	void setTrapType(int trapType);
 	void setSprite(Sprite *sprite);
 	void setSpeed(int speed);

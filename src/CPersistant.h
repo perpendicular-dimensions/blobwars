@@ -23,15 +23,15 @@ class Persistant : public GameObject {
 	
 	public:
 	
-		char stageName[50];
+		std::string stageName;
 		int numberOfLines;
 		List dataList;
 		
 	Persistant();
 	~Persistant();
 	
-	void setName(const char *name);
-	void addLine(const char *data);
+	void setName(const std::string &name);
+	void addLine(const std::string &data);
 	void clear();
 
 };

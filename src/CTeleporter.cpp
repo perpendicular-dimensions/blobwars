@@ -28,9 +28,9 @@ Teleporter::Teleporter()
 	sprite = NULL;
 }
 
-void Teleporter::setName(const char *name)
+void Teleporter::setName(const std::string &name)
 {
-	strlcpy(this->name, name, sizeof this->name);
+	this->name = name;
 }
 
 void Teleporter::set(int x, int y, int destX, int destY)

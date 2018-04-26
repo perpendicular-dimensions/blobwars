@@ -23,13 +23,13 @@ class Data : public GameObject {
 
 	public:
 
-		char key[100];
-		char value[100];
+		std::string key;
+		std::string value;
 		int current;
 		int target;
 		
 	Data();
-	void set(const char *key, const char *value, int current, int target);
+	void set(const std::string &key, const std::string &value, int current, int target);
 	bool isComplete();
 	void getCurrentTarget(int *current, int *target);
 

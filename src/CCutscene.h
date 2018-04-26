@@ -23,12 +23,12 @@ class Cutscene : public GameObject {
 
 	public:
 	
-		char sprite[50];
-		char text[1024];
+		std::string sprite;
+		std::string text;
 		int waitTime;
 		
 	Cutscene();
 	~Cutscene();
-	void appendText(const char *line);
+	void appendText(std::string_view line);
 	
 };

@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-void addObstacle(const char *name, int x, int y, const char *spriteName)
+void addObstacle(const std::string &name, int x, int y, const std::string &spriteName)
 {
 	Entity *obstacle = new Entity();
 	

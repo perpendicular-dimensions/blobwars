@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 class Weapon {
 
 	public:
-		char name[50];
+		std::string name;
 		int id;
 		int damage, dx, dy, reload, health;
 		int flags;
@@ -30,7 +30,7 @@ class Weapon {
 		Sprite *sprite[2];
 
 	Weapon();
-	void setName(const char *name);
+	void setName(const std::string &name);
 	int getSpeed(int face) const;
 
 };

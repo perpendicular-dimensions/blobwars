@@ -26,9 +26,6 @@ MedalServer::MedalServer()
 	
 	connected = false;
 	gotRuby = false;
-	
-	message[0] = 0;
-	rubyMessage[0] = 0;
 }
 
 MedalServer::~MedalServer()
@@ -39,7 +36,7 @@ MedalServer::~MedalServer()
 	}
 }
 
-bool MedalServer::connect(const char *privateKey)
+bool MedalServer::connect(const std::string &privateKey)
 {
 	if (SDLNet_ResolveHost(&ip, MEDAL_SERVER_HOST, MEDAL_SERVER_PORT) == -1)
 	{
@@ -49,33 +46,26 @@ bool MedalServer::connect(const char *privateKey)
 	
 	debug(("Connected %s to %s:%d\n", privateKey, MEDAL_SERVER_HOST, MEDAL_SERVER_PORT));
 	
-	strlcpy(this->privateKey, privateKey, sizeof this->privateKey);
+	this->privateKey = privateKey;
 	connected = true;
 	
 	return true;
 }
 
-#if !UNIX
-extern char *strtok_r(char *s1, const char *s2, char **lasts);
-#endif
-		
-int MedalServer::postMedal(const char *str)
+int MedalServer::postMedal(const std::string &str)
 {
 	if (!connected)
 	{
 		return 0;
 	}
 	
-	char *store;
+	std::string medal = str;
 	
-	char medal[128];
-	strlcpy(medal, str, sizeof medal);
-	
-	for (unsigned int i = 0 ; i < strlen(medal) ; i++)
+	for (auto &&c: medal)
 	{
-		if (medal[i] == ' ' || medal[i] == '#' || medal[i] == ',')
+		if (c == ' ' || c == '#' || c == ',')
 		{
-			medal[i] = '_';
+			c = '_';
 		}
 	}
 	
@@ -89,15 +79,9 @@ int MedalServer::postMedal(const char *str)
 		return 0;
 	}
 	
-	char out[1024];
+	std::string out = fmt::format("GET /addMedal/{}/MBS_{} HTTP/1.1\nHost: {}\nUser-Agent:BWMBS{:.2f}-{}\n\n", privateKey, medal, MEDAL_SERVER_HOST, VERSION, RELEASE);
 	
-	snprintf(out, sizeof out, "GET /addMedal/%s/MBS_%s HTTP/1.1\nHost: %s\nUser-Agent:BWMBS%.2f-%d\n\n", privateKey, medal, MEDAL_SERVER_HOST, VERSION, RELEASE);
-	
-	//printf("%s\n", out);
-	
-	int len = strlen(out) + 1;
-	
-	if (SDLNet_TCP_Send(socket, (void*)out, len) < len)
+	if (SDLNet_TCP_Send(socket, (void*)out.data(), out.size()) < (int)out.size())
 	{
 		printf("SDLNet_TCP_Send: %s\n", SDLNet_GetError());
 		printf("Disconnected\n");
@@ -106,24 +90,36 @@ int MedalServer::postMedal(const char *str)
 		return 0;
 	}
 	
-	char *in = new char[1024];
+	std::vector<char> in;
+	in.reserve(1024);
 
-	SDLNet_TCP_Recv(socket, in, 512);
-	
-	//printf("%s\n", in);
+	int len = SDLNet_TCP_Recv(socket, in.data(), 512);
+
+	if (len <= 0)
+	{
+		printf("SDLNet_TCP_Recv: %s\n", SDLNet_GetError());
+		printf("Disconnected\n");
+		SDLNet_TCP_Close(socket);
+		close();
+		return 0;
+	}
+
+	in[len] = 0;
+	in.resize(len + 1);
 	
 	int response = 0;
-	char *token = strtok_r(in, "\n", &store);
+	char tmpMessage[512];
 	
-	while (token != NULL)
+	for (auto token: split(in, '\n'))
 	{
-		if (strstr(token, "MEDAL_RESPONSE"))
+		if (contains(token, "MEDAL_RESPONSE"))
 		{
-			sscanf(token, "%*s %d %[^\n\r]", &response, message);
+			scan(token, "%*s %d %[^\n\r]", &response, tmpMessage);
+			message = tmpMessage;
 			
 			if (response == 4)
 			{
-				strlcpy(rubyMessage, message, sizeof rubyMessage);
+				rubyMessage = message;
 				gotRuby = true;
 			}
 			else
@@ -131,20 +127,16 @@ int MedalServer::postMedal(const char *str)
 				break;
 			}
 		}
-		
-		token = strtok_r(NULL, "\n", &store);
 	}
 	
 	debug(("MedalServer Response: %d '%s'\n", response, message))
-	
-	delete[] in;
 	
 	SDLNet_TCP_Close(socket);
 	
 	return response;
 }
 
-const char *MedalServer::getMessage()
+std::string MedalServer::getMessage()
 {
 	return message;
 }
@@ -154,7 +146,7 @@ bool MedalServer::hasRuby()
 	return gotRuby;
 }
 
-const char *MedalServer::getRubyMessage()
+std::string MedalServer::getRubyMessage()
 {
 	gotRuby = false;
 	

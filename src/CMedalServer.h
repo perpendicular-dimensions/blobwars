@@ -22,9 +22,9 @@ class MedalServer {
 
 	private:
 		
-		char privateKey[20];
-		char message[128];
-		char rubyMessage[128];
+		std::string privateKey;
+		std::string message;
+		std::string rubyMessage;
 		
 		bool connected;
 		bool gotRuby;
@@ -38,13 +38,13 @@ class MedalServer {
 		
 		SDL_mutex *lock;
 		
-		bool connect(const char *privateKey);
+		bool connect(const std::string &privateKey);
 		
-		int postMedal(const char *medal);
+		int postMedal(const std::string &medal);
 		bool hasRuby();
 		
-		const char *getMessage();
-		const char *getRubyMessage();
+		std::string getMessage();
+		std::string getRubyMessage();
 		
 		void close();
 

@@ -46,12 +46,12 @@ void showAllSprites()
 		{
 			sprite = (Sprite*)sprite->next;
 
-			if (strcmp(sprite->name, "optionsBackground"))
+			if (sprite->name != "optionsBackground")
 			{
 				graphics.blit(sprite->getCurrentFrame(), x, y, graphics.screen, false);
 
 				x += sprite->image[0]->w + 5;
-				h = max(h, sprite->image[0]->h + 5);
+				h = std::max(h, sprite->image[0]->h + 5);
 
 				if (x >= 600)
 				{

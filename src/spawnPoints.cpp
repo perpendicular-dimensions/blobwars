@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-static bool okayToSpawnEnemy(const char *name, int x, int y)
+static bool okayToSpawnEnemy(std::string name, int x, int y)
 {
 	// Don't summon other monsters!!
 	if (map.fightingGaldov)
@@ -112,7 +112,7 @@ void doSpawnPoints()
 
 	int x, y;
 
-	char *enemy;
+	std::string enemy;
 
 	while (sp->next != NULL)
 	{

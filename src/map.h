@@ -1,4 +1,4 @@
-bool loadMapData(const char *filename);
+bool loadMapData(const std::string &filename);
 void doWind();
 void raiseWaterLevel();
 void evaluateMapAttribute(Entity *ent,int mapAttribute);

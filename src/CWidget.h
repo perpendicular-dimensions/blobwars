@@ -23,7 +23,10 @@ class Widget : public GameObject {
 
 	public:
 
-		char name[50], groupName[50], label[80], options[100];
+		std::string name;
+		std::string groupName;
+		std::string label;
+		std::string options;
 
 		int type;
 
@@ -40,7 +43,7 @@ class Widget : public GameObject {
 		Widget *previous;
 
 	Widget();
-	void setProperties(const char *name, const char *groupName, const char *label, const char *options, int x, int y, int min, int max);
+	void setProperties(const std::string &name, const std::string &groupName, const std::string &label, const std::string &options, int x, int y, int min, int max);
 	void setValue(int *value);
 	void redraw();
 

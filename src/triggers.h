@@ -1,1 +1,1 @@
-void activateTrigger(const char *linkName,const char *activateMessage,bool active);
+void activateTrigger(const std::string &linkName,const std::string &activateMessage,bool active);

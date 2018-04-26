@@ -23,11 +23,11 @@ class PersistData : public GameObject {
 
 	public:
 	
-		char data[150];
+		std::string data;
 		
 	PersistData();
 	~PersistData();
 	
-	bool setData(const char *data);
+	bool setData(const std::string &data);
 
 };

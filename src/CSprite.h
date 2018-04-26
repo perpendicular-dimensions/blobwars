@@ -25,7 +25,7 @@ class Sprite : public GameObject {
 
 	public:
 
-		char name[50];
+		std::string name;
 
 		SDL_Surface *image[8];
 		unsigned char frameLength[8];

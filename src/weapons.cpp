@@ -31,20 +31,18 @@ void loadDefWeapons()
 		graphics.showErrorAndExit("Couldn't load weapon definitions file (%s)", "data/weapons");
 	}
 
-	char *token = strtok((char*)engine.dataBuffer, "\n");
-
 	char name[50];
 	char sprite[2][100];
 	char flags[100];
 	int param[8];
 	int id;
 
-	while (true)
+	for (auto token: split(engine.dataBuffer, '\n'))
 	{
-		if (strcmp(token, "@EOF@") == 0)
+		if (token == "@EOF@")
 			break;
 
-		sscanf(token, "%d %*c %[^\"] %*c %d %d %d %d %d %d %s %s %d %s", &id, name, &param[0], &param[1], &param[2], &param[3], &param[4], &param[5], sprite[0], sprite[1], &param[6], flags);
+		scan(token, "%d %*c %[^\"] %*c %d %d %d %d %d %d %s %s %d %s", &id, name, &param[0], &param[1], &param[2], &param[3], &param[4], &param[5], sprite[0], sprite[1], &param[6], flags);
 
 		weapon[id].setName(name);
 		weapon[id].id = param[0];
@@ -57,8 +55,6 @@ void loadDefWeapons()
 		weapon[id].sprite[1] = graphics.getSprite(sprite[1], true);
 		weapon[id].fireSound = param[6];
 		weapon[id].flags = engine.getValueOfFlagTokens(flags);
-
-		token = strtok(NULL, "\n");
 	}
 }
 
@@ -143,21 +139,21 @@ Weapon *getRandomGaldovWeapon()
 * @param name
 * @return The randomly selected Weapon
 */
-Weapon *getWeaponByName(const char *name)
+Weapon *getWeaponByName(const std::string &name)
 {
-	if (strcmp("randomStraight", name) == 0)
+	if ("randomStraight" == name)
 	{
 		return getRandomStraightWeapon();
 	}
 
-	if (strcmp("randomAimed", name) == 0)
+	if ("randomAimed" == name)
 	{
 		return getRandomAimedWeapon();
 	}
 
 	for (int i = 0 ; i < MAX_WEAPONS ; i++)
 	{
-		if (strcmp(weapon[i].name, name) == 0)
+		if (weapon[i].name == name)
 		{
 			return &weapon[i];
 		}

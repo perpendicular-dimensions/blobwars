@@ -457,7 +457,7 @@ void galdovInit()
 	debug(("galdovInit\n"));
 	
 	map.boss[0] = new Boss();
-	strlcpy(map.boss[0]->name, "Galdov", sizeof map.boss[0]->name);
+	map.boss[0]->name = "Galdov";
 	map.boss[0]->health = 45 * game.skill;
 	map.boss[0]->maxHealth = 45 * game.skill;
 	map.boss[0]->setSprites(graphics.getSprite("GaldovRight", true), graphics.getSprite("GaldovLeft", true), graphics.getSprite("GaldovLeft", true));
@@ -481,7 +481,7 @@ void galdovInit()
 	for (int i = 1 ; i < 10 ; i++)
 	{
 		map.boss[i] = new Boss();
-		strlcpy(map.boss[i]->name, "Fake", sizeof map.boss[i]->name);
+		map.boss[i]->name = "Fake";
 		map.boss[i]->setSprites(graphics.getSprite("GaldovRight", true), graphics.getSprite("GaldovLeft", true), graphics.getSprite("GaldovLeft", true));
 		map.boss[i]->x = 9999;
 		map.boss[i]->y = 9999;

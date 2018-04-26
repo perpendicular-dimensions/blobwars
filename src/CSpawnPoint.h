@@ -23,7 +23,7 @@ class SpawnPoint : public GameObject {
 
 	public:
 
-		char name[50];
+		std::string name;
 
 		bool active;
 
@@ -35,7 +35,7 @@ class SpawnPoint : public GameObject {
 
 	SpawnPoint();
 	void reset();
-	void create(const char *name, int x, int y, int spawnType, int spawnSubType, int minInterval, int maxInterval, bool active);
+	void create(const std::string &name, int x, int y, int spawnType, int spawnSubType, int minInterval, int maxInterval, bool active);
 	void think();
 	bool readyToSpawn();
 

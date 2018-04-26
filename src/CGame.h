@@ -19,16 +19,15 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class Game {
-
-	private:
-	
+class PODGame {
+	protected:
+		
 		int objectiveCheckPointX, objectiveCheckPointY;
 
 	public:
 
-		char mapName[50];
-		char stageName[50];
+		char s_mapName[50];
+		char s_stageName[50];
 
 		int gore, skill, soundVol, musicVol, output, brightness, autoSaveSlot, autoSave;
 
@@ -59,6 +58,14 @@ class Game {
 		
 		int canContinue;
 
+};
+
+class Game: public PODGame {
+
+	public:
+		std::string mapName;
+		std::string stageName;
+
 		Game();
 		void clear();
 		void destroy();
@@ -75,8 +82,8 @@ class Game {
 		int getTotalAccuracy();
 		int getMostUsedWeapon();
 		void totalUpStats();
-		void setStageName(const char *name);
-		void setMapName(const char *name);
+		void setStageName(const std::string &name);
+		void setMapName(const std::string &name);
 		void setMissionOver(int reason);
 		void resetMissionOver();
 

@@ -75,9 +75,9 @@ bool Train::waitsForPlayer()
 	return true;
 }
 
-void Train::setName(const char *name)
+void Train::setName(const std::string &name)
 {
-	strlcpy(this->name, name, sizeof this->name);
+	this->name = name;
 }
 
 void Train::set(int startX, int startY, int endX, int endY, int pause, bool fromStart)

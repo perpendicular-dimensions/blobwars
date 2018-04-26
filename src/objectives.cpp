@@ -141,7 +141,7 @@ bool perfectlyCompleted()
 	return true;
 }
 
-bool requiredEnemy(const char *name)
+bool requiredEnemy(const std::string &name)
 {
 	Objective *objective = (Objective*)map.objectiveList.getHead();
 
@@ -149,7 +149,7 @@ bool requiredEnemy(const char *name)
 	{
 		objective = (Objective*)objective->next;
 
-		if (strcmp(objective->target, name) == 0)
+		if (objective->target == name)
 		{
 			return true;
 		}
@@ -171,7 +171,7 @@ bool requiredObjectivesCompleted()
 	{
 		objective = (Objective*)objective->next;
 
-		if (strcmp(objective->target, "Exit") == 0)
+		if (objective->target == "Exit")
 		{
 			continue;
 		}
@@ -238,11 +238,11 @@ void autoCompleteAllObjectives(bool allObjectives)
 	}
 }
 
-void checkObjectives(const char *name, bool alwaysInform)
+void checkObjectives(const std::string &name, bool alwaysInform)
 {
 	Objective *objective = (Objective*)map.objectiveList.getHead();
 
-	char message[256];
+	std::string message;
 	
 	int requiredValue;
 
@@ -252,9 +252,9 @@ void checkObjectives(const char *name, bool alwaysInform)
 
 		if (!objective->completed)
 		{
-			if (strcmp(objective->target, name) == 0)
+			if (objective->target == name)
 			{
-				if (strstr(objective->target, "Combo-"))
+				if (contains(objective->target, "Combo-"))
 				{
 					objective->currentValue = game.currentComboHits;
 					Math::limitInt(&objective->currentValue, 0, objective->targetValue);
@@ -270,24 +270,24 @@ void checkObjectives(const char *name, bool alwaysInform)
 				{
 					if (!map.isBossMission)
 					{
-						snprintf(message, sizeof message, _("%s - Objective Completed - Check Point Reached!"), _(objective->description));
+						message = fmt::format(_("{} - Objective Completed - Check Point Reached!"), _(objective->description));
 						game.setObjectiveCheckPoint();
 					}
 					else
 					{
-						snprintf(message, sizeof message, _("%s - Objective Completed"), _(objective->description));
+						message = fmt::format(_("{} - Objective Completed"), _(objective->description));
 					}
 
-					if (strcmp(objective->description, "Get the Aqua Lung") == 0)
+					if (objective->description == "Get the Aqua Lung")
 					{
-						snprintf(message, sizeof message, "Got the Aqua Lung! You can now swim forever!");
+						message = fmt::format("Got the Aqua Lung! You can now swim forever!");
 						game.hasAquaLung = true;
 						presentPlayerMedal("Aqua_Lung");
 					}
 
-					if (strcmp(objective->description, "Get the Jetpack") == 0)
+					if (objective->description == "Get the Jetpack")
 					{
-						snprintf(message, sizeof message, "Got the Jetpack! Press SPACE to Activate!");
+						message = fmt::format("Got the Jetpack! Press SPACE to Activate!");
 						game.hasJetPack = true;
 						presentPlayerMedal("Jetpack");
 					}
@@ -297,20 +297,20 @@ void checkObjectives(const char *name, bool alwaysInform)
 					game.totalObjectivesCompleted++;
 
 				}
-				else if (!strstr(objective->target, "Combo-"))
+				else if (!contains(objective->target, "Combo-"))
 				{
 					if ((requiredValue % 10 == 0) || (requiredValue <= 10) || (alwaysInform))
 					{
 						switch (Math::prand() % 3)
 						{
 							case 0:
-								snprintf(message, sizeof message, _("%s - %d more to go..."), _(objective->description), requiredValue);
+								message = fmt::format(_("{} - {} more to go..."), _(objective->description), requiredValue);
 								break;
 							case 1:
-								snprintf(message, sizeof message, _("%s - need %d more"), _(objective->description), requiredValue);
+								message = fmt::format(_("{} - need {} more"), _(objective->description), requiredValue);
 								break;
 							case 2:
-								snprintf(message, sizeof message, _("%s - %d of %d"), _(objective->description), objective->currentValue, objective->targetValue);
+								message = fmt::format(_("{} - {} of {}"), _(objective->description), objective->currentValue, objective->targetValue);
 								break;
 						}
 						

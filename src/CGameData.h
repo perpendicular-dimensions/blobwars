@@ -30,21 +30,21 @@ class GameData {
 	void clear();
 	void destroy();
 	
-	void addCompletedObjective(const char *key, const char *value, int current, int target);
+	void addCompletedObjective(const std::string &key, const std::string &value, int current, int target);
 	void addCompletedObjective(Data *newData);
 	
-	void setMIARescueCount(const char *key, int rescues, int total);
-	bool MIARescued(const char *stageName, char *name);
+	void setMIARescueCount(const std::string &key, int rescues, int total);
+	bool MIARescued(const std::string &stageName, const std::string &name);
 	
-	bool objectiveCompleted(const char *stageName, const char *name);
-	void getObjectiveValues(const char *stageName, const char *name, int *current, int *target);
+	bool objectiveCompleted(const std::string &stageName, const std::string &name);
+	void getObjectiveValues(const std::string &stageName, const std::string &name, int *current, int *target);
 	
-	bool stagePreviouslyCleared(const char *stageName);
-	bool isCompleted(const char *key, const char *value);
+	bool stagePreviouslyCleared(const std::string &stageName);
+	bool isCompleted(const std::string &key, const std::string &value);
 	int getPercentageComplete();
 	
-	bool levelPrefectlyCleared(const char *level);
-	bool requiredLevelCleared(const char *requiredLevel);
+	bool levelPrefectlyCleared(const std::string &level);
+	bool requiredLevelCleared(const std::string &requiredLevel);
 	
 	void calculateWorldCompleted();
 	void calculateAllCompleted();

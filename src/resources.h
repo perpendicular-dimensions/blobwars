@@ -1,3 +1,3 @@
 void loadResources();
-void loadSprite(const char *token);
-void loadSound(int index,const char *filename);
+void loadSprite(std::string_view token);
+void loadSound(int index,const std::string &filename);

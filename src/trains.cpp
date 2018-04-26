@@ -74,7 +74,7 @@ static void openDoor(Train *train)
 * @param train The door that performs the blocking
 * @param dir The direction the entity was moving in (required for clipping)
 */
-static void trainBlockEntity(Entity *ent, const char *message, Train *train, int dir)
+static void trainBlockEntity(Entity *ent, std::string message, Train *train, int dir)
 {
 	if (ent == &player)
 	{

@@ -123,7 +123,7 @@ void Math::removeBit(long *currentBits, long oldBits)
 
 void Math::calculateSlope(float x, float y, float x2, float y2, float *dx, float *dy)
 {
-	int steps = (int)max(fabs(x - x2), fabs(y - y2));
+	int steps = (int)std::max(fabs(x - x2), fabs(y - y2));
 	if (steps == 0)
 	{
 		*dx = 0;
@@ -137,19 +137,13 @@ void Math::calculateSlope(float x, float y, float x2, float y2, float *dx, float
 	*dy /= steps;
 }
 
-char *Math::formatTime(int t)
+std::string Math::formatTime(int t)
 {
-	static char time[1024];
-	
-	time[0] = 0;
-	
 	int hours = t / 3600;
 	int minutes = (t % 3600) / 60;
 	int seconds = (t % 60);
-	
-	snprintf(time, sizeof time, "%dh %dm %ds", hours, minutes, seconds);
-	
-	return time;
+
+	return fmt::format("{}h {}m {}s", hours, minutes, seconds);
 }
 
 long Math::pSeed;

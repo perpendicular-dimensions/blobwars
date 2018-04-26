@@ -23,20 +23,15 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 Pak::Pak()
 {
-	input = NULL;
 	fd = NULL;
 	
 	numberOfFiles = 0;
 	listPos = 0;
 	currentFile = NULL;
-
-	pakFilename[0] = 0;
-	filename[0] = 0;
 }
 
 Pak::~Pak()
 {
-	delete[] input;
 	delete[] fd;
 }
 
@@ -52,7 +47,7 @@ void Pak::showPakErrorAndExit()
 	exit(1);
 }
 
-void Pak::setPakFile(const char *pakFilename)
+void Pak::setPakFile(const std::string &pakFilename)
 {
 	#if USEPAK
 	strlcpy(this->pakFilename, pakFilename, sizeof this->pakFilename);
@@ -107,7 +102,7 @@ void Pak::setPakFile(const char *pakFilename)
 	#endif
 }
 
-bool Pak::unpack(const char *filename, unsigned char **buffer)
+bool Pak::unpack(const std::string &filename, std::vector<char> *buffer)
 {
 	debug(("Pak : Unpacking %s...\n", filename));
 	
@@ -115,7 +110,7 @@ bool Pak::unpack(const char *filename, unsigned char **buffer)
 	
 	for (unsigned int i = 0 ; i < numberOfFiles ; i++)
 	{
-		if (strcmp(filename, fd[i].filename) == 0)
+		if (filename == fd[i].filename)
 		{
 			currentFile = &fd[i];
 			break;
@@ -127,46 +122,36 @@ bool Pak::unpack(const char *filename, unsigned char **buffer)
 		return false;
 	}
 	
-	FILE *pak = fopen(pakFilename, "rb");
-	if (!pak)
+	std::ifstream pak(pakFilename);
+
+	pak.seekg(currentFile->location);
+
+	std::vector<char> input;
+	input.reserve(currentFile->cSize * 1.01 + 12);
+	buffer->reserve(currentFile->fSize + 1);
+
+	pak.read(input.data(), currentFile->cSize);
+
+	if (pak.bad())
 	{
 		showPakErrorAndExit();
 	}
 	
-	fseek(pak, currentFile->location, SEEK_SET);
-
-	delete[] input;
-	input = NULL;
-	
-	input = new unsigned char[(int)(currentFile->cSize * 1.01) + 12];
-	*buffer = new unsigned char[currentFile->fSize + 1];
-
-	if (fread(input, 1, currentFile->cSize, pak) != currentFile->cSize)
-	{
-		fclose(pak);
-		return showPakErrorAndExit(), false;
-	}
-	
 	uLongf fSize = (uLongf)currentFile->fSize;
 	
-	uncompress(*buffer, &fSize, input, currentFile->cSize);
-	(*buffer)[currentFile->fSize] = 0;
+	uncompress((Bytef *)buffer->data(), &fSize, (Bytef *)input.data(), currentFile->cSize);
+	buffer->at(currentFile->fSize) = 0;
 
-	fclose(pak);
-	
-	delete[] input;
-	input = NULL;
-	
 	debug(("Pak : Unpack %s...Done\n", filename));
 
 	return true;
 }
 
-bool Pak::fileExists(const char *filename)
+bool Pak::fileExists(const std::string &filename)
 {
 	for (unsigned int i = 0 ; i < numberOfFiles ; i++)
 	{
-		if (strcmp(fd[i].filename, filename) == 0)
+		if (fd[i].filename == filename)
 		{
 			return true;
 		}

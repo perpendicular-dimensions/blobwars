@@ -28,9 +28,9 @@ class Map {
 
 	public:
 
-		char name[255];
+		std::string name;
 
-		unsigned char data[MAPWIDTH][MAPHEIGHT];
+		uint8_t data[MAPWIDTH][MAPHEIGHT];
 
 		int offsetX, offsetY;
 		int limitLeft, limitRight, limitUp, limitDown;
@@ -98,34 +98,34 @@ class Map {
 	bool isLiquid(int x, int y);
 	bool isTopLayer(int x, int y);
 	
-	Persistant *getPersistant(const char *name);
-	Persistant *createPersistant(const char *name);
-	void destroyPersistant(const char *name);
+	Persistant *getPersistant(const std::string &name);
+	Persistant *createPersistant(const std::string &name);
+	void destroyPersistant(const std::string &name);
 	
-	void setName(const char *name);
+	void setName(const std::string &name);
 	void setClipping(int limitLeft, int limitRight, int limitUp, int limitDown);
-	void addTrain(const char *name, int startX, int startY, int endX, int endY, int pause, bool atStart, bool active);
-	void addDoor(const char *name, int type, int startX, int startY, int endX, int endY, bool active);
-	void addSwitch(const char *name, const char *linkName, const char *requiredObjectName, const char *activateMessage, int type, int x, int y, bool activated);
+	void addTrain(const std::string &name, int startX, int startY, int endX, int endY, int pause, bool atStart, bool active);
+	void addDoor(const std::string &name, int type, int startX, int startY, int endX, int endY, bool active);
+	void addSwitch(const std::string &name, const std::string &linkName, const std::string &requiredObjectName, const std::string &activateMessage, int type, int x, int y, bool activated);
 	void addItem(Entity *item);
 	void addBullet(Entity *bullet);
 	void addParticle(float x, float y, float dx, float dy, int health, int color, Sprite *sprite, int flags);
 	void addEnemy(Entity *enemy);
 	void addMIA(Entity *mia);
 	void addObstacle(Entity *obstacle);
-	void addSpawnPoint(const char *name, int x, int y, int type, int subtype, int min, int max, bool active);
+	void addSpawnPoint(const std::string &name, int x, int y, int type, int subtype, int min, int max, bool active);
 	void addEffect(Effect *effect);
-	void addObjective(const char *description, const char *target, int targetValue, bool required);
+	void addObjective(const std::string &description, const std::string &target, int targetValue, bool required);
 	void addTeleporter(Teleporter *teleporter);
 	void addLineDef(LineDef *lineDef);
 	void addTrap(Trap *trap);
-	void evalTileset(const char *baseDir);
+	void evalTileset(const std::string &baseDir);
 	
 	void killAllEnemies();
 	
 	void setAllowableEnemy(Entity *enemy);
-	char *getSpawnableEnemy();
-	char *getSpawnableEnemy(int i);
+	std::string getSpawnableEnemy();
+	std::string getSpawnableEnemy(int i);
 	
 	void getRandomEntityPosition(int *x, int *y);
 	void setMainBossPart(Boss *boss);

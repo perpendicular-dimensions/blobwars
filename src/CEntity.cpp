@@ -51,9 +51,9 @@ Entity::Entity()
 	}
 }
 
-void Entity::setName(const char *name)
+void Entity::setName(const std::string &name)
 {
-	strlcpy(this->name, name, sizeof this->name);
+	this->name = name;
 }
 
 void Entity::setSprites(Sprite *sprite1, Sprite *sprite2, Sprite *sprite3)

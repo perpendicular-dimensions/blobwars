@@ -23,8 +23,8 @@ class HubLevel : public GameObject {
 
 	public:
 
-		char stageName[50];
-		char filename[50];
+		std::string stageName;
+		std::string filename;
 
 		int x, y;
 		
@@ -32,5 +32,5 @@ class HubLevel : public GameObject {
 		Sprite *target;
 
 	HubLevel();
-	void set(const char *stageName, const char *filename, int x, int y);
+	void set(const std::string &stageName, const std::string &filename, int x, int y);
 };

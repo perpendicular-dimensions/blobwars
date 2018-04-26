@@ -29,7 +29,7 @@ class Train : public GameObject {
 
 	public:
 
-		char name[50];
+		std::string name;
 
 		int type;
 
@@ -51,7 +51,7 @@ class Train : public GameObject {
 	bool isReady();
 	bool isMoving();
 	bool waitsForPlayer();
-	void setName(const char *name);
+	void setName(const std::string &name);
 	void set(int startX, int startY, int endX, int endY, int pause, bool fromStart);
 	bool openClose();
 	void move();

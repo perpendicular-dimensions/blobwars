@@ -35,10 +35,6 @@ Audio::Audio()
 	music = NULL;
 	quickSound = NULL;
 	
-	levelMusicName[0] = 0;
-	songtitle[0] = 0;
-	songalbum[0] = 0;
-	songartist[0] = 0;
 	songlicense = -1;
 }
 
@@ -63,7 +59,7 @@ void Audio::registerEngine(Engine *engine)
 	this->engine = engine;
 }
 
-bool Audio::loadSound(int i, const char *filename)
+bool Audio::loadSound(int i, const std::string &filename)
 {
 	if (!engine->useAudio)
 	{
@@ -86,7 +82,7 @@ bool Audio::loadSound(int i, const char *filename)
 		engine->unpack(filename, PAK_SOUND);
 		sound[i] = Mix_LoadWAV_RW(engine->sdlrw, 1);
 	#else
-		sound[i] = Mix_LoadWAV(filename);
+		sound[i] = Mix_LoadWAV(filename.c_str());
 	#endif
 
 	if (!sound[i])
@@ -98,18 +94,16 @@ bool Audio::loadSound(int i, const char *filename)
 	return true;
 }
 
-bool Audio::loadMusic(const char *filename)
+bool Audio::loadMusic(const std::string &filename)
 {
-	char tempPath[PATH_MAX];
-	
-	snprintf(tempPath, sizeof tempPath, "%smusic.mod", engine->userHomeDirectory);
+	std::string tempPath = fmt::format("{}music.mod", engine->userHomeDirectory);
 	
 	if (!engine->useAudio)
 	{
 		return true;
 	}
 
-	remove(tempPath);
+	remove(tempPath.c_str());
 	
 	if (music != NULL)
 	{
@@ -121,9 +115,9 @@ bool Audio::loadMusic(const char *filename)
 
 	#if USEPAK
 		engine->unpack(filename, PAK_MUSIC);
-		music = Mix_LoadMUS(tempPath);
+		music = Mix_LoadMUS(tempPath.c_str());
 	#else
-		music = Mix_LoadMUS(filename);
+		music = Mix_LoadMUS(filename.c_str());
 	#endif
 
 	songtitle[0] = 0;
@@ -138,42 +132,36 @@ bool Audio::loadMusic(const char *filename)
 	}
 
 	#if USEPAK
-		snprintf(tempPath, sizeof tempPath, "%smusic.tags", engine->userHomeDirectory);
-		remove(tempPath);
-		char tagfilename[PATH_MAX];
-		snprintf(tagfilename, sizeof tagfilename, "%s.tags", filename);
+		tempPath = fmt::format("{}music.tags", engine->userHomeDirectory);
+		remove(tempPath.c_str());
+
+		std::string tagFileName = fmt::format("{}.tags", filename);
 		engine->unpack(tagfilename, PAK_TAGS);
 	#else
-		snprintf(tempPath, sizeof tempPath, "%s.tags", filename);
+		tempPath = fmt::format("{}.tags", filename);
 	#endif
-	FILE *fp = fopen(tempPath, "r");
-	char line[1024];
 	
-	while(fp && fgets(line, sizeof line, fp))
+	std::ifstream file(tempPath);
+	std::string line;
+	
+	while(std::getline(file, line))
 	{
-		int l = strlen(line);
-		if(line[l - 1] == '\n')
-			line[l - 1] = 0;
-
-		if(!strncasecmp(line, "title=", 6))
-			 strlcpy(songtitle, line + 6, sizeof songtitle);
-		else if(!strncasecmp(line, "album=", 6))
-			 strlcpy(songalbum, line + 6, sizeof songalbum);
-		else if(!strncasecmp(line, "artist=", 7))
-			 strlcpy(songartist, line + 7, sizeof songartist);
-		else if(!strncasecmp(line, "license=", 8))
+		if(!line.compare(0, 6, "title="))
+			songtitle = line.substr(6);
+		else if(!line.compare(0, 6, "album="))
+			songalbum = line.substr(6);
+		else if(!line.compare(0, 7, "artist="))
+			songartist = line.substr(7);
+		else if(!line.compare(0, 8, "license="))
 		{
-			if(!strncasecmp(line + 8, "CC-BY ", 6))
+			if(!line.compare(8, 6, "CC-BY "))
 				songlicense = 0;
-			else if(!strncasecmp(line + 8, "CC-BY-SA ", 9))
+			else if(!line.compare(8, 9, "CC-BY-SA "))
 				songlicense = 1;
 		}
 	}
 
-	if(fp)
-		fclose(fp);
-	
-	strlcpy(levelMusicName, filename, sizeof levelMusicName);
+	levelMusicName = filename;
 
 	return true;
 }
@@ -245,16 +233,14 @@ void Audio::playMusicOnce()
 
 bool Audio::loadGameOverMusic()
 {
-	char tempPath[PATH_MAX];
-	
-	snprintf(tempPath, sizeof tempPath, "%smusic.mod", engine->userHomeDirectory);
-	
 	if (!engine->useAudio)
 	{
 		return true;
 	}
 
-	remove(tempPath);
+	std::string tempPath = engine->userHomeDirectory + "music.mod";
+	
+	remove(tempPath.c_str());
 	SDL_Delay(250); // wait a bit, just to be sure!
 
 	if (music != NULL)
@@ -267,7 +253,7 @@ bool Audio::loadGameOverMusic()
 
 	#if USEPAK
 		engine->unpack("music/gameover", PAK_MUSIC);
-		music = Mix_LoadMUS(tempPath);
+		music = Mix_LoadMUS(tempPath.c_str());
 	#else
 		music = Mix_LoadMUS("music/gameover");
 	#endif

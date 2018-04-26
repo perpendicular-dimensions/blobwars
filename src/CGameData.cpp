@@ -36,16 +36,16 @@ void GameData::destroy()
 	clear();
 }
 
-void GameData::addCompletedObjective(const char *key, const char *value, int current, int target)
+void GameData::addCompletedObjective(const std::string &key, const std::string &value, int current, int target)
 {
 	Data *data = (Data*)dataList.getHead();
 
 	while (data->next != NULL)
 	{
 		data = (Data*)data->next;
-		if (strcmp(key, data->key) == 0)
+		if (key == data->key)
 		{
-			if (strcmp(value, data->value) == 0)
+			if (value == data->value)
 			{
 				data->set(key, value, current, target);
 				return;
@@ -66,9 +66,9 @@ void GameData::addCompletedObjective(Data *newData)
 	while (data->next != NULL)
 	{
 		data = (Data*)data->next;
-		if (strcmp(data->key, newData->key) == 0)
+		if (data->key == newData->key)
 		{
-			if (strcmp(data->value, newData->value) == 0)
+			if (data->value == newData->value)
 			{
 				data->set(newData->key, newData->value, newData->current, newData->target);
 				return;
@@ -79,19 +79,18 @@ void GameData::addCompletedObjective(Data *newData)
 	dataList.add(newData);
 }
 
-void GameData::setMIARescueCount(const char *key, int rescues, int total)
+void GameData::setMIARescueCount(const std::string &key, int rescues, int total)
 {
 	Data *data = (Data*)dataList.getHead();
 
-	char newKey[100];
-	snprintf(newKey, sizeof newKey, "%s MIAs", key);
+	std::string newKey = key + " MIAs";
 
 	while (data->next != NULL)
 	{
 		data = (Data*)data->next;
-		if (strcmp(newKey, data->key) == 0)
+		if (newKey == data->key)
 		{
-			strlcpy(data->value, "MIAs", sizeof data->value);
+			data->value = "MIAs";
 			data->current = rescues;
 			data->target = total;
 			return;
@@ -105,19 +104,18 @@ void GameData::setMIARescueCount(const char *key, int rescues, int total)
 	dataList.add(data);
 }
 
-bool GameData::MIARescued(const char *stageName, char *name)
+bool GameData::MIARescued(const std::string &stageName, const std::string &name)
 {
 	Data *data = (Data*)dataList.getHead();
 
-	char newName[100];
-	snprintf(newName, sizeof newName, "MIA_%s", name);
+	std::string  newName = "MIA_" + name;
 
 	while (data->next != NULL)
 	{
 		data = (Data*)data->next;
-		if (strcmp(data->key, stageName) == 0)
+		if (data->key == stageName)
 		{
-			if (strcmp(data->value, newName) == 0)
+			if (data->value == newName)
 			{
 				return data->isComplete();
 			}
@@ -127,16 +125,16 @@ bool GameData::MIARescued(const char *stageName, char *name)
 	return false;
 }
 
-bool GameData::objectiveCompleted(const char *stageName, const char *name)
+bool GameData::objectiveCompleted(const std::string &stageName, const std::string &name)
 {
 	Data *data = (Data*)dataList.getHead();
 
 	while (data->next != NULL)
 	{
 		data = (Data*)data->next;
-		if (strcmp(data->key, stageName) == 0)
+		if (data->key == stageName)
 		{
-			if (strcmp(data->value, name) == 0)
+			if (data->value == name)
 			{
 				return (data->current == data->target);
 			}
@@ -146,7 +144,7 @@ bool GameData::objectiveCompleted(const char *stageName, const char *name)
 	return false;
 }
 
-void GameData::getObjectiveValues(const char *stageName, const char *name, int *current, int *target)
+void GameData::getObjectiveValues(const std::string &stageName, const std::string &name, int *current, int *target)
 {
 	*current = -1;
 	*target = -1;
@@ -156,9 +154,9 @@ void GameData::getObjectiveValues(const char *stageName, const char *name, int *
 	while (data->next != NULL)
 	{
 		data = (Data*)data->next;
-		if (strcmp(data->key, stageName) == 0)
+		if (data->key == stageName)
 		{
-			if (strcmp(data->value, name) == 0)
+			if (data->value == name)
 			{
 				data->getCurrentTarget(current, target);
 				return;
@@ -167,14 +165,14 @@ void GameData::getObjectiveValues(const char *stageName, const char *name, int *
 	}
 }
 
-bool GameData::stagePreviouslyCleared(const char *stageName)
+bool GameData::stagePreviouslyCleared(const std::string &stageName)
 {
 	Data *data = (Data*)dataList.getHead();
 
 	while (data->next != NULL)
 	{
 		data = (Data*)data->next;
-		if (strcmp(data->key, stageName) == 0)
+		if (data->key == stageName)
 		{
 			return true;
 		}
@@ -183,16 +181,16 @@ bool GameData::stagePreviouslyCleared(const char *stageName)
 	return false;
 }
 
-bool GameData::isCompleted(const char *key, const char *value)
+bool GameData::isCompleted(const std::string &key, const std::string &value)
 {
 	Data *data = (Data*)dataList.getHead();
 
 	while (data->next != NULL)
 	{
 		data = (Data*)data->next;
-		if (strcmp(key, data->key) == 0)
+		if (key == data->key)
 		{
-			if (strcmp(value, data->value) == 0)
+			if (value == data->value)
 				return true;
 		}
 	}
@@ -200,7 +198,7 @@ bool GameData::isCompleted(const char *key, const char *value)
 	return false;
 }
 
-bool GameData::levelPrefectlyCleared(const char *level)
+bool GameData::levelPrefectlyCleared(const std::string &level)
 {
 	Data *data = (Data*)dataList.getHead();
 	
@@ -210,7 +208,7 @@ bool GameData::levelPrefectlyCleared(const char *level)
 	{
 		data = (Data*)data->next;
 
-		if (strcmp(data->key, level) == 0)
+		if (data->key == level)
 		{
 			found = true;
 
@@ -225,7 +223,7 @@ bool GameData::levelPrefectlyCleared(const char *level)
 	return true;
 }
 
-bool GameData::requiredLevelCleared(const char *requiredLevel)
+bool GameData::requiredLevelCleared(const std::string &requiredLevel)
 {
 	Data *data = (Data*)dataList.getHead();
 
@@ -233,7 +231,7 @@ bool GameData::requiredLevelCleared(const char *requiredLevel)
 	{
 		data = (Data*)data->next;
 
-		if (strcmp(data->key, requiredLevel) == 0)
+		if (data->key == requiredLevel)
 		{
 			return true;
 		}
@@ -255,7 +253,7 @@ void GameData::calculateWorldCompleted()
 	{
 		data = (Data*)data->next;
 		
-		if (strcmp(data->key, "BioMech HQ") == 0)
+		if (data->key == "BioMech HQ")
 		{
 			completedWorld = true;
 		}

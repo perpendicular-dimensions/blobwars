@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-static void playIntro(int tx, int ty, int delay)
+static void playIntro(split &it, int tx, int ty, int delay)
 {
 	unsigned int frameLimit = SDL_GetTicks() + 16;
 	unsigned int time = 0;
@@ -29,21 +29,22 @@ static void playIntro(int tx, int ty, int delay)
 	graphics.setFontSize(1);
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 
-	char *line[3];
+	std::string line[3];
 	SDL_Surface *text[3];
 
 	for (int i = 0 ; i < 3 ; i++)
 	{
-		line[i] = strtok(NULL, "\n");
+		line[i] = *it;
+		++it;
 
-		if (!line[i])
+		if (line[i].empty())
 		{
 			return graphics.showErrorAndExit("Malformed Intro Data", "");
 		}
 
 		text[i] = NULL;
 
-		if (strcmp(line[i], "@none@"))
+		if (line[i] != "@none@")
 		{
 			text[i] = graphics.getString(line[i], true);
 		}
@@ -116,15 +117,13 @@ static void showIntroError()
 	}
 }
 
-static void parseIntroCommand()
+static void parseIntroCommand(std::string_view line)
 {
-	char *line;
 	char command[25], param[25];
 
-	line = strtok(NULL, "\n");
-	sscanf(line, "%s %s", command, param);
+	scan(line, "%s %s", command, param);
 
-	if (strcmp(command, "SPAWN") == 0)
+	if (!strcmp(command, "SPAWN"))
 	{
 		SpawnPoint *sp = (SpawnPoint*)map.spawnList.getHead();
 
@@ -132,7 +131,7 @@ static void parseIntroCommand()
 		{
 			sp = (SpawnPoint*)sp->next;
 
-			if (strcmp(param, sp->name) == 0)
+			if (param == sp->name)
 			{
 				sp->active = true;
 			}
@@ -163,19 +162,20 @@ int doIntro()
 
 	audio.playMusic();
 
-	strtok((char*)engine.dataBuffer, "\n");
+	auto lines = split(engine.dataBuffer, '\n');
+	++lines;
 
-	while (true)
+	for (auto it = lines.begin(); it != lines.end(); ++it)
 	{
-		char *line = strtok(NULL, "\n");
-		sscanf(line, "%d %d %d", &x, &y, &delay);
+		if (scan(*it, "%d %d %d", &x, &y, &delay) != 3)
+			abort();
 
 		if (delay == -1)
 			break;
 
-		parseIntroCommand();
+		parseIntroCommand(*++it);
 
-		playIntro(x, y, delay);
+		playIntro(it, x, y, delay);
 
 		if (engine.userAccepts())
 			break;

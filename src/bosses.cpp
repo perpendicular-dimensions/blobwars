@@ -96,10 +96,10 @@ static void tankBossLevel()
 	{
 		enemy = (Entity*)enemy->next;
 		
-		if (strcmp(enemy->name, "Red Blob 1") == 0)
+		if (enemy->name == "Red Blob 1")
 			blob1 = true;
 		
-		if (strcmp(enemy->name, "Red Blob 2") == 0)
+		if (enemy->name == "Red Blob 2")
 			blob2 = true;	
 	}
 	
@@ -301,7 +301,7 @@ static void galdovFinalLevel()
 	}
 }
 
-void createBoss(const char *stageName)
+void createBoss(const std::string &stageName)
 {
 	map.mainBossPart = NULL;
 	
@@ -312,32 +312,32 @@ void createBoss(const char *stageName)
 	
 	debug(("createBoss()\n"));
 	
-	if (strcmp(stageName, "BioMech Supply Depot") == 0)
+	if (stageName == "BioMech Supply Depot")
 	{
 		tankBossMGInit();
 		tankBossGLInit();
 		map.bossNextThink = 0;
 		map.doBossLevelAction = &tankBossLevel;
 	}
-	else if (strcmp(stageName, "BioMech Communications") == 0)
+	else if (stageName == "BioMech Communications")
 	{
 		aquaBossInit();
 		map.bossNextThink = 0;
 		map.doBossLevelAction = &aquaBossLevel;
 	}
-	else if (strcmp(stageName, "BioMech Assimilator") == 0)
+	else if (stageName == "BioMech Assimilator")
 	{
 		droidBossInit();
 		map.bossNextThink = 0;
 		map.doBossLevelAction = &droidBossLevel;
 	}
-	else if (strcmp(stageName, "BioMech HQ") == 0)
+	else if (stageName == "BioMech HQ")
 	{
 		galdovInit();
 		map.bossNextThink = 0;
 		map.doBossLevelAction = &galdovLevel;
 	}
-	else if (strcmp(stageName, "Final Battle") == 0)
+	else if (stageName == "Final Battle")
 	{
 		galdovFinalInit();
 		map.bossNextThink = 0;

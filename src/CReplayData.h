@@ -4,7 +4,7 @@ class ReplayData
 	
 		static const int DATA_LENGTH = 650;
 	
-		FILE *fp;
+		std::fstream file;
 		int index;
 		char data[DATA_LENGTH][CONTROL::MAX];
 		
@@ -14,7 +14,7 @@ class ReplayData
 	
 			bool fast;
 	
-			char filename[PATH_MAX];
+			std::string filename;
 	
 			REPLAY_MODE::TYPE replayMode;
 			ReplayDataHeader header;

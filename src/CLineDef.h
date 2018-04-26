@@ -26,11 +26,13 @@ class LineDef : public GameObject {
 		int x, y;
 		int width, height;
 
-		char name[50], linkName[50], activateMessage[100];
+		std::string name;
+		std::string linkName;
+		std::string activateMessage;
 
 		bool activated;
 
 	LineDef();
-	void set(const char *name, const char *linkName, const char *activateMessage, int x, int y, int width, int height);
+	void set(const std::string &name, const std::string &linkName, const std::string &activateMessage, int x, int y, int width, int height);
 
 };

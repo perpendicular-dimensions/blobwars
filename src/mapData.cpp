@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-void getMapTokens()
+void getMapTokens(split &it)
 {
 	char skillLevel[10];
 	char mapEntity[255];
@@ -31,7 +31,7 @@ void getMapTokens()
 	
 	bool previouslyCleared = false;
 	
-	char *token = NULL;
+	std::string_view token;
 	
 	Persistant *persistant = NULL;
 	PersistData *persistData = NULL;
@@ -40,7 +40,8 @@ void getMapTokens()
 	{
 		if (!previouslyCleared)
 		{
-			token = strtok(NULL, "\n");
+			token = *it;
+			++it;
 		}
 		else
 		{
@@ -59,24 +60,24 @@ void getMapTokens()
 
 		allowAtSkillLevel = false;
 
-		sscanf(token, "%s", skillLevel);
+		scan(token, "%s", skillLevel);
 
-		if ((strstr(skillLevel, "E")) && (game.skill == 0))
+		if ((contains(skillLevel, "E")) && (game.skill == 0))
 		{
 			allowAtSkillLevel = true;
 		}
 
-		if ((strstr(skillLevel, "M")) && (game.skill == 1))
+		if ((contains(skillLevel, "M")) && (game.skill == 1))
 		{
 			allowAtSkillLevel = true;
 		}
 
-		if ((strstr(skillLevel, "H")) && (game.skill >= 2))
+		if ((contains(skillLevel, "H")) && (game.skill >= 2))
 		{
 			allowAtSkillLevel = true;
 		}
 		
-		if ((strstr(skillLevel, "X")) && (game.skill == 3))
+		if ((contains(skillLevel, "X")) && (game.skill == 3))
 		{
 			allowAtSkillLevel = true;
 		}
@@ -86,7 +87,7 @@ void getMapTokens()
 			allowAtSkillLevel = true;
 
 		// Ignore comments
-		if (strstr(skillLevel, "//"))
+		if (contains(skillLevel, "//"))
 			allowAtSkillLevel = false;
 
 		if (strcmp("@EOF@", skillLevel) == 0)
@@ -96,11 +97,11 @@ void getMapTokens()
 
 		if (allowAtSkillLevel)
 		{
-			sscanf(token, "%*s %s", mapEntity);
+			scan(token, "%*s %s", mapEntity);
 
 			if (strcmp("STAGENAME", mapEntity) == 0)
 			{
-				sscanf(token, "%*s %*s %*c %[^\"] %*c", string[0]);
+				scan(token, "%*s %*s %*c %[^\"] %*c", string[0]);
 
 				map.setName(string[0]);
 				game.setStageName(string[0]);
@@ -119,28 +120,28 @@ void getMapTokens()
 			else if (strcmp("TIMELIMIT", mapEntity) == 0)
 			{
 				debug(("Loading Time Limit: %s\n", token));
-				sscanf(token, "%*s %*s %d %d", &param[0], &param[1]);
+				scan(token, "%*s %*s %d %d", &param[0], &param[1]);
 				map.remainingMinutes = param[0];
 				map.remainingSeconds = param[1];
 			}
 			else if (strcmp("TRAIN", mapEntity) == 0)
 			{
-				sscanf(token, "%*s %*s %s %d %d %d %d %d %s %s", string[0], &param[0], &param[1], &param[2], &param[3], &param[4], string[1], string[2]);
+				scan(token, "%*s %*s %s %d %d %d %d %d %s %s", string[0], &param[0], &param[1], &param[2], &param[3], &param[4], string[1], string[2]);
 				map.addTrain(string[0], param[0], param[1], param[2], param[3], param[4], engine.getValueOfDefine(string[1]), engine.getValueOfDefine(string[2]));
 			}
 			else if (strcmp("DOOR", mapEntity) == 0)
 			{
-				sscanf(token, "%*s %*s %s %s %d %d %d %d %s", string[0], string[1], &param[0], &param[1], &param[2], &param[3], string[2]);
+				scan(token, "%*s %*s %s %s %d %d %d %d %s", string[0], string[1], &param[0], &param[1], &param[2], &param[3], string[2]);
 				map.addDoor(string[0], engine.getValueOfDefine(string[1]), param[0], param[1], param[2], param[3], engine.getValueOfDefine(string[2]));
 			}
 			else if (strcmp("SWITCH", mapEntity) == 0)
 			{
-				sscanf(token, "%*s %*s %*c %[^\"] %*c %s %*c %[^\"] %*c %*c %[^\"] %*c %s %d %d %s", string[0], string[1], string[2], string[3], string[4], &param[0], &param[1], string[5]);
+				scan(token, "%*s %*s %*c %[^\"] %*c %s %*c %[^\"] %*c %*c %[^\"] %*c %s %d %d %s", string[0], string[1], string[2], string[3], string[4], &param[0], &param[1], string[5]);
 				map.addSwitch(string[0], string[1], string[2], string[3], engine.getValueOfDefine(string[4]), param[0], param[1], engine.getValueOfDefine(string[5]));
 			}
 			else if (strcmp("ITEM", mapEntity) == 0)
 			{
-				sscanf(token, "%*s %*s %d %*c %[^\"] %*c %d %d %s", &param[0], string[0], &param[1], &param[2], string[1]);
+				scan(token, "%*s %*s %d %*c %[^\"] %*c %d %d %s", &param[0], string[0], &param[1], &param[2], string[1]);
 				
 				addItem(param[0], string[0], param[1], param[2], string[1], 60, 1, 0, false);
 
@@ -151,19 +152,19 @@ void getMapTokens()
 			}
 			else if (strcmp("OBSTACLE", mapEntity) == 0)
 			{
-				sscanf(token, "%*s %*s %*c %[^\"] %*c %d %d %s", string[0], &param[0], &param[1], string[1]);
+				scan(token, "%*s %*s %*c %[^\"] %*c %d %d %s", string[0], &param[0], &param[1], string[1]);
 
 				addObstacle(string[0], param[0], param[1], string[1]);
 			}
 			else if (strcmp("OBJECTIVE", mapEntity) == 0)
 			{
-				sscanf(token, "%*s %*s %*c %[^\"] %*c %*c %[^\"] %*c %d %s", string[0], string[1], &param[0], string[2]);
+				scan(token, "%*s %*s %*c %[^\"] %*c %*c %[^\"] %*c %d %s", string[0], string[1], &param[0], string[2]);
 
 				map.addObjective(string[0], string[1], param[0], engine.getValueOfDefine(string[2]));
 			}
 			else if (strcmp("START", mapEntity) == 0)
 			{
-				sscanf(token, "%*s %*s %d %d", &param[0], &param[1]);
+				scan(token, "%*s %*s %d %d", &param[0], &param[1]);
 
 				player.place(param[0], param[1]);
 
@@ -175,7 +176,7 @@ void getMapTokens()
 			{
 				if (!engine.devNoMonsters)
 				{
-					sscanf(token, "%*s %*s %*c %[^\"] %*c %d %d", string[0], &param[0], &param[1]);
+					scan(token, "%*s %*s %*c %[^\"] %*c %d %d", string[0], &param[0], &param[1]);
 					
 					if ((game.skill == 0) && (map.waterLevel != -1))
 					{
@@ -189,70 +190,70 @@ void getMapTokens()
 			}
 			else if (strcmp("MIA", mapEntity) == 0)
 			{
-				sscanf(token, "%*s %*s %*c %[^\"] %*c %d %d %s", string[0], &param[0], &param[1], string[1]);
+				scan(token, "%*s %*s %*c %[^\"] %*c %d %d %s", string[0], &param[0], &param[1], string[1]);
 				addMIA(string[0], param[0], param[1], engine.getValueOfDefine(string[1]));
 				map.totalMIAs++;
 			}
 			else if (strcmp("REQUIREDMIAS", mapEntity) == 0)
 			{
-				sscanf(token, "%*s %*s %d", &param[0]);
+				scan(token, "%*s %*s %d", &param[0]);
 				map.requiredMIAs = param[0];
 			}
 			else if (strcmp("LINEDEF", mapEntity) == 0)
 			{
-				sscanf(token, "%*s %*s %*c %[^\"] %*c %s %*c %[^\"] %*c %d %d %d %d %s", string[0], string[1], string[2], &param[0], &param[1], &param[2], &param[3], string[3]);
+				scan(token, "%*s %*s %*c %[^\"] %*c %s %*c %[^\"] %*c %d %d %d %d %s", string[0], string[1], string[2], &param[0], &param[1], &param[2], &param[3], string[3]);
 
 				addLineDef(string[0], string[1], string[2], param[0], param[1], param[2], param[3], engine.getValueOfDefine(string[3]));
 			}
 			else if (strcmp("SPAWNPOINT", mapEntity) == 0)
 			{
-				sscanf(token, "%*s %*s %s %d %d %s %s %d %d %s", string[0], &param[0], &param[1], string[1], string[2], &param[2], &param[3], string[3]);
+				scan(token, "%*s %*s %s %d %d %s %s %d %d %s", string[0], &param[0], &param[1], string[1], string[2], &param[2], &param[3], string[3]);
 				map.addSpawnPoint(string[0], param[0], param[1], engine.getValueOfDefine(string[1]), engine.getValueOfDefine(string[2]), param[2], param[3], engine.getValueOfDefine(string[3]));
 			}
 			else if (strcmp("SPAWNABLE_ENEMY", mapEntity) == 0)
 			{
-				sscanf(token, "%*s %*s %*c %[^\"] %*c", string[0]);
+				scan(token, "%*s %*s %*c %[^\"] %*c", string[0]);
 				map.setAllowableEnemy(getDefinedEnemy(string[0]));
 			}
 			else if (strcmp("TELEPORTER", mapEntity) == 0)
 			{
-				sscanf(token, "%*s %*s %s %d %d %d %d %s", string[0], &param[0], &param[1], &param[2], &param[3], string[1]);
+				scan(token, "%*s %*s %s %d %d %d %d %s", string[0], &param[0], &param[1], &param[2], &param[3], string[1]);
 				addTeleporter(string[0], param[0], param[1], param[2], param[3], engine.getValueOfDefine(string[1]));
 			}
 			else if (strcmp("TRAP", mapEntity) == 0)
 			{
-				sscanf(token, "%*s %*s %s %s %d %d %d %d %d %d %d %d %s %s", string[0], string[1], &param[0], &param[1], &param[2], &param[3], &param[4], &param[5], &param[6], &param[7], string[2], string[3]);
+				scan(token, "%*s %*s %s %s %d %d %d %d %d %d %d %d %s %s", string[0], string[1], &param[0], &param[1], &param[2], &param[3], &param[4], &param[5], &param[6], &param[7], string[2], string[3]);
 				addTrap(string[0], engine.getValueOfDefine(string[1]), param[0], param[1], param[2], param[3], param[4], param[5], param[6], param[7], string[2], engine.getValueOfDefine(string[3]));
 			}
 			else if (strcmp("SPRITE", mapEntity) == 0)
 			{
-				sscanf(token, "%*s %*s %[^\n\r]", string[0]);
+				scan(token, "%*s %*s %[^\n\r]", string[0]);
 				loadSprite(string[0]);
 			}
 			else if (strcmp("DEFENEMY", mapEntity) == 0)
 			{
-				sscanf(token, "%*s %*s %[^\n\r]", string[0]);
+				scan(token, "%*s %*s %[^\n\r]", string[0]);
 				loadEnemy(string[0]);
 			}
 			else if (strcmp("TILESET", mapEntity) == 0)
 			{
-				sscanf(token, "%*s %*s %s", string[0]);
+				scan(token, "%*s %*s %s", string[0]);
 				map.evalTileset(string[0]);
 				graphics.loadMapTiles(string[0]);
 			}
 			else if (strcmp("CLIPPING", mapEntity) == 0)
 			{
-				sscanf(token, "%*s %*s %d %d %d %d", &param[0], &param[1], &param[2], &param[3]);
+				scan(token, "%*s %*s %d %d %d %d", &param[0], &param[1], &param[2], &param[3]);
 				map.setClipping(param[0], param[1], param[2], param[3]);
 			}
 			else if (strcmp("AMBIENCE", mapEntity) == 0)
 			{
-				sscanf(token, "%*s %*s %s", string[0]);
+				scan(token, "%*s %*s %s", string[0]);
 				audio.loadSound(SND_AMBIANCE, string[0]);
 			}
 			else if (strcmp("WATERLEVEL", mapEntity) == 0)
 			{
-				sscanf(token, "%*s %*s %d", &param[0]);
+				scan(token, "%*s %*s %d", &param[0]);
 				
 				map.requiredWaterLevel = param[0];
 				
@@ -273,12 +274,13 @@ void getMapTokens()
 			}
 			else if (strcmp("ALPHATILES", mapEntity) == 0)
 			{
-				for (int i = 0 ; i < 15 ; i++)
-					token++;
+				auto it = split(token, ' ').begin();
+				++it;
+				++it;
 
-				while (true)
+				for (; it != it.end(); ++it)
 				{
-					sscanf(token, "%d", &param[0]);
+					param[0] = stoi(*it);
 
 					if (param[0] == -1)
 						break;
@@ -286,24 +288,16 @@ void getMapTokens()
 					debug(("Setting Alpha for Tile %d\n", param[0]));
 
 					SDL_SetAlpha(graphics.tile[param[0]], 130);
-
-					while (true)
-					{
-						token++;
-
-						if (*token == ' ')
-							break;
-					}
 				}
 			}
 			else if (strcmp("BACKGROUND", mapEntity) == 0)
 			{
-				sscanf(token, "%*s %*s %s", string[0]);
+				scan(token, "%*s %*s %s", string[0]);
 				graphics.loadBackground(string[0]);
 			}
 			else if (strcmp("MUSIC", mapEntity) == 0)
 			{
-				sscanf(token, "%*s %*s %s", string[0]);
+				scan(token, "%*s %*s %s", string[0]);
 				audio.loadMusic(string[0]);
 			}
 			else if (allowAtSkillLevel)
@@ -337,7 +331,7 @@ void getMapTokens()
 	}
 }
 
-const char *getActiveState(bool active)
+std::string getActiveState(bool active)
 {
 	if (active)
 	{
@@ -363,9 +357,6 @@ void createPersistantMapData()
 		return;
 	}
 	
-	char line[1024];
-	line[0] = 0;
-	
 	char skill;
 	
 	switch (game.skill)
@@ -381,7 +372,7 @@ void createPersistantMapData()
 			break;
 	}
 	
-	snprintf(line, sizeof line, "%c START %d %d\n", skill, (int)game.checkPointX, (int)game.checkPointY);
+	std::string line = fmt::format("{} START {} {}\n", skill, game.checkPointX, game.checkPointY);
 	persistant->addLine(line);
 
 	Entity *ent;
@@ -392,14 +383,14 @@ void createPersistantMapData()
 	LineDef *lineDef;
 	SpawnPoint *spawnPoint;
 	
-	char *define[3];
+	std::string define[3];
 	
 	ent = (Entity*)map.enemyList.getHead();
 	
 	while (ent->next != NULL)
 	{
 		ent = (Entity*)ent->next;
-		snprintf(line, sizeof line, "%c ENEMY \"%s\" %d %d\n", skill, ent->name, (int)ent->x, (int)ent->y);
+		line = fmt::format("{} ENEMY \"{}\" {} {}\n", skill, ent->name, ent->x, ent->y);
 		persistant->addLine(line);
 	}
 	
@@ -415,7 +406,7 @@ void createPersistantMapData()
 			continue;
 		}
 		
-		snprintf(line, sizeof line, "%c ITEM %d \"%s\" %d %d %s\n", skill, ent->id, ent->name, (int)ent->x, (int)ent->y, ent->sprite[0]->name);
+		line = fmt::format("{} ITEM {} \"{}\" {} {} {}\n", skill, ent->id, ent->name, ent->x, ent->y, ent->sprite[0]->name);
 		persistant->addLine(line);
 	}
 	
@@ -424,7 +415,7 @@ void createPersistantMapData()
 	while (ent->next != NULL)
 	{
 		ent = (Entity*)ent->next;
-		snprintf(line, sizeof line, "%c OBSTACLE \"%s\" %d %d %s\n", skill, ent->name, (int)ent->x, (int)ent->y, ent->sprite[0]->name);
+		line = fmt::format("{} OBSTACLE \"{}\" {} {} {}\n", skill, ent->name, ent->x, ent->y, ent->sprite[0]->name);
 		persistant->addLine(line);
 	}
 	
@@ -434,10 +425,9 @@ void createPersistantMapData()
 	{
 		swt = (Switch*)swt->next;
 		define[0] = engine.getDefineOfValue("SWT_", swt->type);
-		define[1] = (char*)getActiveState(swt->activated);
+		define[1] = getActiveState(swt->activated);
 		
-		snprintf(line, sizeof line, "%c SWITCH \"%s\" %s \"%s\" \"%s\" %s %d %d %s\n", skill, swt->name, swt->linkName, swt->requiredObjectName, swt->activateMessage, define[0], (int)swt->x, (int)swt->y, define[1]);
-		
+		line = fmt::format("{} SWITCH \"{}\" {} \"{}\" \"{}\" {} {} {} {}\n", skill, swt->name, swt->linkName, swt->requiredObjectName, swt->activateMessage, define[0], swt->x, swt->y, define[1]);
 		persistant->addLine(line);
 	}
 	
@@ -458,14 +448,14 @@ void createPersistantMapData()
 				define[0] = engine.getDefineOfValue("_DOO", train->type);
 			}
 			
-			define[1] = (char*)getActiveState(train->active);
-			snprintf(line, sizeof line, "%c DOOR %s %s %d %d %d %d %s\n", skill, train->name, define[0], train->startX, train->startY, train->endX, train->endY, define[1]);
+			define[1] = getActiveState(train->active);
+			line = fmt::format("{} DOOR {} {} {} {} {} {} {}\n", skill, train->name, define[0], train->startX, train->startY, train->endX, train->endY, define[1]);
 		}
 		else
 		{
 			define[0] = engine.getDefineOfValue("TR_A", train->waitAtStart);
-			define[1] = (char*)getActiveState(train->active);
-			snprintf(line, sizeof line, "%c TRAIN %s %d %d %d %d %d %s %s\n", skill, train->name, train->startX, train->startY, train->endX, train->endY, train->getPause(), define[0], define[1]);
+			define[1] = getActiveState(train->active);
+			line = fmt::format("{} TRAIN {} {} {} {} {} {} {} {}\n", skill, train->name, train->startX, train->startY, train->endX, train->endY, train->getPause(), define[0], define[1]);
 		}
 				
 		persistant->addLine(line);
@@ -477,8 +467,8 @@ void createPersistantMapData()
 	{
 		trap = (Trap*)trap->next;
 		define[0] = engine.getDefineOfValue("TRAP_TYPE", trap->type);
-		define[1] = (char*)getActiveState(trap->active);
-		snprintf(line, sizeof line, "%c TRAP %s %s %d %d %d %d %d %d %d %d %s %s\n", skill, trap->name, define[0], (int)trap->damage, (int)trap->speed, (int)trap->startX, (int)trap->startY, (int)trap->endX, (int)trap->endY, (int)trap->waitTime[0], (int)trap->waitTime[1], trap->sprite->name, define[1]);
+		define[1] = getActiveState(trap->active);
+		line = fmt::format("{} TRAP {} {} {} {} {} {} {} {} {} {} {} {}\n", skill, trap->name, define[0], (int)trap->damage, (int)trap->speed, (int)trap->startX, (int)trap->startY, (int)trap->endX, (int)trap->endY, (int)trap->waitTime[0], (int)trap->waitTime[1], trap->sprite->name, define[1]);
 		persistant->addLine(line);
 	}
 	
@@ -487,8 +477,8 @@ void createPersistantMapData()
 	while (teleporter->next != NULL)
 	{
 		teleporter = (Teleporter*)teleporter->next;
-		define[0] = (char*)getActiveState(teleporter->active);
-		snprintf(line, sizeof line, "%c TELEPORTER %s %d %d %d %d %s\n", skill, teleporter->name, (int)teleporter->x, (int)teleporter->y, (int)teleporter->destX, (int)teleporter->destY, define[0]);
+		define[0] = getActiveState(teleporter->active);
+		line = fmt::format("{} TELEPORTER {} {} {} {} {} {}\n", skill, teleporter->name, (int)teleporter->x, (int)teleporter->y, (int)teleporter->destX, (int)teleporter->destY, define[0]);
 		persistant->addLine(line);
 	}
 	
@@ -497,8 +487,8 @@ void createPersistantMapData()
 	while (lineDef->next != NULL)
 	{
 		lineDef = (LineDef*)lineDef->next;
-		define[0] = (char*)getActiveState(lineDef->activated);
-		snprintf(line, sizeof line, "%c LINEDEF \"%s\" %s \"%s\" %d %d %d %d %s\n", skill, lineDef->name, lineDef->linkName, lineDef->activateMessage, (int)lineDef->x, (int)lineDef->y, (int)lineDef->width, (int)lineDef->height, define[0]);
+		define[0] = getActiveState(lineDef->activated);
+		line = fmt::format("{} LINEDEF \"{}\" {} \"{}\" {} {} {} {} {}\n", skill, lineDef->name, lineDef->linkName, lineDef->activateMessage, (int)lineDef->x, (int)lineDef->y, (int)lineDef->width, (int)lineDef->height, define[0]);
 		persistant->addLine(line);
 	}
 	
@@ -509,7 +499,7 @@ void createPersistantMapData()
 		spawnPoint = (SpawnPoint*)spawnPoint->next;
 		define[0] = engine.getDefineOfValue("SPW_", spawnPoint->spawnType);
 		
-		if (strstr(define[0], "HAZARD"))
+		if (contains(define[0], "HAZARD"))
 		{
 			define[1] = engine.getDefineOfValue("HAZARD_", spawnPoint->spawnSubType);
 		}
@@ -518,23 +508,23 @@ void createPersistantMapData()
 			define[1] = engine.getDefineOfValue("SPW_", spawnPoint->spawnSubType);
 		}
 			
-		define[2] = (char*)getActiveState(spawnPoint->active);
-		snprintf(line, sizeof line, "%c SPAWNPOINT %s %d %d %s %s %d %d %s\n", skill, spawnPoint->name, (int)spawnPoint->x, (int)spawnPoint->y, define[0], define[1], (int)(spawnPoint->minInterval / 60), (int)(spawnPoint->maxInterval / 60), define[2]);
+		define[2] = getActiveState(spawnPoint->active);
+		line = fmt::format("{} SPAWNPOINT {} {} {} {} {} {} {} {}\n", skill, spawnPoint->name, (int)spawnPoint->x, (int)spawnPoint->y, define[0], define[1], (int)(spawnPoint->minInterval / 60), (int)(spawnPoint->maxInterval / 60), define[2]);
 		persistant->addLine(line);
 	}
 	
 	for (int i = 0 ; i < 10 ; i++)
 	{
-		if (map.getSpawnableEnemy(i) != NULL)
+		if (!map.getSpawnableEnemy(i).empty())
 		{
-			snprintf(line, sizeof line, "%c SPAWNABLE_ENEMY \"%s\"\n", skill, map.getSpawnableEnemy(i));
+			line = fmt::format("{} SPAWNABLE_ENEMY \"{}\"\n", skill, map.getSpawnableEnemy(i));
 			persistant->addLine(line);
 		}
 	}
 	
 	if (map.waterLevel != -1)
 	{
-		snprintf(line, sizeof line, "%c WATERLEVEL %d\n", skill, (int)map.waterLevel);
+		line = fmt::format("{} WATERLEVEL {}\n", skill, (int)map.waterLevel);
 		persistant->addLine(line);
 	}
 	

@@ -29,26 +29,26 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 * @param activateMessage The message to display on successful trigger
 * @param active The new status of the object
 */
-void activateTrigger(const char *linkName, const char *activateMessage, bool active)
+void activateTrigger(const std::string &linkName, const std::string &activateMessage, bool active)
 {
-	if (strcmp(linkName, "@none@") == 0)
+	if (linkName == "@none@")
 		return;
 		
-	if (strcmp(linkName, "WATERLEVEL") == 0)
+	if (linkName == "WATERLEVEL")
 	{
-		int newLevel = atoi(activateMessage);
+		int newLevel = stoi(activateMessage);
 		
 		// only if the new level is less than our current level
 		// (ie - raising water up!)
 		if (newLevel < map.waterLevel)
 		{
-			map.requiredWaterLevel = atoi(activateMessage);
+			map.requiredWaterLevel = newLevel;
 			engine.setInfoMessage("Water level is rising", 1, INFO_ACTIVATE);
 		}
 		return;
 	}
 
-	if (strcmp(linkName, "OBSTACLERESET") == 0)
+	if (linkName == "OBSTACLERESET")
 	{
 		if (!active)
 			return;
@@ -59,7 +59,7 @@ void activateTrigger(const char *linkName, const char *activateMessage, bool act
 		{
 			obstacle = (Entity*)obstacle->next;
 
-			if (strcmp(obstacle->name, activateMessage) == 0)
+			if (obstacle->name == activateMessage)
 			{
 				addTeleportParticles(obstacle->x + (obstacle->width / 2), obstacle->y + (obstacle->height / 2), 50, SND_TELEPORT2);
 				obstacle->place(obstacle->tx, obstacle->ty);
@@ -86,10 +86,10 @@ void activateTrigger(const char *linkName, const char *activateMessage, bool act
 	{
 		train = (Train*)train->next;
 
-		if (strcmp(linkName, train->name) == 0)
+		if (linkName == train->name)
 		{
 			train->active = active;
-			if ((train->active) && (strcmp(activateMessage, "@none@")))
+			if ((train->active) && (activateMessage != "@none@"))
 				engine.setInfoMessage(activateMessage, 1, INFO_ACTIVATE);
 
 			if (train->type != TR_TRAIN)
@@ -103,10 +103,10 @@ void activateTrigger(const char *linkName, const char *activateMessage, bool act
 	{
 		sp = (SpawnPoint*)sp->next;
 
-		if (strcmp(linkName, sp->name) == 0)
+		if (linkName == sp->name)
 		{
 			sp->active = !sp->active;
-			if ((sp->active) && (strcmp(activateMessage, "@none@")))
+			if ((sp->active) && (activateMessage != "@none@"))
 				engine.setInfoMessage(activateMessage, 1, INFO_ACTIVATE);
 
 			linkOkay = true;
@@ -117,10 +117,10 @@ void activateTrigger(const char *linkName, const char *activateMessage, bool act
 	{
 		tele = (Teleporter*)tele->next;
 
-		if (strcmp(linkName, tele->name) == 0)
+		if (linkName == tele->name)
 		{
 			tele->active = active;
-			if ((tele->active) && (strcmp(activateMessage, "@none@")))
+			if ((tele->active) && (activateMessage != "@none@"))
 				engine.setInfoMessage(activateMessage, 1, INFO_ACTIVATE);
 
 			linkOkay = true;
@@ -131,10 +131,10 @@ void activateTrigger(const char *linkName, const char *activateMessage, bool act
 	{
 		trap = (Trap*)trap->next;
 
-		if (strcmp(linkName, trap->name) == 0)
+		if (linkName == trap->name)
 		{
 			toggleTrap(trap);
-			if (strcmp(activateMessage, "@none@"))
+			if (activateMessage != "@none@")
 				engine.setInfoMessage(activateMessage, 1, INFO_ACTIVATE);
 			linkOkay = true;
 		}

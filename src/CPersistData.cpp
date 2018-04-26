@@ -23,22 +23,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 PersistData::PersistData()
 {
-	data[0] = 0;
 }
 
 PersistData::~PersistData()
 {
 }
 
-bool PersistData::setData(const char *data)
+bool PersistData::setData(const std::string &data)
 {
-	if (strlen(data) > 149)
-	{
-		debug(("ERROR: PERSISTANT DATA LINE EXCEEDS 150 CHARACTERS! IS %lu!\n", (unsigned long)strlen(data)));
-		return false;
-	}
-	
-	strlcpy(this->data, data, sizeof this->data);
-	
+	this->data = data;
 	return true;
 }

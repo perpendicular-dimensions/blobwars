@@ -39,12 +39,8 @@ void Keyboard::setDefaultKeys()
 	control[CONTROL::MAP] = SDL_SCANCODE_TAB;
 }
 
-const char *Keyboard::translateKey(int scancode)
+std::string Keyboard::translateKey(int scancode)
 {
-	static char keyName[50];
-	keyName[0] = 0;
-	keyName[0] = '\0';
-	
 	if (scancode <= 0)
 	{
 		return "...";
@@ -52,7 +48,7 @@ const char *Keyboard::translateKey(int scancode)
 
 	SDL_Keycode key = SDL_GetKeyFromScancode((SDL_Scancode)scancode);
 	
-	strlcpy(keyName, _(SDL_GetKeyName(key)), sizeof keyName);
+	std::string keyName = _(SDL_GetKeyName(key));
 	
 	/*
 	This is not really neccessary, but it just makes
@@ -62,24 +58,21 @@ const char *Keyboard::translateKey(int scancode)
 	*/
 	
 	bool uppercase = true;
-	char *c = keyName;
 	
-	while (*c != '\0')
+	for (auto &&c: keyName)
 	{
-		if ((*c >= SDL_SCANCODE_A) && (*c <= SDL_SCANCODE_Z))
+		if ((c >= SDL_SCANCODE_A) && (c <= SDL_SCANCODE_Z))
 		{
 			if (uppercase)
 			{
-				*c -= 32;
+				c -= 32;
 				uppercase = false;
 			}
 		}
-		else if (*c == SDL_SCANCODE_SPACE)
+		else if (c == SDL_SCANCODE_SPACE)
 		{
 			uppercase = true;
 		}
-		
-		c++;
 	}
 	
 	return keyName;

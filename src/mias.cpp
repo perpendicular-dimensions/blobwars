@@ -19,26 +19,26 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-char mia_scared[7][50];
-
 #include "headers.h"
+
+std::string mia_scared[7];
 
 void initMIAPhrases()
 {
-	strlcpy(mia_scared[0], "help me...", sizeof mia_scared[0]);
-	strlcpy(mia_scared[1], "i don't wanna die...", sizeof mia_scared[1]);
-	strlcpy(mia_scared[2], "please... someone help...", sizeof mia_scared[2]);
-	strlcpy(mia_scared[3], "i... i'm scared...", sizeof mia_scared[3]);
-	strlcpy(mia_scared[4], "i wanna go home...", sizeof mia_scared[4]);
-	strlcpy(mia_scared[5], "what was that?!", sizeof mia_scared[5]);
-	strlcpy(mia_scared[6], "i don't like it here...", sizeof mia_scared[6]);
+	mia_scared[0] = "help me...";
+	mia_scared[1] = "i don't wanna die...";
+	mia_scared[2] = "please... someone help...";
+	mia_scared[3] = "i... i'm scared...";
+	mia_scared[4] = "i wanna go home...";
+	mia_scared[5] = "what was that?!";
+	mia_scared[6] = "i don't like it here...";
 }
 
-void addMIA(const char *name, int x, int y, int type)
+void addMIA(const std::string &name, int x, int y, int type)
 {
 	Entity *mia = new Entity();
 
-	strlcpy(mia->name, name, sizeof mia->name);
+	mia->name = name;
 	mia->id = type;
 	mia->baseThink = 60;
 	mia->health = 180;
@@ -65,7 +65,7 @@ void doMIAs()
 
 	int x, y;
 
-	char message[256];
+	std::string message;
 
 	while (mia->next != NULL)
 	{
@@ -104,7 +104,7 @@ void doMIAs()
 				{
 					static Graphics::SurfaceCache cache;
 					graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
-					graphics.drawString(_((char*)mia_scared[mia->value]), x + 10, y - 10, true, graphics.screen, cache);
+					graphics.drawString(_(mia_scared[mia->value]), x + 10, y - 10, true, graphics.screen, cache);
 				}
 
 				graphics.blit(mia->getFaceImage(), x, y, graphics.screen, false);
@@ -144,17 +144,17 @@ void doMIAs()
 
 					if ((map.foundMIAs == (map.requiredMIAs / 2)) || (game.skill == 0))
 					{
-						snprintf(message, sizeof message, _("Rescued %s - Checkpoint Reached!"), mia->name);
+						message = fmt::format(_("Rescued {} - Checkpoint Reached!"), mia->name);
 						game.setObjectiveCheckPoint();
 					}
 					else
 					{
-						snprintf(message, sizeof message, _("Rescued %s!"), mia->name);
+						message = fmt::format(_("Rescued {}!"), mia->name);
 					}
 
 					if (map.foundMIAs == map.requiredMIAs)
 					{
-						snprintf(message, sizeof message, _("Rescue %d MIAs - Objective Complete - Checkpoint Reached!"), map.requiredMIAs);
+						message = fmt::format(_("Rescue {} MIAs - Objective Complete - Checkpoint Reached!"), map.requiredMIAs);
 						game.setObjectiveCheckPoint();
 					}
 					

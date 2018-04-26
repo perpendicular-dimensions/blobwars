@@ -201,8 +201,8 @@ void Graphics::updateScreen()
 	{
 		if ((Math::prand() % 500) == 0)
 		{
-			snprintf(screenshot, sizeof screenshot, "screenshots/screenshot%.3d.bmp", screenShotNumber);
-			SDL_SaveBMP(screen, screenshot);
+			screenshot = fmt::format("screenshots/screenshot{:.3d}.bmp", screenShotNumber);
+			SDL_SaveBMP(screen, screenshot.c_str());
 			screenShotNumber++;
 		}
 
@@ -211,8 +211,8 @@ void Graphics::updateScreen()
 
 	if (engine->keyState[SDL_SCANCODE_F12])
 	{
-		snprintf(screenshot, sizeof screenshot, "screenshots/screenshot%.3d.bmp", screenShotNumber);
-		SDL_SaveBMP(screen, screenshot);
+		screenshot = fmt::format("screenshots/screenshot{:.3d}.bmp", screenShotNumber);
+		SDL_SaveBMP(screen, screenshot.c_str());
 		screenShotNumber++;
 
 		engine->keyState[SDL_SCANCODE_F12] = 0;
@@ -256,8 +256,8 @@ void Graphics::delay(int time)
 void Graphics::RGBtoHSV(float r, float g, float b, float *h, float *s, float *v)
 {
 	float mn, mx, delta;
-	mn = min(min(r, g), b);
-	mx = max(max(r, g), b);
+	mn = std::min({r, g, b});
+	mx = std::max({r, g, b});
 	*v = mx;
 	delta = mx - mn;
 
@@ -350,7 +350,7 @@ void Graphics::HSVtoRGB(float *r, float *g, float *b, float h, float s, float v)
 	}
 }
 
-SDL_Surface *Graphics::loadImage(const char *filename, bool srcalpha)
+SDL_Surface *Graphics::loadImage(const std::string &filename, bool srcalpha)
 {
 	SDL_Surface *image, *newImage;
 
@@ -359,7 +359,7 @@ SDL_Surface *Graphics::loadImage(const char *filename, bool srcalpha)
 			showErrorAndExit(ERR_FILE, filename);
 		image = IMG_Load_RW(engine->sdlrw, 1);
 	#else
-		image = IMG_Load(filename);
+		image = IMG_Load(filename.c_str());
 	#endif
 
 	if (!image)
@@ -385,7 +385,7 @@ SDL_Surface *Graphics::loadImage(const char *filename, bool srcalpha)
 	return newImage;
 }
 
-SDL_Surface *Graphics::loadImage(const char *filename, int hue, int sat, int value)
+SDL_Surface *Graphics::loadImage(const std::string &filename, int hue, int sat, int value)
 {
 	SDL_Surface *image, *newImage;
 
@@ -394,7 +394,7 @@ SDL_Surface *Graphics::loadImage(const char *filename, int hue, int sat, int val
 			showErrorAndExit(ERR_FILE, filename);
 		image = IMG_Load_RW(engine->sdlrw, 1);
 	#else
-		image = IMG_Load(filename);
+		image = IMG_Load(filename.c_str());
 	#endif
 
 	if (!image)
@@ -455,7 +455,7 @@ SDL_Surface *Graphics::loadImage(const char *filename, int hue, int sat, int val
 	return newImage;
 }
 
-SDL_Surface *Graphics::quickSprite(const char *name, SDL_Surface *image)
+SDL_Surface *Graphics::quickSprite(const std::string &name, SDL_Surface *image)
 {
 	Sprite *sprite = addSprite(name);
 	sprite->setFrame(0, image, 60);
@@ -482,28 +482,13 @@ void Graphics::fadeToBlack()
 	}
 }
 
-void Graphics::loadMapTiles(const char *baseDir)
+void Graphics::loadMapTiles(const std::string &baseDir)
 {
-	bool found, autoAlpha;
-	char filename[255];
-	filename[0] = 0;
-
-	autoAlpha = false;
+	const bool autoAlpha = baseDir == "gfx/common";
 	
-	if (strcmp(baseDir, "gfx/common") == 0)
-	{
-		autoAlpha = true;
-	}
-
-	#if !USEPAK
-	FILE *fp;
-	#endif
-
 	for (int i = 1 ; i < MAX_TILES ; i++)
 	{
-		found = true;
-
-		snprintf(filename, sizeof filename, "%s/%d.png", baseDir, i);
+		std::string filename = fmt::format("{}/{}.png", baseDir, i);
 
 		#if USEPAK
 		
@@ -512,39 +497,34 @@ void Graphics::loadMapTiles(const char *baseDir)
 
 		#else
 
-		fp = fopen(filename, "rb");
-		if (!fp)
+		if (access(filename.c_str(), R_OK))
 			continue;
-		fclose(fp);
 
 		#endif
 
-		if (found)
+		tile[i] = loadImage(filename);
+
+		if (!tile[i])
+			abort();
+
+		if (autoAlpha)
 		{
-			tile[i] = loadImage(filename);
-
-			if (!tile[i])
-				abort();
-
-			if (autoAlpha)
+			if ((i < MAP_EXITSIGN) || (i >= MAP_WATERANIM))
 			{
-				if ((i < MAP_EXITSIGN) || (i >= MAP_WATERANIM))
-				{
-					SDL_SetAlpha(tile[i], 130);
-				}
-			}
-			else
-			{
-				if (i < MAP_DECORATION)
-				{
-					SDL_SetColorKey(tile[i], 0, SDL_MapRGB(tile[i]->format, 0, 0, 0));
-				}
+				SDL_SetAlpha(tile[i], 130);
 			}
 		}
-	}
+		else
+		{
+			if (i < MAP_DECORATION)
+			{
+				SDL_SetColorKey(tile[i], 0, SDL_MapRGB(tile[i]->format, 0, 0, 0));
+			}
+		}
+		}
 }
 
-void Graphics::loadFont(int i, const char *filename, int pointSize)
+void Graphics::loadFont(int i, const std::string &filename, int pointSize)
 {
 	debug(("Attempting to load font %s with point size of %d...\n", filename, pointSize));
 	
@@ -556,11 +536,10 @@ void Graphics::loadFont(int i, const char *filename, int pointSize)
 	
 	#if USEPAK
 		(void)filename;
-		char tempPath[PATH_MAX];
-		snprintf(tempPath, sizeof tempPath, "%sfont.ttf", engine->userHomeDirectory);
-		font[i] = TTF_OpenFont(tempPath, pointSize);
+		std::string tempPath = engine->userHomeDirectory + "font.ttf";
+		font[i] = TTF_OpenFont(tempPath.c_str(), pointSize);
 	#else
-		font[i] = TTF_OpenFont(filename, pointSize);
+		font[i] = TTF_OpenFont(filename.c_str(), pointSize);
 	#endif
 
 	if (!font[i])
@@ -571,17 +550,17 @@ void Graphics::loadFont(int i, const char *filename, int pointSize)
 	TTF_SetFontStyle(font[i], TTF_STYLE_NORMAL);
 }
 
-Sprite *Graphics::addSprite(const char *name)
+Sprite *Graphics::addSprite(const std::string &name)
 {
 	Sprite *sprite = new Sprite;
-	strlcpy(sprite->name, name, sizeof sprite->name);
+	sprite->name = name;
 
 	spriteList.add(sprite);
 
 	return sprite;
 }
 
-Sprite *Graphics::getSprite(const char *name, bool required)
+Sprite *Graphics::getSprite(const std::string &name, bool required)
 {
 	Sprite *sprite = (Sprite*)spriteList.getHead();
 
@@ -589,7 +568,7 @@ Sprite *Graphics::getSprite(const char *name, bool required)
 	{
 		sprite = (Sprite*)sprite->next;
 		
-		if (strcmp(sprite->name, name) == 0)
+		if (sprite->name == name)
 		{
 			return sprite;
 		}
@@ -643,12 +622,12 @@ int Graphics::getLavaAnim(int current)
 	return current;
 }
 
-void Graphics::loadBackground(const char *filename)
+void Graphics::loadBackground(const std::string &filename)
 {
 	if (background != NULL)
 		SDL_FreeSurface(background);
 
-	if (strcmp(filename, "@none@") == 0)
+	if (filename == "@none@")
 		return;
 
 	background = loadImage(filename);
@@ -829,9 +808,9 @@ void Graphics::setFontSize(int size)
 	Math::limitInt(&fontSize, 0, 4);
 }
 
-SDL_Surface *Graphics::getString(const char *in, bool transparent)
+SDL_Surface *Graphics::getString(const std::string &in, bool transparent)
 {
-	SDL_Surface *text = TTF_RenderUTF8_Shaded(font[fontSize], in, fontForeground, fontBackground);
+	SDL_Surface *text = TTF_RenderUTF8_Shaded(font[fontSize], in.c_str(), fontForeground, fontBackground);
 
 	if (!text)
 	{
@@ -850,11 +829,11 @@ SDL_Surface *Graphics::getString(const char *in, bool transparent)
 	return text;
 }
 
-void Graphics::drawString(const char *in, int x, int y, int alignment, SDL_Surface *dest)
+void Graphics::drawString(const std::string &in, int x, int y, int alignment, SDL_Surface *dest)
 {
 	bool center = false;
 
-	SDL_Surface *text = TTF_RenderUTF8_Shaded(font[fontSize], in, fontForeground, fontBackground);
+	SDL_Surface *text = TTF_RenderUTF8_Shaded(font[fontSize], in.c_str(), fontForeground, fontBackground);
 
 	if (!text)
 		text = TTF_RenderUTF8_Shaded(font[fontSize], "FONT_ERROR", fontForeground, fontBackground);
@@ -871,20 +850,17 @@ void Graphics::drawString(const char *in, int x, int y, int alignment, SDL_Surfa
 	SDL_FreeSurface(text);
 }
 
-void Graphics::drawString(const char *in, int x, int y, int alignment, SDL_Surface *dest, SurfaceCache &cache)
+void Graphics::drawString(const std::string &in, int x, int y, int alignment, SDL_Surface *dest, SurfaceCache &cache)
 {
 	bool center = false;
 
-	if(!cache.text || strcmp(in, cache.text)) {
+	if(in != cache.text) {
 		if(cache.surface)
 			SDL_FreeSurface(cache.surface);
 
-		if(cache.text)
-			::free(cache.text);
+		cache.text = in;
 
-		cache.text = strdup(in);
-
-		cache.surface = TTF_RenderUTF8_Shaded(font[fontSize], in, fontForeground, fontBackground);
+		cache.surface = TTF_RenderUTF8_Shaded(font[fontSize], in.c_str(), fontForeground, fontBackground);
 
 		if (!cache.surface)
 			cache.surface = TTF_RenderUTF8_Shaded(font[fontSize], "FONT_ERROR", fontForeground, fontBackground);
@@ -906,31 +882,29 @@ void Graphics::clearChatString()
 	chatString[0] = 0;
 }
 
-void Graphics::createChatString(const char *in)
+void Graphics::createChatString(const std::string &in)
 {
-	strlcat(chatString, " ", sizeof chatString);
-	strlcat(chatString, in, sizeof chatString);
+	chatString.push_back(' ');
+	chatString.append(in);
 }
 
 void Graphics::drawChatString(SDL_Surface *surface, int y)
 {
-	char *word = strtok(chatString, " ");
-	char wordWithSpace[100];
-	
-	int r, g, b;
-
 	int x = 10;
 	int surfaceWidth = surface->w - 10;
 
 	SDL_Surface *wordSurface;
 
-	while (word)
+	auto tokens = split(chatString, ' ');
+
+	for (auto it = tokens.begin(); it != tokens.end(); ++it)
 	{
-		if (strcmp(word, "<RGB>") == 0)
+		auto &&word = *it;
+		if (word == "<RGB>")
 		{
-			r = atoi(strtok(NULL, " "));
-			g = atoi(strtok(NULL, " "));
-			b = atoi(strtok(NULL, " "));
+			int r = stoi(*++it);
+			int g = stoi(*++it);
+			int b = stoi(*++it);
 
 			if ((!r) && (!g) && (!b))
 			{
@@ -940,14 +914,10 @@ void Graphics::drawChatString(SDL_Surface *surface, int y)
 
 			setFontColor(r, g, b, 0, 0, 0);
 
-			word = strtok(NULL, " ");
-
 			continue;
 		}
 
-		snprintf(wordWithSpace, sizeof wordWithSpace, "%s ", word);
-
-		wordSurface = getString(wordWithSpace, false);
+		wordSurface = getString(std::string(word) + " ", false);
 
 		if (x + wordSurface->w > surfaceWidth)
 		{
@@ -960,15 +930,11 @@ void Graphics::drawChatString(SDL_Surface *surface, int y)
 		x += wordSurface->w;
 
 		SDL_FreeSurface(wordSurface);
-
-		word = strtok(NULL, " ");
 	}
 }
 
-void Graphics::showMedalMessage(int type, const char *in)
+void Graphics::showMedalMessage(int type, const std::string &in)
 {
-	char message[1024];
-	
 	if (medalMessage != NULL)
 	{
 		SDL_FreeSurface(medalMessage);
@@ -1002,12 +968,12 @@ void Graphics::showMedalMessage(int type, const char *in)
 	medalType = type - 1; // for indexing on the image
 	if (type != -1)
 	{
-		snprintf(message, sizeof message, "  Medal Earned - %s  ", in);
+		std::string message = fmt::format("  Medal Earned - {}  ", in);
 		medalMessage = getString(message, true);
 	}
 	else
 	{
-		snprintf(message, sizeof message, "  %s  ", in);
+		std::string message = fmt::format("  {}  ", in);
 		medalMessage = getString(message, true);
 	}
 	medalMessageTimer = (5 * 60);
@@ -1125,17 +1091,17 @@ void Graphics::showLicenseErrorAndExit()
 	}
 }
 
-void Graphics::showErrorAndExit(const char *error, const char *param)
+void Graphics::showErrorAndExit(const std::string &error, const std::string &param)
 {
+	abort();
 	SDL_FillRect(screen, NULL, black);
 
-	if (strcmp(param, "LICENSE") == 0)
+	if (param == "LICENSE")
 	{
 		showLicenseErrorAndExit();
 	}
 
-	char message[256];
-	snprintf(message, sizeof message, error, param);
+	std::string message = fmt::format(error, param);
 
 	setFontSize(3); setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
 	drawString("An unforseen error has occurred", 320, 50, true, screen);

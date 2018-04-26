@@ -23,22 +23,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 Data::Data()
 {
-	key[0] = 0;
-	value[0] = 0;
 	current = 0;
 	target = 1;
 }
 
-void Data::set(const char *key, const char *value, int current, int target)
+void Data::set(const std::string &key, const std::string &value, int current, int target)
 {
-	if ((strlen(key) > 100) || (strlen(value) > 100))
-	{
-		debug(("Key-Value Pair too Big!!! (%s:%s)\n", key, value));
-		return;
-	}
-
-	strlcpy(this->key, key, sizeof this->key);
-	strlcpy(this->value, value, sizeof this->value);
+	this->key = key;
+	this->value = value;
 	this->current = current;
 	this->target = target;
 }

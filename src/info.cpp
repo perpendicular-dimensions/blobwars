@@ -59,8 +59,6 @@ void doStatusBar()
 	graphics.setFontSize(0);
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 
-	char string[1024];
-
 	graphics.blit(graphics.infoBar, 0, 0, graphics.screen, false);
 
 	graphics.drawString(_("Health"), 50, 5, TXT_RIGHT, graphics.screen, healthCache);
@@ -113,7 +111,7 @@ void doStatusBar()
 					graphics.blit(graphics.getSprite("WarningBlock", true)->getCurrentFrame(), 315 + (i * 15), 7, graphics.screen, false);
 	}
 
-	if ((map.mainBossPart == NULL || strstr(engine.message, "Aqua") || strstr(engine.message, "Jet")) && (game.missionOverReason != MIS_GAMECOMPLETE))
+	if ((map.mainBossPart == NULL || contains(engine.message, "Aqua") || contains(engine.message, "Jet")) && (game.missionOverReason != MIS_GAMECOMPLETE))
 	{
 		if (engine.messageTime > -1)
 		{
@@ -169,12 +167,12 @@ void doStatusBar()
 	}
 
 	static Graphics::SurfaceCache weaponCache;
-	snprintf(string, sizeof string, "%s %s", _("Weapon:"), _(player.currentWeapon->name));
-	graphics.drawString(string, 630, 5, TXT_RIGHT, graphics.screen, weaponCache);
+	std::string message = fmt::format("{} {}", _("Weapon:"), _(player.currentWeapon->name));
+	graphics.drawString(message, 630, 5, TXT_RIGHT, graphics.screen, weaponCache);
 	
 	if (game.skill == 3)
 	{
-		snprintf(string, sizeof string, _("Time Remaining: %.2d:%.2d"), map.remainingMinutes, map.remainingSeconds);
+		message = fmt::format(_("Time Remaining: {:02d}:{:02d}"), map.remainingMinutes, map.remainingSeconds);
 		graphics.blit(graphics.infoBar, 0, 25, graphics.screen, false);
 		
 		if ((map.remainingMinutes > 0) || (map.remainingSeconds > 0))
@@ -194,7 +192,7 @@ void doStatusBar()
 				}
 			}
 			static Graphics::SurfaceCache cache;
-			graphics.drawString(string, 320, 35, TXT_CENTERED, graphics.screen, cache);
+			graphics.drawString(message, 320, 35, TXT_CENTERED, graphics.screen, cache);
 		}
 		else
 		{
@@ -218,53 +216,51 @@ void doPauseInfo()
 
 	graphics.fade(130);
 
-	char string[1024];
-	string[0] = 0;
+	std::string message;
 	
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 
 	#if DEBUG
-	snprintf(string, sizeof string, _("Position = %d:%d"), (int)player.x, (int)player.y);
-	graphics.drawString(string, 5, 25, false, graphics.screen);
+	message = fmt::format(_("Position = {}:{}"), (int)player.x, (int)player.y);
+	graphics.drawString(message, 5, 25, false, graphics.screen);
 	#endif
 
 	graphics.drawString(_("*** PAUSED ***"), 320, y, TXT_CENTERED, graphics.screen);
 
 	graphics.drawString(_("MIAs in Area"), col1, y += 30, TXT_RIGHT, graphics.screen);
-	snprintf(string, sizeof string, "%d", map.totalMIAs - map.foundMIAs);
-	graphics.drawString(string, col2, y, TXT_LEFT, graphics.screen);
+	message = fmt::format("{}", map.totalMIAs - map.foundMIAs);
+	graphics.drawString(message, col2, y, TXT_LEFT, graphics.screen);
 
 	graphics.drawString(_("Enemies Defeated"), col1, y += 20, TXT_RIGHT, graphics.screen);
-	snprintf(string, sizeof string, "%d", game.currentMissionEnemiesDefeated);
-	graphics.drawString(string, col2, y, TXT_LEFT, graphics.screen);
+	message = fmt::format("{}", game.currentMissionEnemiesDefeated);
+	graphics.drawString(message, col2, y, TXT_LEFT, graphics.screen);
 
 	graphics.drawString(_("Items Collected"), col1, y += 20, TXT_RIGHT, graphics.screen);
-	snprintf(string, sizeof string, "%d / %d", map.foundItems, map.totalItems);
-	graphics.drawString(string, col2, y, TXT_LEFT, graphics.screen);
+	message = fmt::format("{} / {}", map.foundItems, map.totalItems);
+	graphics.drawString(message, col2, y, TXT_LEFT, graphics.screen);
 
 	graphics.drawString(_("Best Combo"), col1, y += 20, TXT_RIGHT, graphics.screen);
-	snprintf(string, sizeof string, _("%d Hits"), game.maxComboHits);
-	graphics.drawString(string, col2, y, TXT_LEFT, graphics.screen);
+	message = fmt::format(_("{} Hits"), game.maxComboHits);
+	graphics.drawString(message, col2, y, TXT_LEFT, graphics.screen);
 
 	graphics.drawString(_("++ Inventory ++"), 320, y += 40, TXT_CENTERED, graphics.screen);
 	showCarriedItems();
 
 	// Do the objectives list
 	Objective *objective = (Objective*)map.objectiveList.getHead();
-	char message[256];
 
 	y += 60;
 
 	if (map.totalMIAs > 0)
 	{
 		graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
-		snprintf(message, sizeof message, _("Rescue %d MIAs"), map.requiredMIAs);
+		message = fmt::format(_("Rescue {} MIAs"), map.requiredMIAs);
 		graphics.drawString(message, col1, y, TXT_RIGHT, graphics.screen);
 
 		if (map.foundMIAs < map.requiredMIAs)
 		{
 			graphics.setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
-			snprintf(message, sizeof message, "%d / %d", map.foundMIAs, map.requiredMIAs);
+			message = fmt::format("{} / {}", map.foundMIAs, map.requiredMIAs);
 			graphics.drawString(message, col2, y, TXT_LEFT, graphics.screen);
 		}
 		else
@@ -282,7 +278,7 @@ void doPauseInfo()
 		
 		graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 		
-		if ((game.skill < 3) &&  (strstr(objective->description, "L.R.T.S.")) && (!gameData.completedWorld))
+		if ((game.skill < 3) &&  (contains(objective->description, "L.R.T.S.")) && (!gameData.completedWorld))
 		{
 			graphics.drawString(_("???? ???????? ????"), col1, y, TXT_RIGHT, graphics.screen);
 		}
@@ -306,7 +302,7 @@ void doPauseInfo()
 			}
 			else
 			{
-				snprintf(message, sizeof message, "%d / %d", objective->currentValue, objective->targetValue);
+				message = fmt::format("{} / {}", objective->currentValue, objective->targetValue);
     			graphics.drawString(message, col2, y, TXT_LEFT, graphics.screen);
 			}
 
@@ -325,8 +321,8 @@ void doPauseInfo()
 
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 
-	snprintf(string, sizeof string, "%s - %.2d:%.2d:%.2d", _("Mission Time"), game.currentMissionHours, game.currentMissionMinutes, game.currentMissionSeconds);
-	graphics.drawString(string, 320, 430, TXT_CENTERED, graphics.screen);
+	message = fmt::format("{} - {:02d}:{:02d}:{:02d}", _("Mission Time"), game.currentMissionHours, game.currentMissionMinutes, game.currentMissionSeconds);
+	graphics.drawString(message, 320, 430, TXT_CENTERED, graphics.screen);
 }
 
 static SDL_Surface *createMusicInfo(void)

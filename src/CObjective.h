@@ -23,14 +23,14 @@ class Objective : public GameObject {
 
 	public:
 	
-		char description[100];
-		char target[50];
+		std::string description;
+		std::string target;
 		int currentValue;
 		int targetValue;
 		bool required;
 		bool completed;
 
 		Objective();
-		Objective(const char *description, const char *target, int targetValue, bool required);
+		Objective(const std::string &description, const std::string &target, int targetValue, bool required);
 
 };

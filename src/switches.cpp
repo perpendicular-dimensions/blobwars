@@ -26,7 +26,7 @@ void checkSwitchContact(Entity *ent)
 	Switch *swt = (Switch*)map.switchList.getHead();
 	bool okayToActivate = false;
 
-	char message[256];
+	std::string message;
 
 	while (swt->next != NULL)
 	{
@@ -54,7 +54,7 @@ void checkSwitchContact(Entity *ent)
 		{
 			okayToActivate = false;
 
-			if (strcmp(swt->requiredObjectName, "@none@") == 0)
+			if (swt->requiredObjectName == "@none@")
 			{
 				okayToActivate = true;
 			}
@@ -66,15 +66,15 @@ void checkSwitchContact(Entity *ent)
 					
 					if (swt->type == SWT_PRESSURE)
 					{
-						strlcpy(swt->requiredObjectName, "@none@", sizeof swt->requiredObjectName);
+						swt->requiredObjectName = "@none@";
 					}
 					
 					checkObjectives(swt->name, true);
-					strlcpy(swt->name, "Switch", sizeof swt->name);
+					swt->name = "Switch";
 				}
 				else
 				{
-					snprintf(message, sizeof message, "%s required", swt->requiredObjectName);
+					message = swt->requiredObjectName + " required";
 					engine.setInfoMessage(message, 1, INFO_HINT);
 				}
 			}

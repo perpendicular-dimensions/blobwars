@@ -366,7 +366,7 @@ void droidBossInit()
 	debug(("droidBossInit\n"));
 	
 	map.boss[0] = new Boss();
-	strlcpy(map.boss[0]->name, "BioMech Jetpack Blob", sizeof map.boss[0]->name);
+	map.boss[0]->name = "BioMech Jetpack Blob";
 	map.boss[0]->health = 30 * game.skill;
 	map.boss[0]->maxHealth = 30 * game.skill;
 	map.boss[0]->setSprites(graphics.getSprite("JetpackBlobRight1", true), graphics.getSprite("JetpackBlobLeft1", true), graphics.getSprite("JetpackBlobLeft1", true));
@@ -388,7 +388,7 @@ void droidBossInit()
 	for (int i = 1 ; i < 6 ; i++)
 	{
 		map.boss[i] = new Boss();
-		strlcpy(map.boss[i]->name, "Orb Bomb", sizeof map.boss[i]->name);
+		map.boss[i]->name = "Orb Bomb";
 		map.boss[i]->setSprites(graphics.getSprite("DroidOrb", true), graphics.getSprite("DroidOrb", true), graphics.getSprite("DroidOrb", true));
 		map.boss[i]->active = false;
 		map.boss[i]->face = 1;

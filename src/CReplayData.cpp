@@ -3,8 +3,6 @@
 
 ReplayData::ReplayData()
 {
-	fp = NULL;
-
 	endOfReplay = false;
 	
 	fast = false;
@@ -12,8 +10,6 @@ ReplayData::ReplayData()
 	header.randomSeed = time(NULL);
 	header.version = VERSION;
 	header.release = RELEASE;
-	
-	filename[0] = 0;
 }
 
 ReplayData::~ReplayData()
@@ -21,28 +17,24 @@ ReplayData::~ReplayData()
 	if (replayMode == REPLAY_MODE::RECORD)
 	{
 		save();
-		rewind(fp);
-		int size = fwrite(&header, sizeof(ReplayDataHeader), 1, fp);
-		if (size != 1)
+		file.seekp(0);
+		file.write((char *)&header, sizeof(ReplayDataHeader));
+		file.flush();
+		if (file.bad())
 		{
-			printf("Error saving replay data: %s\n", strerror(errno));
+			fmt::print("Error saving replay data: {}\n", strerror(errno));
 			exit(1);
 		}
-	}
-	
-	if (replayMode != REPLAY_MODE::NONE)
-	{
-		fclose(fp);
 	}
 }
 
 void ReplayData::printReplayInformation()
 {
 	tm *timeinfo = localtime(&header.randomSeed);
-	printf("Recorded on : %s", asctime(timeinfo));
-	printf("Map         : %s\n", header.map);
-	printf("Score       : %d\n", header.score);
-	printf("Time        : %s\n", Math::formatTime(header.time));
+	fmt::print("Recorded on : {}", asctime(timeinfo));
+	fmt::print("Map         : {}\n", header.map);
+	fmt::print("Score       : {}\n", header.score);
+	fmt::print("Time        : {}\n", Math::formatTime(header.time));
 }
 
 void ReplayData::swapHeaderEndians()
@@ -62,20 +54,14 @@ void ReplayData::setMode(REPLAY_MODE::TYPE replayMode)
 
 	if (replayMode == REPLAY_MODE::PLAYBACK)
 	{
-		fp = fopen(filename, "rb");
+		file = std::fstream(filename, std::ios_base::in);
+
+		file.read((char *)&header, sizeof header);
 		
-		if (!fp)
+		if (file.bad())
 		{
-			printf("ERROR: Replay file '%s' could not be loaded.\n", filename);
+			fmt::print("ERROR: Replay file '{}' could not be loaded.\n", filename);
 			this->replayMode = REPLAY_MODE::NONE;
-			return;
-		}
-		
-		if (fread(&header, sizeof(ReplayDataHeader), 1, fp) != 1)
-		{
-			printf("ERROR: Replay file '%s' is corrupt\n", filename);
-			this->replayMode = REPLAY_MODE::NONE;
-			fclose(fp);
 			return;
 		}
 		
@@ -85,31 +71,23 @@ void ReplayData::setMode(REPLAY_MODE::TYPE replayMode)
 		printReplayInformation();
 		if ((header.version != VERSION) && (header.release != RELEASE))
 		{
-			printf("\nWARNING: Replay is from a different version (%f %d) and may not play back correctly\n", header.version, header.release);
+			fmt::print("\nWARNING: Replay is from a different version ({} {}) and may not play back correctly\n", header.version, header.release);
 		}
 		printf("Press F5 to toggle Fast Playback\n");
 		load();
 	}
 	else if (replayMode == REPLAY_MODE::RECORD)
 	{
-		fp = fopen(filename, "wba");
-		
-		if (!fp)
-		{
-			printf("ERROR: Replay file '%s' could not be opened for writing.\n", filename);
-			this->replayMode = REPLAY_MODE::NONE;
-			return;
-		}
+		file = std::fstream(filename, std::ios_base::out);
 		
 		swapHeaderEndians();
 		
-		int size = fwrite(&header, sizeof(ReplayDataHeader), 1, fp);
-		if (size != 1)
+		file.write((char *)&header, sizeof header);
+
+		if (file.bad())
 		{
-			printf("Error writing replay data header: %s\n", strerror(errno));
+			fmt::print("Error writing replay data header: {}\n", strerror(errno));
 			this->replayMode = REPLAY_MODE::NONE;
-			fclose(fp);
-			fp = NULL;
 			return;
 		}
 		
@@ -228,9 +206,9 @@ void ReplayData::load()
 
 	debug(("ReplayData::load()\n"));
 	
-	int size = fread(data, 1, DATA_LENGTH * CONTROL::MAX, fp);
+	file.read((char *)data, sizeof data);
 	
-	if (size != DATA_LENGTH * CONTROL::MAX)
+	if (file.bad())
 	{
 		printf("Error reading replay data\n");
 		exit(1);
@@ -243,9 +221,9 @@ void ReplayData::save()
 {
 	debug(("ReplayData::save()\n"));
 	
-	int size = fwrite(data, 1, DATA_LENGTH * CONTROL::MAX, fp);
+	file.write((char *)data, sizeof data);
 	
-	if (size != DATA_LENGTH * CONTROL::MAX)
+	if (file.bad())
 	{
 		printf("Error saving replay data\n");
 		exit(1);

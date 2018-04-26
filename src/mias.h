@@ -1,3 +1,3 @@
 void doMIAs();
-void addMIA(const char *name,int x,int y,int type);
+void addMIA(const std::string &name,int x,int y,int type);
 void initMIAPhrases();

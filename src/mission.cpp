@@ -63,8 +63,6 @@ static void skipBossMission()
 
 void processPostMissionData()
 {
-	char string[1024];
-	
 	if (!gameData.stagePreviouslyCleared(game.stageName))
 	{
 		presentPlayerMedal(game.stageName);
@@ -99,15 +97,15 @@ void processPostMissionData()
 		if (mia->health > 0)
 			miaFound = false;
 
-		snprintf(string, sizeof string, "MIA_%s", mia->name);
+		std::string text = "MIA_" + mia->name;
 		
 		if (miaFound)
 		{
-			gameData.addCompletedObjective(map.name, string, 1, 1);
+			gameData.addCompletedObjective(map.name, text, 1, 1);
 		}
 		else
 		{
-			gameData.addCompletedObjective(map.name, string, 0, 1);
+			gameData.addCompletedObjective(map.name, text, 0, 1);
 		}
 	}
 
@@ -126,9 +124,7 @@ void processPostMissionData()
 
 void clearAllMissionData()
 {
-	char levelMIAKey[100];
-	
-	snprintf(levelMIAKey, sizeof levelMIAKey, "%s MIAs", game.stageName);
+	std::string levelMIAKey = game.stageName = " MIAs";
 	
 	Data *data = (Data*)gameData.dataList.getHead();
 	Data *previous = data;
@@ -137,7 +133,7 @@ void clearAllMissionData()
 	{
 		data = (Data*)data->next;
 		
-		if ((strcmp(data->key, game.stageName) == 0) || (strstr(data->key, levelMIAKey)))
+		if ((data->key == game.stageName) || (contains(data->key, levelMIAKey)))
 		{
 			gameData.dataList.remove(previous, data);
 			data = previous;
@@ -179,7 +175,7 @@ void showMissionClear()
 	int clearY = 520;
 	Entity *mia = (Entity*)map.miaList.getHead();
 	Sprite *teleportStar = graphics.getSprite("TeleportStar", true);
-	char message[256];
+	std::string message;
 	int col1 = 360;
 	int col2 = 380;
 	int count = 0;
@@ -228,13 +224,13 @@ void showMissionClear()
 	if (map.totalMIAs > 0)
 	{
 		graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
-		snprintf(message, sizeof message, _("Rescue %d MIAs"), map.requiredMIAs);
+		message = fmt::format(_("Rescue {} MIAs"), map.requiredMIAs);
 		graphics.drawString(message, col1, y, TXT_RIGHT, graphics.background);
 
 		if (map.foundMIAs < map.requiredMIAs)
 		{
 			graphics.setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
-			snprintf(message, sizeof message, "%d / %d", map.foundMIAs, map.requiredMIAs);
+			message = fmt::format("{} / {}", map.foundMIAs, map.requiredMIAs);
 			graphics.drawString(message, col2, y, TXT_LEFT, graphics.background);
 		}
 		else
@@ -256,7 +252,7 @@ void showMissionClear()
 
 		graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 		
-		if ((game.skill < 3) &&  (strstr(objective->description, "L.R.T.S.")) && (!gameData.completedWorld))
+		if ((game.skill < 3) &&  (contains(objective->description, "L.R.T.S.")) && (!gameData.completedWorld))
 		{
 			graphics.drawString(_("???? ???????? ????"), col1, y, TXT_RIGHT, graphics.background);
 		}
@@ -275,7 +271,7 @@ void showMissionClear()
 			else
 			{
 				graphics.setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
-				snprintf(message, sizeof message, "%d / %d", objective->currentValue, objective->targetValue);
+				message = fmt::format("{} / {}", objective->currentValue, objective->targetValue);
 				graphics.drawString(message, col2, y, TXT_LEFT, graphics.background);
 			}
 		}
@@ -363,7 +359,7 @@ void showMissionClear()
 		}
 
 		static Graphics::SurfaceCache cache;
-		snprintf(message, sizeof message, "%s - %.2d:%.2d:%.2d", _("Mission Time"), game.currentMissionHours, game.currentMissionMinutes, game.currentMissionSeconds);
+		message = fmt::format("{} - {:02d}:{:02d}:{:02d}", _("Mission Time"), game.currentMissionHours, game.currentMissionMinutes, game.currentMissionSeconds);
 		graphics.drawString(message, 320, 420, true, graphics.screen, cache);
 
 		engine.delay(frameLimit);

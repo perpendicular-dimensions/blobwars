@@ -111,21 +111,18 @@ static void showTitleWidgets()
 */
 static void setupSaveWidgets()
 {
-	char widgetName[10];
-	widgetName[0] = 0;
-	
 	for (int i = 0 ; i < 5 ; i++)
 	{
-		snprintf(widgetName, sizeof widgetName, "save%d", i + 1);
-		strlcpy(engine.getWidgetByName(widgetName)->label, engine.saveSlot[i], sizeof engine.getWidgetByName(widgetName)->label);
+		std::string widgetName = fmt::format("save{}", i + 1);
+		engine.getWidgetByName(widgetName)->label = engine.saveSlot[i];
 		
-		if ((strstr(engine.saveSlot[i], _("Empty"))) || (strstr(engine.saveSlot[i], _("Corrupt"))))
+		if ((contains(engine.saveSlot[i], _("Empty"))) || (contains(engine.saveSlot[i], _("Corrupt"))))
 		{
 			engine.enableWidget(widgetName, false);
 		}
 		
-		snprintf(widgetName, sizeof widgetName, "slot%d", i + 1);
-		strlcpy(engine.getWidgetByName(widgetName)->label, engine.saveSlot[i], sizeof engine.getWidgetByName(widgetName)->label);
+		widgetName = fmt::format("slot{}", i + 1);
+		engine.getWidgetByName(widgetName)->label = engine.saveSlot[i];
 	}
 }
 
@@ -144,7 +141,7 @@ static void loadTitleWidgets()
 	setupSaveWidgets();
 	
 	Widget *widget = engine.getWidgetByName("labelManual");
-	strlcpy(widget->label, GAMEPLAYMANUAL, sizeof widget->label);
+	widget->label = GAMEPLAYMANUAL;
 
 	showTitleWidgets();
 }
@@ -224,10 +221,9 @@ int title()
 		NULL,
 	};
 
-	char v[50];
 	#define STRINGIFY_VALUE(x) STRINGIFY(x)
 	#define STRINGIFY(x) #x
-	snprintf(v, sizeof v, _("Version %s"), STRINGIFY_VALUE(VERSION));
+	std::string v = fmt::format(_("Version {}"), STRINGIFY_VALUE(VERSION));
 	SDL_Surface *version = graphics.quickSprite("Version", graphics.getString(v, true));
 
 	SDL_SetAlpha(title, 0);
@@ -483,7 +479,7 @@ int title()
 		game.hasAquaLung = game.hasJetPack = true;
 	}
 	
-	if (strcmp(game.mapName, "data/spaceStation") == 0)
+	if (game.mapName == "data/spaceStation")
 	{
 		game.setMapName("data/finalBattle");
 		game.setStageName("Final Battle");
@@ -500,7 +496,6 @@ void doCredits()
 {
 	map.clear();
 
-	char *line;
 	char string[100];
 	int i = 0;
 	int numberOfCredits = 0;
@@ -511,22 +506,21 @@ void doCredits()
 
 	engine.loadData(_("data/credits"));
 
-	line = strtok((char*)engine.dataBuffer, "\n");
+	auto it = split(engine.dataBuffer, '\n');
 
-	sscanf(line, "%d", &numberOfCredits);
+	numberOfCredits = stoi(*it);
+	++it;
 
 	y = new float[numberOfCredits];
 	 SDL_Surface **credit = new SDL_Surface*[numberOfCredits];
-
-	line = strtok(NULL, "\n");
 
 	pos1 = 520;
 
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 
-	while (line)
+	for (; it != it.end(); ++it)
 	{
-		sscanf(line, "%d %d %[^\n\r]", &pos2, &size, string);
+		scan(*it, "%d %d %[^\n\r]", &pos2, &size, string);
 
 		pos1 += pos2;
 
@@ -544,8 +538,6 @@ void doCredits()
 		{
 			break;
 		}
-
-		line = strtok(NULL, "\n");
 	}
 	
 	SDL_Surface *device = graphics.quickSprite("credit", graphics.loadImage("gfx/main/creditsDevice.png"));

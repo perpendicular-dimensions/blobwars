@@ -33,7 +33,7 @@ static void drawOptions(Widget *widget, int maxWidth)
 
 	int count = 0;
 
-	char *c = widget->options;
+	char *c = &widget->options.front();
 
 	SDL_Surface *text;
 
@@ -126,22 +126,21 @@ static void drawJoypadButtonOption(Widget *widget)
 	
 	int x = 300;
 	
-	char text[25];
-	text[0] = 0;
+	std::string text;
 	
 	// joysticks have a button 0 so we can't
 	// do the same thing as the keyboard(!)
 	if (*widget->value < -2)
 	{
-		snprintf(text, sizeof text, "...");
+		text = "...";
 	}
 	else if (*widget->value == -2)
 	{
-		snprintf(text, sizeof text, "N/A");
+		text = "N/A";
 	}
 	else
 	{
-		snprintf(text, sizeof text, "Button #%d", *widget->value);
+		text = fmt::format("Button #{}", *widget->value);
 	}
 	
 	graphics.drawString(text, x, widget->y, TXT_LEFT, graphics.screen);
@@ -209,7 +208,7 @@ void drawWidgets()
 			generateWidgetImage(widget);
 		}
 			
-		maxWidth = max(maxWidth, widget->image->w);
+		maxWidth = std::max(maxWidth, widget->image->w);
 	}
 
 	widget = (Widget*)engine.widgetList.getHead();

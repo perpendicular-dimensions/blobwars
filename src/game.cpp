@@ -71,7 +71,7 @@ static void showInGameOptions()
 	engine.showWidgetGroup("quitconf", false);
 	engine.showWidgetGroup("trainconf", false);
 	
-	if ((map.isBossMission) || (engine.practice) || (strcmp(map.name, "Space Station") == 0))
+	if ((map.isBossMission) || (engine.practice) || (map.name == "Space Station"))
 	{
 		engine.enableWidget("escape", false);
 		engine.enableWidget("restart", false);
@@ -312,9 +312,7 @@ int gameover()
 	if (game.canContinue > 1)
 	{
 		Widget *widget = engine.getWidgetByName("gameOverNo");
-		char postfix[100];
-		snprintf(postfix, sizeof postfix, " (%d)", game.canContinue);
-		strlcat(widget->label, postfix, sizeof widget->label);
+		widget->label += fmt::format(" ({})", game.canContinue);
 	}
 
 	while (true)
@@ -386,7 +384,7 @@ void showMissionInformation()
 
 	graphics.drawRect(1, 1, 398, 298, graphics.black, graphics.white, panelBack);
 
-	char message[256];
+	std::string message;
 	int col1 = 25;
 	int col2 = 375;
 	int y = 30;
@@ -406,13 +404,13 @@ void showMissionInformation()
 	if (map.totalMIAs > 0)
 	{
 		graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
-		snprintf(message, sizeof message, _("Rescue %d MIAs"), map.requiredMIAs);
+		message = fmt::format(_("Rescue {} MIAs"), map.requiredMIAs);
 		graphics.drawString(message, col1, y, TXT_LEFT, panel);
 
 		if (map.foundMIAs < map.requiredMIAs)
 		{
 			graphics.setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
-			snprintf(message, sizeof message, "%d / %d", map.foundMIAs, map.requiredMIAs);
+			message = fmt::format("{} / {}", map.foundMIAs, map.requiredMIAs);
 			graphics.drawString(message, col2, y, TXT_RIGHT, panel);
 		}
 		else
@@ -432,7 +430,7 @@ void showMissionInformation()
 
 		graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 		
-		if ((game.skill < 3) &&  (strstr(objective->description, "L.R.T.S.")) && (!gameData.completedWorld))
+		if ((game.skill < 3) && (objective->description.find("L.R.T.S.") != std::string::npos) && (!gameData.completedWorld))
 		{
 			graphics.drawString(_("???? ???????? ????"), col1, y, TXT_LEFT, panel);
 		}
@@ -456,7 +454,7 @@ void showMissionInformation()
 			}
 			else
 			{
-				snprintf(message, sizeof message, "%d / %d", objective->currentValue, objective->targetValue);
+				message = fmt::format("{} / {}", objective->currentValue, objective->targetValue);
 				graphics.drawString(message, col2, y, TXT_RIGHT, panel);
 			}
 		}
@@ -470,7 +468,7 @@ void showMissionInformation()
 	if (game.skill == 3)
 	{
 		graphics.setFontColor(0xff, 0xff, 0x00, 0x00, 0x00, 0x00);
-		snprintf(message, sizeof message, _("Time Limit - %d:%.2d Minutes"), map.remainingMinutes, map.remainingSeconds);
+		message = fmt::format(_("Time Limit - {}:{:02d} Minutes"), map.remainingMinutes, map.remainingSeconds);
 		graphics.drawString(message, 200, 260, TXT_CENTERED, panel);
 	}
 	
@@ -570,8 +568,7 @@ int doGame()
 
 	#if DEBUG
 	Uint32 now, then, frameCounter;
-	char fps[10];
-	strlcpy(fps, "fps", sizeof fps);
+	std::string fps = "fps";
 	#endif
 
 	engine.messageTime = -1;
@@ -619,7 +616,7 @@ int doGame()
 	then = frameCounter = start;
 #endif
 
-	if ((strcmp(map.name, "Space Station") == 0) && (!game.continueFromCheckPoint))
+	if ((map.name == "Space Station") && (!game.continueFromCheckPoint))
 	{
 		beamInPlayer();
 	}
@@ -737,7 +734,7 @@ int doGame()
 					{
 						game.missionOver = MAX_FPS * 2;
 						
-						if (strcmp(map.name, "Space Station") != 0)
+						if (map.name != "Space Station")
 						{
 							addTeleportParticles(player.x, player.y, 50, SND_TELEPORT3);
 							dropCarriedItems();
@@ -850,7 +847,7 @@ int doGame()
 		if (SDL_GetTicks() > frameCounter + 500)
 		{
 			now = SDL_GetTicks();
-			snprintf(fps, sizeof fps, "%2.2f fps", ((double)frames*1000)/(now - then));
+			fps = fmt::format("{:2.2f} fps", ((double)frames*1000)/(now - then));
 			then = frameCounter = SDL_GetTicks();
 			frames = 0;
 		}
@@ -859,7 +856,7 @@ int doGame()
 
 	if (allObjectivesCompleted())
 	{
-		if (strcmp(map.name, "Final Battle") == 0)
+		if (map.name == "Final Battle")
 		{
 			game.missionOverReason = MIS_GAMECOMPLETE;
 		}
@@ -872,7 +869,7 @@ int doGame()
 	switch (game.missionOverReason)
 	{
 		case MIS_COMPLETE:
-			if (strcmp(map.name, "Space Station"))
+			if (map.name != "Space Station")
 			{
 				graphics.delay(1000);
 				audio.loadMusic("music/grasslands");

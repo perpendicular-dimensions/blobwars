@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-void addLineDef(const char *name, const char *linkName, const char *message, int x, int y, int width, int height, bool active)
+void addLineDef(const std::string &name, const std::string &linkName, const std::string &message, int x, int y, int width, int height, bool active)
 {
 	LineDef *lineDef = new LineDef();
 
@@ -31,7 +31,7 @@ void addLineDef(const char *name, const char *linkName, const char *message, int
 	map.addLineDef(lineDef);
 }
 
-void showMessageLineDef(const char *linkName, bool show)
+void showMessageLineDef(const std::string &linkName, bool show)
 {
 	LineDef *lineDef = (LineDef*)map.lineList.getHead();
 
@@ -39,7 +39,7 @@ void showMessageLineDef(const char *linkName, bool show)
 	{
 		lineDef = (LineDef*)lineDef->next;
 
-		if (strcmp(lineDef->linkName, linkName) == 0)
+		if (lineDef->linkName == linkName)
 			lineDef->activated = show;
 	}
 }
@@ -76,7 +76,7 @@ void doLineDefs()
 
 			if (Collision::collision(player.x + player.dx, player.y + player.dy, player.width, player.height, lineDef->x, lineDef->y, lineDef->width, lineDef->height))
 			{
-				if ((strcmp(lineDef->name, "Exit") == 0) && (!requiredObjectivesCompleted()))
+				if ((lineDef->name == "Exit") && (!requiredObjectivesCompleted()))
 				{
 					config.resetControl(CONTROL::LEFT);
 					config.resetControl(CONTROL::RIGHT);
@@ -94,15 +94,15 @@ void doLineDefs()
 					continue;
 				}
 
-				if (strcmp(lineDef->name, "Message") == 0)
+				if (lineDef->name == "Message")
 				{
 					engine.setInfoMessage(lineDef->activateMessage, 1, INFO_HINT);
-					if (strcmp(lineDef->linkName, "@none@") == 0)
+					if (lineDef->linkName == "@none@")
 					{
 						lineDef->activated = true;
 					}
 				}
-				else if (strcmp(lineDef->name, "PlayerOut") == 0)
+				else if (lineDef->name == "PlayerOut")
 				{
 					if (game.missionOver == 0)
 					{
@@ -118,13 +118,13 @@ void doLineDefs()
 						game.setMissionOver(MIS_PLAYERDEAD);
 					}
 				}
-				else if (strcmp(lineDef->name, "CheckPoint") == 0)
+				else if (lineDef->name == "CheckPoint")
 				{
 					game.setObjectiveCheckPoint();
 					engine.setInfoMessage("Checkpoint Reached", 9, INFO_OBJECTIVE);
 					lineDef->activated = true;
 				}
-				else if (strcmp(lineDef->name, "ActivateBoss") == 0)
+				else if (lineDef->name == "ActivateBoss")
 				{
 					map.mainBossPart->active = true;
 					lineDef->activated = true;
@@ -135,7 +135,7 @@ void doLineDefs()
 					activateTrigger(lineDef->linkName, lineDef->activateMessage, true);
 					lineDef->activated = true;
 					
-					if (strcmp(lineDef->name, "StealCrystal") == 0)
+					if (lineDef->name == "StealCrystal")
 					{
 						stealCrystal();
 						lineDef->activated = true;

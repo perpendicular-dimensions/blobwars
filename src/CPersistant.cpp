@@ -23,7 +23,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 Persistant::Persistant()
 {
-	stageName[0] = 0;
 	numberOfLines = 0;
 }
 
@@ -33,9 +32,9 @@ Persistant::~Persistant()
 	numberOfLines = 0;
 }
 
-void Persistant::setName(const char *name)
+void Persistant::setName(const std::string &name)
 {
-	strlcpy(this->stageName, name, sizeof this->stageName);
+	this->stageName = name;
 }
 
 void Persistant::clear()
@@ -44,7 +43,7 @@ void Persistant::clear()
 	numberOfLines = 0;
 }
 
-void Persistant::addLine(const char *data)
+void Persistant::addLine(const std::string &data)
 {
 	PersistData *persistant = new PersistData();
 	

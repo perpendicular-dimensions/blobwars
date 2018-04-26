@@ -23,42 +23,38 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 void initSaveSlots()
 {
-	char filename[PATH_MAX];
-	char string[100];
-	struct stat fileInfo;
 	int modTime = 0;
 
-	Game tempGame;
-
 	engine.continueSaveSlot = 0;
-
-	FILE *fp;
 
 	//READ SAVE GAME DATA
 	for (int i = 0 ; i < 5 ; i++)
 	{
-		snprintf(filename, sizeof filename, "%ssave%d.dat", engine.userHomeDirectory, i);
+		std::string filename = fmt::format("{}save{}.dat", engine.userHomeDirectory, i);
 
-		fp = fopen(filename, "rb");
+		std::ifstream file(filename);
 
-		if (!fp)
+		if (file.bad())
 		{
-			strlcpy(string, "%.2d - %s", sizeof string);
-			snprintf(engine.saveSlot[i], sizeof engine.saveSlot[i], string, (i + 1), _("Empty"));
+			engine.saveSlot[i] = fmt::format("{} - {}", i + 1, _("Empty"));
 		}
 		else
 		{
-			if (fread(&tempGame, sizeof(Game), 1, fp) != 1)
+			PODGame tempGame;
+			file.read((char *)&tempGame, sizeof tempGame);
+
+			if (file.bad())
 			{
-				strlcpy(string, "%.2d - %s", sizeof string);
-				snprintf(engine.saveSlot[i], sizeof engine.saveSlot[i], string, (i + 1), _("Corrupt Save Data"));
+				engine.saveSlot[i] = fmt::format("{} - {}", i + 1, _("Corrupt Save Data"));
 			}
 			else
 			{
-				snprintf(engine.saveSlot[i], sizeof engine.saveSlot[i], "%.2d - %s (%.2d:%.2d:%.2d)", (i + 1), _(tempGame.stageName), tempGame.totalHours, tempGame.totalMinutes, tempGame.totalSeconds);
+				engine.saveSlot[i] = fmt::format("{} - {} ({:02d}:{:02d}:{:02d})", i + 1, _(tempGame.s_stageName), tempGame.totalHours, tempGame.totalMinutes, tempGame.totalSeconds);
 			}
 
-			if (stat(filename, &fileInfo) != -1)
+			struct stat fileInfo;
+
+			if (stat(filename.c_str(), &fileInfo) != -1)
 			{
 				if (fileInfo.st_mtime > modTime)
 				{
@@ -66,8 +62,6 @@ void initSaveSlots()
 					engine.continueSaveSlot = (i + 1);
 				}
 			}
-
-			fclose(fp);
 		}
 	}
 	
@@ -83,52 +77,47 @@ bool loadGame(int slot)
 	game.clear();
 
 	SDL_Delay(500);
-	char filename[PATH_MAX];
 	
-	char line[1024];
+	std::string line;
 	char string[2][1024];
 	int param[2];
 	
 	Data *data;
 
-	FILE *fp;
-	
-	int sanity = 0;
+	std::string filename = fmt::format("{}save{}.dat", engine.userHomeDirectory, slot);
 
-	snprintf(filename, sizeof filename, "%ssave%d.dat", engine.userHomeDirectory, slot);
-
-	fp = fopen(filename, "rb");
+	std::ifstream file(filename);
 	
-	if (!fp)
+	if (file.bad())
 	{
 		return false;
 	}
 
-	if (fread(&game, sizeof(Game), 1, fp) != 1)
+	file.read((char *)&game, sizeof game);
+
+	if (file.bad())
 	{
-		fclose(fp);
 		return graphics.showErrorAndExit("The save data loaded was not in the format expected", ""), false;
 	}
 	
-	fclose(fp);
-	
-	snprintf(filename, sizeof filename, "%spersistant%d.dat", engine.userHomeDirectory, slot);
+	filename = fmt::format("{}persistant{}.dat", engine.userHomeDirectory, slot);
 
-	fp = fopen(filename, "rb");
+	file.close();
+	file.open(filename);
 	
-	if (!fp)
+	if (file.bad())
 	{
 		return false;
 	}
 	
-	while (true)
+	while (std::getline(file, line))
 	{
-		if (!fgets(line, 1024, fp)) {
-			fclose(fp);
-			return graphics.showErrorAndExit("Unexpected end of file reading save data", ""), false;
-		}
+		scan(line, "%*c %[^\"] %*c %*c %[^\"] %*c %d %d", string[0], string[1], &param[0], &param[1]);
 
-		sscanf(line, "%*c %[^\"] %*c %*c %[^\"] %*c %d %d", string[0], string[1], &param[0], &param[1]);
+		if (param[0] == -1 && param[1] == -1)
+		{
+			break;
+		}
 		
 		data = new Data();
 		
@@ -136,85 +125,52 @@ bool loadGame(int slot)
 		
 		debug(("Read %s %s %d %d\n", data->key, data->value, data->current, data->target));
 		
-		if ((data->current == -1) && (data->target == -1))
-		{
-			delete data;
-			break;
-		}
-
 		gameData.addCompletedObjective(data);
-		
-		sanity++;
-		
-		if (sanity == 10000)
-		{
-			debug(("Sanity Check #1 > 10000!\n"));
-			fclose(fp);
-			exit(1);
-		}
 	}
 	
-	sanity = 0;
-	
-	char stageName[50];
+	std::string stageName;
 	int numberOfLines = 0;
+	bool complete = false;
 	
-	Persistant *persistant;
-	PersistData *persistData;
-	
-	while (true)
+	while (std::getline(file, stageName))
 	{
-		if (!fgets(line, 1024, fp)) {
-			fclose(fp);
-			graphics.showErrorAndExit("Unexpected end of file reading save data", "");
-		}
-
-		sscanf(line, "%[^\n\r]", string[0]);
-		strlcpy(stageName, string[0], sizeof stageName);
-		
-		if (strcmp(stageName, "@EOF@") == 0)
+		if (stageName == "@EOF@")
 		{
+			complete = true;
 			break;
 		}
 
-		if (!fgets(line, 1024, fp)) {
-			fclose(fp);
-			graphics.showErrorAndExit("Unexpected end of file reading save data", "");
+		if (!std::getline(file, line)) {
+			break;
 		}
-		sscanf(line, "%d", &numberOfLines);
+
+		scan(line, "%d", &numberOfLines);
 		
 		debug(("Read %s with %d lines.\n", stageName, numberOfLines));
 		
-		persistant = map.createPersistant(stageName);
+		auto persistant = map.createPersistant(stageName);
 		
 		for (int i = 0 ; i < numberOfLines ; i++)
 		{
-			persistData = new PersistData();
-
-			if (!fgets(line, 1024, fp)) {
-				fclose(fp);
+			if (!std::getline(file, line)) {
 				graphics.showErrorAndExit("Unexpected end of file reading save data", "");
 			}
 
-			strlcpy(persistData->data, line, sizeof persistData->data);
+			auto persistData = new PersistData();
+
+			persistData->data = line;
 			
 			//debug(("Read %d: %s", i, persistData->data));
 			
 			persistant->addLine(persistData->data);
-			
-			sanity++;
-		
-			if (sanity == 100000)
-			{
-				debug(("Sanity Check #2 > 100000!\n"));
-				fclose(fp);
-				exit(1);
-			}
 		}
 	}
 
-	fclose(fp);
-	
+	if (!complete)
+	{
+		graphics.showErrorAndExit("Unexpected end of file reading save data", "");
+	}
+
 	debug(("Loaded Successfully\n"));
 
 	return true;
@@ -244,13 +200,10 @@ static int confirmSave()
 	engine.setWidgetVariable("contyes", &quitYes);
 	engine.setWidgetVariable("contno", &quitNo);
 	
-	char widgetName[10];
-	widgetName[0] = 0;
-	
 	for (int i = 0 ; i < 5 ; i++)
 	{
-		snprintf(widgetName, sizeof widgetName, "slot%d", i + 1);
-		strlcpy(engine.getWidgetByName(widgetName)->label, engine.saveSlot[i], sizeof engine.getWidgetByName(widgetName)->label);
+		std::string widgetName = fmt::format("slot{}", i + 1);
+		engine.getWidgetByName(widgetName)->label = engine.saveSlot[i];
 	}
 	
 	engine.highlightWidget("slot1");
@@ -329,7 +282,7 @@ static int confirmSave()
 
 void saveGame()
 {
-	char message[256];
+	std::string message;
 
 	SDL_FillRect(graphics.screen, NULL, graphics.black);
 	graphics.updateScreen();
@@ -342,39 +295,26 @@ void saveGame()
 
 	graphics.setFontSize(1);
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
-	snprintf(message, sizeof message, _("Saving Game to Save Slot #%d. Please Wait..."), slot + 1);
+	message = fmt::format(_("Saving Game to Save Slot #{}. Please Wait..."), slot + 1);
 	graphics.drawString(message, 320, 220, true, graphics.screen);
 	graphics.updateScreen();
 
-	char filename[PATH_MAX];
+	std::string filename = fmt::format("{}save{}.dat", engine.userHomeDirectory, slot);
 
-	FILE *fp;
-
-	snprintf(filename, sizeof filename, "%ssave%d.dat", engine.userHomeDirectory, slot);
-
-	fp = fopen(filename, "wb");
+	std::ofstream file(filename);
 	
-	if (!fp)
-	{
-		return graphics.showErrorAndExit("File write error whilst saving game", "");
-	}
+	const auto &podgame = static_cast<PODGame>(game);
+	file.write((char *)&podgame, sizeof podgame);
+	file.close();
 
-	if (fwrite(&game, sizeof(Game), 1, fp) != 1)
+	if (file.bad())
 	{
-		fclose(fp);
 		return graphics.showErrorAndExit("File write error whilst saving game", strerror(errno));
 	}
 	
-	fclose(fp);
-	
-	snprintf(filename, sizeof filename, "%spersistant%d.dat", engine.userHomeDirectory, slot);
+	filename = fmt::format("{}persistant{}.dat", engine.userHomeDirectory, slot);
 
-	fp = fopen(filename, "wt");
-	
-	if (!fp)
-	{
-		return graphics.showErrorAndExit("File write error whilst saving game", "");
-	}
+	file.open(filename);
 	
 	createPersistantMapData();
 	
@@ -384,10 +324,10 @@ void saveGame()
 	{
 		data = (Data*)data->next;
 		
-		fprintf(fp, "\"%s\" \"%s\" %d %d\n", data->key, data->value, data->current, data->target);
+		fmt::print(file, "\"{}\" \"{}\" {} {}\n", data->key, data->value, data->current, data->target);
 	}
 	
-	fprintf(fp, "\"@EOF@\" \"@EOF@\" -1 -1\n");
+	fmt::print(file, "\"@EOF@\" \"@EOF@\" -1 -1\n");
 	
 	Persistant *persistant = (Persistant*)map.persistantList.getHead();
 	PersistData *persistData;
@@ -396,13 +336,13 @@ void saveGame()
 	{
 		persistant = (Persistant*)persistant->next;
 		
-		if (strcmp(persistant->stageName, "@none@") == 0)
+		if (persistant->stageName == "@none@")
 		{
 			continue;
 		}
 		
-		fprintf(fp, "%s\n", persistant->stageName);
-		fprintf(fp, "%d\n", persistant->numberOfLines);
+		fmt::print(file, "{}\n", persistant->stageName);
+		fmt::print(file, "{}\n", persistant->numberOfLines);
 	
 		persistData = (PersistData*)persistant->dataList.getHead();
 		
@@ -410,13 +350,17 @@ void saveGame()
 		{
 			persistData = (PersistData*)persistData->next;
 			
-			fprintf(fp, "%s", persistData->data);
+			fmt::print(file, "{}", persistData->data);
 		}
 	}
 	
-	fprintf(fp, "@EOF@\n");
-	
-	fclose(fp);
+	fmt::print(file, "@EOF@\n");
+	file.close();
+
+	if (file.bad())
+	{
+		return graphics.showErrorAndExit("File write error whilst saving game", "");
+	}
 	
 	map.clear();
 	

@@ -21,11 +21,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-Entity *getDefinedEnemy(const char *name)
+Entity *getDefinedEnemy(const std::string &name)
 {
 	for (int i = 0 ; i < MAX_ENEMIES ; i++)
 	{
-		if (strcmp(name, defEnemy[i].name) == 0)
+		if (name == defEnemy[i].name)
 		{
 			return &defEnemy[i];
 		}
@@ -36,7 +36,7 @@ Entity *getDefinedEnemy(const char *name)
 	return NULL;
 }
 
-void addEnemy(const char *name, int x, int y, int flags)
+void addEnemy(const std::string &name, int x, int y, int flags)
 {
 	Entity *defEnemy = getDefinedEnemy(name);
 
@@ -355,7 +355,7 @@ void enemyBulletCollisions(Entity *bullet)
 			continue;
 		}
 
-		char comboString[100];
+		std::string comboString;
 
 		if ((bullet->owner == &player) || (bullet->owner == &engine.world) || (bullet->flags & ENT_BOSS))
 		{
@@ -438,7 +438,7 @@ void enemyBulletCollisions(Entity *bullet)
 								checkCombo();
 							}
 							
-							snprintf(comboString, sizeof comboString, "Combo-%s", bullet->name);
+							comboString = "Combo-" + bullet->name;
 							checkObjectives(comboString, false);
 							checkObjectives("Enemy", false);
 							checkObjectives(enemy->name, false);
@@ -486,7 +486,7 @@ void enemyBulletCollisions(Entity *bullet)
 					{
 						if (player.currentWeapon != &weapon[WP_LASER])
 						{
-							snprintf(comboString, sizeof comboString, "Combo-%s", bullet->name);
+							comboString = "Combo-" + bullet->name;
 							checkCombo();
 							checkObjectives(comboString, false);
 						}
@@ -495,8 +495,7 @@ void enemyBulletCollisions(Entity *bullet)
 
 				if (game.currentComboHits >= 3)
 				{
-					char message[50];
-					snprintf(message, sizeof message, _("%d Hit Combo!"), game.currentComboHits);
+					std::string message = fmt::format(_("{} Hit Combo!"), game.currentComboHits);
 					engine.setInfoMessage(message, 0, INFO_NORMAL);
 				}
 
@@ -506,27 +505,27 @@ void enemyBulletCollisions(Entity *bullet)
 	}
 }
 
-static int getNonGoreParticleColor(const char *name)
+static int getNonGoreParticleColor(const std::string &name)
 {
 	int rtn = graphics.yellow;
 	
-	if (strcmp(name, "Pistol Blob") == 0)
+	if (name == "Pistol Blob")
 	{
 		rtn = graphics.green;
 	}
-	else if (strcmp(name, "Grenade Blob") == 0)
+	else if (name == "Grenade Blob")
 	{
 		rtn = graphics.skyBlue;
 	}
-	else if (strcmp(name, "Aqua Blob") == 0)
+	else if (name == "Aqua Blob")
 	{
 		rtn = graphics.cyan;
 	}
-	else if (strcmp(name, "Laser Blob") == 0)
+	else if (name == "Laser Blob")
 	{
 		rtn = SDL_MapRGB(graphics.screen->format, 255, 0, 255);
 	}
-	else if (strcmp(name, "Machine Gun Blob") == 0)
+	else if (name == "Machine Gun Blob")
 	{
 		rtn = SDL_MapRGB(graphics.screen->format, 200, 64, 24);
 	}
@@ -798,12 +797,12 @@ void doEnemies()
 	}
 }
 
-void loadEnemy(const char *token)
+void loadEnemy(const std::string &token)
 {
 	int enemy = -1;
 
 	for (int i = MAX_ENEMIES - 1; i >= 0; i--)
-		if (strcmp(defEnemy[i].name, "") == 0)
+		if (defEnemy[i].name == "")
 			enemy = i;
 
 	if (enemy == -1)
@@ -815,7 +814,7 @@ void loadEnemy(const char *token)
 	char name[50], sprite[3][100], weapon[100], flags[1024];
 	int health, value;
 
-	sscanf(token, "%*c %[^\"] %*c %s %s %s %*c %[^\"] %*c %d %d %s", name, sprite[0], sprite[1], sprite[2], weapon, &health, &value, flags);
+	sscanf(token.c_str(), "%*c %[^\"] %*c %s %s %s %*c %[^\"] %*c %d %d %s", name, sprite[0], sprite[1], sprite[2], weapon, &health, &value, flags);
 
 	defEnemy[enemy].setName(name);
 	defEnemy[enemy].setSprites(graphics.getSprite(sprite[0], true), graphics.getSprite(sprite[1], true), graphics.getSprite(sprite[2], true));
@@ -840,19 +839,20 @@ void loadDefEnemies()
 		return graphics.showErrorAndExit("Couldn't load enemy definitions file (%s)", "data/defEnemies");
 	}
 
-	char *token = strtok((char*)engine.dataBuffer, "\n");
+	auto data_view = std::string_view(engine.dataBuffer.data(), engine.dataBuffer.size());
 
 	char name[50], sprite[3][100], weapon[100], flags[1024];
 	int health, value;
 
-	while (true)
+	for (auto line_view: split(data_view, '\n'))
 	{
-		if (strcmp(token, "@EOF@") == 0)
+		if (line_view == "@EOF@")
 		{
 			break;
 		}
 
-		sscanf(token, "%*c %[^\"] %*c %s %s %s %*c %[^\"] %*c %d %d %s", name, sprite[0], sprite[1], sprite[2], weapon, &health, &value, flags);
+		auto line = std::string(line_view);
+		sscanf(line.c_str(), "%*c %[^\"] %*c %s %s %s %*c %[^\"] %*c %d %d %s", name, sprite[0], sprite[1], sprite[2], weapon, &health, &value, flags);
 
 		defEnemy[enemy].setName(name);
 		defEnemy[enemy].setSprites(graphics.getSprite(sprite[0], true), graphics.getSprite(sprite[1], true), graphics.getSprite(sprite[2], true));
@@ -862,7 +862,5 @@ void loadDefEnemies()
 		defEnemy[enemy].flags = engine.getValueOfFlagTokens(flags);
 
 		enemy++;
-
-		token = strtok(NULL, "\n");
 	}
 }

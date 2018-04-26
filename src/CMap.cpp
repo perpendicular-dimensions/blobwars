@@ -45,7 +45,7 @@ void Map::clear()
 	limitRight = ((MAPWIDTH - 40) * BRICKSIZE);
 	limitDown = ((MAPHEIGHT - 30) * BRICKSIZE);
 
-	name[0] = 0;
+	name.clear();
 
 	for (int x = 0 ; x < MAPWIDTH ; x++)
 		for (int y = 0 ; y < MAPHEIGHT ; y++)
@@ -106,10 +106,7 @@ void Map::destroy()
 
 bool Map::isPracticeMission()
 {
-	if (strstr(name, "Practice"))
-		return true;
-		
-	return false;
+	return name.find("Practice") != name.npos;
 }
 
 bool Map::isValid(int x, int y)
@@ -193,7 +190,7 @@ bool Map::isTopLayer(int x, int y)
 	return false;
 }
 
-Persistant *Map::getPersistant(const char *name)
+Persistant *Map::getPersistant(const std::string &name)
 {
 	Persistant *p = (Persistant*)persistantList.getHead();
 	
@@ -201,7 +198,7 @@ Persistant *Map::getPersistant(const char *name)
 	{
 		p = (Persistant*)p->next;
 		
-		if (strcmp(p->stageName, name) == 0)
+		if (p->stageName == name)
 		{
 			return p;
 		}
@@ -210,7 +207,7 @@ Persistant *Map::getPersistant(const char *name)
 	return NULL;
 }
 
-Persistant *Map::createPersistant(const char *name)
+Persistant *Map::createPersistant(const std::string &name)
 {
 	Persistant *p = (Persistant*)persistantList.getHead();
 	
@@ -218,7 +215,7 @@ Persistant *Map::createPersistant(const char *name)
 	{
 		p = (Persistant*)p->next;
 		
-		if (strcmp(p->stageName, name) == 0)
+		if (p->stageName == name)
 		{
 			return p;
 		}
@@ -234,7 +231,7 @@ Persistant *Map::createPersistant(const char *name)
 	return p;
 }
 
-void Map::destroyPersistant(const char *name)
+void Map::destroyPersistant(const std::string &name)
 {
 	Persistant *p = (Persistant*)persistantList.getHead();
 	
@@ -242,40 +239,40 @@ void Map::destroyPersistant(const char *name)
 	{
 		p = (Persistant*)p->next;
 		
-		if (strcmp(p->stageName, name) == 0)
+		if (p->stageName == name)
 		{
-			strlcpy(p->stageName, "@none@", sizeof p->stageName);
+			p->stageName = "@none@";
 			p->clear();
 			return;
 		}
 	}
 }
 
-void Map::setName(const char *name)
+void Map::setName(const std::string &name)
 {
-	strlcpy(this->name, name, sizeof this->name);
+	this->name = name;
 	
-	if (strstr(name, "BioMech"))
+	if (name.find("BioMech") != name.npos)
 	{
 		isBossMission = true;
 	}
 		
-	if (strcmp(name, "Galdov") == 0)
+	if (name == "Galdov")
 	{
 		isBossMission = true;
 	}
 
-	if (strcmp(name, "Final Battle") == 0)
+	if (name == "Final Battle")
 	{
 		isBossMission = true;
 	}
 		
-	if (strstr(name, "Ice"))
+	if (name.find("Ice") != name.npos)
 	{
 		isIceLevel = true;
 	}
 		
-	if (strstr(name, "Arctic"))
+	if (name.find("Arctic") != name.npos)
 	{
 		isIceLevel = true;
 		isBlizzardLevel = true;
@@ -290,7 +287,7 @@ void Map::setClipping(int limitLeft, int limitRight, int limitUp, int limitDown)
 	if (limitDown != -1) this->limitDown = limitDown;
 }
 
-void Map::addTrain(const char *name, int startX, int startY, int endX, int endY, int pause, bool atStart, bool active)
+void Map::addTrain(const std::string &name, int startX, int startY, int endX, int endY, int pause, bool atStart, bool active)
 {
 	Train *train = new Train();
 	train->setName(name);
@@ -309,7 +306,7 @@ void Map::addTrain(const char *name, int startX, int startY, int endX, int endY,
 	trainList.add(train);
 }
 
-void Map::addDoor(const char *name, int type, int startX, int startY, int endX, int endY, bool active)
+void Map::addDoor(const std::string &name, int type, int startX, int startY, int endX, int endY, bool active)
 {
 	Train *train = new Train();
 	train->setName(name);
@@ -333,7 +330,7 @@ void Map::addDoor(const char *name, int type, int startX, int startY, int endX, 
 	trainList.add(train);
 }
 
-void Map::addSwitch(const char *name, const char *linkName, const char *requiredObjectName, const char *activateMessage, int type, int x, int y, bool activated)
+void Map::addSwitch(const std::string &name, const std::string &linkName, const std::string &requiredObjectName, const std::string &activateMessage, int type, int x, int y, bool activated)
 {
 	Switch *swt = new Switch();
 	swt->set(name, linkName, requiredObjectName, activateMessage, type, x, y, activated);
@@ -375,7 +372,7 @@ void Map::addObstacle(Entity *obstacle)
 	obstacleList.add(obstacle);
 }
 
-void Map::addSpawnPoint(const char *name, int x, int y, int type, int subtype, int min, int max, bool active)
+void Map::addSpawnPoint(const std::string &name, int x, int y, int type, int subtype, int min, int max, bool active)
 {
 	SpawnPoint *spawnPoint = new SpawnPoint();
 	spawnPoint->create(name, x, y, type, subtype, min, max, active);
@@ -388,7 +385,7 @@ void Map::addEffect(Effect *effect)
 	effectList.add(effect);
 }
 
-void Map::addObjective(const char *description, const char *target, int targetValue, bool required)
+void Map::addObjective(const std::string &description, const std::string &target, int targetValue, bool required)
 {
 	Objective *objective = new Objective(description, target, targetValue, required);
 
@@ -410,13 +407,13 @@ void Map::addTrap(Trap *trap)
 	trapList.add(trap);
 }
 
-void Map::evalTileset(const char *baseDir)
+void Map::evalTileset(const std::string &baseDir)
 {
-	if (strstr(baseDir, "caves"))
+	if (baseDir.find("caves") != baseDir.npos)
 	{
 		isCavesTileset = true;
 	}
-	else if (strstr(baseDir, "grasslands"))
+	else if (baseDir.find("grasslands") != baseDir.npos)
 	{
 		isGrasslandsTileset = true;
 	}
@@ -449,19 +446,19 @@ void Map::setAllowableEnemy(Entity *enemy)
 	debug(("WARNING: Can't add anymore spawnable enemies to list!!!\n"));
 }
 
-char *Map::getSpawnableEnemy(int i)
+std::string Map::getSpawnableEnemy(int i)
 {
 	if (allowableEnemy[i] == NULL)
-		return NULL;
+		return {};
 	
 	return allowableEnemy[i]->name;
 }
 
-char *Map::getSpawnableEnemy()
+std::string Map::getSpawnableEnemy()
 {
 	if (maxAllowableEnemies == 0)
 	{
-		printf("ERROR: No enemy spawn list defined for map '%s'!! Please report this Error!\n", name);
+		fmt::print("ERROR: No enemy spawn list defined for map '{}'!! Please report this Error!\n", name);
 		exit(1);
 	}
 

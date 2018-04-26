@@ -25,14 +25,14 @@ class Teleporter : public GameObject {
 	
 		Sprite *sprite;
 
-		char name[50];
+		std::string name;
 
 		bool active;
 		int x, y;
 		int destX, destY;
 
 	Teleporter();
-	void setName(const char *name);
+	void setName(const std::string &name);
 	void set(int x, int y, int destX, int destY);
 	void setActive(bool active);
 

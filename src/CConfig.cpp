@@ -88,78 +88,59 @@ void Config::doPause()
 
 bool Config::loadJoystickConfig()
 {
-	char filename[PATH_MAX];
-	snprintf(filename, sizeof filename, "%sjoystick.cfg", engine->userHomeDirectory);
+	std::string filename = engine->userHomeDirectory + "joystick.cfg";
 	
 	debug(("Loading joystick config from %s\n", filename));
 	
-	FILE *fp = fopen(filename, "rb");
-	
-	if (!fp)
+	std::ifstream file(filename);
+
+	file.read((char *)&joystick, sizeof(Joystick));
+		
+	if (file.bad())
 	{
 		return false;
 	}
 		
-	if (fread(&joystick, sizeof(Joystick), 1, fp) != 1)
-	{
-		fclose(fp);
-		return false;
-	}
-		
-	fclose(fp);
-	
 	return true;
 }
 
 bool Config::saveJoystickConfig()
 {
 	bool ret = true;
-	char filename[PATH_MAX];
-	snprintf(filename, sizeof filename, "%sjoystick.cfg", engine->userHomeDirectory);
+
+	std::string filename = engine->userHomeDirectory + "joystick.cfg";
 	
 	debug(("Saving joystick config to %s\n", filename));
 	
-	FILE *fp = fopen(filename, "wb");
-	
-	if (!fp)
-	{
-		debug(("WARNING: Couldn't save joystick config: %s\n", strerror(errno)));
-		return false;
-	}
+	std::ofstream file(filename);
 
-	if (fwrite(&joystick, sizeof(Joystick), 1, fp) != 1)
+	file.write((char *)&joystick, sizeof(Joystick));
+	file.close();
+
+	if (file.bad())
 	{
 		debug(("WARNING: Couldn't save joystick config: %s\n", strerror(errno)));
 		ret = false;
 	}
 
-	fclose(fp);
-	
 	return ret;
 }
 
 bool Config::loadKeyConfig()
 {
-	char filename[PATH_MAX];
-	snprintf(filename, sizeof filename, "%skeyboard.cfg", engine->userHomeDirectory);
-	
+	std::string filename = engine->userHomeDirectory + "keyboard.cfg";
+
 	debug(("Loading keyboard config from %s\n", filename));
 	
-	FILE *fp = fopen(filename, "rb");
-	
-	if (!fp)
+	std::ifstream file(filename);
+
+	file.read((char *)&keyboard, sizeof(Keyboard));
+		
+	if (file.bad())
 	{
 		return false;
 	}
 		
-	if (fread(&keyboard, sizeof(Keyboard), 1, fp) != 1)
-	{
-		fclose(fp);
-		return false;
-	}
-		
-	fclose(fp);
-	
 	// Keyboard break fix - Feb 09
 	keyboard.control[CONTROL::UP] = 0;
 	
@@ -169,27 +150,21 @@ bool Config::loadKeyConfig()
 bool Config::saveKeyConfig()
 {
 	bool ret = true;
-	char filename[PATH_MAX];
-	snprintf(filename, sizeof filename, "%skeyboard.cfg", engine->userHomeDirectory);
+	std::string filename = engine->userHomeDirectory + "keyboard.cfg";
 	
 	debug(("Saving keyboard config to %s\n", filename));
 	
-	FILE *fp = fopen(filename, "wb");
-	
-	if (!fp)
-	{
-		debug(("WARNING: Couldn't save keyboard config: %s\n", strerror(errno)));
-		return false;
-	}
+	std::ofstream file(filename);
 
-	if (fwrite(&keyboard, sizeof(keyboard), 1, fp) != 1)
+	file.write((char *)&keyboard, sizeof(keyboard));
+	file.close();
+	
+	if (file.bad())
 	{
 		debug(("WARNING: Couldn't save keyboard config: %s\n", strerror(errno)));
 		ret = false;
 	}
 
-	fclose(fp);
-	
 	return ret;
 }
 

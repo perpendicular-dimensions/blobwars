@@ -23,12 +23,12 @@ class FileData {
 
 	public:
 
-		char filename[60];
+		std::string filename;
 		Uint32 cSize;
 		Uint32 fSize;
 		Uint32 location;
 
 	FileData();
 	
-	void set(const char *filename, Uint32 fSize, Uint32 cSize, Uint32 location);
+	void set(const std::string &filename, Uint32 fSize, Uint32 cSize, Uint32 location);
 };

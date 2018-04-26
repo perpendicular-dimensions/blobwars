@@ -33,9 +33,9 @@ Weapon::Weapon()
 	health = 0;
 }
 
-void Weapon::setName(const char *name)
+void Weapon::setName(const std::string &name)
 {
-	strlcpy(this->name, name, sizeof this->name);
+	this->name = name;
 }
 
 int Weapon::getSpeed(int face) const

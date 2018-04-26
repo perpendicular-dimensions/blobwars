@@ -23,10 +23,10 @@ class Switch : public GameObject {
 
 	public:
 		
-		char name[50];
-		char linkName[50];
-		char requiredObjectName[50];
-		char activateMessage[100];
+		std::string name;
+		std::string linkName;
+		std::string requiredObjectName;
+		std::string activateMessage;
 
 		int type;
 		int x, y;
@@ -34,6 +34,6 @@ class Switch : public GameObject {
 		bool activated;
 
 		Switch();
-		void set(const char *name, const char *linkName, const char *requiredObjectName, const char *activateMessage, int type, int x, int y, bool activated);
+		void set(const std::string &name, const std::string &linkName, const std::string &requiredObjectName, const std::string &activateMessage, int type, int x, int y, bool activated);
 		
 };

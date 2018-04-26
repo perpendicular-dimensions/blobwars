@@ -23,11 +23,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 static int medalWorker(void *data)
 {
-	char *tname = (char*)data;
+	std::string *tname = (std::string *)data;
 	
 	SDL_mutexP(medalServer.lock);
 	
-	int type = medalServer.postMedal(tname);
+	int type = medalServer.postMedal(*tname);
 	
 	while (!graphics.canShowMedalMessage())
 	{
@@ -57,22 +57,20 @@ static int medalWorker(void *data)
 	
 	SDL_mutexV(medalServer.lock);
 	
-	delete[] tname;
+	delete tname;
 	
 	return type;
 }
 
-void presentPlayerMedal(const char *tname)
+void presentPlayerMedal(const std::string &tname)
 {
 	if (engine.cheats)
 		return;
 
 	// Copy the input, so that threading
 	// doesn't trip us up!
-	char *data = new char[128];
+	std::string *data = new std::string(tname);
 	
-	strlcpy(data, tname, 128);
-
 	SDL_Thread *thread = SDL_CreateThread(medalWorker, "MedalWorker", (void*)data);
 
 	if (thread == NULL)

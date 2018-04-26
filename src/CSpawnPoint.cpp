@@ -23,7 +23,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 SpawnPoint::SpawnPoint()
 {
-	name[0] = 0;
 	active = false;
 	x = y = 0;
 
@@ -41,9 +40,9 @@ void SpawnPoint::reset()
 	requiredInterval = Math::rrand(minInterval, maxInterval);
 }
 
-void SpawnPoint::create(const char *name, int x, int y, int spawnType, int spawnSubType, int minInterval, int maxInterval, bool active)
+void SpawnPoint::create(const std::string &name, int x, int y, int spawnType, int spawnSubType, int minInterval, int maxInterval, bool active)
 {
-	strlcpy(this->name, name, sizeof this->name);
+	this->name = name;
 	this->x = x;
 	this->y = y;
 	this->spawnType = spawnType;

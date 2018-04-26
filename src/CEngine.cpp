@@ -37,8 +37,6 @@ Engine::Engine()
 	
 	allowJoypad = true;
 
-	lastKeyPressed[0] = 0;
-
 	fullScreen = 0;
 
 	useAudio = 2;
@@ -57,11 +55,8 @@ Engine::Engine()
 	// Development Stuff
 	devNoMonsters = false;
 
-	dataBuffer = NULL;
-	binaryBuffer = NULL;
 	#ifdef FRAMEWORK_SDL
-	char pakPath[PATH_MAX];
-	strlcpy(pakPath, PAKFULLPATH, sizeof(pakPath));
+	char pakPath[PATH_MAX] = PAKFULLPATH;
 	if (CFBundleGetMainBundle() != NULL) {
 		CFURLRef pakURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), CFSTR(PAKNAME), NULL, NULL);
 		if (pakURL != NULL) {
@@ -80,7 +75,6 @@ Engine::Engine()
 	timeDifference = 0;
 
 	// Cheats
-	memset(lastKeyEvents, ' ', 25);
 	cheatHealth = cheatExtras = cheatFuel = cheatLevels = false;
 	cheatBlood = cheatInvulnerable = cheatReload = cheatSpeed = cheatSkipLevel = false;
 	
@@ -92,26 +86,20 @@ void Engine::destroy()
 	debug(("engine: free widgets\n"));
 	deleteWidgets();
 
-	debug(("engine: free databuffer\n"));
-	delete[] dataBuffer;
-
-	debug(("engine: free binarybuffer\n"));
-	delete[] binaryBuffer;
-
 	debug(("Clearing Define List...\n"));
 	defineList.clear();
 }
 
 void Engine::clearCheatVars()
 {
-	memset(lastKeyEvents, ' ', 25);
+	lastKeyEvents.clear();
 	cheatHealth = cheatExtras = cheatFuel = cheatLevels = false;
 	cheatBlood = cheatInvulnerable = cheatReload = cheatSpeed = cheatSkipLevel = false;
 }
 
 bool Engine::compareLastKeyInputs()
 {
-	if (strstr(lastKeyEvents, "LOCKANDLOAD"))
+	if (contains(lastKeyEvents, "LOCKANDLOAD"))
 	{
 		cheats = true;
 		return true;
@@ -122,33 +110,15 @@ bool Engine::compareLastKeyInputs()
 
 void Engine::addKeyEvent()
 {
-	if (strlen(lastKeyPressed) > 1)
+	if (lastKeyPressed.size() != 1)
 	{
 		return;
 	}
 
-	int index = -1;
+	if (lastKeyEvents.size() >= 25)
+		lastKeyEvents.erase(0, 1);
 
-	for (int i = 0 ; i < 25 ; i++)
-	{
-		if (lastKeyEvents[i] == ' ')
-		{
-			index = i;
-			break;
-		}
-	}
-
-	if (index == -1)
-	{
-		for (int i = 0 ; i < 24 ; i++)
-		{
-			lastKeyEvents[i] = lastKeyEvents[i + 1];
-		}
-
-		index = 24;
-	}
-
-	lastKeyEvents[index] = lastKeyPressed[0];
+	lastKeyEvents.append(lastKeyPressed);
 
 	compareLastKeyInputs();
 }
@@ -227,7 +197,7 @@ void Engine::getInput()
 				}
 
 				keyState[event.key.keysym.scancode] = 1;
-				strlcpy(lastKeyPressed, SDL_GetKeyName(SDL_GetKeyFromScancode(event.key.keysym.scancode)), sizeof lastKeyPressed);
+				lastKeyPressed = SDL_GetKeyName(SDL_GetKeyFromScancode(event.key.keysym.scancode));
 				addKeyEvent();
 				break;
 
@@ -354,9 +324,9 @@ void Engine::clearInput()
 	joykeyFire = false;
 }
 
-void Engine::setUserHome(const char *path)
+void Engine::setUserHome(const std::string &path)
 {
-	strlcpy(userHomeDirectory, path, sizeof userHomeDirectory);
+	userHomeDirectory = path;
 	debug(("User Home = %s\n", path));
 }
 
@@ -371,20 +341,9 @@ it is found, the data is read into a character buffer.
 In the case of music, the data music be written to a temporary directory
 since SDL currently provides no means to load music directly from memory
 */
-bool Engine::unpack(const char *filename, int fileType)
+bool Engine::unpack(const std::string &filename, int fileType)
 {
 	bool ret = true;
-
-	if (fileType == PAK_DATA)
-	{
-		delete[] dataBuffer;
-		dataBuffer = NULL;
-	}
-	else
-	{
-		delete[] binaryBuffer;
-		binaryBuffer = NULL;
-	}
 
 	if (fileType != PAK_DATA)
 	{
@@ -403,7 +362,7 @@ bool Engine::unpack(const char *filename, int fileType)
 
 	if ((fileType == PAK_IMG) || (fileType == PAK_SOUND))
 	{
-		sdlrw = SDL_RWFromMem(binaryBuffer, pak.getUncompressedSize());
+		sdlrw = SDL_RWFromMem(binaryBuffer.data(), pak.getUncompressedSize());
 		if (!sdlrw)
 		{
 			printf("Fatal Error: SDL_RWops allocation failed\n");
@@ -413,38 +372,31 @@ bool Engine::unpack(const char *filename, int fileType)
 
 	if ((fileType == PAK_MUSIC) || (fileType == PAK_FONT) || (fileType == PAK_TAGS))
 	{
-		char tempPath[PATH_MAX];
+		std::string tempPath = userHomeDirectory;
 		
-		FILE *fp = NULL;
-
 		if (fileType == PAK_MUSIC)
 		{
-			snprintf(tempPath, sizeof tempPath, "%smusic.mod", userHomeDirectory);
-			fp = fopen(tempPath, "wb");
+			tempPath.append("music.mod");
 		}
 		else if (fileType == PAK_TAGS)
 		{
-			snprintf(tempPath, sizeof tempPath, "%smusic.tags", userHomeDirectory);
-			fp = fopen(tempPath, "wb");
+			tempPath.append("music.tags");
 		}
 		else if (fileType == PAK_FONT)
 		{
-			snprintf(tempPath, sizeof tempPath, "%sfont.ttf", userHomeDirectory);
-			fp = fopen(tempPath, "wb");
+			tempPath.append("font.ttf");
 		}
 
-		if (!fp)
-		{
-			printf("Fatal Error: could not open %s for writing: %s", tempPath, strerror(errno));
-			return false;
-		}
+		std::ofstream file(tempPath);
 
-		if (fwrite(binaryBuffer, 1, pak.getUncompressedSize(), fp) != pak.getUncompressedSize())
+		file.write((const char *)binaryBuffer.data(), pak.getUncompressedSize());
+		file.close();
+
+		if (file.bad())
 		{
-			printf("Fatal Error: could not write to %s: %s", tempPath, strerror(errno));
+			fmt::print("Fatal Error: could not write to {}: {}", tempPath, strerror(errno));
 			ret = false;
 		}
-		fclose(fp);
 	}
 
 	debug(("unpack() : Loaded %s (%d), ret: %d\n", filename, pak.getUncompressedSize(), (int)ret));
@@ -452,36 +404,26 @@ bool Engine::unpack(const char *filename, int fileType)
 	return ret;
 }
 
-bool Engine::loadData(const char *filename)
+bool Engine::loadData(const std::string &filename)
 {
 	bool ret = true;
 
-	delete[] dataBuffer;
-	dataBuffer = NULL;
-	
 	#if USEPAK
 		return unpack(filename, PAK_DATA);
 	#endif
 
-	FILE *fp;
-	fp = fopen(filename, "rb");
-	if (fp == NULL)
-		return false;
+	std::ifstream file(filename);
 
-	fseek(fp, 0, SEEK_END);
+	size_t fSize = file.seekg(0, std::ios_base::end).tellg();
+	file.seekg(0);
 
-	int fSize = ftell(fp);
+	dataBuffer.resize(fSize + 1);
 
-	rewind(fp);
-
-	dataBuffer = new unsigned char[fSize + 1];
-
-	if (fread(dataBuffer, 1, fSize, fp) != (size_t)fSize)
-		ret = false;
-
+	file.read((char *)dataBuffer.data(), fSize);
 	dataBuffer[fSize] = 0;
 
-	fclose(fp);
+	if (file.bad())
+		ret = false;
 
 	debug(("loadData() : Loaded %s (%d), ret: %d\n", filename, fSize, (int)ret));
 
@@ -490,12 +432,12 @@ bool Engine::loadData(const char *filename)
 
 void Engine::reportFontFailure()
 {
-	printf("\nUnable to load font. The game cannot continue without it.\n");
-	printf("Please confirm that the game and all required SDL libraries are installed\n");
-	printf("The following information may be useful to you,\n\n");
-	printf("Expected location of PAK file: %s\n", PAKFULLPATH);
-	printf("Location of TMP directory: %s\n", userHomeDirectory);
-	printf("\nAlso try checking http://www.parallelrealities.co.uk/blobWars.php for updates\n\n");
+	fmt::print("\nUnable to load font. The game cannot continue without it.\n");
+	fmt::print("Please confirm that the game and all required SDL libraries are installed\n");
+	fmt::print("The following information may be useful to you,\n\n");
+	fmt::print("Expected location of PAK file: {}\n", PAKFULLPATH);
+	fmt::print("Location of TMP directory: {}\n", userHomeDirectory);
+	fmt::print("\nAlso try checking http://www.parallelrealities.co.uk/blobWars.php for updates\n\n");
 	exit(1);
 }
 
@@ -535,11 +477,11 @@ void Engine::resetTimeDifference()
 	time1 = time2 = SDL_GetTicks();
 }
 
-void Engine::setInfoMessage(const char *message, int priority, int type)
+void Engine::setInfoMessage(const std::string &message, int priority, int type)
 {
 	if (priority >= messagePriority)
 	{
-		strlcpy(this->message, message, sizeof this->message);
+		this->message = message;
 		messageTime = 180;
 		messagePriority = priority;
 		messageType = type;
@@ -564,30 +506,26 @@ void Engine::addWidget(Widget *widget)
 	widgetList.add(widget);
 }
 
-bool Engine::loadWidgets(const char *filename)
+bool Engine::loadWidgets(const std::string &filename)
 {
 	deleteWidgets();
 
 	if (!loadData(filename))
 		return false;
 
-	char token[50], name[50], groupName[50], label[80], options[100], *line;
+	char token[50], name[50], groupName[50], label[80], options[100];
 	int x, y, min, max;
 
 	int i;
 
 	Widget *widget;
 
-	line = strtok((char*)dataBuffer, "\n");
-
-	while (true)
+	for (auto line: split(dataBuffer, '\n'))
 	{
-		sscanf(line, "%s", token);
+		scan(line, "%s %s %s %*c %[^\"] %*c %*c %[^\"] %*c %d %d %d %d", token, name, groupName, label, options, &x, &y, &min, &max);
 
 		if (strcmp(token, "END") == 0)
 			break;
-
-		sscanf(line, "%*s %s %s %*c %[^\"] %*c %*c %[^\"] %*c %d %d %d %d", name, groupName, label, options, &x, &y, &min, &max);
 
 		widget = new Widget;
 
@@ -595,10 +533,10 @@ bool Engine::loadWidgets(const char *filename)
 
 		while (true)
 		{
-			if (strcmp(token, widgetName[i]) == 0)
+			if (token == widgetName[i])
 				widget->type = i;
 
-			if (strcmp("-1", widgetName[i]) == 0)
+			if ("-1" == widgetName[i])
 				break;
 
 			i++;
@@ -607,10 +545,6 @@ bool Engine::loadWidgets(const char *filename)
 		widget->setProperties(name, groupName, label, options, x, y, min, max);
 
 		addWidget(widget);
-
-
-		if ((line = strtok(NULL, "\n")) == NULL)
-			break;
 	}
 
 	highlightedWidget = (Widget*)widgetList.getHead()->next;
@@ -618,7 +552,7 @@ bool Engine::loadWidgets(const char *filename)
 	return true;
 }
 
-Widget *Engine::getWidgetByName(const char *name)
+Widget *Engine::getWidgetByName(const std::string &name)
 {
 	Widget *widget = (Widget*)widgetList.getHead();
 
@@ -626,7 +560,7 @@ Widget *Engine::getWidgetByName(const char *name)
 	{
 		widget = (Widget*)widget->next;
 
-		if (strcmp(widget->name, name) == 0)
+		if (widget->name == name)
 			return widget;
 	}
 
@@ -635,7 +569,7 @@ Widget *Engine::getWidgetByName(const char *name)
 	return NULL;
 }
 
-void Engine::showWidgetGroup(const char *groupName, bool show)
+void Engine::showWidgetGroup(const std::string &groupName, bool show)
 {
 	bool found = false;
 
@@ -645,7 +579,7 @@ void Engine::showWidgetGroup(const char *groupName, bool show)
 	{
 		widget = (Widget*)widget->next;
 
-		if (strcmp(widget->groupName, groupName) == 0)
+		if (widget->groupName == groupName)
 		{
 			widget->visible = show;
 			widget->redraw();
@@ -657,7 +591,7 @@ void Engine::showWidgetGroup(const char *groupName, bool show)
 		debug(("Group '%s' does not exist\n", groupName));
 }
 
-void Engine::enableWidgetGroup(const char *groupName, bool show)
+void Engine::enableWidgetGroup(const std::string &groupName, bool show)
 {
 	bool found = false;
 
@@ -667,7 +601,7 @@ void Engine::enableWidgetGroup(const char *groupName, bool show)
 	{
 		widget = (Widget*)widget->next;
 
-		if (strcmp(widget->groupName, groupName) == 0)
+		if (widget->groupName == groupName)
 		{
 			widget->enabled = show;
 			widget->redraw();
@@ -679,7 +613,7 @@ void Engine::enableWidgetGroup(const char *groupName, bool show)
 		debug(("Group '%s' does not exist\n", groupName));
 }
 
-void Engine::showWidget(const char *name, bool show)
+void Engine::showWidget(const std::string &name, bool show)
 {
 	Widget *widget = getWidgetByName(name);
 	if (widget != NULL)
@@ -689,7 +623,7 @@ void Engine::showWidget(const char *name, bool show)
 	}
 }
 
-void Engine::enableWidget(const char *name, bool enable)
+void Engine::enableWidget(const std::string &name, bool enable)
 {
 	Widget *widget = getWidgetByName(name);
 	if (widget != NULL)
@@ -699,14 +633,14 @@ void Engine::enableWidget(const char *name, bool enable)
 	}
 }
 
-void Engine::setWidgetVariable(const char *name, int *variable)
+void Engine::setWidgetVariable(const std::string &name, int *variable)
 {
 	Widget *widget = getWidgetByName(name);
 	if (widget != NULL)
 		widget->value = variable;
 }
 
-bool Engine::widgetChanged(const char *name)
+bool Engine::widgetChanged(const std::string &name)
 {
 	Widget *widget = getWidgetByName(name);
 	if (widget != NULL)
@@ -764,7 +698,7 @@ void Engine::highlightWidget(int dir)
 	highlightedWidget->redraw();
 }
 
-void Engine::highlightWidget(const char *name)
+void Engine::highlightWidget(const std::string &name)
 {
 	highlightedWidget = getWidgetByName(name);
 }
@@ -897,44 +831,6 @@ int Engine::processWidgets()
 	return update;
 }
 
-#if !UNIX
-char *strtok_r(char *s1, const char *s2, char **lasts)
-{
-	char *ret;
-	
-	if (s1 == NULL)
-	{
-		s1 = *lasts;
-	}
-	
-	while (*s1 && strchr(s2, *s1))
-	{
-		++s1;
-	}
-	
-	if (*s1 == '\0')
-	{
-		return NULL;
-	}
-	
-	ret = s1;
-	
-	while(*s1 && !strchr(s2, *s1))
-	{
-		++s1;
-	}
-	
-	if(*s1)
-	{
-		*s1++ = '\0';
-	}
-	
-	*lasts = s1;
-	
-	return ret;
-}
-#endif
-
 /*
 Loads key-value defines into a linked list, comments are ignored. The defines.h file is used by the
 game at compile time and run time, so everything is syncronised. This technique has the advantage of
@@ -947,17 +843,11 @@ bool Engine::loadDefines()
 	if (!loadData("data/defines.h"))
 		return false;
 
-	strtok((char*)dataBuffer, "\n");
-
-	while (true)
+	for (auto line: split(dataBuffer, '\n'))
 	{
-		char *token = strtok(NULL, "\n");
-		if (!token)
-			break;
-
-		if (!strstr(token, "/*"))
+		if (!contains(line, "/*"))
 		{
-			sscanf(token, "%*s %s %[^\n\r]", string[0], string[1]);
+			scan(line, "%*s %s %[^\n\r]", string[0], string[1]);
 			Data *data = new Data();
 			data->set(string[0], string[1], 1, 1);
 			defineList.add(data);
@@ -974,7 +864,7 @@ traverse the list and return 1 when it encounters ACTIVE. This has two advantage
 the code, I don't have to change all the data entries too. You probably already
 thought of that though... :)
 */
-int Engine::getValueOfDefine(const char *word)
+int Engine::getValueOfDefine(const std::string &word)
 {
 	int rtn = 0;
 
@@ -984,21 +874,21 @@ int Engine::getValueOfDefine(const char *word)
 	{
 		data = (Data*)data->next;
 
-		if (strcmp(data->key, word) == 0)
+		if (data->key == word)
 		{
-			rtn = atoi(data->value);
+			rtn = stoi(data->value);
 			return rtn;
 		}
 	}
 
-	printf("ERROR: getValueOfDefine() : %s is not defined!\n", word);
+	fmt::print("ERROR: getValueOfDefine() : {} is not defined!\n", word);
 	exit(1);
 }
 
 /*
 Does the opposite of the above(!)
 */
-char *Engine::getDefineOfValue(const char *prefix, int value)
+std::string Engine::getDefineOfValue(const std::string &prefix, int value)
 {
 	int rtn = 0;
 
@@ -1008,9 +898,9 @@ char *Engine::getDefineOfValue(const char *prefix, int value)
 	{
 		data = (Data*)data->next;
 
-		if (strstr(data->key, prefix))
+		if (contains(data->key, prefix))
 		{
-			rtn = atoi(data->value);
+			rtn = stoi(data->value);
 			
 			if (rtn == value)
 			{
@@ -1019,7 +909,7 @@ char *Engine::getDefineOfValue(const char *prefix, int value)
 		}
 	}
 
-	printf("ERROR: getDefineOfValue() : %s, %d is not defined!\n", prefix, value);
+	fmt::print("ERROR: getDefineOfValue() : {}, {} is not defined!\n", prefix, value);
 	exit(1);
 }
 
@@ -1029,30 +919,19 @@ the function above, delimited with plus signs. So ENT_FLIES+ENT_AIMS. It then wo
 flags (in a bit of a half arsed manner because of my lazy (2 << 25) declarations, adds all
 the values together and then returns them... phew! Makes data files human readable though :)
 */
-int Engine::getValueOfFlagTokens(const char *realLine)
+int Engine::getValueOfFlagTokens(const std::string &line)
 {
-	if (strcmp(realLine, "0") == 0)
+	if (line == "0")
 		return 0;
 
-	char *store;
-	char line[1024];
 	bool found;
 	int value;
-	strlcpy(line, realLine, sizeof line);
 
 	int flags = 0;
 
-	char *word = strtok_r(line, "+", &store);
-
-	if (!word)
-	{
-		printf("ERROR: getValueOfFlagTokens() : NULL Pointer!\n");
-		exit(1);
-	}
-
 	Data *data;
 
-	while (true)
+	for (auto word: split(line, '+'))
 	{
 		data = (Data*)defineList.getHead();
 		found = false;
@@ -1061,14 +940,14 @@ int Engine::getValueOfFlagTokens(const char *realLine)
 		{
 			data = (Data*)data->next;
 
-			if (strcmp(data->key, word) == 0)
+			if (data->key == word)
 			{
 				value = -1;
-				sscanf(data->value, "%d", &value);
+				sscanf(data->value.c_str(), "%d", &value);
 
 				if (value == -1)
 				{
-					sscanf(data->value, "%*s %*d %*s %d", &value);
+					sscanf(data->value.c_str(), "%*s %*d %*s %d", &value);
 					value = 2 << value;
 				}
 
@@ -1080,17 +959,13 @@ int Engine::getValueOfFlagTokens(const char *realLine)
 
 		if (!found)
 		{
-			printf("ERROR: getValueOfFlagTokens() : Illegal Token '%s'\n", word);
+			fmt::print("ERROR: getValueOfFlagTokens() : Illegal Token '{}'\n", word);
 			#if IGNORE_FLAGTOKEN_ERRORS
 				break;
 			#else
 				exit(1);
 			#endif
 		}
-
-		word = strtok_r(NULL, "+", &store);
-		if (!word)
-			break;
 	}
 
 	return flags;

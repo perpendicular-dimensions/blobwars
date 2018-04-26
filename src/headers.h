@@ -29,6 +29,17 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <locale.h>
 #include <dirent.h>
 
+#include <algorithm>
+#include <fstream>
+#include <string>
+#include <string_view>
+#include <fmt/format.h>
+#include <fmt/ostream.h>
+#include <fmt/time.h>
+//#include <boost/filesystem.hpp>
+
+//namespace fs = boost::filesystem;
+
 #include <zlib.h>
 
 #ifdef FRAMEWORK_SDL
@@ -52,7 +63,8 @@ extern DECLSPEC int SDLCALL SDL_GetGamma(float *red, float *green, float *blue);
 
 #if !defined(_WIN32) && !defined(__APPLE__)
 #include <libintl.h>
-#define _(string) gettext(string)
+inline const char *_(const char *str) { return gettext(str); }
+inline const char *_(const std::string &str) { return gettext(str.c_str()); }
 #else
 #define _(x) (x)
 #define gettext(x) (x)
@@ -60,12 +72,8 @@ extern DECLSPEC int SDLCALL SDL_GetGamma(float *red, float *green, float *blue);
 #define textdomain(x) while(false)
 #endif
 
-#if !defined(OpenBSD) && !defined(FreeBSD) && !defined(__APPLE__)
-static inline void strlcat(char *dest, const char *src, size_t n) { strncat(dest, src, n - 1); }
-static inline void strlcpy(char *dest, const char *src, size_t n) { strncpy(dest, src, n); dest[n - 1] = 0; }
-#endif
-
 #include "defs.h"
+#include "utils.h"
 
 #include "CMath.h"
 

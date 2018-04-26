@@ -23,7 +23,7 @@ class Audio {
 
 	private:
 	
-		char levelMusicName[128];
+		std::string levelMusicName;
 
 		Engine *engine;
 
@@ -36,9 +36,9 @@ class Audio {
 		Mix_Music *music;
 
 	public:
-		char songtitle[128];
-		char songalbum[128];
-		char songartist[128];
+		std::string songtitle;
+		std::string songalbum;
+		std::string songartist;
 		int songlicense;
 
 		int output;
@@ -48,8 +48,8 @@ class Audio {
 	void setSoundVolume(int soundVolume);
 	void setMusicVolume(int musicVolume);
 	void registerEngine(Engine *engine);
-	bool loadSound(int i, const char *filename);
-	bool loadMusic(const char *filename);
+	bool loadSound(int i, const std::string &filename);
+	bool loadMusic(const std::string &filename);
 	void playSoundRelative(int snd, int channel, float x);
 	void playSound(int snd, int channel, float x);
 	void playSound(int snd, int channel);

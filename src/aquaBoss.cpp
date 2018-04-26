@@ -291,7 +291,7 @@ void aquaBossInit()
 	debug(("aquaBossInit\n"));
 	
 	map.boss[0] = new Boss();
-	strlcpy(map.boss[0]->name, "BioMech Aqua Blob", sizeof map.boss[0]->name);
+	map.boss[0]->name = "BioMech Aqua Blob";
 	map.boss[0]->health = 45 * game.skill;
 	map.boss[0]->maxHealth = 45 * game.skill;
 	map.boss[0]->setSprites(graphics.getSprite("AquaBossRight", true), graphics.getSprite("AquaBossLeft", true), graphics.getSprite("AquaBossLeft", true));

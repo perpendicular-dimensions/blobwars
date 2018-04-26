@@ -158,8 +158,8 @@ int main(int argc, char *argv[])
 		else if (strcmp(argv[i], "-mono") == 0) engine.useAudio = 1;
 		else if (strcmp(argv[i], "-version") == 0) {showVersion(); exit(0);}
 		else if (strcmp(argv[i], "--help") == 0) showHelp();
-		else if (strcmp(argv[i], "-record") == 0) {recordMode = REPLAY_MODE::RECORD; strlcpy(replayData.filename, argv[++i], sizeof replayData.filename);}
-		else if (strcmp(argv[i], "-playback") == 0) {recordMode = REPLAY_MODE::PLAYBACK; strlcpy(replayData.filename, argv[++i], sizeof replayData.filename);}
+		else if (strcmp(argv[i], "-record") == 0) {recordMode = REPLAY_MODE::RECORD; replayData.filename = argv[++i];}
+		else if (strcmp(argv[i], "-playback") == 0) {recordMode = REPLAY_MODE::PLAYBACK; replayData.filename = argv[++i];}
 		else if (strcmp(argv[i], "-map") == 0) {if (argc > i + 1) {game.setMapName(argv[++i]); requiredSection = SECTION_GAME;}}
 		else if (strcmp(argv[i], "-listmaps") == 0) listMaps();
 		else if (strcmp(argv[i], "-credits") == 0) requiredSection = SECTION_CREDITS;
@@ -182,7 +182,7 @@ int main(int argc, char *argv[])
 			
 		case REPLAY_MODE::RECORD:
 			requiredSection = SECTION_GAME;
-			strlcpy(replayData.header.map, game.mapName, sizeof replayData.header.map);
+			strncpy(replayData.header.map, game.mapName.c_str(), sizeof replayData.header.map);
 			replayData.header.skill = game.skill = 3;
 			replayData.setMode(REPLAY_MODE::RECORD);
 			break;

@@ -23,7 +23,7 @@ class Entity : public GameObject {
 
 	public:
 
-		char name[50];
+		std::string name;
 
 		float x, y, dx, dy;
 		int tx, ty, width, height;
@@ -53,7 +53,7 @@ class Entity : public GameObject {
 		Entity *owner;
 
 	Entity();
-	void setName(const char *name);
+	void setName(const std::string &name);
 	void setSprites(Sprite *sprite1, Sprite *sprite2, Sprite *sprite3);
 	void animate();
 	SDL_Surface *getFaceImage();

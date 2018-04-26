@@ -23,11 +23,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 Switch::Switch()
 {
-	this->name[0] = 0;
-	this->linkName[0] = 0;
-	this->requiredObjectName[0] = 0;
-	this->activateMessage[0] = 0;
-
 	type = 0;
 	x = y = 0;
 	activated = false;
@@ -36,12 +31,12 @@ Switch::Switch()
 	next = NULL;
 }
 
-void Switch::set(const char *name, const char *linkName, const char *requiredObjectName, const char *activateMessage, int type, int x, int y, bool activated)
+void Switch::set(const std::string &name, const std::string &linkName, const std::string &requiredObjectName, const std::string &activateMessage, int type, int x, int y, bool activated)
 {
-	strlcpy(this->name, name, sizeof this->name);
-	strlcpy(this->linkName, linkName, sizeof this->linkName);
-	strlcpy(this->requiredObjectName, requiredObjectName, sizeof this->requiredObjectName);
-	strlcpy(this->activateMessage, activateMessage, sizeof this->activateMessage);
+	this->name = name;
+	this->linkName = linkName;
+	this->requiredObjectName = requiredObjectName;
+	this->activateMessage = activateMessage;
 	this->type = type;
 	this->x = x;
 	this->y = y;

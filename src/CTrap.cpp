@@ -29,9 +29,9 @@ Trap::Trap()
 	x = y = dx = dy = 0;
 }
 
-void Trap::setName(const char *name)
+void Trap::setName(const std::string &name)
 {
-	strlcpy(this->name, name, sizeof this->name);
+	this->name = name;
 }
 
 void Trap::setTrapType(int type)

@@ -6,6 +6,6 @@ class Keyboard {
 	
 		Keyboard();
 		void setDefaultKeys();
-		static const char *translateKey(int value);
+		static std::string translateKey(int value);
 
 };

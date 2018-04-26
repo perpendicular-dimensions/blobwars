@@ -25,18 +25,15 @@ LineDef::LineDef()
 {
 	x = y = 0;
 	width = height = 0;
-	name[0] = 0;
-	linkName[0] = 0;
-	activateMessage[0] = 0;
 	activated = false;
 	next = NULL;
 }
 
-void LineDef::set(const char *name, const char *linkName, const char *activateMessage, int x, int y, int width, int height)
+void LineDef::set(const std::string &name, const std::string &linkName, const std::string &activateMessage, int x, int y, int width, int height)
 {
-	strlcpy(this->name, name, sizeof this->name);
-	strlcpy(this->linkName, linkName, sizeof this->linkName);
-	strlcpy(this->activateMessage, activateMessage, sizeof this->activateMessage);
+	this->name = name;
+	this->linkName = linkName;
+	this->activateMessage = activateMessage;
 	this->x = x;
 	this->y = y;
 	this->width = width;

@@ -23,103 +23,77 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 static List sceneList;
 
-static void createSceneList()
+static void createSceneList(split &it)
 {
-	char sceneLine[1024] = "";
-	char *line = NULL;
-	int waitTime = 0;
 	Cutscene *scene = NULL;
 	
-	while (true)
+	for (; it != it.end(); ++it)
 	{
-		line = strtok(NULL, "\n");
-		if (line == NULL)
-			break;
+		auto line = *it;
 		
-		if (strcmp(sceneLine, "@EOF@") == 0)
+		if (line == "@EOF@")
 			break;
 	
 		if (line[0] == '[')
 			break;	
 		
-		if (strcmp(line, "END") == 0)
+		if (line == "END")
 			break;
 		
-		if (strcmp(line, "NEW") == 0)
+		if (line == "NEW")
 		{
 			scene = new Cutscene();
 			sceneList.add(scene);
 			
 			// Assume graphics is first line after new
-			line = strtok(NULL, "\n");
-			if (strcmp(line, "@none@") != 0)
+			line = *++it;
+			if (line != "@none@")
 			{
-				strlcpy(scene->sprite, line, sizeof scene->sprite);
+				scene->sprite = line;
 				debug(("Loading cutscene image %s\n", scene->sprite));
 				graphics.quickSprite(scene->sprite, graphics.loadImage(scene->sprite));
 			}
-			line = strtok(NULL, "\n");
-			sscanf(line, "%d", &waitTime);
-			scene->waitTime = (waitTime * 100);
-			line = strtok(NULL, "\n");
+			line = *++it;
+			scene->waitTime = (stoi(line) * 100);
 		}
 		
-		if (scene && strcmp(line, "@none@") != 0)
+		if (scene && line != "@none@")
 		{
 			scene->appendText(line);
 		}
 	}
 }
 
-static bool setupScene(const char *stagename)
+static bool setupScene(const std::string &stagename)
 {
 	sceneList.clear();
 	
-	char sceneLine[1024];
-
 	if (!engine.loadData(_("data/ending")))
 		return graphics.showErrorAndExit("Couldn't load cutscene data file (%s)", _("data/ending")), false;
 
-	char *line = strtok((char*)engine.dataBuffer, "\n");
-	int i = 0;
-
 	graphics.clearChatString();
 	
-	bool found = false;
+	std::string_view sv(&engine.dataBuffer.at(0), engine.dataBuffer.size());
+	auto lines = split(sv, '\n');
+	auto it = lines.begin();
 
-	while (!found)
+	for (; it != lines.end(); ++it)
 	{	
+		auto line = std::string(*it);
+
 		if (line[0] == '[')
 		{
-			sscanf(line, "%*c %[^]]", sceneLine);
-			if (strcmp(sceneLine, stagename) == 0)
+			char sceneLine[1024];
+			scan(line, "%*c %[^]]", sceneLine);
+			if (sceneLine == stagename)
 			{
-				found = true;
+				createSceneList(it);
+				return true;
 			}
 		}
-
-		if (!found)
-		{
-			line = strtok(NULL, "\n");
-			if (line == NULL)
-				break;
-		}
-
-		i++;
-
-		// sanity check!
-		if (i == 10000)
-		{
-			exit(1);
-		}
 	}
 	
-	if (found)
-	{
-		createSceneList();
-	}
-	
-	return found;
+	return false;
 }
 
 static void showScene(bool allowSkip)
@@ -191,7 +165,7 @@ static void showScene(bool allowSkip)
 				graphics.drawChatString(panel, 0);
 				image = NULL;
 				
-				if (strcmp(scene->sprite, "") != 0)
+				if (!scene->sprite.empty())
 				{
 					debug(("Getting cutscene %s\n", scene->sprite));
 					image = graphics.getSprite(scene->sprite, true)->image[0];
@@ -219,8 +193,7 @@ void checkStartCutscene()
 		return;
 	}
 	
-	char sceneName[1024];
-	snprintf(sceneName, sizeof sceneName, "%s Start", game.stageName);
+	std::string sceneName = game.stageName + " Start";
 	
 	if (setupScene(sceneName))
 	{
@@ -240,9 +213,7 @@ void checkEndCutscene()
 		return;
 	}
 	
-
-	char sceneName[1024];
-	snprintf(sceneName, sizeof sceneName, "%s End", game.stageName);
+	std::string sceneName = game.stageName + " Start";
 	
 	debug(("%s\n", sceneName));
 	
@@ -250,14 +221,14 @@ void checkEndCutscene()
 	
 	// Don't let the player skip the end of game cutscene...
 	// So we get the music timed well! :)
-	if (strcmp(game.stageName, "Final Battle") == 0)
+	if (game.stageName == "Final Battle")
 	{
 		allowSkip = false;
 	}
 	
 	if (setupScene(sceneName))
 	{
-		if (strcmp(game.stageName, "Final Battle") != 0)
+		if (game.stageName != "Final Battle")
 		{
 			audio.loadMusic("music/cutscene");
 		}

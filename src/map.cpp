@@ -270,7 +270,7 @@ static void addMiniMapDoors(SDL_Surface *panel, int mapX, int mapY)
 
 void showMap(int centerX, int centerY)
 {
-	char string[100];
+	std::string message;
 	int x1, y1, x2, y2;
 
 	x1 = centerX - 32;
@@ -392,8 +392,8 @@ void showMap(int centerX, int centerY)
 	graphics.drawString(_("Enemies"), 430, 410, TXT_LEFT, graphics.screen);
 
 	graphics.setFontSize(1);
-	snprintf(string, sizeof string, "%s - %.2d:%.2d:%.2d", _("Mission Time"), game.currentMissionHours, game.currentMissionMinutes, game.currentMissionSeconds);
-	graphics.drawString(string, 320, 60, TXT_CENTERED, graphics.screen);
+	message = fmt::format("{} - {:02d}:{:02d}:{:02d}", _("Mission Time"), game.currentMissionHours, game.currentMissionMinutes, game.currentMissionSeconds);
+	graphics.drawString(message, 320, 60, TXT_CENTERED, graphics.screen);
 	graphics.drawString(_("Press Button to Continue..."), 320, 450, TXT_CENTERED, graphics.screen);
 
 	engine.flushInput();
@@ -638,24 +638,13 @@ void doWind()
 	addWindParticles();
 }
 
-static void parseMapDataLine(const char *line, int y)
+static void parseMapDataLine(std::string_view line, int y)
 {
-	int tileIndex = 0;
 	int x = 0;
 
-	while (true)
+	for (auto token: split(line, ' '))
 	{
-		sscanf(line, "%d", &tileIndex);
-
-		map.data[x][y] = tileIndex;
-
-		while (true)
-		{
-			line++;
-
-			if (*line == ' ')
-				break;
-		}
+		map.data[x][y] = stoi(token);
 
 		x++;
 
@@ -664,30 +653,21 @@ static void parseMapDataLine(const char *line, int y)
 	}
 }
 
-bool loadMapData(const char *filename)
+bool loadMapData(const std::string &filename)
 {
 	map.clear();
 
 	if (!engine.loadData(filename))
 		graphics.showErrorAndExit("The requested map '%s' was not found.", filename);
 
-	char *token = strtok((char*)engine.dataBuffer, "\n");
-	parseMapDataLine(token, 0);
+	auto it = split(engine.dataBuffer, '\n').begin();
 
-	int y = 1;
-
-	while (true)
+	for (int y = 0; y < MAPHEIGHT; ++it, ++y)
 	{
-		token = strtok(NULL, "\n");
-
-		parseMapDataLine(token, y);
-
-		y++;
-		if (y == MAPHEIGHT)
-			break;
+		parseMapDataLine(*it, y);
 	}
 
-	getMapTokens();
+	getMapTokens(it);
 
 	adjustObjectives();
 	initMIAPhrases();

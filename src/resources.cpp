@@ -21,14 +21,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-void loadSound(int index, const char *filename)
+void loadSound(int index, const std::string &filename)
 {
 	audio.loadSound(index, filename);
 
 	graphics.showLoading(1, 30);
 }
 
-void loadSprite(const char *token)
+void loadSprite(std::string_view token)
 {
 	Sprite *sprite;
 
@@ -39,7 +39,7 @@ void loadSprite(const char *token)
 	int i;
 	int hue, sat, val;
 
-	sscanf(token, "%s %d %d %d %s %d %s %d %s %d %s %d %s %d %s %d %s %d %s %d", name, &hue, &sat, &val, filename[0], &frameTime[0], filename[1], &frameTime[1], filename[2], &frameTime[2], filename[3], &frameTime[3], filename[4], &frameTime[4], filename[5], &frameTime[5], filename[6], &frameTime[6], filename[7], &frameTime[7]);
+	scan(token, "%s %d %d %d %s %d %s %d %s %d %s %d %s %d %s %d %s %d %s %d", name, &hue, &sat, &val, filename[0], &frameTime[0], filename[1], &frameTime[1], filename[2], &frameTime[2], filename[3], &frameTime[3], filename[4], &frameTime[4], filename[5], &frameTime[5], filename[6], &frameTime[6], filename[7], &frameTime[7]);
 
 	sprite = graphics.addSprite(name);
 
@@ -83,18 +83,14 @@ void loadResources()
 	if (!engine.loadData("data/mainSprites"))
 		graphics.showErrorAndExit(ERR_FILE, "data/mainSprites");
 
-	char *token = strtok((char*)engine.dataBuffer, "\n");
-
-	while (true)
+	for (auto token: split(engine.dataBuffer, '\n'))
 	{
-		if (strcmp(token, "@EOF@") == 0)
+		if (token == "@EOF@")
 		{
 			break;
 		}
 
 		loadSprite(token);
-
-		token = strtok(NULL, "\n");
 
 		graphics.showLoading(1, 20);
 	}

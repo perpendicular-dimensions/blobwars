@@ -21,8 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-String *stringHead = new String;
-String *stringTail = stringHead;
+std::vector<std::string> strings;
 
 Audio audio;
 Engine engine;
@@ -223,73 +222,67 @@ static void deleteEnemy(int x, int y)
 	}
 }
 
-static void saveMap(const char *name)
+static void saveMap(const std::string &name)
 {
-	FILE *fp = fopen(name, "wb");
+	std::ofstream file(name);
 	Entity *enemy = (Entity*)map.enemyList.getHead();
-	String *str;
 
-	if (fp)
+	for (int y = 0 ; y < MAPHEIGHT ; y++)
 	{
-		for (int y = 0 ; y < MAPHEIGHT ; y++)
+		for (int x = 0 ; x < MAPWIDTH ; x++)
 		{
-			for (int x = 0 ; x < MAPWIDTH ; x++)
-			{
-				fprintf(fp, "%d ", map.data[x][y]);
-			}
-			fprintf(fp, "\n");
+			fmt::print(file, "{} ", map.data[x][y]);
 		}
-
-		str = stringHead->next;
-		while (str != NULL)
-		{
-			fprintf(fp, "%s", str->string);
-			str = str->next;
-		}
-		
-		while (enemy->next != NULL)
-		{
-			enemy = (Entity*)enemy->next;
-			fprintf(fp, "EMH ENEMY \"%s\" %d %d\n", enemy->name, (int)enemy->x, (int)enemy->y);
-		}
-
-		fprintf(fp, "@EOF@\n");
-
-		fclose(fp);
+		fmt::print(file, "\n");
 	}
-	
-	printf("Saved %s (%d)\n", name, SDL_GetTicks());
+
+	for (auto &&str: strings)
+	{
+		file << str;
+	}
+		
+	while (enemy->next != NULL)
+	{
+		enemy = (Entity*)enemy->next;
+		fmt::print(file, "EMH ENEMY \"{}\" {} {}\n", enemy->name, (int)enemy->x, (int)enemy->y);
+	}
+
+	fmt::print(file, "@EOF@\n");
+	file.close();
+
+	if (file.bad())
+	{
+		fmt::print("Could not save {}: {}\n", name, strerror(errno));
+	}
+	else
+	{
+		fmt::print("Saved {} ({})\n", name, SDL_GetTicks());
+	}
 }
 
 static void collectMapData()
 {
-	FILE *fp = fopen(game.mapName, "rb");
-	if (!fp)
-		return;
+	std::ifstream file(game.mapName);
 
-	char string[1024];
-	String *str;
+	/* Skip the map tiles */
+	for (int y = 0 ; y < MAPHEIGHT ; y++)
+		file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');	
 
-	for (int y = 0 ; y < 300 ; y++)
-		fgets(string, 1024, fp);
+	std::string line;
 
-	while (true)
+	while (getline(file, line))
 	{
-		fgets(string, 1024, fp);
-		printf("Read: %s", string);
+		fmt::print("Read: {}\n", line);
 
-		if (strstr(string, "@EOF@"))
+		if (contains(line, "@EOF@"))
 			break;
 
-		if (!strstr(string, " ENEMY \""))
+		if (!contains(line, " ENEMY \""))
 		{
-			str = new String;
-			strlcpy(str->string, string, sizeof str->string);
-			stringTail->next = str;
-			stringTail = str;
+			strings.push_back(line);
 		}
 		
-		if (strstr(string, "TILESET gfx/ancient"))
+		if (contains(line, "TILESET gfx/ancient"))
 		{
 			for (int x = 0 ; x < MAPWIDTH ; x++)
 			{
@@ -301,7 +294,7 @@ static void collectMapData()
 			}
 		}
 		
-		if (strstr(string, "TILESET gfx/caves"))
+		if (contains(line, "TILESET gfx/caves"))
 		{
 			for (int x = 0 ; x < MAPWIDTH ; x++)
 			{
@@ -313,43 +306,35 @@ static void collectMapData()
 			}
 		}
 	}
-
-	fclose(fp);
 }
 
-static void newMap(const char *name)
+static void newMap(const std::string &name)
 {
-	FILE *fp = fopen(name, "wb");
+	std::ofstream file(name);
 
-	if (fp)
+	for (int y = 0 ; y < MAPHEIGHT ; y++)
 	{
-		for (int y = 0 ; y < MAPHEIGHT ; y++)
+		for (int x = 0 ; x < MAPWIDTH ; x++)
 		{
-			for (int x = 0 ; x < MAPWIDTH ; x++)
-			{
-				fprintf(fp, "%d ", map.data[x][y]);
-			}
-			fprintf(fp, "\n");
+			fmt::print(file, "{} ", map.data[x][y]);
 		}
-		
-		fprintf(fp, "EMH STAGENAME \"unnamed\"\n");
-
-		fprintf(fp, "EMH TILESET gfx/grasslands\n");
-		fprintf(fp, "EMH BACKGROUND gfx/grasslands/stone.jpg\n");
-		fprintf(fp, "EMH MUSIC music/tunnel\n");
-
-		fprintf(fp, "EMH ALPHATILES 1 2 3 200 201 202 203 204 244 245 246 -1\n");
-
-		fprintf(fp, "EMH START 10 10\n");
-
-		fprintf(fp, "@EOF@\n");
-		
-		fclose(fp);
+		fmt::print(file, "\n");
 	}
-	else
-	{
+	
+	fmt::print(file, "EMH STAGENAME \"unnamed\"\n");
+
+	fmt::print(file, "EMH TILESET gfx/grasslands\n");
+	fmt::print(file, "EMH BACKGROUND gfx/grasslands/stone.jpg\n");
+	fmt::print(file, "EMH MUSIC music/tunnel\n");
+
+	fmt::print(file, "EMH ALPHATILES 1 2 3 200 201 202 203 204 244 245 246 -1\n");
+
+	fmt::print(file, "EMH START 10 10\n");
+
+	fmt::print(file, "@EOF@\n");
+
+	if (file.bad())
 		exit(1);
-	}
 }
 
 static void addTileDecoration()
@@ -485,7 +470,7 @@ int main(int argc, char *argv[])
 
 	int MOVESPEED = 5;
 	
-	char string[255];
+	std::string statusline;
 	
 	unsigned int frameLimit = SDL_GetTicks() + 16;
 
@@ -641,11 +626,11 @@ int main(int argc, char *argv[])
 		if (mapY > MAPHEIGHT - 30) mapY = MAPHEIGHT - 30;
 
 		if (editing == 0)
-			snprintf(string, sizeof string, "Index : %d:%d ; Screen %d:%d ; Tile %d", mapX + x, mapY + y, (mapX + x) * BRICKSIZE, (mapY + y) * BRICKSIZE, currentBlock);
+			statusline = fmt::format("Index : {}:{} ; Screen {}:{} ; Tile {}", mapX + x, mapY + y, (mapX + x) * BRICKSIZE, (mapY + y) * BRICKSIZE, currentBlock);
 		else if (editing == 1)
-			snprintf(string, sizeof string, "Index : %d:%d ; Screen %d:%d ; %s", mapX + x, mapY + y, (mapX + x) * BRICKSIZE, (mapY + y) * BRICKSIZE, defEnemy[currentMonster].name);
+			statusline = fmt::format("Index : {}:{} ; Screen {}:{} ; {}", mapX + x, mapY + y, (mapX + x) * BRICKSIZE, (mapY + y) * BRICKSIZE, defEnemy[currentMonster].name);
 		else if (editing == 2)
-			snprintf(string, sizeof string, "Index : %d:%d ; Screen %d:%d ; %s", mapX + x, mapY + y, (mapX + x) * BRICKSIZE, (mapY + y) * BRICKSIZE, defItem[currentItem].name);
+			statusline = fmt::format("Index : {}:{} ; Screen {}:{} ; {}", mapX + x, mapY + y, (mapX + x) * BRICKSIZE, (mapY + y) * BRICKSIZE, defItem[currentItem].name);
 
 		r.x = 0;
 		r.w = 640;
@@ -658,20 +643,10 @@ int main(int argc, char *argv[])
 
 		SDL_FillRect(graphics.screen, &r, graphics.black);
 
-		graphics.drawString(string, 320, r.y + 5, true, graphics.screen);
+		graphics.drawString(statusline, 320, r.y + 5, true, graphics.screen);
 		
 		engine.delay(frameLimit);
 		frameLimit = SDL_GetTicks() + 16;
-	}
-
-	String *str = stringHead->next;
-	String *str2;
-	while (str != NULL)
-	{
-		str2 = str;
-		printf("Deleting %s", str->string);
-		str = str->next;
-		delete str2;
 	}
 
 	return 0;

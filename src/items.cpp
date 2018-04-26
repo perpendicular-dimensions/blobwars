@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-void addItem(int itemType, const char *name, int x, int y, const char *spriteName, int health, int value, int flags, bool randomMovement)
+void addItem(int itemType, const std::string &name, int x, int y, const std::string &spriteName, int health, int value, int flags, bool randomMovement)
 {
 	Entity *item = new Entity();
 
@@ -168,7 +168,7 @@ void stealCrystal()
 	{
 		item = (Entity*)item->next;
 
-		if (strcmp(item->name, "Reality Crystal") == 0)
+		if (item->name == "Reality Crystal")
 		{
 			item->dx = 0;
 			item->dy = 0;
@@ -209,8 +209,6 @@ void dropCarriedItems()
 
 static void pickUpItem(Entity *item)
 {
-	char string[100];
-
 	if (item->flags & ENT_DYING)
 	{
 		game.totalBonusesCollected++;
@@ -262,6 +260,8 @@ static void pickUpItem(Entity *item)
 
 	if ((item->id < ITEM_POINTS) || (item->id > ITEM_POINTS7))
 	{
+		std::string message;
+
 		/*
 			oh yeah, right... because "Picked up a Ancient Cog" is really good English, isn't it? It's almost
 			as bad as Medal of Honor: Frontline where it said "Picked up 3 Stick Grenade(s)"... Would it really
@@ -273,32 +273,34 @@ static void pickUpItem(Entity *item)
 		{
 			case 'A':
 			case 'a':
+			case 'E':
+			case 'e':
 			case 'I':
 			case 'i':
 			case 'O':
 			case 'o':
 			case 'U':
 			case 'u':
-				snprintf(string, sizeof string, _("Picked up an %s"), item->name);
+				message = fmt::format(_("Picked up an {}"), item->name);
 				break;
 			default:
-				snprintf(string, sizeof string, _("Picked up a %s"), item->name);
+				message = fmt::format(_("Picked up a {}"), item->name);
 				break;
 		}
 
 		if (!map.isBossMission)
-			engine.setInfoMessage(string, 0, INFO_NORMAL);
+			engine.setInfoMessage(message, 0, INFO_NORMAL);
 
 		checkObjectives(item->name, true);
 		
-		if (strcmp(item->name, "LRTS") == 0)
+		if (item->name == "LRTS")
 		{
 			presentPlayerMedal("LRTS_PART");
 		}
 	}
 }
 
-bool carryingItem(const char *name)
+bool carryingItem(const std::string &name)
 {
 	Entity *item = (Entity*)map.itemList.getHead();
 
@@ -309,7 +311,7 @@ bool carryingItem(const char *name)
 		if (item->owner != &player)
 			continue;
 
-		if (strcmp(item->name, name) == 0)
+		if (item->name == name)
 		{
 			item->owner = item;
 			item->health = -999;
@@ -426,25 +428,21 @@ void loadDefItems()
 	if (!engine.loadData("data/defItems"))
 		graphics.showErrorAndExit("Couldn't load item definitions file (%s)", "data/defItems");
 
-	char *token = strtok((char*)engine.dataBuffer, "\n");
-
 	int id;
 	char name[50];
 	char sprite[100];
 	int value;
 
-	while (true)
+	for (auto token: split(engine.dataBuffer, '\n'))
 	{
-		if (strcmp(token, "@EOF@") == 0)
+		if (token == "@EOF@")
 			break;
 
-		sscanf(token, "%d %*c %[^\"] %*c %s %d", &id, name, sprite, &value);
+		scan(token, "%d %*c %[^\"] %*c %s %d", &id, name, sprite, &value);
 
 		defItem[id].id = id;
 		defItem[id].setName(name);
 		defItem[id].setSprites(graphics.getSprite(sprite, true), graphics.getSprite(sprite, true), graphics.getSprite(sprite, true));
 		defItem[id].value = value;
-
-		token = strtok(NULL, "\n");
 	}
 }

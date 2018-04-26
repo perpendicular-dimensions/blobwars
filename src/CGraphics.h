@@ -41,8 +41,8 @@ class Graphics {
 		int currentLoading;
 
 		int screenShotNumber;
-		char screenshot[100];
-		char chatString[1024];
+		std::string screenshot;
+		std::string chatString;
 		
 		SDL_Surface *medalMessage;
 		int medalMessageTimer;
@@ -53,9 +53,8 @@ class Graphics {
 
 	public:
 		struct SurfaceCache {
-			char *text;
-			SDL_Surface *surface;
-			SurfaceCache(): text(NULL), surface(NULL) {}	
+			std::string text;
+			SDL_Surface *surface = nullptr;
 		};
 
 		bool takeRandomScreenShots;
@@ -85,21 +84,21 @@ class Graphics {
 	void delay(int time);
 	void RGBtoHSV(float r, float g, float b, float *h, float *s, float *v);
 	void HSVtoRGB(float *r, float *g, float *b, float h, float s, float v);
-	SDL_Surface *loadImage(const char *filename, bool srcalpha = false);
-	SDL_Surface *loadImage(const char *filename, int hue, int sat, int value);
-	SDL_Surface *quickSprite(const char *name, SDL_Surface *image);
+	SDL_Surface *loadImage(const std::string &filename, bool srcalpha = false);
+	SDL_Surface *loadImage(const std::string &filename, int hue, int sat, int value);
+	SDL_Surface *quickSprite(const std::string &name, SDL_Surface *image);
 	void fade(int amount);
 	void fadeToBlack();
-	void loadMapTiles(const char *baseDir);
-	void loadFont(int i, const char *filename, int pixelSize);
-	Sprite *addSprite(const char *name);
-	Sprite *getSprite(const char *name, bool required);
+	void loadMapTiles(const std::string &baseDir);
+	void loadFont(int i, const std::string &filename, int pixelSize);
+	Sprite *addSprite(const std::string &name);
+	Sprite *getSprite(const std::string &name, bool required);
 	void animateSprites();
 	int getWaterAnim() const;
 	int getSlimeAnim() const;
 	int getLavaAnim() const;
 	int getLavaAnim(int current);
-	void loadBackground(const char *filename);
+	void loadBackground(const std::string &filename);
 	void putPixel(int x, int y, Uint32 pixel, SDL_Surface *dest);
 	Uint32 getPixel(SDL_Surface *surface, int x, int y);
 	void drawLine(float startX, float startY, float endX, float endY, int color, SDL_Surface *dest);
@@ -110,12 +109,12 @@ class Graphics {
 	void drawRect(int x, int y, int w, int h, int color, int borderColor, SDL_Surface *dest);
 	void setFontColor(int red, int green, int blue, int red2, int green2, int blue2);
 	void setFontSize(int size);
-	SDL_Surface *getString(const char *in, bool transparent);
-	void drawString(const char *in, int x, int y, int alignment, SDL_Surface *dest);
-	void drawString(const char *in, int x, int y, int alignment, SDL_Surface *dest, SurfaceCache &cache);
+	SDL_Surface *getString(const std::string &in, bool transparent);
+	void drawString(const std::string &in, int x, int y, int alignment, SDL_Surface *dest);
+	void drawString(const std::string &in, int x, int y, int alignment, SDL_Surface *dest, SurfaceCache &cache);
 	void clearChatString();
-	void createChatString(const char *in);
-	void showMedalMessage(int type, const char *in);
+	void createChatString(const std::string &in);
+	void showMedalMessage(int type, const std::string &in);
 	void drawChatString(SDL_Surface *surface, int y);
 	void drawWidgetRect(int x, int y, int w, int h);
 	SDL_Surface *createSurface(int width, int height);
@@ -125,7 +124,7 @@ class Graphics {
 	void unlock(SDL_Surface *surface);
 	void resetLoading();
 	void showLoading(int amount, int max);
-	void showErrorAndExit(const char *error, const char *param);
+	void showErrorAndExit(const std::string &error, const std::string &param);
 	void showLicenseErrorAndExit();
 	void showRootWarning();
 

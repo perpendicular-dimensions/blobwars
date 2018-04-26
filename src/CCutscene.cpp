@@ -23,13 +23,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 Cutscene::Cutscene()
 {
-	sprite[0] = 0;
-	text[0] = 0;
 	waitTime = 0;
 }
 
-void Cutscene::appendText(const char *line)
+void Cutscene::appendText(std::string_view line)
 {
-	strlcat(text, " ", sizeof text);
-	strlcat(text, line, sizeof text);
+	text.push_back(' ');
+	text.append(line);
 }

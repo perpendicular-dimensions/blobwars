@@ -22,8 +22,8 @@ PKG_CONFIG ?= pkg-config
 CXXFLAGS += `$(PKG_CONFIG) --cflags sdl2 SDL2_mixer SDL2_image SDL2_ttf SDL2_net` -DVERSION=$(VERSION) -DRELEASE=$(RELEASE) -DUSEPAK=$(USEPAK)
 CXXFLAGS += -DPAKNAME=\"$(PAKNAME)\" -DPAKLOCATION=\"$(DATADIR)\" -DUNIX -DGAMEPLAYMANUAL=\"$(DOCDIR)index.html\" -Wall
 CXXFLAGS += -DLOCALEDIR=\"$(LOCALEDIR)\" -DMEDAL_SERVER_HOST=\"$(MEDAL_SERVER_HOST)\" -DMEDAL_SERVER_PORT=$(MEDAL_SERVER_PORT)
-CXXFLAGS += $(CFLAGS) -Werror -Wno-format-truncation
-LIBS = `$(PKG_CONFIG) --libs sdl2 SDL2_mixer SDL2_image SDL2_ttf SDL2_net` -lz
+CXXFLAGS += $(CFLAGS) -Werror -Wno-format-truncation -std=c++17
+LIBS = `$(PKG_CONFIG) --libs sdl2 SDL2_mixer SDL2_image SDL2_ttf SDL2_net` -lz -lfmt
 PAKLIBS = -lz
 
 OBJS += CAudio.o
@@ -62,6 +62,7 @@ OBJS += particles.o player.o
 OBJS += resources.o 
 OBJS += spawnPoints.o switches.o 
 OBJS += tankBoss.o teleporters.o title.o trains.o traps.o triggers.o 
+OBJS += utils.o
 OBJS += weapons.o widgets.o
 
 GAMEOBJS = $(OBJS) main.o

@@ -36,7 +36,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 * @param sprite The Sprite to use with this trap
 * @param active The active state of this trap
 */
-void addTrap(const char *name, int trapType, int damage, int speed, int startX, int startY, int endX, int endY, int wait1, int wait2, const char *sprite, bool active)
+void addTrap(const std::string &name, int trapType, int damage, int speed, int startX, int startY, int endX, int endY, int wait1, int wait2, const std::string &sprite, bool active)
 {
 	Trap *trap = new Trap();
 

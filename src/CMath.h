@@ -38,9 +38,8 @@ class Math {
 	static void wrapFloat(float *in, float low, float high);
 	static long prand();
 	static long rrand(int min, int max);
-	static bool boolFromWord(const char *word);
 	static void addBit(long *currentBits, long newBits);
 	static void removeBit(long *currentBits, long oldBits);
 	static void calculateSlope(float x, float y, float x2, float y2, float *dx, float *dy);
-	static char *formatTime(int seconds);
+	static std::string formatTime(int seconds);
 };

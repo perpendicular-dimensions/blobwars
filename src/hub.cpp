@@ -27,7 +27,7 @@ static void createStatsPanel(int page)
 
 	graphics.drawRect(1, 1, image->w - 2, image->h - 2, graphics.black, graphics.white, image);
 
-	char string[100];
+	std::string message;
 	int x1 = 80;
 	int x2 = 270;
 	int x3 = 300;
@@ -44,70 +44,70 @@ static void createStatsPanel(int page)
 	{
 		case 0:
 			graphics.drawString(_("Skill Level:"), x1, y += 20, false, image);
-			snprintf(string, sizeof string, "%s", _(skill[game.skill]));
-			graphics.drawString(string, x2, y, false, image);
+			message = fmt::format("{}", _(skill[game.skill]));
+			graphics.drawString(message, x2, y, false, image);
 
 			graphics.drawString(_("Score:"), x1, y += 20, false, image);
-			snprintf(string, sizeof string, "%d", game.score);
-			graphics.drawString(string, x2, y, false, image);
+			message = fmt::format("{}", game.score);
+			graphics.drawString(message, x2, y, false, image);
 
 			graphics.drawString(_("MIAs Saved:"), x1, y += 20, false, image);
-			snprintf(string, sizeof string, "%d", game.totalMIAsRescued);
-			graphics.drawString(string, x2, y, false, image);
+			message = fmt::format("{}", game.totalMIAsRescued);
+			graphics.drawString(message, x2, y, false, image);
 
 			graphics.drawString(_("Objectives Completed:"), x1, y += 20, false, image);
-			snprintf(string, sizeof string, "%d", game.totalObjectivesCompleted);
-			graphics.drawString(string, x2, y, false, image);
+			message = fmt::format("{}", game.totalObjectivesCompleted);
+			graphics.drawString(message, x2, y, false, image);
 
 			// Don't do this on Extreme or it will always say 100%
 			if (game.skill < 3)
 			{
 				graphics.drawString(_("Percentage Complete:"), x1, y += 20, false, image);
-				snprintf(string, sizeof string, "%d%%", gameData.getPercentageComplete());
-				graphics.drawString(string, x2, y, false, image);
+				message = fmt::format("{}%", gameData.getPercentageComplete());
+				graphics.drawString(message, x2, y, false, image);
 			}
 
-			snprintf(string, sizeof string, "%s - %.2d:%.2d:%.2d", _("Total Game Time"), game.totalHours, game.totalMinutes, game.totalSeconds);
-			graphics.drawString(string, 200, y += 110, true, image);
+			message = fmt::format("{} - {:02d}:{:02d}:{:02d}", _("Total Game Time"), game.totalHours, game.totalMinutes, game.totalSeconds);
+			graphics.drawString(message, 200, y += 110, true, image);
 
 			break;
 
 		case 1:
 
 			graphics.drawString(_("Enemies Defeated:"), x1, y += 20, false, image);
-			snprintf(string, sizeof string, "%d", game.totalEnemiesDefeated);
-			graphics.drawString(string, x2, y, false, image);
+			message = fmt::format("{}", game.totalEnemiesDefeated);
+			graphics.drawString(message, x2, y, false, image);
 
 			graphics.drawString(_("Items Collected:"), x1, y += 20, false, image);
-			snprintf(string, sizeof string, "%d", game.totalItemsCollected);
-			graphics.drawString(string, x2, y, false, image);
+			message = fmt::format("{}", game.totalItemsCollected);
+			graphics.drawString(message, x2, y, false, image);
 
 			graphics.drawString(_("Bonuses Picked Up:"), x1, y += 20, false, image);
-			snprintf(string, sizeof string, "%d", game.totalBonusesCollected);
-			graphics.drawString(string, x2, y, false, image);
+			message = fmt::format("{}", game.totalBonusesCollected);
+			graphics.drawString(message, x2, y, false, image);
 
 			graphics.drawString(_("Best Combo:"), x1, y += 20, false, image);
-			snprintf(string, sizeof string, _("%d Hits"), game.maxComboHits);
-			graphics.drawString(string, x2, y, false, image);
+			message = fmt::format(_("{} Hits"), game.maxComboHits);
+			graphics.drawString(message, x2, y, false, image);
 			
 			graphics.drawString(_("Missions Started:"), x1, y += 20, false, image);
-			snprintf(string, sizeof string, "%d", game.levelsStarted);
-			graphics.drawString(string, x2, y, false, image);
+			message = fmt::format("{}", game.levelsStarted);
+			graphics.drawString(message, x2, y, false, image);
 
 			graphics.drawString(_("Continues Used:"), x1, y += 20, false, image);
-			snprintf(string, sizeof string, "%d", game.continuesUsed);
-			graphics.drawString(string, x2, y, false, image);
+			message = fmt::format("{}", game.continuesUsed);
+			graphics.drawString(message, x2, y, false, image);
 			
 			if ((game.continuesUsed > 0) && (game.levelsStarted > 0))
 			{
 				graphics.drawString(_("Average Continue Usage:"), x1, y += 20, false, image);
-				snprintf(string, sizeof string, "%d", (game.continuesUsed / game.levelsStarted));
-				graphics.drawString(string, x2, y, false, image);
+				message = fmt::format("{}", (game.continuesUsed / game.levelsStarted));
+				graphics.drawString(message, x2, y, false, image);
 			}
 
 			graphics.drawString(_("Escapes Used:"), x1, y += 20, false, image);
-			snprintf(string, sizeof string, "%d", game.escapes);
-			graphics.drawString(string, x2, y, false, image);
+			message = fmt::format("{}", game.escapes);
+			graphics.drawString(message, x2, y, false, image);
 
 			break;
 
@@ -122,43 +122,43 @@ static void createStatsPanel(int page)
 			graphics.drawString(_("Accuracy"), x3, y, false, image);
 
 			graphics.drawString(_("Pistol"), x1, y += 30, false, image);
-			snprintf(string, sizeof string, "%d", game.bulletsFired[WP_PISTOL]);
-			graphics.drawString(string, x2, y, false, image);
-			snprintf(string, sizeof string, "%d%%", game.getWeaponAccuracy(WP_PISTOL));
-			graphics.drawString(string, x3, y, false, image);
+			message = fmt::format("{}", game.bulletsFired[WP_PISTOL]);
+			graphics.drawString(message, x2, y, false, image);
+			message = fmt::format("{}%", game.getWeaponAccuracy(WP_PISTOL));
+			graphics.drawString(message, x3, y, false, image);
 
 			graphics.drawString(_("Machine Gun"), x1, y += 20, false, image);
-			snprintf(string, sizeof string, "%d", game.bulletsFired[WP_MACHINEGUN]);
-			graphics.drawString(string, x2, y, false, image);
-			snprintf(string, sizeof string, "%d%%", game.getWeaponAccuracy(WP_MACHINEGUN));
-			graphics.drawString(string, x3, y, false, image);
+			message = fmt::format("{}", game.bulletsFired[WP_MACHINEGUN]);
+			graphics.drawString(message, x2, y, false, image);
+			message = fmt::format("{}%", game.getWeaponAccuracy(WP_MACHINEGUN));
+			graphics.drawString(message, x3, y, false, image);
 
 			graphics.drawString(_("Laser Cannon"), x1, y += 20, false, image);
-			snprintf(string, sizeof string, "%d", game.bulletsFired[WP_LASER]);
-			graphics.drawString(string, x2, y, false, image);
-			snprintf(string, sizeof string, "%d%%", game.getWeaponAccuracy(WP_LASER));
-			graphics.drawString(string, x3, y, false, image);
+			message = fmt::format("{}", game.bulletsFired[WP_LASER]);
+			graphics.drawString(message, x2, y, false, image);
+			message = fmt::format("{}%", game.getWeaponAccuracy(WP_LASER));
+			graphics.drawString(message, x3, y, false, image);
 			
 			graphics.drawString(_("Grenades"), x1, y += 20, false, image);
-			snprintf(string, sizeof string, "%d", game.bulletsFired[WP_GRENADES]);
-			graphics.drawString(string, x2, y, false, image);
-			snprintf(string, sizeof string, "%d%%", game.getWeaponAccuracy(WP_GRENADES));
-			graphics.drawString(string, x3, y, false, image);
+			message = fmt::format("{}", game.bulletsFired[WP_GRENADES]);
+			graphics.drawString(message, x2, y, false, image);
+			message = fmt::format("{}%", game.getWeaponAccuracy(WP_GRENADES));
+			graphics.drawString(message, x3, y, false, image);
 
 			graphics.drawString(_("Spread Gun"), x1, y += 20, false, image);
-			snprintf(string, sizeof string, "%d", game.bulletsFired[WP_SPREAD]);
-			graphics.drawString(string, x2, y, false, image);
-			snprintf(string, sizeof string, "%d%%", game.getWeaponAccuracy(WP_SPREAD));
-			graphics.drawString(string, x3, y, false, image);
+			message = fmt::format("{}", game.bulletsFired[WP_SPREAD]);
+			graphics.drawString(message, x2, y, false, image);
+			message = fmt::format("{}%", game.getWeaponAccuracy(WP_SPREAD));
+			graphics.drawString(message, x3, y, false, image);
 			
 			graphics.drawString(_("Total"), x1, y += 30, false, image);
-			snprintf(string, sizeof string, "%d", game.getTotalBulletsFired());
-			graphics.drawString(string, x2, y, false, image);
-			snprintf(string, sizeof string, "%d%%", game.getTotalAccuracy());
-			graphics.drawString(string, x3, y, false, image);
+			message = fmt::format("{}", game.getTotalBulletsFired());
+			graphics.drawString(message, x2, y, false, image);
+			message = fmt::format("{}%", game.getTotalAccuracy());
+			graphics.drawString(message, x3, y, false, image);
 
-			snprintf(string, sizeof string, "%s - %s", _("Most Used Weapon"), _(weapon[game.getMostUsedWeapon()].name));
-			graphics.drawString(string, 200, y += 50, true, image);
+			message = fmt::format("{} - {}", _("Most Used Weapon"), _(weapon[game.getMostUsedWeapon()].name));
+			graphics.drawString(message, 200, y += 50, true, image);
 
 			break;
 	}
@@ -173,62 +173,46 @@ static void createStatsPanel(int page)
 		graphics.blit(arrows->image[3], 200, 260, image, false);
 }
 
-static void loadLevelBrief(const char *levelName)
+static void loadLevelBrief(const std::string &levelName)
 {
-	char briefLine[1024];
-
 	if (!engine.loadData(_("data/levelBrief")))
 	{
-		graphics.showErrorAndExit("Couldn't load mission briefing file (%s)", _("data/levelBrief"));
+		graphics.showErrorAndExit("Couldn't load mission briefing file ({})", _("data/levelBrief"));
 	}
 
-	char *line = strtok((char*)engine.dataBuffer, "\n");
 	bool collectData = false;
 	SDL_Surface *image = graphics.getSprite("infoPanel", true)->image[0];
 
-	int i = 0 ;
-
 	graphics.clearChatString();
 
-	while (true)
+	auto data_view = std::string_view(engine.dataBuffer.data(), engine.dataBuffer.size());
+
+	for (auto line_view: split(data_view, '\n'))
 	{
 		if (collectData)
 		{
-			sscanf(line, "%[^\n\r]", briefLine);
-
-			if (strcmp(briefLine, "@EOF@") == 0)
+			if (line_view == "@EOF@")
 				break;
 
-			if (line[0] == '[')
+			if (line_view[0] == '[')
 				break;
 
-			graphics.createChatString(line);
+			graphics.createChatString(std::string(line_view));
 		}
 		else
 		{
-			if (line[0] == '[')
+			if (line_view[0] == '[' && line_view.size() > 2)
 			{
-				sscanf(line, "%*c %[^]]", briefLine);
-				if (strcmp(briefLine, levelName) == 0)
+				if (line_view.substr(1, line_view.size() - 2) == levelName)
 					collectData = true;
 			}
 		}
-
-		line = strtok(NULL, "\n");
-		if (line == NULL)
-			break;
-
-		i++;
-
-		// sanity check!
-		if (i == 10000)
-			break;
 	}
 	
 	graphics.drawChatString(image, 40);
 }
 
-static void createObjectivesPanel(const char *levelName)
+static void createObjectivesPanel(const std::string &levelName)
 {
 	SDL_Surface *image = graphics.getSprite("infoPanel", true)->image[0];
 
@@ -238,78 +222,76 @@ static void createObjectivesPanel(const char *levelName)
 
 	graphics.drawRect(1, 1, image->w - 2, image->h - 2, graphics.black, graphics.white, image);
 
-	char string[100];
-	char levelMIAKey[100];
+	std::string text;
+	std::string levelMIAKey;
 	int x1 = 60;
 	int x2 = 260;
 	int y = 15;
 	
-	snprintf(levelMIAKey, sizeof levelMIAKey, "%s MIAs", levelName);
+	levelMIAKey = levelName + " MIAs";
 
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 
-	snprintf(string, sizeof string, _("Information for %s"), _(levelName));
-	graphics.drawString(string, 200, y, true, image);
+	text = fmt::format(_("Information for {}"), _(levelName));
+	graphics.drawString(text, 200, y, true, image);
 	y += 10;
 
 	while (data->next != NULL)
 	{
 		data = (Data*)data->next;
 
-		if ((strcmp(data->key, levelName) == 0) || (strstr(data->key, levelMIAKey)))
+		if ((data->key == levelName) || (data->key.find(levelMIAKey) != data->key.npos))
 		{
 			found = true;
 
-			if (strstr(data->key, "MIAs"))
+			if (data->key.find("MIAs") != data->key.npos)
 			{
 				// if it says 0 / 0 don't bother...
-				if (strcmp(data->value, "0 / 0"))
+				if (data->value != "0 / 0")
 				{
 					graphics.drawString(_("MIAs Rescued"), x1, y += 20, false, image);
-					snprintf(string, sizeof string, "%d / %d", data->current, data->target);
+					text = fmt::format("{} / {}", data->current, data->target);
 					(data->isComplete()) ? graphics.setFontColor(0x00, 0xff, 0x00, 0x00, 0x00, 0x00) : graphics.setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
-					graphics.drawString(string, x2, y, false, image);
+					graphics.drawString(text, x2, y, false, image);
 				}
 			}
-			else if (!strstr(data->value, "MIA_"))
+			else if (data->value.find("MIA_") == data->value.npos)
 			{
-				if ((game.skill < 3) &&  (strstr(data->value, "L.R.T.S.")) && (!gameData.completedWorld))
+				if ((game.skill < 3) &&  (data->value.find("L.R.T.S.") != data->value.npos) && (!gameData.completedWorld))
 				{
 					graphics.drawString(_("???? ???????? ????"), x1, y += 20, false, image);
 				}
 				else
 				{
-					strlcpy(string, _(data->value), sizeof string);
+					text = _(data->value);
 					
-					if (strlen(string) >= 25)
+					if (text.size() >= 25)
 					{
 						int cut_char = 25;
 						// don't break unicode characters
-						while (((string[cut_char] >> 6) & 3) == 2)
+						while (((text[cut_char] >> 6) & 3) == 2)
 						{
 							cut_char--;
 						}
 
-						string[cut_char++] = '.';
-						string[cut_char++] = '.';
-						string[cut_char++] = '.';
-						string[cut_char] = '\0';
+						text.resize(cut_char);
+						text.append("...");
 					}
 					
-					graphics.drawString(string, x1, y += 20, false, image);
+					graphics.drawString(text, x1, y += 20, false, image);
 				}
 				
 				if (data->target == 1)
 				{
-					snprintf(string, sizeof string, "%s", (data->isComplete()) ? _("Completed") : _("Incomplete"));
+					text = (data->isComplete()) ? _("Completed") : _("Incomplete");;
 				}
 				else
 				{
-					snprintf(string, sizeof string, "%d / %d", data->current, data->target);
+					text = fmt::format("{} / {}", data->current, data->target);
 				}
 				
 				(data->isComplete()) ? graphics.setFontColor(0x00, 0xff, 0x00, 0x00, 0x00, 0x00) : graphics.setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
-				graphics.drawString(string, x2, y, false, image);
+				graphics.drawString(text, x2, y, false, image);
 			}
 		}
 
@@ -322,8 +304,6 @@ static void createObjectivesPanel(const char *levelName)
 
 static void createMIAPanel(int start, int max)
 {
-	char string[100];
-	char name[100];
 	int x1 = 20;
 	int x2 = 130;
 	int x3 = 310;
@@ -352,7 +332,7 @@ static void createMIAPanel(int start, int max)
 	{
 		data = (Data*)data->next;
 
-		if (strstr(data->value, "MIA_"))
+		if (data->value.find("MIA_") != data->value.npos)
 		{
 			if (current < start)
 			{
@@ -360,26 +340,24 @@ static void createMIAPanel(int start, int max)
 				continue;
 			}
 
-			snprintf(name, sizeof name, "%s", data->value);
-			strtok(name, "_");
+			std::string text = data->value.substr(4);
 
-			snprintf(string, sizeof string, "%s", strtok(NULL, "_"));
-			graphics.drawString(string, x1, y += 20, false, image);
+			graphics.drawString(text, x1, y += 20, false, image);
 
 			graphics.drawString(_(data->key), x2, y, false, image);
 
 			if (data->isComplete())
 			{
-				snprintf(string, sizeof string, "%s", _("Found"));
+				text = _("Found");
 				graphics.setFontColor(0x00, 0xff, 0x00, 0x00, 0x00, 0x00);
 			}
 			else
 			{
-				snprintf(string, sizeof string, "%s", _("Missing"));
+				text = _("Missing");
 				graphics.setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
 			}
 
-			graphics.drawString(string, x3, y, false, image);
+			graphics.drawString(text, x3, y, false, image);
 
 			graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 
@@ -403,12 +381,12 @@ static void createMIAPanel(int start, int max)
 		graphics.blit(arrows->image[3], 200, 260, image, false);
 }
 
-static bool requirementMet(const char *requiredLevel)
+static bool requirementMet(const std::string &requiredLevel)
 {
-	if (strstr(requiredLevel, "Stages"))
+	if (contains(requiredLevel, "Stages"))
 	{
 		int stages = 0;
-		sscanf(requiredLevel, "%*s %d", &stages);
+		scan(requiredLevel, "%*s %d", &stages);
 
 		if (game.stagesCleared >= stages)
 		{
@@ -422,7 +400,7 @@ static bool requirementMet(const char *requiredLevel)
 		return true;
 	}
 
-	if (strcmp(requiredLevel, "@none@") == 0)
+	if (requiredLevel == "@none@")
 	{
 		return true;
 	}
@@ -450,13 +428,13 @@ int doHub()
 	graphics.quickSprite("joystickHeader", graphics.loadImage("gfx/main/joystickConfig.png"));
 	graphics.quickSprite("optionsBackground", graphics.loadImage("gfx/main/optionsBackground.png"));
 
-	char string[80];
+	std::string filename;
 
 	Sprite *cursor = graphics.addSprite("Cursor");
 	for (int i = 0 ; i < 6 ; i++)
 	{
-		snprintf(string, sizeof string, "gfx/main/cursor%d.png", i + 1);
-		cursor->setFrame(i, graphics.loadImage(string), 10);
+		filename = fmt::format("gfx/main/cursor{}.png", i + 1);
+		cursor->setFrame(i, graphics.loadImage(filename), 10);
 	}
 
 	Sprite *newTarget = graphics.addSprite("NewTarget");
@@ -464,17 +442,17 @@ int doHub()
 	
 	for (int i = 0 ; i < 5 ; i++)
 	{
-		snprintf(string, sizeof string, "gfx/sprites/miaSignal%d.png", i + 1);
+		filename = fmt::format("gfx/sprites/miaSignal{}.png", i + 1);
 		
-		newTarget->setFrame(i, graphics.loadImage(string, -60, 0, 0), 15);
-		visitedTarget->setFrame(i, graphics.loadImage(string, 0, 0, 0), 15);
+		newTarget->setFrame(i, graphics.loadImage(filename, -60, 0, 0), 15);
+		visitedTarget->setFrame(i, graphics.loadImage(filename, 0, 0, 0), 15);
 	}
 
 	Sprite *hubIcons = graphics.addSprite("HubIcons");
 	for (int i = 0 ; i < 6 ; i++)
 	{
-		snprintf(string, sizeof string, "gfx/main/hubIcon%d.png", i + 1);
-		hubIcons->setFrame(i, graphics.loadImage(string), 60);
+		filename = fmt::format("gfx/main/hubIcon{}.png", i + 1);
+		hubIcons->setFrame(i, graphics.loadImage(filename), 60);
 	}
 
 	SDL_Surface *infoPanel = graphics.quickSprite("infoPanel", graphics.createSurface(400, 300));
@@ -490,15 +468,6 @@ int doHub()
 
 	engine.loadData("data/hub");
 
-	char *line = strtok((char*)engine.dataBuffer, "\n");
-
-	char name[50], level[50], requiredLevel[50];
-	int x, y;
-
-	#if DEBUG
-	char pos[50];
-	#endif
-
 	graphics.setFontSize(0);
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 	
@@ -506,11 +475,13 @@ int doHub()
 	
 	gameData.calculateWorldCompleted();
 
-	while (true)
+	for (auto line: split(engine.dataBuffer, '\n'))
 	{
-		sscanf(line, "%*c %[^\"] %*c %*c %[^\"] %*c %d %d %*c %[^\"] %*c", name, level, &x, &y, requiredLevel);
+		char name[50], level[50], requiredLevel[50];
+		int x, y;
+		scan(line, "%*c %[^\"] %*c %*c %[^\"] %*c %d %d %*c %[^\"] %*c", name, level, &x, &y, requiredLevel);
 
-		if (strcmp(name, "@EOF@") == 0)
+		if (!strcmp(name, "@EOF@"))
 		{
 			break;
 		}
@@ -520,7 +491,6 @@ int doHub()
 		{
 			if (strstr(name, "BioMech"))
 			{
-				line = strtok(NULL, "\n");
 				continue;
 			}
 		}
@@ -539,14 +509,11 @@ int doHub()
 				numberOfHubs++;
 			}
 		}
-
-		line = strtok(NULL, "\n");
 	}
 
 	int rtn = -1;
 	
-	strlcpy(level, "@none@", sizeof level);
-	strlcpy(game.stageName, "@none@", sizeof game.stageName);
+	game.stageName = "@none@";
 
 	bool showData = false;
 	bool showStats = false;
@@ -564,7 +531,7 @@ int doHub()
 	{
 		data = (Data*)data->next;
 
-		if (strstr(data->value, "MIA_"))
+		if (contains(data->value, "MIA_"))
 		{
 			miaMax++;
 		}
@@ -575,7 +542,7 @@ int doHub()
 	if ((numberOfHubs == 0) && (gameData.completedWorld))
 	{
 		game.setMapName("data/spaceStation");
-		strlcpy(game.stageName, "Space Station", sizeof game.stageName);
+		game.stageName = "Space Station";
 		createObjectivesPanel("Space Station");
 		showData = true;
 		showStats = showMIAs = false;
@@ -607,15 +574,15 @@ int doHub()
 		{
 			static Graphics::SurfaceCache cache;
 			graphics.drawRect(10, 400, 620, 20, graphics.black, graphics.white, graphics.screen);
-			snprintf(string, sizeof string, "%s : %s", _("Selected Destination"), _(game.stageName));
-			graphics.drawString(string, 320, 409, true, graphics.screen, cache);
+			std::string message = fmt::format("{} : {}", _("Selected Destination"), _(game.stageName));
+			graphics.drawString(message, 320, 409, true, graphics.screen, cache);
 		}
 		
 		graphics.drawRect(10, 430, 620, 40, graphics.black, graphics.white, graphics.screen);
 
 		#if DEBUG
 		static Graphics::SurfaceCache posCache;
-		snprintf(pos, sizeof pos, "%.3d:%.3d", engine.getMouseX(), engine.getMouseY());
+		std::string pos = fmt::format("{:03d}:{:03d}", engine.getMouseX(), engine.getMouseY());
 		graphics.drawString(pos, 320, 15, true, graphics.screen, posCache);
 		#endif
 

@@ -23,10 +23,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 Widget::Widget()
 {
-	name[0] = 0;
-	groupName[0] = 0;
-	label[0] = 0;
-	options[0] = 0;
 	x = y = type = min = max = 0;
 	enabled = visible = true;
 	changed = false;
@@ -36,18 +32,12 @@ Widget::Widget()
 	image = NULL;
 }
 
-void Widget::setProperties(const char *name, const char *groupName, const char *label, const char *options, int x, int y, int min, int max)
+void Widget::setProperties(const std::string &name, const std::string &groupName, const std::string &label, const std::string &options, int x, int y, int min, int max)
 {
-	if ((strlen(name) > 50) || (strlen(groupName) > 50) || (strlen(label) > 80) || (strlen(options) > 100))
-	{
-		debug(("WIDGET NAME OVERFLOW!\n"));
-		exit(1);
-	}
-
-	strlcpy(this->name, name, sizeof this->name);
-	strlcpy(this->groupName, groupName, sizeof this->groupName);
-	strlcpy(this->label, label, sizeof this->label);
-	strlcpy(this->options, options, sizeof this->options);
+	this->name = name;
+	this->groupName = groupName;
+	this->label = label;
+	this->options = options;
 	this->x = x;
 	this->y = y;
 	this->min = min;

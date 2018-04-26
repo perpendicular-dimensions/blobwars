@@ -22,15 +22,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 // Read in the define list used by the map data also
 #include "defines.h"
 
-#define min(a, b) ((a) < (b) ? (a) : (b))
-#define max(a, b) ((a) > (b) ? (a) : (b))
-
 #define PI 3.14159265359
 
 /* ############## errors ########### */
 
-#define ERR_FILE 		"A required file (%s) was not found in PAK file"
-#define ERR_LOCALE 	"Locale information missing for section '%s' (contains only partial translation)"
+#define ERR_FILE 		"A required file ({}) was not found in PAK file"
+#define ERR_LOCALE 	"Locale information missing for section '{}' (contains only partial translation)"
 
 /* ########### maximums ############ */
 
@@ -164,7 +161,7 @@ struct REPLAY_MODE
 
 /* ########### widgets ############ */
 
-const char widgetName[][25] = {
+const std::string widgetName[] = {
 
 	"BUTTON",
 	"RADIO",
@@ -187,7 +184,7 @@ const char widgetName[][25] = {
 
 /* ############## skill ############# */
 
-const char skill[][10] = {
+const std::string skill[] = {
 
 	"Easy",
 	"Normal",

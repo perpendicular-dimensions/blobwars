@@ -23,8 +23,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 Objective::Objective()
 {
-	this->description[0] = 0;
-	this->target[0] = 0;
 	this->currentValue = 0;
 	this->targetValue = 0;
 	this->required = false;
@@ -33,10 +31,10 @@ Objective::Objective()
 	next = NULL;
 }
 
-Objective::Objective(const char *description, const char *target, int targetValue, bool required)
+Objective::Objective(const std::string &description, const std::string &target, int targetValue, bool required)
 {
-	strlcpy(this->description, description, sizeof this->description);
-	strlcpy(this->target, target, sizeof this->target);
+	this->description = description;
+	this->target = target;
 	this->targetValue = targetValue;
 	this->required = required;
 

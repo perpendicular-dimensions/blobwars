@@ -30,7 +30,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 * @param destY The y destination of the teleporter
 * @param active The active state of the teleporter
 */
-void addTeleporter(const char *name, int x, int y, int destX, int destY, bool active)
+void addTeleporter(const std::string &name, int x, int y, int destX, int destY, bool active)
 {
 	Teleporter *teleport = new Teleporter();
 

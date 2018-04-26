@@ -25,14 +25,12 @@ class Pak {
 	
 		Uint32 numberOfFiles;
 		Uint32 listPos;
-		Bytef *input;
 		
 		FileData *fd;
 		FileData *currentFile;
 
-		char pakFilename[1024];
-
-		char filename[60];
+		std::string pakFilename;
+		std::string filename;
 		
 	void showPakErrorAndExit();
 
@@ -40,9 +38,9 @@ class Pak {
 
 	Pak();
 	~Pak();
-	void setPakFile(const char *pakFilename);
-	bool unpack(const char *filename, unsigned char **buffer);
-	bool fileExists(const char *filename);
+	void setPakFile(const std::string &pakFilename);
+	bool unpack(const std::string &filename, std::vector<char> *buffer);
+	bool fileExists(const std::string &filename);
 	unsigned int getUncompressedSize() const;
 
 };

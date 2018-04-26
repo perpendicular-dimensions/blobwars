@@ -23,22 +23,15 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 FileData::FileData()
 {
-	filename[0] = 0;
 	fSize = 0;
 	cSize = 0;
 	location = 0;
 }
 
-void FileData::set(const char *filename, Uint32 fSize, Uint32 cSize, Uint32 location)
+void FileData::set(const std::string &filename, Uint32 fSize, Uint32 cSize, Uint32 location)
 {
-	if (strlen(filename) > 59)
-	{
-		printf("WARNING: FileData::set - FILENAME EXCEEDS 60 CHARACTERS!!!\n");
-		return;
-	}
 	
-	strlcpy(this->filename, filename, sizeof this->filename);
-	
+	this->filename = filename;
 	this->fSize = fSize;
 	this->cSize = cSize;
 	this->location = location;

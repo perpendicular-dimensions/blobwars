@@ -50,11 +50,10 @@ void showLicense()
 	char line[255];
 	int y = 0;
 
-	char *token = strtok((char*)engine.dataBuffer, "\n");
-
+	for (auto token: split(engine.dataBuffer, '\n'))
 	while (true)
 	{
-		sscanf(token, "%d %[^\n\r]", &y, line);
+		scan(token, "%d %[^\n\r]", &y, line);
 		
 		if (y == -1)
 		{
@@ -62,13 +61,6 @@ void showLicense()
 		}
 
 		graphics.drawString(line, 320, y, true, graphics.screen);
-
-		token = strtok(NULL, "\n");
-
-		if (token == NULL)
-		{
-			break;
-		}
 	}
 
 	graphics.delay(4000);
@@ -134,23 +126,13 @@ static bool loadConfig()
 	int release = 0;
 	bool rtn = false;
 
-	char configPath[PATH_MAX];
-
-	snprintf(configPath, sizeof configPath, "%sconfig", engine.userHomeDirectory);
+	std::string configPath = engine.userHomeDirectory + "config";
 
 	debug(("Loading Config from %s\n", configPath));
 
-	FILE *fp = fopen(configPath, "rb");
-
-	if (!fp)
-	{
-		return true;
-	}
-
-	if (fscanf(fp, "%10f %10d", &version, &release) != 2)
-	{
-		rtn = true;
-	}
+	std::ifstream file(configPath);
+	file >> version;
+	file >> release;
 
 	debug(("Version = %.2f - Expected %.2f\n", version, VERSION));
 	debug(("Release = %d - Expected %d\n", release, RELEASE));
@@ -160,12 +142,18 @@ static bool loadConfig()
 		rtn = true;
 	}
 
-	if (fscanf(fp, "%10d %10d %10d %10d %10d %10d %10d", &engine.fullScreen, &game.musicVol, &game.soundVol, &game.output, &game.brightness, &engine.extremeAvailable, &game.gore) != 7)
+	file >> engine.fullScreen;
+	file >> game.musicVol;
+	file >> game.soundVol;
+	file >> game.output;
+	file >> game.brightness;
+	file >> engine.extremeAvailable;
+	file >> game.gore;
+
+	if (file.bad())
 	{
 		rtn = true;
 	}
-
-	fclose(fp);
 
 	debug(("Extreme Mode = %d\n", engine.extremeAvailable));
 	debug(("Output Type = %d\n", game.output));
@@ -184,22 +172,17 @@ static bool loadConfig()
 
 void saveConfig()
 {
-	char configPath[PATH_MAX];
+	std::string configPath = engine.userHomeDirectory + "config";
 
-	snprintf(configPath, sizeof configPath, "%sconfig", engine.userHomeDirectory);
+	std::ofstream file(configPath);
 
-	FILE *fp = fopen(configPath, "wb");
+	fmt::print(file, "{} {}\n", VERSION, RELEASE);
+	fmt::print(file, "{} {} {} {} {} {} {}\n", engine.fullScreen, game.musicVol, game.soundVol, game.output, game.brightness, engine.extremeAvailable, game.gore);
 
-	if (!fp)
+	if (file.bad())
 	{
-		printf("Error Saving Config to %s\n", configPath);
-		return;
+		fmt::print("Error Saving Config to {}\n", configPath);
 	}
-
-	fprintf(fp, "%f %d\n", VERSION, RELEASE);
-	fprintf(fp, "%d %d %d %d %d %d %d\n", engine.fullScreen, game.musicVol, game.soundVol, game.output, game.brightness, engine.extremeAvailable, game.gore);
-
-	fclose(fp);
 	
 	debug(("Output Type = %d\n", game.output));
 }
@@ -213,37 +196,25 @@ static int initMedalService(void *data)
 
 	SDL_mutexP(medalServer.lock);
 	
-	char connectMessage[1024];
-	snprintf(connectMessage, sizeof connectMessage, "Contacting Medal Server - %s:%d", MEDAL_SERVER_HOST, MEDAL_SERVER_PORT);
+	std::string connectMessage = fmt::format("Contacting Medal Server - {}:{}", MEDAL_SERVER_HOST, MEDAL_SERVER_PORT);
 	
 	graphics.showMedalMessage(-1, connectMessage);
 	
-	char keyPath[PATH_MAX];
-	char privateKey[20];
-
-	snprintf(keyPath, sizeof keyPath, "%smedalKey", engine.userHomeDirectory);
+	std::string privateKey;
+	std::string keyPath = engine.userHomeDirectory + "medalKey";
 	
 	debug(("Loading private key from %s\n", keyPath));
 	
-	FILE *fp = fopen(keyPath, "rb");
-	
-	if (!fp)
+	std::ifstream file(keyPath);
+	file >> privateKey;
+
+	if (file.bad())
 	{
-		graphics.showMedalMessage(-1, "No Medal Key found - Online functions disabled");
+		graphics.showMedalMessage(-1, "No valid Medal Key found - Online functions disabled");
 		SDL_mutexV(medalServer.lock);
 		return 0;
 	}
-	
-	if (fscanf(fp, "%19s", privateKey) != 1)
-	{
-		graphics.showMedalMessage(-1, "Medal Key file corrupt - Online functions disabled");
-		SDL_mutexV(medalServer.lock);
-		fclose(fp);
-		return 0;
-	}
-	
-	fclose(fp);
-		
+
 	if (!medalServer.connect(privateKey))
 	{
 		graphics.showMedalMessage(-1, "Medal Server Connection Failed - Online functions disabled");
@@ -417,7 +388,7 @@ void initSystem()
 	SDL_SetWindowIcon(graphics.window, device);
 	SDL_FreeSurface(device);
 	
-	if (strstr(engine.userHomeDirectory, "/root"))
+	if (contains(engine.userHomeDirectory, "/root"))
 	{
 		graphics.showRootWarning();
 	}
@@ -460,7 +431,7 @@ atexit();
 */
 void cleanup()
 {
-	char tempPath[PATH_MAX];
+	std::string tempPath;
 	
 	debug(("Cleaning Up...\n"));
 	
@@ -471,8 +442,8 @@ void cleanup()
 	audio.destroy();
 
 	debug(("Removing Music...\n"));
-	snprintf(tempPath, sizeof tempPath, "%smusic.mod", engine.userHomeDirectory);
-	remove(tempPath);
+	tempPath = engine.userHomeDirectory + "music.mod";
+	remove(tempPath.c_str());
 
 	debug(("Freeing Game Info...\n"));
 	game.destroy();
@@ -493,8 +464,8 @@ void cleanup()
 	}
 
 	debug(("Removing Font File...\n"));
-	snprintf(tempPath, sizeof tempPath, "%sfont.ttf", engine.userHomeDirectory);
-	remove(tempPath);
+	tempPath = engine.userHomeDirectory + "font.ttf";
+	remove(tempPath.c_str());
 	
 	if (SDL_NumJoysticks() > 0)
 	{

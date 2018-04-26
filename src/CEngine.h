@@ -33,8 +33,8 @@ class Engine {
 		float timeDifference;
 		
 		// used for cheating!
-		char lastKeyPressed[25];
-		char lastKeyEvents[25];
+		std::string lastKeyPressed;
+		std::string lastKeyEvents;
 		
 		// Joystick config stuff
 		int lastButtonPressed;
@@ -61,7 +61,7 @@ class Engine {
 		bool saveConfig;
 		bool allowQuit;
 
-		char userHomeDirectory[PATH_MAX];
+		std::string userHomeDirectory;
 
 		int useAudio;
 		int fullScreen;
@@ -73,15 +73,15 @@ class Engine {
 
 		SDL_RWops *sdlrw;
 
-		unsigned char *binaryBuffer; // used for unzipping
-		unsigned char *dataBuffer; // used for unzipping
+		std::vector<char> binaryBuffer; // used for unzipping
+		std::vector<char> dataBuffer; // used for unzipping
 
 		int messageTime;
 		int messagePriority;
 		int messageType;
-		char message[100];
+		std::string message;
 
-		char saveSlot[10][80];
+		std::string saveSlot[10];
 		int continueSaveSlot;
 
 		int playerPosX, playerPosY;
@@ -112,10 +112,10 @@ class Engine {
 	void addKeyEvent();
 	void flushInput();
 	void clearInput();
-	void setUserHome(const char *path);
+	void setUserHome(const std::string &path);
 	Pak *getPak();
-	bool unpack(const char *filename, int fileType);
-	bool loadData(const char *filename);
+	bool unpack(const std::string &filename, int fileType);
+	bool loadData(const std::string &filename);
 	void reportFontFailure();
 	void setPlayerPosition(int x, int y, int limitLeft, int limitRight, int limitUp, int limitDown);
 	int getFrameLoop() const;
@@ -123,23 +123,23 @@ class Engine {
 	void doTimeDifference();
 	float getTimeDifference() const;
 	void resetTimeDifference();
-	void setInfoMessage(const char *message, int priority, int type);
+	void setInfoMessage(const std::string &message, int priority, int type);
 	void deleteWidgets();
 	void addWidget(Widget *widget);
-	bool loadWidgets(const char *filename);
-	Widget *getWidgetByName(const char *name);
-	void showWidgetGroup(const char *groupName, bool show);
-	void enableWidgetGroup(const char *groupName, bool show);
-	void showWidget(const char *name, bool show);
-	void enableWidget(const char *name, bool enable);
-	void setWidgetVariable(const char *name, int *variable);
-	bool widgetChanged(const char *name);
+	bool loadWidgets(const std::string &filename);
+	Widget *getWidgetByName(const std::string &name);
+	void showWidgetGroup(const std::string &groupName, bool show);
+	void enableWidgetGroup(const std::string &groupName, bool show);
+	void showWidget(const std::string &name, bool show);
+	void enableWidget(const std::string &name, bool enable);
+	void setWidgetVariable(const std::string &name, int *variable);
+	bool widgetChanged(const std::string &name);
 	void highlightWidget(int dir);
-	void highlightWidget(const char *name);
+	void highlightWidget(const std::string &name);
 	int processWidgets();
 	bool loadDefines();
-	int getValueOfDefine(const char *word);
-	char *getDefineOfValue(const char *prefix, int value);
-	int getValueOfFlagTokens(const char *line);
+	int getValueOfDefine(const std::string &word);
+	std::string getDefineOfValue(const std::string &prefix, int value);
+	int getValueOfFlagTokens(const std::string &line);
 	void delay(unsigned int frameLimit);
 };
