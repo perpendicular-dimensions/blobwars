@@ -710,12 +710,8 @@ static void galdovFinalWaitForObjective()
 	self->setActionFinished(120);
 	self->setThinkTime(2);
 	
-	Objective *objective = (Objective*)map.objectiveList.getHead();
-
-	while (objective->next != NULL)
+	for (auto &&objective: map.objectives)
 	{
-		objective = (Objective*)objective->next;
-
 		if (objective->target.find("Reality") != std::string::npos)
 		{
 			if (objective->completed)

@@ -19,19 +19,15 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class Persistant : public GameObject {
+class Persistant {
 	
 	public:
 	
 		std::string stageName;
-		int numberOfLines;
-		List dataList;
+		std::vector<std::string> data;
 		
-	Persistant();
-	~Persistant();
-	
 	void setName(const std::string &name);
-	void addLine(const std::string &data);
+	void addLine(const std::string &line);
 	void clear();
 
 };

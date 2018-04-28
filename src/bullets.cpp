@@ -59,7 +59,6 @@ void addBullet(Entity *owner, float dx, float dy)
 		bullet->dy += -tdy;
 	}
 
-	bullet->next = NULL;
 	bullet->health = owner->currentWeapon->health;
 	bullet->damage = owner->currentWeapon->damage;
 	bullet->setSprites(owner->currentWeapon->sprite[0], owner->currentWeapon->sprite[1], owner->currentWeapon->sprite[1]);
@@ -286,15 +285,11 @@ static bool bulletHasCollided(Entity *bullet, float dx, float dy)
 
 void doBullets()
 {
-	Entity *bullet = (Entity*)map.bulletList.getHead();
-	Entity *previous = bullet;
-
 	int x, y;
 
-	while (bullet->next != NULL)
+	for (auto it = map.bullets.begin(); it != map.bullets.end();)
 	{
-		bullet = (Entity*)bullet->next;
-		
+		auto bullet = it->get();
 		bullet->owner->referenced = true;
 
 		x = (int)(bullet->x - engine.playerPosX);
@@ -357,13 +352,12 @@ void doBullets()
 
 		if (bullet->health > 0)
 		{
-			previous = bullet;
+			++it;
 		}
 		else
 		{
 			destroyBullet(bullet);
-			map.bulletList.remove(previous, bullet);
-			bullet = previous;
+			it = map.bullets.erase(it);
 		}
 	}
 }

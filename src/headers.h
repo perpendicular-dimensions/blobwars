@@ -31,8 +31,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include <algorithm>
 #include <fstream>
+#include <list>
+#include <map>
+#include <set>
 #include <string>
 #include <string_view>
+#include <vector>
+
 #include <fmt/format.h>
 #include <fmt/ostream.h>
 #include <fmt/time.h>
@@ -76,9 +81,6 @@ inline const char *_(const std::string &str) { return gettext(str.c_str()); }
 #include "utils.h"
 
 #include "CMath.h"
-
-#include "CGameObject.h"
-#include "CList.h"
 
 #include "CSprite.h"
 #include "CData.h"

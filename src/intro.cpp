@@ -125,12 +125,8 @@ static void parseIntroCommand(std::string_view line)
 
 	if (!strcmp(command, "SPAWN"))
 	{
-		SpawnPoint *sp = (SpawnPoint*)map.spawnList.getHead();
-
-		while (sp->next != NULL)
+		for (auto &&sp: map.spawns)
 		{
-			sp = (SpawnPoint*)sp->next;
-
 			if (param == sp->name)
 			{
 				sp->active = true;

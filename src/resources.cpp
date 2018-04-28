@@ -170,5 +170,5 @@ void loadResources()
 	game.canContinue = 0;
 
 	// We don't need this anymore. Remove it to free up some memory...
-	engine.defineList.clear();
+	engine.defines.clear();
 }

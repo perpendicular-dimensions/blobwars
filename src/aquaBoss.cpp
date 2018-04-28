@@ -58,12 +58,8 @@ static void aquaBossRecharge()
 	bool leachedEnemy = false;
 	int diffX, diffY;
 	
-	Entity *enemy = (Entity*)map.enemyList.getHead();
-	
-	while (enemy->next != NULL)
+	for (auto &&enemy: map.enemies)
 	{
-		enemy = (Entity*)enemy->next;
-		
 		// don't leach enemies not in the pool!!
 		if (enemy->x >= 1490)
 			continue;
@@ -84,7 +80,7 @@ static void aquaBossRecharge()
 				
 				Math::limitInt(&(++self->health), 0, self->maxHealth);
 				self->setActionFinished(25);
-				leachParticles(enemy);
+				leachParticles(enemy.get());
 				leachedEnemy = true;
 			}
 		}

@@ -25,16 +25,31 @@ class GameData {
 		
 		bool completedWorld;
 
-		List dataList;
+		struct Completion {
+			int current;
+			int target;
+
+			void set(int current, int target) {
+				this->current = current;
+				this->target = target;
+			}
+
+			bool isComplete() {
+				return current == target;
+			}
+		};
+
+		std::map<std::string, std::map<std::string, Completion>> objectives;
 
 	void clear();
-	void destroy();
 	
 	void addCompletedObjective(const std::string &key, const std::string &value, int current, int target);
-	void addCompletedObjective(Data *newData);
 	
 	void setMIARescueCount(const std::string &key, int rescues, int total);
+	void getMIARescueCount(const std::string &key, int *rescues, int *total);
 	bool MIARescued(const std::string &stageName, const std::string &name);
+
+	int countMIAs();
 	
 	bool objectiveCompleted(const std::string &stageName, const std::string &name);
 	void getObjectiveValues(const std::string &stageName, const std::string &name, int *current, int *target);
@@ -50,5 +65,9 @@ class GameData {
 	void calculateAllCompleted();
 
 	GameData();
+
+	private:
+
+	Completion *find(const std::string &key, const std::string &value);
 
 };

@@ -21,11 +21,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-Cutscene::Cutscene()
-{
-	waitTime = 0;
-}
-
 void Cutscene::appendText(std::string_view line)
 {
 	text.push_back(' ');

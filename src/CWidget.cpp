@@ -21,17 +21,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-Widget::Widget()
-{
-	x = y = type = min = max = 0;
-	enabled = visible = true;
-	changed = false;
-
-	value = NULL;
-	next = previous = NULL;
-	image = NULL;
-}
-
 void Widget::setProperties(const std::string &name, const std::string &groupName, const std::string &label, const std::string &options, int x, int y, int min, int max)
 {
 	this->name = name;

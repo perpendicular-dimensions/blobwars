@@ -53,12 +53,8 @@ void activateTrigger(const std::string &linkName, const std::string &activateMes
 		if (!active)
 			return;
 
-		Entity *obstacle = (Entity*)map.obstacleList.getHead();
-
-		while (obstacle->next != NULL)
+		for (auto &&obstacle: map.obstacles)
 		{
-			obstacle = (Entity*)obstacle->next;
-
 			if (obstacle->name == activateMessage)
 			{
 				addTeleportParticles(obstacle->x + (obstacle->width / 2), obstacle->y + (obstacle->height / 2), 50, SND_TELEPORT2);
@@ -77,15 +73,8 @@ void activateTrigger(const std::string &linkName, const std::string &activateMes
 
 	bool linkOkay = false;
 
-	Train *train = (Train*)map.trainList.getHead();
-	SpawnPoint *sp = (SpawnPoint*)map.spawnList.getHead();
-	Teleporter *tele = (Teleporter*)map.teleportList.getHead();
-	Trap *trap = (Trap*)map.trapList.getHead();
-
-	while (train->next != NULL)
+	for (auto &&train: map.trains)
 	{
-		train = (Train*)train->next;
-
 		if (linkName == train->name)
 		{
 			train->active = active;
@@ -99,10 +88,8 @@ void activateTrigger(const std::string &linkName, const std::string &activateMes
 		}
 	}
 
-	while (sp->next != NULL)
+	for (auto &&sp: map.spawns)
 	{
-		sp = (SpawnPoint*)sp->next;
-
 		if (linkName == sp->name)
 		{
 			sp->active = !sp->active;
@@ -113,10 +100,8 @@ void activateTrigger(const std::string &linkName, const std::string &activateMes
 		}
 	}
 
-	while (tele->next != NULL)
+	for (auto &&tele: map.teleports)
 	{
-		tele = (Teleporter*)tele->next;
-
 		if (linkName == tele->name)
 		{
 			tele->active = active;
@@ -127,13 +112,11 @@ void activateTrigger(const std::string &linkName, const std::string &activateMes
 		}
 	}
 
-	while (trap->next != NULL)
+	for (auto &&trap: map.traps)
 	{
-		trap = (Trap*)trap->next;
-
 		if (linkName == trap->name)
 		{
-			toggleTrap(trap);
+			toggleTrap(trap.get());
 			if (activateMessage != "@none@")
 				engine.setInfoMessage(activateMessage, 1, INFO_ACTIVATE);
 			linkOkay = true;

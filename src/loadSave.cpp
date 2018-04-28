@@ -82,8 +82,6 @@ bool loadGame(int slot)
 	char string[2][1024];
 	int param[2];
 	
-	Data *data;
-
 	std::string filename = fmt::format("{}save{}.dat", engine.userHomeDirectory, slot);
 
 	std::ifstream file(filename);
@@ -119,13 +117,7 @@ bool loadGame(int slot)
 			break;
 		}
 		
-		data = new Data();
-		
-		data->set(string[0], string[1], param[0], param[1]);
-		
-		debug(("Read %s %s %d %d\n", data->key, data->value, data->current, data->target));
-		
-		gameData.addCompletedObjective(data);
+		gameData.addCompletedObjective(string[0], string[1], param[0], param[1]);
 	}
 	
 	std::string stageName;
@@ -162,7 +154,7 @@ bool loadGame(int slot)
 			
 			//debug(("Read %d: %s", i, persistData->data));
 			
-			persistant->addLine(persistData->data);
+			persistant.push_back(persistData->data);
 		}
 	}
 
@@ -318,39 +310,29 @@ void saveGame()
 	
 	createPersistantMapData();
 	
-	Data *data = (Data*)gameData.dataList.getHead();
-
-	while (data->next != NULL)
+	for (auto &&objective: gameData.objectives)
 	{
-		data = (Data*)data->next;
-		
-		fmt::print(file, "\"{}\" \"{}\" {} {}\n", data->key, data->value, data->current, data->target);
+		for (auto &&subobjective: objective.second)
+		{
+			fmt::print(file, "\"{}\" \"{}\" {} {}\n", objective.first, subobjective.first, subobjective.second.current, subobjective.second.target);
+		}
 	}
 	
 	fmt::print(file, "\"@EOF@\" \"@EOF@\" -1 -1\n");
 	
-	Persistant *persistant = (Persistant*)map.persistantList.getHead();
-	PersistData *persistData;
-	
-	while (persistant->next != NULL)
+	for (auto &[levelName, lines]: map.persistants)
 	{
-		persistant = (Persistant*)persistant->next;
-		
-		if (persistant->stageName == "@none@")
+		if (levelName == "@none@")
 		{
 			continue;
 		}
 		
-		fmt::print(file, "{}\n", persistant->stageName);
-		fmt::print(file, "{}\n", persistant->numberOfLines);
+		fmt::print(file, "{}\n", levelName);
+		fmt::print(file, "{}\n", lines.size());
 	
-		persistData = (PersistData*)persistant->dataList.getHead();
-		
-		while (persistData->next != NULL)
+		for (auto &line: lines)
 		{
-			persistData = (PersistData*)persistData->next;
-			
-			fmt::print(file, "{}", persistData->data);
+			fmt::print(file, "{}\n", line);
 		}
 	}
 	

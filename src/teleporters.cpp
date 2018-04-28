@@ -48,12 +48,8 @@ void addTeleporter(const std::string &name, int x, int y, int destX, int destY, 
 */
 void checkTeleportContact(Entity *ent)
 {
-	Teleporter *teleport = (Teleporter*)map.teleportList.getHead();
-
-	while (teleport->next != NULL)
+	for (auto &&teleport: map.teleports)
 	{
-		teleport = (Teleporter*)teleport->next;
-
 		if (!teleport->active)
 			continue;
 
@@ -75,15 +71,12 @@ void checkTeleportContact(Entity *ent)
 void doTeleporters()
 {
 	Sprite *teleportStar = graphics.getSprite("TeleportStar", true);
-	Teleporter *teleport = (Teleporter*)map.teleportList.getHead();
 
 	int x, y;
 	float dy;
 
-	while (teleport->next != NULL)
+	for (auto &&teleport: map.teleports)
 	{
-		teleport = (Teleporter*)teleport->next;
-
 		x = (int)(teleport->x - engine.playerPosX);
 		y = (int)(teleport->y - engine.playerPosY);
 

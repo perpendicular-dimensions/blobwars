@@ -56,20 +56,20 @@ void Map::clear()
 
 	maxAllowableEnemies = 0;
 
-	trainList.clear();
-	itemList.clear();
-	bulletList.clear();
-	enemyList.clear();
-	miaList.clear();
-	obstacleList.clear();
-	particleList.clear();
-	switchList.clear();
-	spawnList.clear();
-	effectList.clear();
-	objectiveList.clear();
-	teleportList.clear();
-	lineList.clear();
-	trapList.clear();
+	trains.clear();
+	items.clear();
+	bullets.clear();
+	enemies.clear();
+	mias.clear();
+	obstacles.clear();
+	particles.clear();
+	switches.clear();
+	spawns.clear();
+	effects.clear();
+	objectives.clear();
+	teleports.clear();
+	lines.clear();
+	traps.clear();
 	
 	remainingMinutes = 0;
 	remainingSeconds = 0;
@@ -95,13 +95,6 @@ void Map::clear()
 	}
 	
 	windPower = windChangeTime = 0;
-}
-
-void Map::destroy()
-{
-	clear();
-	
-	persistantList.clear();
 }
 
 bool Map::isPracticeMission()
@@ -190,62 +183,19 @@ bool Map::isTopLayer(int x, int y)
 	return false;
 }
 
-Persistant *Map::getPersistant(const std::string &name)
+std::vector<std::string> &Map::getPersistant(const std::string &name)
 {
-	Persistant *p = (Persistant*)persistantList.getHead();
-	
-	while (p->next != NULL)
-	{
-		p = (Persistant*)p->next;
-		
-		if (p->stageName == name)
-		{
-			return p;
-		}
-	}
-	
-	return NULL;
+	return persistants[name];
 }
 
-Persistant *Map::createPersistant(const std::string &name)
+std::vector<std::string> &Map::createPersistant(const std::string &name)
 {
-	Persistant *p = (Persistant*)persistantList.getHead();
-	
-	while (p->next != NULL)
-	{
-		p = (Persistant*)p->next;
-		
-		if (p->stageName == name)
-		{
-			return p;
-		}
-	}
-	
-	debug(("Creating %s in persistance list...\n", name));
-	
-	p = new Persistant();
-	p->setName(name);
-	
-	persistantList.add(p);
-	
-	return p;
+	return persistants[name];
 }
 
 void Map::destroyPersistant(const std::string &name)
 {
-	Persistant *p = (Persistant*)persistantList.getHead();
-	
-	while (p->next != NULL)
-	{
-		p = (Persistant*)p->next;
-		
-		if (p->stageName == name)
-		{
-			p->stageName = "@none@";
-			p->clear();
-			return;
-		}
-	}
+	persistants.erase(name);
 }
 
 void Map::setName(const std::string &name)
@@ -303,7 +253,7 @@ void Map::addTrain(const std::string &name, int startX, int startY, int endX, in
 		debug(("WARNING: TRAIN WITH 0 WAIT TIME ADDED '%s' (%d:%d)\n", name, startX, startY));
 	}
 
-	trainList.add(train);
+	trains.emplace_back(train);
 }
 
 void Map::addDoor(const std::string &name, int type, int startX, int startY, int endX, int endY, bool active)
@@ -327,7 +277,7 @@ void Map::addDoor(const std::string &name, int type, int startX, int startY, int
 		train->height = 16;
 	}
 	
-	trainList.add(train);
+	trains.emplace_back(train);
 }
 
 void Map::addSwitch(const std::string &name, const std::string &linkName, const std::string &requiredObjectName, const std::string &activateMessage, int type, int x, int y, bool activated)
@@ -335,17 +285,17 @@ void Map::addSwitch(const std::string &name, const std::string &linkName, const 
 	Switch *swt = new Switch();
 	swt->set(name, linkName, requiredObjectName, activateMessage, type, x, y, activated);
 
-	switchList.add(swt);
+	switches.emplace_back(swt);
 }
 
 void Map::addItem(Entity *item)
 {
-	itemList.add(item);
+	items.emplace_back(item);
 }
 
 void Map::addBullet(Entity *bullet)
 {
-	bulletList.add(bullet);
+	bullets.emplace_back(bullet);
 }
 
 void Map::addParticle(float x, float y, float dx, float dy, int health, int color, Sprite *sprite, int flags)
@@ -354,22 +304,22 @@ void Map::addParticle(float x, float y, float dx, float dy, int health, int colo
 	particle->set(x, y, dx, dy, color, health, flags);
 	particle->setSprite(sprite);
 	
-	particleList.add(particle);
+	particles.emplace_back(particle);
 }
 
 void Map::addEnemy(Entity *enemy)
 {
-	enemyList.add(enemy);
+	enemies.emplace_back(enemy);
 }
 
 void Map::addMIA(Entity *mia)
 {
-	miaList.add(mia);
+	mias.emplace_back(mia);
 }
 
 void Map::addObstacle(Entity *obstacle)
 {
-	obstacleList.add(obstacle);
+	obstacles.emplace_back(obstacle);
 }
 
 void Map::addSpawnPoint(const std::string &name, int x, int y, int type, int subtype, int min, int max, bool active)
@@ -377,34 +327,34 @@ void Map::addSpawnPoint(const std::string &name, int x, int y, int type, int sub
 	SpawnPoint *spawnPoint = new SpawnPoint();
 	spawnPoint->create(name, x, y, type, subtype, min, max, active);
 
-	spawnList.add(spawnPoint);
+	spawns.emplace_back(spawnPoint);
 }
 
 void Map::addEffect(Effect *effect)
 {
-	effectList.add(effect);
+	effects.emplace_back(effect);
 }
 
 void Map::addObjective(const std::string &description, const std::string &target, int targetValue, bool required)
 {
 	Objective *objective = new Objective(description, target, targetValue, required);
 
-	objectiveList.add(objective);
+	objectives.emplace_back(objective);
 }
 
 void Map::addTeleporter(Teleporter *teleporter)
 {
-	teleportList.add(teleporter);
+	teleports.emplace_back(teleporter);
 }
 
 void Map::addLineDef(LineDef *lineDef)
 {
-	lineList.add(lineDef);
+	lines.emplace_back(lineDef);
 }
 
 void Map::addTrap(Trap *trap)
 {
-	trapList.add(trap);
+	traps.emplace_back(trap);
 }
 
 void Map::evalTileset(const std::string &baseDir)
@@ -421,14 +371,8 @@ void Map::evalTileset(const std::string &baseDir)
 
 void Map::killAllEnemies()
 {
-	Entity *enemy = (Entity*)enemyList.getHead()->next;
-
-	while (enemy != NULL)
-	{
+	for (auto &&enemy: enemies)
 		enemy->health = -1;
-
-		enemy = (Entity*)enemy->next;
-	}
 }
 
 void Map::setAllowableEnemy(Entity *enemy)
@@ -467,47 +411,32 @@ std::string Map::getSpawnableEnemy()
 
 void Map::getRandomEntityPosition(int *x, int *y)
 {
-	Entity *ent = (Entity*)miaList.getHead();
+	size_t count = mias.size() + enemies.size() + items.size();
+	size_t i = Math::prand() % count;
 
-	while (ent->next != NULL)
+	Entity *ent;
+
+	if (i < mias.size())
 	{
-		ent = (Entity*)ent->next;
-
-		if ((Math::prand() % 5) == 0)
-		{
-			*x = (int)ent->x;
-			*y = (int)ent->y;
-			return;
-		}
+		auto it = mias.begin();
+		std::advance(it, i);
+		ent = it->get();
+	}
+	else if (i < mias.size() + enemies.size())
+	{
+		auto it = enemies.begin();
+		std::advance(it, i - mias.size());
+		ent = it->get();
+	}
+	else
+	{
+		auto it = items.begin();
+		std::advance(it, i - mias.size() - enemies.size());
+		ent = it->get();
 	}
 
-	ent = (Entity*)enemyList.getHead();
-
-	while (ent->next != NULL)
-	{
-		ent = (Entity*)ent->next;
-
-		if ((Math::prand() % 5) == 0)
-		{
-			*x = (int)ent->x;
-			*y = (int)ent->y;
-			return;
-		}
-	}
-
-	ent = (Entity*)itemList.getHead();
-
-	while (ent->next != NULL)
-	{
-		ent = (Entity*)ent->next;
-
-		if ((Math::prand() % 5) == 0)
-		{
-			*x = (int)ent->x;
-			*y = (int)ent->y;
-			return;
-		}
-	}
+	*x = (int)ent->x;
+	*y = (int)ent->y;
 }
 
 void Map::setMainBossPart(Boss *boss)

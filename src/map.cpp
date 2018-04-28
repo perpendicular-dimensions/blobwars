@@ -123,103 +123,81 @@ void drawMapTopLayer()
 	}
 }
 
-static void addBlips(List *blipList, int mapX, int mapY, int type)
+static void addBlips(std::vector<RadarBlip> *blips, int mapX, int mapY, int type, Entity *ent, Sprite *blipSprite)
 {
-	Sprite *blipType;
-	Entity *ent;
+	if (ent->health <= 0)
+		return;
 
-	switch (type)
+	if (type == 3)
 	{
-		case 1:
-			blipType = graphics.getSprite("MIAArrow", true);
-			ent = (Entity*)map.miaList.getHead();
-			break;
-		case 2:
-			blipType = graphics.getSprite("ItemArrow", true);
-			ent = (Entity*)map.itemList.getHead();
-			break;
-		case 3:
-			blipType = graphics.getSprite("EnemyArrow", true);
-			ent = (Entity*)map.enemyList.getHead();
-			break;
-		default:
+		if (!requiredEnemy(ent->name))
+		{
 			return;
+		}
 	}
 
-	RadarBlip *blip;
-	int x, y;
-
-	while (ent->next != NULL)
+	// Items
+	if (type == 2)
 	{
-		ent = (Entity*)ent->next;
-
-		if (ent->health <= 0)
-			continue;
-
-		if (type == 3)
+		if ((ent->id < ITEM_MISC) || (ent->id == ITEM_MISC_INVISIBLE))
 		{
-			if (!requiredEnemy(ent->name))
-			{
-				continue;
-			}
-		}
-
-		// Items
-		if (type == 2)
-		{
-			if ((ent->id < ITEM_MISC) || (ent->id == ITEM_MISC_INVISIBLE))
-			{
-				continue;
-			}
-		}
-
-		x = (int)(ent->x + ent->width) >> BRICKSHIFT;
-		y = (int)(ent->y + ent->height) >> BRICKSHIFT;
-
-		x -= mapX;
-		y -= mapY;
-
-		x = (160) + (x * 5);
-		y = (120) + (y * 5);
-
-		if ((x >= 165) && (y >= 125) && (x <= 475) && (y <= 355))
-		{
-			blip = new RadarBlip();
-			blip->set(x, y, type);
-			blipList->add (blip);
-		}
-		else
-		{
-			if (y < 125)
-				graphics.blit(blipType->image[0], 220 + (type * 50), 100, graphics.screen, true);
-			if (x > 475)
-				graphics.blit(blipType->image[1], 510, 140 + (type * 50), graphics.screen, true);
-			if (y > 355)
-				graphics.blit(blipType->image[2], 220 + (type * 50), 380, graphics.screen, true);
-			if (x < 165)
-				graphics.blit(blipType->image[3], 125, 140 + (type * 50), graphics.screen, true);
+			return;
 		}
 	}
+
+	int x = (int)(ent->x + ent->width) >> BRICKSHIFT;
+	int y = (int)(ent->y + ent->height) >> BRICKSHIFT;
+
+	x -= mapX;
+	y -= mapY;
+
+	x = (160) + (x * 5);
+	y = (120) + (y * 5);
+
+	if ((x >= 165) && (y >= 125) && (x <= 475) && (y <= 355))
+	{
+		blips->emplace_back(x, y, type);
+	}
+	else
+	{
+		if (y < 125)
+			graphics.blit(blipSprite->image[0], 220 + (type * 50), 100, graphics.screen, true);
+		if (x > 475)
+			graphics.blit(blipSprite->image[1], 510, 140 + (type * 50), graphics.screen, true);
+		if (y > 355)
+			graphics.blit(blipSprite->image[2], 220 + (type * 50), 380, graphics.screen, true);
+		if (x < 165)
+			graphics.blit(blipSprite->image[3], 125, 140 + (type * 50), graphics.screen, true);
+	}
+}
+
+static void addBlips(std::vector<RadarBlip> *blips, int mapX, int mapY)
+{
+	Sprite *blipSprite;
+
+	blipSprite = graphics.getSprite("MIAArrow", true);
+	for (auto &&mia: map.mias)
+		addBlips(blips, mapX, mapY, 1, mia.get(), blipSprite);
+
+	blipSprite = graphics.getSprite("ItemArrow", true);
+	for (auto &&item: map.items)
+		addBlips(blips, mapX, mapY, 2, item.get(), blipSprite);
+
+	blipSprite = graphics.getSprite("EnemyArrow", true);
+	for (auto &&enemy: map.enemies)
+		addBlips(blips, mapX, mapY, 3, enemy.get(), blipSprite);
 }
 
 static void addMiniMapDoors(SDL_Surface *panel, int mapX, int mapY)
 {
-	Train *train = (Train*)map.trainList.getHead();
-
-	int x, y;
-	int width, height, color;
-
-	while (train->next != NULL)
+	for (auto &&train: map.trains)
 	{
-		train = (Train*)train->next;
+		int width = 5;
+		int height = 5;
+		int color = graphics.white;
 		
-		width = 5;
-		height = 5;
-		color = graphics.white;
-		
-		x = (int)train->x >> BRICKSHIFT;
-		
-		y = (int)train->y >> BRICKSHIFT;
+		int x = (int)train->x >> BRICKSHIFT;
+		int y = (int)train->y >> BRICKSHIFT;
 		
 		if ((x >= mapX) && (x <= mapX + 64) && (y >= mapY) && (y <= mapY + 48))
 		{
@@ -361,15 +339,11 @@ void showMap(int centerX, int centerY)
 	graphics.blit(background, 0, 0, graphics.screen, false);
 	SDL_FreeSurface(background);
 
-	List blipList;
+	std::vector<RadarBlip> blips;
 
-	RadarBlip *blip = new RadarBlip();
-	blip->set(160 + ((centerX - x1) * 5), 120 + ((centerY - y1) * 5), 0);
-	blipList.add(blip);
+	blips.emplace_back(160 + ((centerX - x1) * 5), 120 + ((centerY - y1) * 5), 0);
 
-	addBlips(&blipList, x1, y1, 1);
-	addBlips(&blipList, x1, y1, 2);
-	addBlips(&blipList, x1, y1, 3);
+	addBlips(&blips, x1, y1);
 	
 	Sprite *enemySignal = graphics.getSprite("EnemySignal", true);
 	Sprite *miaSignal = graphics.getSprite("MIASignal", true);
@@ -419,33 +393,27 @@ void showMap(int centerX, int centerY)
 			break;
 		}
 
-		blip = (RadarBlip*)blipList.getHead();
-
-		while (blip->next != NULL)
+		for (auto &&blip: blips)
 		{
-			blip = (RadarBlip*)blip->next;
-
-			switch (blip->type)
+			switch (blip.type)
 			{
 				case 0:
-					graphics.blit(bobSignal->getCurrentFrame(), blip->x, blip->y, graphics.screen, true);
+					graphics.blit(bobSignal->getCurrentFrame(), blip.x, blip.y, graphics.screen, true);
 					break;
 				case 1:
-					graphics.blit(miaSignal->getCurrentFrame(), blip->x, blip->y, graphics.screen, true);
+					graphics.blit(miaSignal->getCurrentFrame(), blip.x, blip.y, graphics.screen, true);
 					break;
 				case 2:
-					graphics.blit(itemSignal->getCurrentFrame(), blip->x, blip->y, graphics.screen, true);
+					graphics.blit(itemSignal->getCurrentFrame(), blip.x, blip.y, graphics.screen, true);
 					break;
 				case 3:
-					graphics.blit(enemySignal->getCurrentFrame(), blip->x, blip->y, graphics.screen, true);
+					graphics.blit(enemySignal->getCurrentFrame(), blip.x, blip.y, graphics.screen, true);
 					break;
 			}
 		}
 
 		SDL_Delay(16);
 	}
-
-	blipList.clear();
 
 	SDL_FillRect(graphics.screen, NULL, graphics.black);
 	graphics.updateScreen();

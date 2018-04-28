@@ -19,7 +19,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class Widget : public GameObject {
+class Widget {
 
 	public:
 
@@ -28,21 +28,22 @@ class Widget : public GameObject {
 		std::string label;
 		std::string options;
 
-		int type;
+		int type = 0;
 
-		int x, y;
+		int x = 0;
+		int y = 0;
 
-		int *value; // NB - THIS IS A POINTER!!
+		int *value = nullptr; // NB - THIS IS A POINTER!!
 
-		int min, max;
+		int min = 0;
+		int max = 0;
 
-		bool enabled, visible, changed;
+		bool enabled = true;
+		bool visible = true;
+		bool changed = false;
 
-		SDL_Surface *image;
+		SDL_Surface *image = nullptr;
 
-		Widget *previous;
-
-	Widget();
 	void setProperties(const std::string &name, const std::string &groupName, const std::string &label, const std::string &options, int x, int y, int min, int max);
 	void setValue(int *value);
 	void redraw();

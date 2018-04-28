@@ -38,12 +38,8 @@ void addExplosion(float x, float y, int radius, Entity *owner)
 		map.addParticle(x, y, dx, dy, Math::rrand(5, 30), graphics.white, explosion, PAR_WEIGHTLESS);
 	}
 
-	Entity *enemy = (Entity*)map.enemyList.getHead();
-
-	while (enemy->next != NULL)
+	for (auto &&enemy: map.enemies)
 	{
-		enemy = (Entity*)enemy->next;
-		
 		if ((enemy->flags & ENT_IMMUNE) || (enemy->flags & ENT_IMMUNEEXPLODE))
 		{
 			continue;
@@ -97,7 +93,7 @@ void addExplosion(float x, float y, int radius, Entity *owner)
 			
 			for (int i = 0 ; i < 4 ; i++)
 			{
-				(enemy->flags & ENT_EXPLODES) ? addSmokeAndFire(enemy, Math::rrand(-15, 5), Math::rrand(-15, 5), 2) : addBlood(enemy, Math::rrand(-5, 5), Math::rrand(-5, 5), 1);
+				(enemy->flags & ENT_EXPLODES) ? addSmokeAndFire(enemy.get(), Math::rrand(-15, 5), Math::rrand(-15, 5), 2) : addBlood(enemy.get(), Math::rrand(-5, 5), Math::rrand(-5, 5), 1);
 			}
 				
 			if (!(enemy->flags & ENT_STATIC))

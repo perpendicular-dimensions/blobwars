@@ -19,7 +19,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class Entity : public GameObject {
+class Entity {
 
 	public:
 
@@ -51,6 +51,8 @@ class Entity : public GameObject {
 		int dead;
 
 		Entity *owner;
+
+		bool referenced = false;
 
 	Entity();
 	void setName(const std::string &name);

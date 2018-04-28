@@ -20,15 +20,3 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
 #include "headers.h"
-
-RadarBlip::RadarBlip()
-{
-	next = NULL;
-}
-
-void RadarBlip::set(int x, int y, int type)
-{
-	this->x = x;
-	this->y = y;
-	this->type = type;
-}

@@ -247,7 +247,6 @@ void doPauseInfo()
 	showCarriedItems();
 
 	// Do the objectives list
-	Objective *objective = (Objective*)map.objectiveList.getHead();
 
 	y += 60;
 
@@ -270,10 +269,8 @@ void doPauseInfo()
 		}
 	}
 
-	while (objective->next != NULL)
+	for (auto &&objective: map.objectives)
 	{
-		objective = (Objective*)objective->next;
-
 		y += 20;
 		
 		graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);

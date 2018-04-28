@@ -29,8 +29,6 @@ SpawnPoint::SpawnPoint()
 	spawnType = spawnSubType = 0;
 
 	currentInterval = minInterval = maxInterval = 0;
-
-	next = NULL;
 }
 
 void SpawnPoint::reset()

@@ -28,216 +28,120 @@ GameData::GameData()
 
 void GameData::clear()
 {
-	dataList.clear();
+	objectives.clear();
 }
 
-void GameData::destroy()
+GameData::Completion *GameData::find(const std::string &key, const std::string &value)
 {
-	clear();
+	auto it = objectives.find(key);
+
+	if (it != objectives.end()) {
+		auto &subobjectives = it->second;
+		auto subit = subobjectives.find(value);
+		if (subit != subobjectives.end())
+			return &subit->second;
+	}
+	
+	return nullptr;
 }
 
 void GameData::addCompletedObjective(const std::string &key, const std::string &value, int current, int target)
 {
-	Data *data = (Data*)dataList.getHead();
-
-	while (data->next != NULL)
-	{
-		data = (Data*)data->next;
-		if (key == data->key)
-		{
-			if (value == data->value)
-			{
-				data->set(key, value, current, target);
-				return;
-			}
-		}
-	}
-
-	data = new Data();
-	data->set(key, value, current, target);
-
-	dataList.add(data);
-}
-
-void GameData::addCompletedObjective(Data *newData)
-{
-	Data *data = (Data*)dataList.getHead();
-
-	while (data->next != NULL)
-	{
-		data = (Data*)data->next;
-		if (data->key == newData->key)
-		{
-			if (data->value == newData->value)
-			{
-				data->set(newData->key, newData->value, newData->current, newData->target);
-				return;
-			}
-		}
-	}
-
-	dataList.add(newData);
+	objectives[key][value].set(current, target);
 }
 
 void GameData::setMIARescueCount(const std::string &key, int rescues, int total)
 {
-	Data *data = (Data*)dataList.getHead();
-
-	std::string newKey = key + " MIAs";
-
-	while (data->next != NULL)
-	{
-		data = (Data*)data->next;
-		if (newKey == data->key)
-		{
-			data->value = "MIAs";
-			data->current = rescues;
-			data->target = total;
-			return;
-		}
-	}
-
-	data = new Data();
-
-	data->set(newKey, "MIAs", rescues, total);
-
-	dataList.add(data);
+	addCompletedObjective(key + " MIAs", "MIAs", rescues, total);
 }
+
+void GameData::getMIARescueCount(const std::string &key, int *rescues, int *total)
+{
+	getObjectiveValues(key + " MIAs", "MIAs", rescues, total);
+}
+
 
 bool GameData::MIARescued(const std::string &stageName, const std::string &name)
 {
-	Data *data = (Data*)dataList.getHead();
+	auto it = find(stageName, "MIA_" + name);
 
-	std::string  newName = "MIA_" + name;
-
-	while (data->next != NULL)
-	{
-		data = (Data*)data->next;
-		if (data->key == stageName)
-		{
-			if (data->value == newName)
-			{
-				return data->isComplete();
-			}
-		}
-	}
+	if (it)
+		return it->isComplete();
 
 	return false;
 }
 
-bool GameData::objectiveCompleted(const std::string &stageName, const std::string &name)
+int GameData::countMIAs()
 {
-	Data *data = (Data*)dataList.getHead();
+	int count = 0;
 
-	while (data->next != NULL)
+	for (auto &&objective: objectives)
 	{
-		data = (Data*)data->next;
-		if (data->key == stageName)
+		for (auto &&subobjective: objective.second)
 		{
-			if (data->value == name)
-			{
-				return (data->current == data->target);
-			}
+			if (contains(subobjective.first, "MIA_"))
+				count++;
 		}
 	}
+
+	return count;
+}
+
+bool GameData::objectiveCompleted(const std::string &stageName, const std::string &name)
+{
+	auto it = find(stageName, name);
+
+	if (it)
+		return it->isComplete();
 
 	return false;
 }
 
 void GameData::getObjectiveValues(const std::string &stageName, const std::string &name, int *current, int *target)
 {
-	*current = -1;
-	*target = -1;
-	
-	Data *data = (Data*)dataList.getHead();
+	auto it = find(stageName, name);
 
-	while (data->next != NULL)
+	if (it)
 	{
-		data = (Data*)data->next;
-		if (data->key == stageName)
-		{
-			if (data->value == name)
-			{
-				data->getCurrentTarget(current, target);
-				return;
-			}
-		}
+		*current = it->current;
+		*target = it->target;
+	}
+	else
+	{
+		*current = -1;
+		*target = -1;
 	}
 }
 
 bool GameData::stagePreviouslyCleared(const std::string &stageName)
 {
-	Data *data = (Data*)dataList.getHead();
-
-	while (data->next != NULL)
-	{
-		data = (Data*)data->next;
-		if (data->key == stageName)
-		{
-			return true;
-		}
-	}
-
-	return false;
+	return objectives.find(stageName) != objectives.end();
 }
 
 bool GameData::isCompleted(const std::string &key, const std::string &value)
 {
-	Data *data = (Data*)dataList.getHead();
-
-	while (data->next != NULL)
-	{
-		data = (Data*)data->next;
-		if (key == data->key)
-		{
-			if (value == data->value)
-				return true;
-		}
-	}
-
-	return false;
+	return find(key, value) != nullptr;
 }
 
 bool GameData::levelPrefectlyCleared(const std::string &level)
 {
-	Data *data = (Data*)dataList.getHead();
-	
-	bool found = false;
+	auto it = objectives.find(level);
 
-	while (data->next != NULL)
-	{
-		data = (Data*)data->next;
-
-		if (data->key == level)
-		{
-			found = true;
-
-			if (!data->isComplete())
-				return false;
-		}
-	}
-	
-	if (!found)
+	if (it == objectives.end() || it->second.empty())
 		return false;
+
+	for (auto &&subobjective: it->second)
+	{
+		if (!subobjective.second.isComplete())
+			return false;
+	}
 
 	return true;
 }
 
 bool GameData::requiredLevelCleared(const std::string &requiredLevel)
 {
-	Data *data = (Data*)dataList.getHead();
-
-	while (data->next != NULL)
-	{
-		data = (Data*)data->next;
-
-		if (data->key == requiredLevel)
-		{
-			return true;
-		}
-	}
-
-	return false;
+	return objectives.find(requiredLevel) != objectives.end();
 }
 
 /*
@@ -245,37 +149,23 @@ Whether or not all the levels in the game have been unlocked
 */
 void GameData::calculateWorldCompleted()
 {
-	completedWorld = false;
-	
-	Data *data = (Data*)dataList.getHead();
-
-	while (data->next != NULL)
-	{
-		data = (Data*)data->next;
-		
-		if (data->key == "BioMech HQ")
-		{
-			completedWorld = true;
-		}
-	}
+	completedWorld = requiredLevelCleared("BioMech HQ");
 }
 
 int GameData::getPercentageComplete()
 {
-	float percentage, total, completed;
+	float percentage = 0;
+	float total = 0;
+	float completed = 0;
 
-	total = completed = percentage = 0;
-
-	Data *data = (Data*)dataList.getHead();
-
-	while (data->next != NULL)
+	for (auto &&objective: objectives)
 	{
-		data = (Data*)data->next;
-
-		total++;
-
-		if (data->isComplete())
-			completed++;
+		for (auto &&subobjective: objective.second)
+		{
+			total++;
+			if (subobjective.second.isComplete())
+				completed++;
+		}
 	}
 
 	if ((total == 0) || (completed == 0))

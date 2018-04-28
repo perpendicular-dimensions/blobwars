@@ -19,23 +19,21 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class Effect : public GameObject {
+class Effect {
 
 	public:
 
-		float x, y, dx, dy;
+		float x = 0;
+		float y = 0;
+		float dx = 0;
+		float dy = 0;
 
-		//SDL_Surface *frame[4];
-		
-		int color;
+		int color = 0;
 
-		int health;
+		int health = 0;
 
-		//int frames, frameTime, currentFrameTime;
+		long flags = 0;
 
-		long flags;
-
-	Effect();
 	void create(float x, float y, float dx, float dy, int flags);
 	void update();
 

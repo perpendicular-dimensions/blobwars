@@ -344,12 +344,8 @@ void enemyBulletCollisions(Entity *bullet)
 		return;
 	}
 
-	Entity *enemy = (Entity*)map.enemyList.getHead();
-
-	while (enemy->next != NULL)
+	for (auto &&enemy: map.enemies)
 	{
-		enemy = (Entity*)enemy->next;
-
 		if ((enemy->flags & ENT_TELEPORTING) || (enemy->dead == DEAD_DYING))
 		{
 			continue;
@@ -359,7 +355,7 @@ void enemyBulletCollisions(Entity *bullet)
 
 		if ((bullet->owner == &player) || (bullet->owner == &engine.world) || (bullet->flags & ENT_BOSS))
 		{
-			if (Collision::collision(enemy, bullet))
+			if (Collision::collision(enemy.get(), bullet))
 			{
 				if (bullet->id != WP_LASER)
 				{
@@ -406,7 +402,7 @@ void enemyBulletCollisions(Entity *bullet)
 					audio.playSound(SND_HIT, CH_ANY, enemy->x);
 					if (game.gore)
 					{
-						addBlood(enemy, bullet->dx / 4, Math::rrand(-6, -3), 1);
+						addBlood(enemy.get(), bullet->dx / 4, Math::rrand(-6, -3), 1);
 					}
 					else
 					{
@@ -576,16 +572,13 @@ static void gibEnemy(Entity *enemy)
 
 void doEnemies()
 {
-	Entity *enemy = (Entity*)map.enemyList.getHead();
-	Entity *previous = enemy;
-	
 	map.fightingGaldov = false;
 
 	int x, y, absX, absY;
 
-	while (enemy->next != NULL)
+	for (auto it = map.enemies.begin(); it != map.enemies.end();)
 	{
-		enemy = (Entity*)enemy->next;
+		auto enemy = it->get();
 		
 		if (!engine.cheatBlood)
 		{
@@ -594,15 +587,14 @@ void doEnemies()
 				if (!enemy->referenced)
 				{
 					debug(("Removing unreferenced enemy '%s'\n", enemy->name));
-					map.enemyList.remove(previous, enemy);
-					enemy = previous;
+					it = map.enemies.erase(it);
 				}
 				else
 				{
-					previous = enemy;
+					enemy->referenced = false;
+					++it;
 				}
 				
-				enemy->referenced = false;
 				continue;
 			}
 		}
@@ -682,8 +674,6 @@ void doEnemies()
 
 		if (enemy->health > 0)
 		{
-			previous = enemy;
-			
 			if ((enemy->environment == ENV_SLIME) || (enemy->environment == ENV_LAVA))
 			{
 				checkObjectives(enemy->name, false);
@@ -739,11 +729,7 @@ void doEnemies()
 				}
 			}
 
-			if (enemy->health > -50)
-			{
-				previous = enemy;
-			}
-			else
+			if (enemy->health <= -50)
 			{
 				if (enemy->flags & ENT_GALDOVFINAL)
 				{
@@ -783,8 +769,8 @@ void doEnemies()
 							}
 							
 							debug(("Removing unreferenced enemy '%s'\n", enemy->name));
-							map.enemyList.remove(previous, enemy);
-							enemy = previous;
+							it = map.enemies.erase(it);
+							continue;
 						}
 					}
 				}
@@ -794,6 +780,7 @@ void doEnemies()
 		// default the enemy to not referenced.
 		// doBullets() will change this if required.
 		enemy->referenced = false;
+		++it;
 	}
 }
 

@@ -25,12 +25,8 @@ void adjustObjectives()
 {
 	bool needRequired = false;
 
-	Entity *mia = (Entity*)map.miaList.getHead();
-
-	while (mia->next != NULL)
+	for (auto &&mia: map.mias)
 	{
-		mia = (Entity*)mia->next;
-
 		if (gameData.MIARescued(map.name, mia->name))
 		{
 			mia->health = 0;
@@ -53,14 +49,10 @@ void adjustObjectives()
 	int current = 0;
 	int target = 0;
 
-	Objective *objective = (Objective*)map.objectiveList.getHead();
-	
 	bool previouslyCleared = gameData.stagePreviouslyCleared(map.name);
 
-	while (objective->next != NULL)
+	for (auto &&objective: map.objectives)
 	{	
-		objective = (Objective*)objective->next;
-
 		if (game.skill == 0)
 		{
 			objective->required = false;
@@ -110,12 +102,8 @@ bool allObjectivesCompleted()
 	if (map.foundMIAs < map.requiredMIAs)
 		return false;
 
-	Objective *objective = (Objective*)map.objectiveList.getHead();
-
-	while (objective->next != NULL)
+	for (auto &&objective: map.objectives)
 	{
-		objective = (Objective*)objective->next;
-
 		if ((objective->required) && (!objective->completed))
 			return false;
 	}
@@ -128,12 +116,8 @@ bool perfectlyCompleted()
 	if (map.foundMIAs < map.totalMIAs)
 		return false;
 
-	Objective *objective = (Objective*)map.objectiveList.getHead();
-
-	while (objective->next != NULL)
+	for (auto &&objective: map.objectives)
 	{
-		objective = (Objective*)objective->next;
-
 		if (!objective->completed)
 			return false;
 	}
@@ -143,12 +127,8 @@ bool perfectlyCompleted()
 
 bool requiredEnemy(const std::string &name)
 {
-	Objective *objective = (Objective*)map.objectiveList.getHead();
-
-	while (objective->next != NULL)
+	for (auto &&objective: map.objectives)
 	{
-		objective = (Objective*)objective->next;
-
 		if (objective->target == name)
 		{
 			return true;
@@ -165,12 +145,8 @@ bool requiredObjectivesCompleted()
 		return false;
 	}
 
-	Objective *objective = (Objective*)map.objectiveList.getHead();
-
-	while (objective->next != NULL)
+	for (auto &&objective: map.objectives)
 	{
-		objective = (Objective*)objective->next;
-
 		if (objective->target == "Exit")
 		{
 			continue;
@@ -202,12 +178,8 @@ void autoCompleteAllObjectives(bool allObjectives)
 	
 	map.foundItems = map.totalItems;
 
-	Objective *objective = (Objective*)map.objectiveList.getHead();
-
-	while (objective->next != NULL)
+	for (auto &&objective: map.objectives)
 	{
-		objective = (Objective*)objective->next;
-		
 		if (allObjectives)
 		{
 			objective->completed = true;
@@ -225,11 +197,8 @@ void autoCompleteAllObjectives(bool allObjectives)
 	
 	int required = map.foundMIAs;
 
-	Entity *mia = (Entity*)map.miaList.getHead();
-
-	while (mia->next != NULL)
+	for (auto &&mia: map.mias)
 	{
-		mia = (Entity*)mia->next;
 		mia->health = 0;
 		required--;
 		
@@ -240,16 +209,12 @@ void autoCompleteAllObjectives(bool allObjectives)
 
 void checkObjectives(const std::string &name, bool alwaysInform)
 {
-	Objective *objective = (Objective*)map.objectiveList.getHead();
-
 	std::string message;
 	
 	int requiredValue;
 
-	while (objective->next != NULL)
+	for (auto &&objective: map.objectives)
 	{
-		objective = (Objective*)objective->next;
-
 		if (!objective->completed)
 		{
 			if (objective->target == name)

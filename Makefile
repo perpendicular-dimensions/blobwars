@@ -15,10 +15,11 @@ DOCDIR ?= $(PREFIX)/share/doc/$(PROG)/
 ICONDIR ?= $(PREFIX)/share/icons/hicolor/
 DESKTOPDIR ?= $(PREFIX)/share/applications/
 LOCALEDIR ?= $(PREFIX)/share/locale/
-MEDAL_SERVER_HOST = www.stephenjsweeney.com
-MEDAL_SERVER_PORT = 80
+MEDAL_SERVER_HOST = localhost
+MEDAL_SERVER_PORT = 0
 
 PKG_CONFIG ?= pkg-config
+CXXFLAGS = -O0 -g
 CXXFLAGS += `$(PKG_CONFIG) --cflags sdl2 SDL2_mixer SDL2_image SDL2_ttf SDL2_net` -DVERSION=$(VERSION) -DRELEASE=$(RELEASE) -DUSEPAK=$(USEPAK)
 CXXFLAGS += -DPAKNAME=\"$(PAKNAME)\" -DPAKLOCATION=\"$(DATADIR)\" -DUNIX -DGAMEPLAYMANUAL=\"$(DOCDIR)index.html\" -Wall
 CXXFLAGS += -DLOCALEDIR=\"$(LOCALEDIR)\" -DMEDAL_SERVER_HOST=\"$(MEDAL_SERVER_HOST)\" -DMEDAL_SERVER_PORT=$(MEDAL_SERVER_PORT)
@@ -32,12 +33,11 @@ OBJS += CCollision.o CCutscene.o  CConfig.o
 OBJS += CData.o 
 OBJS += CEffect.o CEngine.o CEntity.o 
 OBJS += CFileData.o 
-OBJS += CGame.o CGameData.o CGameObject.o CGraphics.o
+OBJS += CGame.o CGameData.o CGraphics.o
 OBJS += CHub.o 
 OBJS += CKeyboard.o 
 OBJS += CJoystick.o 
 OBJS += CLineDef.o
-OBJS += CList.o
 OBJS += CMap.o CMath.o CMedalServer.o
 OBJS += CObjective.o
 OBJS += CPak.o CParticle.o CPersistant.o CPersistData.o

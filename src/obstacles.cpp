@@ -39,20 +39,16 @@ void addObstacle(const std::string &name, int x, int y, const std::string &sprit
 
 bool checkObstacleContact(Entity *ent, int dir)
 {
-	Entity *obstacle = (Entity*)map.obstacleList.getHead();
-	
 	bool collision = false;
 
-	while (obstacle->next != NULL)
+	for (auto &&obstacle: map.obstacles)
 	{
-		obstacle = (Entity*)obstacle->next;
-		
 		if (obstacle->flags & ENT_TELEPORTING)
 		{
 			continue;
 		}
 
-		if (ent == obstacle)
+		if (ent == obstacle.get())
 		{
 			continue;
 		}
@@ -98,17 +94,13 @@ bool checkObstacleContact(Entity *ent, int dir)
 
 void doObstacles()
 {
-	Entity *obstacle = (Entity*)map.obstacleList.getHead();
-
 	int x, y;
 
-	while (obstacle->next != NULL)
+	for (auto &&obstacle: map.obstacles)
 	{
-		obstacle = (Entity*)obstacle->next;
-
 		if (obstacle->flags & ENT_TELEPORTING)
 		{
-			moveEntity(obstacle);
+			moveEntity(obstacle.get());
 		}
 		else
 		{
@@ -121,7 +113,7 @@ void doObstacles()
 				obstacle->applyGravity();
 			}
 
-			moveEntity(obstacle);
+			moveEntity(obstacle.get());
 
 			if (!(obstacle->flags & ENT_TELEPORTING))
 			{

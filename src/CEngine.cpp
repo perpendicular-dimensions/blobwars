@@ -47,7 +47,8 @@ Engine::Engine()
 
 	saveConfig = false;
 
-	highlightedWidget = NULL;
+	highlightedWidget = nullptr;
+	highlightedIndex = 0;
 
 	message[0] = 0;
 	messageTime = -1;
@@ -79,15 +80,6 @@ Engine::Engine()
 	cheatBlood = cheatInvulnerable = cheatReload = cheatSpeed = cheatSkipLevel = false;
 	
 	extremeAvailable = 0;
-}
-
-void Engine::destroy()
-{
-	debug(("engine: free widgets\n"));
-	deleteWidgets();
-
-	debug(("Clearing Define List...\n"));
-	defineList.clear();
 }
 
 void Engine::clearCheatVars()
@@ -490,20 +482,18 @@ void Engine::setInfoMessage(const std::string &message, int priority, int type)
 
 void Engine::deleteWidgets()
 {
-	Widget *widget;
+	for (auto &&widget: widgets)
+		widget->redraw(); // wat?!
 
-	for (widget = (Widget*)widgetList.getHead()->next ; widget != NULL ; widget = (Widget*)widget->next)
-		widget->redraw();
+	widgets.clear();
 
-	widgetList.clear();
-
-	highlightedWidget = NULL;
+	highlightedWidget = nullptr;
+	highlightedIndex = 0;
 }
 
 void Engine::addWidget(Widget *widget)
 {
-	widget->previous = (Widget*)widgetList.getTail();
-	widgetList.add(widget);
+	widgets.emplace_back(widget);
 }
 
 bool Engine::loadWidgets(const std::string &filename)
@@ -547,22 +537,35 @@ bool Engine::loadWidgets(const std::string &filename)
 		addWidget(widget);
 	}
 
-	highlightedWidget = (Widget*)widgetList.getHead()->next;
+	highlightedWidget = widgets.front().get();
+	highlightedIndex = 0;
 
 	return true;
 }
 
+int Engine::getWidgetIndexByName(const std::string &name)
+{
+	int i = 0;
+
+	for (auto &&widget: widgets)
+	{
+		if (widget->name == name)
+			return i;
+		i++;
+	}
+
+	return -1;
+}
+
 Widget *Engine::getWidgetByName(const std::string &name)
 {
-	Widget *widget = (Widget*)widgetList.getHead();
-
-	while (widget->next != NULL)
+	for (auto &&widget: widgets)
 	{
-		widget = (Widget*)widget->next;
-
 		if (widget->name == name)
-			return widget;
+			return widget.get();
 	}
+
+	return nullptr;
 
 	debug(("No such widget '%s'\n", name));
 
@@ -573,12 +576,8 @@ void Engine::showWidgetGroup(const std::string &groupName, bool show)
 {
 	bool found = false;
 
-	Widget *widget = (Widget*)widgetList.getHead();
-
-	while (widget->next != NULL)
+	for (auto &&widget: widgets)
 	{
-		widget = (Widget*)widget->next;
-
 		if (widget->groupName == groupName)
 		{
 			widget->visible = show;
@@ -595,12 +594,8 @@ void Engine::enableWidgetGroup(const std::string &groupName, bool show)
 {
 	bool found = false;
 
-	Widget *widget = (Widget*)widgetList.getHead();
-
-	while (widget->next != NULL)
+	for (auto &&widget: widgets)
 	{
-		widget = (Widget*)widget->next;
-
 		if (widget->groupName == groupName)
 		{
 			widget->enabled = show;
@@ -653,46 +648,21 @@ void Engine::highlightWidget(int dir)
 {
 	highlightedWidget->redraw();
 
-	if (dir == 1)
+	while (true)
 	{
-		while (true)
-		{
-			if (highlightedWidget->next != NULL)
-			{
-				highlightedWidget = (Widget*)highlightedWidget->next;
-			}
-			else
-			{
-				highlightedWidget = (Widget*)widgetList.getHead()->next;
-			}
+		highlightedIndex += dir;
+		if (highlightedIndex < 0)
+			highlightedIndex = widgets.size() - 1;
+		else if ((size_t)highlightedIndex >= widgets.size())
+			highlightedIndex = 0;
 
-			if (highlightedWidget->type == 4)
-				continue;
+		highlightedWidget = widgets[highlightedIndex].get();
 
-			if ((highlightedWidget->enabled) && (highlightedWidget->visible))
-				break;
-		}
-	}
+		if (highlightedWidget->type == WG_LABEL)
+			continue;
 
-	if (dir == -1)
-	{
-		while (true)
-		{
-			if ((highlightedWidget->previous != NULL) && (highlightedWidget->previous != (Widget*)widgetList.getHead()))
-			{
-				highlightedWidget = highlightedWidget->previous;
-			}
-			else
-			{
-				highlightedWidget = (Widget*)widgetList.getTail();
-			}
-
-			if (highlightedWidget->type == WG_LABEL)
-				continue;
-
-			if ((highlightedWidget->enabled) && (highlightedWidget->visible))
-				break;
-		}
+		if ((highlightedWidget->enabled) && (highlightedWidget->visible))
+			break;
 	}
 
 	highlightedWidget->redraw();
@@ -700,7 +670,8 @@ void Engine::highlightWidget(int dir)
 
 void Engine::highlightWidget(const std::string &name)
 {
-	highlightedWidget = getWidgetByName(name);
+	highlightedIndex = getWidgetIndexByName(name);
+	highlightedWidget = widgets[highlightedIndex].get();
 }
 
 int Engine::processWidgets()
@@ -848,9 +819,7 @@ bool Engine::loadDefines()
 		if (!contains(line, "/*"))
 		{
 			scan(line, "%*s %s %[^\n\r]", string[0], string[1]);
-			Data *data = new Data();
-			data->set(string[0], string[1], 1, 1);
-			defineList.add(data);
+			defines[string[0]] = string[1];
 		}
 	}
 
@@ -866,18 +835,17 @@ thought of that though... :)
 */
 int Engine::getValueOfDefine(const std::string &word)
 {
-	int rtn = 0;
-
-	Data *data = (Data*)defineList.getHead();
-
-	while (data->next != NULL)
-	{
-		data = (Data*)data->next;
-
-		if (data->key == word)
+	auto it = defines.find(word);
+	if (it != defines.end()) {
+		if (!it->second.empty() && it->second[0] == '(')
 		{
-			rtn = stoi(data->value);
-			return rtn;
+			int base, shift;
+			sscanf(it->second.c_str(), "( %d << %d )", &base, &shift);
+			return base << shift;
+		}
+		else
+		{
+			return stoi(it->second);
 		}
 	}
 
@@ -890,21 +858,15 @@ Does the opposite of the above(!)
 */
 std::string Engine::getDefineOfValue(const std::string &prefix, int value)
 {
-	int rtn = 0;
-
-	Data *data = (Data*)defineList.getHead();
-
-	while (data->next != NULL)
+	for (auto it = defines.begin(); it != defines.end(); ++it)
 	{
-		data = (Data*)data->next;
-
-		if (contains(data->key, prefix))
+		if (contains(it->first, prefix))
 		{
-			rtn = stoi(data->value);
-			
+			int rtn = stoi(it->second);
+
 			if (rtn == value)
 			{
-				return data->key;
+				return it->first;
 			}
 		}
 	}
@@ -924,48 +886,11 @@ int Engine::getValueOfFlagTokens(const std::string &line)
 	if (line == "0")
 		return 0;
 
-	bool found;
-	int value;
-
 	int flags = 0;
-
-	Data *data;
 
 	for (auto word: split(line, '+'))
 	{
-		data = (Data*)defineList.getHead();
-		found = false;
-
-		while (data->next != NULL)
-		{
-			data = (Data*)data->next;
-
-			if (data->key == word)
-			{
-				value = -1;
-				sscanf(data->value.c_str(), "%d", &value);
-
-				if (value == -1)
-				{
-					sscanf(data->value.c_str(), "%*s %*d %*s %d", &value);
-					value = 2 << value;
-				}
-
-				flags += value;
-				found = true;
-				break;
-			}
-		}
-
-		if (!found)
-		{
-			fmt::print("ERROR: getValueOfFlagTokens() : Illegal Token '{}'\n", word);
-			#if IGNORE_FLAGTOKEN_ERRORS
-				break;
-			#else
-				exit(1);
-			#endif
-		}
+		flags |= getValueOfDefine(std::string(word));
 	}
 
 	return flags;

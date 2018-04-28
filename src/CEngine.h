@@ -86,20 +86,20 @@ class Engine {
 
 		int playerPosX, playerPosY;
 
-		List widgetList;
+		std::vector<std::unique_ptr<Widget>> widgets;
 
 		Widget *highlightedWidget;
+		int highlightedIndex;
 
 		Entity world;
 
-		List defineList;
+		std::map<std::string, std::string> defines;
 
 		bool cheats;
 		int cheatHealth, cheatExtras, cheatFuel, cheatLevels, cheatBlood, cheatInvulnerable;
 		int cheatReload, cheatSpeed, cheatSkipLevel;
 
 	Engine();
-	void destroy();
 	void getInput();
 	int getMouseX() const;
 	int getMouseY() const;
@@ -128,6 +128,7 @@ class Engine {
 	void addWidget(Widget *widget);
 	bool loadWidgets(const std::string &filename);
 	Widget *getWidgetByName(const std::string &name);
+	int getWidgetIndexByName(const std::string &name);
 	void showWidgetGroup(const std::string &groupName, bool show);
 	void enableWidgetGroup(const std::string &groupName, bool show);
 	void showWidget(const std::string &name, bool show);

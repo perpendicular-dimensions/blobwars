@@ -21,17 +21,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-Persistant::Persistant()
-{
-	numberOfLines = 0;
-}
-
-Persistant::~Persistant()
-{
-	dataList.clear();
-	numberOfLines = 0;
-}
-
 void Persistant::setName(const std::string &name)
 {
 	this->stageName = name;
@@ -39,21 +28,10 @@ void Persistant::setName(const std::string &name)
 
 void Persistant::clear()
 {
-	dataList.clear();
-	numberOfLines = 0;
+	data.clear();
 }
 
-void Persistant::addLine(const std::string &data)
+void Persistant::addLine(const std::string &line)
 {
-	PersistData *persistant = new PersistData();
-	
-	if (persistant->setData(data))
-	{
-		dataList.add(persistant);
-		numberOfLines++;
-	}
-	else
-	{
-		delete persistant;
-	}
+	data.push_back(line);
 }

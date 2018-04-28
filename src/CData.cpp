@@ -21,16 +21,17 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-Data::Data()
-{
-	current = 0;
-	target = 1;
-}
 
-void Data::set(const std::string &key, const std::string &value, int current, int target)
+Data::Data(const std::string &key, const std::string &value, int current, int target)
 {
 	this->key = key;
 	this->value = value;
+	this->current = current;
+	this->target = target;
+}
+
+void Data::set(int current, int target)
+{
 	this->current = current;
 	this->target = target;
 }

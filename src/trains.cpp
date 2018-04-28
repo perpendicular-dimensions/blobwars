@@ -108,9 +108,9 @@ void getTrainMotion(Entity *ent, int &dx, int &dy)
 {
 	dx = 0;
 	dy = 0;
-	Train *train = (Train*)map.trainList.getHead();
-	while (train->next != NULL) {
-		train = (Train*)train->next;
+
+	for (auto &&train: map.trains)
+	{
 		bool collision = (Collision::collision(ent->x, ent->y + ent->dy, ent->width, ent->height - 1, train->x, train->y, train->width, train->height));
 		if(collision) {
 			dx = train->getDX();
@@ -129,15 +129,11 @@ void getTrainMotion(Entity *ent, int &dx, int &dy)
 */
 bool checkTrainContact(Entity *ent, int dir)
 {
-	Train *train = (Train*)map.trainList.getHead();
-
 	bool collision = false;
 	int x, y, mapAttribute;
 
-	while (train->next != NULL)
+	for (auto &&train: map.trains)
 	{
-		train = (Train*)train->next;
-
 		if (dir == DIR_X)
 		{
 			collision = (Collision::collision(ent->x + ent->dx, ent->y, ent->width, ent->height - 1, train->x, train->y, train->width, train->height));
@@ -202,7 +198,7 @@ bool checkTrainContact(Entity *ent, int dir)
 				case TR_SLIDEDOOR:
 					if (!(ent->flags & ENT_BULLET))
 					{
-						openDoor(train);
+						openDoor(train.get());
 					}
 					
 					if (dir & DIR_Y)
@@ -215,7 +211,7 @@ bool checkTrainContact(Entity *ent, int dir)
 
 				case TR_LOCKED_DOOR:
 				case TR_LOCKED_SLIDEDOOR:
-					trainBlockEntity(ent, "Door is locked", train, dir);
+					trainBlockEntity(ent, "Door is locked", train.get(), dir);
 					return true;
 					break;
 
@@ -223,11 +219,11 @@ bool checkTrainContact(Entity *ent, int dir)
 				case TR_GOLD_SLIDEDOOR:
 					if ((ent == &player) && (carryingItem("Gold Key")))
 					{
-						openDoor(train);
+						openDoor(train.get());
 					}
 					else
 					{
-						trainBlockEntity(ent, "Gold Key Required", train, dir);
+						trainBlockEntity(ent, "Gold Key Required", train.get(), dir);
 					}
 					return true;
 					break;
@@ -236,11 +232,11 @@ bool checkTrainContact(Entity *ent, int dir)
 				case TR_SILVER_SLIDEDOOR:
 					if ((ent == &player) && (carryingItem("Silver Key")))
 					{
-						openDoor(train);
+						openDoor(train.get());
 					}
 					else
 					{
-						trainBlockEntity(ent, "Silver Key Required", train, dir);
+						trainBlockEntity(ent, "Silver Key Required", train.get(), dir);
 					}
 					return true;
 					break;
@@ -249,11 +245,11 @@ bool checkTrainContact(Entity *ent, int dir)
 				case TR_BRONZE_SLIDEDOOR:
 					if ((ent == &player) && (carryingItem("Bronze Key")))
 					{
-						openDoor(train);
+						openDoor(train.get());
 					}
 					else
 					{
-						trainBlockEntity(ent, "Bronze Key Required", train, dir);
+						trainBlockEntity(ent, "Bronze Key Required", train.get(), dir);
 					}
 					return true;
 					break;
@@ -320,12 +316,8 @@ static bool doorClosedOnEntity(Train *train)
 		return true;
 	}
 	
-	Entity *enemy = (Entity*)map.enemyList.getHead();
-
-	while (enemy->next != NULL)
+	for (auto &&enemy: map.enemies)
 	{
-		enemy = (Entity*)enemy->next;
-		
 		if (Collision::collision(enemy->x, enemy->y, enemy->width, enemy->height, train->x, y, train->width, train->height))
 		{
 			return true;
@@ -340,15 +332,11 @@ static bool doorClosedOnEntity(Train *train)
 */
 void doTrains()
 {
-	Train *train = (Train*)map.trainList.getHead();
-
 	int x, y, oldX, oldY;
 	int playSound = false;
 
-	while (train->next != NULL)
+	for (auto &&train: map.trains)
 	{
-		train = (Train*)train->next;
-
 		x = (int)(train->x - engine.playerPosX);
 		y = (int)(train->y - engine.playerPosY);
 
@@ -367,7 +355,7 @@ void doTrains()
 			// only check if the door actually moved(!)
 			if ((oldX != (int)train->x) || (oldY != (int)train->y))
 			{
-				if (doorClosedOnEntity(train))
+				if (doorClosedOnEntity(train.get()))
 				{
 					train->x = oldX;
 					train->y = oldY;
@@ -381,7 +369,7 @@ void doTrains()
 
 		if (train->sprite == NULL)
 		{
-			setTrainSprite(train);
+			setTrainSprite(train.get());
 		}
 
 		if (train->sprite && (abs(x) <= 800) && (abs(y) <= 600))

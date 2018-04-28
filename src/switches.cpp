@@ -23,15 +23,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 void checkSwitchContact(Entity *ent)
 {
-	Switch *swt = (Switch*)map.switchList.getHead();
 	bool okayToActivate = false;
 
 	std::string message;
 
-	while (swt->next != NULL)
+	for (auto &&swt: map.switches)
 	{
-		swt = (Switch*)swt->next;
-		
 		if (swt->type == SWT_USED)
 			continue;
 
@@ -50,7 +47,7 @@ void checkSwitchContact(Entity *ent)
 		if ((swt->type == SWT_WATERLEVEL) && (ent != &player))
 			continue;
 
-		if (Collision::collision(ent, swt))
+		if (Collision::collision(ent, swt.get()))
 		{
 			okayToActivate = false;
 
@@ -122,14 +119,10 @@ void checkSwitchContact(Entity *ent)
 
 void doSwitches()
 {
-	Switch *swt = (Switch*)map.switchList.getHead();
-
 	int x, y, absX, absY;
 
-	while (swt->next != NULL)
+	for (auto &&swt: map.switches)
 	{
-		swt = (Switch*)swt->next;
-
 		x = (int)(swt->x - engine.playerPosX);
 		y = (int)(swt->y - engine.playerPosY);
 

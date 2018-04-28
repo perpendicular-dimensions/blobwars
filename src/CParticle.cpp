@@ -27,7 +27,6 @@ Particle::Particle()
 	dx = dy = 0;
 	sprite = NULL;
 	color = 0;
-	next = NULL;
 }
 
 void Particle::set(float x, float y, float dx, float dy, int color, int health, int flags)

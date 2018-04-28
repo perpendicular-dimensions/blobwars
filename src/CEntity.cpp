@@ -34,7 +34,6 @@ Entity::Entity()
 	falling = false;
 	fuel = 7;
 	thinktime = baseThink = 0;
-	next = NULL;
 	owner = this;
 	face = 0;
 	reload = 0;
@@ -43,7 +42,6 @@ Entity::Entity()
 	falling = false;
 	owner = this;
 	dead = DEAD_ALIVE;
-	referenced = false;
 
 	for (int i = 0 ; i < 3 ; i++)
 	{

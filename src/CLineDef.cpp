@@ -26,7 +26,6 @@ LineDef::LineDef()
 	x = y = 0;
 	width = height = 0;
 	activated = false;
-	next = NULL;
 }
 
 void LineDef::set(const std::string &name, const std::string &linkName, const std::string &activateMessage, int x, int y, int width, int height)

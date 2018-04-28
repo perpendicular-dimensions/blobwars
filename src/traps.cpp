@@ -133,15 +133,11 @@ static bool doTrapCollisions(Trap *trap)
 		return false;
 	}
 
-	Entity *enemy = (Entity*)map.enemyList.getHead();
-
-	while (enemy->next != NULL)
+	for (auto &&enemy: map.enemies)
 	{
-		enemy = (Entity*)enemy->next;
-
 		if (Collision::collision(trap->x, trap->y, trap->width, trap->height, enemy->x, enemy->y, enemy->width, enemy->height))
 		{
-			throwAndDamageEntity(enemy, trap->damage, -5, 5, -8);
+			throwAndDamageEntity(enemy.get(), trap->damage, -5, 5, -8);
 			hit = true;
 		}
 	}
@@ -179,16 +175,13 @@ static bool doTrapCollisions(Trap *trap)
 */
 void doTraps()
 {
-	Trap *trap = (Trap*)map.trapList.getHead();
-	Trap *previous = trap;
-
 	bool remove = false;
 	int x, y, mx, my;
 	unsigned int absX, absY;
 
-	while (trap->next != NULL)
+	for (auto it = map.traps.begin(); it != map.traps.end();)
 	{
-		trap = (Trap*)trap->next;
+		auto trap = it->get();
 		
 		x = (int)(trap->x - engine.playerPosX);
 		y = (int)(trap->y - engine.playerPosY);
@@ -322,12 +315,11 @@ void doTraps()
 
 		if (!remove)
 		{
-			previous = trap;
+			++it;
 		}
 		else
 		{
-			map.trapList.remove(previous, trap);
-			trap = previous;
+			it = map.traps.erase(it);
 		}
 	}
 }

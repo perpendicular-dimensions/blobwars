@@ -35,12 +35,8 @@ static bool okayToSpawnEnemy(std::string name, int x, int y)
 	}
 	
 	// stop enemies from appearing in the middile of doors
-	Train *train = (Train*)map.trainList.getHead();
-
-	while (train->next != NULL)
+	for (auto &&train: map.trains)
 	{
-		train = (Train*)train->next;
-
 		// assume enemy is 20 x 20 pixels (most are at least) and trains are 64 x 64
 		if (Collision::collision(x * BRICKSHIFT, y * BRICKSHIFT, 20, 20, train->x, train->y, 64, 64))
 		{
@@ -108,16 +104,12 @@ static bool okayToSpawnEnemy(std::string name, int x, int y)
 
 void doSpawnPoints()
 {
-	SpawnPoint *sp = (SpawnPoint*)map.spawnList.getHead();
-
 	int x, y;
 
 	std::string enemy;
 
-	while (sp->next != NULL)
+	for (auto &&sp: map.spawns)
 	{
-		sp = (SpawnPoint*)sp->next;
-
 		sp->think();
 
 		if (!sp->active)

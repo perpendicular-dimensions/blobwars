@@ -19,16 +19,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class Cutscene : public GameObject {
+class Cutscene {
 
 	public:
 	
 		std::string sprite;
 		std::string text;
-		int waitTime;
+		int waitTime = 0;
 		
-	Cutscene();
-	~Cutscene();
 	void appendText(std::string_view line);
 	
 };

@@ -145,17 +145,12 @@ void addTeleportParticles(float x, float y, int amount, int soundToPlay)
 
 void doParticles()
 {
-	Particle *particle = (Particle*)map.particleList.getHead();
-	Particle *previous = particle;
-
-	int x, y;
-
-	while (particle->next != NULL)
+	for (auto it = map.particles.begin(); it != map.particles.end();)
 	{
-		particle = (Particle*)particle->next;
+		auto particle = it->get();
 
-		x = (int)(particle->x - engine.playerPosX);
-		y = (int)(particle->y - engine.playerPosY);
+		int x = (int)(particle->x - engine.playerPosX);
+		int y = (int)(particle->y - engine.playerPosY);
 
 		if (particle->sprite == NULL)
 		{
@@ -200,12 +195,11 @@ void doParticles()
 
 		if (particle->health > 0)
 		{
-			previous = particle;
+			++it;
 		}
 		else
 		{
-			map.particleList.remove(previous, particle);
-			particle = previous;
+			it = map.particles.erase(it);
 		}
 	}
 }

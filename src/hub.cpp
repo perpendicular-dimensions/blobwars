@@ -216,8 +216,6 @@ static void createObjectivesPanel(const std::string &levelName)
 {
 	SDL_Surface *image = graphics.getSprite("infoPanel", true)->image[0];
 
-	Data *data = (Data*)gameData.dataList.getHead();
-
 	bool found = false;
 
 	graphics.drawRect(1, 1, image->w - 2, image->h - 2, graphics.black, graphics.white, image);
@@ -228,72 +226,65 @@ static void createObjectivesPanel(const std::string &levelName)
 	int x2 = 260;
 	int y = 15;
 	
-	levelMIAKey = levelName + " MIAs";
-
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 
 	text = fmt::format(_("Information for {}"), _(levelName));
 	graphics.drawString(text, 200, y, true, image);
 	y += 10;
 
-	while (data->next != NULL)
 	{
-		data = (Data*)data->next;
+		int current;
+		int target;
 
-		if ((data->key == levelName) || (data->key.find(levelMIAKey) != data->key.npos))
-		{
-			found = true;
+		gameData.getMIARescueCount(levelName, &current, &target);
 
-			if (data->key.find("MIAs") != data->key.npos)
-			{
-				// if it says 0 / 0 don't bother...
-				if (data->value != "0 / 0")
-				{
-					graphics.drawString(_("MIAs Rescued"), x1, y += 20, false, image);
-					text = fmt::format("{} / {}", data->current, data->target);
-					(data->isComplete()) ? graphics.setFontColor(0x00, 0xff, 0x00, 0x00, 0x00, 0x00) : graphics.setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
-					graphics.drawString(text, x2, y, false, image);
-				}
-			}
-			else if (data->value.find("MIA_") == data->value.npos)
-			{
-				if ((game.skill < 3) &&  (data->value.find("L.R.T.S.") != data->value.npos) && (!gameData.completedWorld))
-				{
-					graphics.drawString(_("???? ???????? ????"), x1, y += 20, false, image);
-				}
-				else
-				{
-					text = _(data->value);
-					
-					if (text.size() >= 25)
-					{
-						int cut_char = 25;
-						// don't break unicode characters
-						while (((text[cut_char] >> 6) & 3) == 2)
-						{
-							cut_char--;
-						}
-
-						text.resize(cut_char);
-						text.append("...");
-					}
-					
-					graphics.drawString(text, x1, y += 20, false, image);
-				}
-				
-				if (data->target == 1)
-				{
-					text = (data->isComplete()) ? _("Completed") : _("Incomplete");;
-				}
-				else
-				{
-					text = fmt::format("{} / {}", data->current, data->target);
-				}
-				
-				(data->isComplete()) ? graphics.setFontColor(0x00, 0xff, 0x00, 0x00, 0x00, 0x00) : graphics.setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
-				graphics.drawString(text, x2, y, false, image);
-			}
+		if (target > 0) {
+			graphics.drawString(_("MIAs Rescued"), x1, y += 20, false, image);
+			text = fmt::format("{} / {}", current, target);
+			(current == target) ? graphics.setFontColor(0x00, 0xff, 0x00, 0x00, 0x00, 0x00) : graphics.setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
+			graphics.drawString(text, x2, y, false, image);
 		}
+	}
+
+	for (auto &&subobjective: gameData.objectives[levelName])
+	{
+		auto &[name, completion] = subobjective;
+
+		if ((game.skill < 3) && contains(name, "L.R.T.S.") && (!gameData.completedWorld))
+		{
+			graphics.drawString(_("???? ???????? ????"), x1, y += 20, false, image);
+		}
+		else
+		{
+			text = _(name);
+			
+			if (text.size() >= 25)
+			{
+				int cut_char = 25;
+				// don't break unicode characters
+				while (((text[cut_char] >> 6) & 3) == 2)
+				{
+					cut_char--;
+				}
+
+				text.resize(cut_char);
+				text.append("...");
+			}
+			
+			graphics.drawString(text, x1, y += 20, false, image);
+		}
+		
+		if (completion.target == 1)
+		{
+			text = (completion.isComplete()) ? _("Completed") : _("Incomplete");;
+		}
+		else
+		{
+			text = fmt::format("{} / {}", completion.current, completion.target);
+		}
+		
+		(completion.isComplete()) ? graphics.setFontColor(0x00, 0xff, 0x00, 0x00, 0x00, 0x00) : graphics.setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
+		graphics.drawString(text, x2, y, false, image);
 
 		graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 	}
@@ -314,8 +305,6 @@ static void createMIAPanel(int start, int max)
 
 	SDL_Surface *image = graphics.getSprite("infoPanel", true)->image[0];
 
-	Data *data = (Data*)gameData.dataList.getHead();
-
 	graphics.drawRect(1, 1, image->w - 2, image->h - 2, graphics.black, graphics.white, image);
 
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
@@ -328,25 +317,30 @@ static void createMIAPanel(int start, int max)
 
 	y += 10;
 
-	while (data->next != NULL)
+	for (auto &&objective: gameData.objectives)
 	{
-		data = (Data*)data->next;
+		auto levelName = objective.first;
 
-		if (data->value.find("MIA_") != data->value.npos)
+		for (auto &&subobjective: objective.second)
 		{
+			auto &[name, completion] = subobjective;
+
+			if (!contains(name, "MIA_"))
+				continue;
+
 			if (current < start)
 			{
 				current++;
 				continue;
 			}
 
-			std::string text = data->value.substr(4);
+			std::string text = name.substr(4);
 
 			graphics.drawString(text, x1, y += 20, false, image);
 
-			graphics.drawString(_(data->key), x2, y, false, image);
+			graphics.drawString(_(levelName), x2, y, false, image);
 
-			if (data->isComplete())
+			if (completion.isComplete())
 			{
 				text = _("Found");
 				graphics.setFontColor(0x00, 0xff, 0x00, 0x00, 0x00, 0x00);
@@ -463,15 +457,12 @@ int doHub()
 	hubArrows->setFrame(2, graphics.loadImage("gfx/main/hubArrowRight.png"), 60);
 	hubArrows->setFrame(3, graphics.loadImage("gfx/main/hubArrowRight2.png"), 60);
 
-	List hubList;
-	HubLevel *hubPoint;
+	std::vector<std::unique_ptr<HubLevel>> hubs;
 
 	engine.loadData("data/hub");
 
 	graphics.setFontSize(0);
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
-	
-	int numberOfHubs = 0;
 	
 	gameData.calculateWorldCompleted();
 
@@ -499,14 +490,13 @@ int doHub()
 		{
 			if (!gameData.levelPrefectlyCleared(name))
 			{
-				hubPoint = new HubLevel;
+				auto hubPoint = new HubLevel;
 				hubPoint->set(name, level, x, y);
 				hubPoint->levelNameImage = graphics.getString(_(name), false);
 				
 				(!gameData.stagePreviouslyCleared(name)) ? hubPoint->target = newTarget : hubPoint->target = visitedTarget;
 				
-				hubList.add(hubPoint);
-				numberOfHubs++;
+				hubs.emplace_back(hubPoint);
 			}
 		}
 	}
@@ -520,26 +510,14 @@ int doHub()
 	bool showMIAs = false;
 	
 	int miaStart = 0;
-	int miaMax = 0;
+	int miaMax = gameData.countMIAs();
 	int page = 0;
 	
 	int labelX, labelY;
 
-	Data *data = (Data*)gameData.dataList.getHead();
-
-	while (data->next != NULL)
-	{
-		data = (Data*)data->next;
-
-		if (contains(data->value, "MIA_"))
-		{
-			miaMax++;
-		}
-	}
-	
 	bool validStage = false;
 	
-	if ((numberOfHubs == 0) && (gameData.completedWorld))
+	if ((hubs.empty()) && (gameData.completedWorld))
 	{
 		game.setMapName("data/spaceStation");
 		game.stageName = "Space Station";
@@ -551,7 +529,7 @@ int doHub()
 		// Wait wait wait... we're in easy mode. Game ends here.
 		if (game.skill == 0)
 		{
-			hubList.clear();
+			hubs.clear();
 			return SECTION_EASYOVER;
 		}
 		
@@ -617,13 +595,9 @@ int doHub()
 			engine.moveMouse(mouseXDelta, mouseYDelta);
 		}
 
-		hubPoint = (HubLevel*)hubList.getHead();
-
 		// Collisions for Hub Points
-		while (hubPoint->next != NULL)
+		for (auto &&hubPoint: hubs)
 		{
-			hubPoint = (HubLevel*)hubPoint->next;
-
 			graphics.blit(hubPoint->target->getCurrentFrame(), hubPoint->x, hubPoint->y, graphics.screen, false);
 
 			if (Collision::collision(engine.getMouseX(), engine.getMouseY(), 1, 1, hubPoint->x, hubPoint->y, 16, 16))
@@ -770,7 +744,7 @@ int doHub()
 		frameLimit = SDL_GetTicks() + 16;
 	}
 
-	hubList.clear();
+	hubs.clear();
 
 	return rtn;
 }

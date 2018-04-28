@@ -30,7 +30,7 @@ class Graphics {
 		TTF_Font *font[5];
 		SDL_Color fontForeground, fontBackground;
 
-		List spriteList;
+		std::map<std::string, std::unique_ptr<Sprite>> sprites;
 
 		int fontSize;
 		
@@ -77,7 +77,6 @@ class Graphics {
 	void destroy();
 	void registerEngine(Engine *engine);
 	void mapColors();
-	Sprite *getSpriteHead();
 	void setTransparent(SDL_Surface *sprite);
 	void updateScreen();
 	bool canShowMedalMessage() const;
@@ -93,6 +92,7 @@ class Graphics {
 	void loadFont(int i, const std::string &filename, int pixelSize);
 	Sprite *addSprite(const std::string &name);
 	Sprite *getSprite(const std::string &name, bool required);
+	const std::map<std::string, std::unique_ptr<Sprite>> &getSprites() { return sprites; }
 	void animateSprites();
 	int getWaterAnim() const;
 	int getSlimeAnim() const;

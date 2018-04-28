@@ -153,28 +153,21 @@ void dropHelperItems(int x, int y)
 
 void stealCrystal()
 {
-	Entity *item = (Entity*)map.itemList.getHead();
-	
-	Objective *objective = (Objective*)map.objectiveList.getHead();
-
-	while (objective->next != NULL)
+	for (auto &&objective: map.objectives)
 	{
-		objective = (Objective*)objective->next;
 		objective->completed = true;
 		objective->currentValue = objective->targetValue;
 	}
 
-	while (item->next != NULL)
+	for (auto &&item: map.items)
 	{
-		item = (Entity*)item->next;
-
 		if (item->name == "Reality Crystal")
 		{
 			item->dx = 0;
 			item->dy = 0;
 			Math::addBit(&item->flags, ENT_TELEPORTING);
 			addTeleportParticles(item->x + (item->width / 2), item->y + (item->height / 2), 50, SND_TELEPORT3);
-			return;
+			break;
 		}
 	}
 }
@@ -186,18 +179,14 @@ last check point position...
 */
 void dropCarriedItems()
 {
-	Entity *item = (Entity*)map.itemList.getHead();
-
-	while (item->next != NULL)
+	for (auto &&item: map.items)
 	{
-		item = (Entity*)item->next;
-
 		if (item->owner != &player)
 			continue;
 
 		Math::removeBit(&item->flags, ENT_DYING);
 		
-		item->owner = item;
+		item->owner = item.get();
 		item->health = 240;
 		item->dx = 0;
 		item->dy = -2;
@@ -302,18 +291,14 @@ static void pickUpItem(Entity *item)
 
 bool carryingItem(const std::string &name)
 {
-	Entity *item = (Entity*)map.itemList.getHead();
-
-	while (item->next != NULL)
+	for (auto &&item: map.items)
 	{
-		item = (Entity*)item->next;
-
 		if (item->owner != &player)
 			continue;
 
 		if (item->name == name)
 		{
-			item->owner = item;
+			item->owner = item.get();
 			item->health = -999;
 			return true;
 		}
@@ -328,12 +313,8 @@ void showCarriedItems()
 	int y = 210;
 	int itemCount = 0;
 
-	Entity *item = (Entity*)map.itemList.getHead();
-
-	while (item->next != NULL)
+	for (auto &&item: map.items)
 	{
-		item = (Entity*)item->next;
-
 		if (item->owner != &player)
 			continue;
 
@@ -343,12 +324,8 @@ void showCarriedItems()
 
 	x = ((640 - x) / 2);
 
-	item = (Entity*)map.itemList.getHead();
-
-	while (item->next != NULL)
+	for (auto &&item: map.items)
 	{
-		item = (Entity*)item->next;
-
 		if (item->owner != &player)
 			continue;
 
@@ -363,16 +340,13 @@ void showCarriedItems()
 
 void doItems()
 {
-	Entity *item = (Entity*)map.itemList.getHead();
-
-	while (item->next != NULL)
+	for (auto it = map.items.begin(); it != map.items.end();)
 	{
-		Entity *previous = item;
-		
-		item = (Entity*)item->next;
+		auto item = it->get();
 		
 		if (item->id == ITEM_MISC_INVISIBLE)
 		{
+			++it;
 			continue;
 		}
 
@@ -417,8 +391,11 @@ void doItems()
 
 		if ((item->health <= 0) && (item->owner != &player))
 		{
-			map.itemList.remove(previous, item);
-			item = previous;
+			it = map.items.erase(it);
+		}
+		else
+		{
+			++it;
 		}
 	}
 }

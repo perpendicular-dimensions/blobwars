@@ -19,18 +19,16 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class Data : public GameObject {
+class Data {
 
 	public:
-
 		std::string key;
 		std::string value;
-		int current;
-		int target;
+		int current = 0;
+		int target = 1;
 		
-	Data();
-	void set(const std::string &key, const std::string &value, int current, int target);
+	Data(const std::string &key, const std::string &value, int current, int target);
+	void set(int current, int target);
 	bool isComplete();
 	void getCurrentTarget(int *current, int *target);
-
 };

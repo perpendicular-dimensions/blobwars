@@ -25,7 +25,7 @@ void newGame()
 {
 	game.clear();
 	gameData.clear();
-	map.persistantList.clear();
+	map.persistants.clear();
 	engine.practice = false;
 
 	game.skill = engine.skill;
@@ -389,8 +389,6 @@ void showMissionInformation()
 	int col2 = 375;
 	int y = 30;
 
-	Objective *objective;
-
 	graphics.setFontSize(0);
 
 	graphics.setFontSize(3);
@@ -420,12 +418,8 @@ void showMissionInformation()
 		}
 	}
 
-	objective = (Objective*)map.objectiveList.getHead();
-
-	while (objective->next != NULL)
+	for (auto &&objective: map.objectives)
 	{
-		objective = (Objective*)objective->next;
-
 		y += 20;
 
 		graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);

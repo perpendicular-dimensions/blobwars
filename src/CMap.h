@@ -68,27 +68,26 @@ class Map {
 		Boss *mainBossPart;
 		float bossEnergyMeterBit;
 		
-		List persistantList;
+		std::map<std::string, std::vector<std::string>> persistants;
 
-		List trainList;
-		List itemList;
-		List bulletList;
-		List enemyList;
-		List miaList;
-		List obstacleList;
-		List particleList;
-		List switchList;
-		List spawnList;
-		List effectList;
-		List objectiveList;
-		List teleportList;
-		List lineList;
-		List trapList;
+		std::vector<std::unique_ptr<Train>> trains;
+		std::list<std::unique_ptr<Entity>> items;
+		std::list<std::unique_ptr<Entity>> bullets;
+		std::list<std::unique_ptr<Entity>> enemies;
+		std::vector<std::unique_ptr<Entity>> mias;
+		std::vector<std::unique_ptr<Entity>> obstacles;
+		std::list<std::unique_ptr<Particle>> particles;
+		std::vector<std::unique_ptr<Switch>> switches;
+		std::vector<std::unique_ptr<SpawnPoint>> spawns;
+		std::list<std::unique_ptr<Effect>> effects;
+		std::vector<std::unique_ptr<Objective>> objectives;
+		std::vector<std::unique_ptr<Teleporter>> teleports;
+		std::vector<std::unique_ptr<LineDef>> lines;
+		std::list<std::unique_ptr<Trap>> traps;
 
 	Map();
 	
 	void clear();
-	void destroy();
 	
 	bool isPracticeMission();
 	bool isValid(int x, int y);
@@ -98,8 +97,8 @@ class Map {
 	bool isLiquid(int x, int y);
 	bool isTopLayer(int x, int y);
 	
-	Persistant *getPersistant(const std::string &name);
-	Persistant *createPersistant(const std::string &name);
+	std::vector<std::string> &getPersistant(const std::string &name);
+	std::vector<std::string> &createPersistant(const std::string &name);
 	void destroyPersistant(const std::string &name);
 	
 	void setName(const std::string &name);

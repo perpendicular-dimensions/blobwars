@@ -33,8 +33,9 @@ void getMapTokens(split &it)
 	
 	std::string_view token;
 	
-	Persistant *persistant = NULL;
-	PersistData *persistData = NULL;
+	std::vector<std::string> *persistant;
+	std::vector<std::string>::iterator persistant_it;
+
 	
 	while (true)
 	{
@@ -45,12 +46,10 @@ void getMapTokens(split &it)
 		}
 		else
 		{
-			persistData = (PersistData*)persistData->next;
-			
-			if (persistData == NULL)
+			if (persistant_it == persistant->end())
 				break;
 			
-			token = persistData->data;
+			token = *persistant_it++;
 		}
 
 		#if USEPAK
@@ -113,8 +112,8 @@ void getMapTokens(split &it)
 				if (previouslyCleared)
 				{
 					debug(("Reading Persistance Data...\n"));
-					persistant = map.getPersistant(map.name);
-					persistData = (PersistData*)persistant->dataList.getHead();
+					persistant = &map.persistants[map.name];
+					persistant_it = persistant->begin();
 				}
 			}
 			else if (strcmp("TIMELIMIT", mapEntity) == 0)
@@ -348,8 +347,8 @@ void createPersistantMapData()
 		graphics.showErrorAndExit("Could not load map define list '%s'", "data/defines.h");
 	}
 	
-	Persistant *persistant = (Persistant*)map.createPersistant(map.name);
-	persistant->clear();
+	auto &persistant = map.createPersistant(map.name);
+	persistant.clear();
 	
 	if (perfectlyCompleted())
 	{
@@ -373,33 +372,18 @@ void createPersistantMapData()
 	}
 	
 	std::string line = fmt::format("{} START {} {}\n", skill, game.checkPointX, game.checkPointY);
-	persistant->addLine(line);
+	persistant.push_back(line);
 
-	Entity *ent;
-	Switch *swt;
-	Train *train;
-	Trap *trap;
-	Teleporter *teleporter;
-	LineDef *lineDef;
-	SpawnPoint *spawnPoint;
-	
 	std::string define[3];
 	
-	ent = (Entity*)map.enemyList.getHead();
-	
-	while (ent->next != NULL)
+	for (auto &&ent: map.enemies)
 	{
-		ent = (Entity*)ent->next;
 		line = fmt::format("{} ENEMY \"{}\" {} {}\n", skill, ent->name, ent->x, ent->y);
-		persistant->addLine(line);
+		persistant.push_back(line);
 	}
 	
-	ent = (Entity*)map.itemList.getHead();
-	
-	while (ent->next != NULL)
+	for (auto &&ent: map.items)
 	{
-		ent = (Entity*)ent->next;
-		
 		// Don't save items that are dying...
 		if (ent->flags & ENT_DYING)
 		{
@@ -407,36 +391,26 @@ void createPersistantMapData()
 		}
 		
 		line = fmt::format("{} ITEM {} \"{}\" {} {} {}\n", skill, ent->id, ent->name, ent->x, ent->y, ent->sprite[0]->name);
-		persistant->addLine(line);
+		persistant.push_back(line);
 	}
 	
-	ent = (Entity*)map.obstacleList.getHead();
-	
-	while (ent->next != NULL)
+	for (auto &&ent: map.obstacles)
 	{
-		ent = (Entity*)ent->next;
 		line = fmt::format("{} OBSTACLE \"{}\" {} {} {}\n", skill, ent->name, ent->x, ent->y, ent->sprite[0]->name);
-		persistant->addLine(line);
+		persistant.push_back(line);
 	}
 	
-	swt = (Switch*)map.switchList.getHead();
-	
-	while (swt->next != NULL)
+	for (auto &&swt: map.switches)
 	{
-		swt = (Switch*)swt->next;
 		define[0] = engine.getDefineOfValue("SWT_", swt->type);
 		define[1] = getActiveState(swt->activated);
 		
 		line = fmt::format("{} SWITCH \"{}\" {} \"{}\" \"{}\" {} {} {} {}\n", skill, swt->name, swt->linkName, swt->requiredObjectName, swt->activateMessage, define[0], swt->x, swt->y, define[1]);
-		persistant->addLine(line);
+		persistant.push_back(line);
 	}
 	
-	train = (Train*)map.trainList.getHead();
-	
-	while (train->next != NULL)
+	for (auto &&train: map.trains)
 	{
-		train = (Train*)train->next;
-		
 		if (train->type != TR_TRAIN)
 		{
 			if (train->type >= TR_SLIDEDOOR)
@@ -458,45 +432,33 @@ void createPersistantMapData()
 			line = fmt::format("{} TRAIN {} {} {} {} {} {} {} {}\n", skill, train->name, train->startX, train->startY, train->endX, train->endY, train->getPause(), define[0], define[1]);
 		}
 				
-		persistant->addLine(line);
+		persistant.push_back(line);
 	}
 	
-	trap = (Trap*)map.trapList.getHead();
-	
-	while (trap->next != NULL)
+	for (auto &&trap: map.traps)
 	{
-		trap = (Trap*)trap->next;
 		define[0] = engine.getDefineOfValue("TRAP_TYPE", trap->type);
 		define[1] = getActiveState(trap->active);
 		line = fmt::format("{} TRAP {} {} {} {} {} {} {} {} {} {} {} {}\n", skill, trap->name, define[0], (int)trap->damage, (int)trap->speed, (int)trap->startX, (int)trap->startY, (int)trap->endX, (int)trap->endY, (int)trap->waitTime[0], (int)trap->waitTime[1], trap->sprite->name, define[1]);
-		persistant->addLine(line);
+		persistant.push_back(line);
 	}
 	
-	teleporter = (Teleporter*)map.teleportList.getHead();
-	
-	while (teleporter->next != NULL)
+	for (auto &&teleporter: map.teleports)
 	{
-		teleporter = (Teleporter*)teleporter->next;
 		define[0] = getActiveState(teleporter->active);
 		line = fmt::format("{} TELEPORTER {} {} {} {} {} {}\n", skill, teleporter->name, (int)teleporter->x, (int)teleporter->y, (int)teleporter->destX, (int)teleporter->destY, define[0]);
-		persistant->addLine(line);
+		persistant.push_back(line);
 	}
 	
-	lineDef = (LineDef*)map.lineList.getHead();
-	
-	while (lineDef->next != NULL)
+	for (auto &&lineDef: map.lines)
 	{
-		lineDef = (LineDef*)lineDef->next;
 		define[0] = getActiveState(lineDef->activated);
 		line = fmt::format("{} LINEDEF \"{}\" {} \"{}\" {} {} {} {} {}\n", skill, lineDef->name, lineDef->linkName, lineDef->activateMessage, (int)lineDef->x, (int)lineDef->y, (int)lineDef->width, (int)lineDef->height, define[0]);
-		persistant->addLine(line);
+		persistant.push_back(line);
 	}
 	
-	spawnPoint = (SpawnPoint*)map.spawnList.getHead();
-	
-	while (spawnPoint->next != NULL)
+	for (auto &&spawnPoint: map.spawns)
 	{
-		spawnPoint = (SpawnPoint*)spawnPoint->next;
 		define[0] = engine.getDefineOfValue("SPW_", spawnPoint->spawnType);
 		
 		if (contains(define[0], "HAZARD"))
@@ -510,7 +472,7 @@ void createPersistantMapData()
 			
 		define[2] = getActiveState(spawnPoint->active);
 		line = fmt::format("{} SPAWNPOINT {} {} {} {} {} {} {} {}\n", skill, spawnPoint->name, (int)spawnPoint->x, (int)spawnPoint->y, define[0], define[1], (int)(spawnPoint->minInterval / 60), (int)(spawnPoint->maxInterval / 60), define[2]);
-		persistant->addLine(line);
+		persistant.push_back(line);
 	}
 	
 	for (int i = 0 ; i < 10 ; i++)
@@ -518,16 +480,16 @@ void createPersistantMapData()
 		if (!map.getSpawnableEnemy(i).empty())
 		{
 			line = fmt::format("{} SPAWNABLE_ENEMY \"{}\"\n", skill, map.getSpawnableEnemy(i));
-			persistant->addLine(line);
+			persistant.push_back(line);
 		}
 	}
 	
 	if (map.waterLevel != -1)
 	{
 		line = fmt::format("{} WATERLEVEL {}\n", skill, (int)map.waterLevel);
-		persistant->addLine(line);
+		persistant.push_back(line);
 	}
 	
 	// We don't need this anymore. Remove it to free up some memory...
-	engine.defineList.clear();
+	engine.defines.clear();
 }

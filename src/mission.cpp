@@ -76,26 +76,14 @@ void processPostMissionData()
 	
 	gameData.setMIARescueCount(map.name, map.foundMIAs, map.totalMIAs);
 
-	Objective *objective = (Objective*)map.objectiveList.getHead();
-	Entity *mia = (Entity*)map.miaList.getHead();
-
-	while (objective->next != NULL)
+	for (auto &&objective: map.objectives)
 	{
-		objective = (Objective*)objective->next;
-		
 		gameData.addCompletedObjective(map.name, objective->description, objective->currentValue, objective->targetValue);
 	}
 
-	bool miaFound;
-
-	while (mia->next != NULL)
+	for (auto &&mia: map.mias)
 	{
-		mia = (Entity*)mia->next;
-
-		miaFound = true;
-
-		if (mia->health > 0)
-			miaFound = false;
+		bool miaFound = mia->health <= 0;
 
 		std::string text = "MIA_" + mia->name;
 		
@@ -124,26 +112,8 @@ void processPostMissionData()
 
 void clearAllMissionData()
 {
-	std::string levelMIAKey = game.stageName = " MIAs";
-	
-	Data *data = (Data*)gameData.dataList.getHead();
-	Data *previous = data;
-	
-	while (data->next != NULL)
-	{
-		data = (Data*)data->next;
-		
-		if ((data->key == game.stageName) || (contains(data->key, levelMIAKey)))
-		{
-			gameData.dataList.remove(previous, data);
-			data = previous;
-		}
-		else
-		{
-			previous = data;
-		}
-	}
-	
+	gameData.objectives.erase(game.stageName);
+	gameData.objectives.erase(game.stageName + " MIAs");
 	map.destroyPersistant(map.name);
 }
 
@@ -173,7 +143,6 @@ void showMissionClear()
 	int y = 520;
 	int miaY = 335;
 	int clearY = 520;
-	Entity *mia = (Entity*)map.miaList.getHead();
 	Sprite *teleportStar = graphics.getSprite("TeleportStar", true);
 	std::string message;
 	int col1 = 360;
@@ -184,11 +153,8 @@ void showMissionClear()
 
 	float px, py, dx, dy;
 
-
-	while (mia->next != NULL)
+	for (auto &&mia: map.mias)
 	{
-		mia = (Entity*)mia->next;
-
 		if (mia->health > 0)
 			continue;
 
@@ -240,14 +206,10 @@ void showMissionClear()
 		}
 	}
 
-	Objective *objective = (Objective*)map.objectiveList.getHead();
-
 	engine.setPlayerPosition(0, 0, -1, -1, -1, -1);
 
-	while (objective->next != NULL)
+	for (auto &&objective: map.objectives)
 	{
-		objective = (Objective*)objective->next;
-
 		y += 20;
 
 		graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
@@ -307,14 +269,10 @@ void showMissionClear()
 
 		count = 0;
 
-		mia = (Entity*)map.miaList.getHead();
-
 		if (clearY == 70)
 		{
-			while (mia->next != NULL)
+			for (auto &&mia: map.mias)
 			{
-				mia = (Entity*)mia->next;
-
 				if (mia->health > 0)
 					continue;
 

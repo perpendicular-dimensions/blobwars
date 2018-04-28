@@ -36,8 +36,6 @@ Sprite::Sprite()
 	currentTime = 0;
 	maxFrames = 0;
 
-	next = NULL;
-
 	randomFrames = false;
 }
 

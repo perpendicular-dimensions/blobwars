@@ -33,12 +33,8 @@ void addLineDef(const std::string &name, const std::string &linkName, const std:
 
 void showMessageLineDef(const std::string &linkName, bool show)
 {
-	LineDef *lineDef = (LineDef*)map.lineList.getHead();
-
-	while (lineDef->next != NULL)
+	for (auto &&lineDef: map.lines)
 	{
-		lineDef = (LineDef*)lineDef->next;
-
 		if (lineDef->linkName == linkName)
 			lineDef->activated = show;
 	}
@@ -46,14 +42,10 @@ void showMessageLineDef(const std::string &linkName, bool show)
 
 void doLineDefs()
 {
-	LineDef *lineDef = (LineDef*)map.lineList.getHead();
-
 	int x, y, absX, absY;
 
-	while (lineDef->next != NULL)
+	for (auto &&lineDef: map.lines)
 	{
-		lineDef = (LineDef*)lineDef->next;
-
 		if (lineDef->activated)
 			continue;
 

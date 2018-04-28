@@ -21,12 +21,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-static List sceneList;
+static std::vector<std::unique_ptr<Cutscene>> scenes;
 
 static void createSceneList(split &it)
 {
-	Cutscene *scene = NULL;
-	
+	Cutscene *scene = nullptr;
+
 	for (; it != it.end(); ++it)
 	{
 		auto line = *it;
@@ -43,7 +43,7 @@ static void createSceneList(split &it)
 		if (line == "NEW")
 		{
 			scene = new Cutscene();
-			sceneList.add(scene);
+			scenes.emplace_back(scene);
 			
 			// Assume graphics is first line after new
 			line = *++it;
@@ -66,7 +66,7 @@ static void createSceneList(split &it)
 
 static bool setupScene(const std::string &stagename)
 {
-	sceneList.clear();
+	scenes.clear();
 	
 	if (!engine.loadData(_("data/ending")))
 		return graphics.showErrorAndExit("Couldn't load cutscene data file (%s)", _("data/ending")), false;
@@ -104,7 +104,7 @@ static void showScene(bool allowSkip)
 	SDL_FillRect(graphics.screen, NULL, graphics.black);
 	graphics.delay(500);
 	
-	Cutscene *scene = (Cutscene*)sceneList.getHead();
+	auto it = scenes.begin();
 	
 	SDL_Surface *panel = graphics.quickSprite("panel", graphics.createSurface(640, 90));
 	SDL_Surface *image = NULL;
@@ -154,9 +154,9 @@ static void showScene(bool allowSkip)
 		
 		if (changeTime <= 0)
 		{
-			if (scene->next != NULL)
+			if (it != scenes.end())
 			{
-				scene = (Cutscene*)scene->next;
+				auto &scene = *it++;
 				panelAlpha = 0;
 				changeTime = scene->waitTime;
 				graphics.clearChatString();

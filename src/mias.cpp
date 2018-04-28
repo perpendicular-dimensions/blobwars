@@ -61,16 +61,8 @@ void addMIA(const std::string &name, int x, int y, int type)
 
 void doMIAs()
 {
-	Entity *mia = (Entity*)map.miaList.getHead();
-
-	int x, y;
-
-	std::string message;
-
-	while (mia->next != NULL)
+	for (auto &&mia: map.mias)
 	{
-		mia = (Entity*)mia->next;
-
 		if (mia->health <= 0)
 			continue;
 
@@ -78,16 +70,16 @@ void doMIAs()
 
 		if (mia->flags & ENT_TELEPORTING)
 		{
-			moveEntity(mia);
+			moveEntity(mia.get());
 		}
 		else
 		{
-			x = (int)(mia->x - engine.playerPosX);
-			y = (int)(mia->y - engine.playerPosY);
+			int x = (int)(mia->x - engine.playerPosX);
+			int y = (int)(mia->y - engine.playerPosY);
 
 			if ((abs(x) <= 2048) && (abs(y) <= 768))
 			{
-				moveEntity(mia);
+				moveEntity(mia.get());
 
 				if (mia->value < 100)
 				{
@@ -112,7 +104,7 @@ void doMIAs()
 
 			}
 
-			if ((Collision::collision(&player, mia)) && (player.health > 0) && (!(player.flags & ENT_TELEPORTING)))
+			if ((Collision::collision(&player, mia.get())) && (player.health > 0) && (!(player.flags & ENT_TELEPORTING)))
 			{
 				if (!(mia->flags & ENT_DYING))
 				{
@@ -139,6 +131,8 @@ void doMIAs()
 
 				if (mia->health <= 0)
 				{
+					std::string message;
+
 					map.foundMIAs++;
 					game.totalMIAsRescued++;
 

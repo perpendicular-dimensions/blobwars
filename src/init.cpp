@@ -438,24 +438,9 @@ void cleanup()
 	debug(("Updating Replay Data\n"));
 	replayData.header.score = game.score;
 
-	debug(("Freeing Audio...\n"));
-	audio.destroy();
-
 	debug(("Removing Music...\n"));
 	tempPath = engine.userHomeDirectory + "music.mod";
 	remove(tempPath.c_str());
-
-	debug(("Freeing Game Info...\n"));
-	game.destroy();
-
-	debug(("Freeing Map Data...\n"));
-	map.destroy();
-
-	debug(("Freeing Engine Data...\n"));
-	engine.destroy();
-
-	debug(("Freeing Graphics...\n"));
-	graphics.destroy();
 
 	debug(("Saving Config...\n"));
 	if (engine.saveConfig)

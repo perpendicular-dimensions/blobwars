@@ -27,8 +27,6 @@ Switch::Switch()
 	x = y = 0;
 	activated = false;
 	health = 0;
-
-	next = NULL;
 }
 
 void Switch::set(const std::string &name, const std::string &linkName, const std::string &requiredObjectName, const std::string &activateMessage, int type, int x, int y, bool activated)
@@ -43,6 +41,4 @@ void Switch::set(const std::string &name, const std::string &linkName, const std
 	this->activated = activated;
 
 	health = 0;
-
-	next = NULL;
 }

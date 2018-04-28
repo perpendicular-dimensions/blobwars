@@ -21,24 +21,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-Effect::Effect()
-{
-	x = y = dx = dy = 0;
-	health = 0;
-	//frames = frameTime = currentFrameTime = 0;
-	flags = 0;
-	color = 0;
-
-	/*
-	for (int i = 0 ; i < 4 ; i++)
-	{
-		frame[i] = NULL;
-	}
-	*/
-
-	next = NULL;
-}
-
 void Effect::create(float x, float y, float dx, float dy, int flags)
 {
 	this->x = x;

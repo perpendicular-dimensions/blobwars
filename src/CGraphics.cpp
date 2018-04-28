@@ -73,16 +73,8 @@ void Graphics::free()
 	}
 	debug(("graphics.free: Tiles - Done\n"));
 
-	debug(("graphics.free: Sprites\n"));
-	Sprite *sprite = (Sprite*)spriteList.getHead();
-	while (sprite->next != NULL)
-	{
-		sprite = (Sprite*)sprite->next;
-		//debug(("graphics.free: Sprites Sprite::Free - %s\n", sprite->name));
-		sprite->free();
-	}
 	debug(("graphics.free: Sprites Clear()\n"));
-	spriteList.clear();
+	sprites.clear();
 	debug(("graphics.free: Sprites - Done\n"));
 }
 
@@ -151,11 +143,6 @@ void Graphics::mapColors()
 	infoBar = alphaRect(640, 25, 0x00, 0x00, 0x00);
 	
 	medalMessage = NULL;
-}
-
-Sprite *Graphics::getSpriteHead()
-{
-	return (Sprite*)spriteList.getHead();
 }
 
 void Graphics::setTransparent(SDL_Surface *sprite)
@@ -552,44 +539,29 @@ void Graphics::loadFont(int i, const std::string &filename, int pointSize)
 
 Sprite *Graphics::addSprite(const std::string &name)
 {
-	Sprite *sprite = new Sprite;
+	auto sprite = new Sprite;
 	sprite->name = name;
-
-	spriteList.add(sprite);
-
+	sprites[name].reset(sprite);
 	return sprite;
 }
 
 Sprite *Graphics::getSprite(const std::string &name, bool required)
 {
-	Sprite *sprite = (Sprite*)spriteList.getHead();
+	auto it = sprites.find(name);
 
-	while (sprite->next != NULL)
-	{
-		sprite = (Sprite*)sprite->next;
-		
-		if (sprite->name == name)
-		{
-			return sprite;
-		}
-	}
+	if (it != sprites.end())
+		return it->second.get();
 
 	if (required)
 		showErrorAndExit("The requested sprite '%s' does not exist", name);
 
-	return NULL;
+	return nullptr;
 }
 
 void Graphics::animateSprites()
 {
-	Sprite *sprite = (Sprite*)spriteList.getHead();
-
-	while (sprite->next != NULL)
-	{
-		sprite = (Sprite*)sprite->next;
-
-		sprite->animate();
-	}
+	for (auto &&sprite: sprites)
+		sprite.second->animate();
 
 	if ((engine->getFrameLoop() % 8) == 0)
 	{

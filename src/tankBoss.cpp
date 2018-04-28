@@ -95,8 +95,6 @@ static void traceTankBossMGFireLine()
 	int x;
 	int y = (int)self->y + 10;
 	
-	Entity *enemy = NULL;
-	
 	for (int i = 0 ; i < 800 ; i++)
 	{
 		x = (int)self->x;
@@ -120,15 +118,11 @@ static void traceTankBossMGFireLine()
 			}
 		}
 		
-		enemy = (Entity*)map.enemyList.getHead();
-
-		while (enemy->next != NULL)
+		for (auto &&enemy: map.enemies)
 		{
-			enemy = (Entity*)enemy->next;
-			
 			if (Collision::collision(enemy->x, enemy->y, enemy->getFaceImage()->w, enemy->getFaceImage()->h, x - 1, y - 1, 2, 2))
 			{
-				throwAndDamageEntity(enemy, 100, dx * 10, dx * 10, 0);
+				throwAndDamageEntity(enemy.get(), 100, dx * 10, dx * 10, 0);
 				
 				enemy->health = -1;
 				

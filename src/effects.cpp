@@ -82,18 +82,15 @@ void addBlood(Entity *ent, float dx, float dy, int amount)
 
 void doEffects()
 {
-	Effect *effect = (Effect*)map.effectList.getHead();
-	Effect *previous = effect;
-
 	Sprite *blood = graphics.getSprite("RedBloodParticle", true);
 	Sprite *explosion = graphics.getSprite("SmallExplosion", true);
 	Sprite *smoke = graphics.getSprite("Smoke", true);
 
 	int x, y;
 
-	while (effect->next != NULL)
+	for (auto it = map.effects.begin(); it != map.effects.end();)
 	{
-		effect = (Effect*)effect->next;
+		auto effect = it->get();
 
 		effect->update();
 
@@ -134,12 +131,11 @@ void doEffects()
 
 		if (effect->health > 0)
 		{
-			previous = effect;
+			++it;
 		}
 		else
 		{
-			map.effectList.remove(previous, effect);
-			effect = previous;
+			it = map.effects.erase(it);
 		}
 	}
 }

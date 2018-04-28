@@ -27,8 +27,6 @@ Objective::Objective()
 	this->targetValue = 0;
 	this->required = false;
 	this->completed = false;
-
-	next = NULL;
 }
 
 Objective::Objective(const std::string &description, const std::string &target, int targetValue, bool required)
@@ -41,6 +39,4 @@ Objective::Objective(const std::string &description, const std::string &target, 
 	this->currentValue = 0;
 
 	this->completed = false;
-
-	next = NULL;
 }

@@ -40,13 +40,9 @@ void showAllSprites()
 
 		SDL_FillRect(graphics.screen, NULL, graphics.black);
 
-		Sprite *sprite = graphics.getSpriteHead();
-
-		while (sprite->next != NULL)
+		for (auto &[name, sprite]: graphics.getSprites())
 		{
-			sprite = (Sprite*)sprite->next;
-
-			if (sprite->name != "optionsBackground")
+			if (name != "optionsBackground")
 			{
 				graphics.blit(sprite->getCurrentFrame(), x, y, graphics.screen, false);
 

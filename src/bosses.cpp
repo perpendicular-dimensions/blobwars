@@ -74,8 +74,6 @@ static void tankBossLevel()
 	
 	addItem(defItem[r].id, defItem[r].name, x, y, defItem[r].sprite[0]->name, 240, defItem[r].value, ENT_DYING, true);
 	
-	Entity *enemy = (Entity*)map.enemyList.getHead();
-	
 	bool blob1 = false;
 	bool blob2 = false;
 	
@@ -92,10 +90,8 @@ static void tankBossLevel()
 		} 
 	}
 
-	while (enemy->next != NULL)
+	for (auto &&enemy: map.enemies)
 	{
-		enemy = (Entity*)enemy->next;
-		
 		if (enemy->name == "Red Blob 1")
 			blob1 = true;
 		
@@ -161,15 +157,11 @@ static void droidBossLevel()
 		return;
 	}
 	
-	Entity *item = (Entity*)map.itemList.getHead();
-	
 	bool addPistol, addMachineGun, addLaser, addSpread;
 	addPistol = addMachineGun = addLaser = addSpread = true;
 
-	while (item->next != NULL)
+	for (auto &&item: map.items)
 	{
-		item = (Entity*)item->next;
-		
 		if (item->flags & ENT_DYING)
 			continue;
 		

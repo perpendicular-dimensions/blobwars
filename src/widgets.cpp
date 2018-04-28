@@ -195,28 +195,20 @@ void drawWidgets()
 {
 	graphics.setFontSize(0);
 
-	Widget *widget = (Widget*)engine.widgetList.getHead();
-
 	int maxWidth = 0;
 
-	while (widget->next != NULL)
+	for (auto &&widget: engine.widgets)
 	{
-		widget = (Widget*)widget->next;
-
 		if (widget->image == NULL)
 		{
-			generateWidgetImage(widget);
+			generateWidgetImage(widget.get());
 		}
 			
 		maxWidth = std::max(maxWidth, widget->image->w);
 	}
 
-	widget = (Widget*)engine.widgetList.getHead();
-
-	while (widget->next != NULL)
+	for (auto &&widget: engine.widgets)
 	{
-		widget = (Widget*)widget->next;
-
 		if (!widget->visible)
 		{
 			continue;
@@ -233,7 +225,7 @@ void drawWidgets()
 			widget->x = (640 - widget->image->w) / 2;
 		}
 
-		if (widget == engine.highlightedWidget)
+		if (widget.get() == engine.highlightedWidget)
 		{
 			graphics.drawWidgetRect(widget->x, widget->y, widget->image->w, widget->image->h);
 		}
@@ -247,17 +239,17 @@ void drawWidgets()
 		switch (widget->type)
 		{
 			case WG_RADIO:
-				drawOptions(widget, maxWidth);
+				drawOptions(widget.get(), maxWidth);
 				break;
 			case WG_SLIDER:
 			case WG_SMOOTH_SLIDER:
-				drawSlider(widget, maxWidth);
+				drawSlider(widget.get(), maxWidth);
 				break;
 			case WG_KEYBOARD:
-				drawKeyOption(widget);
+				drawKeyOption(widget.get());
 				break;
 			case WG_JOYPAD:
-				drawJoypadButtonOption(widget);
+				drawJoypadButtonOption(widget.get());
 				break;
 		}
 

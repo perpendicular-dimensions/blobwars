@@ -32,3 +32,10 @@ blobwars
 
 # Debug files
 *.dSYM/
+
+# Cruft
+.*
+*~
+core
+core.*
+vgcore.*
