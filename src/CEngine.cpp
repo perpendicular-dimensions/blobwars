@@ -826,6 +826,20 @@ bool Engine::loadDefines()
 	return true;
 }
 
+static int parseDefine(const std::string &value)
+{
+	if (!value.empty() && value[0] == '(')
+	{
+		int base, shift;
+		sscanf(value.c_str(), "( %d << %d )", &base, &shift);
+		return base << shift;
+	}
+	else
+	{
+		return stoi(value);
+	}
+}
+
 /*
 Returns the value of a #defined value... ACTIVE is declared as 1 so it will
 traverse the list and return 1 when it encounters ACTIVE. This has two advantages.
@@ -836,17 +850,10 @@ thought of that though... :)
 int Engine::getValueOfDefine(const std::string &word)
 {
 	auto it = defines.find(word);
-	if (it != defines.end()) {
-		if (!it->second.empty() && it->second[0] == '(')
-		{
-			int base, shift;
-			sscanf(it->second.c_str(), "( %d << %d )", &base, &shift);
-			return base << shift;
-		}
-		else
-		{
-			return stoi(it->second);
-		}
+
+	if (it != defines.end())
+	{
+		return parseDefine(it->second);
 	}
 
 	fmt::print("ERROR: getValueOfDefine() : {} is not defined!\n", word);
@@ -862,7 +869,7 @@ std::string Engine::getDefineOfValue(const std::string &prefix, int value)
 	{
 		if (contains(it->first, prefix))
 		{
-			int rtn = stoi(it->second);
+			int rtn = parseDefine(it->second);
 
 			if (rtn == value)
 			{
