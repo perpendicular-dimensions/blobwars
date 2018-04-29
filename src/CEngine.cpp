@@ -20,8 +20,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
 #include "headers.h"
-#include <errno.h>
-extern Graphics graphics;
 
 Engine::Engine()
 {
@@ -798,44 +796,6 @@ int Engine::processWidgets()
 }
 
 /*
-Loads key-value defines into a linked list, comments are ignored. The defines.h file is used by the
-game at compile time and run time, so everything is synchronised. This technique has the advantage of
-allowing the game's data to be human readable and easy to maintain.
-*/
-bool Engine::loadDefines()
-{
-	char string[2][1024];
-
-	if (!loadData("data/defines.h"))
-		return false;
-
-	for (auto line: split(dataBuffer, '\n'))
-	{
-		if (!contains(line, "/*"))
-		{
-			scan(line, "%*s %s %[^\n\r]", string[0], string[1]);
-			defines[string[0]] = string[1];
-		}
-	}
-
-	return true;
-}
-
-static int parseDefine(const std::string &value)
-{
-	if (!value.empty() && value[0] == '(')
-	{
-		int base, shift;
-		sscanf(value.c_str(), "( %d << %d )", &base, &shift);
-		return base << shift;
-	}
-	else
-	{
-		return stoi(value);
-	}
-}
-
-/*
 Returns the value of a #defined value... ACTIVE is declared as 1 so it will
 traverse the list and return 1 when it encounters ACTIVE. This has two advantages.
 1) It makes the game data human readable and 2) It means if I change a #define in
@@ -848,7 +808,7 @@ int Engine::getValueOfDefine(const std::string &word)
 
 	if (it != defines.end())
 	{
-		return parseDefine(it->second);
+		return it->second;
 	}
 
 	fmt::print("ERROR: getValueOfDefine() : {} is not defined!\n", word);
@@ -860,16 +820,13 @@ Does the opposite of the above(!)
 */
 std::string Engine::getDefineOfValue(const std::string &prefix, int value)
 {
-	for (auto it = defines.begin(); it != defines.end(); ++it)
-	{
-		if (contains(it->first, prefix))
-		{
-			int rtn = parseDefine(it->second);
+	auto [begin, end] = reverseDefines.equal_range(value);
 
-			if (rtn == value)
-			{
-				return it->first;
-			}
+	for (auto it = begin; it != end; ++it)
+	{
+		if (contains(it->second, prefix))
+		{
+			return it->second;
 		}
 	}
 

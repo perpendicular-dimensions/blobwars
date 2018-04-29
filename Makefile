@@ -49,6 +49,7 @@ OBJS += CWeapon.o CWidget.o
 OBJS += aquaBoss.o
 OBJS += bosses.o bullets.o 
 OBJS += cutscene.o
+OBJS += defines.o
 OBJS += droidBoss.o 
 OBJS += effects.o enemies.o entities.o explosions.o 
 OBJS += finalBattle.o 
@@ -78,6 +79,9 @@ endif
 
 # top-level rule to create the program.
 all: $(ALL)
+
+src/defines.cpp: src/defines.h tools/makedefs.sh
+	tools/makedefs.sh $< $@
 
 # compiling other source files.
 %.o: src/%.cpp src/%.h src/defs.h src/defines.h src/headers.h

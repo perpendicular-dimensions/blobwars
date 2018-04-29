@@ -93,8 +93,6 @@ class Engine {
 
 		Entity world;
 
-		std::map<std::string, std::string> defines;
-
 		bool cheats;
 		int cheatHealth, cheatExtras, cheatFuel, cheatLevels, cheatBlood, cheatInvulnerable;
 		int cheatReload, cheatSpeed, cheatSkipLevel;
@@ -138,7 +136,6 @@ class Engine {
 	void highlightWidget(int dir);
 	void highlightWidget(const std::string &name);
 	int processWidgets();
-	bool loadDefines();
 	int getValueOfDefine(const std::string &word);
 	std::string getDefineOfValue(const std::string &prefix, int value);
 	int getValueOfFlagTokens(const std::string &line);

@@ -77,9 +77,6 @@ void loadResources()
 	graphics.showLoading(0, 0);
 	graphics.updateScreen();
 	
-	if (!engine.loadDefines())
-		graphics.showErrorAndExit("Could not load map define list '%s'", "data/defines.h");
-
 	if (!engine.loadData("data/mainSprites"))
 		graphics.showErrorAndExit(ERR_FILE, "data/mainSprites");
 
@@ -168,7 +165,4 @@ void loadResources()
 	createBoss(game.stageName);
 	
 	game.canContinue = 0;
-
-	// We don't need this anymore. Remove it to free up some memory...
-	engine.defines.clear();
 }

@@ -342,11 +342,6 @@ std::string getActiveState(bool active)
 
 void createPersistentMapData()
 {
-	if (!engine.loadDefines())
-	{
-		graphics.showErrorAndExit("Could not load map define list '%s'", "data/defines.h");
-	}
-	
 	auto &persistent = map.createPersistent(map.name);
 	persistent.clear();
 	
@@ -489,7 +484,4 @@ void createPersistentMapData()
 		line = fmt::format("{} WATERLEVEL {}\n", skill, (int)map.waterLevel);
 		persistent.push_back(line);
 	}
-	
-	// We don't need this anymore. Remove it to free up some memory...
-	engine.defines.clear();
 }

@@ -22,6 +22,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 // Read in the define list used by the map data also
 #include "defines.h"
 
+extern const std::map<const std::string, int> defines;
+extern const std::multimap<int, const std::string> reverseDefines;
+
 #define PI 3.14159265359
 
 /* ############## errors ########### */
