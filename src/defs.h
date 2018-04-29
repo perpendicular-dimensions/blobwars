@@ -384,7 +384,7 @@ enum {
 /* ############# debug ################## */
 
 #if DEBUG
-	#define debug(x) {printf("*** DEBUG: "); printf x;}
+	#define debug(x) {fmt::print("*** DEBUG: "); fmt::printf x;}
 #else
 	#define debug(x) {}
 #endif

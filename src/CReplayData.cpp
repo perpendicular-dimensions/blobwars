@@ -214,7 +214,7 @@ void ReplayData::load()
 		exit(1);
 	}
 	
-	debug(("ReplayData::load() - Done (%d)\n", size));
+	debug(("ReplayData::load() - Done\n"));
 }
 
 void ReplayData::save()
@@ -229,7 +229,7 @@ void ReplayData::save()
 		exit(1);
 	}
 	
-	debug(("ReplayData::save() - Done (%d)\n", size));
+	debug(("ReplayData::save() - Done\n"));
 	
 	reset();
 }
