@@ -49,7 +49,7 @@ class split {
 	split begin() { return *this; };
 	split end() { return split(sep); }
 
-	bool operator!=(const split &other) const { return other.sep != sep || other.str != str; }
+	bool operator!=(const split &other) const { return other.sep != sep || ((other.str.size() || str.size()) && other.str != str); }
 
 	std::string_view operator*() {
 		auto pos = str.find(sep);
