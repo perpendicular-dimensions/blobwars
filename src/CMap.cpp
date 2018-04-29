@@ -104,83 +104,32 @@ bool Map::isPracticeMission()
 
 bool Map::isValid(int x, int y)
 {
-	if (x >= 0 && y >= 0 && x < MAPWIDTH && y < MAPHEIGHT)
-		return true;
-
-	return false;
+	return x >= 0 && y >= 0 && x < MAPWIDTH && y < MAPHEIGHT;
 }
 
 bool Map::isSolid(int x, int y)
 {
-	if (!isValid(x, y))
-		return false;
-
-	if ((data[x][y] >= MAP_BREAKABLE) && (data[x][y] < MAP_DECORATION))
-	{
-		return true;
-	}
-
-	return false;
+	return isValid(x, y) && data[x][y] >= MAP_BREAKABLE && data[x][y] < MAP_DECORATION;
 }
 
 bool Map::isBreakable(int x, int y)
 {
-	if (!isValid(x, y))
-		return false;
-
-	if ((data[x][y] >= MAP_BREAKABLE) && (data[x][y] <= MAP_BREAKABLE2))
-	{
-		return true;
-	}
-
-	return false;
+	return isValid(x, y) && data[x][y] >= MAP_BREAKABLE && data[x][y] <= MAP_BREAKABLE2;
 }
 
 bool Map::isNoReset(int x, int y)
 {
-	if (!isValid(x, y))
-		return false;
-
-	if ((data[x][y] >= MAP_NORESET) && (data[x][y] < MAP_DECORATION))
-	{
-		return true;
-	}
-
-	return false;
+	return isValid(x, y) && data[x][y] >= MAP_NORESET && data[x][y] < MAP_DECORATION;
 }
 
 bool Map::isLiquid(int x, int y)
 {
-	if (!isValid(x, y))
-		return false;
-
-	if (data[x][y] == 0)
-	{
-		return false;
-	}
-	else if ((data[x][y] >= MAP_WATER) && (data[x][y] <= MAP_LAVA))
-	{
-		return true;
-	}
-	else if ((data[x][y] >= MAP_WATERANIM) && (data[x][y] <= MAP_LAVAANIM))
-	{
-		return true;
-	}
-
-	return false;
+	return isValid(x, y) && ((data[x][y] >= MAP_WATER && data[x][y] <= MAP_LAVA) || (data[x][y] >= MAP_WATERANIM && data[x][y] <= MAP_LAVAANIM));
 }
 
 bool Map::isTopLayer(int x, int y)
 {
-	if (!isValid(x, y))
-		return false;
-
-	if (data[x][y] >= MAP_TOPLAYER)
-	{
-		return true;
-	}
-
-	return false;
+	return isValid(x, y) && data[x][y] >= MAP_TOPLAYER;
 }
 
 std::vector<std::string> &Map::getPersistent(const std::string &name)

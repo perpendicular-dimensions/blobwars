@@ -294,12 +294,7 @@ void Engine::moveMouse(int dx, int dy)
 
 bool Engine::userAccepts()
 {
-	if ((keyState[SDL_SCANCODE_SPACE]) || (keyState[SDL_SCANCODE_ESCAPE]) || (keyState[SDL_SCANCODE_LCTRL]) || (keyState[SDL_SCANCODE_RCTRL]) || (keyState[SDL_SCANCODE_RETURN]) || (keyState[SDL_SCANCODE_LCTRL]) || joykeyFire)
-	{
-		return true;
-	}
-
-	return false;
+	return keyState[SDL_SCANCODE_SPACE] || keyState[SDL_SCANCODE_ESCAPE] || keyState[SDL_SCANCODE_LCTRL] || keyState[SDL_SCANCODE_RCTRL] || keyState[SDL_SCANCODE_RETURN] || keyState[SDL_SCANCODE_LCTRL] || joykeyFire;
 }
 
 void Engine::flushInput()

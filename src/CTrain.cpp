@@ -60,18 +60,12 @@ bool Train::isReady()
 
 bool Train::isMoving()
 {
-	if (think == 0)
-		return true;
-		
-	return false;
+	return think == 0;
 }
 
 bool Train::waitsForPlayer()
 {
-	if ((active) || (pause != 0))
-		return false;
-
-	return true;
+	return !active && pause == 0;
 }
 
 void Train::setName(const std::string &name)

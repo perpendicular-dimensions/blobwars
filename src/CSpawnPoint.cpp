@@ -60,8 +60,5 @@ void SpawnPoint::think()
 
 bool SpawnPoint::readyToSpawn()
 {
-	if (currentInterval >= requiredInterval)
-		return true;
-
-	return false;
+	return currentInterval >= requiredInterval;
 }

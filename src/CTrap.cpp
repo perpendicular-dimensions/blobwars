@@ -117,10 +117,7 @@ bool Trap::performSwingAction()
 		dx = -0.05;
 	}
 
-	if (((int)dy >= -2) && ((int)dy <= 2))
-		return true;
-
-	return false;
+	return (int)dy >= -2 && (int)dy <= 2;
 }
 
 bool Trap::performSpikeAction()
@@ -170,10 +167,7 @@ bool Trap::performBarrierAction()
 		}
 	}
 
-	if (thinktime >= waitTime[0] - 3)
-		return true;
-
-	return false;
+	return thinktime >= waitTime[0] - 3;
 }
 
 bool Trap::performFlameAction()
@@ -191,10 +185,7 @@ bool Trap::performFlameAction()
 		}
 	}
 
-	if (thinktime >= waitTime[0] - 3)
-		return true;
-
-	return false;
+	return thinktime >= waitTime[0] - 3;
 }
 
 bool Trap::think()
