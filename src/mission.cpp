@@ -114,7 +114,7 @@ void clearAllMissionData()
 {
 	gameData.objectives.erase(game.stageName);
 	gameData.objectives.erase(game.stageName + " MIAs");
-	map.destroyPersistant(map.name);
+	map.destroyPersistent(map.name);
 }
 
 void showMissionClear()

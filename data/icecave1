@@ -341,7 +341,7 @@ MH OBJECTIVE "Find 1st Cypher Piece" "Cypher Piece #1" 1 OBJ_REQUIRED
 MH OBJECTIVE "Find 2nd Cypher Piece" "Cypher Piece #2" 1 OBJ_REQUIRED
 MH OBJECTIVE "Exit the Ice Caves" "Exit" 1 OBJ_REQUIRED
 
-// ****************** PERSISTANCE CHECK ******************
+// ****************** PERSISTENCE CHECK ******************
 
 EMH PREVIOUSLY_VISITED
 

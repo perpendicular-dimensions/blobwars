@@ -333,7 +333,7 @@ MH OBJECTIVE "Find the Transmitter" "Transmitter" 1 OBJ_REQUIRED
 M OBJECTIVE "Defeat 50 Enemies" "Enemy" 50 OBJ_OPTIONAL
 H OBJECTIVE "Defeat 100 Enemies" "Enemy" 100 OBJ_OPTIONAL
 
-// ****************** PERSISTANCE CHECK ******************
+// ****************** PERSISTENCE CHECK ******************
 
 EMH PREVIOUSLY_VISITED
 

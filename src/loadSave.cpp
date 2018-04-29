@@ -98,7 +98,7 @@ bool loadGame(int slot)
 		return graphics.showErrorAndExit("The save data loaded was not in the format expected", ""), false;
 	}
 	
-	filename = fmt::format("{}persistant{}.dat", engine.userHomeDirectory, slot);
+	filename = fmt::format("{}persistant{}.dat", engine.userHomeDirectory, slot); // sic, to keep compatibility with older versions
 
 	file.close();
 	file.open(filename);
@@ -140,7 +140,7 @@ bool loadGame(int slot)
 		
 		debug(("Read %s with %d lines.\n", stageName, numberOfLines));
 		
-		auto persistant = map.createPersistant(stageName);
+		auto persistent = map.createPersistent(stageName);
 		
 		for (int i = 0 ; i < numberOfLines ; i++)
 		{
@@ -154,7 +154,7 @@ bool loadGame(int slot)
 			
 			//debug(("Read %d: %s", i, persistData->data));
 			
-			persistant.push_back(persistData->data);
+			persistent.push_back(persistData->data);
 		}
 	}
 
@@ -304,11 +304,11 @@ void saveGame()
 		return graphics.showErrorAndExit("File write error whilst saving game", strerror(errno));
 	}
 	
-	filename = fmt::format("{}persistant{}.dat", engine.userHomeDirectory, slot);
+	filename = fmt::format("{}persistant{}.dat", engine.userHomeDirectory, slot); // sic, to keep compatibility with older versions
 
 	file.open(filename);
 	
-	createPersistantMapData();
+	createPersistentMapData();
 	
 	for (auto &&objective: gameData.objectives)
 	{
@@ -320,7 +320,7 @@ void saveGame()
 	
 	fmt::print(file, "\"@EOF@\" \"@EOF@\" -1 -1\n");
 	
-	for (auto &[levelName, lines]: map.persistants)
+	for (auto &[levelName, lines]: map.persistents)
 	{
 		if (levelName == "@none@")
 		{

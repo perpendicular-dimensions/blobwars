@@ -200,7 +200,7 @@ void doTraps()
 		/*
 			Barrier traps must be do at all times. Otherwise there is an "break" in the
 			line if more than one barrier is used over a large space and the barrier becomes
-			inconsistant.
+			inconsistent.
 		*/
 
 		if (((absX < 800) && (absY < 600)) || (trap->type == TRAP_TYPE_BARRIER) || (trap->type == TRAP_TYPE_FLAME))

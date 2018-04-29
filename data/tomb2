@@ -374,7 +374,7 @@ MH OBJECTIVE "Battle Galdov" "Galdov" 1 OBJ_REQUIRED
 MH OBJECTIVE "Get the Ancient Time Crystal" "Time Crystal" 1 OBJ_REQUIRED
 MH OBJECTIVE "Explore the Flooded Area" "Sword" 1 OBJ_OPTIONAL
 
-// ****************** PERSISTANCE CHECK ******************
+// ****************** PERSISTENCE CHECK ******************
 
 EMH PREVIOUSLY_VISITED
 

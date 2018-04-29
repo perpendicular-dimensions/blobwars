@@ -804,7 +804,7 @@ int Engine::processWidgets()
 
 /*
 Loads key-value defines into a linked list, comments are ignored. The defines.h file is used by the
-game at compile time and run time, so everything is syncronised. This technique has the advantage of
+game at compile time and run time, so everything is synchronised. This technique has the advantage of
 allowing the game's data to be human readable and easy to maintain.
 */
 bool Engine::loadDefines()

@@ -361,7 +361,7 @@ H OBJECTIVE "Defeat 200 Enemies" "Enemy" 200 OBJ_OPTIONAL
 M OBJECTIVE "6 Hit Combo with Spread Gun" "Combo-Spread Gun" 6 OBJ_OPTIONAL
 H OBJECTIVE "12 Hit Combo with Spread Gun" "Combo-Spread Gun" 12 OBJ_OPTIONAL
 
-// ****************** PERSISTANCE CHECK ******************
+// ****************** PERSISTENCE CHECK ******************
 
 EMH PREVIOUSLY_VISITED
 

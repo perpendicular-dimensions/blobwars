@@ -350,7 +350,7 @@ EMH MIA "Quegon" 7936 2304 MIA_NORMAL
 
 EMH REQUIREDMIAS 9
 
-// ****************** PERSISTANCE CHECK ******************
+// ****************** PERSISTENCE CHECK ******************
 
 EMH PREVIOUSLY_VISITED
 

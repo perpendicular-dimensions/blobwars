@@ -37,7 +37,7 @@ Pak::~Pak()
 
 void Pak::showPakErrorAndExit()
 {
-	printf("\nFatal Error: The Blob Wars PAK file was either not found or was not accessable.\n");
+	printf("\nFatal Error: The Blob Wars PAK file was either not found or was not accessible.\n");
 	printf("(If you compiled from source did you forget to run make install?)\n");
 	printf("The path to the file was expected to be,\n\n");
 	printf(PAKFULLPATH"\n\n");

@@ -358,7 +358,7 @@ MH OBJECTIVE "Find 4 Ancient Keys" "Ancient Key" 4 OBJ_REQUIRED
 MH OBJECTIVE "Disable Booby Traps" "BoobyTrap" 3 OBJ_REQUIRED
 MH OBJECTIVE "Enter Ancient Tomb" "Exit" 1 OBJ_REQUIRED
 
-// ****************** PERSISTANCE CHECK ******************
+// ****************** PERSISTENCE CHECK ******************
 
 EMH PREVIOUSLY_VISITED
 
@@ -599,7 +599,7 @@ EHM TRAP SPIKETRAP TRAP_TYPE_SPIKE 5 5 4080 5536 4080 5568 60 60 Spike ACTIVE
 EHM TRAP SPIKETRAP TRAP_TYPE_SPIKE 5 5 4208 5568 4208 5600 60 60 Spike ACTIVE
 EHM TRAP SPIKETRAP TRAP_TYPE_SPIKE 5 5 4368 5536 4368 5568 60 60 Spike ACTIVE
 
-// Spike right in front of the swtich. Easy to avoid
+// Spike right in front of the switch. Easy to avoid
 EHM TRAP SPIKETRAP TRAP_TYPE_SPIKE 5 5 4752 5312 4752 5344 60 60 Spike ACTIVE
 
 // *************** SPAWN POINTS ******************

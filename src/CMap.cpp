@@ -183,19 +183,19 @@ bool Map::isTopLayer(int x, int y)
 	return false;
 }
 
-std::vector<std::string> &Map::getPersistant(const std::string &name)
+std::vector<std::string> &Map::getPersistent(const std::string &name)
 {
-	return persistants[name];
+	return persistents[name];
 }
 
-std::vector<std::string> &Map::createPersistant(const std::string &name)
+std::vector<std::string> &Map::createPersistent(const std::string &name)
 {
-	return persistants[name];
+	return persistents[name];
 }
 
-void Map::destroyPersistant(const std::string &name)
+void Map::destroyPersistent(const std::string &name)
 {
-	persistants.erase(name);
+	persistents.erase(name);
 }
 
 void Map::setName(const std::string &name)

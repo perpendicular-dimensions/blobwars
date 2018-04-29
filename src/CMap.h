@@ -68,7 +68,7 @@ class Map {
 		Boss *mainBossPart;
 		float bossEnergyMeterBit;
 		
-		std::map<std::string, std::vector<std::string>> persistants;
+		std::map<std::string, std::vector<std::string>> persistents;
 
 		std::vector<std::unique_ptr<Train>> trains;
 		std::list<std::unique_ptr<Entity>> items;
@@ -97,9 +97,9 @@ class Map {
 	bool isLiquid(int x, int y);
 	bool isTopLayer(int x, int y);
 	
-	std::vector<std::string> &getPersistant(const std::string &name);
-	std::vector<std::string> &createPersistant(const std::string &name);
-	void destroyPersistant(const std::string &name);
+	std::vector<std::string> &getPersistent(const std::string &name);
+	std::vector<std::string> &createPersistent(const std::string &name);
+	void destroyPersistent(const std::string &name);
 	
 	void setName(const std::string &name);
 	void setClipping(int limitLeft, int limitRight, int limitUp, int limitDown);

@@ -346,7 +346,7 @@ M OBJECTIVE "Defeat 100 Enemies" "Enemy" 100 OBJ_OPTIONAL
 H OBJECTIVE "Defeat 200 Enemies" "Enemy" 200 OBJ_OPTIONAL
 MH OBJECTIVE "Find L.R.T.S. Part" "LRTS" 1 OBJ_OPTIONAL
 
-// ****************** PERSISTANCE CHECK ******************
+// ****************** PERSISTENCE CHECK ******************
 
 EMH PREVIOUSLY_VISITED
 

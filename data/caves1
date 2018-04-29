@@ -341,7 +341,7 @@ EMH MIA "Ceri" 4352 608 MIA_NORMAL
 
 EMH REQUIREDMIAS 4
 
-// ****************** PERSISTANCE CHECK ******************
+// ****************** PERSISTENCE CHECK ******************
 
 EMH PREVIOUSLY_VISITED
 

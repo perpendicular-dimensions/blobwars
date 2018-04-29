@@ -352,7 +352,7 @@ EMH MIA "Ozzy" 7712 3264 MIA_NORMAL
 
 EMH REQUIREDMIAS 11
 
-// ****************** PERSISTANCE CHECK ******************
+// ****************** PERSISTENCE CHECK ******************
 
 EMH PREVIOUSLY_VISITED
 

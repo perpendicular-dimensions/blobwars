@@ -335,7 +335,7 @@ EMH REQUIREDMIAS 12
 
 MH OBJECTIVE "Find L.R.T.S. Part" "LRTS" 1 OBJ_OPTIONAL
 
-// ****************** PERSISTANCE CHECK ******************
+// ****************** PERSISTENCE CHECK ******************
 
 EMH PREVIOUSLY_VISITED
 

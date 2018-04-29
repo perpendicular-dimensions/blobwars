@@ -98,7 +98,6 @@ inline const char *_(const std::string &str) { return gettext(str.c_str()); }
 #include "CTrap.h"
 
 #include "CPersistData.h"
-#include "CPersistant.h"
 
 #include "CMap.h"
 

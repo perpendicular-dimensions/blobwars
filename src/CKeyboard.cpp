@@ -51,7 +51,7 @@ std::string Keyboard::translateKey(int scancode)
 	std::string keyName = _(SDL_GetKeyName(key));
 	
 	/*
-	This is not really neccessary, but it just makes
+	This is not really necessary, but it just makes
 	everything look neater. It runs through the string
 	and uppercase the first letter and any letter after
 	a space.

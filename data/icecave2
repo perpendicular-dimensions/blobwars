@@ -356,7 +356,7 @@ MH OBJECTIVE "Find Two Ancient Keys" "Ancient Key" 2 OBJ_REQUIRED
 MH OBJECTIVE "Find 5 Earth Crystal Shards" "Crystal Shard" 5 OBJ_OPTIONAL
 MH OBJECTIVE "Destroy the Ice Blobs" "Ice Blob" 10 OBJ_OPTIONAL
 
-// ****************** PERSISTANCE CHECK ******************
+// ****************** PERSISTENCE CHECK ******************
 
 EMH PREVIOUSLY_VISITED
 

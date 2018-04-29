@@ -355,7 +355,7 @@ MH OBJECTIVE "Get to the Main Pump Room" "Pump Room" 1 OBJ_REQUIRED
 MH OBJECTIVE "Exit the Tunnel System" "Exit" 1 OBJ_REQUIRED
 MH OBJECTIVE "Find Water Orb Shards" "Crystal Shard" 5 OBJ_OPTIONAL
 
-// ****************** PERSISTANCE CHECK ******************
+// ****************** PERSISTENCE CHECK ******************
 
 EMH PREVIOUSLY_VISITED
 

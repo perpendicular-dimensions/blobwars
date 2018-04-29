@@ -25,7 +25,7 @@ void newGame()
 {
 	game.clear();
 	gameData.clear();
-	map.persistants.clear();
+	map.persistents.clear();
 	engine.practice = false;
 
 	game.skill = engine.skill;

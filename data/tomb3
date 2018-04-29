@@ -376,7 +376,7 @@ MH OBJECTIVE "Get to the Maintenance Room" "Maintenance Room" 1 OBJ_REQUIRED
 MH OBJECTIVE "Battle Galdov" "Galdov" 1 OBJ_REQUIRED
 MH OBJECTIVE "Find L.R.T.S. Part" "LRTS" 1 OBJ_OPTIONAL
 
-// ****************** PERSISTANCE CHECK ******************
+// ****************** PERSISTENCE CHECK ******************
 
 EMH PREVIOUSLY_VISITED
 

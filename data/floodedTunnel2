@@ -336,7 +336,7 @@ MH OBJECTIVE "Exit the Tunnel System" "Exit" 1 OBJ_REQUIRED
 MH OBJECTIVE "Deactivate Security Systems" "Security Switch" 3 OBJ_REQUIRED
 MH OBJECTIVE "Find L.R.T.S. Part" "LRTS" 1 OBJ_OPTIONAL
 
-// ****************** PERSISTANCE CHECK ******************
+// ****************** PERSISTENCE CHECK ******************
 
 EMH PREVIOUSLY_VISITED
 

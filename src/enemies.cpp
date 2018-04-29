@@ -377,8 +377,8 @@ void enemyBulletCollisions(Entity *bullet)
 
 				/*
 					Increment the bullet hits counter. The laser can only do this
-				 	if the target has more than 0 health. Overwise the stats screen
-				 	can show an accurracy of 800%. Which is just plain silly.
+					if the target has more than 0 health. Otherwise the stats screen
+					can show an accurracy of 800%. Which is just plain silly.
 				*/
 				if (bullet->owner == &player)
 				{

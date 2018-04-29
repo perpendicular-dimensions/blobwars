@@ -339,7 +339,7 @@ EMH MIA "Merry" 4032 6688 MIA_NORMAL
 
 EMH REQUIREDMIAS 5
 
-// ****************** PERSISTANCE CHECK ******************
+// ****************** PERSISTENCE CHECK ******************
 
 EMH PREVIOUSLY_VISITED
 
@@ -438,7 +438,7 @@ EMH LINEDEF "Message" @none@ "Three bronze keys are needed to open these doors..
 
 EMH LINEDEF "Message" @none@ "You'll need to 'Kill Two Birds with One Stone' here..." 7264 7072 5 128 INACTIVE
 
-EMH LINEDEF "Message" @none@ "Throw a grenade on the switch and recieve a present..." 1568 8032 5 128 INACTIVE
+EMH LINEDEF "Message" @none@ "Throw a grenade on the switch and receive a present..." 1568 8032 5 128 INACTIVE
 
 // ************ TELEPORTERS ********************
 
