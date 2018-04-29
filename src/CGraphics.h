@@ -99,8 +99,8 @@ class Graphics {
 	int getLavaAnim() const;
 	int getLavaAnim(int current);
 	void loadBackground(const std::string &filename);
-	void putPixel(int x, int y, Uint32 pixel, SDL_Surface *dest);
-	Uint32 getPixel(SDL_Surface *surface, int x, int y);
+	void putPixel(int x, int y, uint32_t pixel, SDL_Surface *dest);
+	uint32_t getPixel(SDL_Surface *surface, int x, int y);
 	void drawLine(float startX, float startY, float endX, float endY, int color, SDL_Surface *dest);
 	void blit(SDL_Surface *image, int x, int y, SDL_Surface *dest, bool centered);
 	void drawBackground();
@@ -118,7 +118,7 @@ class Graphics {
 	void drawChatString(SDL_Surface *surface, int y);
 	void drawWidgetRect(int x, int y, int w, int h);
 	SDL_Surface *createSurface(int width, int height);
-	SDL_Surface *alphaRect(int width, int height, Uint8 red, Uint8 green, Uint8 blue);
+	SDL_Surface *alphaRect(int width, int height, uint8_t red, uint8_t green, uint8_t blue);
 	void colorize(SDL_Surface *image, int red, int green, int blue);
 	void lock(SDL_Surface *surface);
 	void unlock(SDL_Surface *surface);

@@ -213,7 +213,7 @@ static int confirmSave()
 	while (true)
 	{
 		graphics.updateScreen();
-		SDL_FillRect(graphics.screen, NULL, graphics.black);
+		SDL_FillRect(graphics.screen, nullptr, graphics.black);
 		engine.getInput();
 		config.populate();
 
@@ -265,7 +265,7 @@ static int confirmSave()
 		SDL_Delay(16);
 	}
 	
-	SDL_FillRect(graphics.screen, NULL, graphics.black);
+	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.updateScreen();
 	SDL_Delay(250);
 	
@@ -276,7 +276,7 @@ void saveGame()
 {
 	std::string message;
 
-	SDL_FillRect(graphics.screen, NULL, graphics.black);
+	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.updateScreen();
 	SDL_Delay(500);
 	

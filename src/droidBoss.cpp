@@ -55,7 +55,7 @@ static void droidBossChangeParticles()
 	{
 		dy = Math::rrand(-150, -50);
 		dy /= 100;
-		map.addParticle(self->x + (Math::prand() % self->width), self->y  + (Math::prand() % self->height), dx, dy, Math::rrand(1, 60), color, NULL, PAR_WEIGHTLESS);
+		map.addParticle(self->x + (Math::prand() % self->width), self->y  + (Math::prand() % self->height), dx, dy, Math::rrand(1, 60), color, nullptr, PAR_WEIGHTLESS);
 	}
 	
 	self->setThinkTime(2);
@@ -149,7 +149,7 @@ static void droidBossDie()
 	{
 		checkObjectives(self->name, false);
 		
-		map.mainBossPart = NULL;
+		map.mainBossPart = nullptr;
 	}
 }
 

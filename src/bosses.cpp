@@ -262,7 +262,7 @@ static void galdovFinalLevel()
 	
 	for (int i = 6 ; i < 10 ; i++)
 	{
-		if (map.boss[i] == NULL)
+		if (map.boss[i] == nullptr)
 			continue;
 		
 		if (map.boss[i]->health <= -60)
@@ -295,7 +295,7 @@ static void galdovFinalLevel()
 
 void createBoss(const std::string &stageName)
 {
-	map.mainBossPart = NULL;
+	map.mainBossPart = nullptr;
 	
 	if (!map.isBossMission)
 	{
@@ -343,11 +343,11 @@ void doBosses()
 {
 	int x, y, absX, absY;
 	
-	self = NULL;
+	self = nullptr;
 	
 	for (int i = 0 ; i < 10 ; i++)
 	{
-		if (map.boss[i] == NULL)
+		if (map.boss[i] == nullptr)
 		{
 			continue;
 		}
@@ -395,9 +395,9 @@ void doBosses()
 					debug(("Deleting unreferenced Boss...\n"));
 					
 					if(map.mainBossPart == map.boss[i])
-						map.mainBossPart = NULL;
+						map.mainBossPart = nullptr;
 					delete map.boss[i];
-					map.boss[i] = NULL;
+					map.boss[i] = nullptr;
 				} else
 					self->referenced = false;
 			}
@@ -453,13 +453,13 @@ void checkBossBulletCollisions(Entity *bullet)
 		return;
 	}
 	
-	self = NULL;
+	self = nullptr;
 
 	if (bullet->owner == &player)
 	{
 		for (int i = 0 ; i < 10 ; i++)
 		{
-			if (map.boss[i] == NULL)
+			if (map.boss[i] == nullptr)
 			{
 				continue;
 			}
@@ -486,7 +486,7 @@ void checkBossBulletCollisions(Entity *bullet)
 					Math::removeBit(&bullet->flags, ENT_PUFFS);
 				}
 				
-				if (self->react != NULL && self->health > 0)
+				if (self->react != nullptr && self->health > 0)
 				{
 					self->react();
 				}

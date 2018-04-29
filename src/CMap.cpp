@@ -27,7 +27,7 @@ Map::Map()
 	
 	for (int i = 0 ; i < 10 ; i++)
 	{
-		boss[i] = NULL;
+		boss[i] = nullptr;
 	}
 }
 
@@ -52,7 +52,7 @@ void Map::clear()
 			data[x][y] = 0;
 
 	for (int i = 0 ; i < 10 ; i++)
-		allowableEnemy[i] = NULL;
+		allowableEnemy[i] = nullptr;
 
 	maxAllowableEnemies = 0;
 
@@ -81,17 +81,17 @@ void Map::clear()
 	isCavesTileset = false;
 	isGrasslandsTileset = false;
 	bossNextThink = 0;
-	mainBossPart = NULL;
-	doBossLevelAction = NULL;
+	mainBossPart = nullptr;
+	doBossLevelAction = nullptr;
 	bossEnergyMeterBit = 0;
 	
 	for (int i = 0 ; i < 10 ; i++)
 	{
-		if (boss[i] != NULL)
+		if (boss[i] != nullptr)
 		{
 			delete boss[i];
 		}
-		boss[i] = NULL;
+		boss[i] = nullptr;
 	}
 	
 	windPower = windChangeTime = 0;
@@ -379,7 +379,7 @@ void Map::setAllowableEnemy(Entity *enemy)
 {
 	for (int i = 0 ; i < 10 ; i++)
 	{
-		if (allowableEnemy[i] == NULL)
+		if (allowableEnemy[i] == nullptr)
 		{
 			allowableEnemy[i] = enemy;
 			maxAllowableEnemies = i + 1;
@@ -392,7 +392,7 @@ void Map::setAllowableEnemy(Entity *enemy)
 
 std::string Map::getSpawnableEnemy(int i)
 {
-	if (allowableEnemy[i] == NULL)
+	if (allowableEnemy[i] == nullptr)
 		return {};
 	
 	return allowableEnemy[i]->name;
@@ -443,7 +443,7 @@ void Map::setMainBossPart(Boss *boss)
 {
 	mainBossPart = boss;
 	
-	if (mainBossPart != NULL)
+	if (mainBossPart != nullptr)
 	{
 		bossEnergyMeterBit = 200;
 		bossEnergyMeterBit /= boss->maxHealth;

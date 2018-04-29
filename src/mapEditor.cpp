@@ -74,7 +74,7 @@ static void drawMap(int mapX, int mapY)
 
 static void showMap(int *mapX, int *mapY)
 {
-	SDL_FillRect(graphics.screen, NULL, graphics.black);
+	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 
 	engine.keyState[SDL_SCANCODE_SPACE] = 0;
 	int moveTimer = 0;
@@ -170,7 +170,7 @@ static void drawEnemies()
 
 	int x, y, absX, absY;
 
-	while (enemy->next != NULL)
+	while (enemy->next != nullptr)
 	{
 		enemy = (Entity*)enemy->next;
 
@@ -206,7 +206,7 @@ static void deleteEnemy(int x, int y)
 	Entity *enemy = (Entity*)map.enemyList.getHead();
 	Entity *previous = enemy;
 
-	while (enemy->next != NULL)
+	while (enemy->next != nullptr)
 	{
 		enemy = (Entity*)enemy->next;
 
@@ -241,7 +241,7 @@ static void saveMap(const std::string &name)
 		file << str;
 	}
 		
-	while (enemy->next != NULL)
+	while (enemy->next != nullptr)
 	{
 		enemy = (Entity*)enemy->next;
 		fmt::print(file, "EMH ENEMY \"{}\" {} {}\n", enemy->name, (int)enemy->x, (int)enemy->y);
@@ -610,10 +610,10 @@ int main(int argc, char *argv[])
 		Math::limitInt(&currentMonster, 0, MAX_ENEMIES - 1);
 		Math::limitInt(&currentItem, 0, MAX_ITEMS - 1);
 
-		if (defEnemy[currentMonster].sprite[0] == NULL)
+		if (defEnemy[currentMonster].sprite[0] == nullptr)
 			currentMonster = 0;
 			
-		if (defItem[currentItem].sprite[0] == NULL)
+		if (defItem[currentItem].sprite[0] == nullptr)
 			currentItem = 0;
 
 		if (engine.keyState[SDL_SCANCODE_SPACE]) {showMap(&mapX, &mapY);}

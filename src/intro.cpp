@@ -42,7 +42,7 @@ static void playIntro(split &it, int tx, int ty, int delay)
 			return graphics.showErrorAndExit("Malformed Intro Data", "");
 		}
 
-		text[i] = NULL;
+		text[i] = nullptr;
 
 		if (line[i] != "@none@")
 		{
@@ -62,7 +62,7 @@ static void playIntro(split &it, int tx, int ty, int delay)
 		drawMapTopLayer();
 
 		for (int i = 0 ; i < 3 ; i++)
-			if (text[i] != NULL)
+			if (text[i] != nullptr)
 				graphics.blit(text[i], 320, 150 + (i * 30), graphics.screen, true);
 
 		if (engine.userAccepts())
@@ -94,7 +94,7 @@ static void playIntro(split &it, int tx, int ty, int delay)
 
 static void showIntroError()
 {
-	SDL_FillRect(graphics.screen, NULL, graphics.black);
+	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 
 	engine.flushInput();
 

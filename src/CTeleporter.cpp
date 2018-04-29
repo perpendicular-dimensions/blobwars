@@ -25,7 +25,7 @@ Teleporter::Teleporter()
 {
 	x = y = 0;
 	destX = destY = 0;
-	sprite = NULL;
+	sprite = nullptr;
 }
 
 void Teleporter::setName(const std::string &name)

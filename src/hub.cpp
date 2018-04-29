@@ -404,7 +404,7 @@ static bool requirementMet(const std::string &requiredLevel)
 
 int doHub()
 {
-	SDL_FillRect(graphics.screen, NULL, graphics.black);
+	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.delay(1000);
 	
 	graphics.free();
@@ -539,8 +539,8 @@ int doHub()
 	audio.playMusic();
 
 	int labelWidth = 0;
-	Uint32 frameLimit = SDL_GetTicks() + 16;
-	Uint32 now = SDL_GetTicks();
+	uint32_t frameLimit = SDL_GetTicks() + 16;
+	uint32_t now = SDL_GetTicks();
 	
 	while (rtn == -1)
 	{

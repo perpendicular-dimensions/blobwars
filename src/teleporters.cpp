@@ -82,7 +82,7 @@ void doTeleporters()
 
 		if ((abs(x) <= 800) && (abs(y) <= 600))
 		{
-			if (teleport->sprite == NULL)
+			if (teleport->sprite == nullptr)
 			{
 				teleport->sprite = graphics.getSprite("Teleporter", true);
 			}

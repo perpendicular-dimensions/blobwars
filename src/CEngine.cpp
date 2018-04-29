@@ -58,11 +58,11 @@ Engine::Engine()
 
 	#ifdef FRAMEWORK_SDL
 	char pakPath[PATH_MAX] = PAKFULLPATH;
-	if (CFBundleGetMainBundle() != NULL) {
-		CFURLRef pakURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), CFSTR(PAKNAME), NULL, NULL);
-		if (pakURL != NULL) {
+	if (CFBundleGetMainBundle() != nullptr) {
+		CFURLRef pakURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), CFSTR(PAKNAME), nullptr, nullptr);
+		if (pakURL != nullptr) {
 			CFShow(pakURL);
-			CFURLGetFileSystemRepresentation(pakURL, true, (UInt8*)pakPath, sizeof(pakPath));
+			CFURLGetFileSystemRepresentation(pakURL, true, (uint8_t*)pakPath, sizeof(pakPath));
 			CFRelease(pakURL);
 		}
 	}
@@ -569,7 +569,7 @@ Widget *Engine::getWidgetByName(const std::string &name)
 
 	debug(("No such widget '%s'\n", name));
 
-	return NULL;
+	return nullptr;
 }
 
 void Engine::showWidgetGroup(const std::string &groupName, bool show)
@@ -611,7 +611,7 @@ void Engine::enableWidgetGroup(const std::string &groupName, bool show)
 void Engine::showWidget(const std::string &name, bool show)
 {
 	Widget *widget = getWidgetByName(name);
-	if (widget != NULL)
+	if (widget != nullptr)
 	{
 		widget->visible = show;
 		widget->redraw();
@@ -621,7 +621,7 @@ void Engine::showWidget(const std::string &name, bool show)
 void Engine::enableWidget(const std::string &name, bool enable)
 {
 	Widget *widget = getWidgetByName(name);
-	if (widget != NULL)
+	if (widget != nullptr)
 	{
 		widget->enabled = enable;
 		widget->redraw();
@@ -631,14 +631,14 @@ void Engine::enableWidget(const std::string &name, bool enable)
 void Engine::setWidgetVariable(const std::string &name, int *variable)
 {
 	Widget *widget = getWidgetByName(name);
-	if (widget != NULL)
+	if (widget != nullptr)
 		widget->value = variable;
 }
 
 bool Engine::widgetChanged(const std::string &name)
 {
 	Widget *widget = getWidgetByName(name);
-	if (widget != NULL)
+	if (widget != nullptr)
 		return widget->changed;
 
 	return false;
@@ -728,7 +728,7 @@ int Engine::processWidgets()
 
 	if ((keyState[SDL_SCANCODE_RETURN]) || (keyState[SDL_SCANCODE_SPACE]) || (keyState[SDL_SCANCODE_LCTRL]) || (joykeyFire && highlightedWidget->type != WG_JOYPAD))
 	{
-		if (highlightedWidget->value == NULL)
+		if (highlightedWidget->value == nullptr)
 		{
 			debug(("%s has not been implemented!\n", highlightedWidget->name));
 		}

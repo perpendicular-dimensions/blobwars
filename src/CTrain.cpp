@@ -25,7 +25,7 @@ Train::Train()
 {
 	active = true;
 	type = TR_TRAIN;
-	sprite = NULL;
+	sprite = nullptr;
 	waitAtStart = true;
 }
 

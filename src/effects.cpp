@@ -108,7 +108,7 @@ void doEffects()
 		}
 		else if (effect->flags & EFF_COLORED)
 		{
-			map.addParticle(effect->x, effect->y, 0, 1, Math::rrand(5, 30), effect->color, NULL, PAR_COLLIDES);
+			map.addParticle(effect->x, effect->y, 0, 1, Math::rrand(5, 30), effect->color, nullptr, PAR_COLLIDES);
 		}
 
 		x = (int)(effect->x - engine.playerPosX);

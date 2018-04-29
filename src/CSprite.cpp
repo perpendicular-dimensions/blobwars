@@ -28,7 +28,7 @@ Sprite::Sprite()
 {
 	for (int i = 0 ; i < 8 ; i++)
 	{
-		image[i] = NULL;
+		image[i] = nullptr;
 		frameLength[i] = 0;
 	}
 
@@ -96,10 +96,10 @@ void Sprite::free()
 {
 	for (int i = 0 ; i < 8 ; i++)
 	{
-		if (image[i] != NULL)
+		if (image[i] != nullptr)
 		{
 			SDL_FreeSurface(image[i]);
-			image[i] = NULL;
+			image[i] = nullptr;
 			frameLength[i] = 0;
 		}
 	}

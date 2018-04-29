@@ -38,7 +38,7 @@ void showAllSprites()
 		engine.getInput();
 		config.populate();
 
-		SDL_FillRect(graphics.screen, NULL, graphics.black);
+		SDL_FillRect(graphics.screen, nullptr, graphics.black);
 
 		for (auto &[name, sprite]: graphics.getSprites())
 		{

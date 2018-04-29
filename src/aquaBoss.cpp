@@ -233,7 +233,7 @@ static void aquaBossDie()
 	{
 		checkObjectives(self->name, false);
 		
-		map.mainBossPart = NULL;
+		map.mainBossPart = nullptr;
 	}
 }
 

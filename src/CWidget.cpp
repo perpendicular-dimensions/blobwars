@@ -40,8 +40,8 @@ void Widget::setValue(int *value)
 
 void Widget::redraw()
 {
-	if (image != NULL)
+	if (image != nullptr)
 		SDL_FreeSurface(image);
 
-	image = NULL;
+	image = nullptr;
 }

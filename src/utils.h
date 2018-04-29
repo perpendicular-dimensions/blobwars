@@ -17,7 +17,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-/* Replacement for strstr(haystack, needle) ==/!= NULL */
+/* Replacement for strstr(haystack, needle) ==/!= nullptr */
 template<typename T>
 inline bool contains(const std::string &haystack, T needle) { return haystack.find(needle) != haystack.npos; }
 

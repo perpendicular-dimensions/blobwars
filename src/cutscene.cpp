@@ -101,14 +101,14 @@ static void showScene(bool allowSkip)
 	graphics.setFontSize(0);
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 	
-	SDL_FillRect(graphics.screen, NULL, graphics.black);
+	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.delay(500);
 	
 	auto it = scenes.begin();
 	
 	SDL_Surface *panel = graphics.quickSprite("panel", graphics.createSurface(640, 90));
-	SDL_Surface *image = NULL;
-	SDL_FillRect(panel, NULL, graphics.black);
+	SDL_Surface *image = nullptr;
+	SDL_FillRect(panel, nullptr, graphics.black);
 	
 	float panelAlpha = 0;
 	
@@ -142,7 +142,7 @@ static void showScene(bool allowSkip)
 		{
 			panelAlpha += (1 * engine.getTimeDifference());
 			SDL_SetAlpha(panel, panelAlpha);
-			if (image != NULL)
+			if (image != nullptr)
 			{
 				SDL_SetAlpha(image, panelAlpha);
 				graphics.blit(image, 0, 0, graphics.screen, false);
@@ -161,9 +161,9 @@ static void showScene(bool allowSkip)
 				changeTime = scene->waitTime;
 				graphics.clearChatString();
 				graphics.createChatString(scene->text);
-				SDL_FillRect(panel, NULL, graphics.black);
+				SDL_FillRect(panel, nullptr, graphics.black);
 				graphics.drawChatString(panel, 0);
-				image = NULL;
+				image = nullptr;
 				
 				if (!scene->sprite.empty())
 				{
@@ -181,7 +181,7 @@ static void showScene(bool allowSkip)
 		SDL_Delay(16);
 	}
 	
-	SDL_FillRect(graphics.screen, NULL, graphics.black);
+	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.delay(500);
 }
 

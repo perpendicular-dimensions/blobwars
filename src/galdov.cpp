@@ -56,7 +56,7 @@ static void splitParticles()
 	{
 		dy = Math::rrand(-150, -50);
 		dy /= 100;
-		map.addParticle(self->x + (Math::prand() % self->width), self->y  + (Math::prand() % self->height), dx, dy, Math::rrand(1, 60), color, NULL, PAR_WEIGHTLESS);
+		map.addParticle(self->x + (Math::prand() % self->width), self->y  + (Math::prand() % self->height), dx, dy, Math::rrand(1, 60), color, nullptr, PAR_WEIGHTLESS);
 	}
 	
 	self->setThinkTime(1);
@@ -386,9 +386,9 @@ void galdovDie()
 {	
 	self->health--;
 	
-	if (map.mainBossPart != NULL)
+	if (map.mainBossPart != nullptr)
 	{
-		map.mainBossPart = NULL;
+		map.mainBossPart = nullptr;
 		audio.playSound(SND_BOSSCUSTOM2, CH_AMBIANCE, self->x);
 	}
 	
@@ -415,7 +415,7 @@ void galdovDie()
 	if (self->health <= -100)
 	{
 		checkObjectives(self->name, false);	
-		map.mainBossPart = NULL;
+		map.mainBossPart = nullptr;
 		addTeleportParticles(self->x, self->y, 75, SND_TELEPORT3);
 	}
 }
@@ -487,7 +487,7 @@ void galdovInit()
 		map.boss[i]->y = 9999;
 		map.boss[i]->active = false;
 		map.boss[i]->think = &galdovAttack;
-		map.boss[i]->react = NULL;
+		map.boss[i]->react = nullptr;
 		map.boss[i]->die = &fakeDie;
 	}
 	

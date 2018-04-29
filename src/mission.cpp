@@ -35,11 +35,11 @@ static void skipBossMission()
 		gameData.addCompletedObjective("BioMech Communications", "Easy Mode Skip", 1, 1);
 		game.hasAquaLung = true;
 		game.stagesCleared = 11;
-		SDL_FillRect(graphics.screen, NULL, graphics.black);
+		SDL_FillRect(graphics.screen, nullptr, graphics.black);
 		graphics.delay(250);
 		graphics.drawString(_("You got the Aqua Lung!"), 320, 420, TXT_CENTERED, graphics.screen);
 		graphics.delay(2000);
-		SDL_FillRect(graphics.screen, NULL, graphics.black);
+		SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	}
 	
 	if (game.stagesCleared == 15)
@@ -47,11 +47,11 @@ static void skipBossMission()
 		gameData.addCompletedObjective("BioMech Assimilator", "Easy Mode Skip", 1, 1);
 		game.hasJetPack = true;
 		game.stagesCleared = 16;
-		SDL_FillRect(graphics.screen, NULL, graphics.black);
+		SDL_FillRect(graphics.screen, nullptr, graphics.black);
 		graphics.delay(250);
 		graphics.drawString(_("You got the Jet Pack!"), 320, 420, TXT_CENTERED, graphics.screen);
 		graphics.delay(2000);
-		SDL_FillRect(graphics.screen, NULL, graphics.black);
+		SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	}
 	
 	if (game.stagesCleared == 21)
@@ -137,7 +137,7 @@ void showMissionClear()
 	audio.loadSound(0, "sound/pop1");
 	audio.loadSound(1, "sound/cheer");
 
-	SDL_FillRect(graphics.screen, NULL, graphics.black);
+	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.updateScreen();
 
 	int y = 520;

@@ -2,7 +2,7 @@
 
 Config::Config()
 {
-	sdlJoystick = NULL;
+	sdlJoystick = nullptr;
 	
 	for (int i = 0 ; i < CONTROL::MAX ; i++)
 	{

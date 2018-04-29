@@ -223,7 +223,7 @@ static void showInGameOptions()
 		if (restartyes)
 		{
 			game.setMissionOver(MIS_PLAYERRESTART);
-			SDL_FillRect(graphics.screen, NULL, graphics.black);
+			SDL_FillRect(graphics.screen, nullptr, graphics.black);
 			audio.stopMusic();
 			audio.stopAmbiance();
 			graphics.delay(500);
@@ -375,7 +375,7 @@ int gameover()
 
 void showMissionInformation()
 {
-	SDL_FillRect(graphics.screen, NULL, graphics.black);
+	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.updateScreen();
 
 	SDL_Surface *panel = graphics.createSurface(400, 300);
@@ -509,7 +509,7 @@ void showMissionInformation()
 	SDL_FreeSurface(panel);
 	SDL_FreeSurface(panelBack);
 
-	SDL_FillRect(graphics.screen, NULL, graphics.black);
+	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.delay(1000);
 }
 
@@ -554,14 +554,14 @@ int doGame()
 {
 	graphics.setFontSize(0);
 
-	SDL_FillRect(graphics.screen, NULL, graphics.black);
+	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.delay(1000);
 
-	Uint32 frames, frameLimit, millis;
-	Uint32 start, cur;
+	uint32_t frames, frameLimit, millis;
+	uint32_t start, cur;
 
 	#if DEBUG
-	Uint32 now, then, frameCounter;
+	uint32_t now, then, frameCounter;
 	std::string fps = "fps";
 	#endif
 
@@ -714,7 +714,7 @@ int doGame()
 			{
 				if (game.missionOverReason == MIS_PLAYEROUT)
 				{
-					SDL_FillRect(graphics.screen, NULL, graphics.black);
+					SDL_FillRect(graphics.screen, nullptr, graphics.black);
 					graphics.updateScreen();
 					graphics.delay(1000);
 					engine.flushInput();
@@ -897,7 +897,7 @@ int doGame()
 			break;
 			
 		case MIS_GAMECOMPLETE:
-			SDL_FillRect(graphics.screen, NULL, graphics.white);
+			SDL_FillRect(graphics.screen, nullptr, graphics.white);
 			graphics.updateScreen();
 			graphics.fadeToBlack();
 			

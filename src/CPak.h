@@ -23,8 +23,8 @@ class Pak {
 
 	private:
 	
-		Uint32 numberOfFiles;
-		Uint32 listPos;
+		uint32_t numberOfFiles;
+		uint32_t listPos;
 		
 		FileData *fd;
 		FileData *currentFile;

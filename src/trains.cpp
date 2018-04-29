@@ -367,7 +367,7 @@ void doTrains()
 			}
 		}
 
-		if (train->sprite == NULL)
+		if (train->sprite == nullptr)
 		{
 			setTrainSprite(train.get());
 		}

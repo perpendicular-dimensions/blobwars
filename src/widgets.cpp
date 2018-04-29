@@ -199,7 +199,7 @@ void drawWidgets()
 
 	for (auto &&widget: engine.widgets)
 	{
-		if (widget->image == NULL)
+		if (widget->image == nullptr)
 		{
 			generateWidgetImage(widget.get());
 		}

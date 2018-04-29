@@ -37,10 +37,10 @@ and then proceeds. THIS MUST NOT BE REMOVED!!!!!
 */
 void showLicense()
 {
-	SDL_FillRect(graphics.screen, NULL, graphics.black);
+	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.delay(1000);
 
-	SDL_FillRect(graphics.screen, NULL, graphics.black);
+	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	SDL_Surface *pic = graphics.loadImage("gfx/main/licensePic.png");
 	graphics.blit(pic, 0, 0, graphics.screen, false);
 	SDL_FreeSurface(pic);
@@ -80,7 +80,7 @@ void showLicense()
 		SDL_Delay(16);
 	}
 	
-	SDL_FillRect(graphics.screen, NULL, graphics.black);
+	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.delay(1000);
 }
 
@@ -89,7 +89,7 @@ void setupUserHomeDirectory()
 {
 	char *userHome = getenv("HOME");
 	
-	if ((!userHome) || (userHome == NULL))
+	if ((!userHome) || (userHome == nullptr))
 	{
 		printf("Couldn't determine user home directory! Exitting.\n");
 		exit(1);
@@ -259,7 +259,7 @@ void initSystem()
 
 	graphics.screen = SDL_CreateRGBSurface(0, 640, 480, 32, 0xff0000, 0xff00, 0xff, 0xff000000);
 
-	if (graphics.screen == NULL)
+	if (graphics.screen == nullptr)
 	{
 		printf("Couldn't set 640x480 video mode: %s\n", SDL_GetError());
 		exit(1);
@@ -278,7 +278,7 @@ void initSystem()
 
 	graphics.window = SDL_CreateWindow("Blobwars: Metal Blob Solid", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, SDL_WINDOW_RESIZABLE);
 
-	if (graphics.window == NULL)
+	if (graphics.window == nullptr)
 	{
 		printf("Couldn't create %dx%d window: %s\n", w, h, SDL_GetError());
 		exit(1);
@@ -286,7 +286,7 @@ void initSystem()
 
 	graphics.renderer = SDL_CreateRenderer(graphics.window, -1, SDL_RENDERER_PRESENTVSYNC);
 
-	if (graphics.renderer == NULL)
+	if (graphics.renderer == nullptr)
 	{
 		printf("Couldn't create renderer: %s\n", SDL_GetError());
 		exit(1);
@@ -295,7 +295,7 @@ void initSystem()
 	SDL_RenderSetLogicalSize(graphics.renderer, graphics.screen->w, graphics.screen->h);
 	graphics.texture = SDL_CreateTexture(graphics.renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, graphics.screen->w, graphics.screen->h);
 
-	if (graphics.texture == NULL)
+	if (graphics.texture == nullptr)
 	{
 		printf("Could not create %dx%d texture: %s\n", graphics.screen->w, graphics.screen->h, SDL_GetError());
 		exit(1);
@@ -408,13 +408,13 @@ void initSystem()
 	}
 	else
 	{
-		SDL_Thread *thread = SDL_CreateThread(initMedalService, "MedalService", NULL);
+		SDL_Thread *thread = SDL_CreateThread(initMedalService, "MedalService", nullptr);
 	
-		if (thread == NULL)
+		if (thread == nullptr)
 		{
 			printf("Unable to create thread: %s\n", SDL_GetError());
 			printf("Calling medal server directly\n");
-			initMedalService(NULL);
+			initMedalService(nullptr);
 			return;
 		}
 	}

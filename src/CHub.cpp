@@ -25,8 +25,8 @@ HubLevel::HubLevel()
 {
 	x = y = 0;
 
-	levelNameImage = NULL;
-	target = NULL;
+	levelNameImage = nullptr;
+	target = nullptr;
 }
 
 void HubLevel::set(const std::string &stageName, const std::string &filename, int x, int y)

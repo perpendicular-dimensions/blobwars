@@ -23,11 +23,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 Pak::Pak()
 {
-	fd = NULL;
+	fd = nullptr;
 	
 	numberOfFiles = 0;
 	listPos = 0;
-	currentFile = NULL;
+	currentFile = nullptr;
 }
 
 Pak::~Pak()
@@ -61,13 +61,13 @@ void Pak::setPakFile(const std::string &pakFilename)
 		return showPakErrorAndExit();
 	}
 
-	fseek(pak, (-sizeof(Uint32)) * 2, SEEK_END);
-	if (fread(&listPos, sizeof(Uint32), 1, pak) != 1)
+	fseek(pak, (-sizeof(uint32_t)) * 2, SEEK_END);
+	if (fread(&listPos, sizeof(uint32_t), 1, pak) != 1)
 	{
 		fclose(pak);
 		return showPakErrorAndExit();
 	}
-	if (fread(&numberOfFiles, sizeof(Uint32), 1, pak) != 1)
+	if (fread(&numberOfFiles, sizeof(uint32_t), 1, pak) != 1)
 	{
 		fclose(pak);
 		return showPakErrorAndExit();
@@ -106,7 +106,7 @@ bool Pak::unpack(const std::string &filename, std::vector<char> *buffer)
 {
 	debug(("Pak : Unpacking %s...\n", filename));
 	
-	currentFile = NULL;
+	currentFile = nullptr;
 	
 	for (unsigned int i = 0 ; i < numberOfFiles ; i++)
 	{
@@ -117,7 +117,7 @@ bool Pak::unpack(const std::string &filename, std::vector<char> *buffer)
 		}
 	}
 	
-	if (currentFile == NULL)
+	if (currentFile == nullptr)
 	{
 		return false;
 	}

@@ -266,7 +266,7 @@ void showMap(int centerX, int centerY)
 	Math::limitInt(&y1, minY, maxY);
 	Math::limitInt(&y2, minY, maxY);
 
-	SDL_FillRect(graphics.screen, NULL, graphics.black);
+	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.updateScreen();
 	SDL_Delay(500);
 	
@@ -415,7 +415,7 @@ void showMap(int centerX, int centerY)
 		SDL_Delay(16);
 	}
 
-	SDL_FillRect(graphics.screen, NULL, graphics.black);
+	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.updateScreen();
 	SDL_Delay(500);
 

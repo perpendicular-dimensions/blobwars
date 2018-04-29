@@ -111,7 +111,7 @@ void doStatusBar()
 					graphics.blit(graphics.getSprite("WarningBlock", true)->getCurrentFrame(), 315 + (i * 15), 7, graphics.screen, false);
 	}
 
-	if ((map.mainBossPart == NULL || contains(engine.message, "Aqua") || contains(engine.message, "Jet")) && (game.missionOverReason != MIS_GAMECOMPLETE))
+	if ((map.mainBossPart == nullptr || contains(engine.message, "Aqua") || contains(engine.message, "Jet")) && (game.missionOverReason != MIS_GAMECOMPLETE))
 	{
 		if (engine.messageTime > -1)
 		{
@@ -150,7 +150,7 @@ void doStatusBar()
 	}
 	else
 	{
-		if (map.mainBossPart != NULL)
+		if (map.mainBossPart != nullptr)
 		{
 			graphics.blit(graphics.infoBar, 0, 455, graphics.screen, false);
 			
@@ -328,9 +328,9 @@ static SDL_Surface *createMusicInfo(void)
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x40, 0x40, 0x40);
 
 	SDL_Surface *text1;
-	SDL_Surface *text2 = NULL;
-	SDL_Surface *text3 = NULL;
-	SDL_Surface *icon = NULL;
+	SDL_Surface *text2 = nullptr;
+	SDL_Surface *text3 = nullptr;
+	SDL_Surface *icon = nullptr;
 	SDL_Surface *panel;
 
 	int w = 0;
@@ -374,7 +374,7 @@ static SDL_Surface *createMusicInfo(void)
 	int x = w + 5;
 
 	panel = graphics.createSurface(w + 10, h + 10);
-	SDL_FillRect(panel, NULL, SDL_MapRGBA(panel->format, 0, 0, 0, 128));
+	SDL_FillRect(panel, nullptr, SDL_MapRGBA(panel->format, 0, 0, 0, 128));
 
 	if (text1) {
 		y -= text1->h;
@@ -417,7 +417,7 @@ void doMusicInfo(unsigned int ticks)
 			if (panel)
 			{
 				SDL_FreeSurface(panel);
-				panel = NULL;
+				panel = nullptr;
 			}
 
 			return;

@@ -73,7 +73,7 @@ void presentPlayerMedal(const std::string &tname)
 	
 	SDL_Thread *thread = SDL_CreateThread(medalWorker, "MedalWorker", (void*)data);
 
-	if (thread == NULL)
+	if (thread == nullptr)
 	{
 		printf("Unable to create thread: %s\n", SDL_GetError());
 		printf("Calling medal server directly\n");

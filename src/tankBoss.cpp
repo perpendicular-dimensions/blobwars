@@ -52,7 +52,7 @@ static void plasmaBurstTraceParticles(int x, int y)
 			dx = -dx;
 		}
 
-		map.addParticle(x + Math::rrand(-6, 6), y + Math::rrand(-2, 2), dx, 0, Math::rrand(1, 90), color[Math::rrand(0, 6)], NULL, PAR_WEIGHTLESS);
+		map.addParticle(x + Math::rrand(-6, 6), y + Math::rrand(-2, 2), dx, 0, Math::rrand(1, 90), color[Math::rrand(0, 6)], nullptr, PAR_WEIGHTLESS);
 	}
 }
 
@@ -75,7 +75,7 @@ static void plasmaChargeParticles()
 	{
 		dx = Math::rrand(-30, 30); dx /= 90;
 		dy = Math::rrand(-30, 30); dy /= 90;
-		map.addParticle(x, y, dx, dy, Math::rrand(30, 60), graphics.green, NULL, PAR_WEIGHTLESS);
+		map.addParticle(x, y, dx, dy, Math::rrand(30, 60), graphics.green, nullptr, PAR_WEIGHTLESS);
 	}
 }
 
@@ -312,9 +312,9 @@ static void tankBossMGFight()
 
 static void activateGLBoss()
 {
-	if (map.boss[1] == NULL)
+	if (map.boss[1] == nullptr)
 	{
-		map.mainBossPart = NULL;
+		map.mainBossPart = nullptr;
 		return;
 	}
 	
@@ -341,7 +341,7 @@ static void tankBossMGSwap()
 
 static void tankBossMGReact()
 {
-	if (map.boss[1] == NULL)
+	if (map.boss[1] == nullptr)
 	{
 		return;
 	}
@@ -526,9 +526,9 @@ static void tankBossGLFight()
 
 static void activateMGBoss()
 {
-	if (map.boss[0] == NULL)
+	if (map.boss[0] == nullptr)
 	{
-		map.mainBossPart = NULL;
+		map.mainBossPart = nullptr;
 		return;
 	}
 	
@@ -555,7 +555,7 @@ static void tankBossGLSwap()
 
 static void tankBossGLReact()
 {
-	if (map.boss[0] == NULL)
+	if (map.boss[0] == nullptr)
 		return;
 	
 	if ((Math::prand() % 25) > 0)

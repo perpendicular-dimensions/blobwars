@@ -28,7 +28,7 @@ FileData::FileData()
 	location = 0;
 }
 
-void FileData::set(const std::string &filename, Uint32 fSize, Uint32 cSize, Uint32 location)
+void FileData::set(const std::string &filename, uint32_t fSize, uint32_t cSize, uint32_t location)
 {
 	
 	this->filename = filename;

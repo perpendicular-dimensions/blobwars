@@ -143,7 +143,7 @@ static void galdovInitBlackDroids()
 {
 	for (int i = 6 ; i < 10 ; i++)
 	{
-		if (map.boss[i] == NULL)
+		if (map.boss[i] == nullptr)
 		{
 			map.boss[i] = new Boss();
 		}
@@ -159,7 +159,7 @@ static void galdovInitBlackDroids()
 		map.boss[i]->immune = 0;
 		map.boss[i]->setThinkTime(2);
 		map.boss[i]->think = &blackDroidAttack;
-		map.boss[i]->react = NULL;
+		map.boss[i]->react = nullptr;
 		map.boss[i]->die = &blackDroidDie;
 		map.boss[i]->setActionFinished(120);
 		Math::addBit(&map.boss[i]->flags, ENT_FLIES);
@@ -210,7 +210,7 @@ static void galdovFinalDropCrystal()
 		self->react = &galdovFinalKeepAlive1;
 		Math::removeBit(&self->flags, ENT_FLIES);
 		Math::removeBit(&self->flags, ENT_FIRETRAIL);
-		map.setMainBossPart(NULL);
+		map.setMainBossPart(nullptr);
 		map.boss[0]->health = 30 * game.skill;
 		map.boss[0]->setSprites(graphics.getSprite("GaldovPain", true), graphics.getSprite("GaldovPain", true), graphics.getSprite("GaldovPain", true));
 		engine.setInfoMessage("Galdov has dropped the crystal! Quick! Get it!!", 99, INFO_HINT);
@@ -228,7 +228,7 @@ static void galdovFinalDie()
 		player.health = 10;
 		self->dx = 5;
 		self->dy = -6;
-		self->react = NULL;
+		self->react = nullptr;
 		Math::removeBit(&self->flags, ENT_FLIES);
 		Math::removeBit(&self->flags, ENT_FIRETRAIL);
 		presentPlayerMedal("Final_Battle");
@@ -447,7 +447,7 @@ static void galdovRejoin()
 	
 	for (int i = 1 ; i < 10 ; i++)
 	{
-		if (map.boss[i] != NULL)
+		if (map.boss[i] != nullptr)
 		{
 			addTeleportParticles(map.boss[i]->x + 4, map.boss[i]->y + 4, 75, -1);
 			
@@ -481,7 +481,7 @@ static void galdovFinalMiniReact()
 	}
 	else
 	{
-		map.setMainBossPart(NULL);
+		map.setMainBossPart(nullptr);
 	}
 }
 
@@ -491,7 +491,7 @@ static void galdovFinalSplit()
 	
 	for (int i = 1 ; i < 10 ; i++)
 	{
-		if (map.boss[i] == NULL)
+		if (map.boss[i] == nullptr)
 		{
 			map.boss[i] = new Boss();
 			map.boss[i]->name = "MiniGaldov";
@@ -536,7 +536,7 @@ static void galdovFinalSplit()
 	map.boss[0]->think = &galdovRejoin;
 	map.boss[0]->active = true;
 	
-	map.setMainBossPart(NULL);
+	map.setMainBossPart(nullptr);
 	
 	debug(("galdovFinalSplit: Done\n"));
 }
@@ -671,13 +671,13 @@ static void galdovFinalShieldInit()
 	self->setActionFinished(60);
 	self->setThinkTime(60);
 	self->think = &galdovMiniAttack;
-	self->react = NULL;
+	self->react = nullptr;
 	
 	Math::addBit(&map.boss[0]->flags, ENT_IMMUNE);
 	
 	for (int i = 1 ; i < 6 ; i++)
 	{
-		if (map.boss[i] != NULL)
+		if (map.boss[i] != nullptr)
 		{
 			delete map.boss[i];
 		}
@@ -692,7 +692,7 @@ static void galdovFinalShieldInit()
 		map.boss[i]->setActionFinished(2);
 		map.boss[i]->setThinkTime(2);
 		map.boss[i]->think = &orbSeekGaldov;
-		map.boss[i]->react = NULL;
+		map.boss[i]->react = nullptr;
 		Math::addBit(&map.boss[i]->flags, ENT_FLIES);
 	}
 	

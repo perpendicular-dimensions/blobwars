@@ -25,7 +25,7 @@ Particle::Particle()
 {
 	x = y = 0;
 	dx = dy = 0;
-	sprite = NULL;
+	sprite = nullptr;
 	color = 0;
 }
 
@@ -42,7 +42,7 @@ void Particle::set(float x, float y, float dx, float dy, int color, int health, 
 
 void Particle::setSprite(Sprite *sprite)
 {
-	if (sprite == NULL)
+	if (sprite == nullptr)
 		return;
 
 	this->sprite = sprite;

@@ -33,14 +33,14 @@ Entity *getDefinedEnemy(const std::string &name)
 
 	debug(("No Such Enemy '%s'\n", name));
 
-	return NULL;
+	return nullptr;
 }
 
 void addEnemy(const std::string &name, int x, int y, int flags)
 {
 	Entity *defEnemy = getDefinedEnemy(name);
 
-	if (defEnemy == NULL)
+	if (defEnemy == nullptr)
 	{
 		debug(("ERROR : COULDN'T FIND ENEMY '%s'!\n", name));
 		return;

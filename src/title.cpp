@@ -151,7 +151,7 @@ static void loadTitleWidgets()
 */
 static void doQuit()
 {
-	SDL_FillRect(graphics.screen, NULL, graphics.black);
+	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	SDL_Surface *sequel = graphics.loadImage("gfx/main/sequel.png");
 	SDL_Surface *book = graphics.loadImage("gfx/main/book.png");
 
@@ -185,7 +185,7 @@ int title()
 	audio.free();
 	graphics.free();
 
-	SDL_FillRect(graphics.screen, NULL, graphics.black);
+	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.delay(1000);
 
 	newGame();
@@ -218,7 +218,7 @@ int title()
 	SDL_Surface *copyright[] = {
 		graphics.quickSprite("Copyright1", graphics.getString(_("Copyright (C) 2011-2015 Perpendicular Dimensions"), true)),
 		graphics.quickSprite("Copyright2", graphics.getString(_("Copyright (C) 2004-2011 Parallel Realities"), true)),
-		NULL,
+		nullptr,
 	};
 
 	#define STRINGIFY_VALUE(x) STRINGIFY(x)
@@ -256,7 +256,7 @@ int title()
 
 	audio.playMusic();
 
-	Uint32 now = SDL_GetTicks();
+	uint32_t now = SDL_GetTicks();
 
 	unsigned int frameLimit = SDL_GetTicks() + 16;
 
@@ -445,7 +445,7 @@ int title()
 
 	engine.deleteWidgets();
 
-	SDL_FillRect(graphics.screen, NULL, graphics.black);
+	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.updateScreen();
 	audio.stopMusic();
 	
@@ -549,7 +549,7 @@ void doCredits()
 	audio.playMusic();
 
 	engine.resetTimeDifference();
-	Uint32 now = SDL_GetTicks();
+	uint32_t now = SDL_GetTicks();
 
 	while (y[numberOfCredits - 1] > 350)
 	{
@@ -561,7 +561,7 @@ void doCredits()
 
 		engine.doTimeDifference();
 
-		SDL_FillRect(graphics.screen, NULL, graphics.black);
+		SDL_FillRect(graphics.screen, nullptr, graphics.black);
 		graphics.blit(backdrop, 0, 365, graphics.screen, false);
 
 		float speed = 0.25;

@@ -33,9 +33,9 @@ Boss::Boss()
 	
 	shieldFrequency = 999;
 	
-	react = NULL;
-	think = NULL;
-	die = NULL;
+	react = nullptr;
+	think = nullptr;
+	die = nullptr;
 	
 	Math::addBit(&flags, ENT_BOSS);
 }

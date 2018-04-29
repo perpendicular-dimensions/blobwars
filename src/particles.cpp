@@ -51,7 +51,7 @@ void addWindParticles()
 		dx = Math::rrand(1, 100) * map.windPower;
 		dx /= 100;
 		dy = Math::rrand(1, 10); dy /= 10;
-		map.addParticle(x, y, dx, dy, 120, c, NULL, PAR_WEIGHTLESS);
+		map.addParticle(x, y, dx, dy, 120, c, nullptr, PAR_WEIGHTLESS);
 	}
 }
 
@@ -76,7 +76,7 @@ void addColorParticles(float x, float y, int amount, int color)
 
 		dx = Math::rrand(-30, 30); dx /= 30;
 		dy = Math::rrand(-30, 30); dy /= 30;
-		map.addParticle(x, y, dx, dy, Math::rrand(5, 30), c, NULL, 0);
+		map.addParticle(x, y, dx, dy, Math::rrand(5, 30), c, nullptr, 0);
 	}
 }
 
@@ -152,7 +152,7 @@ void doParticles()
 		int x = (int)(particle->x - engine.playerPosX);
 		int y = (int)(particle->y - engine.playerPosY);
 
-		if (particle->sprite == NULL)
+		if (particle->sprite == nullptr)
 		{
 			graphics.lock(graphics.screen);
 			

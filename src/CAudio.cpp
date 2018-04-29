@@ -29,11 +29,11 @@ Audio::Audio()
 
 	for (int i = 0 ; i < MAX_SOUNDS ; i++)
 	{
-		sound[i] = NULL;
+		sound[i] = nullptr;
 	}
 
-	music = NULL;
-	quickSound = NULL;
+	music = nullptr;
+	quickSound = nullptr;
 	
 	songlicense = -1;
 }
@@ -72,10 +72,10 @@ bool Audio::loadSound(int i, const std::string &filename)
 		exit(1);
 	}
 
-	if (sound[i] != NULL)
+	if (sound[i] != nullptr)
 	{
 		Mix_FreeChunk(sound[i]);
-		sound[i] = NULL;
+		sound[i] = nullptr;
 	}
 
 	#if USEPAK
@@ -105,12 +105,12 @@ bool Audio::loadMusic(const std::string &filename)
 
 	remove(tempPath.c_str());
 	
-	if (music != NULL)
+	if (music != nullptr)
 	{
 		Mix_HaltMusic();
 		SDL_Delay(5);
 		Mix_FreeMusic(music);
-		music = NULL;
+		music = nullptr;
 	}
 
 	#if USEPAK
@@ -243,12 +243,12 @@ bool Audio::loadGameOverMusic()
 	remove(tempPath.c_str());
 	SDL_Delay(250); // wait a bit, just to be sure!
 
-	if (music != NULL)
+	if (music != nullptr)
 	{
 		Mix_HaltMusic();
 		SDL_Delay(5);
 		Mix_FreeMusic(music);
-		music = NULL;
+		music = nullptr;
 	}
 
 	#if USEPAK
@@ -270,12 +270,12 @@ bool Audio::reloadLevelMusic()
 {
 	// remove the Game Over music first...
 
-	if (music != NULL)
+	if (music != nullptr)
 	{
 		Mix_HaltMusic();
 		SDL_Delay(5);
 		Mix_FreeMusic(music);
-		music = NULL;
+		music = nullptr;
 	}
 
 	return loadMusic(levelMusicName);
@@ -368,26 +368,26 @@ void Audio::free()
 {
 	for (int i = 0 ; i < MAX_SOUNDS - 3 ; i++)
 	{
-		if (sound[i] != NULL)
+		if (sound[i] != nullptr)
 		{
 			Mix_FreeChunk(sound[i]);
-			sound[i] = NULL;
+			sound[i] = nullptr;
 		}
 	}
 
-	if (music != NULL)
+	if (music != nullptr)
 	{
 		Mix_HaltMusic();
 		SDL_Delay(5);
 		Mix_FreeMusic(music);
 	}
 
-	music = NULL;
+	music = nullptr;
 
-	if (quickSound != NULL)
+	if (quickSound != nullptr)
 		Mix_FreeChunk(quickSound);
 
-	quickSound = NULL;
+	quickSound = nullptr;
 }
 
 void Audio::destroy()
@@ -396,10 +396,10 @@ void Audio::destroy()
 
 	for (int i = MAX_SOUNDS - 3 ; i < MAX_SOUNDS ; i++)
 	{
-		if (sound[i] != NULL)
+		if (sound[i] != nullptr)
 		{
 			Mix_FreeChunk(sound[i]);
-			sound[i] = NULL;
+			sound[i] = nullptr;
 		}
 	}
 }

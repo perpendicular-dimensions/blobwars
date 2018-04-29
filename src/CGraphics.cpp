@@ -30,11 +30,11 @@ Graphics::Graphics()
 {
 	for (int i = 0 ; i < MAX_TILES ; i++)
 	{
-		tile[i] = NULL;
+		tile[i] = nullptr;
 	}
 
-	background = NULL;
-	infoMessage = NULL;
+	background = nullptr;
+	infoMessage = nullptr;
 
 	fontSize = 0;
 	
@@ -54,21 +54,21 @@ Graphics::Graphics()
 void Graphics::free()
 {
 	debug(("graphics.free: Background\n"));
-	if (background != NULL)
+	if (background != nullptr)
 	{
 		SDL_FreeSurface(background);
 	}
 	debug(("graphics.free: Background - Done\n"));
 
-	background = NULL;
+	background = nullptr;
 
 	debug(("graphics.free: Tiles\n"));
 	for (int i = 0 ; i < MAX_TILES ; i++)
 	{
-		if (tile[i] != NULL)
+		if (tile[i] != nullptr)
 		{
 			SDL_FreeSurface(tile[i]);
-			tile[i] = NULL;
+			tile[i] = nullptr;
 		}
 	}
 	debug(("graphics.free: Tiles - Done\n"));
@@ -90,7 +90,7 @@ void Graphics::destroy()
 		}
 	}
 	
-	if (medalMessage != NULL)
+	if (medalMessage != nullptr)
 	{
 		SDL_FreeSurface(medalMessage);
 	}
@@ -107,10 +107,10 @@ void Graphics::destroy()
 	
 	for (int i = 0 ; i < 4 ; i++)
 	{
-		if (medal[i] != NULL)
+		if (medal[i] != nullptr)
 		{
 			SDL_FreeSurface(medal[i]);
-			medal[i] = NULL;
+			medal[i] = nullptr;
 		}
 	}
 }
@@ -142,7 +142,7 @@ void Graphics::mapColors()
 
 	infoBar = alphaRect(640, 25, 0x00, 0x00, 0x00);
 	
-	medalMessage = NULL;
+	medalMessage = nullptr;
 }
 
 void Graphics::setTransparent(SDL_Surface *sprite)
@@ -179,8 +179,8 @@ void Graphics::updateScreen()
 		}
 	}
 	
-	SDL_UpdateTexture(texture, NULL, screen->pixels, screen->w * 4);
-	SDL_RenderCopy(renderer, texture, NULL, NULL);
+	SDL_UpdateTexture(texture, nullptr, screen->pixels, screen->w * 4);
+	SDL_RenderCopy(renderer, texture, nullptr, nullptr);
 	SDL_RenderPresent(renderer);
 	SDL_RenderClear(renderer);
 
@@ -398,7 +398,7 @@ SDL_Surface *Graphics::loadImage(const std::string &filename, int hue, int sat, 
 			SDL_Color *color;
 			float r, g, b, h, s, v;
 
-			if (image->format->palette->colors != NULL)
+			if (image->format->palette->colors != nullptr)
 			{
 				for (int i = 1 ; i < image->format->palette->ncolors ; i++)
 				{
@@ -596,7 +596,7 @@ int Graphics::getLavaAnim(int current)
 
 void Graphics::loadBackground(const std::string &filename)
 {
-	if (background != NULL)
+	if (background != nullptr)
 		SDL_FreeSurface(background);
 
 	if (filename == "@none@")
@@ -607,14 +607,14 @@ void Graphics::loadBackground(const std::string &filename)
 	SDL_SetColorKey(background, 0, SDL_MapRGB(background->format, 0, 0, 0));
 }
 
-void Graphics::putPixel(int x, int y, Uint32 pixel, SDL_Surface *dest)
+void Graphics::putPixel(int x, int y, uint32_t pixel, SDL_Surface *dest)
 {
 	if ((x < 0) || (x > 639) || (y < 0) || (y > 479))
 		return;
 
 	int bpp = dest->format->BytesPerPixel;
 	/* Here p is the address to the pixel we want to set */
-	Uint8 *p = (Uint8 *)dest->pixels + y * dest->pitch + x * bpp;
+	uint8_t *p = (uint8_t *)dest->pixels + y * dest->pitch + x * bpp;
 
 	switch(bpp)
 	{
@@ -623,7 +623,7 @@ void Graphics::putPixel(int x, int y, Uint32 pixel, SDL_Surface *dest)
 			break;
 
 		case 2:
-			*(Uint16 *)p = pixel;
+			*(uint16_t *)p = pixel;
 			break;
 
 		case 3:
@@ -642,25 +642,25 @@ void Graphics::putPixel(int x, int y, Uint32 pixel, SDL_Surface *dest)
 			break;
 
 		case 4:
-			*(Uint32 *)p = pixel;
+			*(uint32_t *)p = pixel;
 			break;
 	}
 }
 
-Uint32 Graphics::getPixel(SDL_Surface *surface, int x, int y)
+uint32_t Graphics::getPixel(SDL_Surface *surface, int x, int y)
 {
 	if ((x < 0) || (x > (surface->w - 1)) || (y < 0) || (y > (surface->h - 1)))
 		return 0;
 
 	int bpp = surface->format->BytesPerPixel;
-	Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
+	uint8_t *p = (uint8_t *)surface->pixels + y * surface->pitch + x * bpp;
 
 	switch(bpp) {
 	case 1:
 		return *p;
 
 	case 2:
-		return *(Uint16 *)p;
+		return *(uint16_t *)p;
 
 	case 3:
 		if(SDL_BYTEORDER == SDL_BIG_ENDIAN)
@@ -669,7 +669,7 @@ Uint32 Graphics::getPixel(SDL_Surface *surface, int x, int y)
 				return p[0] | p[1] << 8 | p[2] << 16;
 
 	case 4:
-		return *(Uint32 *)p;
+		return *(uint32_t *)p;
 
 	default:
 		return 0;       /* shouldn't happen, but avoids warnings */
@@ -702,7 +702,7 @@ void Graphics::blit(SDL_Surface *image, int x, int y, SDL_Surface *dest, bool ce
 {
 	if (!image)
 	{
-		return showErrorAndExit("graphics::blit() - NULL pointer", SDL_GetError());
+		return showErrorAndExit("graphics::blit() - nullptr pointer", SDL_GetError());
 	}
 
 	if ((x < -image->w) || (x > 640 + image->w))
@@ -724,16 +724,16 @@ void Graphics::blit(SDL_Surface *image, int x, int y, SDL_Surface *dest, bool ce
 	gRect.h = image->h;
 
 	/* Blit onto the screen surface */
-	if (SDL_BlitSurface(image, NULL, dest, &gRect) < 0)
+	if (SDL_BlitSurface(image, nullptr, dest, &gRect) < 0)
 		showErrorAndExit("graphics::blit() - %s", SDL_GetError());
 }
 
 void Graphics::drawBackground()
 {
-	if (background != NULL)
+	if (background != nullptr)
 		blit(background, 0, 0, screen, false);
 	else
-		SDL_FillRect(screen, NULL, black);
+		SDL_FillRect(screen, nullptr, black);
 }
 
 void Graphics::drawBackground(SDL_Rect *r)
@@ -907,7 +907,7 @@ void Graphics::drawChatString(SDL_Surface *surface, int y)
 
 void Graphics::showMedalMessage(int type, const std::string &in)
 {
-	if (medalMessage != NULL)
+	if (medalMessage != nullptr)
 	{
 		SDL_FreeSurface(medalMessage);
 	}
@@ -964,7 +964,7 @@ SDL_Surface *Graphics::createSurface(int width, int height)
 
 	surface = SDL_CreateRGBSurface(SDL_SWSURFACE, width, height, screen->format->BitsPerPixel, screen->format->Rmask, screen->format->Gmask, screen->format->Bmask, screen->format->Amask);
 
-	if (surface == NULL)
+	if (surface == nullptr)
 		showErrorAndExit("CreateRGBSurface failed: %s\n", SDL_GetError());
 
 	newImage = SDL_ConvertSurface(surface, screen->format, 0);
@@ -974,11 +974,11 @@ SDL_Surface *Graphics::createSurface(int width, int height)
 	return newImage;
 }
 
-SDL_Surface *Graphics::alphaRect(int width, int height, Uint8 red, Uint8 green, Uint8 blue)
+SDL_Surface *Graphics::alphaRect(int width, int height, uint8_t red, uint8_t green, uint8_t blue)
 {
 	SDL_Surface *surface = createSurface(width, height);
 
-	SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, red, green, blue));
+	SDL_FillRect(surface, nullptr, SDL_MapRGB(surface->format, red, green, blue));
 
 	SDL_SetAlpha(surface, 130);
 
@@ -1066,7 +1066,7 @@ void Graphics::showLicenseErrorAndExit()
 void Graphics::showErrorAndExit(const std::string &error, const std::string &param)
 {
 	abort();
-	SDL_FillRect(screen, NULL, black);
+	SDL_FillRect(screen, nullptr, black);
 
 	if (param == "LICENSE")
 	{

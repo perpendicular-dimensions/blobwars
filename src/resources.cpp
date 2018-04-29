@@ -72,7 +72,7 @@ void loadResources()
 	graphics.quickSprite("keyHeader", graphics.loadImage("gfx/main/keyConfig.png"));
 	graphics.quickSprite("optionsBackground", graphics.loadImage("gfx/main/optionsBackground.png"));
 
-	SDL_FillRect(graphics.screen, NULL, graphics.black);
+	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.drawString(_("Loading..."), 320, 440, TXT_CENTERED, graphics.screen);
 	graphics.showLoading(0, 0);
 	graphics.updateScreen();

@@ -23,7 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 static void showCheatConfig()
 {
-	SDL_FillRect(graphics.screen, NULL, graphics.black);
+	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.delay(500);
 
 	SDL_Surface *header = graphics.getSprite("cheatHeader", true)->image[0];
@@ -88,7 +88,7 @@ static void showCheatConfig()
 	
 	audio.playMenuSound(2);
 
-	SDL_FillRect(graphics.screen, NULL, graphics.black);
+	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.delay(500);
 
 	if (!engine.loadWidgets(_("data/optionWidgets")))
@@ -101,7 +101,7 @@ static void showCheatConfig()
 
 static void showKeyConfig()
 {
-	SDL_FillRect(graphics.screen, NULL, graphics.black);
+	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.delay(500);
 
 	if (!engine.loadWidgets(_("data/keyboardWidgets")))
@@ -180,7 +180,7 @@ static void showKeyConfig()
 
 	audio.playMenuSound(2);
 
-	SDL_FillRect(graphics.screen, NULL, graphics.black);
+	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.delay(500);
 
 	if (!engine.loadWidgets(_("data/optionWidgets")))
@@ -193,7 +193,7 @@ static void showKeyConfig()
 
 static void showJoystickConfig()
 {
-	SDL_FillRect(graphics.screen, NULL, graphics.black);
+	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.delay(500);
 
 	if (!engine.loadWidgets(_("data/joystickWidgets")))
@@ -266,7 +266,7 @@ static void showJoystickConfig()
 
 	audio.playMenuSound(2);
 
-	SDL_FillRect(graphics.screen, NULL, graphics.black);
+	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.delay(500);
 
 	if (!engine.loadWidgets(_("data/optionWidgets")))
@@ -281,7 +281,7 @@ void showOptions()
 {
 	float brightness;
 
-	SDL_FillRect(graphics.screen, NULL, graphics.black);
+	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.delay(500);
 
 	if (!engine.loadWidgets(_("data/optionWidgets")))
@@ -460,6 +460,6 @@ void showOptions()
 
 	audio.playMenuSound(2);
 
-	SDL_FillRect(graphics.screen, NULL, graphics.black);
+	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.delay(500);
 }

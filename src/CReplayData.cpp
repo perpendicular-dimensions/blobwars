@@ -7,7 +7,7 @@ ReplayData::ReplayData()
 	
 	fast = false;
 	
-	header.randomSeed = time(NULL);
+	header.randomSeed = time(nullptr);
 	header.version = VERSION;
 	header.release = RELEASE;
 }

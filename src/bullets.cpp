@@ -164,11 +164,11 @@ static void destroyBullet(Entity *bullet)
 		
 		if (bullet->flags & ENT_SPARKS)
 		{
-			map.addParticle(bullet->x, bullet->y, dx, dy, Math::rrand(5, 30), graphics.white, NULL, 0);
+			map.addParticle(bullet->x, bullet->y, dx, dy, Math::rrand(5, 30), graphics.white, nullptr, 0);
 		}
 		else
 		{
-			map.addParticle(bullet->x, bullet->y, dx, dy, Math::rrand(5, 30), graphics.red, NULL, 0);
+			map.addParticle(bullet->x, bullet->y, dx, dy, Math::rrand(5, 30), graphics.red, nullptr, 0);
 		}
 	}
 }

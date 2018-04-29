@@ -45,7 +45,7 @@ Entity::Entity()
 
 	for (int i = 0 ; i < 3 ; i++)
 	{
-		sprite[i] = NULL;
+		sprite[i] = nullptr;
 	}
 }
 

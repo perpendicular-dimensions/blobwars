@@ -26,7 +26,7 @@ static int totalFiles = 0;
 static Bytef *buffer;
 static Bytef *output;
 
-static FileData *fileData = NULL;
+static FileData *fileData = nullptr;
 
 void cleanup()
 {
@@ -87,7 +87,7 @@ static void recurseDirectory(const char *dirName)
 
 	dirp = opendir(dirName);
 
-	if (dirp == NULL)
+	if (dirp == nullptr)
 	{
 		printf("%s: Directory does not exist or is not accessible\n", dirName);
 		return;
@@ -202,8 +202,8 @@ int main(int argc, char *argv[])
 	printf("Paking...000%%");
 	fflush(stdout);
 	
-	output = NULL;
-	buffer = NULL;
+	output = nullptr;
+	buffer = nullptr;
 	
 	atexit(cleanup);
 
