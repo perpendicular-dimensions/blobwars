@@ -275,35 +275,35 @@ void doPauseInfo()
 		
 		graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 		
-		if ((game.skill < 3) &&  (contains(objective->description, "L.R.T.S.")) && (!gameData.completedWorld))
+		if ((game.skill < 3) &&  contains(objective.description, "L.R.T.S.") && (!gameData.completedWorld))
 		{
 			graphics.drawString(_("???? ???????? ????"), col1, y, TXT_RIGHT, graphics.screen);
 		}
 		else
 		{
-			graphics.drawString(_(objective->description), col1, y, TXT_RIGHT, graphics.screen);
+			graphics.drawString(_(objective.description), col1, y, TXT_RIGHT, graphics.screen);
 		}
 		
 		// this is a fake objective (for the 4th Ancient Tomb)
-		if (objective->targetValue == -1)
+		if (objective.targetValue == -1)
 		{
 			graphics.setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
 			graphics.drawString(_("Incomplete"), col2, y, TXT_LEFT, graphics.screen);
 		}
-		else if (objective->currentValue < objective->targetValue)
+		else if (objective.currentValue < objective.targetValue)
 		{
 			graphics.setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
-			if (objective->targetValue == 1)
+			if (objective.targetValue == 1)
 			{
 				graphics.drawString(_("Incomplete"), col2, y, TXT_LEFT, graphics.screen);
 			}
 			else
 			{
-				message = fmt::format("{} / {}", objective->currentValue, objective->targetValue);
+				message = fmt::format("{} / {}", objective.currentValue, objective.targetValue);
     			graphics.drawString(message, col2, y, TXT_LEFT, graphics.screen);
 			}
 
-			if (!objective->required)
+			if (!objective.required)
 			{
 				graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 				graphics.drawString(_("(optional)"), 450, y, TXT_LEFT, graphics.screen);

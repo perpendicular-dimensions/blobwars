@@ -21,32 +21,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-Entity::Entity()
+Entity::Entity(int id, const std::string &name, int x, int y)
 {
-	name[0] = 0;
-	x = y = dx = dy = tx = ty = width = height = 0;
-	id = 0;
-	health = 0;
-	immune = 120;
-	environment = ENV_AIR;
-	value = 0;
-	oxygen = 7;
-	falling = false;
-	fuel = 7;
-	thinktime = baseThink = 0;
-	owner = this;
-	face = 0;
-	reload = 0;
-	deathSound = -1;
-	flags = 0;
-	falling = false;
-	owner = this;
-	dead = DEAD_ALIVE;
-
-	for (int i = 0 ; i < 3 ; i++)
-	{
-		sprite[i] = nullptr;
-	}
+	this->id = id;
+	this->name = name;
+	this->x = x;
+	this->y = y;
 }
 
 void Entity::setName(const std::string &name)

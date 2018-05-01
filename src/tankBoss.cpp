@@ -110,25 +110,25 @@ static void traceTankBossMGFireLine()
 		
 		if (Collision::collision(player.x, player.y, 20, 20, x - 1, y - 1, 2, 2))
 		{
-			throwAndDamageEntity(&player, 100, dx * 10, dx * 10, 0);
+			throwAndDamageEntity(player, 100, dx * 10, dx * 10, 0);
 			
 			for (int i = 0 ; i < 10 ; i++)
 			{
-				addExplosion(player.x + Math::rrand(-25, 25), player.y + Math::rrand(-25, 25), 10, self);
+				addExplosion(player.x + Math::rrand(-25, 25), player.y + Math::rrand(-25, 25), 10, *self);
 			}
 		}
 		
 		for (auto &&enemy: map.enemies)
 		{
-			if (Collision::collision(enemy->x, enemy->y, enemy->getFaceImage()->w, enemy->getFaceImage()->h, x - 1, y - 1, 2, 2))
+			if (Collision::collision(enemy.x, enemy.y, enemy.getFaceImage()->w, enemy.getFaceImage()->h, x - 1, y - 1, 2, 2))
 			{
-				throwAndDamageEntity(enemy.get(), 100, dx * 10, dx * 10, 0);
+				throwAndDamageEntity(enemy, 100, dx * 10, dx * 10, 0);
 				
-				enemy->health = -1;
+				enemy.health = -1;
 				
 				for (int i = 0 ; i < 10 ; i++)
 				{
-					addExplosion(enemy->x + Math::rrand(-25, 25), enemy->y + Math::rrand(-25, 25), 10, self);
+					addExplosion(enemy.x + Math::rrand(-25, 25), enemy.y + Math::rrand(-25, 25), 10, *self);
 				}
 			}
 		}	
@@ -175,7 +175,7 @@ static void tankBossMGRapidFire()
 {
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
 	
-	addBullet((Entity*)self, 0, 0);
+	addBullet(*self, 0, 0);
 	
 	self->think = &tankBossMGRapidFire;
 	self->setActionFinished(4);
@@ -193,7 +193,7 @@ static void tankBossMGFire()
 {
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
 	
-	addBullet((Entity*)self, 0, 0);
+	addBullet(*self, 0, 0);
 	
 	self->think = &tankBossMGFire;
 	self->setActionFinished(15);
@@ -224,9 +224,9 @@ static void tankBossMGDie()
 	self->health -= Math::rrand(1, 2);
 	
 	// don't hurt the player(!)
-	addExplosion(self->x, self->y, 50, &player);
-	addSmokeAndFire(self, Math::rrand(-5, 5), Math::rrand(-5, 5), 2);
-	addBlood(self, Math::rrand(-5, 5), Math::rrand(-5, 5), 3);
+	addExplosion(self->x, self->y, 50, player);
+	addSmokeAndFire(*self, Math::rrand(-5, 5), Math::rrand(-5, 5), 2);
+	addBlood(*self, Math::rrand(-5, 5), Math::rrand(-5, 5), 3);
 	
 	if ((Math::prand() % 5) == 0)
 	{
@@ -418,7 +418,7 @@ static void tankBossGLRapidFire()
 {
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
 	
-	addBullet((Entity*)self, 0, 0);
+	addBullet(*self, 0, 0);
 	
 	self->think = &tankBossGLRapidFire;
 	self->setActionFinished(4);
@@ -440,7 +440,7 @@ static void tankBossGLMortor()
 	if (self->face == 1)
 		speed = -speed;
 	
-	addBullet((Entity*)self, speed, 0);
+	addBullet(*self, speed, 0);
 	
 	self->think = &tankBossGLMortor;
 	self->setActionFinished(20);
@@ -576,9 +576,9 @@ static void tankBossGLDie()
 	self->health -= Math::rrand(1, 2);
 	
 	// don't hurt the player(!)
-	addExplosion(self->x, self->y, 50, &player);
-	addSmokeAndFire(self, Math::rrand(-5, 5), Math::rrand(-5, 5), 2);
-	addBlood(self, Math::rrand(-5, 5), Math::rrand(-5, 5), 3);
+	addExplosion(self->x, self->y, 50, player);
+	addSmokeAndFire(*self, Math::rrand(-5, 5), Math::rrand(-5, 5), 2);
+	addBlood(*self, Math::rrand(-5, 5), Math::rrand(-5, 5), 3);
 	
 	if ((Math::prand() % 5) == 0)
 	{

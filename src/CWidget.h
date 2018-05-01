@@ -44,7 +44,8 @@ class Widget {
 
 		SDL_Surface *image = nullptr;
 
-	void setProperties(const std::string &name, const std::string &groupName, const std::string &label, const std::string &options, int x, int y, int min, int max);
+	Widget(const std::string &name, const std::string &groupName, const std::string &label, const std::string &options, int type, int x, int y, int min, int max);
+	~Widget();
 	void setValue(int *value);
 	void redraw();
 

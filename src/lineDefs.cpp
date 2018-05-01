@@ -23,20 +23,18 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 void addLineDef(const std::string &name, const std::string &linkName, const std::string &message, int x, int y, int width, int height, bool active)
 {
-	LineDef *lineDef = new LineDef();
+	auto &lineDef = map.lines.emplace_back();
 
-	lineDef->set(name, linkName, message, x, y, width, height);
-	lineDef->activated = active;
-
-	map.addLineDef(lineDef);
+	lineDef.set(name, linkName, message, x, y, width, height);
+	lineDef.activated = active;
 }
 
 void showMessageLineDef(const std::string &linkName, bool show)
 {
 	for (auto &&lineDef: map.lines)
 	{
-		if (lineDef->linkName == linkName)
-			lineDef->activated = show;
+		if (lineDef.linkName == linkName)
+			lineDef.activated = show;
 	}
 }
 
@@ -46,11 +44,11 @@ void doLineDefs()
 
 	for (auto &&lineDef: map.lines)
 	{
-		if (lineDef->activated)
+		if (lineDef.activated)
 			continue;
 
-		x = (int)(lineDef->x - engine.playerPosX);
-		y = (int)(lineDef->y - engine.playerPosY);
+		x = (int)(lineDef.x - engine.playerPosX);
+		y = (int)(lineDef.y - engine.playerPosY);
 
 		absX = abs(x);
 		absY = abs(y);
@@ -58,7 +56,7 @@ void doLineDefs()
 		if ((absX < 800) && (absY < 600))
 		{
 			#if DEBUG
-				graphics.drawRect(x, y, lineDef->width, lineDef->height, graphics.red, graphics.screen);
+				graphics.drawRect(x, y, lineDef.width, lineDef.height, graphics.red, graphics.screen);
 			#endif
 
 			if (player.health < 1)
@@ -66,15 +64,15 @@ void doLineDefs()
 				continue;
 			}
 
-			if (Collision::collision(player.x + player.dx, player.y + player.dy, player.width, player.height, lineDef->x, lineDef->y, lineDef->width, lineDef->height))
+			if (Collision::collision(player.x + player.dx, player.y + player.dy, player.width, player.height, lineDef.x, lineDef.y, lineDef.width, lineDef.height))
 			{
-				if ((lineDef->name == "Exit") && (!requiredObjectivesCompleted()))
+				if ((lineDef.name == "Exit") && (!requiredObjectivesCompleted()))
 				{
 					config.resetControl(CONTROL::LEFT);
 					config.resetControl(CONTROL::RIGHT);
 
-					if (player.dx > 0) player.x = (lineDef->x - player.width) - 2;
-					if (player.dx < 0) player.x = (lineDef->x + lineDef->width + 2);
+					if (player.dx > 0) player.x = (lineDef.x - player.width) - 2;
+					if (player.dx < 0) player.x = (lineDef.x + lineDef.width + 2);
 					
 					player.dx = 0;
 					
@@ -86,15 +84,15 @@ void doLineDefs()
 					continue;
 				}
 
-				if (lineDef->name == "Message")
+				if (lineDef.name == "Message")
 				{
-					engine.setInfoMessage(lineDef->activateMessage, 1, INFO_HINT);
-					if (lineDef->linkName == "@none@")
+					engine.setInfoMessage(lineDef.activateMessage, 1, INFO_HINT);
+					if (lineDef.linkName == "@none@")
 					{
-						lineDef->activated = true;
+						lineDef.activated = true;
 					}
 				}
-				else if (lineDef->name == "PlayerOut")
+				else if (lineDef.name == "PlayerOut")
 				{
 					if (game.missionOver == 0)
 					{
@@ -110,27 +108,27 @@ void doLineDefs()
 						game.setMissionOver(MIS_PLAYERDEAD);
 					}
 				}
-				else if (lineDef->name == "CheckPoint")
+				else if (lineDef.name == "CheckPoint")
 				{
 					game.setObjectiveCheckPoint();
 					engine.setInfoMessage("Checkpoint Reached", 9, INFO_OBJECTIVE);
-					lineDef->activated = true;
+					lineDef.activated = true;
 				}
-				else if (lineDef->name == "ActivateBoss")
+				else if (lineDef.name == "ActivateBoss")
 				{
 					map.mainBossPart->active = true;
-					lineDef->activated = true;
+					lineDef.activated = true;
 				}
 				else
 				{
-					checkObjectives(lineDef->name, true);
-					activateTrigger(lineDef->linkName, lineDef->activateMessage, true);
-					lineDef->activated = true;
+					checkObjectives(lineDef.name, true);
+					activateTrigger(lineDef.linkName, lineDef.activateMessage, true);
+					lineDef.activated = true;
 					
-					if (lineDef->name == "StealCrystal")
+					if (lineDef.name == "StealCrystal")
 					{
 						stealCrystal();
-						lineDef->activated = true;
+						lineDef.activated = true;
 					}
 				}
 			}

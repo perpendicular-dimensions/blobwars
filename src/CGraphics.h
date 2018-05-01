@@ -30,7 +30,7 @@ class Graphics {
 		TTF_Font *font[5];
 		SDL_Color fontForeground, fontBackground;
 
-		std::map<std::string, std::unique_ptr<Sprite>> sprites;
+		std::map<std::string, Sprite> sprites;
 
 		int fontSize;
 		
@@ -90,9 +90,9 @@ class Graphics {
 	void fadeToBlack();
 	void loadMapTiles(const std::string &baseDir);
 	void loadFont(int i, const std::string &filename, int pixelSize);
-	Sprite *addSprite(const std::string &name);
+	Sprite &addSprite(const std::string &name);
 	Sprite *getSprite(const std::string &name, bool required);
-	const std::map<std::string, std::unique_ptr<Sprite>> &getSprites() { return sprites; }
+	const auto &getSprites() { return sprites; }
 	void animateSprites();
 	int getWaterAnim() const;
 	int getSlimeAnim() const;

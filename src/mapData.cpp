@@ -36,7 +36,6 @@ void getMapTokens(split &it)
 	std::vector<std::string> *persistent;
 	std::vector<std::string>::iterator persistent_it;
 
-	
 	while (true)
 	{
 		if (!previouslyCleared)
@@ -373,58 +372,58 @@ void createPersistentMapData()
 	
 	for (auto &&ent: map.enemies)
 	{
-		line = fmt::format("{} ENEMY \"{}\" {} {}\n", skill, ent->name, ent->x, ent->y);
+		line = fmt::format("{} ENEMY \"{}\" {} {}\n", skill, ent.name, ent.x, ent.y);
 		persistent.push_back(line);
 	}
 	
 	for (auto &&ent: map.items)
 	{
 		// Don't save items that are dying...
-		if (ent->flags & ENT_DYING)
+		if (ent.flags & ENT_DYING)
 		{
 			continue;
 		}
 		
-		line = fmt::format("{} ITEM {} \"{}\" {} {} {}\n", skill, ent->id, ent->name, ent->x, ent->y, ent->sprite[0]->name);
+		line = fmt::format("{} ITEM {} \"{}\" {} {} {}\n", skill, ent.id, ent.name, ent.x, ent.y, ent.sprite[0]->name);
 		persistent.push_back(line);
 	}
 	
 	for (auto &&ent: map.obstacles)
 	{
-		line = fmt::format("{} OBSTACLE \"{}\" {} {} {}\n", skill, ent->name, ent->x, ent->y, ent->sprite[0]->name);
+		line = fmt::format("{} OBSTACLE \"{}\" {} {} {}\n", skill, ent.name, ent.x, ent.y, ent.sprite[0]->name);
 		persistent.push_back(line);
 	}
 	
 	for (auto &&swt: map.switches)
 	{
-		define[0] = engine.getDefineOfValue("SWT_", swt->type);
-		define[1] = getActiveState(swt->activated);
+		define[0] = engine.getDefineOfValue("SWT_", swt.type);
+		define[1] = getActiveState(swt.activated);
 		
-		line = fmt::format("{} SWITCH \"{}\" {} \"{}\" \"{}\" {} {} {} {}\n", skill, swt->name, swt->linkName, swt->requiredObjectName, swt->activateMessage, define[0], swt->x, swt->y, define[1]);
+		line = fmt::format("{} SWITCH \"{}\" {} \"{}\" \"{}\" {} {} {} {}\n", skill, swt.name, swt.linkName, swt.requiredObjectName, swt.activateMessage, define[0], swt.x, swt.y, define[1]);
 		persistent.push_back(line);
 	}
 	
 	for (auto &&train: map.trains)
 	{
-		if (train->type != TR_TRAIN)
+		if (train.type != TR_TRAIN)
 		{
-			if (train->type >= TR_SLIDEDOOR)
+			if (train.type >= TR_SLIDEDOOR)
 			{
-				define[0] = engine.getDefineOfValue("_SLIDE", train->type);
+				define[0] = engine.getDefineOfValue("_SLIDE", train.type);
 			}
 			else
 			{
-				define[0] = engine.getDefineOfValue("_DOO", train->type);
+				define[0] = engine.getDefineOfValue("_DOO", train.type);
 			}
 			
-			define[1] = getActiveState(train->active);
-			line = fmt::format("{} DOOR {} {} {} {} {} {} {}\n", skill, train->name, define[0], train->startX, train->startY, train->endX, train->endY, define[1]);
+			define[1] = getActiveState(train.active);
+			line = fmt::format("{} DOOR {} {} {} {} {} {} {}\n", skill, train.name, define[0], train.startX, train.startY, train.endX, train.endY, define[1]);
 		}
 		else
 		{
-			define[0] = engine.getDefineOfValue("TR_A", train->waitAtStart);
-			define[1] = getActiveState(train->active);
-			line = fmt::format("{} TRAIN {} {} {} {} {} {} {} {}\n", skill, train->name, train->startX, train->startY, train->endX, train->endY, train->getPause(), define[0], define[1]);
+			define[0] = engine.getDefineOfValue("TR_A", train.waitAtStart);
+			define[1] = getActiveState(train.active);
+			line = fmt::format("{} TRAIN {} {} {} {} {} {} {} {}\n", skill, train.name, train.startX, train.startY, train.endX, train.endY, train.getPause(), define[0], define[1]);
 		}
 				
 		persistent.push_back(line);
@@ -432,41 +431,41 @@ void createPersistentMapData()
 	
 	for (auto &&trap: map.traps)
 	{
-		define[0] = engine.getDefineOfValue("TRAP_TYPE", trap->type);
-		define[1] = getActiveState(trap->active);
-		line = fmt::format("{} TRAP {} {} {} {} {} {} {} {} {} {} {} {}\n", skill, trap->name, define[0], (int)trap->damage, (int)trap->speed, (int)trap->startX, (int)trap->startY, (int)trap->endX, (int)trap->endY, (int)trap->waitTime[0], (int)trap->waitTime[1], trap->sprite->name, define[1]);
+		define[0] = engine.getDefineOfValue("TRAP_TYPE", trap.type);
+		define[1] = getActiveState(trap.active);
+		line = fmt::format("{} TRAP {} {} {} {} {} {} {} {} {} {} {} {}\n", skill, trap.name, define[0], (int)trap.damage, (int)trap.speed, (int)trap.startX, (int)trap.startY, (int)trap.endX, (int)trap.endY, (int)trap.waitTime[0], (int)trap.waitTime[1], trap.sprite->name, define[1]);
 		persistent.push_back(line);
 	}
 	
 	for (auto &&teleporter: map.teleports)
 	{
-		define[0] = getActiveState(teleporter->active);
-		line = fmt::format("{} TELEPORTER {} {} {} {} {} {}\n", skill, teleporter->name, (int)teleporter->x, (int)teleporter->y, (int)teleporter->destX, (int)teleporter->destY, define[0]);
+		define[0] = getActiveState(teleporter.active);
+		line = fmt::format("{} TELEPORTER {} {} {} {} {} {}\n", skill, teleporter.name, (int)teleporter.x, (int)teleporter.y, (int)teleporter.destX, (int)teleporter.destY, define[0]);
 		persistent.push_back(line);
 	}
 	
 	for (auto &&lineDef: map.lines)
 	{
-		define[0] = getActiveState(lineDef->activated);
-		line = fmt::format("{} LINEDEF \"{}\" {} \"{}\" {} {} {} {} {}\n", skill, lineDef->name, lineDef->linkName, lineDef->activateMessage, (int)lineDef->x, (int)lineDef->y, (int)lineDef->width, (int)lineDef->height, define[0]);
+		define[0] = getActiveState(lineDef.activated);
+		line = fmt::format("{} LINEDEF \"{}\" {} \"{}\" {} {} {} {} {}\n", skill, lineDef.name, lineDef.linkName, lineDef.activateMessage, (int)lineDef.x, (int)lineDef.y, (int)lineDef.width, (int)lineDef.height, define[0]);
 		persistent.push_back(line);
 	}
 	
 	for (auto &&spawnPoint: map.spawns)
 	{
-		define[0] = engine.getDefineOfValue("SPW_", spawnPoint->spawnType);
+		define[0] = engine.getDefineOfValue("SPW_", spawnPoint.spawnType);
 		
 		if (contains(define[0], "HAZARD"))
 		{
-			define[1] = engine.getDefineOfValue("HAZARD_", spawnPoint->spawnSubType);
+			define[1] = engine.getDefineOfValue("HAZARD_", spawnPoint.spawnSubType);
 		}
 		else
 		{
-			define[1] = engine.getDefineOfValue("SPW_", spawnPoint->spawnSubType);
+			define[1] = engine.getDefineOfValue("SPW_", spawnPoint.spawnSubType);
 		}
 			
-		define[2] = getActiveState(spawnPoint->active);
-		line = fmt::format("{} SPAWNPOINT {} {} {} {} {} {} {} {}\n", skill, spawnPoint->name, (int)spawnPoint->x, (int)spawnPoint->y, define[0], define[1], (int)(spawnPoint->minInterval / 60), (int)(spawnPoint->maxInterval / 60), define[2]);
+		define[2] = getActiveState(spawnPoint.active);
+		line = fmt::format("{} SPAWNPOINT {} {} {} {} {} {} {} {}\n", skill, spawnPoint.name, (int)spawnPoint.x, (int)spawnPoint.y, define[0], define[1], (int)(spawnPoint.minInterval / 60), (int)(spawnPoint.maxInterval / 60), define[2]);
 		persistent.push_back(line);
 	}
 	

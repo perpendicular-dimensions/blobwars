@@ -145,61 +145,52 @@ void addTeleportParticles(float x, float y, int amount, int soundToPlay)
 
 void doParticles()
 {
-	for (auto it = map.particles.begin(); it != map.particles.end();)
+	map.particles.remove_if([](auto &&particle)
 	{
-		auto particle = it->get();
+		int x = (int)(particle.x - engine.playerPosX);
+		int y = (int)(particle.y - engine.playerPosY);
 
-		int x = (int)(particle->x - engine.playerPosX);
-		int y = (int)(particle->y - engine.playerPosY);
-
-		if (particle->sprite == nullptr)
+		if (particle.sprite == nullptr)
 		{
 			graphics.lock(graphics.screen);
 			
-			graphics.putPixel(x, y, particle->color, graphics.screen);
+			graphics.putPixel(x, y, particle.color, graphics.screen);
 			
 			graphics.unlock(graphics.screen);
 		}
 		else
 		{
-			graphics.blit(particle->getFrame(), x, y, graphics.screen, false);
+			graphics.blit(particle.getFrame(), x, y, graphics.screen, false);
 		}
 
-		particle->health--;
+		particle.health--;
 
-		particle->move();
+		particle.move();
 
-		if (!(particle->flags & PAR_WEIGHTLESS))
+		if (!(particle.flags & PAR_WEIGHTLESS))
 		{
-			particle->dy += 0.1;
+			particle.dy += 0.1;
 		}
 
-		x = (int)particle->x >> BRICKSHIFT;
-		y = (int)particle->y >> BRICKSHIFT;
+		x = (int)particle.x >> BRICKSHIFT;
+		y = (int)particle.y >> BRICKSHIFT;
 
-		if (particle->flags & PAR_COLLIDES)
+		if (particle.flags & PAR_COLLIDES)
 		{
 			if (map.isSolid(x, y))
 			{
-				particle->health = 0;
+				particle.health = 0;
 			}
 		}
 
-		if (particle->flags & PAR_LIQUID)
+		if (particle.flags & PAR_LIQUID)
 		{
 			if (!map.isLiquid(x, y))
 			{
-				particle->health = 0;
+				particle.health = 0;
 			}
 		}
 
-		if (particle->health > 0)
-		{
-			++it;
-		}
-		else
-		{
-			it = map.particles.erase(it);
-		}
-	}
+		return particle.health <= 0;
+	});
 }

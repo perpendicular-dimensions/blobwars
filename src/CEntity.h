@@ -25,36 +25,51 @@ class Entity {
 
 		std::string name;
 
-		float x, y, dx, dy;
-		int tx, ty, width, height;
+		float x = 0;
+		float y = 0;
+		float dx = 0;
+		float dy = 0;
 
-		signed char oxygen, fuel;
+		int tx = 0;
+		int ty = 0;
+		int width = 0;
+		int height = 0;
 
-		unsigned char immune;
-		unsigned char environment, damage;
-		unsigned char face;
+		signed char oxygen = 7;
+		signed char fuel = 7;
 
-		signed int thinktime, baseThink, health, reload;
+		unsigned char immune = 120;
+		unsigned char environment = ENV_AIR;
+		unsigned char damage = 0;
+		unsigned char face = 0;
 
-		unsigned int id, value;
-		long flags;
-		unsigned char currentFrame, currentTime;
+		int thinktime = 0;
+		int baseThink = 0;
+		int health = 0;
+		int reload = 0;
 
-		int deathSound;
+		unsigned int id = 0;
+		unsigned int value = 0;
+		long flags = 0;
+		unsigned char currentFrame = 0;
+		unsigned char currentTime = 0;
+
+		int deathSound = -1;
 		
-		Sprite *sprite[3];
+		Sprite *sprite[3] = {};
 
-		bool falling;
+		bool falling = false;
 
-		Weapon *currentWeapon;
+		Weapon *currentWeapon = nullptr;
 		
-		int dead;
+		int dead = DEAD_ALIVE;
 
-		Entity *owner;
+		Entity *owner = this;
 
 		bool referenced = false;
 
-	Entity();
+	Entity() {}
+	Entity(int id, const std::string &name, int x, int y);
 	void setName(const std::string &name);
 	void setSprites(Sprite *sprite1, Sprite *sprite2, Sprite *sprite3);
 	void animate();

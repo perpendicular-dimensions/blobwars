@@ -24,20 +24,20 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 static void aquaBossAttack(); // break circular dependency
 
-static void leachParticles(Entity *enemy)
+static void leachParticles(Entity &enemy)
 {
 	float dx, dy;
 	
 	Sprite *blood = graphics.getSprite("RedBloodParticle", true);
 	
-	Math::calculateSlope(self->x, self->y, enemy->x, enemy->y, &dx, &dy);
+	Math::calculateSlope(self->x, self->y, enemy.x, enemy.y, &dx, &dy);
 	
 	dx *= Math::rrand(1, 2);
 	dy *= Math::rrand(1, 2);
 
 	for (int i = 0 ; i < 25 ; i++)
 	{
-		map.addParticle(enemy->x + 10 + Math::rrand(-2, 2), enemy->y + 10 + Math::rrand(-2, 2), dx, dy, Math::rrand(1, 60), graphics.red, blood, PAR_WEIGHTLESS);
+		map.addParticle(enemy.x + 10 + Math::rrand(-2, 2), enemy.y + 10 + Math::rrand(-2, 2), dx, dy, Math::rrand(1, 60), graphics.red, blood, PAR_WEIGHTLESS);
 	}
 	
 	addBlood(enemy, 0, 0, 1);
@@ -61,26 +61,26 @@ static void aquaBossRecharge()
 	for (auto &&enemy: map.enemies)
 	{
 		// don't leach enemies not in the pool!!
-		if (enemy->x >= 1490)
+		if (enemy.x >= 1490)
 			continue;
 		
-		diffX = abs((int)(enemy->x - self->x));
-		diffY = abs((int)(enemy->y - self->y));
+		diffX = abs((int)(enemy.x - self->x));
+		diffY = abs((int)(enemy.y - self->y));
 		
 		if ((diffX <= 160) && (diffY <= 120))
 		{
-			if (enemy->health > -100)
+			if (enemy.health > -100)
 			{
-				enemy->dx = enemy->dy = 0;
-				enemy->health = -1;
-				if (enemy->health % 10)
+				enemy.dx = enemy.dy = 0;
+				enemy.health = -1;
+				if (enemy.health % 10)
 				{
-					audio.playSound(SND_DEATH1 + Math::prand() % 3, CH_DEATH, enemy->x);
+					audio.playSound(SND_DEATH1 + Math::prand() % 3, CH_DEATH, enemy.x);
 				}
 				
 				Math::limitInt(&(++self->health), 0, self->maxHealth);
 				self->setActionFinished(25);
-				leachParticles(enemy.get());
+				leachParticles(enemy);
 				leachedEnemy = true;
 			}
 		}
@@ -114,7 +114,7 @@ static void aquaBossRapidLaserFire()
 	self->setThinkTime(2);
 	self->setActionFinished(5);
 	
-	addBullet((Entity*)self, self->currentWeapon->getSpeed(self->face), 0);
+	addBullet(*self, self->currentWeapon->getSpeed(self->face), 0);
 	self->think = &aquaBossRapidLaserFire;
 	
 	self->custom--;
@@ -170,7 +170,7 @@ void aquaBossFire()
 	self->setThinkTime(2);
 	self->think = &aquaBossFire;
 	
-	addBullet((Entity*)self, 0, 0);
+	addBullet(*self, 0, 0);
 	
 	self->custom--;
 	
@@ -225,9 +225,9 @@ static void aquaBossDie()
 	self->dx = Math::rrand(-3, 3);
 	self->dy = Math::rrand(-3, 3);
 	
-	addExplosion(self->x, self->y, 50, &player);
-	addSmokeAndFire(self, Math::rrand(-5, 5), Math::rrand(-5, 5), 2);
-	addBlood(self, Math::rrand(-5, 5), Math::rrand(-5, 5), 3);
+	addExplosion(self->x, self->y, 50, player);
+	addSmokeAndFire(*self, Math::rrand(-5, 5), Math::rrand(-5, 5), 2);
+	addBlood(*self, Math::rrand(-5, 5), Math::rrand(-5, 5), 3);
 	
 	if (self->health <= -100)
 	{

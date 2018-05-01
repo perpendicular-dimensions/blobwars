@@ -21,15 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-Switch::Switch()
-{
-	type = 0;
-	x = y = 0;
-	activated = false;
-	health = 0;
-}
-
-void Switch::set(const std::string &name, const std::string &linkName, const std::string &requiredObjectName, const std::string &activateMessage, int type, int x, int y, bool activated)
+Switch::Switch(const std::string &name, const std::string &linkName, const std::string &requiredObjectName, const std::string &activateMessage, int type, int x, int y, bool activated)
 {
 	this->name = name;
 	this->linkName = linkName;
@@ -39,6 +31,4 @@ void Switch::set(const std::string &name, const std::string &linkName, const std
 	this->x = x;
 	this->y = y;
 	this->activated = activated;
-
-	health = 0;
 }

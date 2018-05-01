@@ -424,40 +424,40 @@ int doHub()
 
 	std::string filename;
 
-	Sprite *cursor = graphics.addSprite("Cursor");
+	auto &cursor = graphics.addSprite("Cursor");
 	for (int i = 0 ; i < 6 ; i++)
 	{
 		filename = fmt::format("gfx/main/cursor{}.png", i + 1);
-		cursor->setFrame(i, graphics.loadImage(filename), 10);
+		cursor.setFrame(i, graphics.loadImage(filename), 10);
 	}
 
-	Sprite *newTarget = graphics.addSprite("NewTarget");
-	Sprite *visitedTarget = graphics.addSprite("VisitedTarget");
+	auto &newTarget = graphics.addSprite("NewTarget");
+	auto &visitedTarget = graphics.addSprite("VisitedTarget");
 	
 	for (int i = 0 ; i < 5 ; i++)
 	{
 		filename = fmt::format("gfx/sprites/miaSignal{}.png", i + 1);
 		
-		newTarget->setFrame(i, graphics.loadImage(filename, -60, 0, 0), 15);
-		visitedTarget->setFrame(i, graphics.loadImage(filename, 0, 0, 0), 15);
+		newTarget.setFrame(i, graphics.loadImage(filename, -60, 0, 0), 15);
+		visitedTarget.setFrame(i, graphics.loadImage(filename, 0, 0, 0), 15);
 	}
 
-	Sprite *hubIcons = graphics.addSprite("HubIcons");
+	auto &hubIcons = graphics.addSprite("HubIcons");
 	for (int i = 0 ; i < 6 ; i++)
 	{
 		filename = fmt::format("gfx/main/hubIcon{}.png", i + 1);
-		hubIcons->setFrame(i, graphics.loadImage(filename), 60);
+		hubIcons.setFrame(i, graphics.loadImage(filename), 60);
 	}
 
 	SDL_Surface *infoPanel = graphics.quickSprite("infoPanel", graphics.createSurface(400, 300));
 
-	Sprite *hubArrows = graphics.addSprite("HubArrows");
-	hubArrows->setFrame(0, graphics.loadImage("gfx/main/hubArrowLeft.png"), 60);
-	hubArrows->setFrame(1, graphics.loadImage("gfx/main/hubArrowLeft2.png"), 60);
-	hubArrows->setFrame(2, graphics.loadImage("gfx/main/hubArrowRight.png"), 60);
-	hubArrows->setFrame(3, graphics.loadImage("gfx/main/hubArrowRight2.png"), 60);
+	auto &hubArrows = graphics.addSprite("HubArrows");
+	hubArrows.setFrame(0, graphics.loadImage("gfx/main/hubArrowLeft.png"), 60);
+	hubArrows.setFrame(1, graphics.loadImage("gfx/main/hubArrowLeft2.png"), 60);
+	hubArrows.setFrame(2, graphics.loadImage("gfx/main/hubArrowRight.png"), 60);
+	hubArrows.setFrame(3, graphics.loadImage("gfx/main/hubArrowRight2.png"), 60);
 
-	std::vector<std::unique_ptr<HubLevel>> hubs;
+	std::vector<HubLevel> hubs;
 
 	engine.loadData("data/hub");
 
@@ -490,13 +490,10 @@ int doHub()
 		{
 			if (!gameData.levelPrefectlyCleared(name))
 			{
-				auto hubPoint = new HubLevel;
-				hubPoint->set(name, level, x, y);
-				hubPoint->levelNameImage = graphics.getString(_(name), false);
-				
-				(!gameData.stagePreviouslyCleared(name)) ? hubPoint->target = newTarget : hubPoint->target = visitedTarget;
-				
-				hubs.emplace_back(hubPoint);
+				auto &hubPoint = hubs.emplace_back(name, level, x, y);
+
+				hubPoint.levelNameImage = graphics.getString(_(name), false);
+				hubPoint.target = !gameData.stagePreviouslyCleared(name) ? &newTarget : &visitedTarget;
 			}
 		}
 	}
@@ -598,23 +595,23 @@ int doHub()
 		// Collisions for Hub Points
 		for (auto &&hubPoint: hubs)
 		{
-			graphics.blit(hubPoint->target->getCurrentFrame(), hubPoint->x, hubPoint->y, graphics.screen, false);
+			graphics.blit(hubPoint.target->getCurrentFrame(), hubPoint.x, hubPoint.y, graphics.screen, false);
 
-			if (Collision::collision(engine.getMouseX(), engine.getMouseY(), 1, 1, hubPoint->x, hubPoint->y, 16, 16))
+			if (Collision::collision(engine.getMouseX(), engine.getMouseY(), 1, 1, hubPoint.x, hubPoint.y, 16, 16))
 			{
 				labelX = engine.getMouseX();
 				labelY = engine.getMouseY() - 20;
 
-				labelWidth = hubPoint->levelNameImage->w / 2;
+				labelWidth = hubPoint.levelNameImage->w / 2;
 
 				Math::limitInt(&labelX, 10 + labelWidth, 630 - labelWidth);
 
-				graphics.blit(hubPoint->levelNameImage, labelX, labelY, graphics.screen, true);
+				graphics.blit(hubPoint.levelNameImage, labelX, labelY, graphics.screen, true);
 
 				if (engine.mouseLeft || config.isControl(CONTROL::FIRE))
 				{
-					game.setMapName(hubPoint->filename);
-					game.setStageName(hubPoint->stageName);
+					game.setMapName(hubPoint.filename);
+					game.setStageName(hubPoint.stageName);
 					validStage = true;
 					engine.mouseLeft = 0;
 					config.resetControl(CONTROL::FIRE);
@@ -622,8 +619,8 @@ int doHub()
 
 				if (engine.mouseRight || config.isControl(CONTROL::MAP))
 				{
-					game.setMapName(hubPoint->filename);
-					game.setStageName(hubPoint->stageName);
+					game.setMapName(hubPoint.filename);
+					game.setStageName(hubPoint.stageName);
 					createObjectivesPanel(game.stageName);
 					showData = true;
 					showStats = false;
@@ -636,8 +633,8 @@ int doHub()
 		// Collisions for Panel
 		for (int i = ((1 - validStage) * 2) ; i < 6 ; i++)
 		{
-			graphics.blit(hubIcons->image[i], 50 + (i * 100), 440, graphics.screen, false);
-			if (Collision::collision(engine.getMouseX(), engine.getMouseY(), 1, 1, 50 + (i * 100), 440, hubIcons->image[i]->w, hubIcons->image[i]->h))
+			graphics.blit(hubIcons.image[i], 50 + (i * 100), 440, graphics.screen, false);
+			if (Collision::collision(engine.getMouseX(), engine.getMouseY(), 1, 1, 50 + (i * 100), 440, hubIcons.image[i]->w, hubIcons.image[i]->h))
 			{
 				if (engine.mouseLeft || config.isControl(CONTROL::FIRE))
 				{
@@ -737,7 +734,7 @@ int doHub()
 			}
 		}
 
-		graphics.blit(cursor->getCurrentFrame(), engine.getMouseX(), engine.getMouseY(), graphics.screen, true);
+		graphics.blit(cursor.getCurrentFrame(), engine.getMouseX(), engine.getMouseY(), graphics.screen, true);
 
 		doMusicInfo(SDL_GetTicks() - (now + 60000));
 		engine.delay(frameLimit);

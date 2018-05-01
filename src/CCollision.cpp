@@ -32,15 +32,15 @@ bool Collision::collision(float x0, float y0, int w0, int h0, float x2, float y2
 	return !(x1<x2 || x3<x0 || y1<y2 || y3<y0);
 }
 
-bool Collision::collision(Entity *ent1, Entity *ent2)
+bool Collision::collision(Entity &ent1, Entity &ent2)
 {
-	if ((ent1->flags & ENT_NOCOLLISIONS) || (ent2->flags & ENT_NOCOLLISIONS))
+	if ((ent1.flags & ENT_NOCOLLISIONS) || (ent2.flags & ENT_NOCOLLISIONS))
 		return false;
 
-	return collision(ent1->x, ent1->y, ent1->width, ent1->height, ent2->x, ent2->y, ent2->width, ent2->height);
+	return collision(ent1.x, ent1.y, ent1.width, ent1.height, ent2.x, ent2.y, ent2.width, ent2.height);
 }
 
-bool Collision::collision(Entity *ent, Switch *swt)
+bool Collision::collision(Entity &ent, Switch &swt)
 {
-	return collision(ent->x, ent->y, ent->width, ent->height, swt->x, swt->y, 64, 16);
+	return collision(ent.x, ent.y, ent.width, ent.height, swt.x, swt.y, 64, 16);
 }

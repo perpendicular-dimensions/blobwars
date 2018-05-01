@@ -27,9 +27,9 @@ void adjustObjectives()
 
 	for (auto &&mia: map.mias)
 	{
-		if (gameData.MIARescued(map.name, mia->name))
+		if (gameData.MIARescued(map.name, mia.name))
 		{
-			mia->health = 0;
+			mia.health = 0;
 			map.foundMIAs++;
 		}
 	}
@@ -55,42 +55,42 @@ void adjustObjectives()
 	{	
 		if (game.skill == 0)
 		{
-			objective->required = false;
+			objective.required = false;
 		}
 
 		if (game.skill >= 3)
 		{
-			objective->required = true;
+			objective.required = true;
 		}
 
 		if (needRequired)
 		{
-			objective->required = true;
+			objective.required = true;
 		}
 
 		if (previouslyCleared)
 		{
-			if (gameData.objectiveCompleted(map.name, objective->description))
+			if (gameData.objectiveCompleted(map.name, objective.description))
 			{
-				objective->completed = true;
+				objective.completed = true;
 	
-				debug(("Objective %s has been completed\n", objective->description));
+				debug(("Objective %s has been completed\n", objective.description));
 			}
 	
-			gameData.getObjectiveValues(map.name, objective->description, &current, &target);
-			objective->currentValue = current;
-			objective->targetValue = target;
+			gameData.getObjectiveValues(map.name, objective.description, &current, &target);
+			objective.currentValue = current;
+			objective.targetValue = target;
 			
 			// Make sure that gameplay adjustments are catered for...
-			if (!objective->completed)
+			if (!objective.completed)
 			{
-				Math::limitInt(&objective->currentValue, 0, objective->targetValue);
+				Math::limitInt(&objective.currentValue, 0, objective.targetValue);
 				
-				if (objective->currentValue == objective->targetValue)
+				if (objective.currentValue == objective.targetValue)
 				{
-					objective->completed = true;
+					objective.completed = true;
 					
-					debug(("Objective %s has been completed (gameplay adjustment!)\n", objective->description));
+					debug(("Objective %s has been completed (gameplay adjustment!)\n", objective.description));
 				}
 			}
 		}
@@ -104,7 +104,7 @@ bool allObjectivesCompleted()
 
 	for (auto &&objective: map.objectives)
 	{
-		if ((objective->required) && (!objective->completed))
+		if ((objective.required) && (!objective.completed))
 			return false;
 	}
 
@@ -118,7 +118,7 @@ bool perfectlyCompleted()
 
 	for (auto &&objective: map.objectives)
 	{
-		if (!objective->completed)
+		if (!objective.completed)
 			return false;
 	}
 
@@ -129,7 +129,7 @@ bool requiredEnemy(const std::string &name)
 {
 	for (auto &&objective: map.objectives)
 	{
-		if (objective->target == name)
+		if (objective.target == name)
 		{
 			return true;
 		}
@@ -147,12 +147,12 @@ bool requiredObjectivesCompleted()
 
 	for (auto &&objective: map.objectives)
 	{
-		if (objective->target == "Exit")
+		if (objective.target == "Exit")
 		{
 			continue;
 		}
 
-		if ((objective->required) && (!objective->completed))
+		if ((objective.required) && (!objective.completed))
 		{
 			return false;
 		}
@@ -182,15 +182,15 @@ void autoCompleteAllObjectives(bool allObjectives)
 	{
 		if (allObjectives)
 		{
-			objective->completed = true;
-			objective->currentValue = objective->targetValue;
+			objective.completed = true;
+			objective.currentValue = objective.targetValue;
 		}
 		else
 		{
-			if (objective->required)
+			if (objective.required)
 			{
-				objective->completed = true;
-				objective->currentValue = objective->targetValue;
+				objective.completed = true;
+				objective.currentValue = objective.targetValue;
 			}
 		}
 	}
@@ -199,7 +199,7 @@ void autoCompleteAllObjectives(bool allObjectives)
 
 	for (auto &&mia: map.mias)
 	{
-		mia->health = 0;
+		mia.health = 0;
 		required--;
 		
 		if (required == 0)
@@ -215,42 +215,42 @@ void checkObjectives(const std::string &name, bool alwaysInform)
 
 	for (auto &&objective: map.objectives)
 	{
-		if (!objective->completed)
+		if (!objective.completed)
 		{
-			if (objective->target == name)
+			if (objective.target == name)
 			{
-				if (contains(objective->target, "Combo-"))
+				if (contains(objective.target, "Combo-"))
 				{
-					objective->currentValue = game.currentComboHits;
-					Math::limitInt(&objective->currentValue, 0, objective->targetValue);
+					objective.currentValue = game.currentComboHits;
+					Math::limitInt(&objective.currentValue, 0, objective.targetValue);
 				}
 				else
 				{
-					objective->currentValue++;
+					objective.currentValue++;
 				}
 
-				requiredValue = objective->targetValue - objective->currentValue;
+				requiredValue = objective.targetValue - objective.currentValue;
 
-				if (objective->currentValue == objective->targetValue)
+				if (objective.currentValue == objective.targetValue)
 				{
 					if (!map.isBossMission)
 					{
-						message = fmt::format(_("{} - Objective Completed - Check Point Reached!"), _(objective->description));
+						message = fmt::format(_("{} - Objective Completed - Check Point Reached!"), _(objective.description));
 						game.setObjectiveCheckPoint();
 					}
 					else
 					{
-						message = fmt::format(_("{} - Objective Completed"), _(objective->description));
+						message = fmt::format(_("{} - Objective Completed"), _(objective.description));
 					}
 
-					if (objective->description == "Get the Aqua Lung")
+					if (objective.description == "Get the Aqua Lung")
 					{
 						message = fmt::format("Got the Aqua Lung! You can now swim forever!");
 						game.hasAquaLung = true;
 						presentPlayerMedal("Aqua_Lung");
 					}
 
-					if (objective->description == "Get the Jetpack")
+					if (objective.description == "Get the Jetpack")
 					{
 						message = fmt::format("Got the Jetpack! Press SPACE to Activate!");
 						game.hasJetPack = true;
@@ -258,24 +258,24 @@ void checkObjectives(const std::string &name, bool alwaysInform)
 					}
 
 					engine.setInfoMessage(message, 9, INFO_OBJECTIVE);
-					objective->completed = true;
+					objective.completed = true;
 					game.totalObjectivesCompleted++;
 
 				}
-				else if (!contains(objective->target, "Combo-"))
+				else if (!contains(objective.target, "Combo-"))
 				{
 					if ((requiredValue % 10 == 0) || (requiredValue <= 10) || (alwaysInform))
 					{
 						switch (Math::prand() % 3)
 						{
 							case 0:
-								message = fmt::format(_("{} - {} more to go..."), _(objective->description), requiredValue);
+								message = fmt::format(_("{} - {} more to go..."), _(objective.description), requiredValue);
 								break;
 							case 1:
-								message = fmt::format(_("{} - need {} more"), _(objective->description), requiredValue);
+								message = fmt::format(_("{} - need {} more"), _(objective.description), requiredValue);
 								break;
 							case 2:
-								message = fmt::format(_("{} - {} of {}"), _(objective->description), objective->currentValue, objective->targetValue);
+								message = fmt::format(_("{} - {} of {}"), _(objective.description), objective.currentValue, objective.targetValue);
 								break;
 						}
 						

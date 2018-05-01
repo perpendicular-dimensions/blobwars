@@ -22,24 +22,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "headers.h"
 
 /**
-* Creates a new Sprite object
-*/
-Sprite::Sprite()
-{
-	for (int i = 0 ; i < 8 ; i++)
-	{
-		image[i] = nullptr;
-		frameLength[i] = 0;
-	}
-
-	currentFrame = 0;
-	currentTime = 0;
-	maxFrames = 0;
-
-	randomFrames = false;
-}
-
-/**
 * Sets the specified train with the specified image with
 * a specified time
 * @param i The index of the frame to set (0 - 7)
@@ -87,24 +69,7 @@ void Sprite::getNextFrame(unsigned char *frame, unsigned char *time)
 	*time = frameLength[*frame];
 }
 
-SDL_Surface *Sprite::getCurrentFrame()
+SDL_Surface *Sprite::getCurrentFrame() const
 {
 	return image[currentFrame];
-}
-
-void Sprite::free()
-{
-	for (int i = 0 ; i < 8 ; i++)
-	{
-		if (image[i] != nullptr)
-		{
-			SDL_FreeSurface(image[i]);
-			image[i] = nullptr;
-			frameLength[i] = 0;
-		}
-	}
-	
-	currentFrame = 0;
-	currentTime = 0;
-	maxFrames = 0;
 }

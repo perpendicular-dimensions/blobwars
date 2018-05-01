@@ -21,15 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-Particle::Particle()
-{
-	x = y = 0;
-	dx = dy = 0;
-	sprite = nullptr;
-	color = 0;
-}
-
-void Particle::set(float x, float y, float dx, float dy, int color, int health, int flags)
+Particle::Particle(float x, float y, float dx, float dy, int color, int health, int flags, Sprite *sprite)
 {
 	this->x = x;
 	this->y = y;
@@ -38,6 +30,7 @@ void Particle::set(float x, float y, float dx, float dy, int color, int health, 
 	this->color = color;
 	this->health = health;
 	this->flags = flags;
+	this->sprite = sprite;
 }
 
 void Particle::setSprite(Sprite *sprite)

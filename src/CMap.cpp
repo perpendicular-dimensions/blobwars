@@ -188,14 +188,11 @@ void Map::setClipping(int limitLeft, int limitRight, int limitUp, int limitDown)
 
 void Map::addTrain(const std::string &name, int startX, int startY, int endX, int endY, int pause, bool atStart, bool active)
 {
-	Train *train = new Train();
-	train->setName(name);
-	train->type = TR_TRAIN;
-	train->set(startX, startY, endX, endY, pause, atStart);
-	train->active = active;
+	auto &train = trains.emplace_back(name, TR_TRAIN, startX, startY, endX, endY, pause, atStart);
 
-	train->width = 64;
-	train->height = 16;
+	train.active = active;
+	train.width = 64;
+	train.height = 16;
 	
 	if (pause == 0)
 	{
@@ -207,103 +204,41 @@ void Map::addTrain(const std::string &name, int startX, int startY, int endX, in
 
 void Map::addDoor(const std::string &name, int type, int startX, int startY, int endX, int endY, bool active)
 {
-	Train *train = new Train();
-	train->setName(name);
+	auto &train = trains.emplace_back(name, type, startX, startY, endX, endY, 0, false);
 
-	train->type = type;
-
-	train->set(startX, startY, endX, endY, 0, false);
-	train->active = active;
+	train.active = active;
 
 	if (type < TR_SLIDEDOOR)
 	{
-		train->width = 16;
-		train->height = 64;
+		train.width = 16;
+		train.height = 64;
 	}
 	else
 	{
-		train->width = 64;
-		train->height = 16;
+		train.width = 64;
+		train.height = 16;
 	}
-	
-	trains.emplace_back(train);
 }
 
 void Map::addSwitch(const std::string &name, const std::string &linkName, const std::string &requiredObjectName, const std::string &activateMessage, int type, int x, int y, bool activated)
 {
-	Switch *swt = new Switch();
-	swt->set(name, linkName, requiredObjectName, activateMessage, type, x, y, activated);
-
-	switches.emplace_back(swt);
-}
-
-void Map::addItem(Entity *item)
-{
-	items.emplace_back(item);
-}
-
-void Map::addBullet(Entity *bullet)
-{
-	bullets.emplace_back(bullet);
+	switches.emplace_back(name, linkName, requiredObjectName, activateMessage, type, x, y, activated);
 }
 
 void Map::addParticle(float x, float y, float dx, float dy, int health, int color, Sprite *sprite, int flags)
 {
-	Particle *particle = new Particle();
-	particle->set(x, y, dx, dy, color, health, flags);
-	particle->setSprite(sprite);
-	
-	particles.emplace_back(particle);
-}
-
-void Map::addEnemy(Entity *enemy)
-{
-	enemies.emplace_back(enemy);
-}
-
-void Map::addMIA(Entity *mia)
-{
-	mias.emplace_back(mia);
-}
-
-void Map::addObstacle(Entity *obstacle)
-{
-	obstacles.emplace_back(obstacle);
+	particles.emplace_back(x, y, dx, dy, color, health, flags, sprite);
 }
 
 void Map::addSpawnPoint(const std::string &name, int x, int y, int type, int subtype, int min, int max, bool active)
 {
-	SpawnPoint *spawnPoint = new SpawnPoint();
-	spawnPoint->create(name, x, y, type, subtype, min, max, active);
-
-	spawns.emplace_back(spawnPoint);
+	spawns.emplace_back(name, x, y, type, subtype, min, max, active);
 }
 
-void Map::addEffect(Effect *effect)
-{
-	effects.emplace_back(effect);
-}
 
 void Map::addObjective(const std::string &description, const std::string &target, int targetValue, bool required)
 {
-	Objective *objective = new Objective(description, target, targetValue, required);
-
-	objectives.emplace_back(objective);
-}
-
-void Map::addTeleporter(Teleporter *teleporter)
-{
-	teleports.emplace_back(teleporter);
-}
-
-void Map::addLineDef(LineDef *lineDef)
-{
-	lines.emplace_back(lineDef);
-}
-
-void Map::addTrap(Trap *trap)
-{
-	traps.emplace_back(trap);
+	objectives.emplace_back(description, target, targetValue, required);
 }
 
 void Map::evalTileset(const std::string &baseDir)
@@ -321,7 +256,7 @@ void Map::evalTileset(const std::string &baseDir)
 void Map::killAllEnemies()
 {
 	for (auto &&enemy: enemies)
-		enemy->health = -1;
+		enemy.health = -1;
 }
 
 void Map::setAllowableEnemy(Entity *enemy)
@@ -369,19 +304,19 @@ void Map::getRandomEntityPosition(int *x, int *y)
 	{
 		auto it = mias.begin();
 		std::advance(it, i);
-		ent = it->get();
+		ent = &*it;
 	}
 	else if (i < mias.size() + enemies.size())
 	{
 		auto it = enemies.begin();
 		std::advance(it, i - mias.size());
-		ent = it->get();
+		ent = &*it;
 	}
 	else
 	{
 		auto it = items.begin();
 		std::advance(it, i - mias.size() - enemies.size());
-		ent = it->get();
+		ent = &*it;
 	}
 
 	*x = (int)ent->x;

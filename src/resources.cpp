@@ -30,8 +30,6 @@ void loadSound(int index, const std::string &filename)
 
 void loadSprite(std::string_view token)
 {
-	Sprite *sprite;
-
 	char name[50];
 	char filename[8][100];
 	int frameTime[8];
@@ -41,7 +39,7 @@ void loadSprite(std::string_view token)
 
 	scan(token, "%s %d %d %d %s %d %s %d %s %d %s %d %s %d %s %d %s %d %s %d", name, &hue, &sat, &val, filename[0], &frameTime[0], filename[1], &frameTime[1], filename[2], &frameTime[2], filename[3], &frameTime[3], filename[4], &frameTime[4], filename[5], &frameTime[5], filename[6], &frameTime[6], filename[7], &frameTime[7]);
 
-	sprite = graphics.addSprite(name);
+	auto &sprite = graphics.addSprite(name);
 
 	i = 0;
 
@@ -50,7 +48,7 @@ void loadSprite(std::string_view token)
 		if (strcmp(filename[i], "@none@") == 0)
 			break;
 
-		sprite->setFrame(i, graphics.loadImage(filename[i], hue, sat, val), frameTime[i]);
+		sprite.setFrame(i, graphics.loadImage(filename[i], hue, sat, val), frameTime[i]);
 
 		i++;
 		

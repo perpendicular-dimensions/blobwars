@@ -142,8 +142,8 @@ static void droidBossDie()
 	self->dx = Math::rrand(-3, 3);
 	self->dy = Math::rrand(-3, 3);
 	
-	addExplosion(self->x + Math::prand() % self->width, self->y + Math::prand() % self->height, 50, &player);
-	addSmokeAndFire(self, Math::rrand(-5, 5), Math::rrand(-5, 5), 2);
+	addExplosion(self->x + Math::prand() % self->width, self->y + Math::prand() % self->height, 50, player);
+	addSmokeAndFire(*self, Math::rrand(-5, 5), Math::rrand(-5, 5), 2);
 	
 	if (self->health <= -100)
 	{
@@ -195,14 +195,14 @@ static void droidBossFire()
 {	
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
 	
-	if (hasClearShot((Entity*)self))
+	if (hasClearShot(*self))
 	{
-		self->flags & ENT_AIMS ? addBullet((Entity*)self, 0, 0) : addBullet((Entity*)self, self->currentWeapon->getSpeed(self->face), 0);
+		self->flags & ENT_AIMS ? addBullet(*self, 0, 0) : addBullet(*self, self->currentWeapon->getSpeed(self->face), 0);
 		
 		if (self->currentWeapon == &weapon[WP_ALIENSPREAD])
 		{
-			addBullet(self, self->currentWeapon->getSpeed(self->face), 2);
-			addBullet(self, self->currentWeapon->getSpeed(self->face), -2);
+			addBullet(*self, self->currentWeapon->getSpeed(self->face), 2);
+			addBullet(*self, self->currentWeapon->getSpeed(self->face), -2);
 		}
 	}
 					
@@ -222,7 +222,7 @@ static void orbWait()
 
 static void orbExplode()
 {
-	addExplosion(self->x, self->y, 50, self);
+	addExplosion(self->x, self->y, 50, *self);
 	self->setThinkTime(2);
 	self->setActionFinished(2);
 	self->active = false;

@@ -86,7 +86,7 @@ class Engine {
 
 		int playerPosX, playerPosY;
 
-		std::vector<std::unique_ptr<Widget>> widgets;
+		std::vector<Widget> widgets;
 
 		Widget *highlightedWidget;
 		int highlightedIndex;
@@ -123,7 +123,6 @@ class Engine {
 	void resetTimeDifference();
 	void setInfoMessage(const std::string &message, int priority, int type);
 	void deleteWidgets();
-	void addWidget(Widget *widget);
 	bool loadWidgets(const std::string &filename);
 	Widget *getWidgetByName(const std::string &name);
 	int getWidgetIndexByName(const std::string &name);

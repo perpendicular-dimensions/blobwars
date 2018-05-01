@@ -27,13 +27,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 * @param widget The radio button widget
 * @param maxWidth The width of the largest widget (used for spacing)
 */
-static void drawOptions(Widget *widget, int maxWidth)
+static void drawOptions(Widget &widget, int maxWidth)
 {
-	int x = widget->x + maxWidth + 55;
+	int x = widget.x + maxWidth + 55;
 
 	int count = 0;
 
-	char *c = &widget->options.front();
+	char *c = &widget.options.front();
 
 	SDL_Surface *text;
 
@@ -56,10 +56,10 @@ static void drawOptions(Widget *widget, int maxWidth)
 		if (*c)
 			c++;
 
-		if (widget->enabled)
+		if (widget.enabled)
 		{
 			graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
-			if (count == *widget->value)
+			if (count == *widget.value)
 				graphics.setFontColor(0x00, 0x00, 0x00, 0x00, 0xff, 0x00);
 		}
 		else
@@ -69,10 +69,10 @@ static void drawOptions(Widget *widget, int maxWidth)
 
 		text = graphics.getString(token, false);
 
-		if ((widget->enabled) && (count == *widget->value))
-			graphics.drawWidgetRect(x, widget->y, text->w, text->h);
+		if ((widget.enabled) && (count == *widget.value))
+			graphics.drawWidgetRect(x, widget.y, text->w, text->h);
 
-		graphics.blit(text, x, widget->y, graphics.screen, false);
+		graphics.blit(text, x, widget.y, graphics.screen, false);
 
 		x += text->w + 25;
 		count++;
@@ -85,32 +85,32 @@ static void drawOptions(Widget *widget, int maxWidth)
 * @param widget The slider widget
 * @param maxWidth The width of the largest widget (used for spacing)
 */
-static void drawSlider(Widget *widget, int maxWidth)
+static void drawSlider(Widget &widget, int maxWidth)
 {
-	int x = widget->x + maxWidth + 50;
+	int x = widget.x + maxWidth + 50;
 
-	if (widget->enabled)
+	if (widget.enabled)
 	{
-		graphics.drawRect(x, widget->y, 300, 18, graphics.white, graphics.screen);
+		graphics.drawRect(x, widget.y, 300, 18, graphics.white, graphics.screen);
 	}
 	else
 	{
-		graphics.drawRect(x, widget->y, 300, 18, graphics.grey, graphics.screen);
+		graphics.drawRect(x, widget.y, 300, 18, graphics.grey, graphics.screen);
 	}
 
-	graphics.drawRect(x + 1, widget->y + 1, 298, 16, graphics.black, graphics.screen);
+	graphics.drawRect(x + 1, widget.y + 1, 298, 16, graphics.black, graphics.screen);
 
-	float width = 296.00 / widget->max;
+	float width = 296.00 / widget.max;
 
-	width *= *widget->value;
+	width *= *widget.value;
 
-	if (widget->enabled)
+	if (widget.enabled)
 	{
-		graphics.drawRect(x + 2, widget->y + 2, (int)width, 14, graphics.green, graphics.screen);
+		graphics.drawRect(x + 2, widget.y + 2, (int)width, 14, graphics.green, graphics.screen);
 	}
 	else
 	{
-		graphics.drawRect(x + 2, widget->y + 2, (int)width, 14, graphics.darkGreen, graphics.screen);
+		graphics.drawRect(x + 2, widget.y + 2, (int)width, 14, graphics.darkGreen, graphics.screen);
 	}
 
 }
@@ -120,7 +120,7 @@ static void drawSlider(Widget *widget, int maxWidth)
 * -1000 or less appears as ...
 * @param widget The Joypad Button widget
 */
-static void drawJoypadButtonOption(Widget *widget)
+static void drawJoypadButtonOption(Widget &widget)
 {
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 	
@@ -130,34 +130,34 @@ static void drawJoypadButtonOption(Widget *widget)
 	
 	// joysticks have a button 0 so we can't
 	// do the same thing as the keyboard(!)
-	if (*widget->value < -2)
+	if (*widget.value < -2)
 	{
 		text = "...";
 	}
-	else if (*widget->value == -2)
+	else if (*widget.value == -2)
 	{
 		text = "N/A";
 	}
 	else
 	{
-		text = fmt::format("Button #{}", *widget->value);
+		text = fmt::format("Button #{}", *widget.value);
 	}
 	
-	graphics.drawString(text, x, widget->y, TXT_LEFT, graphics.screen);
+	graphics.drawString(text, x, widget.y, TXT_LEFT, graphics.screen);
 }
 
 /**
 * Draws a widget used to represent a key based on the widget's current value
 * @param widget The Widget
 */
-static void drawKeyOption(Widget *widget)
+static void drawKeyOption(Widget &widget)
 {
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 	
 	int x = 300;
 	
-	graphics.drawString(Keyboard::translateKey(*widget->value),
-			    x, widget->y, TXT_LEFT, graphics.screen);
+	graphics.drawString(Keyboard::translateKey(*widget.value),
+			    x, widget.y, TXT_LEFT, graphics.screen);
 }
 
 /**
@@ -165,15 +165,15 @@ static void drawKeyOption(Widget *widget)
 * colour as set depending on the status of the widget
 * @param widget The Widget to create the image for
 */
-static void generateWidgetImage(Widget *widget)
+static void generateWidgetImage(Widget &widget)
 {
-	if (widget == engine.highlightedWidget)
+	if (&widget == engine.highlightedWidget)
 	{
 		graphics.setFontColor(0x00, 0x00, 0x00, 0x00, 0xff, 0x00);
 	}
 	else
 	{
-		if (widget->enabled)
+		if (widget.enabled)
 		{
 			graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 		}
@@ -183,7 +183,7 @@ static void generateWidgetImage(Widget *widget)
 		}
 	}
 
-	widget->image = graphics.getString(widget->label, false);
+	widget.image = graphics.getString(widget.label, false);
 }
 
 /**
@@ -199,60 +199,60 @@ void drawWidgets()
 
 	for (auto &&widget: engine.widgets)
 	{
-		if (widget->image == nullptr)
+		if (widget.image == nullptr)
 		{
-			generateWidgetImage(widget.get());
+			generateWidgetImage(widget);
 		}
 			
-		maxWidth = std::max(maxWidth, widget->image->w);
+		maxWidth = std::max(maxWidth, widget.image->w);
 	}
 
 	for (auto &&widget: engine.widgets)
 	{
-		if (!widget->visible)
+		if (!widget.visible)
 		{
 			continue;
 		}
 
-		if ((!widget->value) && (widget->type != WG_LABEL))
+		if ((!widget.value) && (widget.type != WG_LABEL))
 		{
-			debug(("WARNING: Widget variable for '%s' not set!\n", widget->name));
+			debug(("WARNING: Widget variable for '%s' not set!\n", widget.name));
 			continue;
 		}
 
-		if (widget->x == -1)
+		if (widget.x == -1)
 		{
-			widget->x = (640 - widget->image->w) / 2;
+			widget.x = (640 - widget.image->w) / 2;
 		}
 
-		if (widget.get() == engine.highlightedWidget)
+		if (&widget == engine.highlightedWidget)
 		{
-			graphics.drawWidgetRect(widget->x, widget->y, widget->image->w, widget->image->h);
+			graphics.drawWidgetRect(widget.x, widget.y, widget.image->w, widget.image->h);
 		}
 		else
 		{
-			graphics.drawRect(widget->x - 3, widget->y - 2, widget->image->w + 6, widget->image->h + 4, graphics.black, graphics.screen);
+			graphics.drawRect(widget.x - 3, widget.y - 2, widget.image->w + 6, widget.image->h + 4, graphics.black, graphics.screen);
 		}
 
-		graphics.blit(widget->image, widget->x, widget->y, graphics.screen, false);
+		graphics.blit(widget.image, widget.x, widget.y, graphics.screen, false);
 
-		switch (widget->type)
+		switch (widget.type)
 		{
 			case WG_RADIO:
-				drawOptions(widget.get(), maxWidth);
+				drawOptions(widget, maxWidth);
 				break;
 			case WG_SLIDER:
 			case WG_SMOOTH_SLIDER:
-				drawSlider(widget.get(), maxWidth);
+				drawSlider(widget, maxWidth);
 				break;
 			case WG_KEYBOARD:
-				drawKeyOption(widget.get());
+				drawKeyOption(widget);
 				break;
 			case WG_JOYPAD:
-				drawJoypadButtonOption(widget.get());
+				drawJoypadButtonOption(widget);
 				break;
 		}
 
-		widget->changed = false;
+		widget.changed = false;
 	}
 }

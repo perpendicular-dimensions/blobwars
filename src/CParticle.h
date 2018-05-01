@@ -26,13 +26,13 @@ class Particle {
 		float x, y, dx, dy;
 
 		Sprite *sprite;
-		unsigned char currentFrame, currentTime;
+		unsigned char currentFrame = 0;
+		unsigned char currentTime = 0;
 
 		int health, color;
 		long flags;
 
-		Particle();
-		void set(float x, float y, float dx, float dy, int color, int health, int flags);
+		Particle(float x, float y, float dx, float dy, int color, int health, int flags, Sprite *sprite);
 		void setSprite(Sprite *sprite);
 		SDL_Surface *getFrame();
 		void move();

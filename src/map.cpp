@@ -123,14 +123,14 @@ void drawMapTopLayer()
 	}
 }
 
-static void addBlips(std::vector<RadarBlip> *blips, int mapX, int mapY, int type, Entity *ent, Sprite *blipSprite)
+static void addBlips(std::vector<RadarBlip> *blips, int mapX, int mapY, int type, Entity &ent, Sprite *blipSprite)
 {
-	if (ent->health <= 0)
+	if (ent.health <= 0)
 		return;
 
 	if (type == 3)
 	{
-		if (!requiredEnemy(ent->name))
+		if (!requiredEnemy(ent.name))
 		{
 			return;
 		}
@@ -139,14 +139,14 @@ static void addBlips(std::vector<RadarBlip> *blips, int mapX, int mapY, int type
 	// Items
 	if (type == 2)
 	{
-		if ((ent->id < ITEM_MISC) || (ent->id == ITEM_MISC_INVISIBLE))
+		if ((ent.id < ITEM_MISC) || (ent.id == ITEM_MISC_INVISIBLE))
 		{
 			return;
 		}
 	}
 
-	int x = (int)(ent->x + ent->width) >> BRICKSHIFT;
-	int y = (int)(ent->y + ent->height) >> BRICKSHIFT;
+	int x = (int)(ent.x + ent.width) >> BRICKSHIFT;
+	int y = (int)(ent.y + ent.height) >> BRICKSHIFT;
 
 	x -= mapX;
 	y -= mapY;
@@ -177,15 +177,15 @@ static void addBlips(std::vector<RadarBlip> *blips, int mapX, int mapY)
 
 	blipSprite = graphics.getSprite("MIAArrow", true);
 	for (auto &&mia: map.mias)
-		addBlips(blips, mapX, mapY, 1, mia.get(), blipSprite);
+		addBlips(blips, mapX, mapY, 1, mia, blipSprite);
 
 	blipSprite = graphics.getSprite("ItemArrow", true);
 	for (auto &&item: map.items)
-		addBlips(blips, mapX, mapY, 2, item.get(), blipSprite);
+		addBlips(blips, mapX, mapY, 2, item, blipSprite);
 
 	blipSprite = graphics.getSprite("EnemyArrow", true);
 	for (auto &&enemy: map.enemies)
-		addBlips(blips, mapX, mapY, 3, enemy.get(), blipSprite);
+		addBlips(blips, mapX, mapY, 3, enemy, blipSprite);
 }
 
 static void addMiniMapDoors(SDL_Surface *panel, int mapX, int mapY)
@@ -196,19 +196,19 @@ static void addMiniMapDoors(SDL_Surface *panel, int mapX, int mapY)
 		int height = 5;
 		int color = graphics.white;
 		
-		int x = (int)train->x >> BRICKSHIFT;
-		int y = (int)train->y >> BRICKSHIFT;
+		int x = (int)train.x >> BRICKSHIFT;
+		int y = (int)train.y >> BRICKSHIFT;
 		
 		if ((x >= mapX) && (x <= mapX + 64) && (y >= mapY) && (y <= mapY + 48))
 		{
 			x -= mapX;
 			y -= mapY;
 			
-			if (train->type == TR_TRAIN)
+			if (train.type == TR_TRAIN)
 			{
 				width = 10;
 			}
-			else if ((train->type >= TR_SLIDEDOOR) && (train->type <= TR_BRONZE_SLIDEDOOR))
+			else if ((train.type >= TR_SLIDEDOOR) && (train.type <= TR_BRONZE_SLIDEDOOR))
 			{
 				width = 10;
 			}
@@ -217,7 +217,7 @@ static void addMiniMapDoors(SDL_Surface *panel, int mapX, int mapY)
 				height = 10;
 			}
 			
-			switch (train->type)
+			switch (train.type)
 			{
 				case TR_GOLD_DOOR:
 				case TR_GOLD_SLIDEDOOR:
@@ -423,7 +423,7 @@ void showMap(int centerX, int centerY)
 	engine.clearInput();
 }
 
-void evaluateMapAttribute(Entity *ent, int mapAttribute)
+void evaluateMapAttribute(Entity &ent, int mapAttribute)
 {
 	switch (mapAttribute)
 	{
@@ -460,71 +460,68 @@ void evaluateMapAttribute(Entity *ent, int mapAttribute)
 	switch (mapAttribute)
 	{
 		case MAP_AIR:
-			if ((ent->environment != ENV_AIR) && (!(ent->flags & ENT_INANIMATE)))
+			if ((ent.environment != ENV_AIR) && (!(ent.flags & ENT_INANIMATE)))
 			{
-				if (!(ent->flags & ENT_SWIMS))
+				if (!(ent.flags & ENT_SWIMS))
 				{
-					if (ent->dy < 0)
+					if (ent.dy < 0)
 					{
-						ent->dy = PLAYER_JUMP_SPEED;
+						ent.dy = PLAYER_JUMP_SPEED;
 					}
 
-					if (ent == &player)
+					if ((&ent == &player) && ((game.hasAquaLung) || (engine.cheatExtras)))
 					{
-						if ((ent == &player) && ((game.hasAquaLung) || (engine.cheatExtras)))
-						{
-							player.setSprites(graphics.getSprite("BobRight", true), graphics.getSprite("BobLeft", true), graphics.getSprite("BobSpin", true));
-						}
+						player.setSprites(graphics.getSprite("BobRight", true), graphics.getSprite("BobLeft", true), graphics.getSprite("BobSpin", true));
 					}
 
-					ent->environment = ENV_AIR;
+					ent.environment = ENV_AIR;
 					
-					if (ent->dy < 0)
+					if (ent.dy < 0)
 					{
-						audio.playSound(SND_WATEROUT, CH_TOUCH, ent->x);
+						audio.playSound(SND_WATEROUT, CH_TOUCH, ent.x);
 					}
 
-					ent->checkEnvironment();
+					ent.checkEnvironment();
 				}
 			}
-			ent->falling = true;
+			ent.falling = true;
 		case MAP_SOLID:
 			break;
 		case MAP_WATER:
 		case MAP_SLIME:
 		case MAP_LAVA:
 
-			ent->falling = false;
+			ent.falling = false;
 
-			if (ent->environment == ENV_AIR)
+			if (ent.environment == ENV_AIR)
 			{
-				audio.playSound(SND_WATERIN, CH_TOUCH, ent->x);
+				audio.playSound(SND_WATERIN, CH_TOUCH, ent.x);
 				if ((mapAttribute == MAP_SLIME) || (mapAttribute == MAP_LAVA))
-					ent->thinktime = 1;
+					ent.thinktime = 1;
 			}
 			
 			// On ice levels water is harmful (because it's very very cold!)
 			if ((map.isIceLevel) && (mapAttribute == MAP_WATER))
 			{
 				mapAttribute = MAP_LAVA;
-				ent->thinktime = 1;
+				ent.thinktime = 1;
 			}
 
 			if (mapAttribute == MAP_WATER)
 			{
-				ent->environment = ENV_WATER;
-				if ((ent == &player) && ((game.hasAquaLung) || (engine.cheatExtras)))
+				ent.environment = ENV_WATER;
+				if ((&ent == &player) && ((game.hasAquaLung) || (engine.cheatExtras)))
 				{
 					player.setSprites(graphics.getSprite("AquaBobRight", true), graphics.getSprite("AquaBobLeft", true), graphics.getSprite("AquaBobSpin", true));
 				}
 			}
 			else if (mapAttribute == MAP_SLIME)
 			{
-				ent->environment = ENV_SLIME;
+				ent.environment = ENV_SLIME;
 			}
 			else if (mapAttribute == MAP_LAVA)
 			{
-				ent->environment = ENV_LAVA;
+				ent.environment = ENV_LAVA;
 			}
 			break;
 	}
@@ -583,7 +580,7 @@ void raiseWaterLevel()
 
 		if ((mapAttribute == MAP_WATER) && (player.environment == MAP_AIR))
 		{
-			evaluateMapAttribute(&player, mapAttribute);
+			evaluateMapAttribute(player, mapAttribute);
 		}
 	}
 }

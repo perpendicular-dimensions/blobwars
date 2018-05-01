@@ -30,10 +30,9 @@ class Switch {
 
 		int type;
 		int x, y;
-		int health;
+		int health = 0;
 		bool activated;
 
-		Switch();
-		void set(const std::string &name, const std::string &linkName, const std::string &requiredObjectName, const std::string &activateMessage, int type, int x, int y, bool activated);
+		Switch(const std::string &name, const std::string &linkName, const std::string &requiredObjectName, const std::string &activateMessage, int type, int x, int y, bool activated);
 		
 };

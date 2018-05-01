@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-static std::vector<std::unique_ptr<Cutscene>> scenes;
+static std::vector<Cutscene> scenes;
 
 static void createSceneList(split &it)
 {
@@ -42,9 +42,8 @@ static void createSceneList(split &it)
 		
 		if (line == "NEW")
 		{
-			scene = new Cutscene();
-			scenes.emplace_back(scene);
-			
+			scene = &scenes.emplace_back();
+
 			// Assume graphics is first line after new
 			line = *++it;
 			if (line != "@none@")
@@ -158,17 +157,17 @@ static void showScene(bool allowSkip)
 			{
 				auto &scene = *it++;
 				panelAlpha = 0;
-				changeTime = scene->waitTime;
+				changeTime = scene.waitTime;
 				graphics.clearChatString();
-				graphics.createChatString(scene->text);
+				graphics.createChatString(scene.text);
 				SDL_FillRect(panel, nullptr, graphics.black);
 				graphics.drawChatString(panel, 0);
 				image = nullptr;
 				
-				if (!scene->sprite.empty())
+				if (!scene.sprite.empty())
 				{
-					debug(("Getting cutscene %s\n", scene->sprite));
-					image = graphics.getSprite(scene->sprite, true)->image[0];
+					debug(("Getting cutscene %s\n", scene.sprite));
+					image = graphics.getSprite(scene.sprite, true)->image[0];
 					SDL_SetColorKey(image, 0, SDL_MapRGB(image->format, 0, 0, 0));
 				}
 			}

@@ -444,10 +444,10 @@ SDL_Surface *Graphics::loadImage(const std::string &filename, int hue, int sat, 
 
 SDL_Surface *Graphics::quickSprite(const std::string &name, SDL_Surface *image)
 {
-	Sprite *sprite = addSprite(name);
-	sprite->setFrame(0, image, 60);
+	Sprite &sprite = addSprite(name);
+	sprite.setFrame(0, image, 60);
 
-	return sprite->getCurrentFrame();
+	return sprite.getCurrentFrame();
 }
 
 void Graphics::fade(int amount)
@@ -537,11 +537,10 @@ void Graphics::loadFont(int i, const std::string &filename, int pointSize)
 	TTF_SetFontStyle(font[i], TTF_STYLE_NORMAL);
 }
 
-Sprite *Graphics::addSprite(const std::string &name)
+Sprite &Graphics::addSprite(const std::string &name)
 {
-	auto sprite = new Sprite;
-	sprite->name = name;
-	sprites[name].reset(sprite);
+	auto &sprite = sprites[name];
+	sprite.name = name;
 	return sprite;
 }
 
@@ -550,7 +549,7 @@ Sprite *Graphics::getSprite(const std::string &name, bool required)
 	auto it = sprites.find(name);
 
 	if (it != sprites.end())
-		return it->second.get();
+		return &it->second;
 
 	if (required)
 		showErrorAndExit("The requested sprite '%s' does not exist", name);
@@ -561,7 +560,7 @@ Sprite *Graphics::getSprite(const std::string &name, bool required)
 void Graphics::animateSprites()
 {
 	for (auto &&sprite: sprites)
-		sprite.second->animate();
+		sprite.second.animate();
 
 	if ((engine->getFrameLoop() % 8) == 0)
 	{

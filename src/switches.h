@@ -1,2 +1,2 @@
 void doSwitches();
-void checkSwitchContact(Entity *ent);
+void checkSwitchContact(Entity &ent);

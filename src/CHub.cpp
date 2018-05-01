@@ -21,15 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-HubLevel::HubLevel()
-{
-	x = y = 0;
-
-	levelNameImage = nullptr;
-	target = nullptr;
-}
-
-void HubLevel::set(const std::string &stageName, const std::string &filename, int x, int y)
+HubLevel::HubLevel(const std::string &stageName, const std::string &filename, int x, int y)
 {
 	this->stageName = stageName;
 	this->filename = filename;

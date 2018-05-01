@@ -28,9 +28,8 @@ class HubLevel {
 
 		int x, y;
 		
-		SDL_Surface *levelNameImage;
-		Sprite *target;
+		SDL_Surface *levelNameImage = nullptr;
+		Sprite *target = nullptr;
 
-	HubLevel();
-	void set(const std::string &stageName, const std::string &filename, int x, int y);
+	HubLevel(const std::string &stageName, const std::string &filename, int x, int y);
 };

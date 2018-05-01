@@ -27,20 +27,17 @@ class Sprite {
 
 		std::string name;
 
-		SDL_Surface *image[8];
-		unsigned char frameLength[8];
+		SDL_Surface *image[8] = {};
+		unsigned char frameLength[8] = {};
 
-		unsigned char currentFrame;
-		unsigned char currentTime;
-		unsigned char maxFrames;
+		unsigned char currentFrame = 0;
+		unsigned char currentTime = 0;
+		unsigned char maxFrames = 0;
 
-		bool randomFrames;
+		bool randomFrames = false;
 
-	Sprite();
 	void setFrame(int i, SDL_Surface *shape, int time);
 	void animate();
 	void getNextFrame(unsigned char *frame, unsigned char *time);
-	SDL_Surface *getCurrentFrame();
-	void free();
-
+	SDL_Surface *getCurrentFrame() const;
 };

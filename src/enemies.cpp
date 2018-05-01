@@ -46,38 +46,35 @@ void addEnemy(const std::string &name, int x, int y, int flags)
 		return;
 	}
 
-	Entity *enemy = new Entity();
-	enemy->setName(defEnemy->name);
-	enemy->setSprites(defEnemy->sprite[0], defEnemy->sprite[1], defEnemy->sprite[2]);
-	enemy->currentWeapon = defEnemy->currentWeapon;
-	enemy->value = defEnemy->value;
-	enemy->health = defEnemy->health;
-	enemy->flags = defEnemy->flags;
+	auto &enemy = map.enemies.emplace_back(0, defEnemy->name, x, y);
 
-	enemy->place(x, y);
-	enemy->setVelocity(0, 0);
-	enemy->baseThink = 60;
+	enemy.setSprites(defEnemy->sprite[0], defEnemy->sprite[1], defEnemy->sprite[2]);
+	enemy.currentWeapon = defEnemy->currentWeapon;
+	enemy.value = defEnemy->value;
+	enemy.health = defEnemy->health;
+	enemy.flags = defEnemy->flags;
 
-	enemy->flags += flags;
+	enemy.setVelocity(0, 0);
+	enemy.baseThink = 60;
+
+	enemy.flags += flags;
 	
-	enemy->reload = 120; // Wait about seconds seconds before attacking
+	enemy.reload = 120; // Wait about seconds seconds before attacking
 
-	if (map.data[(int)(enemy->x) >> BRICKSHIFT][(int)(enemy->y) >> BRICKSHIFT] == MAP_WATER)
+	if (map.data[(int)(enemy.x) >> BRICKSHIFT][(int)(enemy.y) >> BRICKSHIFT] == MAP_WATER)
 	{
-		enemy->environment = ENV_WATER;
+		enemy.environment = ENV_WATER;
 	}
-
-	map.addEnemy(enemy);
 }
 
-bool hasClearShot(Entity *enemy)
+bool hasClearShot(Entity &enemy)
 {
 	int mx, my;
-	float x = enemy->x;
-	float y = enemy->y;
+	float x = enemy.x;
+	float y = enemy.y;
 	float dx, dy;
 
-	Math::calculateSlope(player.x, player.y, enemy->x, enemy->y, &dx, &dy);
+	Math::calculateSlope(player.x, player.y, enemy.x, enemy.y, &dx, &dy);
 
 	if ((dx == 0) && (dy == 0))
 		return true;
@@ -105,7 +102,7 @@ bool hasClearShot(Entity *enemy)
 	return true;
 }
 
-static void lookForPlayer(Entity *enemy)
+static void lookForPlayer(Entity &enemy)
 {
 	// player is dead
 	if (player.health <= -60)
@@ -115,11 +112,11 @@ static void lookForPlayer(Entity *enemy)
 		return;
 
 	// can't fire anyway!
-	if (enemy->reload > 0)
+	if (enemy.reload > 0)
 		return;
 
-	int x = (int)fabs(enemy->x - player.x);
-	int y = (int)fabs(enemy->y - player.y);
+	int x = (int)fabs(enemy.x - player.x);
+	int y = (int)fabs(enemy.y - player.y);
 
 	// out of range
 	if (x > 480)
@@ -130,81 +127,81 @@ static void lookForPlayer(Entity *enemy)
 		return;
 
 	// Player is in range... go for them!
-	if (enemy->flags & ENT_ALWAYSCHASE)
+	if (enemy.flags & ENT_ALWAYSCHASE)
 	{
-		enemy->owner->tx = (int)(player.x);
-		enemy->owner->ty = (int)(player.y);
+		enemy.owner->tx = (int)(player.x);
+		enemy.owner->ty = (int)(player.y);
 	}
 	else if ((Math::prand() % (35 - game.skill)) == 0)
 	{
-		enemy->owner->tx = (int)(player.x);
-		enemy->owner->ty = (int)(player.y);
+		enemy.owner->tx = (int)(player.x);
+		enemy.owner->ty = (int)(player.y);
 	}
 
 	// facing the wrong way
-	if ((enemy->face == 0) && (player.x < enemy->x))
+	if ((enemy.face == 0) && (player.x < enemy.x))
 	{
 		return;
 	}
 
 	// still facing the wrong way
-	if ((enemy->face == 1) && (player.x > enemy->x))
+	if ((enemy.face == 1) && (player.x > enemy.x))
 	{
 		return;
 	}
 
 	if (hasClearShot(enemy))
 	{
-		if (enemy->flags & ENT_ALWAYSFIRES)
+		if (enemy.flags & ENT_ALWAYSFIRES)
 		{
-			addBullet(enemy, enemy->currentWeapon->getSpeed(enemy->face), 0);
-			if (enemy->currentWeapon == &weapon[WP_ALIENSPREAD])
+			addBullet(enemy, enemy.currentWeapon->getSpeed(enemy.face), 0);
+			if (enemy.currentWeapon == &weapon[WP_ALIENSPREAD])
 			{
-				addBullet(enemy, enemy->currentWeapon->getSpeed(enemy->face), 2);
-				addBullet(enemy, enemy->currentWeapon->getSpeed(enemy->face), -2);
+				addBullet(enemy, enemy.currentWeapon->getSpeed(enemy.face), 2);
+				addBullet(enemy, enemy.currentWeapon->getSpeed(enemy.face), -2);
 			}
 		}
 		else if ((Math::prand() % 850) <= (game.skill * 5))
 		{
-			addBullet(enemy, enemy->currentWeapon->getSpeed(enemy->face), 0);
-			if (enemy->currentWeapon == &weapon[WP_ALIENSPREAD])
+			addBullet(enemy, enemy.currentWeapon->getSpeed(enemy.face), 0);
+			if (enemy.currentWeapon == &weapon[WP_ALIENSPREAD])
 			{
-				addBullet(enemy, enemy->currentWeapon->getSpeed(enemy->face), 2);
-				addBullet(enemy, enemy->currentWeapon->getSpeed(enemy->face), -2);
+				addBullet(enemy, enemy.currentWeapon->getSpeed(enemy.face), 2);
+				addBullet(enemy, enemy.currentWeapon->getSpeed(enemy.face), -2);
 			}
 		}
 
-		if (enemy->flags & ENT_RAPIDFIRE)
+		if (enemy.flags & ENT_RAPIDFIRE)
 		{
-			if (enemy->flags & ENT_ALWAYSFIRES)
+			if (enemy.flags & ENT_ALWAYSFIRES)
 			{
 				if ((Math::prand() % 25) > game.skill * 3)
-					Math::removeBit(&enemy->flags, ENT_ALWAYSFIRES);
+					Math::removeBit(&enemy.flags, ENT_ALWAYSFIRES);
 			}
 			else
 			{
 				if ((Math::prand() % 50) < game.skill * 2)
-					Math::addBit(&enemy->flags, ENT_ALWAYSFIRES);
+					Math::addBit(&enemy.flags, ENT_ALWAYSFIRES);
 			}
 		}
 	}
 	else
 	{
-		if (enemy->flags & ENT_RAPIDFIRE)
-			Math::removeBit(&enemy->flags, ENT_ALWAYSFIRES);
+		if (enemy.flags & ENT_RAPIDFIRE)
+			Math::removeBit(&enemy.flags, ENT_ALWAYSFIRES);
 	}
 
-	if ((enemy->flags & ENT_FLIES) || (enemy->flags & ENT_SWIMS) || (enemy->flags & ENT_NOJUMP))
+	if ((enemy.flags & ENT_FLIES) || (enemy.flags & ENT_SWIMS) || (enemy.flags & ENT_NOJUMP))
 		return;
 		
-	if (enemy->flags & ENT_JUMPS)
+	if (enemy.flags & ENT_JUMPS)
 	{
-		if (!enemy->falling)
+		if (!enemy.falling)
 		{
 			if ((Math::prand() % 25) == 0)
 			{
 				int distance = Math::rrand(1, 4);
-				enemy->setVelocity(distance - ((distance * 2) * enemy->face), Math::rrand(-12, -10));
+				enemy.setVelocity(distance - ((distance * 2) * enemy.face), Math::rrand(-12, -10));
 			}
 		}
 		
@@ -212,114 +209,114 @@ static void lookForPlayer(Entity *enemy)
 	}
 
 	// Jump to try and reach player (even if they are approximately level with you!)
-	if (player.y - 5 < enemy->y)
+	if (player.y - 5 < enemy.y)
 	{
-		if (!enemy->falling)
+		if (!enemy.falling)
 		{
 			if ((Math::prand() % 100) == 0)
 			{
-				enemy->dy = -12;
+				enemy.dy = -12;
 			}
 		}
 	}
 }
 
-static void doAI(Entity *enemy)
+static void doAI(Entity &enemy)
 {
-	if (enemy->flags & ENT_GALDOV)
+	if (enemy.flags & ENT_GALDOV)
 	{
 		doGaldovAI(enemy);
 	}
-	else if (enemy->flags & ENT_BOSS)
+	else if (enemy.flags & ENT_BOSS)
 	{
 		return;
 	}
 
-	int x = (int)enemy->x;
-	int y = (int)enemy->y + enemy->height;
+	int x = (int)enemy.x;
+	int y = (int)enemy.y + enemy.height;
 	
-	if (enemy->dx > 0)
-		x += enemy->width;
+	if (enemy.dx > 0)
+		x += enemy.width;
 
 	x = x >> BRICKSHIFT;
 	y = y >> BRICKSHIFT;
 
-	if (enemy->dx == 0)
-		enemy->tx = (int)enemy->x;
+	if (enemy.dx == 0)
+		enemy.tx = (int)enemy.x;
 
 	// Don't enter areas you're not supposed to
-	if (enemy->tx != (int)enemy->x)
+	if (enemy.tx != (int)enemy.x)
 	{
-		if (!(enemy->flags & (ENT_FLIES|ENT_SWIMS)))
+		if (!(enemy.flags & (ENT_FLIES|ENT_SWIMS)))
 		{
 			if (!map.isSolid(x, y))
 			{
-				enemy->tx = (int)enemy->x;
+				enemy.tx = (int)enemy.x;
 			}
 		}
 	}
 
-	if ((int)enemy->x == enemy->tx)
+	if ((int)enemy.x == enemy.tx)
 	{
 		if ((Math::prand() % 100) == 0)
 		{
-			enemy->tx = (int)(enemy->x + Math::rrand(-640, 640));
-			enemy->ty = (int)(enemy->y);
-			if ((enemy->flags & ENT_FLIES) || (enemy->flags & ENT_SWIMS))
+			enemy.tx = (int)(enemy.x + Math::rrand(-640, 640));
+			enemy.ty = (int)(enemy.y);
+			if ((enemy.flags & ENT_FLIES) || (enemy.flags & ENT_SWIMS))
 			{
-				enemy->ty = (int)(enemy->y + Math::rrand(-320, 320));
+				enemy.ty = (int)(enemy.y + Math::rrand(-320, 320));
 			}
 		}
 
-		Math::limitInt(&enemy->tx, 15, (MAPWIDTH * BRICKSIZE)- 20);
-		Math::limitInt(&enemy->ty, 15, (MAPHEIGHT * BRICKSIZE)- 20);
+		Math::limitInt(&enemy.tx, 15, (MAPWIDTH * BRICKSIZE)- 20);
+		Math::limitInt(&enemy.ty, 15, (MAPHEIGHT * BRICKSIZE)- 20);
 
-		if (map.isSolid((enemy->tx >> BRICKSHIFT), (enemy->ty >> BRICKSHIFT)))
+		if (map.isSolid((enemy.tx >> BRICKSHIFT), (enemy.ty >> BRICKSHIFT)))
 		{
-			enemy->tx = (int)enemy->x;
-			enemy->ty = (int)enemy->y;
+			enemy.tx = (int)enemy.x;
+			enemy.ty = (int)enemy.y;
 		}
 	}
 
 	// Don't enter areas you're not supposed to
-	if (enemy->ty != (int)enemy->y)
+	if (enemy.ty != (int)enemy.y)
 	{
-		if (enemy->flags & ENT_FLIES)
+		if (enemy.flags & ENT_FLIES)
 		{
 			if (map.isLiquid(x, y + 1))
 			{
-				enemy->ty = (int)enemy->y;
+				enemy.ty = (int)enemy.y;
 			}
 		}
 	}
 
-	if ((int)enemy->y == enemy->ty)
+	if ((int)enemy.y == enemy.ty)
 	{
-		enemy->y = enemy->ty;
-		enemy->dx = 0;
+		enemy.y = enemy.ty;
+		enemy.dx = 0;
 	}
 
-	if (!enemy->falling)
-		enemy->dx = 0;
+	if (!enemy.falling)
+		enemy.dx = 0;
 
-	if ((enemy->flags & ENT_FLIES) || (enemy->flags & ENT_SWIMS))
+	if ((enemy.flags & ENT_FLIES) || (enemy.flags & ENT_SWIMS))
 	{
-		enemy->dx = enemy->dy = 0;
+		enemy.dx = enemy.dy = 0;
 
-		if ((int)enemy->y < enemy->ty) enemy->dy = 1;
-		if ((int)enemy->y > enemy->ty) enemy->dy = -1;
+		if ((int)enemy.y < enemy.ty) enemy.dy = 1;
+		if ((int)enemy.y > enemy.ty) enemy.dy = -1;
 	}
 
-	if ((int)enemy->x == enemy->tx) {enemy->dx = 0;}
-	if ((int)enemy->x < enemy->tx) {enemy->dx = 1; enemy->face = 0;}
-	if ((int)enemy->x > enemy->tx) {enemy->dx = -1; enemy->face = 1;}
+	if ((int)enemy.x == enemy.tx) {enemy.dx = 0;}
+	if ((int)enemy.x < enemy.tx) {enemy.dx = 1; enemy.face = 0;}
+	if ((int)enemy.x > enemy.tx) {enemy.dx = -1; enemy.face = 1;}
 
-	if ((enemy->flags & ENT_SWIMS) && (enemy->environment == ENV_WATER))
+	if ((enemy.flags & ENT_SWIMS) && (enemy.environment == ENV_WATER))
 	{
-		enemy->dy = 0;
+		enemy.dy = 0;
 
-		if ((int)enemy->y < enemy->ty) enemy->dy = 1;
-		if ((int)enemy->y > enemy->ty) enemy->dy = -1;
+		if ((int)enemy.y < enemy.ty) enemy.dy = 1;
+		if ((int)enemy.y > enemy.ty) enemy.dy = -1;
 	}
 
 	lookForPlayer(enemy);
@@ -337,41 +334,41 @@ static void checkCombo()
 	}
 }
 
-void enemyBulletCollisions(Entity *bullet)
+void enemyBulletCollisions(Entity &bullet)
 {
-	if (bullet->health < 1)
+	if (bullet.health < 1)
 	{
 		return;
 	}
 
 	for (auto &&enemy: map.enemies)
 	{
-		if ((enemy->flags & ENT_TELEPORTING) || (enemy->dead == DEAD_DYING))
+		if ((enemy.flags & ENT_TELEPORTING) || (enemy.dead == DEAD_DYING))
 		{
 			continue;
 		}
 
 		std::string comboString;
 
-		if ((bullet->owner == &player) || (bullet->owner == &engine.world) || (bullet->flags & ENT_BOSS))
+		if ((bullet.owner == &player) || (bullet.owner == &engine.world) || (bullet.flags & ENT_BOSS))
 		{
-			if (Collision::collision(enemy.get(), bullet))
+			if (Collision::collision(enemy, bullet))
 			{
-				if (bullet->id != WP_LASER)
+				if (bullet.id != WP_LASER)
 				{
-					bullet->health = 0;
+					bullet.health = 0;
 				}
 				
-				Math::removeBit(&bullet->flags, ENT_SPARKS);
-				Math::removeBit(&bullet->flags, ENT_PUFFS);
+				Math::removeBit(&bullet.flags, ENT_SPARKS);
+				Math::removeBit(&bullet.flags, ENT_PUFFS);
 
-				if ((enemy->flags & ENT_IMMUNE) && (!(enemy->flags & ENT_STATIC)))
+				if ((enemy.flags & ENT_IMMUNE) && (!(enemy.flags & ENT_STATIC)))
 				{
-					bullet->health = 0; // include the Laser for this one!
-					enemy->owner->tx = (int)bullet->owner->x;
-					enemy->owner->ty = (int)bullet->owner->y;
-					if (enemy->x < enemy->tx) {enemy->owner->dx = 1; enemy->owner->face = 0;}
-					if (enemy->x > enemy->tx) {enemy->owner->dx = -1; enemy->owner->face = 1;}
+					bullet.health = 0; // include the Laser for this one!
+					enemy.owner->tx = (int)bullet.owner->x;
+					enemy.owner->ty = (int)bullet.owner->y;
+					if (enemy.x < enemy.tx) {enemy.owner->dx = 1; enemy.owner->face = 0;}
+					if (enemy.x > enemy.tx) {enemy.owner->dx = -1; enemy.owner->face = 1;}
 					return;
 				}
 
@@ -380,53 +377,53 @@ void enemyBulletCollisions(Entity *bullet)
 					if the target has more than 0 health. Otherwise the stats screen
 					can show an accurracy of 800%. Which is just plain silly.
 				*/
-				if (bullet->owner == &player)
+				if (bullet.owner == &player)
 				{
-					enemy->tx = (int)player.x;
-					enemy->ty = (int)player.y;
-					enemy->face = 0;
+					enemy.tx = (int)player.x;
+					enemy.ty = (int)player.y;
+					enemy.face = 0;
 					
-					if (player.x < enemy->x)
+					if (player.x < enemy.x)
 					{
-						enemy->face = 1;
+						enemy.face = 1;
 					}
 
-					if ((bullet->id != WP_LASER) || (enemy->health > 0))
+					if ((bullet.id != WP_LASER) || (enemy.health > 0))
 					{
 						game.incBulletsHit();
 					}
 				}
 
-				if (!(enemy->flags & ENT_EXPLODES))
+				if (!(enemy.flags & ENT_EXPLODES))
 				{
-					audio.playSound(SND_HIT, CH_ANY, enemy->x);
+					audio.playSound(SND_HIT, CH_ANY, enemy.x);
 					if (game.gore)
 					{
-						addBlood(enemy.get(), bullet->dx / 4, Math::rrand(-6, -3), 1);
+						addBlood(enemy, bullet.dx / 4, Math::rrand(-6, -3), 1);
 					}
 					else
 					{
-						addColorParticles(bullet->x, bullet->y, Math::rrand(25, 75), -1);
+						addColorParticles(bullet.x, bullet.y, Math::rrand(25, 75), -1);
 					}
 				}
 				else
 				{
-					audio.playSound(SND_CLANG, CH_ANY, enemy->x);
-					addColorParticles(bullet->x, bullet->y, Math::rrand(25, 75), -1);
+					audio.playSound(SND_CLANG, CH_ANY, enemy.x);
+					addColorParticles(bullet.x, bullet.y, Math::rrand(25, 75), -1);
 				}
 
-				if (enemy->health > 0)
+				if (enemy.health > 0)
 				{
-					if (!(enemy->flags & ENT_IMMUNE))
+					if (!(enemy.flags & ENT_IMMUNE))
 					{
-						enemy->health -= bullet->damage;
+						enemy.health -= bullet.damage;
 					}
 					
-					if (enemy->health <= 0)
+					if (enemy.health <= 0)
 					{	
-						if (bullet->owner == &player)
+						if (bullet.owner == &player)
 						{
-							addPlayerScore(enemy->value);
+							addPlayerScore(enemy.value);
 							game.currentMissionEnemiesDefeated++;
 	
 							if (player.currentWeapon != &weapon[WP_LASER])
@@ -434,55 +431,55 @@ void enemyBulletCollisions(Entity *bullet)
 								checkCombo();
 							}
 							
-							comboString = "Combo-" + bullet->name;
+							comboString = "Combo-" + bullet.name;
 							checkObjectives(comboString, false);
 							checkObjectives("Enemy", false);
-							checkObjectives(enemy->name, false);
+							checkObjectives(enemy.name, false);
 						}
 	
-						if (!(enemy->flags & ENT_STATIC))
+						if (!(enemy.flags & ENT_STATIC))
 						{
-							enemy->dx = (bullet->dx / 4);
-							enemy->dy = -10;
+							enemy.dx = (bullet.dx / 4);
+							enemy.dy = -10;
 							
-							if (enemy->flags & ENT_EXPLODES)
+							if (enemy.flags & ENT_EXPLODES)
 							{
-								audio.playSound(SND_ELECDEATH1 + Math::prand() % 3, CH_DEATH, enemy->x);
+								audio.playSound(SND_ELECDEATH1 + Math::prand() % 3, CH_DEATH, enemy.x);
 							}
 							else if (game.gore)
 							{
-								audio.playSound(SND_DEATH1 + Math::prand() % 3, CH_DEATH, enemy->x);
+								audio.playSound(SND_DEATH1 + Math::prand() % 3, CH_DEATH, enemy.x);
 							}
 						}
 					}
 					
 				}
 				
-				if (enemy->flags & ENT_STATIC)
+				if (enemy.flags & ENT_STATIC)
 				{
 					return;
 				}
 
-				if (enemy->health < 0)
+				if (enemy.health < 0)
 				{
-					enemy->dx = Math::rrand(-3, 3);
-					enemy->dy = 5 - Math::prand() % 15;
-					enemy->health = -1;
+					enemy.dx = Math::rrand(-3, 3);
+					enemy.dy = 5 - Math::prand() % 15;
+					enemy.health = -1;
 					
-					if (enemy->flags & ENT_EXPLODES)
+					if (enemy.flags & ENT_EXPLODES)
 					{
-						audio.playSound(SND_ELECDEATH1 + Math::prand() % 3, CH_DEATH, enemy->x);
+						audio.playSound(SND_ELECDEATH1 + Math::prand() % 3, CH_DEATH, enemy.x);
 					}
 					else if (game.gore)
 					{
-						audio.playSound(SND_DEATH1 + Math::prand() % 3, CH_DEATH, enemy->x);
+						audio.playSound(SND_DEATH1 + Math::prand() % 3, CH_DEATH, enemy.x);
 					}
 
-					if (bullet->owner == &player)
+					if (bullet.owner == &player)
 					{
 						if (player.currentWeapon != &weapon[WP_LASER])
 						{
-							comboString = "Combo-" + bullet->name;
+							comboString = "Combo-" + bullet.name;
 							checkCombo();
 							checkObjectives(comboString, false);
 						}
@@ -529,29 +526,29 @@ static int getNonGoreParticleColor(const std::string &name)
 	return rtn;
 }
 
-static void gibEnemy(Entity *enemy)
+static void gibEnemy(Entity &enemy)
 {
-	if (enemy->flags & ENT_GALDOV)
+	if (enemy.flags & ENT_GALDOV)
 	{
-		addTeleportParticles(enemy->x, enemy->y, 75, SND_TELEPORT3);
+		addTeleportParticles(enemy.x, enemy.y, 75, SND_TELEPORT3);
 		checkObjectives("Galdov", true);
 	}
 
-	if (enemy->flags & ENT_EXPLODES)
+	if (enemy.flags & ENT_EXPLODES)
 	{
-		addExplosion(enemy->x + (enemy->width / 2), enemy->y + (enemy->height / 2), 10 + (20 * game.skill), enemy);
+		addExplosion(enemy.x + (enemy.width / 2), enemy.y + (enemy.height / 2), 10 + (20 * game.skill), enemy);
 		addSmokeAndFire(enemy, Math::rrand(-5, 5), Math::rrand(-5, 5), 2);
 		return;
 	}
 
 	float x, y, dx, dy;
 	int amount = (game.gore) ? 25 : 150;
-	int color = getNonGoreParticleColor(enemy->name);
+	int color = getNonGoreParticleColor(enemy.name);
 
 	for (int i = 0 ; i < amount ; i++)
 	{
-		x = enemy->x + Math::rrand(-3, 3);
-		y = enemy->y + Math::rrand(-3, 3);
+		x = enemy.x + Math::rrand(-3, 3);
+		y = enemy.y + Math::rrand(-3, 3);
 		
 		if (game.gore)
 		{
@@ -567,63 +564,57 @@ static void gibEnemy(Entity *enemy)
 		}
 	}
 	
-	(game.gore) ? audio.playSound(SND_SPLAT, CH_ANY) : audio.playSound(SND_POP, CH_ANY, enemy->x);
+	(game.gore) ? audio.playSound(SND_SPLAT, CH_ANY) : audio.playSound(SND_POP, CH_ANY, enemy.x);
 }
 
 void doEnemies()
 {
 	map.fightingGaldov = false;
 
-	int x, y, absX, absY;
-
-	for (auto it = map.enemies.begin(); it != map.enemies.end();)
+	map.enemies.remove_if([](auto &&enemy)
 	{
-		auto enemy = it->get();
-		
 		if (!engine.cheatBlood)
 		{
-			if (enemy->dead == DEAD_DYING)
+			if (enemy.dead == DEAD_DYING)
 			{
-				if (!enemy->referenced)
+				if (!enemy.referenced)
 				{
-					debug(("Removing unreferenced enemy '%s'\n", enemy->name));
-					it = map.enemies.erase(it);
+					debug(("Removing unreferenced enemy '%s'\n", enemy.name));
+					return true;
 				}
 				else
 				{
-					enemy->referenced = false;
-					++it;
+					enemy.referenced = false;
+					return false;
 				}
-				
-				continue;
 			}
 		}
 
-		x = (int)(enemy->x - engine.playerPosX);
-		y = (int)(enemy->y - engine.playerPosY);
+		int x = (int)(enemy.x - engine.playerPosX);
+		int y = (int)(enemy.y - engine.playerPosY);
 
-		absX = abs(x);
-		absY = abs(y);
+		int absX = abs(x);
+		int absY = abs(y);
 
 		if ((absX < 800) && (absY < 600))
 		{
 			// Fly forever
-			if (enemy->flags & ENT_FLIES)
+			if (enemy.flags & ENT_FLIES)
 			{
-				enemy->fuel = 7;
+				enemy.fuel = 7;
 			}
 
-			if (enemy->owner->flags & ENT_TELEPORTING)
+			if (enemy.owner->flags & ENT_TELEPORTING)
 			{
 				moveEntity(enemy);
 			}
 			else
 			{
-				if ((enemy->health > 0) && (!(enemy->flags & ENT_STATIC)))
+				if ((enemy.health > 0) && (!(enemy.flags & ENT_STATIC)))
 				{
-					enemy->think();
+					enemy.think();
 
-					if (enemy->owner == enemy)
+					if (enemy.owner == &enemy)
 					{
 						doAI(enemy);
 					}
@@ -635,142 +626,141 @@ void doEnemies()
 				
 				if (map.isBlizzardLevel)
 				{
-					enemy->dx += map.windPower * 0.1;
+					enemy.dx += map.windPower * 0.1;
 				}
 
-				if (enemy->flags & ENT_NOMOVE)
+				if (enemy.flags & ENT_NOMOVE)
 				{
-					enemy->dx = 0;
+					enemy.dx = 0;
 				}
 
 				moveEntity(enemy);
 
 				if ((absX < 700) && (absY < 500))
 				{
-					if (enemy->flags & ENT_FIRETRAIL)
+					if (enemy.flags & ENT_FIRETRAIL)
 					{
-						addFireTrailParticle(enemy->x + (enemy->face * 16) + Math::rrand(-1, 1), enemy->y + Math::rrand(-1, 1));
+						addFireTrailParticle(enemy.x + (enemy.face * 16) + Math::rrand(-1, 1), enemy.y + Math::rrand(-1, 1));
 					}
 					
-					graphics.blit(enemy->getFaceImage(), x, y, graphics.screen, false);
+					graphics.blit(enemy.getFaceImage(), x, y, graphics.screen, false);
 					
-					if ((enemy->dx != 0) || (enemy->flags & ENT_FLIES) || (enemy->flags & ENT_STATIC))
+					if ((enemy.dx != 0) || (enemy.flags & ENT_FLIES) || (enemy.flags & ENT_STATIC))
 					{
-						enemy->animate();
+						enemy.animate();
 					}
 				}
 			}
 		}
 		else
 		{
-			if (enemy->flags & ENT_SPAWNED)
+			if (enemy.flags & ENT_SPAWNED)
 			{
 				if ((absX > 1920) || (absY > 1440))
 				{
-					enemy->health = -100;
+					enemy.health = -100;
 				}
 			}
 		}
 
-		if (enemy->health > 0)
+		if (enemy.health > 0)
 		{
-			if ((enemy->environment == ENV_SLIME) || (enemy->environment == ENV_LAVA))
+			if ((enemy.environment == ENV_SLIME) || (enemy.environment == ENV_LAVA))
 			{
-				checkObjectives(enemy->name, false);
-				enemy->health = -1;
+				checkObjectives(enemy.name, false);
+				enemy.health = -1;
 			}
 		}
 		else
 		{
-			if (enemy->flags & ENT_GALDOV)
+			if (enemy.flags & ENT_GALDOV)
 			{
-				enemy->health = -99;
+				enemy.health = -99;
 			}
 
-			if (enemy->health == 0)
+			if (enemy.health == 0)
 			{
-				Math::removeBit(&enemy->flags, ENT_WEIGHTLESS);
-				Math::removeBit(&enemy->flags, ENT_SWIMS);
-				Math::removeBit(&enemy->flags, ENT_FLIES);
-				Math::addBit(&enemy->flags, ENT_INANIMATE);
-				Math::addBit(&enemy->flags, ENT_BOUNCES);
-				enemy->health = -1 - Math::prand() % 25;
+				Math::removeBit(&enemy.flags, ENT_WEIGHTLESS);
+				Math::removeBit(&enemy.flags, ENT_SWIMS);
+				Math::removeBit(&enemy.flags, ENT_FLIES);
+				Math::addBit(&enemy.flags, ENT_INANIMATE);
+				Math::addBit(&enemy.flags, ENT_BOUNCES);
+				enemy.health = -1 - Math::prand() % 25;
 			}
 			
 			if (engine.cheatBlood)
 			{
-				if (!(enemy->flags & ENT_EXPLODES))
+				if (!(enemy.flags & ENT_EXPLODES))
 				{
-					if ((enemy->health % 4) == 0)
+					if ((enemy.health % 4) == 0)
 					{
 						addBlood(enemy, Math::rrand(-2, 2), Math::rrand(-6, -3), 1);
 					}
-					else if ((enemy->health % 10) == 0)
+					else if ((enemy.health % 10) == 0)
 					{
 						if (game.gore)
 						{
-							audio.playSound(SND_DEATH1 + Math::prand() % 3, CH_DEATH, enemy->x);
+							audio.playSound(SND_DEATH1 + Math::prand() % 3, CH_DEATH, enemy.x);
 						}
 					}
 				}
 			}
 
-			enemy->health--;
+			enemy.health--;
 
-			if (enemy->flags & ENT_MULTIEXPLODE)
+			if (enemy.flags & ENT_MULTIEXPLODE)
 			{
-				if (enemy->health < -30)
+				if (enemy.health < -30)
 				{
-					if ((enemy->health % 3) == 0)
+					if ((enemy.health % 3) == 0)
 					{
-						addExplosion(enemy->x + Math::prand() % 25, enemy->y + Math::prand() % 25,  10 + (20 * game.skill), enemy);
+						addExplosion(enemy.x + Math::prand() % 25, enemy.y + Math::prand() % 25,  10 + (20 * game.skill), enemy);
 						addSmokeAndFire(enemy, Math::rrand(-5, 5), Math::rrand(-5, 5), 2);
 					}
 				}
 			}
 
-			if (enemy->health <= -50)
+			if (enemy.health <= -50)
 			{
-				if (enemy->flags & ENT_GALDOVFINAL)
+				if (enemy.flags & ENT_GALDOVFINAL)
 				{
-					enemy->health = -30;
-					enemy->dx = Math::rrand(-10, 10);
-					enemy->dy = Math::rrand(-10, 10);
+					enemy.health = -30;
+					enemy.dx = Math::rrand(-10, 10);
+					enemy.dy = Math::rrand(-10, 10);
 				}
 				else
 				{
-					if (enemy->dead == DEAD_ALIVE)
+					if (enemy.dead == DEAD_ALIVE)
 					{
 						if ((absX < 800) && (absY < 600))
 						{
 							gibEnemy(enemy);
 							
-							if (enemy->value)
+							if (enemy.value)
 							{
-								dropRandomItems((int)enemy->x, (int)enemy->y);
+								dropRandomItems((int)enemy.x, (int)enemy.y);
 							}
 						}
 						
-						enemy->dead = DEAD_DYING;
+						enemy.dead = DEAD_DYING;
 					}
 					
-					if (enemy->dead == DEAD_DYING)
+					if (enemy.dead == DEAD_DYING)
 					{
-						if (!enemy->referenced)
+						if (!enemy.referenced)
 						{
 							if ((absX < 800) && (absY < 600))
 							{
 								gibEnemy(enemy);
 								
-								if (enemy->value)
+								if (enemy.value)
 								{
-									dropRandomItems((int)enemy->x, (int)enemy->y);
+									dropRandomItems((int)enemy.x, (int)enemy.y);
 								}
 							}
 							
-							debug(("Removing unreferenced enemy '%s'\n", enemy->name));
-							it = map.enemies.erase(it);
-							continue;
+							debug(("Removing unreferenced enemy '%s'\n", enemy.name));
+							return true;
 						}
 					}
 				}
@@ -779,9 +769,9 @@ void doEnemies()
 		
 		// default the enemy to not referenced.
 		// doBullets() will change this if required.
-		enemy->referenced = false;
-		++it;
-	}
+		enemy.referenced = false;
+		return false;
+	});
 }
 
 void loadEnemy(const std::string &token)

@@ -21,24 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-SpawnPoint::SpawnPoint()
-{
-	active = false;
-	x = y = 0;
-
-	spawnType = spawnSubType = 0;
-
-	currentInterval = minInterval = maxInterval = 0;
-}
-
-void SpawnPoint::reset()
-{
-	currentInterval = 0;
-
-	requiredInterval = Math::rrand(minInterval, maxInterval);
-}
-
-void SpawnPoint::create(const std::string &name, int x, int y, int spawnType, int spawnSubType, int minInterval, int maxInterval, bool active)
+SpawnPoint::SpawnPoint(const std::string &name, int x, int y, int spawnType, int spawnSubType, int minInterval, int maxInterval, bool active)
 {
 	this->name = name;
 	this->x = x;
@@ -50,6 +33,13 @@ void SpawnPoint::create(const std::string &name, int x, int y, int spawnType, in
 	this->active = active;
 
 	reset();
+}
+
+void SpawnPoint::reset()
+{
+	currentInterval = 0;
+
+	requiredInterval = Math::rrand(minInterval, maxInterval);
 }
 
 void SpawnPoint::think()

@@ -198,14 +198,14 @@ static void galdovFire()
 	self->setThinkTime(2);
 	self->think = &galdovFire;
 	
-	if (hasClearShot(self))
+	if (hasClearShot(*self))
 	{
-		self->flags & ENT_AIMS ? addBullet((Entity*)self, 0, 0) : addBullet((Entity*)self, self->currentWeapon->getSpeed(self->face), 0);
+		self->flags & ENT_AIMS ? addBullet(*self, 0, 0) : addBullet(*self, self->currentWeapon->getSpeed(self->face), 0);
 			
 		if (self->currentWeapon == &weapon[WP_ALIENSPREAD])
 		{
-			addBullet(self, self->currentWeapon->getSpeed(self->face), 2);
-			addBullet(self, self->currentWeapon->getSpeed(self->face), -2);
+			addBullet(*self, self->currentWeapon->getSpeed(self->face), 2);
+			addBullet(*self, self->currentWeapon->getSpeed(self->face), -2);
 		}
 	}
 	
@@ -220,14 +220,14 @@ static void galdovRocketAttack()
 {
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
 	
-	if (!hasClearShot(self))
+	if (!hasClearShot(*self))
 		return;
 	
 	self->setActionFinished(5);
 	self->setThinkTime(2);
 	self->think = &galdovRocketAttack;
 	
-	addBullet((Entity*)self, 0, 0);
+	addBullet(*self, 0, 0);
 	
 	self->custom--;
 	
@@ -400,8 +400,8 @@ void galdovDie()
 		self->dx = Math::rrand(-5, 5);
 		self->dy = Math::rrand(-5, 5);
 		
-		addExplosion(self->x, self->y, 5, &player);
-		addSmokeAndFire(self, Math::rrand(-4, 4), Math::rrand(-4, 4), 2);
+		addExplosion(self->x, self->y, 5, player);
+		addSmokeAndFire(*self, Math::rrand(-4, 4), Math::rrand(-4, 4), 2);
 	}
 	
 	for (int i = 1 ; i < 10 ; i++)
@@ -443,7 +443,7 @@ static void fakeDie()
 {
 	dropItems((int)self->x, (int)self->y);
 	
-	addExplosion(self->x, self->y, 50, self);
+	addExplosion(self->x, self->y, 50, *self);
 	self->setThinkTime(2);
 	self->setActionFinished(2);
 	self->active = false;

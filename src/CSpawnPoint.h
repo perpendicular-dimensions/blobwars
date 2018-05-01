@@ -33,9 +33,8 @@ class SpawnPoint {
 
 		int currentInterval, minInterval, maxInterval, requiredInterval;
 
-	SpawnPoint();
+	SpawnPoint(const std::string &name, int x, int y, int spawnType, int spawnSubType, int minInterval, int maxInterval, bool active);
 	void reset();
-	void create(const std::string &name, int x, int y, int spawnType, int spawnSubType, int minInterval, int maxInterval, bool active);
 	void think();
 	bool readyToSpawn();
 

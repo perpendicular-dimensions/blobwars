@@ -20,39 +20,28 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
 class Train {
-
 	private:
-
 		float dx, dy;
-
-		int pause, think;
+		int pause;
+		int think = 0;
 
 	public:
-
 		std::string name;
-
 		int type;
-
 		bool active;
-
 		float x, y;
-		
 		bool waitAtStart;
-		
 		int startX, startY, endX, endY;
-
 		int height, width;
-		
-		Sprite *sprite;
+		Sprite *sprite = nullptr;
 
-	Train();
+	Train(const std::string &name, int type, int startX, int startY, int endX, int endY, int pause, bool fromStart);
+
 	float getDX();
 	float getDY();
 	bool isReady();
 	bool isMoving();
 	bool waitsForPlayer();
-	void setName(const std::string &name);
-	void set(int startX, int startY, int endX, int endY, int pause, bool fromStart);
 	bool openClose();
 	void move();
 	

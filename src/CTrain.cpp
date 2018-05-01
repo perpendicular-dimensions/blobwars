@@ -21,13 +21,42 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-Train::Train()
+
+Train::Train(const std::string &name, int type, int startX, int startY, int endX, int endY, int pause, bool fromStart)
 {
-	active = true;
-	type = TR_TRAIN;
-	sprite = nullptr;
-	waitAtStart = true;
+	this->name = name;
+	this->type = type;
+	this->startX = startX;
+	this->startY = startY;
+	this->endX = endX;
+	this->endY = endY;
+
+	this->pause = pause;
+
+	Math::calculateSlope(startX, startY, endX, endY, &dx, &dy);
+	
+	if ((dx != 0) && (dy != 0))
+		debug(("WARNING: TRAIN '%s' is not straight! - %d %d %d %d\n", name, startX, startY, endX, endY));
+
+	if (fromStart)
+	{
+		this->x = this->startX;
+		this->y = this->startY;
+		waitAtStart = true;
+	}
+	else
+	{
+		this->x = this->endX;
+		this->y = this->endY;
+		if (type == TR_TRAIN)
+		{
+			dx = -dx;
+			dy = -dy;
+		}
+		waitAtStart = false;
+	}
 }
+
 
 float Train::getDX()
 {
@@ -66,45 +95,6 @@ bool Train::isMoving()
 bool Train::waitsForPlayer()
 {
 	return !active && pause == 0;
-}
-
-void Train::setName(const std::string &name)
-{
-	this->name = name;
-}
-
-void Train::set(int startX, int startY, int endX, int endY, int pause, bool fromStart)
-{
-	this->startX = startX;
-	this->startY = startY;
-	this->endX = endX;
-	this->endY = endY;
-
-	this->pause = pause;
-	this->think = 0;
-
-	Math::calculateSlope(startX, startY, endX, endY, &dx, &dy);
-	
-	if ((dx != 0) && (dy != 0))
-		debug(("WARNING: TRAIN '%s' is not straight! - %d %d %d %d\n", name, startX, startY, endX, endY));
-
-	if (fromStart)
-	{
-		this->x = this->startX;
-		this->y = this->startY;
-		waitAtStart = true;
-	}
-	else
-	{
-		this->x = this->endX;
-		this->y = this->endY;
-		if (type == TR_TRAIN)
-		{
-			dx = -dx;
-			dy = -dy;
-		}
-		waitAtStart = false;
-	}
 }
 
 bool Train::openClose()

@@ -32,13 +32,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 void addTeleporter(const std::string &name, int x, int y, int destX, int destY, bool active)
 {
-	Teleporter *teleport = new Teleporter();
+	auto &teleport = map.teleports.emplace_back();
 
-	teleport->setName(name);
-	teleport->set(x, y, destX, destY);
-	teleport->active = active;
-	
-	map.addTeleporter(teleport);
+	teleport.setName(name);
+	teleport.set(x, y, destX, destY);
+	teleport.active = active;
 }
 
 /**
@@ -46,21 +44,21 @@ void addTeleporter(const std::string &name, int x, int y, int destX, int destY, 
 * the teleporter's destination location
 * @param ent The entity to check against
 */
-void checkTeleportContact(Entity *ent)
+void checkTeleportContact(Entity &ent)
 {
 	for (auto &&teleport: map.teleports)
 	{
-		if (!teleport->active)
+		if (!teleport.active)
 			continue;
 
-		if (Collision::collision(ent->x + ent->dx, ent->y + ent->dy, ent->width, ent->height, teleport->x + 16, teleport->y - 20, 32, 25))
+		if (Collision::collision(ent.x + ent.dx, ent.y + ent.dy, ent.width, ent.height, teleport.x + 16, teleport.y - 20, 32, 25))
 		{
-			ent->dx = teleport->destX;
-			ent->dy = teleport->destY;
-			Math::addBit(&ent->flags, ENT_TELEPORTING);
-			addTeleportParticles(ent->x + (ent->width / 2), ent->y + (ent->height / 2), 50, SND_TELEPORT3);
+			ent.dx = teleport.destX;
+			ent.dy = teleport.destY;
+			Math::addBit(&ent.flags, ENT_TELEPORTING);
+			addTeleportParticles(ent.x + (ent.width / 2), ent.y + (ent.height / 2), 50, SND_TELEPORT3);
 			
-			debug(("%s - Teleporting to %f:%f\n", ent->name, ent->dx, ent->dy));
+			debug(("%s - Teleporting to %f:%f\n", ent.name, ent.dx, ent.dy));
 		}
 	}
 }
@@ -77,23 +75,23 @@ void doTeleporters()
 
 	for (auto &&teleport: map.teleports)
 	{
-		x = (int)(teleport->x - engine.playerPosX);
-		y = (int)(teleport->y - engine.playerPosY);
+		x = (int)(teleport.x - engine.playerPosX);
+		y = (int)(teleport.y - engine.playerPosY);
 
 		if ((abs(x) <= 800) && (abs(y) <= 600))
 		{
-			if (teleport->sprite == nullptr)
+			if (teleport.sprite == nullptr)
 			{
-				teleport->sprite = graphics.getSprite("Teleporter", true);
+				teleport.sprite = graphics.getSprite("Teleporter", true);
 			}
 
-			graphics.blit(teleport->sprite->getCurrentFrame(), x, y, graphics.screen, false);
+			graphics.blit(teleport.sprite->getCurrentFrame(), x, y, graphics.screen, false);
 
-			if (teleport->active)
+			if (teleport.active)
 			{
 				dy = Math::rrand(-100, -10);
 				dy /= 100;
-				map.addParticle(teleport->x + Math::prand() % 64, teleport->y, 0, dy, Math::rrand(30, 60), graphics.white, teleportStar, PAR_WEIGHTLESS);
+				map.addParticle(teleport.x + Math::prand() % 64, teleport.y, 0, dy, Math::rrand(30, 60), graphics.white, teleportStar, PAR_WEIGHTLESS);
 			}
 		}
 	}

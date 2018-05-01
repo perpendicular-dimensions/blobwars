@@ -78,14 +78,14 @@ void processPostMissionData()
 
 	for (auto &&objective: map.objectives)
 	{
-		gameData.addCompletedObjective(map.name, objective->description, objective->currentValue, objective->targetValue);
+		gameData.addCompletedObjective(map.name, objective.description, objective.currentValue, objective.targetValue);
 	}
 
 	for (auto &&mia: map.mias)
 	{
-		bool miaFound = mia->health <= 0;
+		bool miaFound = mia.health <= 0;
 
-		std::string text = "MIA_" + mia->name;
+		std::string text = "MIA_" + mia.name;
 		
 		if (miaFound)
 		{
@@ -155,12 +155,12 @@ void showMissionClear()
 
 	for (auto &&mia: map.mias)
 	{
-		if (mia->health > 0)
+		if (mia.health > 0)
 			continue;
 
-		mia->x = 700;
+		mia.x = 700;
 		
-		mia->y = miaY;
+		mia.y = miaY;
 		
 		count++;
 
@@ -214,18 +214,18 @@ void showMissionClear()
 
 		graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 		
-		if ((game.skill < 3) &&  (contains(objective->description, "L.R.T.S.")) && (!gameData.completedWorld))
+		if ((game.skill < 3) &&  (contains(objective.description, "L.R.T.S.")) && (!gameData.completedWorld))
 		{
 			graphics.drawString(_("???? ???????? ????"), col1, y, TXT_RIGHT, graphics.background);
 		}
 		else
 		{
-			graphics.drawString(_(objective->description), col1, y, TXT_RIGHT, graphics.background);
+			graphics.drawString(_(objective.description), col1, y, TXT_RIGHT, graphics.background);
 		}
 
-		if (objective->currentValue < objective->targetValue)
+		if (objective.currentValue < objective.targetValue)
 		{
-			if (objective->targetValue == 1)
+			if (objective.targetValue == 1)
 			{
 				graphics.setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
 				graphics.drawString(_("Incomplete"), col2, y, TXT_LEFT, graphics.background);
@@ -233,7 +233,7 @@ void showMissionClear()
 			else
 			{
 				graphics.setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
-				message = fmt::format("{} / {}", objective->currentValue, objective->targetValue);
+				message = fmt::format("{} / {}", objective.currentValue, objective.targetValue);
 				graphics.drawString(message, col2, y, TXT_LEFT, graphics.background);
 			}
 		}
@@ -273,21 +273,21 @@ void showMissionClear()
 		{
 			for (auto &&mia: map.mias)
 			{
-				if (mia->health > 0)
+				if (mia.health > 0)
 					continue;
 
 				if (count > colCount)
 					count = 0;
 
-				graphics.blit(mia->getFaceImage(), (int)mia->x, (int)mia->y, graphics.screen, false);
+				graphics.blit(mia.getFaceImage(), (int)mia.x, (int)mia.y, graphics.screen, false);
 
-				if (mia->x == 700)
+				if (mia.x == 700)
 					audio.playSound(0, 0);
 
-				if (mia->x > (place + (count * 25)))
-					Math::limitFloat(&(mia->x -= 35), place + (count * 25), 640);
+				if (mia.x > (place + (count * 25)))
+					Math::limitFloat(&(mia.x -= 35), place + (count * 25), 640);
 
-				if (mia->x > place + (count * 25))
+				if (mia.x > place + (count * 25))
 					break;
 
 				count++;

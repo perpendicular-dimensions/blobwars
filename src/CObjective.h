@@ -25,12 +25,11 @@ class Objective {
 	
 		std::string description;
 		std::string target;
-		int currentValue;
+		int currentValue = 0;
 		int targetValue;
 		bool required;
-		bool completed;
+		bool completed = false;
 
-		Objective();
 		Objective(const std::string &description, const std::string &target, int targetValue, bool required);
 
 };

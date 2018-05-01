@@ -475,18 +475,10 @@ void Engine::setInfoMessage(const std::string &message, int priority, int type)
 
 void Engine::deleteWidgets()
 {
-	for (auto &&widget: widgets)
-		widget->redraw(); // wat?!
-
 	widgets.clear();
 
 	highlightedWidget = nullptr;
 	highlightedIndex = 0;
-}
-
-void Engine::addWidget(Widget *widget)
-{
-	widgets.emplace_back(widget);
 }
 
 bool Engine::loadWidgets(const std::string &filename)
@@ -496,41 +488,30 @@ bool Engine::loadWidgets(const std::string &filename)
 	if (!loadData(filename))
 		return false;
 
-	char token[50], name[50], groupName[50], label[80], options[100];
-	int x, y, min, max;
-
-	int i;
-
-	Widget *widget;
-
 	for (auto line: split(dataBuffer, '\n'))
 	{
+		char token[50], name[50], groupName[50], label[80], options[100];
+		int x, y, min, max;
+
 		scan(line, "%s %s %s %*c %[^\"] %*c %*c %[^\"] %*c %d %d %d %d", token, name, groupName, label, options, &x, &y, &min, &max);
 
 		if (strcmp(token, "END") == 0)
 			break;
 
-		widget = new Widget;
+		int type = 0;
 
-		i = 0;
-
-		while (true)
+		for (size_t i = 0; i < widgetNames.size(); ++i)
 		{
-			if (token == widgetName[i])
-				widget->type = i;
-
-			if ("-1" == widgetName[i])
+			if (token == widgetNames[i]) {
+				type = i;
 				break;
-
-			i++;
+			}
 		}
 
-		widget->setProperties(name, groupName, label, options, x, y, min, max);
-
-		addWidget(widget);
+		widgets.emplace_back(name, groupName, label, options, type, x, y, min, max);
 	}
 
-	highlightedWidget = widgets.front().get();
+	highlightedWidget = &widgets.front();
 	highlightedIndex = 0;
 
 	return true;
@@ -542,7 +523,7 @@ int Engine::getWidgetIndexByName(const std::string &name)
 
 	for (auto &&widget: widgets)
 	{
-		if (widget->name == name)
+		if (widget.name == name)
 			return i;
 		i++;
 	}
@@ -554,8 +535,8 @@ Widget *Engine::getWidgetByName(const std::string &name)
 {
 	for (auto &&widget: widgets)
 	{
-		if (widget->name == name)
-			return widget.get();
+		if (widget.name == name)
+			return &widget;
 	}
 
 	return nullptr;
@@ -571,10 +552,10 @@ void Engine::showWidgetGroup(const std::string &groupName, bool show)
 
 	for (auto &&widget: widgets)
 	{
-		if (widget->groupName == groupName)
+		if (widget.groupName == groupName)
 		{
-			widget->visible = show;
-			widget->redraw();
+			widget.visible = show;
+			widget.redraw();
 			found = true;
 		}
 	}
@@ -589,10 +570,10 @@ void Engine::enableWidgetGroup(const std::string &groupName, bool show)
 
 	for (auto &&widget: widgets)
 	{
-		if (widget->groupName == groupName)
+		if (widget.groupName == groupName)
 		{
-			widget->enabled = show;
-			widget->redraw();
+			widget.enabled = show;
+			widget.redraw();
 			found = true;
 		}
 	}
@@ -649,7 +630,7 @@ void Engine::highlightWidget(int dir)
 		else if ((size_t)highlightedIndex >= widgets.size())
 			highlightedIndex = 0;
 
-		highlightedWidget = widgets[highlightedIndex].get();
+		highlightedWidget = &widgets[highlightedIndex];
 
 		if (highlightedWidget->type == WG_LABEL)
 			continue;
@@ -664,7 +645,7 @@ void Engine::highlightWidget(int dir)
 void Engine::highlightWidget(const std::string &name)
 {
 	highlightedIndex = getWidgetIndexByName(name);
-	highlightedWidget = widgets[highlightedIndex].get();
+	highlightedWidget = &widgets[highlightedIndex];
 }
 
 int Engine::processWidgets()

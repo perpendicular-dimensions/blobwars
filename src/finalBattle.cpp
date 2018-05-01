@@ -31,14 +31,14 @@ static void blackDroidFire()
 {	
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
 	
-	if (!hasClearShot(self))
+	if (!hasClearShot(*self))
 		return;
 	
 	self->setActionFinished(9);
 	self->setThinkTime(2);
 	self->think = &blackDroidFire;
 	
-	addBullet((Entity*)self, 0, 0);
+	addBullet(*self, 0, 0);
 	
 	self->custom--;
 	if (self->custom == 0)
@@ -56,8 +56,8 @@ static void blackDroidDie()
 	{
 		if ((self->health % 3) == 0)
 		{
-			addExplosion(self->x, self->y, 35, self);
-			addSmokeAndFire(self, Math::rrand(-15, 15), Math::rrand(-15, 15), 2);
+			addExplosion(self->x, self->y, 35, *self);
+			addSmokeAndFire(*self, Math::rrand(-15, 15), Math::rrand(-15, 15), 2);
 		}
 	}
 	
@@ -257,8 +257,8 @@ static void galdovFinalDie()
 		self->dx = Math::rrand(-5, 5);
 		self->dy = Math::rrand(-5, 5);
 		
-		addExplosion(self->x, self->y, 50, &player);
-		addSmokeAndFire(self, Math::rrand(-5, 5), Math::rrand(-5, 5), 2);
+		addExplosion(self->x, self->y, 50, player);
+		addSmokeAndFire(*self, Math::rrand(-5, 5), Math::rrand(-5, 5), 2);
 	}
 }
 
@@ -266,14 +266,14 @@ static void galdovMiniFire()
 {	
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
 	
-	if (!hasClearShot(self))
+	if (!hasClearShot(*self))
 		return;
 	
 	self->setActionFinished(9);
 	self->setThinkTime(2);
 	self->think = &galdovMiniFire;
 	
-	addBullet((Entity*)self, 0, 0);
+	addBullet(*self, 0, 0);
 	
 	self->custom--;
 	if (self->custom == 0)
@@ -413,7 +413,7 @@ static void galdovMiniAttack()
 
 static void galdovMiniDie()
 {
-	addExplosion(self->x, self->y, 5, self);
+	addExplosion(self->x, self->y, 5, *self);
 	dropItems((int)self->x, (int)self->y);
 	self->setThinkTime(2);
 	self->setActionFinished(2);
@@ -655,7 +655,7 @@ static void orbSeekGaldov()
 		self->active = false;
 		self->setActionFinished(60);
 		self->setThinkTime(60);
-		addExplosion(self->x, self->y, 75, &player);
+		addExplosion(self->x, self->y, 75, player);
 		audio.playSound(SND_BOSSCUSTOM2, CH_AMBIANCE, self->x);
 		self->place(9999, 9999);
 		map.boss[0]->setSprites(graphics.getSprite("GaldovPain", true), graphics.getSprite("GaldovPain", true), graphics.getSprite("GaldovPain", true));
@@ -712,9 +712,9 @@ static void galdovFinalWaitForObjective()
 	
 	for (auto &&objective: map.objectives)
 	{
-		if (objective->target.find("Reality") != std::string::npos)
+		if (contains(objective.target, "Reality"))
 		{
-			if (objective->completed)
+			if (objective.completed)
 			{
 				player.dx = 1000;
 				player.dy = 1408;

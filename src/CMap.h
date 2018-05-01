@@ -70,20 +70,22 @@ class Map {
 		
 		std::map<std::string, std::vector<std::string>> persistents;
 
-		std::vector<std::unique_ptr<Train>> trains;
-		std::list<std::unique_ptr<Entity>> items;
-		std::list<std::unique_ptr<Entity>> bullets;
-		std::list<std::unique_ptr<Entity>> enemies;
-		std::vector<std::unique_ptr<Entity>> mias;
-		std::vector<std::unique_ptr<Entity>> obstacles;
-		std::list<std::unique_ptr<Particle>> particles;
-		std::vector<std::unique_ptr<Switch>> switches;
-		std::vector<std::unique_ptr<SpawnPoint>> spawns;
-		std::list<std::unique_ptr<Effect>> effects;
-		std::vector<std::unique_ptr<Objective>> objectives;
-		std::vector<std::unique_ptr<Teleporter>> teleports;
-		std::vector<std::unique_ptr<LineDef>> lines;
-		std::list<std::unique_ptr<Trap>> traps;
+		// Various types of items present in the map.
+		// Rules: std::list for things that are removed often, and that are referenced.
+		std::vector<Train> trains;
+		std::list<Entity> items;
+		std::list<Entity> bullets;
+		std::list<Entity> enemies;
+		std::list<Entity> mias;
+		std::list<Entity> obstacles;
+		std::list<Particle> particles;
+		std::vector<Switch> switches;
+		std::vector<SpawnPoint> spawns;
+		std::list<Effect> effects;
+		std::vector<Objective> objectives;
+		std::vector<Teleporter> teleports;
+		std::vector<LineDef> lines;
+		std::list<Trap> traps;
 
 	Map();
 	
@@ -106,18 +108,9 @@ class Map {
 	void addTrain(const std::string &name, int startX, int startY, int endX, int endY, int pause, bool atStart, bool active);
 	void addDoor(const std::string &name, int type, int startX, int startY, int endX, int endY, bool active);
 	void addSwitch(const std::string &name, const std::string &linkName, const std::string &requiredObjectName, const std::string &activateMessage, int type, int x, int y, bool activated);
-	void addItem(Entity *item);
-	void addBullet(Entity *bullet);
 	void addParticle(float x, float y, float dx, float dy, int health, int color, Sprite *sprite, int flags);
-	void addEnemy(Entity *enemy);
-	void addMIA(Entity *mia);
-	void addObstacle(Entity *obstacle);
 	void addSpawnPoint(const std::string &name, int x, int y, int type, int subtype, int min, int max, bool active);
-	void addEffect(Effect *effect);
 	void addObjective(const std::string &description, const std::string &target, int targetValue, bool required);
-	void addTeleporter(Teleporter *teleporter);
-	void addLineDef(LineDef *lineDef);
-	void addTrap(Trap *trap);
 	void evalTileset(const std::string &baseDir);
 	
 	void killAllEnemies();

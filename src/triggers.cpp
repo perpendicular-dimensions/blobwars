@@ -55,14 +55,14 @@ void activateTrigger(const std::string &linkName, const std::string &activateMes
 
 		for (auto &&obstacle: map.obstacles)
 		{
-			if (obstacle->name == activateMessage)
+			if (obstacle.name == activateMessage)
 			{
-				addTeleportParticles(obstacle->x + (obstacle->width / 2), obstacle->y + (obstacle->height / 2), 50, SND_TELEPORT2);
-				obstacle->place(obstacle->tx, obstacle->ty);
-				Math::removeBit(&obstacle->flags, ENT_TELEPORTING);
-				obstacle->dx = obstacle->dy = 0;
-				obstacle->environment = ENV_AIR;
-				addTeleportParticles(obstacle->x + (obstacle->width / 2), obstacle->y + (obstacle->height / 2), 50, SND_TELEPORT2);
+				addTeleportParticles(obstacle.x + (obstacle.width / 2), obstacle.y + (obstacle.height / 2), 50, SND_TELEPORT2);
+				obstacle.place(obstacle.tx, obstacle.ty);
+				Math::removeBit(&obstacle.flags, ENT_TELEPORTING);
+				obstacle.dx = obstacle.dy = 0;
+				obstacle.environment = ENV_AIR;
+				addTeleportParticles(obstacle.x + (obstacle.width / 2), obstacle.y + (obstacle.height / 2), 50, SND_TELEPORT2);
 			}
 		}
 
@@ -75,14 +75,14 @@ void activateTrigger(const std::string &linkName, const std::string &activateMes
 
 	for (auto &&train: map.trains)
 	{
-		if (linkName == train->name)
+		if (linkName == train.name)
 		{
-			train->active = active;
-			if ((train->active) && (activateMessage != "@none@"))
+			train.active = active;
+			if ((train.active) && (activateMessage != "@none@"))
 				engine.setInfoMessage(activateMessage, 1, INFO_ACTIVATE);
 
-			if (train->type != TR_TRAIN)
-				audio.playSound(SND_OPENDOOR, CH_TOUCH, train->x);
+			if (train.type != TR_TRAIN)
+				audio.playSound(SND_OPENDOOR, CH_TOUCH, train.x);
 
 			linkOkay = true;
 		}
@@ -90,10 +90,10 @@ void activateTrigger(const std::string &linkName, const std::string &activateMes
 
 	for (auto &&sp: map.spawns)
 	{
-		if (linkName == sp->name)
+		if (linkName == sp.name)
 		{
-			sp->active = !sp->active;
-			if ((sp->active) && (activateMessage != "@none@"))
+			sp.active = !sp.active;
+			if ((sp.active) && (activateMessage != "@none@"))
 				engine.setInfoMessage(activateMessage, 1, INFO_ACTIVATE);
 
 			linkOkay = true;
@@ -102,10 +102,10 @@ void activateTrigger(const std::string &linkName, const std::string &activateMes
 
 	for (auto &&tele: map.teleports)
 	{
-		if (linkName == tele->name)
+		if (linkName == tele.name)
 		{
-			tele->active = active;
-			if ((tele->active) && (activateMessage != "@none@"))
+			tele.active = active;
+			if ((tele.active) && (activateMessage != "@none@"))
 				engine.setInfoMessage(activateMessage, 1, INFO_ACTIVATE);
 
 			linkOkay = true;
@@ -114,9 +114,9 @@ void activateTrigger(const std::string &linkName, const std::string &activateMes
 
 	for (auto &&trap: map.traps)
 	{
-		if (linkName == trap->name)
+		if (linkName == trap.name)
 		{
-			toggleTrap(trap.get());
+			toggleTrap(trap);
 			if (activateMessage != "@none@")
 				engine.setInfoMessage(activateMessage, 1, INFO_ACTIVATE);
 			linkOkay = true;

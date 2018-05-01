@@ -23,18 +23,18 @@ class Effect {
 
 	public:
 
-		float x = 0;
-		float y = 0;
-		float dx = 0;
-		float dy = 0;
+		float x;
+		float y;
+		float dx;
+		float dy;
 
 		int color = 0;
 
 		int health = 0;
 
-		long flags = 0;
+		long flags;
 
-	void create(float x, float y, float dx, float dy, int flags);
+	Effect(float x, float y, float dx, float dy, int flags);
 	void update();
 
 };

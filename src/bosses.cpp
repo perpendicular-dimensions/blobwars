@@ -92,10 +92,10 @@ static void tankBossLevel()
 
 	for (auto &&enemy: map.enemies)
 	{
-		if (enemy->name == "Red Blob 1")
+		if (enemy.name == "Red Blob 1")
 			blob1 = true;
 		
-		if (enemy->name == "Red Blob 2")
+		if (enemy.name == "Red Blob 2")
 			blob2 = true;	
 	}
 	
@@ -162,10 +162,10 @@ static void droidBossLevel()
 
 	for (auto &&item: map.items)
 	{
-		if (item->flags & ENT_DYING)
+		if (item.flags & ENT_DYING)
 			continue;
 		
-		switch (item->id)
+		switch (item.id)
 		{
 			case ITEM_PISTOL:
 				addPistol = false;
@@ -354,7 +354,7 @@ void doBosses()
 		
 		self = map.boss[i];
 			
-		moveEntity((Entity*)self);
+		moveEntity(*self);
 		
 		if (self->flags & ENT_TELEPORTING)
 			continue;
@@ -414,26 +414,26 @@ void doBosses()
 	map.doBossLevelAction();
 }
 
-static bool isCorrectShieldFrequency(Entity *bullet)
+static bool isCorrectShieldFrequency(Entity &bullet)
 {	
-	if (bullet->id != self->shieldFrequency)
+	if (bullet.id != self->shieldFrequency)
 	{
-		bullet->owner = self;
-		bullet->dx = -bullet->dx;
-		bullet->dx *= 0.25;
-		bullet->dy = -2;
+		bullet.owner = self;
+		bullet.dx = -bullet.dx;
+		bullet.dx *= 0.25;
+		bullet.dy = -2;
 		
-		bullet->x += bullet->dx;
-		bullet->y += bullet->dy;
+		bullet.x += bullet.dx;
+		bullet.y += bullet.dy;
 		
-		bullet->health += 60;
+		bullet.health += 60;
 		
-		bullet->owner = self;
+		bullet.owner = self;
 		
-		Math::removeBit(&bullet->flags, ENT_WEIGHTLESS);
-		Math::removeBit(&bullet->flags, ENT_BOUNCES);
+		Math::removeBit(&bullet.flags, ENT_WEIGHTLESS);
+		Math::removeBit(&bullet.flags, ENT_BOUNCES);
 		
-		audio.playSound(SND_RICO1, CH_ANY, bullet->x);
+		audio.playSound(SND_RICO1, CH_ANY, bullet.x);
 		
 		return false;
 	}
@@ -441,9 +441,9 @@ static bool isCorrectShieldFrequency(Entity *bullet)
 	return true;
 }
 
-void checkBossBulletCollisions(Entity *bullet)
+void checkBossBulletCollisions(Entity &bullet)
 {
-	if ((bullet->health < 1) || (player.health <= -60))
+	if ((bullet.health < 1) || (player.health <= -60))
 	{
 		return;
 	}
@@ -455,7 +455,7 @@ void checkBossBulletCollisions(Entity *bullet)
 	
 	self = nullptr;
 
-	if (bullet->owner == &player)
+	if (bullet.owner == &player)
 	{
 		for (int i = 0 ; i < 10 ; i++)
 		{
@@ -466,7 +466,7 @@ void checkBossBulletCollisions(Entity *bullet)
 			
 			self = map.boss[i];
 		
-			if (Collision::collision((Entity*)self, bullet))
+			if (Collision::collision(*self, bullet))
 			{
 				
 				if (map.boss[i]->shieldFrequency != 999)
@@ -479,11 +479,11 @@ void checkBossBulletCollisions(Entity *bullet)
 				
 				if (!(self->flags & ENT_IMMUNE))
 				{
-					self->health -= bullet->damage;
-					audio.playSound(SND_CLANG, CH_ANY, bullet->x);
-					addColorParticles(bullet->x, bullet->y, Math::rrand(25, 75), -1);
-					Math::removeBit(&bullet->flags, ENT_SPARKS);
-					Math::removeBit(&bullet->flags, ENT_PUFFS);
+					self->health -= bullet.damage;
+					audio.playSound(SND_CLANG, CH_ANY, bullet.x);
+					addColorParticles(bullet.x, bullet.y, Math::rrand(25, 75), -1);
+					Math::removeBit(&bullet.flags, ENT_SPARKS);
+					Math::removeBit(&bullet.flags, ENT_PUFFS);
 				}
 				
 				if (self->react != nullptr && self->health > 0)
@@ -491,16 +491,16 @@ void checkBossBulletCollisions(Entity *bullet)
 					self->react();
 				}
 	
-				if (bullet->id != WP_LASER)
+				if (bullet.id != WP_LASER)
 				{
-					bullet->health = 0;
+					bullet.health = 0;
 				}
 			}
 		}
 	}
 }
 
-void doGaldovAI(Entity *galdov)
+void doGaldovAI(Entity &galdov)
 {
 	map.fightingGaldov = true;
 
@@ -514,39 +514,39 @@ void doGaldovAI(Entity *galdov)
 		case 0:
 			if ((Math::prand() % 5) == 0)
 			{
-				if (galdov->flags & ENT_FLIES)
+				if (galdov.flags & ENT_FLIES)
 				{
-					Math::removeBit(&galdov->flags, ENT_FLIES);
-					Math::removeBit(&galdov->flags, ENT_FIRETRAIL);
+					Math::removeBit(&galdov.flags, ENT_FLIES);
+					Math::removeBit(&galdov.flags, ENT_FIRETRAIL);
 				}
 				else
 				{
-					Math::addBit(&galdov->flags, ENT_FLIES);
-					Math::addBit(&galdov->flags, ENT_FIRETRAIL);
+					Math::addBit(&galdov.flags, ENT_FLIES);
+					Math::addBit(&galdov.flags, ENT_FIRETRAIL);
 				}
 			}
 			break;
 		case 1:
-			if (galdov->flags & ENT_JUMPS)
+			if (galdov.flags & ENT_JUMPS)
 			{
-				Math::removeBit(&galdov->flags, ENT_JUMPS);
+				Math::removeBit(&galdov.flags, ENT_JUMPS);
 			}
 			else
 			{
-				Math::addBit(&galdov->flags, ENT_JUMPS);
+				Math::addBit(&galdov.flags, ENT_JUMPS);
 			}
 			break;
 		case 2:
-			galdov->currentWeapon = getRandomGaldovWeapon();
+			galdov.currentWeapon = getRandomGaldovWeapon();
 			break;
 		case 3:
-			if (galdov->flags & ENT_RAPIDFIRE)
+			if (galdov.flags & ENT_RAPIDFIRE)
 			{
-				Math::removeBit(&galdov->flags, ENT_RAPIDFIRE);
+				Math::removeBit(&galdov.flags, ENT_RAPIDFIRE);
 			}
 			else
 			{
-				Math::addBit(&galdov->flags, ENT_RAPIDFIRE);
+				Math::addBit(&galdov.flags, ENT_RAPIDFIRE);
 			}
 			break;
 	}

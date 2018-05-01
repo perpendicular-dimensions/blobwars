@@ -147,9 +147,9 @@ void gibPlayer()
 	(game.gore) ? audio.playSound(SND_SPLAT, CH_ANY) : audio.playSound(SND_POP, CH_ANY);
 }
 
-void checkPlayerBulletCollisions(Entity *bullet)
+void checkPlayerBulletCollisions(Entity &bullet)
 {
-	if ((bullet->health < 1) || (player.health <= -60))
+	if ((bullet.health < 1) || (player.health <= -60))
 	{
 		return;
 	}
@@ -159,40 +159,40 @@ void checkPlayerBulletCollisions(Entity *bullet)
 		return;
 	}
 
-	if (bullet->owner != &player)
+	if (bullet.owner != &player)
 	{
-		if (Collision::collision(&player, bullet))
+		if (Collision::collision(player, bullet))
 		{
-			if ((!player.immune) && (!(bullet->flags & ENT_EXPLODES)))
+			if ((!player.immune) && (!(bullet.flags & ENT_EXPLODES)))
 			{
-				addBlood(&player, bullet->dx / 4, Math::rrand(-6, -3), 1);
+				addBlood(player, bullet.dx / 4, Math::rrand(-6, -3), 1);
 				audio.playSound(SND_HIT, CH_ANY);
 				if (game.missionOverReason == MIS_INPROGRESS)
 				{
-					player.health -= bullet->damage;
+					player.health -= bullet.damage;
 					player.immune = 120;
 				}
 			}
 
-			Math::removeBit(&bullet->flags, ENT_SPARKS);
-			Math::removeBit(&bullet->flags, ENT_PUFFS);
+			Math::removeBit(&bullet.flags, ENT_SPARKS);
+			Math::removeBit(&bullet.flags, ENT_PUFFS);
 
 			if (player.health <= 0)
 			{
-				player.dx = bullet->dx;
+				player.dx = bullet.dx;
 				player.dy = -5;
 				audio.playSound(SND_DEATH1 + Math::prand() % 3, CH_DEATH);
 				player.health = 0;
 			}
 
-			if (bullet->id == WP_LASER)
+			if (bullet.id == WP_LASER)
 			{
 				debug(("Laser Hit Player"));
-				throwAndDamageEntity(&player, 0, -3, 3, -8);
+				throwAndDamageEntity(player, 0, -3, 3, -8);
 			}
 			else
 			{
-				bullet->health = 0;
+				bullet.health = 0;
 			}
 		}
 	}
@@ -229,14 +229,14 @@ void doPlayer()
 	
 	if (player.flags & ENT_TELEPORTING)
 	{
-		moveEntity(&player);
+		moveEntity(player);
 		return;
 	}
 
 	if (game.missionOverReason == MIS_PLAYEROUT)
 	{
 		graphics.blit(player.getFaceImage(), (int)(player.x - engine.playerPosX), (int)(player.y - engine.playerPosY), graphics.screen, false);
-		moveEntity(&player);
+		moveEntity(player);
 		return;
 	}
 
@@ -254,7 +254,7 @@ void doPlayer()
 			player.oxygen = 7;
 		}
 
-		moveEntity(&player);
+		moveEntity(player);
 
 		graphics.blit(player.getFaceImage(), (int)(player.x - engine.playerPosX), (int)(player.y - engine.playerPosY), graphics.screen, false);
 
@@ -445,9 +445,9 @@ void doPlayer()
 		player.currentWeapon = &weapon[WP_SPREAD];
 	#endif
 	
-	moveEntity(&player);
+	moveEntity(player);
 
-	// Math::limitFloat(&player.x, 10, map.limitRight + 608);
+	// Math::limitFloat(player.x, 10, map.limitRight + 608);
 	// moveEntity() limits x < 10
 	if (player.x > map.limitRight + 608)
 	{
@@ -457,7 +457,7 @@ void doPlayer()
 			player.dx = 0;
 		}
 	}
-	// Math::limitFloat(&player.y, map.limitUp + 5, (MAPHEIGHT * BRICKSIZE) + 64);
+	// Math::limitFloat(player.y, map.limitUp + 5, (MAPHEIGHT * BRICKSIZE) + 64);
 	if (player.y < map.limitUp + 5)
 	{
 		player.y = map.limitUp + 5;
@@ -475,11 +475,11 @@ void doPlayer()
 	{
 		if (player.reload == 0)
 		{
-			addBullet(&player, player.currentWeapon->getSpeed(player.face), 0);
+			addBullet(player, player.currentWeapon->getSpeed(player.face), 0);
 			if (player.currentWeapon == &weapon[WP_SPREAD])
 			{
-				addBullet(&player, player.currentWeapon->getSpeed(player.face), 2);
-				addBullet(&player, player.currentWeapon->getSpeed(player.face), -2);
+				addBullet(player, player.currentWeapon->getSpeed(player.face), 2);
+				addBullet(player, player.currentWeapon->getSpeed(player.face), -2);
 			}
 		}
 	}

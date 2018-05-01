@@ -38,7 +38,7 @@ static bool okayToSpawnEnemy(std::string name, int x, int y)
 	for (auto &&train: map.trains)
 	{
 		// assume enemy is 20 x 20 pixels (most are at least) and trains are 64 x 64
-		if (Collision::collision(x * BRICKSHIFT, y * BRICKSHIFT, 20, 20, train->x, train->y, 64, 64))
+		if (Collision::collision(x * BRICKSHIFT, y * BRICKSHIFT, 20, 20, train.x, train.y, 64, 64))
 		{
 			debug(("Couldn't add enemy '%s' - Collided with train\n", name));
 			return false;
@@ -110,29 +110,29 @@ void doSpawnPoints()
 
 	for (auto &&sp: map.spawns)
 	{
-		sp->think();
+		sp.think();
 
-		if (!sp->active)
+		if (!sp.active)
 		{
 			continue;
 		}
 
-		if (sp->spawnType == SPW_HAZARD)
+		if (sp.spawnType == SPW_HAZARD)
 		{
-			if (sp->spawnSubType == HAZARD_ROCKFALL)
+			if (sp.spawnSubType == HAZARD_ROCKFALL)
 			{
-				x = (int)fabs(sp->x - player.x);
-				y = (int)fabs(sp->y - player.y);
+				x = (int)fabs(sp.x - player.x);
+				y = (int)fabs(sp.y - player.y);
 				
 				if ((x <= 640) && (y <= 480))
 				{
 					engine.setPlayerPosition((int)player.x + Math::rrand(-MAP_SHAKEAMOUNT, MAP_SHAKEAMOUNT), (int)player.y + Math::rrand(-MAP_SHAKEAMOUNT, MAP_SHAKEAMOUNT), map.limitLeft, map.limitRight, map.limitUp, map.limitDown);
 				}
 			}
-			else if (sp->spawnSubType == HAZARD_STALAGTITES)
+			else if (sp.spawnSubType == HAZARD_STALAGTITES)
 			{
-				x = (int)fabs(sp->x - player.x);
-				y = (int)fabs(sp->y - player.y);
+				x = (int)fabs(sp.x - player.x);
+				y = (int)fabs(sp.y - player.y);
 				
 				if ((x <= 320) && (y <= 480))
 				{
@@ -141,45 +141,45 @@ void doSpawnPoints()
 			}
 		}
 
-		if (sp->readyToSpawn())
+		if (sp.readyToSpawn())
 		{	
-			if ((sp->spawnType != SPW_ENEMY) && (sp->spawnType != SPW_ITEM))
+			if ((sp.spawnType != SPW_ENEMY) && (sp.spawnType != SPW_ITEM))
 			{
 				// If the player is too far away, don't spawn (unless it's random enemy / item spawning)
-				x = (int)fabs(sp->x - player.x);
-				y = (int)fabs(sp->y - player.y);
+				x = (int)fabs(sp.x - player.x);
+				y = (int)fabs(sp.y - player.y);
 
 				if ((x > 700) || (y > 500))
 				{
-					sp->reset();
+					sp.reset();
 					continue;
 				}
 			}
 
-			switch (sp->spawnType)
+			switch (sp.spawnType)
 			{
 				case SPW_HAZARD:
-					switch (sp->spawnSubType)
+					switch (sp.spawnSubType)
 					{
 						case HAZARD_LAVABALL:
-							engine.world.place(sp->x, sp->y);
+							engine.world.place(sp.x, sp.y);
 							engine.world.currentWeapon = &weapon[WP_LAVABALL1];
-							addBullet(&engine.world, Math::rrand(-5, 5), Math::rrand(-(5 + game.skill), -(2 + game.skill)));
+							addBullet(engine.world, Math::rrand(-5, 5), Math::rrand(-(5 + game.skill), -(2 + game.skill)));
 							break;
 						case HAZARD_ROCKFALL:
-							engine.world.place(sp->x, sp->y);
+							engine.world.place(sp.x, sp.y);
 							engine.world.currentWeapon = &weapon[WP_ROCK1];
-							addBullet(&engine.world, Math::rrand(-2, 2), Math::rrand(0, 2));
+							addBullet(engine.world, Math::rrand(-2, 2), Math::rrand(0, 2));
 							break;
 						case HAZARD_BOMBS:
-							engine.world.place(sp->x, sp->y);
+							engine.world.place(sp.x, sp.y);
 							engine.world.currentWeapon = &weapon[WP_BOMB];
-							addBullet(&engine.world, Math::rrand(-2, 2), Math::rrand(0, 2));
+							addBullet(engine.world, Math::rrand(-2, 2), Math::rrand(0, 2));
 							break;
 						case HAZARD_EXPLOSION:
-							x = sp->x + Math::rrand(-128, 128);
-							y = sp->y + Math::rrand(-128, 128);
-							addExplosion(x, y, 50, &engine.world);
+							x = sp.x + Math::rrand(-128, 128);
+							y = sp.y + Math::rrand(-128, 128);
+							addExplosion(x, y, 50, engine.world);
 							x = x >> BRICKSHIFT;
 							y = y >> BRICKSHIFT;
 							if (map.isSolid(x, y))
@@ -200,16 +200,16 @@ void doSpawnPoints()
 							}
 							break;
 						case HAZARD_POWERBULLETS:
-							engine.world.place(sp->x, sp->y);
+							engine.world.place(sp.x, sp.y);
 							engine.world.currentWeapon = &weapon[WP_SHELLS];
 							x = engine.world.currentWeapon->dx;
-							if (player.x < sp->x) x = -x;
-							addBullet(&engine.world, x, 0);
+							if (player.x < sp.x) x = -x;
+							addBullet(engine.world, x, 0);
 							break;
 						case HAZARD_STALAGTITES:
-							engine.world.place(sp->x, sp->y);
+							engine.world.place(sp.x, sp.y);
 							engine.world.currentWeapon = &weapon[WP_STALAGTITE];
-							addBullet(&engine.world, 0, 2);
+							addBullet(engine.world, 0, 2);
 							break;
 						default:
 							printf("Spawn Subtype is unknown!\n");
@@ -273,9 +273,9 @@ void doSpawnPoints()
 					if (game.missionOverReason != MIS_INPROGRESS)
 						break;
 					
-					if (map.boss[sp->spawnSubType]->health > 0)
+					if (map.boss[sp.spawnSubType]->health > 0)
 					{
-						map.boss[sp->spawnSubType]->active = true;
+						map.boss[sp.spawnSubType]->active = true;
 					}
 					
 					break;
@@ -285,13 +285,13 @@ void doSpawnPoints()
 					break;
 			}
 
-			sp->reset();
+			sp.reset();
 
-			if (sp->spawnType == SPW_ENEMY)
+			if (sp.spawnType == SPW_ENEMY)
 			{
 				if ((Math::prand() % (game.skill + 2)) > 0)
 				{
-					sp->requiredInterval = Math::rrand(1, 30);
+					sp.requiredInterval = Math::rrand(1, 30);
 				}
 			}
 		}

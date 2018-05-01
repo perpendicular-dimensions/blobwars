@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-void checkSwitchContact(Entity *ent)
+void checkSwitchContact(Entity &ent)
 {
 	bool okayToActivate = false;
 
@@ -29,89 +29,89 @@ void checkSwitchContact(Entity *ent)
 
 	for (auto &&swt: map.switches)
 	{
-		if (swt->type == SWT_USED)
+		if (swt.type == SWT_USED)
 			continue;
 
-		if (swt->type == SWT_NORMAL)
+		if (swt.type == SWT_NORMAL)
 		{
-			if ((ent != &player) && (!(ent->flags & ENT_BULLET)))
+			if ((&ent != &player) && (!(ent.flags & ENT_BULLET)))
 				continue;
 
-			if ((ent->flags & ENT_BULLET) && (ent->id != WP_GRENADES))
+			if ((ent.flags & ENT_BULLET) && (ent.id != WP_GRENADES))
 				continue;
 		}
 		
-		if ((swt->type == SWT_RESET) && (ent != &player))
+		if ((swt.type == SWT_RESET) && (&ent != &player))
 			continue;
 			
-		if ((swt->type == SWT_WATERLEVEL) && (ent != &player))
+		if ((swt.type == SWT_WATERLEVEL) && (&ent != &player))
 			continue;
 
-		if (Collision::collision(ent, swt.get()))
+		if (Collision::collision(ent, swt))
 		{
 			okayToActivate = false;
 
-			if (swt->requiredObjectName == "@none@")
+			if (swt.requiredObjectName == "@none@")
 			{
 				okayToActivate = true;
 			}
-			else if (ent == &player)
+			else if (&ent == &player)
 			{
-				if (carryingItem(swt->requiredObjectName))
+				if (carryingItem(swt.requiredObjectName))
 				{
 					okayToActivate = true;
 					
-					if (swt->type == SWT_PRESSURE)
+					if (swt.type == SWT_PRESSURE)
 					{
-						swt->requiredObjectName = "@none@";
+						swt.requiredObjectName = "@none@";
 					}
 					
-					checkObjectives(swt->name, true);
-					swt->name = "Switch";
+					checkObjectives(swt.name, true);
+					swt.name = "Switch";
 				}
 				else
 				{
-					message = swt->requiredObjectName + " required";
+					message = swt.requiredObjectName + " required";
 					engine.setInfoMessage(message, 1, INFO_HINT);
 				}
 			}
 
 			if (okayToActivate)
 			{	
-				if (swt->health == 0)
+				if (swt.health == 0)
 				{
-					if ((swt->type == SWT_NORMAL) || (swt->type == SWT_WATERLEVEL))
+					if ((swt.type == SWT_NORMAL) || (swt.type == SWT_WATERLEVEL))
 					{
-						audio.playSound(SND_SWITCH1, CH_TOUCH, swt->x);
-						swt->activated = !swt->activated;
-						activateTrigger(swt->linkName, swt->activateMessage, swt->activated);
-						swt->health = 1;
-						swt->type = SWT_USED;
+						audio.playSound(SND_SWITCH1, CH_TOUCH, swt.x);
+						swt.activated = !swt.activated;
+						activateTrigger(swt.linkName, swt.activateMessage, swt.activated);
+						swt.health = 1;
+						swt.type = SWT_USED;
 					}
-					else if (swt->type == SWT_TOGGLE)
+					else if (swt.type == SWT_TOGGLE)
 					{
-						audio.playSound(SND_SWITCH1, CH_TOUCH, swt->x);
-						activateTrigger(swt->linkName, swt->activateMessage, !swt->activated);
-						swt->activated = !swt->activated;
+						audio.playSound(SND_SWITCH1, CH_TOUCH, swt.x);
+						activateTrigger(swt.linkName, swt.activateMessage, !swt.activated);
+						swt.activated = !swt.activated;
 					}
-					else if (swt->type == SWT_PRESSURE)
+					else if (swt.type == SWT_PRESSURE)
 					{
-						audio.playSound(SND_SWITCH1, CH_TOUCH, swt->x);
-						swt->activated = true;
-						activateTrigger(swt->linkName, swt->activateMessage, true);
-						swt->health = 2;
+						audio.playSound(SND_SWITCH1, CH_TOUCH, swt.x);
+						swt.activated = true;
+						activateTrigger(swt.linkName, swt.activateMessage, true);
+						swt.health = 2;
 					}
-					else if ((swt->type == SWT_TIMED) || (swt->type == SWT_RESET))
+					else if ((swt.type == SWT_TIMED) || (swt.type == SWT_RESET))
 					{
-						audio.playSound(SND_SWITCH1, CH_TOUCH, swt->x);
-						activateTrigger(swt->linkName, swt->activateMessage, true);
-						swt->activated = !swt->activated;
-						swt->health = 240;
+						audio.playSound(SND_SWITCH1, CH_TOUCH, swt.x);
+						activateTrigger(swt.linkName, swt.activateMessage, true);
+						swt.activated = !swt.activated;
+						swt.health = 240;
 					}
 				}
 
-				if ((swt->type == SWT_TOGGLE) || (swt->type == SWT_PRESSURE))
-					swt->health = 2;
+				if ((swt.type == SWT_TOGGLE) || (swt.type == SWT_PRESSURE))
+					swt.health = 2;
 			}
 		}
 	}
@@ -123,31 +123,31 @@ void doSwitches()
 
 	for (auto &&swt: map.switches)
 	{
-		x = (int)(swt->x - engine.playerPosX);
-		y = (int)(swt->y - engine.playerPosY);
+		x = (int)(swt.x - engine.playerPosX);
+		y = (int)(swt.y - engine.playerPosY);
 
 		absX = abs(x);
 		absY = abs(y);
 
 		if ((absX < 800) && (absY < 600))
 		{
-			if (!swt->activated)
+			if (!swt.activated)
 				graphics.blit(graphics.getSprite("SwitchOff", true)->getCurrentFrame(), x, y, graphics.screen, false);
 			else
 				graphics.blit(graphics.getSprite("SwitchOn", true)->getCurrentFrame(), x, y, graphics.screen, false);
 		}
 
-		if ((swt->type != SWT_NORMAL) && (swt->type != SWT_WATERLEVEL) && (swt->type != SWT_USED))
+		if ((swt.type != SWT_NORMAL) && (swt.type != SWT_WATERLEVEL) && (swt.type != SWT_USED))
 		{
-			if (swt->health > 0)
+			if (swt.health > 0)
 			{
-				swt->health--;
-				if (swt->health == 0)
+				swt.health--;
+				if (swt.health == 0)
 				{
-					if (swt->type != SWT_TOGGLE)
+					if (swt.type != SWT_TOGGLE)
 					{
-						swt->activated = false;
-						activateTrigger(swt->linkName, swt->activateMessage, false);
+						swt.activated = false;
+						activateTrigger(swt.linkName, swt.activateMessage, false);
 					}
 				}
 			}

@@ -127,9 +127,9 @@ static void parseIntroCommand(std::string_view line)
 	{
 		for (auto &&sp: map.spawns)
 		{
-			if (param == sp->name)
+			if (param == sp.name)
 			{
-				sp->active = true;
+				sp.active = true;
 			}
 		}
 	}

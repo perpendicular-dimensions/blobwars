@@ -164,8 +164,7 @@ struct REPLAY_MODE
 
 /* ########### widgets ############ */
 
-const std::string widgetName[] = {
-
+const std::vector<std::string> widgetNames = {
 	"BUTTON",
 	"RADIO",
 	"SMOOTH_SLIDER",
@@ -173,8 +172,6 @@ const std::string widgetName[] = {
 	"LABEL",
 	"KEYBOARD",
 	"JOYPAD",
-	"-1"
-
 };
 
 #define WG_BUTTON				0

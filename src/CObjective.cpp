@@ -21,22 +21,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-Objective::Objective()
-{
-	this->currentValue = 0;
-	this->targetValue = 0;
-	this->required = false;
-	this->completed = false;
-}
-
 Objective::Objective(const std::string &description, const std::string &target, int targetValue, bool required)
 {
 	this->description = description;
 	this->target = target;
 	this->targetValue = targetValue;
 	this->required = required;
-
-	this->currentValue = 0;
-
-	this->completed = false;
 }

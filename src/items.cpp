@@ -23,43 +23,38 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 void addItem(int itemType, const std::string &name, int x, int y, const std::string &spriteName, int health, int value, int flags, bool randomMovement)
 {
-	Entity *item = new Entity();
+	auto &item = map.items.emplace_back(itemType, name, x, y);
 
-	item->id = itemType;
-	item->setName(name);
-	item->place(x, y);
-	item->setSprites(graphics.getSprite(spriteName, true), graphics.getSprite(spriteName, true), graphics.getSprite(spriteName, true));
-	item->health = health;
-	item->value = value;
-	item->flags = ENT_INANIMATE + ENT_BOUNCES + ENT_COLLECTABLE;
+	item.setSprites(graphics.getSprite(spriteName, true), graphics.getSprite(spriteName, true), graphics.getSprite(spriteName, true));
+	item.health = health;
+	item.value = value;
+	item.flags = ENT_INANIMATE + ENT_BOUNCES + ENT_COLLECTABLE;
 
 	// raise items taller than the enemy
  	int x1 = x >> BRICKSHIFT;
-	int x2 = (x + item->width - 1) >> BRICKSHIFT;
-	int y2 = (y + item->height - 1) >> BRICKSHIFT;
+	int x2 = (x + item.width - 1) >> BRICKSHIFT;
+	int y2 = (y + item.height - 1) >> BRICKSHIFT;
 	if ((map.isSolid(x1, y2)) || (map.isSolid(x2, y2)))
 	{
-		item->y = (y2 * BRICKSIZE) - item->height;
+		item.y = (y2 * BRICKSIZE) - item.height;
 	}
 
 	if (randomMovement)
 	{
-		item->setRandomVelocity();
+		item.setRandomVelocity();
 	}
 
-	item->health += Math::prand() % 120;
+	item.health += Math::prand() % 120;
 
-	Math::addBit(&item->flags, flags);
+	Math::addBit(&item.flags, flags);
 	
-	if (item->id == ITEM_MISC_INVISIBLE)
+	if (item.id == ITEM_MISC_INVISIBLE)
 	{
 		if ((gameData.completedWorld) || (game.skill == 3))
 		{
-			item->id = ITEM_MISC_NOSHOW;
+			item.id = ITEM_MISC_NOSHOW;
 		}
 	}
-
-	map.addItem(item);
 }
 
 static void dropBossItems(int x, int y)
@@ -155,18 +150,18 @@ void stealCrystal()
 {
 	for (auto &&objective: map.objectives)
 	{
-		objective->completed = true;
-		objective->currentValue = objective->targetValue;
+		objective.completed = true;
+		objective.currentValue = objective.targetValue;
 	}
 
 	for (auto &&item: map.items)
 	{
-		if (item->name == "Reality Crystal")
+		if (item.name == "Reality Crystal")
 		{
-			item->dx = 0;
-			item->dy = 0;
-			Math::addBit(&item->flags, ENT_TELEPORTING);
-			addTeleportParticles(item->x + (item->width / 2), item->y + (item->height / 2), 50, SND_TELEPORT3);
+			item.dx = 0;
+			item.dy = 0;
+			Math::addBit(&item.flags, ENT_TELEPORTING);
+			addTeleportParticles(item.x + (item.width / 2), item.y + (item.height / 2), 50, SND_TELEPORT3);
 			break;
 		}
 	}
@@ -181,48 +176,48 @@ void dropCarriedItems()
 {
 	for (auto &&item: map.items)
 	{
-		if (item->owner != &player)
+		if (item.owner != &player)
 			continue;
 
-		Math::removeBit(&item->flags, ENT_DYING);
+		Math::removeBit(&item.flags, ENT_DYING);
 		
-		item->owner = item.get();
-		item->health = 240;
-		item->dx = 0;
-		item->dy = -2;
-		item->x = game.checkPointX + Math::rrand(0, 6);
-		item->y = game.checkPointY;
-		item->flags = ENT_INANIMATE + ENT_BOUNCES + ENT_NOCOLLISIONS;
+		item.owner = &item;
+		item.health = 240;
+		item.dx = 0;
+		item.dy = -2;
+		item.x = game.checkPointX + Math::rrand(0, 6);
+		item.y = game.checkPointY;
+		item.flags = ENT_INANIMATE + ENT_BOUNCES + ENT_NOCOLLISIONS;
 	}
 }
 
-static void pickUpItem(Entity *item)
+static void pickUpItem(Entity &item)
 {
-	if (item->flags & ENT_DYING)
+	if (item.flags & ENT_DYING)
 	{
 		game.totalBonusesCollected++;
 	}
-	else if (item->id >= ITEM_MISC)
+	else if (item.id >= ITEM_MISC)
 	{
 		game.currentMissionItemsCollected++;
 		map.foundItems++;
 	}
 
-	item->health = 10;
-	item->flags = ENT_WEIGHTLESS + ENT_DYING + ENT_NOCOLLISIONS;
-	item->dx = 0;
-	item->dy = -5;
+	item.health = 10;
+	item.flags = ENT_WEIGHTLESS + ENT_DYING + ENT_NOCOLLISIONS;
+	item.dx = 0;
+	item.dy = -5;
 
-	switch (item->id)
+	switch (item.id)
 	{
 		case ITEM_PISTOL:
 		case ITEM_MACHINEGUN:
 		case ITEM_LASER:
 		case ITEM_GRENADES:
 		case ITEM_SPREAD:
-			player.currentWeapon = &weapon[item->id];
-			game.currentWeapon = item->id;
-			audio.playSound(SND_GETWEAPON, CH_ITEM, item->x);
+			player.currentWeapon = &weapon[item.id];
+			game.currentWeapon = item.id;
+			audio.playSound(SND_GETWEAPON, CH_ITEM, item.x);
 			break;
 		case ITEM_POINTS:
 		case ITEM_POINTS2:
@@ -231,23 +226,23 @@ static void pickUpItem(Entity *item)
 		case ITEM_POINTS5:
 		case ITEM_POINTS6:
 		case ITEM_POINTS7:
-			addPlayerScore(item->value);
-			audio.playSound(SND_ITEM, CH_ITEM, item->x);
+			addPlayerScore(item.value);
+			audio.playSound(SND_ITEM, CH_ITEM, item.x);
 			break;
 		case ITEM_CHERRY:
 		case ITEM_DOUBLECHERRY:
 		case ITEM_TRIPLECHERRY:
-			Math::limitInt(&(player.health += item->value), 0, MAX_HEALTH);
-			audio.playSound(SND_GULP + (Math::prand() % 2), CH_ITEM, item->x);
+			Math::limitInt(&(player.health += item.value), 0, MAX_HEALTH);
+			audio.playSound(SND_GULP + (Math::prand() % 2), CH_ITEM, item.x);
 			break;
 		case ITEM_MISC:
-			item->owner = &player;
+			item.owner = &player;
 		case ITEM_MISC_NOSHOW:
-			audio.playSound(SND_ITEM, CH_ITEM, item->x);
+			audio.playSound(SND_ITEM, CH_ITEM, item.x);
 			break;
 	}
 
-	if ((item->id < ITEM_POINTS) || (item->id > ITEM_POINTS7))
+	if ((item.id < ITEM_POINTS) || (item.id > ITEM_POINTS7))
 	{
 		std::string message;
 
@@ -258,7 +253,7 @@ static void pickUpItem(Entity *item)
 			for how many items had been picked up??! Yeah... and EA expect us to pay �45 for that! Probably the
 			worst bit about that game was that it was just fecking crap anyway!
 		*/
-		switch (item->name[0])
+		switch (item.name[0])
 		{
 			case 'A':
 			case 'a':
@@ -270,19 +265,19 @@ static void pickUpItem(Entity *item)
 			case 'o':
 			case 'U':
 			case 'u':
-				message = fmt::format(_("Picked up an {}"), item->name);
+				message = fmt::format(_("Picked up an {}"), item.name);
 				break;
 			default:
-				message = fmt::format(_("Picked up a {}"), item->name);
+				message = fmt::format(_("Picked up a {}"), item.name);
 				break;
 		}
 
 		if (!map.isBossMission)
 			engine.setInfoMessage(message, 0, INFO_NORMAL);
 
-		checkObjectives(item->name, true);
+		checkObjectives(item.name, true);
 		
-		if (item->name == "LRTS")
+		if (item.name == "LRTS")
 		{
 			presentPlayerMedal("LRTS_PART");
 		}
@@ -293,13 +288,13 @@ bool carryingItem(const std::string &name)
 {
 	for (auto &&item: map.items)
 	{
-		if (item->owner != &player)
+		if (item.owner != &player)
 			continue;
 
-		if (item->name == name)
+		if (item.name == name)
 		{
-			item->owner = item.get();
-			item->health = -999;
+			item.owner = &item;
+			item.health = -999;
 			return true;
 		}
 	}
@@ -315,10 +310,10 @@ void showCarriedItems()
 
 	for (auto &&item: map.items)
 	{
-		if (item->owner != &player)
+		if (item.owner != &player)
 			continue;
 
-		x += (item->width + 8);
+		x += (item.width + 8);
 		itemCount++;
 	}
 
@@ -326,12 +321,12 @@ void showCarriedItems()
 
 	for (auto &&item: map.items)
 	{
-		if (item->owner != &player)
+		if (item.owner != &player)
 			continue;
 
-		graphics.blit(item->getFaceImage(), x, y, graphics.screen, false);
+		graphics.blit(item.getFaceImage(), x, y, graphics.screen, false);
 
-		x += (item->width + 8);
+		x += (item.width + 8);
 	}
 
 	if (itemCount == 0)
@@ -342,46 +337,46 @@ void doItems()
 {
 	for (auto it = map.items.begin(); it != map.items.end();)
 	{
-		auto item = it->get();
+		auto &item = *it;
 		
-		if (item->id == ITEM_MISC_INVISIBLE)
+		if (item.id == ITEM_MISC_INVISIBLE)
 		{
 			++it;
 			continue;
 		}
 
-		int x = (int)(item->x - engine.playerPosX);
-		int y = (int)(item->y - engine.playerPosY);
+		int x = (int)(item.x - engine.playerPosX);
+		int y = (int)(item.y - engine.playerPosY);
 
-		item->think();
+		item.think();
 
-		if (item->flags & ENT_TELEPORTING)
+		if (item.flags & ENT_TELEPORTING)
 		{
 			moveEntity(item);
 		}
-		else if ((abs(x) <= 800) && (abs(y) <= 600) && (item->owner == item))
+		else if ((abs(x) <= 800) && (abs(y) <= 600) && (item.owner == &item))
 		{
 			// Gravity
-			if (!(item->flags & ENT_WEIGHTLESS))
-				item->applyGravity();
+			if (!(item.flags & ENT_WEIGHTLESS))
+				item.applyGravity();
 				
 			if (!map.isIceLevel)
-				item->dx *= 0.98;
+				item.dx *= 0.98;
 
 			moveEntity(item);
 
-			if ((item->health >= 60) || ((engine.getFrameLoop() % 3) == 0))
+			if ((item.health >= 60) || ((engine.getFrameLoop() % 3) == 0))
 			{
-				graphics.blit(item->getFaceImage(), x, y, graphics.screen, false);
+				graphics.blit(item.getFaceImage(), x, y, graphics.screen, false);
 			}
 
-			item->animate();
+			item.animate();
 
 			if ((player.health > 0) && (!(player.flags & ENT_TELEPORTING)))
 			{
-				if (Collision::collision(&player, item))
+				if (Collision::collision(player, item))
 				{
-					if (item->flags & ENT_COLLECTABLE)
+					if (item.flags & ENT_COLLECTABLE)
 					{
 						pickUpItem(item);
 					}
@@ -389,7 +384,7 @@ void doItems()
 			}
 		}
 
-		if ((item->health <= 0) && (item->owner != &player))
+		if ((item.health <= 0) && (item.owner != &player))
 		{
 			it = map.items.erase(it);
 		}

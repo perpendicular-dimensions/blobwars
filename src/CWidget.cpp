@@ -21,16 +21,23 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-void Widget::setProperties(const std::string &name, const std::string &groupName, const std::string &label, const std::string &options, int x, int y, int min, int max)
+Widget::Widget(const std::string &name, const std::string &groupName, const std::string &label, const std::string &options, int type, int x, int y, int min, int max)
 {
 	this->name = name;
 	this->groupName = groupName;
 	this->label = label;
 	this->options = options;
+	this->type = type;
 	this->x = x;
 	this->y = y;
 	this->min = min;
 	this->max = max;
+}
+
+Widget::~Widget()
+{
+	if (image != nullptr)
+		SDL_FreeSurface(image);
 }
 
 void Widget::setValue(int *value)
