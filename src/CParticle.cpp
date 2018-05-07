@@ -40,7 +40,7 @@ void Particle::setSprite(Sprite *sprite)
 
 	this->sprite = sprite;
 
-	currentFrame = Math::prand() % (sprite->maxFrames + 1);
+	currentFrame = Math::prand() % sprite->frames.size();
 	currentTime = 1;
 }
 
@@ -54,7 +54,7 @@ SDL_Surface *Particle::getFrame()
 		sprite->getNextFrame(&currentFrame, &currentTime);
 	}
 
-	return sprite->image[currentFrame];
+	return sprite->getCurrentFrame();
 }
 
 void Particle::move()

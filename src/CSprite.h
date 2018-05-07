@@ -27,17 +27,22 @@ class Sprite {
 
 		std::string name;
 
-		SDL_Surface *image[8] = {};
-		unsigned char frameLength[8] = {};
+		struct Frame {
+			SDL_Surface *image;
+			unsigned char time;
+			Frame(SDL_Surface *image, unsigned char time): image(image), time(time) {}
+		};
+
+		std::vector<Frame> frames;
 
 		unsigned char currentFrame = 0;
 		unsigned char currentTime = 0;
-		unsigned char maxFrames = 0;
 
 		bool randomFrames = false;
 
-	void setFrame(int i, SDL_Surface *shape, int time);
+	void addFrame(SDL_Surface *shape, int time);
 	void animate();
 	void getNextFrame(unsigned char *frame, unsigned char *time);
 	SDL_Surface *getCurrentFrame() const;
+	SDL_Surface *getFrame(unsigned char frame) const;
 };

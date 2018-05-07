@@ -89,7 +89,7 @@ static void trainBlockEntity(Entity &ent, std::string message, Train &train, int
 	{
 		if (dir & DIR_X)
 		{
-			if (ent.dx < 0) ent.x = train.x + train.sprite->image[0]->w;
+			if (ent.dx < 0) ent.x = train.x + train.sprite->getFrame(0)->w;
 			if (ent.dx > 0) ent.x = train.x - ent.width;
 		}
 	}

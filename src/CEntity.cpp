@@ -40,15 +40,13 @@ void Entity::setSprites(Sprite *sprite1, Sprite *sprite2, Sprite *sprite3)
 	sprite[1] = sprite2;
 	sprite[2] = sprite3;
 
-	currentFrame = 0;
+	if (sprite[0]->frames.empty())
+		currentFrame = 0;
+	else
+		currentFrame = Math::prand() % sprite[0]->frames.size();
 
-	if (sprite[0]->maxFrames > 0)
-	{
-		currentFrame = Math::prand() % (sprite[0]->maxFrames + 1);
-	}
-
-	width = sprite[0]->image[0]->w;
-	height = sprite[0]->image[0]->h;
+	width = sprite[0]->getFrame(0)->w;
+	height = sprite[0]->getFrame(0)->h;
 
 	currentTime = 1;
 }
@@ -61,6 +59,7 @@ void Entity::animate()
 	{
 		currentFrame++;
 		sprite[face]->getNextFrame(&currentFrame, &currentTime);
+		assert(currentFrame < sprite[0]->frames.size());
 	}
 }
 
@@ -68,7 +67,7 @@ SDL_Surface *Entity::getFaceImage()
 {
 	if ((health > 0) && (immune <= 120))
 	{
-		return sprite[face]->image[currentFrame];
+		return sprite[face]->frames[currentFrame].image;
 	}
 
 	return sprite[2]->getCurrentFrame();

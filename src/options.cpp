@@ -26,8 +26,8 @@ static void showCheatConfig()
 	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.delay(500);
 
-	SDL_Surface *header = graphics.getSprite("cheatHeader", true)->image[0];
-	SDL_Surface *optionsBackground = graphics.getSprite("optionsBackground", true)->image[0];
+	SDL_Surface *header = graphics.getSprite("cheatHeader", true)->getFrame(0);
+	SDL_Surface *optionsBackground = graphics.getSprite("optionsBackground", true)->getFrame(0);
 	SDL_SetColorKey(optionsBackground, 0, SDL_MapRGB(optionsBackground->format, 0, 0, 0));
 
 	if (!engine.loadWidgets(_("data/cheatWidgets")))
@@ -109,8 +109,8 @@ static void showKeyConfig()
 		graphics.showErrorAndExit(ERR_FILE, _("data/keyboardWidgets"));
 	}
 		
-	SDL_Surface *header = graphics.getSprite("keyHeader", true)->image[0];
-	SDL_Surface *optionsBackground = graphics.getSprite("optionsBackground", true)->image[0];
+	SDL_Surface *header = graphics.getSprite("keyHeader", true)->getFrame(0);
+	SDL_Surface *optionsBackground = graphics.getSprite("optionsBackground", true)->getFrame(0);
 	SDL_SetColorKey(optionsBackground, 0, SDL_MapRGB(optionsBackground->format, 0, 0, 0));
 
 	int done = 0;
@@ -199,8 +199,8 @@ static void showJoystickConfig()
 	if (!engine.loadWidgets(_("data/joystickWidgets")))
 		graphics.showErrorAndExit(ERR_FILE, _("data/joystickWidgets"));
 		
-	SDL_Surface *header = graphics.getSprite("joystickHeader", true)->image[0];
-	SDL_Surface *optionsBackground = graphics.getSprite("optionsBackground", true)->image[0];
+	SDL_Surface *header = graphics.getSprite("joystickHeader", true)->getFrame(0);
+	SDL_Surface *optionsBackground = graphics.getSprite("optionsBackground", true)->getFrame(0);
 	SDL_SetColorKey(optionsBackground, 0, SDL_MapRGB(optionsBackground->format, 0, 0, 0));
 
 	int done = 0;
@@ -289,8 +289,8 @@ void showOptions()
 		graphics.showErrorAndExit(ERR_FILE, _("data/optionWidgets"));
 	}
 		
-	SDL_Surface *header = graphics.getSprite("optionsHeader", true)->image[0];
-	SDL_Surface *optionsBackground = graphics.getSprite("optionsBackground", true)->image[0];
+	SDL_Surface *header = graphics.getSprite("optionsHeader", true)->getFrame(0);
+	SDL_Surface *optionsBackground = graphics.getSprite("optionsBackground", true)->getFrame(0);
 	SDL_SetColorKey(optionsBackground, 0, SDL_MapRGB(optionsBackground->format, 0, 0, 0));
 
 	int done = 0;

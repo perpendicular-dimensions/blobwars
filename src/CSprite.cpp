@@ -28,16 +28,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 * @param shape The image to be used
 * @param time How long this frame will last
 */
-void Sprite::setFrame(int i, SDL_Surface *shape, int time)
+void Sprite::addFrame(SDL_Surface *shape, int time)
 {
-	image[i] = shape;
-	frameLength[i] = time;
+	frames.emplace_back(shape, time);
 
 	currentFrame = 0;
-	currentTime = frameLength[0];
-
-	if (i > maxFrames)
-		maxFrames = i;
+	currentTime = frames[0].time;
 }
 
 void Sprite::animate()
@@ -49,27 +45,26 @@ void Sprite::animate()
 
 	currentFrame++;
 	
-	if (currentFrame == 8)
+	if (currentFrame >= frames.size())
 		currentFrame = 0;
 
-	if (frameLength[currentFrame] == 0)
-		currentFrame = 0;
-
-	currentTime = frameLength[currentFrame];
+	currentTime = frames[currentFrame].time;
 }
 
 void Sprite::getNextFrame(unsigned char *frame, unsigned char *time)
 {
-	if (*frame >= 8)
+	if (*frame >= frames.size())
 		*frame = 0;
 
-	if (frameLength[*frame] == 0)
-		*frame = 0;
-
-	*time = frameLength[*frame];
+	*time = frames[*frame].time;
 }
 
 SDL_Surface *Sprite::getCurrentFrame() const
 {
-	return image[currentFrame];
+	return frames[currentFrame].image;
+}
+
+SDL_Surface *Sprite::getFrame(unsigned char frame) const
+{
+	return frames[frame].image;
 }

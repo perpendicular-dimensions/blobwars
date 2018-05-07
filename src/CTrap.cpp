@@ -55,8 +55,8 @@ void Trap::setSprite(Sprite *sprite)
 {
 	this->sprite = sprite;
 
-	this->width = sprite->image[0]->w;
-	this->height = sprite->image[0]->h;
+	this->width = sprite->getFrame(0)->w;
+	this->height = sprite->getFrame(0)->h;
 }
 
 void Trap::setDestinations(int startX, int startY, int endX, int endY)

@@ -34,26 +34,36 @@ void loadSprite(std::string_view token)
 	char filename[8][100];
 	int frameTime[8];
 
-	int i;
 	int hue, sat, val;
 
 	scan(token, "%s %d %d %d %s %d %s %d %s %d %s %d %s %d %s %d %s %d %s %d", name, &hue, &sat, &val, filename[0], &frameTime[0], filename[1], &frameTime[1], filename[2], &frameTime[2], filename[3], &frameTime[3], filename[4], &frameTime[4], filename[5], &frameTime[5], filename[6], &frameTime[6], filename[7], &frameTime[7]);
 
 	auto &sprite = graphics.addSprite(name);
 
-	i = 0;
-
-	while (true)
+	for (int i = 0; i < 8; i++)
 	{
 		if (strcmp(filename[i], "@none@") == 0)
 			break;
 
-		sprite.setFrame(i, graphics.loadImage(filename[i], hue, sat, val), frameTime[i]);
+		sprite.addFrame(graphics.loadImage(filename[i], hue, sat, val), frameTime[i]);
+	}
+}
 
-		i++;
-		
-		if (i == 8)
+void loadSprites()
+{
+	if (!engine.loadData("data/mainSprites"))
+		graphics.showErrorAndExit(ERR_FILE, "data/mainSprites");
+
+	for (auto token: split(engine.dataBuffer, '\n'))
+	{
+		if (token == "@EOF@")
+		{
 			break;
+		}
+
+		loadSprite(token);
+
+		graphics.showLoading(1, 20);
 	}
 }
 
@@ -75,21 +85,7 @@ void loadResources()
 	graphics.showLoading(0, 0);
 	graphics.updateScreen();
 	
-	if (!engine.loadData("data/mainSprites"))
-		graphics.showErrorAndExit(ERR_FILE, "data/mainSprites");
-
-	for (auto token: split(engine.dataBuffer, '\n'))
-	{
-		if (token == "@EOF@")
-		{
-			break;
-		}
-
-		loadSprite(token);
-
-		graphics.showLoading(1, 20);
-	}
-
+	loadSprites();
 	loadSound(SND_WATERIN, "sound/waterIn");
 	loadSound(SND_WATEROUT, "sound/waterOut");
 	loadSound(SND_ITEM, "sound/item");

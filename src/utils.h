@@ -90,3 +90,15 @@ int scan(const std::string_view &sv, const char *format, Args... args) { return 
 
 /* A version of stoi() that works on string_views. */
 int stoi(std::string_view str);
+
+/* memstream implementation */
+struct membuf: std::streambuf {
+	membuf(char const* base, size_t size) {
+		char *p = const_cast<char *>(base);
+		this->setg(p, p, p + size);
+	}
+};
+
+struct imemstream: virtual membuf, std::istream {
+	imemstream(char const *base, size_t size): membuf(base, size), std::istream(static_cast<std::streambuf *>(this)) {}
+};

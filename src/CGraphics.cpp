@@ -445,7 +445,7 @@ SDL_Surface *Graphics::loadImage(const std::string &filename, int hue, int sat, 
 SDL_Surface *Graphics::quickSprite(const std::string &name, SDL_Surface *image)
 {
 	Sprite &sprite = addSprite(name);
-	sprite.setFrame(0, image, 60);
+	sprite.addFrame(image, 60);
 
 	return sprite.getCurrentFrame();
 }

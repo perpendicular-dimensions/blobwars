@@ -161,13 +161,13 @@ static void addBlips(std::vector<RadarBlip> *blips, int mapX, int mapY, int type
 	else
 	{
 		if (y < 125)
-			graphics.blit(blipSprite->image[0], 220 + (type * 50), 100, graphics.screen, true);
+			graphics.blit(blipSprite->getFrame(0), 220 + (type * 50), 100, graphics.screen, true);
 		if (x > 475)
-			graphics.blit(blipSprite->image[1], 510, 140 + (type * 50), graphics.screen, true);
+			graphics.blit(blipSprite->getFrame(1), 510, 140 + (type * 50), graphics.screen, true);
 		if (y > 355)
-			graphics.blit(blipSprite->image[2], 220 + (type * 50), 380, graphics.screen, true);
+			graphics.blit(blipSprite->getFrame(2), 220 + (type * 50), 380, graphics.screen, true);
 		if (x < 165)
-			graphics.blit(blipSprite->image[3], 125, 140 + (type * 50), graphics.screen, true);
+			graphics.blit(blipSprite->getFrame(3), 125, 140 + (type * 50), graphics.screen, true);
 	}
 }
 

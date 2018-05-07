@@ -91,8 +91,8 @@ static void drawTrapChain(Trap &trap)
 {
 	float x = trap.startX;
 	float y = trap.startY;
-	int tx = (int)trap.x + (trap.sprite->image[0]->w / 2);
-	int ty = (int)trap.y + (trap.sprite->image[0]->h / 2);
+	int tx = (int)trap.x + (trap.sprite->getFrame(0)->w / 2);
+	int ty = (int)trap.y + (trap.sprite->getFrame(0)->h / 2);
 	float dx, dy;
 
 	Math::calculateSlope(tx, ty, trap.startX, trap.startY, &dx, &dy);
@@ -234,11 +234,11 @@ void doTraps()
 			if (trap.type == TRAP_TYPE_MINE)
 			{
 				int mx = (int)trap.x >> BRICKSHIFT;
-				int my = (int)(trap.y + trap.dy + trap.sprite->image[0]->h) >> BRICKSHIFT;
+				int my = (int)(trap.y + trap.dy + trap.sprite->getFrame(0)->h) >> BRICKSHIFT;
 
 				if (map.isSolid(mx, my))
 				{
-					trap.y = (my * BRICKSIZE) - trap.sprite->image[0]->h;
+					trap.y = (my * BRICKSIZE) - trap.sprite->getFrame(0)->h;
 					trap.dy = 0;
 				}
 			}

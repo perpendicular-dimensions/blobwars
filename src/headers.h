@@ -32,17 +32,21 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <algorithm>
 #include <fstream>
 #include <functional>
+#include <istream>
 #include <list>
 #include <map>
 #include <set>
 #include <string>
 #include <string_view>
+#include <streambuf>
 #include <vector>
 
 #include <fmt/format.h>
 #include <fmt/ostream.h>
 #include <fmt/time.h>
 //#include <boost/filesystem.hpp>
+
+#include <yaml-cpp/yaml.h>
 
 //namespace fs = boost::filesystem;
 

@@ -23,7 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 static void createStatsPanel(int page)
 {
-	SDL_Surface *image = graphics.getSprite("infoPanel", true)->image[0];
+	SDL_Surface *image = graphics.getSprite("infoPanel", true)->getFrame(0);
 
 	graphics.drawRect(1, 1, image->w - 2, image->h - 2, graphics.black, graphics.white, image);
 
@@ -163,14 +163,14 @@ static void createStatsPanel(int page)
 			break;
 	}
 
-	graphics.blit(arrows->image[0], 150, 260, image, false);
-	graphics.blit(arrows->image[2], 200, 260, image, false);
+	graphics.blit(arrows->getFrame(0), 150, 260, image, false);
+	graphics.blit(arrows->getFrame(2), 200, 260, image, false);
 
 	if (page == 0)
-		graphics.blit(arrows->image[1], 150, 260, image, false);
+		graphics.blit(arrows->getFrame(1), 150, 260, image, false);
 
 	if (page == 2)
-		graphics.blit(arrows->image[3], 200, 260, image, false);
+		graphics.blit(arrows->getFrame(3), 200, 260, image, false);
 }
 
 static void loadLevelBrief(const std::string &levelName)
@@ -181,7 +181,7 @@ static void loadLevelBrief(const std::string &levelName)
 	}
 
 	bool collectData = false;
-	SDL_Surface *image = graphics.getSprite("infoPanel", true)->image[0];
+	SDL_Surface *image = graphics.getSprite("infoPanel", true)->getFrame(0);
 
 	graphics.clearChatString();
 
@@ -214,7 +214,7 @@ static void loadLevelBrief(const std::string &levelName)
 
 static void createObjectivesPanel(const std::string &levelName)
 {
-	SDL_Surface *image = graphics.getSprite("infoPanel", true)->image[0];
+	SDL_Surface *image = graphics.getSprite("infoPanel", true)->getFrame(0);
 
 	bool found = false;
 
@@ -303,7 +303,7 @@ static void createMIAPanel(int start, int max)
 	int current = 0;
 	int end = 0;
 
-	SDL_Surface *image = graphics.getSprite("infoPanel", true)->image[0];
+	SDL_Surface *image = graphics.getSprite("infoPanel", true)->getFrame(0);
 
 	graphics.drawRect(1, 1, image->w - 2, image->h - 2, graphics.black, graphics.white, image);
 
@@ -365,14 +365,14 @@ static void createMIAPanel(int start, int max)
 	Sprite *arrows = graphics.getSprite("HubArrows", true);
 
 	if (start > 0)
- 		graphics.blit(arrows->image[0], 150, 260, image, false);
+ 		graphics.blit(arrows->getFrame(0), 150, 260, image, false);
 	else
-		graphics.blit(arrows->image[1], 150, 260, image, false);
+		graphics.blit(arrows->getFrame(1), 150, 260, image, false);
 
 	if ((end == 9) && (current + 9 < max))
-		graphics.blit(arrows->image[2], 200, 260, image, false);
+		graphics.blit(arrows->getFrame(2), 200, 260, image, false);
 	else
-		graphics.blit(arrows->image[3], 200, 260, image, false);
+		graphics.blit(arrows->getFrame(3), 200, 260, image, false);
 }
 
 static bool requirementMet(const std::string &requiredLevel)
@@ -428,7 +428,7 @@ int doHub()
 	for (int i = 0 ; i < 6 ; i++)
 	{
 		filename = fmt::format("gfx/main/cursor{}.png", i + 1);
-		cursor.setFrame(i, graphics.loadImage(filename), 10);
+		cursor.addFrame(graphics.loadImage(filename), 10);
 	}
 
 	auto &newTarget = graphics.addSprite("NewTarget");
@@ -438,24 +438,24 @@ int doHub()
 	{
 		filename = fmt::format("gfx/sprites/miaSignal{}.png", i + 1);
 		
-		newTarget.setFrame(i, graphics.loadImage(filename, -60, 0, 0), 15);
-		visitedTarget.setFrame(i, graphics.loadImage(filename, 0, 0, 0), 15);
+		newTarget.addFrame(graphics.loadImage(filename, -60, 0, 0), 15);
+		visitedTarget.addFrame(graphics.loadImage(filename, 0, 0, 0), 15);
 	}
 
 	auto &hubIcons = graphics.addSprite("HubIcons");
 	for (int i = 0 ; i < 6 ; i++)
 	{
 		filename = fmt::format("gfx/main/hubIcon{}.png", i + 1);
-		hubIcons.setFrame(i, graphics.loadImage(filename), 60);
+		hubIcons.addFrame(graphics.loadImage(filename), 60);
 	}
 
 	SDL_Surface *infoPanel = graphics.quickSprite("infoPanel", graphics.createSurface(400, 300));
 
 	auto &hubArrows = graphics.addSprite("HubArrows");
-	hubArrows.setFrame(0, graphics.loadImage("gfx/main/hubArrowLeft.png"), 60);
-	hubArrows.setFrame(1, graphics.loadImage("gfx/main/hubArrowLeft2.png"), 60);
-	hubArrows.setFrame(2, graphics.loadImage("gfx/main/hubArrowRight.png"), 60);
-	hubArrows.setFrame(3, graphics.loadImage("gfx/main/hubArrowRight2.png"), 60);
+	hubArrows.addFrame(graphics.loadImage("gfx/main/hubArrowLeft.png"), 60);
+	hubArrows.addFrame(graphics.loadImage("gfx/main/hubArrowLeft2.png"), 60);
+	hubArrows.addFrame(graphics.loadImage("gfx/main/hubArrowRight.png"), 60);
+	hubArrows.addFrame(graphics.loadImage("gfx/main/hubArrowRight2.png"), 60);
 
 	std::vector<HubLevel> hubs;
 
@@ -633,8 +633,8 @@ int doHub()
 		// Collisions for Panel
 		for (int i = ((1 - validStage) * 2) ; i < 6 ; i++)
 		{
-			graphics.blit(hubIcons.image[i], 50 + (i * 100), 440, graphics.screen, false);
-			if (Collision::collision(engine.getMouseX(), engine.getMouseY(), 1, 1, 50 + (i * 100), 440, hubIcons.image[i]->w, hubIcons.image[i]->h))
+			graphics.blit(hubIcons.getFrame(i), 50 + (i * 100), 440, graphics.screen, false);
+			if (Collision::collision(engine.getMouseX(), engine.getMouseY(), 1, 1, 50 + (i * 100), 440, hubIcons.getFrame(i)->w, hubIcons.getFrame(i)->h))
 			{
 				if (engine.mouseLeft || config.isControl(CONTROL::FIRE))
 				{

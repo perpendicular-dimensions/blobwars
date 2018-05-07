@@ -167,7 +167,7 @@ static void showScene(bool allowSkip)
 				if (!scene.sprite.empty())
 				{
 					debug(("Getting cutscene %s\n", scene.sprite));
-					image = graphics.getSprite(scene.sprite, true)->image[0];
+					image = graphics.getSprite(scene.sprite, true)->getFrame(0);
 					SDL_SetColorKey(image, 0, SDL_MapRGB(image->format, 0, 0, 0));
 				}
 			}
