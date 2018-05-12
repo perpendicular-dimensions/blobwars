@@ -246,47 +246,50 @@ static void createObjectivesPanel(const std::string &levelName)
 		}
 	}
 
-	for (auto &&subobjective: gameData.objectives[levelName])
+	if (gameData.stagePreviouslyCleared(levelName))
 	{
-		auto &[name, completion] = subobjective;
+		for (auto &&subobjective: gameData.objectives[levelName])
+		{
+			auto &[name, completion] = subobjective;
 
-		if ((game.skill < 3) && contains(name, "L.R.T.S.") && (!gameData.completedWorld))
-		{
-			graphics.drawString(_("???? ???????? ????"), x1, y += 20, false, image);
-		}
-		else
-		{
-			text = _(name);
-			
-			if (text.size() >= 25)
+			if ((game.skill < 3) && contains(name, "L.R.T.S.") && (!gameData.completedWorld))
 			{
-				int cut_char = 25;
-				// don't break unicode characters
-				while (((text[cut_char] >> 6) & 3) == 2)
+				graphics.drawString(_("???? ???????? ????"), x1, y += 20, false, image);
+			}
+			else
+			{
+				text = _(name);
+
+				if (text.size() >= 25)
 				{
-					cut_char--;
+					int cut_char = 25;
+					// don't break unicode characters
+					while (((text[cut_char] >> 6) & 3) == 2)
+					{
+						cut_char--;
+					}
+
+					text.resize(cut_char);
+					text.append("...");
 				}
 
-				text.resize(cut_char);
-				text.append("...");
+				graphics.drawString(text, x1, y += 20, false, image);
 			}
-			
-			graphics.drawString(text, x1, y += 20, false, image);
-		}
-		
-		if (completion.target == 1)
-		{
-			text = (completion.isComplete()) ? _("Completed") : _("Incomplete");;
-		}
-		else
-		{
-			text = fmt::format("{} / {}", completion.current, completion.target);
-		}
-		
-		(completion.isComplete()) ? graphics.setFontColor(0x00, 0xff, 0x00, 0x00, 0x00, 0x00) : graphics.setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
-		graphics.drawString(text, x2, y, false, image);
 
-		graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
+			if (completion.target == 1)
+			{
+				text = (completion.isComplete()) ? _("Completed") : _("Incomplete");;
+			}
+			else
+			{
+				text = fmt::format("{} / {}", completion.current, completion.target);
+			}
+
+			(completion.isComplete()) ? graphics.setFontColor(0x00, 0xff, 0x00, 0x00, 0x00, 0x00) : graphics.setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
+			graphics.drawString(text, x2, y, false, image);
+
+			graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
+		}
 	}
 
 	if (!found)

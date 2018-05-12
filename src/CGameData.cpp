@@ -118,11 +118,6 @@ bool GameData::stagePreviouslyCleared(const std::string &stageName)
 	return objectives.find(stageName) != objectives.end();
 }
 
-bool GameData::isCompleted(const std::string &key, const std::string &value)
-{
-	return find(key, value) != nullptr;
-}
-
 bool GameData::levelPrefectlyCleared(const std::string &level)
 {
 	auto it = objectives.find(level);

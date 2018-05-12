@@ -55,7 +55,6 @@ class GameData {
 	void getObjectiveValues(const std::string &stageName, const std::string &name, int *current, int *target);
 	
 	bool stagePreviouslyCleared(const std::string &stageName);
-	bool isCompleted(const std::string &key, const std::string &value);
 	int getPercentageComplete();
 	
 	bool levelPrefectlyCleared(const std::string &level);
