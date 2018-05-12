@@ -35,18 +35,18 @@ static void activateGLBoss();
 static void plasmaBurstTraceParticles(int x, int y)
 {
 	int color[7];
-	
-	for (int i = 0 ; i < 7 ; i++)
+
+	for (int i = 0; i < 7; i++)
 	{
 		color[i] = SDL_MapRGB(graphics.screen->format, 0, 100 + (i * 20), 0);
 	}
-	
+
 	int dx = 0;
 
-	for (int i = 0 ; i < 25 ; i++)
+	for (int i = 0; i < 25; i++)
 	{
 		dx = Math::rrand(0, 5);
-		
+
 		if (self->face == 1)
 		{
 			dx = -dx;
@@ -63,18 +63,20 @@ static void plasmaChargeParticles()
 {
 	int x = (int)self->x;
 	int y = (int)self->y + 10;
-	
+
 	if (self->face == 0)
 	{
 		x += self->getFaceImage()->w;
 	}
-	
+
 	float dx, dy;
-	
-	for (int i = 0 ; i < 2 ; i++)
+
+	for (int i = 0; i < 2; i++)
 	{
-		dx = Math::rrand(-30, 30); dx /= 90;
-		dy = Math::rrand(-30, 30); dy /= 90;
+		dx = Math::rrand(-30, 30);
+		dx /= 90;
+		dy = Math::rrand(-30, 30);
+		dy /= 90;
 		map.addParticle(x, y, dx, dy, Math::rrand(30, 60), graphics.green, nullptr, PAR_WEIGHTLESS);
 	}
 }
@@ -86,54 +88,54 @@ static void plasmaChargeParticles()
 static void traceTankBossMGFireLine()
 {
 	int dx = 1;
-	
+
 	if (self->face == 1)
 	{
 		dx = -1;
 	}
-	
+
 	int x;
 	int y = (int)self->y + 10;
-	
-	for (int i = 0 ; i < 800 ; i++)
+
+	for (int i = 0; i < 800; i++)
 	{
 		x = (int)self->x;
-		
+
 		if (self->face == 0)
 		{
 			x += self->getFaceImage()->w;
 		}
-		
+
 		x += (i * dx);
-		
+
 		plasmaBurstTraceParticles(x, y);
-		
+
 		if (Collision::collision(player.x, player.y, 20, 20, x - 1, y - 1, 2, 2))
 		{
 			throwAndDamageEntity(player, 100, dx * 10, dx * 10, 0);
-			
-			for (int i = 0 ; i < 10 ; i++)
+
+			for (int i = 0; i < 10; i++)
 			{
 				addExplosion(player.x + Math::rrand(-25, 25), player.y + Math::rrand(-25, 25), 10, *self);
 			}
 		}
-		
+
 		for (auto &&enemy: map.enemies)
 		{
 			if (Collision::collision(enemy.x, enemy.y, enemy.getFaceImage()->w, enemy.getFaceImage()->h, x - 1, y - 1, 2, 2))
 			{
 				throwAndDamageEntity(enemy, 100, dx * 10, dx * 10, 0);
-				
+
 				enemy.health = -1;
-				
-				for (int i = 0 ; i < 10 ; i++)
+
+				for (int i = 0; i < 10; i++)
 				{
 					addExplosion(enemy.x + Math::rrand(-25, 25), enemy.y + Math::rrand(-25, 25), 10, *self);
 				}
 			}
-		}	
+		}
 	}
-	
+
 	self->setThinkTime(2);
 	self->setActionFinished(90);
 	Math::removeBit(&self->flags, ENT_IMMUNE);
@@ -148,7 +150,7 @@ static void tankBossMGCannonFire()
 	self->setThinkTime(2);
 	self->setActionFinished(2);
 	self->think = &tankBossMGCannonFire;
-	
+
 	traceTankBossMGFireLine();
 }
 
@@ -159,11 +161,11 @@ static void tankBossMGCannonFire()
 static void tankBossMGCannonChargeFire()
 {
 	plasmaChargeParticles();
-	
+
 	self->setActionFinished(2);
-	
+
 	self->custom--;
-	
+
 	if (self->custom == 0)
 	{
 		self->think = tankBossMGCannonFire;
@@ -174,13 +176,13 @@ static void tankBossMGCannonChargeFire()
 static void tankBossMGRapidFire()
 {
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
-	
+
 	addBullet(*self, 0, 0);
-	
+
 	self->think = &tankBossMGRapidFire;
 	self->setActionFinished(4);
 	self->custom--;
-	
+
 	if (self->custom <= 0)
 	{
 		self->think = &tankBossMGFight;
@@ -192,13 +194,13 @@ static void tankBossMGRapidFire()
 static void tankBossMGFire()
 {
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
-	
+
 	addBullet(*self, 0, 0);
-	
+
 	self->think = &tankBossMGFire;
 	self->setActionFinished(15);
 	self->custom--;
-	
+
 	if (self->custom <= 0)
 	{
 		self->think = &tankBossMGFight;
@@ -210,9 +212,9 @@ static void tankBossMGFire()
 static void tankBossMGJump()
 {
 	self->dy = -12;
-	
+
 	(player.x < self->x) ? self->dx = -6 : self->dx = 6;
-	
+
 	self->think = &tankBossMGFight;
 	self->setActionFinished(45);
 }
@@ -222,22 +224,22 @@ static void tankBossMGDie()
 	self->setThinkTime(60);
 	self->setActionFinished(60);
 	self->health -= Math::rrand(1, 2);
-	
+
 	// don't hurt the player(!)
 	addExplosion(self->x, self->y, 50, player);
 	addSmokeAndFire(*self, Math::rrand(-5, 5), Math::rrand(-5, 5), 2);
 	addBlood(*self, Math::rrand(-5, 5), Math::rrand(-5, 5), 3);
-	
+
 	if ((Math::prand() % 5) == 0)
 	{
 		self->dx = Math::rrand(-15, 15);
 		self->dy = Math::rrand(-8, 0);
 	}
-	
+
 	if (self->health <= -100)
 	{
 		checkObjectives(self->name, false);
-		
+
 		activateGLBoss();
 	}
 }
@@ -245,9 +247,9 @@ static void tankBossMGDie()
 static void tankBossMGAttack()
 {
 	(player.x > self->x) ? self->face = 0 : self->face = 1;
-	
+
 	int r = Math::prand() % 12;
-	
+
 	if (r < 6)
 	{
 		self->custom = Math::rrand(1, 6);
@@ -280,9 +282,9 @@ static void tankBossMGFight()
 		self->dx = 0;
 		return;
 	}
-	
+
 	int r = Math::prand() % 10;
-	
+
 	if (r < 5)
 	{
 		if (player.x - 320 < self->x)
@@ -291,7 +293,7 @@ static void tankBossMGFight()
 			self->dx = 2;
 		else
 			self->dx = Math::rrand(-2, 2);
-		
+
 		(self->x < player.x) ? self->face = 0 : self->face = 1;
 		self->setActionFinished(60);
 		self->setThinkTime(1);
@@ -317,7 +319,7 @@ static void activateGLBoss()
 		map.mainBossPart = nullptr;
 		return;
 	}
-	
+
 	map.boss[1]->active = true;
 	map.boss[1]->dx = Math::rrand(416, 928);
 	map.boss[1]->dy = 8576;
@@ -325,7 +327,7 @@ static void activateGLBoss()
 	map.boss[1]->setActionFinished(2);
 	map.boss[1]->think = &tankBossGLFight;
 	Math::addBit(&map.boss[1]->flags, ENT_TELEPORTING);
-	
+
 	map.setMainBossPart(map.boss[1]);
 }
 
@@ -334,7 +336,7 @@ static void tankBossMGSwap()
 	// Machine Gun Boss wait state
 	self->active = false;
 	self->face = 0;
-	
+
 	// Grenade launcher boss active state
 	activateGLBoss();
 }
@@ -345,17 +347,17 @@ static void tankBossMGReact()
 	{
 		return;
 	}
-	
+
 	if (self->flags & ENT_IMMUNE)
 	{
 		return;
 	}
-	
+
 	if ((Math::prand() % 25) > 0)
 	{
 		return;
 	}
-	
+
 	self->dx = 915;
 	self->dy = 8256;
 	self->think = &tankBossMGSwap;
@@ -375,7 +377,7 @@ static void tankBossMGStart()
 void tankBossMGInit()
 {
 	debug(("tankBossMGInit\n"));
-	
+
 	map.boss[0] = new Boss();
 	map.boss[0]->name = "BioMech Tank V1.1";
 	map.boss[0]->health = 65 * game.skill;
@@ -393,12 +395,12 @@ void tankBossMGInit()
 	map.boss[0]->react = &tankBossMGReact;
 	map.boss[0]->die = &tankBossMGDie;
 	Math::addBit(&map.boss[0]->flags, ENT_AIMS);
-	
+
 	audio.loadSound(SND_BOSSCUSTOM1, "sound/tankBeam");
 	audio.loadSound(SND_BOSSCUSTOM2, "sound/tankBeamFire");
-	
+
 	map.setMainBossPart(map.boss[0]);
-	
+
 	debug(("tankBossMGInit: Done\n"));
 }
 
@@ -407,9 +409,9 @@ void tankBossMGInit()
 static void tankBossGLJump()
 {
 	self->dy = -12;
-	
+
 	(player.x < self->x) ? self->dx = -6 : self->dx = 6;
-	
+
 	self->think = &tankBossGLFight;
 	self->setActionFinished(45);
 }
@@ -417,13 +419,13 @@ static void tankBossGLJump()
 static void tankBossGLRapidFire()
 {
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
-	
+
 	addBullet(*self, 0, 0);
-	
+
 	self->think = &tankBossGLRapidFire;
 	self->setActionFinished(4);
 	self->custom--;
-	
+
 	if (self->custom <= 0)
 	{
 		self->think = &tankBossGLFight;
@@ -435,17 +437,17 @@ static void tankBossGLRapidFire()
 static void tankBossGLMortor()
 {
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
-	
+
 	int speed = Math::rrand(3, 5);
 	if (self->face == 1)
 		speed = -speed;
-	
+
 	addBullet(*self, speed, 0);
-	
+
 	self->think = &tankBossGLMortor;
 	self->setActionFinished(20);
 	self->custom--;
-	
+
 	if (self->custom <= 0)
 	{
 		self->think = &tankBossGLFight;
@@ -457,9 +459,9 @@ static void tankBossGLMortor()
 static void tankBossGLAttack()
 {
 	(player.x > self->x) ? self->face = 0 : self->face = 1;
-	
+
 	int r = Math::prand() % 10;
-	
+
 	if (r < 5)
 	{
 		Math::removeBit(&self->flags, ENT_AIMS);
@@ -494,9 +496,9 @@ static void tankBossGLFight()
 		self->dx = 0;
 		return;
 	}
-	
+
 	int r = Math::prand() % 10;
-	
+
 	if (r < 5)
 	{
 		if (player.x - 320 < self->x)
@@ -505,7 +507,7 @@ static void tankBossGLFight()
 			self->dx = 2;
 		else
 			self->dx = Math::rrand(-2, 2);
-		
+
 		(self->x < player.x) ? self->face = 0 : self->face = 1;
 		self->setActionFinished(60);
 		self->setThinkTime(1);
@@ -531,7 +533,7 @@ static void activateMGBoss()
 		map.mainBossPart = nullptr;
 		return;
 	}
-	
+
 	map.boss[0]->active = true;
 	map.boss[0]->dx = Math::rrand(416, 928);
 	map.boss[0]->dy = 8576;
@@ -539,7 +541,7 @@ static void activateMGBoss()
 	map.boss[0]->setActionFinished(2);
 	map.boss[0]->think = &tankBossMGFight;
 	Math::addBit(&map.boss[0]->flags, ENT_TELEPORTING);
-	
+
 	map.setMainBossPart(map.boss[0]);
 }
 
@@ -548,7 +550,7 @@ static void tankBossGLSwap()
 	// Grenade launcher Boss wait state
 	self->active = false;
 	self->face = 1;
-	
+
 	// Machine Gun boss active state
 	activateMGBoss();
 }
@@ -557,10 +559,10 @@ static void tankBossGLReact()
 {
 	if (map.boss[0] == nullptr)
 		return;
-	
+
 	if ((Math::prand() % 25) > 0)
 		return;
-	
+
 	self->dx = 420;
 	self->dy = 8256;
 	self->think = &tankBossGLSwap;
@@ -574,22 +576,22 @@ static void tankBossGLDie()
 	self->setThinkTime(60);
 	self->setActionFinished(60);
 	self->health -= Math::rrand(1, 2);
-	
+
 	// don't hurt the player(!)
 	addExplosion(self->x, self->y, 50, player);
 	addSmokeAndFire(*self, Math::rrand(-5, 5), Math::rrand(-5, 5), 2);
 	addBlood(*self, Math::rrand(-5, 5), Math::rrand(-5, 5), 3);
-	
+
 	if ((Math::prand() % 5) == 0)
 	{
 		self->dx = Math::rrand(-15, 15);
 		self->dy = Math::rrand(-8, 0);
 	}
-	
+
 	if (self->health <= -100)
 	{
 		checkObjectives(self->name, false);
-		
+
 		activateMGBoss();
 	}
 }
@@ -597,7 +599,7 @@ static void tankBossGLDie()
 void tankBossGLInit()
 {
 	debug(("tankBossGLInit\n"));
-	
+
 	map.boss[1] = new Boss();
 	map.boss[1]->name = "BioMech Tank V2.6";
 	map.boss[1]->health = 65 * game.skill;
@@ -614,6 +616,6 @@ void tankBossGLInit()
 	map.boss[1]->think = &tankBossGLFight;
 	map.boss[1]->react = &tankBossGLReact;
 	map.boss[1]->die = &tankBossGLDie;
-	
+
 	debug(("tankBossMGInit: Done\n"));
 }

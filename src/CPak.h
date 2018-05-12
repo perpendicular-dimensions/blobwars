@@ -19,28 +19,25 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class Pak {
+class Pak
+{
+private:
+	uint32_t numberOfFiles;
+	uint32_t listPos;
 
-	private:
-	
-		uint32_t numberOfFiles;
-		uint32_t listPos;
-		
-		FileData *fd;
-		FileData *currentFile;
+	FileData *fd;
+	FileData *currentFile;
 
-		std::string pakFilename;
-		std::string filename;
-		
+	std::string pakFilename;
+	std::string filename;
+
 	void showPakErrorAndExit();
 
-	public:
-
+public:
 	Pak();
 	~Pak();
 	void setPakFile(const std::string &pakFilename);
 	bool unpack(const std::string &filename, std::vector<char> *buffer);
 	bool fileExists(const std::string &filename);
 	unsigned int getUncompressedSize() const;
-
 };

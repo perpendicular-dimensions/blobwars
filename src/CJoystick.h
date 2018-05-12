@@ -19,14 +19,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class Joystick {
+class Joystick
+{
+public:
+	Joystick();
 
-	public:
-	
-		Joystick();
-	
-		int sensitivity;
-		
-		int control[CONTROL::MAX];
+	int sensitivity;
 
+	int control[CONTROL::MAX];
 };

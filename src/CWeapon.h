@@ -19,18 +19,17 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class Weapon {
-
-	public:
-		std::string name;
-		int id;
-		int damage, dx, dy, reload, health;
-		int flags;
-		int fireSound;
-		Sprite *sprite[2];
+class Weapon
+{
+public:
+	std::string name;
+	int id;
+	int damage, dx, dy, reload, health;
+	int flags;
+	int fireSound;
+	Sprite *sprite[2];
 
 	Weapon();
 	void setName(const std::string &name);
 	int getSpeed(int face) const;
-
 };

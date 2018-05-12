@@ -51,15 +51,14 @@ void showAllSprites()
 
 				if (x >= 600)
 				{
-     				x = 0;
+					x = 0;
 					y += h;
 					h = 0;
 				}
 			}
 		}
-		
+
 		engine.delay(frameLimit);
 		frameLimit = SDL_GetTicks() + 16;
-
 	}
 }

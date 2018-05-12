@@ -24,13 +24,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 Map::Map()
 {
 	clear();
-	
-	for (int i = 0 ; i < 10 ; i++)
+
+	for (int i = 0; i < 10; i++)
 	{
 		boss[i] = nullptr;
 	}
 }
-
 
 void Map::clear()
 {
@@ -47,11 +46,11 @@ void Map::clear()
 
 	name.clear();
 
-	for (int x = 0 ; x < MAPWIDTH ; x++)
-		for (int y = 0 ; y < MAPHEIGHT ; y++)
+	for (int x = 0; x < MAPWIDTH; x++)
+		for (int y = 0; y < MAPHEIGHT; y++)
 			data[x][y] = 0;
 
-	for (int i = 0 ; i < 10 ; i++)
+	for (int i = 0; i < 10; i++)
 		allowableEnemy[i] = nullptr;
 
 	maxAllowableEnemies = 0;
@@ -70,10 +69,10 @@ void Map::clear()
 	teleports.clear();
 	lines.clear();
 	traps.clear();
-	
+
 	remainingMinutes = 0;
 	remainingSeconds = 0;
-	
+
 	waterLevel = requiredWaterLevel = -1;
 	isBossMission = false;
 	isIceLevel = false;
@@ -84,8 +83,8 @@ void Map::clear()
 	mainBossPart = nullptr;
 	doBossLevelAction = nullptr;
 	bossEnergyMeterBit = 0;
-	
-	for (int i = 0 ; i < 10 ; i++)
+
+	for (int i = 0; i < 10; i++)
 	{
 		if (boss[i] != nullptr)
 		{
@@ -93,7 +92,7 @@ void Map::clear()
 		}
 		boss[i] = nullptr;
 	}
-	
+
 	windPower = windChangeTime = 0;
 }
 
@@ -150,12 +149,12 @@ void Map::destroyPersistent(const std::string &name)
 void Map::setName(const std::string &name)
 {
 	this->name = name;
-	
+
 	if (name.find("BioMech") != name.npos)
 	{
 		isBossMission = true;
 	}
-		
+
 	if (name == "Galdov")
 	{
 		isBossMission = true;
@@ -165,12 +164,12 @@ void Map::setName(const std::string &name)
 	{
 		isBossMission = true;
 	}
-		
+
 	if (name.find("Ice") != name.npos)
 	{
 		isIceLevel = true;
 	}
-		
+
 	if (name.find("Arctic") != name.npos)
 	{
 		isIceLevel = true;
@@ -180,10 +179,14 @@ void Map::setName(const std::string &name)
 
 void Map::setClipping(int limitLeft, int limitRight, int limitUp, int limitDown)
 {
-	if (limitLeft != -1) this->limitLeft = limitLeft;
-	if (limitRight != -1) this->limitRight = limitRight;
-	if (limitUp != -1) this->limitUp = limitUp;
-	if (limitDown != -1) this->limitDown = limitDown;
+	if (limitLeft != -1)
+		this->limitLeft = limitLeft;
+	if (limitRight != -1)
+		this->limitRight = limitRight;
+	if (limitUp != -1)
+		this->limitUp = limitUp;
+	if (limitDown != -1)
+		this->limitDown = limitDown;
 }
 
 void Map::addTrain(const std::string &name, int startX, int startY, int endX, int endY, int pause, bool atStart, bool active)
@@ -193,7 +196,7 @@ void Map::addTrain(const std::string &name, int startX, int startY, int endX, in
 	train.active = active;
 	train.width = 64;
 	train.height = 16;
-	
+
 	if (pause == 0)
 	{
 		debug(("WARNING: TRAIN WITH 0 WAIT TIME ADDED '%s' (%d:%d)\n", name, startX, startY));
@@ -235,7 +238,6 @@ void Map::addSpawnPoint(const std::string &name, int x, int y, int type, int sub
 	spawns.emplace_back(name, x, y, type, subtype, min, max, active);
 }
 
-
 void Map::addObjective(const std::string &description, const std::string &target, int targetValue, bool required)
 {
 	objectives.emplace_back(description, target, targetValue, required);
@@ -261,7 +263,7 @@ void Map::killAllEnemies()
 
 void Map::setAllowableEnemy(Entity *enemy)
 {
-	for (int i = 0 ; i < 10 ; i++)
+	for (int i = 0; i < 10; i++)
 	{
 		if (allowableEnemy[i] == nullptr)
 		{
@@ -278,7 +280,7 @@ std::string Map::getSpawnableEnemy(int i)
 {
 	if (allowableEnemy[i] == nullptr)
 		return {};
-	
+
 	return allowableEnemy[i]->name;
 }
 
@@ -326,7 +328,7 @@ void Map::getRandomEntityPosition(int *x, int *y)
 void Map::setMainBossPart(Boss *boss)
 {
 	mainBossPart = boss;
-	
+
 	if (mainBossPart != nullptr)
 	{
 		bossEnergyMeterBit = 200;

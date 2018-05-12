@@ -21,14 +21,15 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-void SDL_SetAlpha(SDL_Surface *surface, uint8_t value) {
+void SDL_SetAlpha(SDL_Surface *surface, uint8_t value)
+{
 	SDL_SetSurfaceBlendMode(surface, SDL_BLENDMODE_BLEND);
 	SDL_SetSurfaceAlphaMod(surface, value);
 }
 
 Graphics::Graphics()
 {
-	for (int i = 0 ; i < MAX_TILES ; i++)
+	for (int i = 0; i < MAX_TILES; i++)
 	{
 		tile[i] = nullptr;
 	}
@@ -37,7 +38,7 @@ Graphics::Graphics()
 	infoMessage = nullptr;
 
 	fontSize = 0;
-	
+
 	medalMessageTimer = 0;
 	medalType = 0;
 
@@ -63,7 +64,7 @@ void Graphics::free()
 	background = nullptr;
 
 	debug(("graphics.free: Tiles\n"));
-	for (int i = 0 ; i < MAX_TILES ; i++)
+	for (int i = 0; i < MAX_TILES; i++)
 	{
 		if (tile[i] != nullptr)
 		{
@@ -82,14 +83,14 @@ void Graphics::destroy()
 {
 	free();
 
-	for (int i = 0 ; i < 5 ; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		if (font[i])
 		{
 			TTF_CloseFont(font[i]);
 		}
 	}
-	
+
 	if (medalMessage != nullptr)
 	{
 		SDL_FreeSurface(medalMessage);
@@ -104,8 +105,8 @@ void Graphics::destroy()
 	{
 		SDL_FreeSurface(infoBar);
 	}
-	
-	for (int i = 0 ; i < 4 ; i++)
+
+	for (int i = 0; i < 4; i++)
 	{
 		if (medal[i] != nullptr)
 		{
@@ -141,7 +142,7 @@ void Graphics::mapColors()
 	fadeBlack = alphaRect(640, 480, 0x00, 0x00, 0x00);
 
 	infoBar = alphaRect(640, 25, 0x00, 0x00, 0x00);
-	
+
 	medalMessage = nullptr;
 }
 
@@ -161,24 +162,24 @@ void Graphics::updateScreen()
 	if (medalMessageTimer > 0)
 	{
 		int padding = 0;
-		
+
 		medalMessageTimer--;
-		
+
 		if (medalType >= 0)
 		{
 			padding = 18;
 		}
-		
+
 		drawRect(screen->w - (medalMessage->w + 5 + padding), 5, medalMessage->w + padding - 2, 20, grey, screen);
 		drawRect(screen->w - (medalMessage->w + 5 + padding - 1), 6, medalMessage->w + padding - 4, 18, black, screen);
 		blit(medalMessage, screen->w - (medalMessage->w + 5), 7, screen, false);
-		
+
 		if (medalType >= 0)
 		{
 			blit(medal[medalType], screen->w - (medalMessage->w + 5 + 16), 7, screen, false);
 		}
 	}
-	
+
 	SDL_UpdateTexture(texture, nullptr, screen->pixels, screen->w * 4);
 	SDL_RenderCopy(renderer, texture, nullptr, nullptr);
 	SDL_RenderPresent(renderer);
@@ -223,14 +224,14 @@ void Graphics::delay(int time)
 	while (true)
 	{
 		updateScreen();
-		
+
 		if (SDL_GetTicks() >= then + time)
 		{
 			break;
 		}
 
 		engine->getInput();
-		
+
 		/*
 		if (engine->keyState[SDL_SCANCODE_ESCAPE])
 		{
@@ -299,41 +300,41 @@ void Graphics::HSVtoRGB(float *r, float *g, float *b, float h, float s, float v)
 
 	switch (i)
 	{
-		case 0:
-			*r = v;
-			*g = t;
-			*b = p;
-			break;
+	case 0:
+		*r = v;
+		*g = t;
+		*b = p;
+		break;
 
-		case 1:
-			*r = q;
-			*g = v;
-			*b = p;
-			break;
+	case 1:
+		*r = q;
+		*g = v;
+		*b = p;
+		break;
 
-		case 2:
-			*r = p;
-			*g = v;
-			*b = t;
-			break;
+	case 2:
+		*r = p;
+		*g = v;
+		*b = t;
+		break;
 
-		case 3:
-			*r = p;
-			*g = q;
-			*b = v;
-			break;
+	case 3:
+		*r = p;
+		*g = q;
+		*b = v;
+		break;
 
-		case 4:
-			*r = t;
-			*g = p;
-			*b = v;
-			break;
+	case 4:
+		*r = t;
+		*g = p;
+		*b = v;
+		break;
 
-		default:
-			*r = v;
-			*g = p;
-			*b = q;
-			break;
+	default:
+		*r = v;
+		*g = p;
+		*b = q;
+		break;
 	}
 }
 
@@ -341,13 +342,13 @@ SDL_Surface *Graphics::loadImage(const std::string &filename, bool srcalpha)
 {
 	SDL_Surface *image, *newImage;
 
-	#if USEPAK
-		if (!engine->unpack(filename, PAK_IMG))
-			showErrorAndExit(ERR_FILE, filename);
-		image = IMG_Load_RW(engine->sdlrw, 1);
-	#else
-		image = IMG_Load(filename.c_str());
-	#endif
+#if USEPAK
+	if (!engine->unpack(filename, PAK_IMG))
+		showErrorAndExit(ERR_FILE, filename);
+	image = IMG_Load_RW(engine->sdlrw, 1);
+#else
+	image = IMG_Load(filename.c_str());
+#endif
 
 	if (!image)
 		return showErrorAndExit(ERR_FILE, filename), image;
@@ -364,7 +365,7 @@ SDL_Surface *Graphics::loadImage(const std::string &filename, bool srcalpha)
 		newImage = image;
 	}
 
-	if(srcalpha)
+	if (srcalpha)
 		SDL_SetAlpha(newImage, 255);
 	else
 		setTransparent(newImage);
@@ -376,13 +377,13 @@ SDL_Surface *Graphics::loadImage(const std::string &filename, int hue, int sat, 
 {
 	SDL_Surface *image, *newImage;
 
-	#if USEPAK
-		if (!engine->unpack(filename, PAK_IMG))
-			showErrorAndExit(ERR_FILE, filename);
-		image = IMG_Load_RW(engine->sdlrw, 1);
-	#else
-		image = IMG_Load(filename.c_str());
-	#endif
+#if USEPAK
+	if (!engine->unpack(filename, PAK_IMG))
+		showErrorAndExit(ERR_FILE, filename);
+	image = IMG_Load_RW(engine->sdlrw, 1);
+#else
+	image = IMG_Load(filename.c_str());
+#endif
 
 	if (!image)
 		return showErrorAndExit(ERR_FILE, filename), image;
@@ -400,7 +401,7 @@ SDL_Surface *Graphics::loadImage(const std::string &filename, int hue, int sat, 
 
 			if (image->format->palette->colors != nullptr)
 			{
-				for (int i = 1 ; i < image->format->palette->ncolors ; i++)
+				for (int i = 1; i < image->format->palette->ncolors; i++)
 				{
 					color = &image->format->palette->colors[i];
 
@@ -419,7 +420,6 @@ SDL_Surface *Graphics::loadImage(const std::string &filename, int hue, int sat, 
 					color->r = (int)r;
 					color->g = (int)g;
 					color->b = (int)b;
-
 				}
 			}
 		}
@@ -472,22 +472,22 @@ void Graphics::fadeToBlack()
 void Graphics::loadMapTiles(const std::string &baseDir)
 {
 	const bool autoAlpha = baseDir == "gfx/common";
-	
-	for (int i = 1 ; i < MAX_TILES ; i++)
+
+	for (int i = 1; i < MAX_TILES; i++)
 	{
 		std::string filename = fmt::format("{}/{}.png", baseDir, i);
 
-		#if USEPAK
-		
+#if USEPAK
+
 		if (!engine->getPak()->fileExists(filename))
 			continue;
 
-		#else
+#else
 
 		if (access(filename.c_str(), R_OK))
 			continue;
 
-		#endif
+#endif
 
 		tile[i] = loadImage(filename);
 
@@ -508,32 +508,32 @@ void Graphics::loadMapTiles(const std::string &baseDir)
 				SDL_SetColorKey(tile[i], 0, SDL_MapRGB(tile[i]->format, 0, 0, 0));
 			}
 		}
-		}
+	}
 }
 
 void Graphics::loadFont(int i, const std::string &filename, int pointSize)
 {
 	debug(("Attempting to load font %s with point size of %d...\n", filename, pointSize));
-	
+
 	if (font[i])
 	{
 		debug(("Freeing Font %d first...\n", i));
 		TTF_CloseFont(font[i]);
 	}
-	
-	#if USEPAK
-		(void)filename;
-		std::string tempPath = engine->userHomeDirectory + "font.ttf";
-		font[i] = TTF_OpenFont(tempPath.c_str(), pointSize);
-	#else
-		font[i] = TTF_OpenFont(filename.c_str(), pointSize);
-	#endif
+
+#if USEPAK
+	(void)filename;
+	std::string tempPath = engine->userHomeDirectory + "font.ttf";
+	font[i] = TTF_OpenFont(tempPath.c_str(), pointSize);
+#else
+	font[i] = TTF_OpenFont(filename.c_str(), pointSize);
+#endif
 
 	if (!font[i])
 	{
 		engine->reportFontFailure();
 	}
-	
+
 	TTF_SetFontStyle(font[i], TTF_STYLE_NORMAL);
 }
 
@@ -615,34 +615,34 @@ void Graphics::putPixel(int x, int y, uint32_t pixel, SDL_Surface *dest)
 	/* Here p is the address to the pixel we want to set */
 	uint8_t *p = (uint8_t *)dest->pixels + y * dest->pitch + x * bpp;
 
-	switch(bpp)
+	switch (bpp)
 	{
-		case 1:
-			*p = pixel;
-			break;
+	case 1:
+		*p = pixel;
+		break;
 
-		case 2:
-			*(uint16_t *)p = pixel;
-			break;
+	case 2:
+		*(uint16_t *)p = pixel;
+		break;
 
-		case 3:
-			if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
-			{
-				p[0] = (pixel >> 16) & 0xff;
-				p[1] = (pixel >> 8) & 0xff;
-				p[2] = pixel & 0xff;
-			}
-			else
-			{
-				p[0] = pixel & 0xff;
-				p[1] = (pixel >> 8) & 0xff;
-				p[2] = (pixel >> 16) & 0xff;
-			}
-			break;
+	case 3:
+		if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
+		{
+			p[0] = (pixel >> 16) & 0xff;
+			p[1] = (pixel >> 8) & 0xff;
+			p[2] = pixel & 0xff;
+		}
+		else
+		{
+			p[0] = pixel & 0xff;
+			p[1] = (pixel >> 8) & 0xff;
+			p[2] = (pixel >> 16) & 0xff;
+		}
+		break;
 
-		case 4:
-			*(uint32_t *)p = pixel;
-			break;
+	case 4:
+		*(uint32_t *)p = pixel;
+		break;
 	}
 }
 
@@ -654,7 +654,8 @@ uint32_t Graphics::getPixel(SDL_Surface *surface, int x, int y)
 	int bpp = surface->format->BytesPerPixel;
 	uint8_t *p = (uint8_t *)surface->pixels + y * surface->pitch + x * bpp;
 
-	switch(bpp) {
+	switch (bpp)
+	{
 	case 1:
 		return *p;
 
@@ -662,25 +663,25 @@ uint32_t Graphics::getPixel(SDL_Surface *surface, int x, int y)
 		return *(uint16_t *)p;
 
 	case 3:
-		if(SDL_BYTEORDER == SDL_BIG_ENDIAN)
-				return p[0] << 16 | p[1] << 8 | p[2];
+		if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
+			return p[0] << 16 | p[1] << 8 | p[2];
 		else
-				return p[0] | p[1] << 8 | p[2] << 16;
+			return p[0] | p[1] << 8 | p[2] << 16;
 
 	case 4:
 		return *(uint32_t *)p;
 
 	default:
-		return 0;       /* shouldn't happen, but avoids warnings */
+		return 0; /* shouldn't happen, but avoids warnings */
 	}
 }
 
 void Graphics::drawLine(float startX, float startY, float endX, float endY, int color, SDL_Surface *dest)
 {
 	lock(screen);
-	
+
 	float dx, dy;
-	
+
 	Math::calculateSlope(startX, startY, endX, endY, &dx, &dy);
 
 	while (true)
@@ -737,10 +738,14 @@ void Graphics::drawBackground()
 
 void Graphics::drawBackground(SDL_Rect *r)
 {
-	if (r->x < 0) r->x = 0;
-	if (r->y < 0) r->y = 0;
-	if (r->x + r->w > 639) r->w = 640 - r->x;
-	if (r->y + r->h > 639) r->h = 480 - r->y;
+	if (r->x < 0)
+		r->x = 0;
+	if (r->y < 0)
+		r->y = 0;
+	if (r->x + r->w > 639)
+		r->w = 640 - r->x;
+	if (r->y + r->h > 639)
+		r->h = 480 - r->y;
 
 	if (SDL_BlitSurface(background, r, screen, r) < 0)
 		showErrorAndExit("graphics::blit() - %s", SDL_GetError());
@@ -814,8 +819,10 @@ void Graphics::drawString(const std::string &in, int x, int y, int alignment, SD
 
 	setTransparent(text);
 
-	if (alignment == TXT_RIGHT) x -= text->w;
-	if (alignment == TXT_CENTERED) center = true;
+	if (alignment == TXT_RIGHT)
+		x -= text->w;
+	if (alignment == TXT_CENTERED)
+		center = true;
 
 	blit(text, x, y, dest, center);
 	SDL_FreeSurface(text);
@@ -825,8 +832,9 @@ void Graphics::drawString(const std::string &in, int x, int y, int alignment, SD
 {
 	bool center = false;
 
-	if(in != cache.text) {
-		if(cache.surface)
+	if (in != cache.text)
+	{
+		if (cache.surface)
 			SDL_FreeSurface(cache.surface);
 
 		cache.text = in;
@@ -836,14 +844,16 @@ void Graphics::drawString(const std::string &in, int x, int y, int alignment, SD
 		if (!cache.surface)
 			cache.surface = TTF_RenderUTF8_Shaded(font[fontSize], "FONT_ERROR", fontForeground, fontBackground);
 
-		if(!cache.surface)
+		if (!cache.surface)
 			return;
 
 		setTransparent(cache.surface);
 	}
 
-	if (alignment == TXT_RIGHT) x -= cache.surface->w;
-	if (alignment == TXT_CENTERED) center = true;
+	if (alignment == TXT_RIGHT)
+		x -= cache.surface->w;
+	if (alignment == TXT_CENTERED)
+		center = true;
 
 	blit(cache.surface, x, y, dest, center);
 }
@@ -892,7 +902,7 @@ void Graphics::drawChatString(SDL_Surface *surface, int y)
 
 		if (x + wordSurface->w > surfaceWidth)
 		{
-			y += (int)(wordSurface->h * 1.5) ;
+			y += (int)(wordSurface->h * 1.5);
 			x = 10;
 		}
 
@@ -910,32 +920,32 @@ void Graphics::showMedalMessage(int type, const std::string &in)
 	{
 		SDL_FreeSurface(medalMessage);
 	}
-	
+
 	setFontSize(0);
-	
+
 	switch (type)
 	{
-		// Bronze
-		case 1:
-			setFontColor(0xA6, 0x7D, 0x3D, 0x00, 0x00, 0x00);
-			break;
-		
-		// Silver
-		case 2:
-			setFontColor(0xC0, 0xC0, 0xC0, 0x00, 0x00, 0x00);
-			break;
-			
-		// Gold
-		case 3:
-			setFontColor(0xFF, 0xCC, 0x33, 0x00, 0x00, 0x00);
-			break;
-			
-		// Ruby
-		case 4:
-			setFontColor(0xFF, 0x11, 0x55, 0x00, 0x00, 0x00);
-			break;
+	// Bronze
+	case 1:
+		setFontColor(0xA6, 0x7D, 0x3D, 0x00, 0x00, 0x00);
+		break;
+
+	// Silver
+	case 2:
+		setFontColor(0xC0, 0xC0, 0xC0, 0x00, 0x00, 0x00);
+		break;
+
+	// Gold
+	case 3:
+		setFontColor(0xFF, 0xCC, 0x33, 0x00, 0x00, 0x00);
+		break;
+
+	// Ruby
+	case 4:
+		setFontColor(0xFF, 0x11, 0x55, 0x00, 0x00, 0x00);
+		break;
 	}
-	
+
 	medalType = type - 1; // for indexing on the image
 	if (type != -1)
 	{
@@ -998,7 +1008,7 @@ void Graphics::lock(SDL_Surface *surface)
 	/* Lock the screen for direct access to the pixels */
 	if (SDL_MUSTLOCK(surface))
 	{
-		if (SDL_LockSurface(surface) < 0 )
+		if (SDL_LockSurface(surface) < 0)
 		{
 			showErrorAndExit("Could not lock surface", "");
 		}
@@ -1020,7 +1030,7 @@ void Graphics::resetLoading()
 
 void Graphics::showLoading(int amount, int max)
 {
-	#if USEPAK
+#if USEPAK
 	max *= 4;
 
 	if (max > 398)
@@ -1030,23 +1040,25 @@ void Graphics::showLoading(int amount, int max)
 
 	drawRect(120, 420, 400, 10, black, white, screen);
 	drawRect(121, 421, currentLoading, 8, red, screen);
-	#else
+#else
 	(void)amount;
 	(void)max;
-	#endif
+#endif
 }
 
 void Graphics::showLicenseErrorAndExit()
 {
-	setFontSize(3); setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
+	setFontSize(3);
+	setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
 	drawString("License Agreement Missing", 320, 50, true, screen);
-	
-	setFontSize(1); setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
+
+	setFontSize(1);
+	setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 
 	drawString("The GNU General Public License was not found.", 320, 180, true, screen);
 	drawString("It could either not be properly loaded or has been removed.", 320, 220, true, screen);
 	drawString("Blob Wars : Metal Blob Solid will not run with the license missing.", 320, 260, true, screen);
-	
+
 	drawString("Blob Wars : Metal Blob Solid will now exit", 320, 420, true, screen);
 	drawString("Press Escape to continue", 320, 450, true, screen);
 
@@ -1074,9 +1086,11 @@ void Graphics::showErrorAndExit(const std::string &error, const std::string &par
 
 	std::string message = fmt::format(error, param);
 
-	setFontSize(3); setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
+	setFontSize(3);
+	setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
 	drawString("An unforseen error has occurred", 320, 50, true, screen);
-	setFontSize(1); setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
+	setFontSize(1);
+	setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 	drawString(message, 320, 90, true, screen);
 
 	drawString("You may wish to try the following,", 50, 150, false, screen);
@@ -1113,15 +1127,17 @@ void Graphics::showErrorAndExit(const std::string &error, const std::string &par
 
 void Graphics::showRootWarning()
 {
-	setFontSize(3); setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
+	setFontSize(3);
+	setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
 	drawString("CAUTION - RUNNING AS ROOT USER!", 320, 50, true, screen);
-	
-	setFontSize(1); setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
+
+	setFontSize(1);
+	setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 
 	drawString("WARNING - You appear to be running the game as the root user!", 320, 180, true, screen);
 	drawString("This is not recommended and is it strongly advised that you do not run", 320, 220, true, screen);
 	drawString("the game as root. You may still continue but consider running as regular user in future!", 320, 260, true, screen);
-	
+
 	drawString("Press Space to Exit", 320, 420, true, screen);
 	drawString("Press Escape to Continue", 320, 450, true, screen);
 
@@ -1131,7 +1147,7 @@ void Graphics::showRootWarning()
 	{
 		updateScreen();
 		engine->getInput();
-		
+
 		if (engine->keyState[SDL_SCANCODE_ESCAPE])
 		{
 			return;

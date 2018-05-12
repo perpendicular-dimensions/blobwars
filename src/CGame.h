@@ -19,72 +19,69 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class PODGame {
-	protected:
-		
-		int objectiveCheckPointX, objectiveCheckPointY;
+class PODGame
+{
+protected:
+	int objectiveCheckPointX, objectiveCheckPointY;
 
-	public:
+public:
+	char s_mapName[50];
+	char s_stageName[50];
 
-		char s_mapName[50];
-		char s_stageName[50];
+	int gore, skill, soundVol, musicVol, output, brightness, autoSaveSlot, autoSave;
 
-		int gore, skill, soundVol, musicVol, output, brightness, autoSaveSlot, autoSave;
+	int score, stagesCleared;
+	int totalHours, totalMinutes, totalSeconds;
+	int currentMissionHours, currentMissionMinutes, currentMissionSeconds;
+	int totalEnemiesDefeated, totalItemsCollected, totalBonusesCollected;
+	int currentMissionEnemiesDefeated, currentMissionItemsCollected;
+	int totalObjectivesCompleted, totalMIAsRescued;
 
-		int score, stagesCleared;
-		int totalHours, totalMinutes, totalSeconds;
-		int currentMissionHours, currentMissionMinutes, currentMissionSeconds;
-		int totalEnemiesDefeated, totalItemsCollected, totalBonusesCollected;
-		int currentMissionEnemiesDefeated, currentMissionItemsCollected;
-		int totalObjectivesCompleted, totalMIAsRescued;
+	unsigned char currentWeapon;
+	unsigned int bulletsFired[5], bulletsHit[5];
 
-		unsigned char currentWeapon;
-		unsigned int bulletsFired[5], bulletsHit[5];
+	int checkPointX, checkPointY;
+	int teleportPointX, teleportPointY;
 
-		int checkPointX, checkPointY;
-		int teleportPointX, teleportPointY;
+	bool hasAquaLung, hasJetPack, continueFromCheckPoint;
 
-		bool hasAquaLung, hasJetPack, continueFromCheckPoint;
+	int lastComboTime;
+	unsigned char currentComboHits, maxComboHits;
 
-		int lastComboTime;
-		unsigned char currentComboHits, maxComboHits;
+	unsigned int missionOverReason;
+	unsigned long missionOver;
 
-		unsigned int missionOverReason;
-		unsigned long missionOver;
-		
-		unsigned int continuesUsed;
-		unsigned int levelsStarted;
-		unsigned int escapes;
-		
-		int canContinue;
+	unsigned int continuesUsed;
+	unsigned int levelsStarted;
+	unsigned int escapes;
 
+	int canContinue;
 };
 
-class Game: public PODGame {
+class Game: public PODGame
+{
+public:
+	std::string mapName;
+	std::string stageName;
 
-	public:
-		std::string mapName;
-		std::string stageName;
-
-		Game();
-		void clear();
-		void destroy();
-		void incrementMissionTime();
-		void setCheckPoint(float x, float y);
-		void getCheckPoint(float *x, float *y) const;
-		void setObjectiveCheckPoint();
-		void useObjectiveCheckPoint();
-		void doCombo();
-		void incBulletsFired();
-		void incBulletsHit();
-		int getWeaponAccuracy(int weapon);
-		int getTotalBulletsFired() const;
-		int getTotalAccuracy();
-		int getMostUsedWeapon();
-		void totalUpStats();
-		void setStageName(const std::string &name);
-		void setMapName(const std::string &name);
-		void setMissionOver(int reason);
-		void resetMissionOver();
-
+	Game();
+	void clear();
+	void destroy();
+	void incrementMissionTime();
+	void setCheckPoint(float x, float y);
+	void getCheckPoint(float *x, float *y) const;
+	void setObjectiveCheckPoint();
+	void useObjectiveCheckPoint();
+	void doCombo();
+	void incBulletsFired();
+	void incBulletsHit();
+	int getWeaponAccuracy(int weapon);
+	int getTotalBulletsFired() const;
+	int getTotalAccuracy();
+	int getMostUsedWeapon();
+	void totalUpStats();
+	void setStageName(const std::string &name);
+	void setMapName(const std::string &name);
+	void setMissionOver(int reason);
+	void resetMissionOver();
 };

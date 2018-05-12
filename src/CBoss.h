@@ -19,30 +19,28 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class Boss : public Entity {
+class Boss: public Entity
+{
+private:
+	int thinktime;
+	int actiontime;
 
-	private:
-	
-		int thinktime;
-		int actiontime;
+public:
+	int custom;
+	int maxHealth;
+	unsigned int shieldFrequency;
+	bool active;
 
-	public:
-		
-		int custom;
-		int maxHealth;
-		unsigned int shieldFrequency;
-		bool active;
-		
-		void (*think)(void);
-		void (*react)(void);
-		void (*die)(void);
-	
+	void (*think)(void);
+	void (*react)(void);
+	void (*die)(void);
+
 	Boss();
 	~Boss();
-	
+
 	void setThinkTime(int time);
 	void setActionFinished(int time);
-	
+
 	bool actionFinished();
 	bool readyForThink();
 };

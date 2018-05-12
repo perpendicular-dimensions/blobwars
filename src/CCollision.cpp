@@ -29,7 +29,7 @@ bool Collision::collision(float x0, float y0, int w0, int h0, float x2, float y2
 	float x3 = x2 + w1;
 	float y3 = y2 + h1;
 
-	return !(x1<x2 || x3<x0 || y1<y2 || y3<y0);
+	return !(x1 < x2 || x3 < x0 || y1 < y2 || y3 < y0);
 }
 
 bool Collision::collision(Entity &ent1, Entity &ent2)

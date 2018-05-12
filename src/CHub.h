@@ -19,17 +19,16 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class HubLevel {
+class HubLevel
+{
+public:
+	std::string stageName;
+	std::string filename;
 
-	public:
+	int x, y;
 
-		std::string stageName;
-		std::string filename;
-
-		int x, y;
-		
-		SDL_Surface *levelNameImage = nullptr;
-		Sprite *target = nullptr;
+	SDL_Surface *levelNameImage = nullptr;
+	Sprite *target = nullptr;
 
 	HubLevel(const std::string &stageName, const std::string &filename, int x, int y);
 };

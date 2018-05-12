@@ -39,20 +39,20 @@ void adjustObjectives()
 		map.requiredMIAs = map.totalMIAs;
 		needRequired = true;
 	}
-	
+
 	if (game.skill == 3)
 	{
 		map.requiredMIAs = map.totalMIAs;
 		needRequired = true;
 	}
-	
+
 	int current = 0;
 	int target = 0;
 
 	bool previouslyCleared = gameData.stagePreviouslyCleared(map.name);
 
 	for (auto &&objective: map.objectives)
-	{	
+	{
 		if (game.skill == 0)
 		{
 			objective.required = false;
@@ -73,23 +73,23 @@ void adjustObjectives()
 			if (gameData.objectiveCompleted(map.name, objective.description))
 			{
 				objective.completed = true;
-	
+
 				debug(("Objective %s has been completed\n", objective.description));
 			}
-	
+
 			gameData.getObjectiveValues(map.name, objective.description, &current, &target);
 			objective.currentValue = current;
 			objective.targetValue = target;
-			
+
 			// Make sure that gameplay adjustments are catered for...
 			if (!objective.completed)
 			{
 				Math::limitInt(&objective.currentValue, 0, objective.targetValue);
-				
+
 				if (objective.currentValue == objective.targetValue)
 				{
 					objective.completed = true;
-					
+
 					debug(("Objective %s has been completed (gameplay adjustment!)\n", objective.description));
 				}
 			}
@@ -175,7 +175,7 @@ void autoCompleteAllObjectives(bool allObjectives)
 	{
 		map.foundMIAs = map.requiredMIAs;
 	}
-	
+
 	map.foundItems = map.totalItems;
 
 	for (auto &&objective: map.objectives)
@@ -194,14 +194,14 @@ void autoCompleteAllObjectives(bool allObjectives)
 			}
 		}
 	}
-	
+
 	int required = map.foundMIAs;
 
 	for (auto &&mia: map.mias)
 	{
 		mia.health = 0;
 		required--;
-		
+
 		if (required == 0)
 			break;
 	}
@@ -210,7 +210,7 @@ void autoCompleteAllObjectives(bool allObjectives)
 void checkObjectives(const std::string &name, bool alwaysInform)
 {
 	std::string message;
-	
+
 	int requiredValue;
 
 	for (auto &&objective: map.objectives)
@@ -260,7 +260,6 @@ void checkObjectives(const std::string &name, bool alwaysInform)
 					engine.setInfoMessage(message, 9, INFO_OBJECTIVE);
 					objective.completed = true;
 					game.totalObjectivesCompleted++;
-
 				}
 				else if (!contains(objective.target, "Combo-"))
 				{
@@ -268,17 +267,17 @@ void checkObjectives(const std::string &name, bool alwaysInform)
 					{
 						switch (Math::prand() % 3)
 						{
-							case 0:
-								message = fmt::format(_("{} - {} more to go..."), _(objective.description), requiredValue);
-								break;
-							case 1:
-								message = fmt::format(_("{} - need {} more"), _(objective.description), requiredValue);
-								break;
-							case 2:
-								message = fmt::format(_("{} - {} of {}"), _(objective.description), objective.currentValue, objective.targetValue);
-								break;
+						case 0:
+							message = fmt::format(_("{} - {} more to go..."), _(objective.description), requiredValue);
+							break;
+						case 1:
+							message = fmt::format(_("{} - need {} more"), _(objective.description), requiredValue);
+							break;
+						case 2:
+							message = fmt::format(_("{} - {} of {}"), _(objective.description), objective.currentValue, objective.targetValue);
+							break;
 						}
-						
+
 						engine.setInfoMessage(message, 1, INFO_NORMAL);
 					}
 					else

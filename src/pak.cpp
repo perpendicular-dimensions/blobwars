@@ -49,7 +49,7 @@ static void countFiles(const char *dirName)
 		}
 
 		snprintf(filename, sizeof filename, "%s/%s", dirName, dfile->d_name);
-		
+
 		if (strlen(filename) > PAK_MAX_FILENAME - 1)
 		{
 			printf("\nERROR - '%s' exceeds maximum defined file length of %d\n", filename, PAK_MAX_FILENAME);
@@ -70,7 +70,7 @@ static void countFiles(const char *dirName)
 	}
 
 	closedir(dirp);
-	
+
 	fileData = new FileData[totalFiles];
 }
 
@@ -92,7 +92,7 @@ static void recurseDirectory(const char *dirName)
 		printf("%s: Directory does not exist or is not accessible\n", dirName);
 		return;
 	}
-	
+
 	float percentage;
 	long filesize;
 
@@ -122,19 +122,19 @@ static void recurseDirectory(const char *dirName)
 				fclose(pak);
 				exit(1);
 			}
-			
+
 			fseek(infile, SEEK_SET, SEEK_END);
-			
+
 			filesize = ftell(infile);
-			
+
 			fclose(infile);
-			
+
 			delete[] buffer;
 			buffer = new unsigned char[filesize];
-			
+
 			delete[] output;
 			output = new unsigned char[(int)(filesize * 1.01) + 12];
-			
+
 			fp = gzopen(filename, "rb");
 
 			if (!fp)
@@ -151,7 +151,7 @@ static void recurseDirectory(const char *dirName)
 
 				cSize = (uLongf)((fSize * 1.01) + 12);
 				compress2(output, &cSize, buffer, fSize, 9);
-				
+
 				fileData[files].set(filename, fSize, cSize, ftell(pak));
 
 				if (fwrite(output, 1, cSize, pak) != cSize)
@@ -162,7 +162,7 @@ static void recurseDirectory(const char *dirName)
 				}
 
 				files++;
-				
+
 				percentage = files;
 				percentage /= totalFiles;
 				percentage *= 100;
@@ -193,28 +193,28 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Error opening %s: %s\n", argv[argc - 1], strerror(errno));
 		return 1;
 	}
-	
-	for (int i = 1 ; i < (argc - 1) ; i++)
+
+	for (int i = 1; i < (argc - 1); i++)
 	{
 		countFiles(argv[i]);
 	}
-		
+
 	printf("Paking...000%%");
 	fflush(stdout);
-	
+
 	output = nullptr;
 	buffer = nullptr;
-	
+
 	atexit(cleanup);
 
-	for (int i = 1 ; i < (argc - 1) ; i++)
+	for (int i = 1; i < (argc - 1); i++)
 	{
 		recurseDirectory(argv[i]);
 	}
 
 	unsigned int pos = ftell(pak);
 
-	for (int i = 0 ; i < files ; i++)
+	for (int i = 0; i < files; i++)
 	{
 		if (fileData[i].fSize == 0)
 		{
@@ -228,7 +228,7 @@ int main(int argc, char *argv[])
 			return 1;
 		}
 	}
-	
+
 	unsigned int numberOfFiles = totalFiles;
 
 	if (fwrite(&pos, sizeof(unsigned int), 1, pak) != 1)

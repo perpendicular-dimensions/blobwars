@@ -35,18 +35,18 @@ static void openDoor(Train &train)
 
 	switch (train.type)
 	{
-		case TR_GOLD_DOOR:
-		case TR_GOLD_SLIDEDOOR:
-			engine.setInfoMessage("Used Gold Key", 1, INFO_NORMAL);
-			break;
-		case TR_SILVER_DOOR:
-		case TR_SILVER_SLIDEDOOR:
-			engine.setInfoMessage("Used Silver Key", 1, INFO_NORMAL);
-			break;
-		case TR_BRONZE_DOOR:
-		case TR_BRONZE_SLIDEDOOR:
-			engine.setInfoMessage("Used Bronze Key", 1, INFO_NORMAL);
-			break;
+	case TR_GOLD_DOOR:
+	case TR_GOLD_SLIDEDOOR:
+		engine.setInfoMessage("Used Gold Key", 1, INFO_NORMAL);
+		break;
+	case TR_SILVER_DOOR:
+	case TR_SILVER_SLIDEDOOR:
+		engine.setInfoMessage("Used Silver Key", 1, INFO_NORMAL);
+		break;
+	case TR_BRONZE_DOOR:
+	case TR_BRONZE_SLIDEDOOR:
+		engine.setInfoMessage("Used Bronze Key", 1, INFO_NORMAL);
+		break;
 	}
 
 	if ((train.type != TR_LOCKED_DOOR) && (train.type != TR_LOCKED_SLIDEDOOR))
@@ -84,13 +84,15 @@ static void trainBlockEntity(Entity &ent, std::string message, Train &train, int
 			audio.playSound(SND_LOCKEDDOOR, CH_TOUCH, train.x);
 		}
 	}
-	
+
 	if ((ent.flags & ENT_BULLET) && (!(ent.flags & ENT_BOUNCES)))
 	{
 		if (dir & DIR_X)
 		{
-			if (ent.dx < 0) ent.x = train.x + train.sprite->getFrame(0)->w;
-			if (ent.dx > 0) ent.x = train.x - ent.width;
+			if (ent.dx < 0)
+				ent.x = train.x + train.sprite->getFrame(0)->w;
+			if (ent.dx > 0)
+				ent.x = train.x - ent.width;
 		}
 	}
 
@@ -112,7 +114,8 @@ void getTrainMotion(Entity &ent, int &dx, int &dy)
 	for (auto &&train: map.trains)
 	{
 		bool collision = (Collision::collision(ent.x, ent.y + ent.dy, ent.width, ent.height - 1, train.x, train.y, train.width, train.height));
-		if(collision) {
+		if (collision)
+		{
 			dx = train.getDX();
 			dy = train.getDY();
 			break;
@@ -151,108 +154,108 @@ bool checkTrainContact(Entity &ent, int dir)
 		{
 			switch (train.type)
 			{
-				case TR_TRAIN:
-					if (ent.flags & ENT_BULLET)
+			case TR_TRAIN:
+				if (ent.flags & ENT_BULLET)
+				{
+					return true;
+				}
+
+				if (ent.flags & ENT_FLIES)
+				{
+					return false;
+				}
+
+				if ((&ent == &player) && (train.waitsForPlayer()))
+				{
+					train.active = true;
+				}
+
+				x = (int)(ent.x + ent.dx) >> BRICKSHIFT;
+				y = (int)(ent.y + ent.height - 1) >> BRICKSHIFT;
+
+				mapAttribute = map.data[x][y];
+
+				evaluateMapAttribute(ent, mapAttribute);
+
+				if (ent.dy >= 0)
+				{
+					if (train.active)
 					{
-						return true;
-					}
-					
-					if (ent.flags & ENT_FLIES)
-					{
-						return false;
-					}
-
-					if ((&ent == &player) && (train.waitsForPlayer()))
-					{
-						train.active = true;
-					}
-
-					x = (int)(ent.x + ent.dx) >> BRICKSHIFT;
-					y = (int)(ent.y + ent.height - 1) >> BRICKSHIFT;
-
-					mapAttribute = map.data[x][y];
-
-					evaluateMapAttribute(ent, mapAttribute);
-
-					if (ent.dy >= 0)
-					{
-						if (train.active)
+						if (!map.isIceLevel)
 						{
-							if (!map.isIceLevel)
-							{
-								ent.x -= train.getDX();
-							}
+							ent.x -= train.getDX();
 						}
-
-						ent.dy = 1;
-
-						ent.y = train.y;
-						ent.y -= ent.height;
-
-						ent.falling = false;
 					}
 
-					break;
+					ent.dy = 1;
 
-				case TR_DOOR:
-				case TR_SLIDEDOOR:
-					if (!(ent.flags & ENT_BULLET))
-					{
-						openDoor(train);
-					}
-					
-					if (dir & DIR_Y)
-					{
-						ent.dy = 0;
-						ent.falling = false;
-					}
-					return true;
-					break;
+					ent.y = train.y;
+					ent.y -= ent.height;
 
-				case TR_LOCKED_DOOR:
-				case TR_LOCKED_SLIDEDOOR:
-					trainBlockEntity(ent, "Door is locked", train, dir);
-					return true;
-					break;
+					ent.falling = false;
+				}
 
-				case TR_GOLD_DOOR:
-				case TR_GOLD_SLIDEDOOR:
-					if ((&ent == &player) && (carryingItem("Gold Key")))
-					{
-						openDoor(train);
-					}
-					else
-					{
-						trainBlockEntity(ent, "Gold Key Required", train, dir);
-					}
-					return true;
-					break;
+				break;
 
-				case TR_SILVER_DOOR:
-				case TR_SILVER_SLIDEDOOR:
-					if ((&ent == &player) && (carryingItem("Silver Key")))
-					{
-						openDoor(train);
-					}
-					else
-					{
-						trainBlockEntity(ent, "Silver Key Required", train, dir);
-					}
-					return true;
-					break;
+			case TR_DOOR:
+			case TR_SLIDEDOOR:
+				if (!(ent.flags & ENT_BULLET))
+				{
+					openDoor(train);
+				}
 
-				case TR_BRONZE_DOOR:
-				case TR_BRONZE_SLIDEDOOR:
-					if ((&ent == &player) && (carryingItem("Bronze Key")))
-					{
-						openDoor(train);
-					}
-					else
-					{
-						trainBlockEntity(ent, "Bronze Key Required", train, dir);
-					}
-					return true;
-					break;
+				if (dir & DIR_Y)
+				{
+					ent.dy = 0;
+					ent.falling = false;
+				}
+				return true;
+				break;
+
+			case TR_LOCKED_DOOR:
+			case TR_LOCKED_SLIDEDOOR:
+				trainBlockEntity(ent, "Door is locked", train, dir);
+				return true;
+				break;
+
+			case TR_GOLD_DOOR:
+			case TR_GOLD_SLIDEDOOR:
+				if ((&ent == &player) && (carryingItem("Gold Key")))
+				{
+					openDoor(train);
+				}
+				else
+				{
+					trainBlockEntity(ent, "Gold Key Required", train, dir);
+				}
+				return true;
+				break;
+
+			case TR_SILVER_DOOR:
+			case TR_SILVER_SLIDEDOOR:
+				if ((&ent == &player) && (carryingItem("Silver Key")))
+				{
+					openDoor(train);
+				}
+				else
+				{
+					trainBlockEntity(ent, "Silver Key Required", train, dir);
+				}
+				return true;
+				break;
+
+			case TR_BRONZE_DOOR:
+			case TR_BRONZE_SLIDEDOOR:
+				if ((&ent == &player) && (carryingItem("Bronze Key")))
+				{
+					openDoor(train);
+				}
+				else
+				{
+					trainBlockEntity(ent, "Bronze Key Required", train, dir);
+				}
+				return true;
+				break;
 			}
 		}
 	}
@@ -268,35 +271,35 @@ static void setTrainSprite(Train &train)
 {
 	switch (train.type)
 	{
-		case TR_TRAIN:
-			train.sprite = graphics.getSprite("Platform", true);
-			break;
-		case TR_DOOR:
-		case TR_LOCKED_DOOR:
-			train.sprite = graphics.getSprite("NormalDoor", true);
-			break;
-		case TR_GOLD_DOOR:
-			train.sprite = graphics.getSprite("GoldDoor", true);
-			break;
-		case TR_SILVER_DOOR:
-			train.sprite = graphics.getSprite("SilverDoor", true);
-			break;
-		case TR_BRONZE_DOOR:
-			train.sprite = graphics.getSprite("BronzeDoor", true);
-			break;
-		case TR_SLIDEDOOR:
-		case TR_LOCKED_SLIDEDOOR:
-			train.sprite = graphics.getSprite("SlideDoor", true);
-			break;
-		case TR_GOLD_SLIDEDOOR:
-			train.sprite = graphics.getSprite("GoldSlideDoor", true);
-			break;
-		case TR_SILVER_SLIDEDOOR:
-			train.sprite = graphics.getSprite("SilverSlideDoor", true);
-			break;
-		case TR_BRONZE_SLIDEDOOR:
-			train.sprite = graphics.getSprite("BronzeSlideDoor", true);
-			break;
+	case TR_TRAIN:
+		train.sprite = graphics.getSprite("Platform", true);
+		break;
+	case TR_DOOR:
+	case TR_LOCKED_DOOR:
+		train.sprite = graphics.getSprite("NormalDoor", true);
+		break;
+	case TR_GOLD_DOOR:
+		train.sprite = graphics.getSprite("GoldDoor", true);
+		break;
+	case TR_SILVER_DOOR:
+		train.sprite = graphics.getSprite("SilverDoor", true);
+		break;
+	case TR_BRONZE_DOOR:
+		train.sprite = graphics.getSprite("BronzeDoor", true);
+		break;
+	case TR_SLIDEDOOR:
+	case TR_LOCKED_SLIDEDOOR:
+		train.sprite = graphics.getSprite("SlideDoor", true);
+		break;
+	case TR_GOLD_SLIDEDOOR:
+		train.sprite = graphics.getSprite("GoldSlideDoor", true);
+		break;
+	case TR_SILVER_SLIDEDOOR:
+		train.sprite = graphics.getSprite("SilverSlideDoor", true);
+		break;
+	case TR_BRONZE_SLIDEDOOR:
+		train.sprite = graphics.getSprite("BronzeSlideDoor", true);
+		break;
 	}
 }
 
@@ -310,12 +313,12 @@ static bool doorClosedOnEntity(Train &train)
 {
 	// allow entities to stand on an horizontal moving door without blocking its movement.
 	int y = (train.type < TR_SLIDEDOOR) ? (int)train.y : (int)train.y + 1;
-	
+
 	if (Collision::collision(player.x, player.y, player.width, player.height, train.x, y, train.width, train.height))
 	{
 		return true;
 	}
-	
+
 	for (auto &&enemy: map.enemies)
 	{
 		if (Collision::collision(enemy.x, enemy.y, enemy.width, enemy.height, train.x, y, train.width, train.height))
@@ -323,7 +326,7 @@ static bool doorClosedOnEntity(Train &train)
 			return true;
 		}
 	}
-	
+
 	return false;
 }
 
@@ -349,9 +352,9 @@ void doTrains()
 		{
 			oldX = (int)train.x;
 			oldY = (int)train.y;
-			
+
 			playSound = train.openClose();
-			
+
 			// only check if the door actually moved(!)
 			if ((oldX != (int)train.x) || (oldY != (int)train.y))
 			{

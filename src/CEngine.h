@@ -19,83 +19,81 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class Engine {
+class Engine
+{
+private:
+	SDL_Event event;
+	signed char frameLoop;
+	int mouseX, mouseY;
 
-	private:
+	// Time Difference
+	unsigned int time1;
+	unsigned int time2;
+	float timeDifference;
 
-		SDL_Event event;
-		signed char frameLoop;
-		int mouseX, mouseY;
+	// used for cheating!
+	std::string lastKeyPressed;
+	std::string lastKeyEvents;
 
-		// Time Difference
-		unsigned int time1;
-		unsigned int time2;
-		float timeDifference;
-		
-		// used for cheating!
-		std::string lastKeyPressed;
-		std::string lastKeyEvents;
-		
-		// Joystick config stuff
-		int lastButtonPressed;
-		
-		Pak pak;
+	// Joystick config stuff
+	int lastButtonPressed;
 
-	public:
-		
-		int extremeAvailable;
+	Pak pak;
 
-		char keyState[SDL_NUM_SCANCODES];
-		char mouseLeft, mouseRight;
-		
-		int joyX, joyY;
-		int joyprevX, joyprevY;
-		int joykeyX, joykeyY;
-		bool joykeyFire;
-		int joystickState[32]; // hopefully no one has a joystick with this many buttons(!)
-		bool waitForButton;
-		bool waitForKey;
-		bool allowJoypad;
+public:
+	int extremeAvailable;
 
-		bool paused;
-		bool saveConfig;
-		bool allowQuit;
+	char keyState[SDL_NUM_SCANCODES];
+	char mouseLeft, mouseRight;
 
-		std::string userHomeDirectory;
+	int joyX, joyY;
+	int joyprevX, joyprevY;
+	int joykeyX, joykeyY;
+	bool joykeyFire;
+	int joystickState[32]; // hopefully no one has a joystick with this many buttons(!)
+	bool waitForButton;
+	bool waitForKey;
+	bool allowJoypad;
 
-		int useAudio;
-		int fullScreen;
-		int skill;
-		bool practice;
+	bool paused;
+	bool saveConfig;
+	bool allowQuit;
 
-		// Development stuff
-		bool devNoMonsters;
+	std::string userHomeDirectory;
 
-		SDL_RWops *sdlrw;
+	int useAudio;
+	int fullScreen;
+	int skill;
+	bool practice;
 
-		std::vector<char> binaryBuffer; // used for unzipping
-		std::vector<char> dataBuffer; // used for unzipping
+	// Development stuff
+	bool devNoMonsters;
 
-		int messageTime;
-		int messagePriority;
-		int messageType;
-		std::string message;
+	SDL_RWops *sdlrw;
 
-		std::string saveSlot[10];
-		int continueSaveSlot;
+	std::vector<char> binaryBuffer; // used for unzipping
+	std::vector<char> dataBuffer;   // used for unzipping
 
-		int playerPosX, playerPosY;
+	int messageTime;
+	int messagePriority;
+	int messageType;
+	std::string message;
 
-		std::vector<Widget> widgets;
+	std::string saveSlot[10];
+	int continueSaveSlot;
 
-		Widget *highlightedWidget;
-		int highlightedIndex;
+	int playerPosX, playerPosY;
 
-		Entity world;
+	std::vector<Widget> widgets;
 
-		bool cheats;
-		int cheatHealth, cheatExtras, cheatFuel, cheatLevels, cheatBlood, cheatInvulnerable;
-		int cheatReload, cheatSpeed, cheatSkipLevel;
+	Widget *highlightedWidget;
+	int highlightedIndex;
+
+	Entity world;
+
+	bool cheats;
+	int cheatHealth, cheatExtras, cheatFuel, cheatLevels, cheatBlood, cheatInvulnerable;
+	int cheatReload, cheatSpeed, cheatSkipLevel;
 
 	Engine();
 	void getInput();
@@ -104,7 +102,7 @@ class Engine {
 
 	void moveMouse(int dx, int dy);
 	bool userAccepts();
-	
+
 	void clearCheatVars();
 	bool compareLastKeyInputs();
 	void addKeyEvent();

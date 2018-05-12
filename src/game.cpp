@@ -52,16 +52,16 @@ static void showInGameOptions()
 
 	engine.setWidgetVariable("warnno", &warnno);
 	engine.setWidgetVariable("warnyes", &warnyes);
-	
+
 	engine.setWidgetVariable("restartno", &restartno);
 	engine.setWidgetVariable("restartyes", &restartyes);
 
 	engine.setWidgetVariable("quitno", &quitno);
 	engine.setWidgetVariable("quityes", &quityes);
-	
+
 	engine.setWidgetVariable("trainno", &quitno);
 	engine.setWidgetVariable("trainyes", &quityes);
-	
+
 	engine.setWidgetVariable("escapeno", &escapeno);
 	engine.setWidgetVariable("escapeyes", &escapeyes);
 
@@ -70,13 +70,13 @@ static void showInGameOptions()
 	engine.showWidgetGroup("escapeconf", false);
 	engine.showWidgetGroup("quitconf", false);
 	engine.showWidgetGroup("trainconf", false);
-	
+
 	if ((map.isBossMission) || (engine.practice) || (map.name == "Space Station"))
 	{
 		engine.enableWidget("escape", false);
 		engine.enableWidget("restart", false);
 	}
-		
+
 	if (!engine.practice)
 	{
 		engine.showWidget("train", false);
@@ -91,12 +91,12 @@ static void showInGameOptions()
 
 	drawWidgets();
 	audio.playMenuSound(2);
-	
+
 	int menuSound = -1;
 
 	while (true)
 	{
-		graphics.updateScreen();		
+		graphics.updateScreen();
 		engine.getInput();
 		config.populate();
 
@@ -106,7 +106,7 @@ static void showInGameOptions()
 			config.resetControl(CONTROL::PAUSE);
 			break;
 		}
-		
+
 		menuSound = engine.processWidgets();
 
 		if (menuSound)
@@ -166,7 +166,7 @@ static void showInGameOptions()
 			engine.showWidgetGroup("escapeconf", false);
 			engine.showWidgetGroup("quitconf", false);
 			engine.showWidgetGroup("restartconf", false);
-			
+
 			if (!engine.practice)
 			{
 				engine.showWidget("train", false);
@@ -175,7 +175,7 @@ static void showInGameOptions()
 			{
 				engine.showWidget("quit", false);
 			}
-			
+
 			graphics.drawRect(120, 100, 400, 300, graphics.black, graphics.white, graphics.screen);
 			drawWidgets();
 			quitno = trainno = warnno = escapeno = restartno = 0;
@@ -191,7 +191,7 @@ static void showInGameOptions()
 			drawWidgets();
 			quit = 0;
 		}
-		
+
 		if (train)
 		{
 			engine.showWidgetGroup("options", false);
@@ -202,7 +202,7 @@ static void showInGameOptions()
 			drawWidgets();
 			train = 0;
 		}
-		
+
 		if (restart)
 		{
 			engine.showWidgetGroup("options", false);
@@ -219,7 +219,7 @@ static void showInGameOptions()
 			game.setMissionOver(MIS_PLAYERQUIT);
 			break;
 		}
-		
+
 		if (restartyes)
 		{
 			game.setMissionOver(MIS_PLAYERRESTART);
@@ -239,7 +239,7 @@ void doGameStuff()
 	engine.getInput();
 	config.populate();
 	replayData.read(config.command);
-	
+
 	if (game.missionOverReason == MIS_INPROGRESS)
 	{
 		config.doPause();
@@ -260,24 +260,24 @@ void doGameStuff()
 	doItems();
 	doBullets();
 	doMIAs();
-	
+
 	if (map.isBossMission)
 	{
 		doBosses();
 	}
-	
+
 	doEnemies();
 	doObstacles();
 	doTeleporters();
-	
+
 	if (map.isBlizzardLevel)
 	{
 		doWind();
 	}
-	
+
 	doParticles();
-	
-	replayData.set(config.command);	
+
+	replayData.set(config.command);
 	replayData.commit();
 }
 
@@ -285,7 +285,7 @@ int gameover()
 {
 	audio.stopMusic();
 	audio.stopAmbiance();
-	
+
 	if (!engine.loadWidgets(_("data/gameOverWidgets")))
 	{
 		return graphics.showErrorAndExit(ERR_FILE, _("data/gameOverWidgets")), SECTION_GAME;
@@ -308,7 +308,7 @@ int gameover()
 
 	engine.setWidgetVariable("gameOverNo", &cont);
 	engine.setWidgetVariable("gameOverYes", &quit);
-	
+
 	if (game.canContinue > 1)
 	{
 		Widget *widget = engine.getWidgetByName("gameOverNo");
@@ -343,7 +343,7 @@ int gameover()
 				quit = 1;
 			}
 		}
-		
+
 		if (showGameOverOptions)
 		{
 			drawWidgets();
@@ -362,7 +362,7 @@ int gameover()
 		audio.fadeMusic();
 		graphics.fadeToBlack();
 		map.clear();
-		
+
 		return SECTION_TITLE;
 	}
 
@@ -423,7 +423,7 @@ void showMissionInformation()
 		y += 20;
 
 		graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
-		
+
 		if ((game.skill < 3) && contains(objective.description, "L.R.T.S.") && (!gameData.completedWorld))
 		{
 			graphics.drawString(_("???? ???????? ????"), col1, y, TXT_LEFT, panel);
@@ -432,7 +432,7 @@ void showMissionInformation()
 		{
 			graphics.drawString(_(objective.description), col1, y, TXT_LEFT, panel);
 		}
-		
+
 		// this is a fake objective (for the 4th Ancient Tomb)
 		if (objective.targetValue == -1)
 		{
@@ -458,14 +458,14 @@ void showMissionInformation()
 			graphics.drawString(_("Completed"), col2, y, TXT_RIGHT, panel);
 		}
 	}
-	
+
 	if (game.skill == 3)
 	{
 		graphics.setFontColor(0xff, 0xff, 0x00, 0x00, 0x00, 0x00);
 		message = fmt::format(_("Time Limit - {}:{:02d} Minutes"), map.remainingMinutes, map.remainingSeconds);
 		graphics.drawString(message, 200, 260, TXT_CENTERED, panel);
 	}
-	
+
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 	graphics.drawString(_("Press Fire to Continue"), 200, 280, TXT_CENTERED, panel);
 
@@ -481,13 +481,17 @@ void showMissionInformation()
 	player.y = py;
 
 	unsigned int frameLimit = SDL_GetTicks() + 16;
-		
+
 	while (true)
 	{
-		if ((int)player.x < player.tx) player.x += 2;
-		if ((int)player.x > player.tx) player.x -= 2;
-		if ((int)player.y < player.ty) player.y += 2;
-		if ((int)player.y > player.ty) player.y -= 2;
+		if ((int)player.x < player.tx)
+			player.x += 2;
+		if ((int)player.x > player.tx)
+			player.x -= 2;
+		if ((int)player.y < player.ty)
+			player.y += 2;
+		if ((int)player.y > player.ty)
+			player.y -= 2;
 
 		if (Collision::collision(player.x, player.y, 5, 5, player.tx, player.ty, 5, 5))
 			map.getRandomEntityPosition(&player.tx, &player.ty);
@@ -516,31 +520,31 @@ void showMissionInformation()
 static void beamInPlayer()
 {
 	game.getCheckPoint(&player.x, &player.y);
-	
+
 	int beamInTime = 180;
-	
+
 	unsigned int frameLimit = SDL_GetTicks() + 16;
-	
+
 	audio.playSound(SND_TELEPORT1, CH_ANY, player.x);
-	
+
 	engine.setPlayerPosition((int)player.x, (int)player.y, map.limitLeft, map.limitRight, map.limitUp, map.limitDown);
-	
+
 	while (beamInTime > 0)
 	{
 		engine.delay(frameLimit);
 		frameLimit = SDL_GetTicks() + 16;
-		
+
 		doGameStuff();
 		drawMapTopLayer();
-		
+
 		if ((beamInTime % 10) == 0)
 			addTeleportParticles(player.x + 10, player.y + 10, 50, -1);
-		
+
 		beamInTime--;
 	}
-	
+
 	game.getCheckPoint(&player.x, &player.y);
-	
+
 	player.dx = 0;
 	player.dy = 0;
 	player.immune = 120;
@@ -560,10 +564,10 @@ int doGame()
 	uint32_t frames, frameLimit, millis;
 	uint32_t start, cur;
 
-	#if DEBUG
+#if DEBUG
 	uint32_t now, then, frameCounter;
 	std::string fps = "fps";
-	#endif
+#endif
 
 	engine.messageTime = -1;
 	engine.messagePriority = -1;
@@ -636,7 +640,7 @@ int doGame()
 
 		if (game.missionOverReason != MIS_PLAYEROUT)
 		{
-  			engine.setPlayerPosition((int)player.x, (int)player.y, map.limitLeft, map.limitRight, map.limitUp, map.limitDown);
+			engine.setPlayerPosition((int)player.x, (int)player.y, map.limitLeft, map.limitRight, map.limitUp, map.limitDown);
 		}
 
 		doSpawnPoints();
@@ -697,7 +701,7 @@ int doGame()
 				{
 					map.killAllEnemies();
 				}
-				
+
 				audio.stopMusic();
 				audio.stopAmbiance();
 
@@ -709,7 +713,7 @@ int doGame()
 		if (game.missionOver > 0)
 		{
 			game.missionOver--;
-		
+
 			if (game.missionOver == 0)
 			{
 				if (game.missionOverReason == MIS_PLAYEROUT)
@@ -727,7 +731,7 @@ int doGame()
 					if (game.missionOverReason == MIS_COMPLETE)
 					{
 						game.missionOver = MAX_FPS * 2;
-						
+
 						if (map.name != "Space Station")
 						{
 							addTeleportParticles(player.x, player.y, 50, SND_TELEPORT3);
@@ -751,7 +755,7 @@ int doGame()
 						{
 							exit(0);
 						}
-					
+
 						break;
 					}
 				}
@@ -763,11 +767,11 @@ int doGame()
 		if (millis >= 60)
 		{
 			millis = 0;
-			
+
 			if ((game.missionOverReason == MIS_INPROGRESS) || (game.missionOverReason == MIS_PLAYEROUT))
 			{
 				game.incrementMissionTime();
-				
+
 				if (game.skill == 3)
 				{
 					doTimeRemaining();
@@ -787,9 +791,9 @@ int doGame()
 			config.populate();
 			config.doPause();
 			graphics.updateScreen();
-			#ifdef DEBUG
+#ifdef DEBUG
 			then = SDL_GetTicks();
-			#endif
+#endif
 			frames = 0;
 
 			if (!engine.paused)
@@ -799,21 +803,21 @@ int doGame()
 
 			SDL_Delay(16);
 		}
-		
+
 		if ((engine.keyState[SDL_SCANCODE_F3]) && (engine.cheatSkipLevel))
 		{
 			autoCompleteAllObjectives(true);
 			engine.keyState[SDL_SCANCODE_F3] = 0;
 			engine.setInfoMessage("Skipping Mission...", 2, INFO_OBJECTIVE);
 		}
-		
-		#if DEBUG
+
+#if DEBUG
 		if (engine.keyState[SDL_SCANCODE_F1])
 		{
 			autoCompleteAllObjectives(false);
-		}		
-		#endif
-		
+		}
+#endif
+
 		if (replayData.replayMode != REPLAY_MODE::PLAYBACK)
 		{
 			engine.delay(frameLimit);
@@ -822,30 +826,30 @@ int doGame()
 		{
 			engine.delay(frameLimit);
 		}
-		
+
 		if (engine.keyState[SDL_SCANCODE_F5])
 		{
 			replayData.fast = !replayData.fast;
 			engine.keyState[SDL_SCANCODE_F5] = 0;
 		}
-		
-		frameLimit = SDL_GetTicks()  + 16;
-		
+
+		frameLimit = SDL_GetTicks() + 16;
+
 		if (game.missionOverReason == MIS_GAMECOMPLETE)
 			frameLimit = SDL_GetTicks() + 64;
 
-		#if DEBUG
+#if DEBUG
 		static Graphics::SurfaceCache fpsCache;
 		graphics.drawString(fps, 600, 30, true, graphics.screen, fpsCache);
 
 		if (SDL_GetTicks() > frameCounter + 500)
 		{
 			now = SDL_GetTicks();
-			fps = fmt::format("{:2.2f} fps", ((double)frames*1000)/(now - then));
+			fps = fmt::format("{:2.2f} fps", ((double)frames * 1000) / (now - then));
 			then = frameCounter = SDL_GetTicks();
 			frames = 0;
 		}
-		#endif
+#endif
 	}
 
 	if (allObjectivesCompleted())
@@ -862,83 +866,83 @@ int doGame()
 
 	switch (game.missionOverReason)
 	{
-		case MIS_COMPLETE:
-			if (map.name != "Space Station")
-			{
-				graphics.delay(1000);
-				audio.loadMusic("music/grasslands");
-				audio.playMusic();
-				graphics.fadeToBlack();
-				
-				bool previouslyCompleted = gameData.stagePreviouslyCleared(game.stageName);
-				
-				showMissionClear();
-				
-				if (engine.practice)
-				{
-					return SECTION_TITLE;
-				}
-				
-				if (!previouslyCompleted)
-				{
-					checkEndCutscene();
-				}
-				return SECTION_HUB;
-			}
-			else
-			{
-				graphics.fadeToBlack();
-				processPostMissionData();
-				saveGame();
-				game.setMapName("data/finalBattle");
-				game.setStageName("Final Battle");
-				return SECTION_GAME;
-			}
-			break;
-			
-		case MIS_GAMECOMPLETE:
-			SDL_FillRect(graphics.screen, nullptr, graphics.white);
-			graphics.updateScreen();
+	case MIS_COMPLETE:
+		if (map.name != "Space Station")
+		{
+			graphics.delay(1000);
+			audio.loadMusic("music/grasslands");
+			audio.playMusic();
 			graphics.fadeToBlack();
-			
-			// we've finished the game. Extreme mode is now available! :)
-			engine.extremeAvailable = true;
-			map.clear();
-			graphics.free();
-			audio.free();
-			checkEndCutscene();
-			return SECTION_CREDITS;
-			break;
 
-		case MIS_TIMEUP:
-			game.canContinue = 0;
-		case MIS_PLAYERDEAD:
-			if (player.health > -60)
+			bool previouslyCompleted = gameData.stagePreviouslyCleared(game.stageName);
+
+			showMissionClear();
+
+			if (engine.practice)
 			{
-				player.health = -99;
-				gibPlayer();
+				return SECTION_TITLE;
 			}
-			return SECTION_GAMEOVER;
-			break;
 
-		case MIS_PLAYERESCAPE:
-			game.escapes++;
-			if (gameData.stagePreviouslyCleared(game.stageName))
+			if (!previouslyCompleted)
 			{
-				processPostMissionData();
-				saveGame();
+				checkEndCutscene();
 			}
 			return SECTION_HUB;
-			break;
-			
-		case MIS_PLAYERRESTART:
-			clearAllMissionData();
+		}
+		else
+		{
+			graphics.fadeToBlack();
+			processPostMissionData();
+			saveGame();
+			game.setMapName("data/finalBattle");
+			game.setStageName("Final Battle");
 			return SECTION_GAME;
-			break;
+		}
+		break;
 
-		default:
-			return SECTION_TITLE;
-			break;
+	case MIS_GAMECOMPLETE:
+		SDL_FillRect(graphics.screen, nullptr, graphics.white);
+		graphics.updateScreen();
+		graphics.fadeToBlack();
+
+		// we've finished the game. Extreme mode is now available! :)
+		engine.extremeAvailable = true;
+		map.clear();
+		graphics.free();
+		audio.free();
+		checkEndCutscene();
+		return SECTION_CREDITS;
+		break;
+
+	case MIS_TIMEUP:
+		game.canContinue = 0;
+	case MIS_PLAYERDEAD:
+		if (player.health > -60)
+		{
+			player.health = -99;
+			gibPlayer();
+		}
+		return SECTION_GAMEOVER;
+		break;
+
+	case MIS_PLAYERESCAPE:
+		game.escapes++;
+		if (gameData.stagePreviouslyCleared(game.stageName))
+		{
+			processPostMissionData();
+			saveGame();
+		}
+		return SECTION_HUB;
+		break;
+
+	case MIS_PLAYERRESTART:
+		clearAllMissionData();
+		return SECTION_GAME;
+		break;
+
+	default:
+		return SECTION_TITLE;
+		break;
 	}
 
 	return SECTION_TITLE;

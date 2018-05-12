@@ -34,7 +34,7 @@ static void showCheatConfig()
 	{
 		graphics.showErrorAndExit(ERR_FILE, _("data/cheatWidgets"));
 	}
-		
+
 	int done = 0;
 
 	engine.setWidgetVariable("health", &engine.cheatHealth);
@@ -47,20 +47,20 @@ static void showCheatConfig()
 	engine.setWidgetVariable("levels", &engine.cheatLevels);
 	engine.setWidgetVariable("skip", &engine.cheatSkipLevel);
 	engine.setWidgetVariable("confirm", &done);
-	
+
 	graphics.blit(optionsBackground, 0, 0, graphics.screen, false);
 	graphics.blit(header, 320, 25, graphics.screen, true);
 	drawWidgets();
 
 	engine.flushInput();
 	engine.clearInput();
-	
+
 	int menuSound = -1;
 
 	while (!done)
 	{
 		graphics.updateScreen();
-		
+
 		if (menuSound)
 			audio.playMenuSound(menuSound);
 
@@ -85,7 +85,7 @@ static void showCheatConfig()
 
 		SDL_Delay(16);
 	}
-	
+
 	audio.playMenuSound(2);
 
 	SDL_FillRect(graphics.screen, nullptr, graphics.black);
@@ -95,7 +95,7 @@ static void showCheatConfig()
 	{
 		graphics.showErrorAndExit(ERR_FILE, _("data/optionWidgets"));
 	}
-	
+
 	engine.highlightWidget("cheats");
 }
 
@@ -108,7 +108,7 @@ static void showKeyConfig()
 	{
 		graphics.showErrorAndExit(ERR_FILE, _("data/keyboardWidgets"));
 	}
-		
+
 	SDL_Surface *header = graphics.getSprite("keyHeader", true)->getFrame(0);
 	SDL_Surface *optionsBackground = graphics.getSprite("optionsBackground", true)->getFrame(0);
 	SDL_SetColorKey(optionsBackground, 0, SDL_MapRGB(optionsBackground->format, 0, 0, 0));
@@ -128,22 +128,22 @@ static void showKeyConfig()
 
 	engine.setWidgetVariable("defaults", &defaults);
 	engine.setWidgetVariable("confirm", &done);
-	
+
 	graphics.blit(optionsBackground, 0, 0, graphics.screen, false);
 	graphics.blit(header, 320, 25, graphics.screen, true);
 	drawWidgets();
 
 	engine.flushInput();
 	engine.clearInput();
-	
+
 	int menuSound = -1;
-	
+
 	engine.allowJoypad = false;
 
 	while (!done)
 	{
 		graphics.updateScreen();
-		
+
 		if (menuSound)
 		{
 			audio.playMenuSound(menuSound);
@@ -157,7 +157,7 @@ static void showKeyConfig()
 		graphics.blit(optionsBackground, 0, 0, graphics.screen, false);
 		graphics.blit(header, 320, 25, graphics.screen, true);
 		drawWidgets();
-		
+
 		if (defaults)
 		{
 			config.restoreKeyDefaults();
@@ -173,9 +173,9 @@ static void showKeyConfig()
 
 		SDL_Delay(16);
 	}
-	
+
 	engine.allowJoypad = true;
-	
+
 	config.saveKeyConfig();
 
 	audio.playMenuSound(2);
@@ -187,7 +187,7 @@ static void showKeyConfig()
 	{
 		graphics.showErrorAndExit(ERR_FILE, _("data/optionWidgets"));
 	}
-	
+
 	engine.highlightWidget("keys");
 }
 
@@ -198,7 +198,7 @@ static void showJoystickConfig()
 
 	if (!engine.loadWidgets(_("data/joystickWidgets")))
 		graphics.showErrorAndExit(ERR_FILE, _("data/joystickWidgets"));
-		
+
 	SDL_Surface *header = graphics.getSprite("joystickHeader", true)->getFrame(0);
 	SDL_Surface *optionsBackground = graphics.getSprite("optionsBackground", true)->getFrame(0);
 	SDL_SetColorKey(optionsBackground, 0, SDL_MapRGB(optionsBackground->format, 0, 0, 0));
@@ -216,26 +216,26 @@ static void showJoystickConfig()
 
 	engine.setWidgetVariable("jetpack", &config.joystick.control[CONTROL::JETPACK]);
 	engine.setWidgetVariable("map", &config.joystick.control[CONTROL::MAP]);
-	
+
 	engine.setWidgetVariable("sensitivity", &sensitivity);
 
 	engine.setWidgetVariable("confirm", &done);
-	
+
 	graphics.blit(optionsBackground, 0, 0, graphics.screen, false);
 	graphics.blit(header, 320, 25, graphics.screen, true);
 	drawWidgets();
 
 	engine.flushInput();
 	engine.clearInput();
-	
+
 	int menuSound = -1;
-	
+
 	engine.allowJoypad = false;
 
 	while (!done)
 	{
 		graphics.updateScreen();
-		
+
 		if (menuSound)
 			audio.playMenuSound(menuSound);
 
@@ -257,11 +257,11 @@ static void showJoystickConfig()
 
 		SDL_Delay(16);
 	}
-	
+
 	config.joystick.sensitivity = (sensitivity * 100);
-	
+
 	engine.allowJoypad = true;
-	
+
 	config.saveJoystickConfig();
 
 	audio.playMenuSound(2);
@@ -273,7 +273,7 @@ static void showJoystickConfig()
 	{
 		graphics.showErrorAndExit(ERR_FILE, _("data/optionWidgets"));
 	}
-	
+
 	engine.highlightWidget("joysticks");
 }
 
@@ -288,7 +288,7 @@ void showOptions()
 	{
 		graphics.showErrorAndExit(ERR_FILE, _("data/optionWidgets"));
 	}
-		
+
 	SDL_Surface *header = graphics.getSprite("optionsHeader", true)->getFrame(0);
 	SDL_Surface *optionsBackground = graphics.getSprite("optionsBackground", true)->getFrame(0);
 	SDL_SetColorKey(optionsBackground, 0, SDL_MapRGB(optionsBackground->format, 0, 0, 0));
@@ -330,13 +330,13 @@ void showOptions()
 
 	engine.flushInput();
 	engine.clearInput();
-	
+
 	int menuSound = -1;
 
 	while (!done)
 	{
 		graphics.updateScreen();
-		
+
 		if (menuSound)
 			audio.playMenuSound(menuSound);
 
@@ -354,7 +354,7 @@ void showOptions()
 			engine.showWidget("cheats", engine.cheats);
 			drawWidgets();
 		}
-		
+
 		menuSound = engine.processWidgets();
 
 		if (menuSound)
@@ -371,14 +371,15 @@ void showOptions()
 			if (engine.widgetChanged("gamma"))
 			{
 				brightness = game.brightness;
-				if (brightness > 0) {
+				if (brightness > 0)
+				{
 					brightness /= 10;
 					uint16_t ramp[256];
 					SDL_CalculateGammaRamp(brightness, ramp);
 					SDL_SetWindowGammaRamp(graphics.window, ramp, ramp, ramp);
 				}
 			}
-			
+
 			if ((joysticks) || (cheats) || (keys))
 			{
 				audio.playMenuSound(2);
@@ -396,7 +397,7 @@ void showOptions()
 				{
 					showKeyConfig();
 				}
-				
+
 				joysticks = keys = cheats = 0;
 
 				engine.setWidgetVariable("fullscreen", &engine.fullScreen);
@@ -417,12 +418,12 @@ void showOptions()
 					engine.enableWidget("musicvol", false);
 					engine.enableWidget("output", false);
 				}
-				
+
 				if (SDL_NumJoysticks() == 0)
 				{
 					engine.enableWidget("joysticks", false);
 				}
-				
+
 				engine.showWidget("cheats", engine.cheats);
 			}
 
@@ -440,12 +441,11 @@ void showOptions()
 
 		SDL_Delay(16);
 	}
-	
-	
-	if (audio.output  != game.output)
+
+	if (audio.output != game.output)
 	{
 		audio.output = game.output;
-		
+
 		if (!audio.output)
 		{
 			audio.stopMusic();

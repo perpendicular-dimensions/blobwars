@@ -1,11 +1,9 @@
-class Keyboard {
+class Keyboard
+{
+public:
+	int control[CONTROL::MAX];
 
-	public:
-		
-			int control[CONTROL::MAX];
-	
-		Keyboard();
-		void setDefaultKeys();
-		static std::string translateKey(int value);
-
+	Keyboard();
+	void setDefaultKeys();
+	static std::string translateKey(int value);
 };

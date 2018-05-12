@@ -21,56 +21,56 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 void SDL_SetAlpha(SDL_Surface *surface, uint8_t value);
 
-class Graphics {
+class Graphics
+{
+private:
+	Engine *engine;
+	SDL_Rect gRect;
+	TTF_Font *font[5];
+	SDL_Color fontForeground, fontBackground;
 
-	private:
+	std::map<std::string, Sprite> sprites;
 
-		Engine *engine;
-		SDL_Rect gRect;
-		TTF_Font *font[5];
-		SDL_Color fontForeground, fontBackground;
+	int fontSize;
 
-		std::map<std::string, Sprite> sprites;
+	int waterAnim;
+	int slimeAnim;
+	int lavaAnim;
 
-		int fontSize;
-		
-		int waterAnim;
-		int slimeAnim;
-		int lavaAnim;
+	int currentLoading;
 
-		int currentLoading;
+	int screenShotNumber;
+	std::string screenshot;
+	std::string chatString;
 
-		int screenShotNumber;
-		std::string screenshot;
-		std::string chatString;
-		
-		SDL_Surface *medalMessage;
-		int medalMessageTimer;
-		int medalType;
+	SDL_Surface *medalMessage;
+	int medalMessageTimer;
+	int medalType;
 
-		SDL_Surface *fadeBlack;
-		SDL_Surface *infoMessage;
+	SDL_Surface *fadeBlack;
+	SDL_Surface *infoMessage;
 
-	public:
-		struct SurfaceCache {
-			std::string text;
-			SDL_Surface *surface = nullptr;
-		};
+public:
+	struct SurfaceCache
+	{
+		std::string text;
+		SDL_Surface *surface = nullptr;
+	};
 
-		bool takeRandomScreenShots;
+	bool takeRandomScreenShots;
 
-		SDL_Window *window;
-		SDL_Renderer *renderer;
-		SDL_Texture *texture;
-		SDL_Surface *screen, *background;
-		SDL_Surface *tile[MAX_TILES];
-		
-		SDL_Surface *medal[4];
-		SDL_Surface *license[2];
-		
-		SDL_Surface *infoBar;
+	SDL_Window *window;
+	SDL_Renderer *renderer;
+	SDL_Texture *texture;
+	SDL_Surface *screen, *background;
+	SDL_Surface *tile[MAX_TILES];
 
-		int red, yellow, green, darkGreen, skyBlue, blue, cyan, white, lightGrey, grey, darkGrey, black;
+	SDL_Surface *medal[4];
+	SDL_Surface *license[2];
+
+	SDL_Surface *infoBar;
+
+	int red, yellow, green, darkGreen, skyBlue, blue, cyan, white, lightGrey, grey, darkGrey, black;
 
 	Graphics();
 	void free();
@@ -92,7 +92,10 @@ class Graphics {
 	void loadFont(int i, const std::string &filename, int pixelSize);
 	Sprite &addSprite(const std::string &name);
 	Sprite *getSprite(const std::string &name, bool required);
-	const auto &getSprites() { return sprites; }
+	const auto &getSprites()
+	{
+		return sprites;
+	}
 	void animateSprites();
 	int getWaterAnim() const;
 	int getSlimeAnim() const;
@@ -127,5 +130,4 @@ class Graphics {
 	void showErrorAndExit(const std::string &error, const std::string &param);
 	void showLicenseErrorAndExit();
 	void showRootWarning();
-
 };

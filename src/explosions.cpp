@@ -31,10 +31,12 @@ void addExplosion(float x, float y, int radius, Entity &owner)
 
 	Sprite *explosion = graphics.getSprite("Explosion", true);
 
-	for (int i = 0 ; i < radius ; i++)
+	for (int i = 0; i < radius; i++)
 	{
-		dx = Math::rrand(-radius, radius); dx /= 10;
-		dy = Math::rrand(-radius, radius); dy /= 10;
+		dx = Math::rrand(-radius, radius);
+		dx /= 10;
+		dy = Math::rrand(-radius, radius);
+		dy /= 10;
 		map.addParticle(x, y, dx, dy, Math::rrand(5, 30), graphics.white, explosion, PAR_WEIGHTLESS);
 	}
 
@@ -44,7 +46,7 @@ void addExplosion(float x, float y, int radius, Entity &owner)
 		{
 			continue;
 		}
-		
+
 		if (enemy.dead == DEAD_DYING)
 		{
 			continue;
@@ -59,17 +61,17 @@ void addExplosion(float x, float y, int radius, Entity &owner)
 		distance = (int)sqrt(distX + distY);
 
 		if (radius - distance > 0)
-		{	
+		{
 			if (enemy.health > 0)
 			{
 				enemy.health -= radius - distance;
-				
+
 				if (enemy.health <= 0)
-				{	
+				{
 					checkObjectives("Enemy", false);
 					checkObjectives(enemy.name, false);
 				}
-				
+
 				if (!(enemy.flags & ENT_STATIC))
 				{
 					if (enemy.flags & ENT_EXPLODES)
@@ -84,18 +86,18 @@ void addExplosion(float x, float y, int radius, Entity &owner)
 						}
 					}
 				}
-				
+
 				if (&owner == &player)
 				{
 					addPlayerScore(enemy.value);
 				}
 			}
-			
-			for (int i = 0 ; i < 4 ; i++)
+
+			for (int i = 0; i < 4; i++)
 			{
 				(enemy.flags & ENT_EXPLODES) ? addSmokeAndFire(enemy, Math::rrand(-15, 5), Math::rrand(-15, 5), 2) : addBlood(enemy, Math::rrand(-5, 5), Math::rrand(-5, 5), 1);
 			}
-				
+
 			if (!(enemy.flags & ENT_STATIC))
 			{
 				enemy.dx = Math::rrand(-5, 5);

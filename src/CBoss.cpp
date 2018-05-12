@@ -24,19 +24,19 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 Boss::Boss()
 {
 	active = true;
-		   
+
 	thinktime = 0;
 	actiontime = 0;
 	custom = 0;
-	
+
 	maxHealth = 0;
-	
+
 	shieldFrequency = 999;
-	
+
 	react = nullptr;
 	think = nullptr;
 	die = nullptr;
-	
+
 	Math::addBit(&flags, ENT_BOSS);
 }
 
@@ -56,13 +56,13 @@ void Boss::setActionFinished(int time)
 bool Boss::readyForThink()
 {
 	Math::limitInt(&(--thinktime), 0, 99999);
-	
+
 	return thinktime == 0;
 }
 
 bool Boss::actionFinished()
 {
 	Math::limitInt(&(--actiontime), 0, 99999);
-	
+
 	return actiontime == 0;
 }

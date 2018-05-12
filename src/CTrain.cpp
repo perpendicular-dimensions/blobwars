@@ -21,7 +21,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-
 Train::Train(const std::string &name, int type, int startX, int startY, int endX, int endY, int pause, bool fromStart)
 {
 	this->name = name;
@@ -34,7 +33,7 @@ Train::Train(const std::string &name, int type, int startX, int startY, int endX
 	this->pause = pause;
 
 	Math::calculateSlope(startX, startY, endX, endY, &dx, &dy);
-	
+
 	if ((dx != 0) && (dy != 0))
 		debug(("WARNING: TRAIN '%s' is not straight! - %d %d %d %d\n", name, startX, startY, endX, endY));
 
@@ -56,7 +55,6 @@ Train::Train(const std::string &name, int type, int startX, int startY, int endX
 		waitAtStart = false;
 	}
 }
-
 
 float Train::getDX()
 {
@@ -107,7 +105,7 @@ bool Train::openClose()
 		{
 			x += dx;
 			y += dy;
-			
+
 			if ((x == startX) && (y == startY))
 				return true;
 		}
@@ -124,7 +122,7 @@ bool Train::openClose()
 			if ((x == endX) && (y == endY))
 				return true;
 		}
-		
+
 		return false;
 	}
 }
@@ -148,7 +146,7 @@ void Train::move()
 		dx = -dx;
 		dy = -dy;
 		think = pause;
-		
+
 		if (think == 0)
 		{
 			think = 60;

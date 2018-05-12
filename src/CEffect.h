@@ -19,22 +19,20 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class Effect {
+class Effect
+{
+public:
+	float x;
+	float y;
+	float dx;
+	float dy;
 
-	public:
+	int color = 0;
 
-		float x;
-		float y;
-		float dx;
-		float dy;
+	int health = 0;
 
-		int color = 0;
-
-		int health = 0;
-
-		long flags;
+	long flags;
 
 	Effect(float x, float y, float dx, float dy, int flags);
 	void update();
-
 };

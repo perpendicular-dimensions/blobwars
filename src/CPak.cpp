@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 Pak::Pak()
 {
 	fd = nullptr;
-	
+
 	numberOfFiles = 0;
 	listPos = 0;
 	currentFile = nullptr;
@@ -40,7 +40,7 @@ void Pak::showPakErrorAndExit()
 	printf("\nFatal Error: The Blob Wars PAK file was either not found or was not accessible.\n");
 	printf("(If you compiled from source did you forget to run make install?)\n");
 	printf("The path to the file was expected to be,\n\n");
-	printf(PAKFULLPATH"\n\n");
+	printf(PAKFULLPATH "\n\n");
 	printf("Please try running the game again. If problems persist either reinstall the game or check,\n\n");
 	printf("http://www.parallelrealities.co.uk/blobWars.php\n\n");
 	printf("for updates.\n\n");
@@ -49,9 +49,9 @@ void Pak::showPakErrorAndExit()
 
 void Pak::setPakFile(const std::string &pakFilename)
 {
-	#if USEPAK
+#if USEPAK
 	strlcpy(this->pakFilename, pakFilename, sizeof this->pakFilename);
-	
+
 	debug(("Pak : Filename set to %s\n", pakFilename));
 
 	FILE *pak = fopen(pakFilename, "rb");
@@ -72,43 +72,43 @@ void Pak::setPakFile(const std::string &pakFilename)
 		fclose(pak);
 		return showPakErrorAndExit();
 	}
-	
+
 	debug(("Pak : File list resides at %d\n", (int)listPos));
 	debug(("Pak : Number of files are %d\n", (int)numberOfFiles));
-	
+
 	fd = new FileData[numberOfFiles];
-	
+
 	fseek(pak, listPos, SEEK_SET);
-	
+
 	int result = 0;
-	
-	for (unsigned int i = 0 ; i < numberOfFiles ; i++)
+
+	for (unsigned int i = 0; i < numberOfFiles; i++)
 	{
 		result = fread(&fd[i], sizeof(FileData), 1, pak);
-		
+
 		if (!result)
 		{
 			fclose(pak);
 			return showPakErrorAndExit();
 		}
-		
+
 		debug(("Read FileData #%d / %d : %s\n", (i + 1), numberOfFiles, fd[i].filename));
 	}
-	
+
 	fclose(pak);
 
-	#else
+#else
 	(void)pakFilename;
-	#endif
+#endif
 }
 
 bool Pak::unpack(const std::string &filename, std::vector<char> *buffer)
 {
 	debug(("Pak : Unpacking %s...\n", filename));
-	
+
 	currentFile = nullptr;
-	
-	for (unsigned int i = 0 ; i < numberOfFiles ; i++)
+
+	for (unsigned int i = 0; i < numberOfFiles; i++)
 	{
 		if (filename == fd[i].filename)
 		{
@@ -116,12 +116,12 @@ bool Pak::unpack(const std::string &filename, std::vector<char> *buffer)
 			break;
 		}
 	}
-	
+
 	if (currentFile == nullptr)
 	{
 		return false;
 	}
-	
+
 	std::ifstream pak(pakFilename);
 
 	pak.seekg(currentFile->location);
@@ -136,9 +136,9 @@ bool Pak::unpack(const std::string &filename, std::vector<char> *buffer)
 	{
 		showPakErrorAndExit();
 	}
-	
+
 	uLongf fSize = (uLongf)currentFile->fSize;
-	
+
 	uncompress((Bytef *)buffer->data(), &fSize, (Bytef *)input.data(), currentFile->cSize);
 	buffer->at(currentFile->fSize) = 0;
 
@@ -149,14 +149,14 @@ bool Pak::unpack(const std::string &filename, std::vector<char> *buffer)
 
 bool Pak::fileExists(const std::string &filename)
 {
-	for (unsigned int i = 0 ; i < numberOfFiles ; i++)
+	for (unsigned int i = 0; i < numberOfFiles; i++)
 	{
 		if (fd[i].filename == filename)
 		{
 			return true;
 		}
 	}
-	
+
 	return false;
 }
 

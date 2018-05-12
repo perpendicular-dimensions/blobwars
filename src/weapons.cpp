@@ -67,18 +67,18 @@ Weapon *getRandomStraightWeapon()
 {
 	switch (Math::prand() % 4)
 	{
-		case 0:
-			return &weapon[WP_MACHINEGUN];
-			break;
-		case 1:
-			return &weapon[WP_ALIENLASER];
-			break;
-		case 2:
-			return &weapon[WP_PLASMARIFLE];
-			break;
-		case 3:
-			return &weapon[WP_ALIENGRENADE];
-			break;
+	case 0:
+		return &weapon[WP_MACHINEGUN];
+		break;
+	case 1:
+		return &weapon[WP_ALIENLASER];
+		break;
+	case 2:
+		return &weapon[WP_PLASMARIFLE];
+		break;
+	case 3:
+		return &weapon[WP_ALIENGRENADE];
+		break;
 	}
 
 	return &weapon[WP_PISTOL];
@@ -93,15 +93,15 @@ Weapon *getRandomAimedWeapon()
 {
 	switch (Math::prand() % 3)
 	{
-		case 0:
-			return &weapon[WP_AIMEDPISTOL];
-			break;
-		case 1:
-			return &weapon[WP_ALIENSPREAD];
-			break;
-		case 2:
-			return &weapon[WP_ALIENGRENADE];
-			break;
+	case 0:
+		return &weapon[WP_AIMEDPISTOL];
+		break;
+	case 1:
+		return &weapon[WP_ALIENSPREAD];
+		break;
+	case 2:
+		return &weapon[WP_ALIENGRENADE];
+		break;
 	}
 
 	return &weapon[WP_AIMEDPISTOL];
@@ -116,18 +116,18 @@ Weapon *getRandomGaldovWeapon()
 {
 	switch (Math::prand() % 4)
 	{
-		case 0:
-			return &weapon[WP_AIMEDPISTOL];
-			break;
-		case 1:
-			return &weapon[WP_ALIENSPREAD];
-			break;
-		case 2:
-			return &weapon[WP_ALIENGRENADE];
-			break;
-		case 3:
-			return &weapon[WP_PLASMARIFLE];
-			break;
+	case 0:
+		return &weapon[WP_AIMEDPISTOL];
+		break;
+	case 1:
+		return &weapon[WP_ALIENSPREAD];
+		break;
+	case 2:
+		return &weapon[WP_ALIENGRENADE];
+		break;
+	case 3:
+		return &weapon[WP_PLASMARIFLE];
+		break;
 	}
 
 	return &weapon[WP_AIMEDPISTOL];
@@ -151,7 +151,7 @@ Weapon *getWeaponByName(const std::string &name)
 		return getRandomAimedWeapon();
 	}
 
-	for (int i = 0 ; i < MAX_WEAPONS ; i++)
+	for (int i = 0; i < MAX_WEAPONS; i++)
 	{
 		if (weapon[i].name == name)
 		{

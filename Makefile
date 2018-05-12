@@ -156,4 +156,7 @@ uninstall:
 		$(RM) $(LOCALEDIR)$$lang/LC_MESSAGES/$(PROG).mo; \
 	done
 
-.PHONY: all install uninstall clean buildpak
+format:
+	clang-format-7 -style=file -i src/*.cpp src/*.h
+
+.PHONY: all install uninstall clean buildpak format

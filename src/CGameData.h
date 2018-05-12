@@ -19,54 +19,54 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class GameData {
+class GameData
+{
+public:
+	bool completedWorld;
 
-	public:
-		
-		bool completedWorld;
+	struct Completion
+	{
+		int current;
+		int target;
 
-		struct Completion {
-			int current;
-			int target;
+		void set(int current, int target)
+		{
+			this->current = current;
+			this->target = target;
+		}
 
-			void set(int current, int target) {
-				this->current = current;
-				this->target = target;
-			}
+		bool isComplete()
+		{
+			return current == target;
+		}
+	};
 
-			bool isComplete() {
-				return current == target;
-			}
-		};
-
-		std::map<std::string, std::map<std::string, Completion>> objectives;
+	std::map<std::string, std::map<std::string, Completion>> objectives;
 
 	void clear();
-	
+
 	void addCompletedObjective(const std::string &key, const std::string &value, int current, int target);
-	
+
 	void setMIARescueCount(const std::string &key, int rescues, int total);
 	void getMIARescueCount(const std::string &key, int *rescues, int *total);
 	bool MIARescued(const std::string &stageName, const std::string &name);
 
 	int countMIAs();
-	
+
 	bool objectiveCompleted(const std::string &stageName, const std::string &name);
 	void getObjectiveValues(const std::string &stageName, const std::string &name, int *current, int *target);
-	
+
 	bool stagePreviouslyCleared(const std::string &stageName);
 	int getPercentageComplete();
-	
+
 	bool levelPrefectlyCleared(const std::string &level);
 	bool requiredLevelCleared(const std::string &requiredLevel);
-	
+
 	void calculateWorldCompleted();
 	void calculateAllCompleted();
 
 	GameData();
 
-	private:
-
+private:
 	Completion *find(const std::string &key, const std::string &value);
-
 };

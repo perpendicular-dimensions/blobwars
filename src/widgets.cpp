@@ -42,15 +42,15 @@ static void drawOptions(Widget &widget, int maxWidth)
 		char token[100];
 		unsigned int token_len;
 
-		char *eow = strchr (c, '|');
+		char *eow = strchr(c, '|');
 		if (!eow)
-			eow = strchr (c, 0);
+			eow = strchr(c, 0);
 
 		token_len = eow - c;
-		if (token_len > sizeof (token) - 1)
-			token_len = sizeof (token) - 1;
-		memcpy (token, c, token_len);
-		token [token_len] = 0;
+		if (token_len > sizeof(token) - 1)
+			token_len = sizeof(token) - 1;
+		memcpy(token, c, token_len);
+		token[token_len] = 0;
 
 		c = eow;
 		if (*c)
@@ -112,7 +112,6 @@ static void drawSlider(Widget &widget, int maxWidth)
 	{
 		graphics.drawRect(x + 2, widget.y + 2, (int)width, 14, graphics.darkGreen, graphics.screen);
 	}
-
 }
 
 /**
@@ -123,11 +122,11 @@ static void drawSlider(Widget &widget, int maxWidth)
 static void drawJoypadButtonOption(Widget &widget)
 {
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
-	
+
 	int x = 300;
-	
+
 	std::string text;
-	
+
 	// joysticks have a button 0 so we can't
 	// do the same thing as the keyboard(!)
 	if (*widget.value < -2)
@@ -142,7 +141,7 @@ static void drawJoypadButtonOption(Widget &widget)
 	{
 		text = fmt::format("Button #{}", *widget.value);
 	}
-	
+
 	graphics.drawString(text, x, widget.y, TXT_LEFT, graphics.screen);
 }
 
@@ -153,11 +152,11 @@ static void drawJoypadButtonOption(Widget &widget)
 static void drawKeyOption(Widget &widget)
 {
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
-	
+
 	int x = 300;
-	
+
 	graphics.drawString(Keyboard::translateKey(*widget.value),
-			    x, widget.y, TXT_LEFT, graphics.screen);
+	                    x, widget.y, TXT_LEFT, graphics.screen);
 }
 
 /**
@@ -203,7 +202,7 @@ void drawWidgets()
 		{
 			generateWidgetImage(widget);
 		}
-			
+
 		maxWidth = std::max(maxWidth, widget.image->w);
 	}
 
@@ -238,19 +237,19 @@ void drawWidgets()
 
 		switch (widget.type)
 		{
-			case WG_RADIO:
-				drawOptions(widget, maxWidth);
-				break;
-			case WG_SLIDER:
-			case WG_SMOOTH_SLIDER:
-				drawSlider(widget, maxWidth);
-				break;
-			case WG_KEYBOARD:
-				drawKeyOption(widget);
-				break;
-			case WG_JOYPAD:
-				drawJoypadButtonOption(widget);
-				break;
+		case WG_RADIO:
+			drawOptions(widget, maxWidth);
+			break;
+		case WG_SLIDER:
+		case WG_SMOOTH_SLIDER:
+			drawSlider(widget, maxWidth);
+			break;
+		case WG_KEYBOARD:
+			drawKeyOption(widget);
+			break;
+		case WG_JOYPAD:
+			drawJoypadButtonOption(widget);
+			break;
 		}
 
 		widget.changed = false;

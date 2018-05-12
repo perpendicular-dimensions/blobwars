@@ -19,22 +19,21 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class Trap {
+class Trap
+{
+public:
+	std::string name;
+	bool active;
+	unsigned char type, damage;
+	unsigned char thinktime, waitTime[2];
 
-	public:
+	signed char currentAction;
 
-		std::string name;
-		bool active;
-		unsigned char type, damage;
-		unsigned char thinktime, waitTime[2];
+	float x, y, dx, dy, speed;
+	int width, height;
+	int startX, startY, endX, endY;
 
-		signed char currentAction;
-
-		float x, y, dx, dy, speed;
-		int width, height;
-		int startX, startY, endX, endY;
-
-		Sprite *sprite;
+	Sprite *sprite;
 
 	Trap();
 	void setName(const std::string &name);
@@ -50,5 +49,4 @@ class Trap {
 	bool performBarrierAction();
 	bool performFlameAction();
 	bool think();
-
 };

@@ -19,21 +19,19 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class Teleporter {
+class Teleporter
+{
+public:
+	Sprite *sprite;
 
-	public:
-	
-		Sprite *sprite;
+	std::string name;
 
-		std::string name;
-
-		bool active;
-		int x, y;
-		int destX, destY;
+	bool active;
+	int x, y;
+	int destX, destY;
 
 	Teleporter();
 	void setName(const std::string &name);
 	void set(int x, int y, int destX, int destY);
 	void setActive(bool active);
-
 };

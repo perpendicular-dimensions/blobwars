@@ -31,7 +31,7 @@ void throwAndDamageEntity(Entity &ent, int damage, int minDX, int maxDX, int DY)
 	if (!(ent.flags & ENT_EXPLODES))
 	{
 		audio.playSound(SND_HIT, CH_ANY, ent.x);
-		for (int i = 0 ; i < 4 ; i++)
+		for (int i = 0; i < 4; i++)
 		{
 			addBlood(ent, Math::rrand(-5, 5), Math::rrand(-6, -3), i);
 		}
@@ -67,7 +67,7 @@ void throwAndDamageEntity(Entity &ent, int damage, int minDX, int maxDX, int DY)
 		}
 
 		Math::removeBit(&player.flags, ENT_FLIES);
-		
+
 		player.setSprites(graphics.getSprite("BobRight", true), graphics.getSprite("BobLeft", true), graphics.getSprite("BobSpin", true));
 	}
 	else
@@ -76,7 +76,7 @@ void throwAndDamageEntity(Entity &ent, int damage, int minDX, int maxDX, int DY)
 	}
 
 	((Math::prand() % 2) == 0) ? ent.dx = -minDX : ent.dx = maxDX;
-	
+
 	if (ent.dy >= 0)
 	{
 		ent.dy = DY;
@@ -95,7 +95,7 @@ static bool checkBrickContactX(Entity &ent)
 	int x2 = (new_ent_x + ent.width - 1) >> BRICKSHIFT;
 	int y1 = ent_y >> BRICKSHIFT;
 	int y2 = (ent_y + ent.height - 1) >> BRICKSHIFT;
-	
+
 	if ((x1 < 0) || (x2 < 0) || (y1 < 0) || (y2 < 0))
 	{
 		return true;
@@ -114,10 +114,10 @@ static bool checkBrickContactX(Entity &ent)
 		{
 			ent.x = (x1 + 1) * BRICKSIZE;
 
-//			if (map.isSolid(x1, y2))
-//			{
-//				ent.falling = false;
-//			}
+			//			if (map.isSolid(x1, y2))
+			//			{
+			//				ent.falling = false;
+			//			}
 
 			return true;
 		}
@@ -128,10 +128,10 @@ static bool checkBrickContactX(Entity &ent)
 		{
 			ent.x = (x2 * BRICKSIZE) - ent.width;
 
-//			if (map.isSolid(x1, y2))
-//			{
-//				ent.falling = false;
-//			}
+			//			if (map.isSolid(x1, y2))
+			//			{
+			//				ent.falling = false;
+			//			}
 
 			return true;
 		}
@@ -144,47 +144,47 @@ static bool checkBrickContactY(Entity &ent)
 {
 	int ent_x = (int)round(ent.x * 100) / 100;
 	int new_ent_y = (int)round((ent.y + ent.dy) * 100) / 100;
- 	int x1 = ent_x >> BRICKSHIFT;
+	int x1 = ent_x >> BRICKSHIFT;
 	int x2 = (ent_x + ent.width - 1) >> BRICKSHIFT;
 	int y1 = new_ent_y >> BRICKSHIFT;
 	int y2 = (new_ent_y + ent.height - 1) >> BRICKSHIFT;
-	
+
 	if ((x1 < 0) || (x2 < 0) || (y1 < 0) || (y2 < 0))
 	{
 		return true;
 	}
 
 	int mapAttribute = map.data[x1][y2];
-	
+
 	if (ent.dy < 0)
 	{
 		mapAttribute = map.data[x1][y1];
 	}
 
 	evaluateMapAttribute(ent, mapAttribute);
-	
+
 	if (ent.flags & ENT_SWIMS)
 	{
 		switch (mapAttribute)
 		{
-			case MAP_AIR:
-			case MAP_AIR_WALL_1:
-			case MAP_AIR_WALL_2:
-			case MAP_AIR_WALL_3:
-			case MAP_AIR_CEILING_1:
+		case MAP_AIR:
+		case MAP_AIR_WALL_1:
+		case MAP_AIR_WALL_2:
+		case MAP_AIR_WALL_3:
+		case MAP_AIR_CEILING_1:
+			return true;
+		case MAP_AIR_WALL_4:
+			if (map.isCavesTileset)
+			{
 				return true;
-			case MAP_AIR_WALL_4:
-				if (map.isCavesTileset)
-				{
-					return true;
-				}
-				break;
-			case MAP_AIR_CEILING_2:
-				if (map.isGrasslandsTileset)
-				{
-					return true;
-				}
-				break;
+			}
+			break;
+		case MAP_AIR_CEILING_2:
+			if (map.isGrasslandsTileset)
+			{
+				return true;
+			}
+			break;
 		}
 	}
 
@@ -201,19 +201,19 @@ static bool checkBrickContactY(Entity &ent)
 	else if (ent.dy > 0)
 	{
 		ent.falling = true;
-		
+
 		if ((map.isSolid(x1, y2)) || (map.isSolid(x2, y2)))
-		{		
+		{
 			ent.falling = false;
-			
+
 			ent.y = (y2 * BRICKSIZE) - ent.height;
-			
+
 			if ((map.isSolid(x1, y2)) && (!map.isBreakable(x1, y2)) && (!map.isNoReset(x1, y2)))
 			{
 				if ((&ent == &player) && (player.environment == ENV_AIR))
 				{
 					game.setCheckPoint(x1 * BRICKSIZE, (y2 * BRICKSIZE) - BRICKSIZE);
-					
+
 					if (engine.practice)
 					{
 						game.setObjectiveCheckPoint();
@@ -222,13 +222,13 @@ static bool checkBrickContactY(Entity &ent)
 			}
 
 			if ((map.isSolid(x2, y2)) && (!map.isBreakable(x2, y2)) && (!map.isNoReset(x2, y2)))
-			{         
+			{
 				if ((&ent == &player) && (player.environment == ENV_AIR))
 				{
 					game.setCheckPoint(x2 * BRICKSIZE, (y2 * BRICKSIZE) - BRICKSIZE);
 					if (engine.practice)
 					{
-						game.setObjectiveCheckPoint();	
+						game.setObjectiveCheckPoint();
 					}
 				}
 			}
@@ -253,10 +253,14 @@ void moveEntity(Entity &ent)
 		Math::limitInt(&diffX, 3, 30);
 		Math::limitInt(&diffY, 3, 30);
 
-		if (ent.x > ent.dx) ent.x -= diffX;
-		if (ent.x < ent.dx) ent.x += diffX;
-		if (ent.y > ent.dy) ent.y -= diffY;
-		if (ent.y < ent.dy) ent.y += diffY;
+		if (ent.x > ent.dx)
+			ent.x -= diffX;
+		if (ent.x < ent.dx)
+			ent.x += diffX;
+		if (ent.y > ent.dy)
+			ent.y -= diffY;
+		if (ent.y < ent.dy)
+			ent.y += diffY;
 
 		if (Collision::collision(ent.x, ent.y, ent.width, ent.height, ent.dx, ent.dy, ent.width, ent.height))
 		{
@@ -264,7 +268,7 @@ void moveEntity(Entity &ent)
 			addTeleportParticles(ent.x + (ent.width / 2), ent.y + (ent.height / 2), 25, SND_TELEPORT3);
 			ent.dx = ent.dy = 0;
 			ent.environment = ENV_AIR;
-			
+
 			if (&ent == &player)
 			{
 				if (player.flags & ENT_FLIES)
@@ -276,9 +280,9 @@ void moveEntity(Entity &ent)
 					player.setSprites(graphics.getSprite("BobRight", true), graphics.getSprite("BobLeft", true), graphics.getSprite("BobSpin", true));
 				}
 			}
-			
+
 			// raise to the floor
- 			int x1 = (int)ent.x >> BRICKSHIFT;
+			int x1 = (int)ent.x >> BRICKSHIFT;
 			int x2 = ((int)ent.x + ent.width - 1) >> BRICKSHIFT;
 			int y2 = ((int)ent.y + ent.height - 1) >> BRICKSHIFT;
 			if ((map.isSolid(x1, y2)) || (map.isSolid(x2, y2)))
@@ -296,9 +300,9 @@ void moveEntity(Entity &ent)
 	{
 		return;
 	}
-		
+
 	ent.falling = true;
-	
+
 	if (&ent != &player)
 	{
 		if ((!(ent.flags & ENT_WEIGHTLESS)) && (!(ent.flags & ENT_FLIES)) && (!(ent.flags & ENT_SWIMS)))
@@ -313,14 +317,14 @@ void moveEntity(Entity &ent)
 			ent.applyGravity();
 		}
 		// This is what makes swimming work:
-		else if ((!config.isControl(CONTROL::UP)) && (!config.isControl(CONTROL::JUMP))  && (!config.isControl(CONTROL::DOWN)))
+		else if ((!config.isControl(CONTROL::UP)) && (!config.isControl(CONTROL::JUMP)) && (!config.isControl(CONTROL::DOWN)))
 		{
 			ent.applyGravity();
 		}
 	}
 
 	if (ent.dx != 0)
-	{		
+	{
 		if ((checkBrickContactX(ent)) || (checkObstacleContact(ent, DIR_X)) || (checkTrainContact(ent, DIR_X)))
 		{
 			ent.dx = 0;
@@ -347,14 +351,14 @@ void moveEntity(Entity &ent)
 				ent.dy = 0;
 			}
 		}
-		
+
 		ent.y += ent.dy;
 	}
-	
+
 	checkSwitchContact(ent);
 	checkTeleportContact(ent);
 
-//	Math::limitFloat(&ent.x, 10, (MAPWIDTH * BRICKSIZE) - 20);
+	//	Math::limitFloat(&ent.x, 10, (MAPWIDTH * BRICKSIZE) - 20);
 	if (ent.x < 10)
 	{
 		ent.x = 10;

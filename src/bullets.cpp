@@ -76,7 +76,7 @@ void addBullet(Entity &owner, float dx, float dy)
 			bullet.deathSound = SND_RICO2;
 		}
 	}
-	
+
 	// cheating here!
 	if (owner.currentWeapon->id == WP_STALAGTITE)
 	{
@@ -97,7 +97,7 @@ void addBullet(Entity &owner, float dx, float dy)
 
 	// Adjust the reload time of enemies according to difficulty level
 	owner.reload = owner.currentWeapon->reload;
-	
+
 	if ((&owner != &player) && (game.skill < 3))
 	{
 		owner.reload *= (3 - game.skill);
@@ -111,12 +111,12 @@ void addBullet(Entity &owner, float dx, float dy)
 	if (&owner == &player)
 	{
 		game.incBulletsFired();
-		
+
 		if (engine.cheatReload)
 		{
 			owner.reload = 4;
 		}
-		
+
 		if (game.bulletsFired[game.currentWeapon] == 10000)
 		{
 			presentPlayerMedal("10000_Bullets");
@@ -142,7 +142,7 @@ static void destroyBullet(Entity &bullet)
 	{
 		addExplosion(bullet.x + (bullet.width / 2), bullet.y + (bullet.height / 2), bullet.damage, *bullet.owner);
 	}
-	
+
 	if (bullet.id == WP_STALAGTITE)
 	{
 		throwStalagParticles(bullet.x, bullet.y);
@@ -150,11 +150,13 @@ static void destroyBullet(Entity &bullet)
 
 	float dx, dy;
 
-	for (int i = 0 ; i < 3 ; i++)
+	for (int i = 0; i < 3; i++)
 	{
-		dx = Math::rrand(-30, 30); dx /= 12;
-		dy = Math::rrand(-30, 30); dy /= 12;
-		
+		dx = Math::rrand(-30, 30);
+		dx /= 12;
+		dy = Math::rrand(-30, 30);
+		dy /= 12;
+
 		if (bullet.flags & ENT_SPARKS)
 		{
 			map.addParticle(bullet.x, bullet.y, dx, dy, Math::rrand(5, 30), graphics.white, nullptr, 0);
@@ -194,11 +196,13 @@ static void bounceBullet(Entity &bullet, float dx, float dy)
 	{
 		bullet.dy = -bullet.dy;
 		bullet.y += bullet.dy;
-		
+
 		Math::limitFloat(&bullet.dy, -4, 4);
 
-		if ((bullet.dy > -2) && (bullet.dy <= 0)) bullet.dy = -2;
-		if ((bullet.dy > 0) && (bullet.dy < 2)) bullet.dy = 2;
+		if ((bullet.dy > -2) && (bullet.dy <= 0))
+			bullet.dy = -2;
+		if ((bullet.dy > 0) && (bullet.dy < 2))
+			bullet.dy = 2;
 
 		if (bullet.id != WP_LASER)
 		{
@@ -206,8 +210,10 @@ static void bounceBullet(Entity &bullet, float dx, float dy)
 			audio.playSound(SND_GRBOUNCE, CH_TOUCH, bullet.x);
 		}
 
-		if ((bullet.dy > -2) && (bullet.dy <= 0)) bullet.dy = -2;
-		if ((bullet.dy > 0) && (bullet.dy < 2)) bullet.dy = 2;
+		if ((bullet.dy > -2) && (bullet.dy <= 0))
+			bullet.dy = -2;
+		if ((bullet.dy > 0) && (bullet.dy < 2))
+			bullet.dy = 2;
 
 		bullet.face = !bullet.face;
 	}
@@ -261,9 +267,9 @@ static bool bulletHasCollided(Entity &bullet, float dx, float dy)
 	enemyBulletCollisions(bullet);
 
 	checkPlayerBulletCollisions(bullet);
-	
+
 	checkBossBulletCollisions(bullet);
-	
+
 	checkSwitchContact(bullet);
 
 	if ((checkTrainContact(bullet, DIR_XY)) || (checkObstacleContact(bullet, DIR_XY)))
@@ -278,8 +284,7 @@ static bool bulletHasCollided(Entity &bullet, float dx, float dy)
 
 void doBullets()
 {
-	map.bullets.remove_if([](auto &&bullet)
-	{
+	map.bullets.remove_if([](auto &&bullet) {
 		bullet.owner->referenced = true;
 
 		int x = (int)(bullet.x - engine.playerPosX);
@@ -297,7 +302,7 @@ void doBullets()
 		{
 			addFireTrailParticle(bullet.x, bullet.y);
 		}
-		
+
 		if (bullet.flags & ENT_PARTICLETRAIL)
 		{
 			addColorParticles(x, y, -1, 3);
@@ -328,7 +333,7 @@ void doBullets()
 		}
 
 		bullet.health--;
-		
+
 		if (bullet.health == 0)
 		{
 			Math::removeBit(&bullet.flags, ENT_SPARKS);
@@ -351,4 +356,3 @@ void doBullets()
 		}
 	});
 }
-

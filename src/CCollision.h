@@ -19,16 +19,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class Collision {
+class Collision
+{
+private:
+	Collision() {}
 
-	private:
-
-		Collision(){}
-
-	public:
-
+public:
 	static bool collision(float x0, float y0, int w0, int h0, float x2, float y2, int w1, int h1);
 	static bool collision(Entity &ent1, Entity &ent2);
 	static bool collision(Entity &ent, Switch &swt);
-
 };

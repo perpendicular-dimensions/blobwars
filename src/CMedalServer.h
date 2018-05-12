@@ -18,34 +18,31 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class MedalServer {
+class MedalServer
+{
+private:
+	std::string privateKey;
+	std::string message;
+	std::string rubyMessage;
 
-	private:
-		
-		std::string privateKey;
-		std::string message;
-		std::string rubyMessage;
-		
-		bool connected;
-		bool gotRuby;
-		
-		IPaddress ip;
-		
-	public:
-		
-		MedalServer();
-		~MedalServer();
-		
-		SDL_mutex *lock;
-		
-		bool connect(const std::string &privateKey);
-		
-		int postMedal(const std::string &medal);
-		bool hasRuby();
-		
-		std::string getMessage();
-		std::string getRubyMessage();
-		
-		void close();
+	bool connected;
+	bool gotRuby;
 
+	IPaddress ip;
+
+public:
+	MedalServer();
+	~MedalServer();
+
+	SDL_mutex *lock;
+
+	bool connect(const std::string &privateKey);
+
+	int postMedal(const std::string &medal);
+	bool hasRuby();
+
+	std::string getMessage();
+	std::string getRubyMessage();
+
+	void close();
 };

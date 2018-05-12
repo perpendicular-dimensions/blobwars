@@ -47,12 +47,12 @@ void Game::clear()
 
 	lastComboTime = 0;
 	currentComboHits = maxComboHits = 0;
-	
+
 	autoSave = 1;
 	autoSaveSlot = 0;
 
 	currentWeapon = 0;
-	for (int i = 0 ; i < 5 ; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		bulletsHit[i] = bulletsFired[i] = 0;
 	}
@@ -173,7 +173,7 @@ int Game::getMostUsedWeapon()
 	unsigned int mostUsed = 0;
 	unsigned int mostFired = 0;
 
-	for (int i = 0 ; i < 5 ; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		if (bulletsFired[i] > mostFired)
 		{
@@ -228,25 +228,25 @@ void Game::setMissionOver(int reason)
 	{
 		switch (reason)
 		{
-			case MIS_COMPLETE:
-				missionOver = MAX_FPS;
-				break;
-			case MIS_PLAYEROUT:
-				missionOver = (int)(MAX_FPS * 2.5);
-				break;
-			case MIS_TIMEUP:
-			case MIS_PLAYERDEAD:
-				missionOver = MAX_FPS * 5;
-				break;
-			case MIS_PLAYERESCAPE:
-				missionOver = MAX_FPS * 2;
-				break;
-			case MIS_GAMECOMPLETE:
-				missionOver = MAX_FPS * 8;
-				break;
-			default:
-				missionOver = MAX_FPS;
-				break;
+		case MIS_COMPLETE:
+			missionOver = MAX_FPS;
+			break;
+		case MIS_PLAYEROUT:
+			missionOver = (int)(MAX_FPS * 2.5);
+			break;
+		case MIS_TIMEUP:
+		case MIS_PLAYERDEAD:
+			missionOver = MAX_FPS * 5;
+			break;
+		case MIS_PLAYERESCAPE:
+			missionOver = MAX_FPS * 2;
+			break;
+		case MIS_GAMECOMPLETE:
+			missionOver = MAX_FPS * 8;
+			break;
+		default:
+			missionOver = MAX_FPS;
+			break;
 		}
 	}
 

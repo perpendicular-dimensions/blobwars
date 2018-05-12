@@ -40,10 +40,10 @@ void checkSwitchContact(Entity &ent)
 			if ((ent.flags & ENT_BULLET) && (ent.id != WP_GRENADES))
 				continue;
 		}
-		
+
 		if ((swt.type == SWT_RESET) && (&ent != &player))
 			continue;
-			
+
 		if ((swt.type == SWT_WATERLEVEL) && (&ent != &player))
 			continue;
 
@@ -60,12 +60,12 @@ void checkSwitchContact(Entity &ent)
 				if (carryingItem(swt.requiredObjectName))
 				{
 					okayToActivate = true;
-					
+
 					if (swt.type == SWT_PRESSURE)
 					{
 						swt.requiredObjectName = "@none@";
 					}
-					
+
 					checkObjectives(swt.name, true);
 					swt.name = "Switch";
 				}
@@ -77,7 +77,7 @@ void checkSwitchContact(Entity &ent)
 			}
 
 			if (okayToActivate)
-			{	
+			{
 				if (swt.health == 0)
 				{
 					if ((swt.type == SWT_NORMAL) || (swt.type == SWT_WATERLEVEL))

@@ -19,30 +19,29 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class Audio {
+class Audio
+{
+private:
+	std::string levelMusicName;
 
-	private:
-	
-		std::string levelMusicName;
+	Engine *engine;
 
-		Engine *engine;
+	Mix_Chunk *sound[MAX_SOUNDS];
+	Mix_Chunk *quickSound;
 
-		Mix_Chunk *sound[MAX_SOUNDS];
-		Mix_Chunk *quickSound;
+	int musicVolume;
+	int soundVolume;
 
-		int musicVolume;
-		int soundVolume;
+	Mix_Music *music;
 
-		Mix_Music *music;
+public:
+	std::string songtitle;
+	std::string songalbum;
+	std::string songartist;
+	int songlicense;
 
-	public:
-		std::string songtitle;
-		std::string songalbum;
-		std::string songartist;
-		int songlicense;
-
-		int output;
-		bool useSound, useMusic;
+	int output;
+	bool useSound, useMusic;
 
 	Audio();
 	void setSoundVolume(int soundVolume);
@@ -66,5 +65,4 @@ class Audio {
 	void fadeMusic();
 	void free();
 	void destroy();
-
 };

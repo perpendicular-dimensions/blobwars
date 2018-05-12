@@ -33,11 +33,11 @@ void activateTrigger(const std::string &linkName, const std::string &activateMes
 {
 	if (linkName == "@none@")
 		return;
-		
+
 	if (linkName == "WATERLEVEL")
 	{
 		int newLevel = stoi(activateMessage);
-		
+
 		// only if the new level is less than our current level
 		// (ie - raising water up!)
 		if (newLevel < map.waterLevel)

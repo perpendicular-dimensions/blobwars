@@ -28,11 +28,11 @@ void getMapTokens(split &it)
 	char string[10][1024];
 	int param[10];
 	bool allowAtSkillLevel = false;
-	
+
 	bool previouslyCleared = false;
-	
+
 	std::string_view token;
-	
+
 	std::vector<std::string> *persistent;
 	std::vector<std::string>::iterator persistent_it;
 
@@ -47,14 +47,14 @@ void getMapTokens(split &it)
 		{
 			if (persistent_it == persistent->end())
 				break;
-			
+
 			token = *persistent_it++;
 		}
 
-		#if USEPAK
+#if USEPAK
 		graphics.showLoading(1, 100);
 		graphics.delay(1);
-		#endif
+#endif
 
 		allowAtSkillLevel = false;
 
@@ -74,12 +74,12 @@ void getMapTokens(split &it)
 		{
 			allowAtSkillLevel = true;
 		}
-		
+
 		if ((contains(skillLevel, "X")) && (game.skill == 3))
 		{
 			allowAtSkillLevel = true;
 		}
-			
+
 		// This is just for practice missions
 		if (game.skill == -1)
 			allowAtSkillLevel = true;
@@ -107,7 +107,7 @@ void getMapTokens(split &it)
 			else if (strcmp("PREVIOUSLY_VISITED", mapEntity) == 0)
 			{
 				previouslyCleared = gameData.stagePreviouslyCleared(map.name);
-				
+
 				if (previouslyCleared)
 				{
 					debug(("Reading Persistence Data...\n"));
@@ -140,7 +140,7 @@ void getMapTokens(split &it)
 			else if (strcmp("ITEM", mapEntity) == 0)
 			{
 				scan(token, "%*s %*s %d %*c %[^\"] %*c %d %d %s", &param[0], string[0], &param[1], &param[2], string[1]);
-				
+
 				addItem(param[0], string[0], param[1], param[2], string[1], 60, 1, 0, false);
 
 				if (param[0] >= ITEM_MISC)
@@ -168,14 +168,13 @@ void getMapTokens(split &it)
 
 				game.setCheckPoint(param[0], param[1]);
 				game.setObjectiveCheckPoint();
-
 			}
 			else if (strcmp("ENEMY", mapEntity) == 0)
 			{
 				if (!engine.devNoMonsters)
 				{
 					scan(token, "%*s %*s %*c %[^\"] %*c %d %d", string[0], &param[0], &param[1]);
-					
+
 					if ((game.skill == 0) && (map.waterLevel != -1))
 					{
 						addEnemy("Aqua Blob", param[0], param[1], 0);
@@ -252,9 +251,9 @@ void getMapTokens(split &it)
 			else if (strcmp("WATERLEVEL", mapEntity) == 0)
 			{
 				scan(token, "%*s %*s %d", &param[0]);
-				
+
 				map.requiredWaterLevel = param[0];
-				
+
 				if (!previouslyCleared)
 				{
 					map.waterLevel = param[0];
@@ -263,12 +262,12 @@ void getMapTokens(split &it)
 				{
 					map.waterLevel = 281;
 				}
-				
+
 				if (game.skill == 0)
 				{
 					map.waterLevel = 281;
 					map.requiredWaterLevel = 222;
-				}				
+				}
 			}
 			else if (strcmp("ALPHATILES", mapEntity) == 0)
 			{
@@ -282,7 +281,7 @@ void getMapTokens(split &it)
 
 					if (param[0] == -1)
 						break;
-						
+
 					debug(("Setting Alpha for Tile %d\n", param[0]));
 
 					SDL_SetAlpha(graphics.tile[param[0]], 130);
@@ -308,7 +307,7 @@ void getMapTokens(split &it)
 			//debug(("Ignoring Line: %s\n", token));
 		}
 	}
-	
+
 	/*
 	We need to make sure the player doesn't appear in a wall that was previously
 	destroyed. Things like this aren't stored so we will just remove a block they
@@ -318,10 +317,10 @@ void getMapTokens(split &it)
 	{
 		int x = game.checkPointX;
 		int y = game.checkPointY;
-		
+
 		x = x >> BRICKSHIFT;
 		y = y >> BRICKSHIFT;
-		
+
 		if ((map.data[x][y] >= MAP_BREAKABLE) && (map.data[x][y] <= MAP_BREAKABLE2))
 		{
 			map.data[x][y] = MAP_AIR;
@@ -335,7 +334,7 @@ std::string getActiveState(bool active)
 	{
 		return "ACTIVE";
 	}
-	
+
 	return "INACTIVE";
 }
 
@@ -343,39 +342,39 @@ void createPersistentMapData()
 {
 	auto &persistent = map.createPersistent(map.name);
 	persistent.clear();
-	
+
 	if (perfectlyCompleted())
 	{
 		debug(("createPersistentMapData :: Perfect - Skipping\n"));
 		return;
 	}
-	
+
 	char skill;
-	
+
 	switch (game.skill)
 	{
-		case 0:
-			skill = 'E';
-			break;
-		case 1:
-			skill = 'M';
-			break;
-		default:
-			skill = 'H';
-			break;
+	case 0:
+		skill = 'E';
+		break;
+	case 1:
+		skill = 'M';
+		break;
+	default:
+		skill = 'H';
+		break;
 	}
-	
+
 	std::string line = fmt::format("{} START {} {}\n", skill, game.checkPointX, game.checkPointY);
 	persistent.push_back(line);
 
 	std::string define[3];
-	
+
 	for (auto &&ent: map.enemies)
 	{
 		line = fmt::format("{} ENEMY \"{}\" {} {}\n", skill, ent.name, ent.x, ent.y);
 		persistent.push_back(line);
 	}
-	
+
 	for (auto &&ent: map.items)
 	{
 		// Don't save items that are dying...
@@ -383,26 +382,26 @@ void createPersistentMapData()
 		{
 			continue;
 		}
-		
+
 		line = fmt::format("{} ITEM {} \"{}\" {} {} {}\n", skill, ent.id, ent.name, ent.x, ent.y, ent.sprite[0]->name);
 		persistent.push_back(line);
 	}
-	
+
 	for (auto &&ent: map.obstacles)
 	{
 		line = fmt::format("{} OBSTACLE \"{}\" {} {} {}\n", skill, ent.name, ent.x, ent.y, ent.sprite[0]->name);
 		persistent.push_back(line);
 	}
-	
+
 	for (auto &&swt: map.switches)
 	{
 		define[0] = engine.getDefineOfValue("SWT_", swt.type);
 		define[1] = getActiveState(swt.activated);
-		
+
 		line = fmt::format("{} SWITCH \"{}\" {} \"{}\" \"{}\" {} {} {} {}\n", skill, swt.name, swt.linkName, swt.requiredObjectName, swt.activateMessage, define[0], swt.x, swt.y, define[1]);
 		persistent.push_back(line);
 	}
-	
+
 	for (auto &&train: map.trains)
 	{
 		if (train.type != TR_TRAIN)
@@ -415,7 +414,7 @@ void createPersistentMapData()
 			{
 				define[0] = engine.getDefineOfValue("_DOO", train.type);
 			}
-			
+
 			define[1] = getActiveState(train.active);
 			line = fmt::format("{} DOOR {} {} {} {} {} {} {}\n", skill, train.name, define[0], train.startX, train.startY, train.endX, train.endY, define[1]);
 		}
@@ -425,10 +424,10 @@ void createPersistentMapData()
 			define[1] = getActiveState(train.active);
 			line = fmt::format("{} TRAIN {} {} {} {} {} {} {} {}\n", skill, train.name, train.startX, train.startY, train.endX, train.endY, train.getPause(), define[0], define[1]);
 		}
-				
+
 		persistent.push_back(line);
 	}
-	
+
 	for (auto &&trap: map.traps)
 	{
 		define[0] = engine.getDefineOfValue("TRAP_TYPE", trap.type);
@@ -436,25 +435,25 @@ void createPersistentMapData()
 		line = fmt::format("{} TRAP {} {} {} {} {} {} {} {} {} {} {} {}\n", skill, trap.name, define[0], (int)trap.damage, (int)trap.speed, (int)trap.startX, (int)trap.startY, (int)trap.endX, (int)trap.endY, (int)trap.waitTime[0], (int)trap.waitTime[1], trap.sprite->name, define[1]);
 		persistent.push_back(line);
 	}
-	
+
 	for (auto &&teleporter: map.teleports)
 	{
 		define[0] = getActiveState(teleporter.active);
 		line = fmt::format("{} TELEPORTER {} {} {} {} {} {}\n", skill, teleporter.name, (int)teleporter.x, (int)teleporter.y, (int)teleporter.destX, (int)teleporter.destY, define[0]);
 		persistent.push_back(line);
 	}
-	
+
 	for (auto &&lineDef: map.lines)
 	{
 		define[0] = getActiveState(lineDef.activated);
 		line = fmt::format("{} LINEDEF \"{}\" {} \"{}\" {} {} {} {} {}\n", skill, lineDef.name, lineDef.linkName, lineDef.activateMessage, (int)lineDef.x, (int)lineDef.y, (int)lineDef.width, (int)lineDef.height, define[0]);
 		persistent.push_back(line);
 	}
-	
+
 	for (auto &&spawnPoint: map.spawns)
 	{
 		define[0] = engine.getDefineOfValue("SPW_", spawnPoint.spawnType);
-		
+
 		if (contains(define[0], "HAZARD"))
 		{
 			define[1] = engine.getDefineOfValue("HAZARD_", spawnPoint.spawnSubType);
@@ -463,13 +462,13 @@ void createPersistentMapData()
 		{
 			define[1] = engine.getDefineOfValue("SPW_", spawnPoint.spawnSubType);
 		}
-			
+
 		define[2] = getActiveState(spawnPoint.active);
 		line = fmt::format("{} SPAWNPOINT {} {} {} {} {} {} {} {}\n", skill, spawnPoint.name, (int)spawnPoint.x, (int)spawnPoint.y, define[0], define[1], (int)(spawnPoint.minInterval / 60), (int)(spawnPoint.maxInterval / 60), define[2]);
 		persistent.push_back(line);
 	}
-	
-	for (int i = 0 ; i < 10 ; i++)
+
+	for (int i = 0; i < 10; i++)
 	{
 		if (!map.getSpawnableEnemy(i).empty())
 		{
@@ -477,7 +476,7 @@ void createPersistentMapData()
 			persistent.push_back(line);
 		}
 	}
-	
+
 	if (map.waterLevel != -1)
 	{
 		line = fmt::format("{} WATERLEVEL {}\n", skill, (int)map.waterLevel);

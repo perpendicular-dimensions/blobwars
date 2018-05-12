@@ -35,13 +35,14 @@ GameData::Completion *GameData::find(const std::string &key, const std::string &
 {
 	auto it = objectives.find(key);
 
-	if (it != objectives.end()) {
+	if (it != objectives.end())
+	{
 		auto &subobjectives = it->second;
 		auto subit = subobjectives.find(value);
 		if (subit != subobjectives.end())
 			return &subit->second;
 	}
-	
+
 	return nullptr;
 }
 
@@ -59,7 +60,6 @@ void GameData::getMIARescueCount(const std::string &key, int *rescues, int *tota
 {
 	getObjectiveValues(key + " MIAs", "MIAs", rescues, total);
 }
-
 
 bool GameData::MIARescued(const std::string &stageName, const std::string &name)
 {

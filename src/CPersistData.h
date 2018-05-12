@@ -19,15 +19,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class PersistData {
+class PersistData
+{
+public:
+	std::string data;
 
-	public:
-	
-		std::string data;
-		
 	PersistData();
 	~PersistData();
-	
-	bool setData(const std::string &data);
 
+	bool setData(const std::string &data);
 };

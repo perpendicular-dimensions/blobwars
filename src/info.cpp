@@ -22,14 +22,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "headers.h"
 
 void doTimeRemaining()
-{		
+{
 	map.remainingSeconds--;
-	
+
 	if ((map.remainingMinutes == 0) && (map.remainingSeconds <= 10) && (map.remainingSeconds > 0))
 	{
 		audio.playSound(SND_CLOCK, CH_TOUCH);
 	}
-	
+
 	if (map.remainingSeconds < 0)
 	{
 		if (map.remainingMinutes > 0)
@@ -38,7 +38,7 @@ void doTimeRemaining()
 			map.remainingMinutes--;
 		}
 	}
-	
+
 	if ((map.remainingSeconds == 0) && (map.remainingMinutes == 0))
 	{
 		player.health = 0;
@@ -46,7 +46,7 @@ void doTimeRemaining()
 		Math::removeBit(&player.flags, ENT_FLIES);
 		game.setMissionOver(MIS_TIMEUP);
 	}
-	
+
 	replayData.header.time++;
 }
 
@@ -63,7 +63,7 @@ void doStatusBar()
 
 	graphics.drawString(_("Health"), 50, 5, TXT_RIGHT, graphics.screen, healthCache);
 
-	for (int i = 0 ; i < MAX_HEALTH ; i++)
+	for (int i = 0; i < MAX_HEALTH; i++)
 	{
 		if (i < player.health)
 			graphics.blit(graphics.getSprite("HealthBlock", true)->getCurrentFrame(), 60 + (i * 15), 7, graphics.screen, false);
@@ -73,14 +73,14 @@ void doStatusBar()
 
 	if (player.health <= 3)
 		if (engine.getFrameLoop() < 30)
-			for (int i = 0 ; i < player.health ; i++)
+			for (int i = 0; i < player.health; i++)
 				graphics.blit(graphics.getSprite("WarningBlock", true)->getCurrentFrame(), 60 + (i * 15), 7, graphics.screen, false);
 
 	if ((!game.hasAquaLung) && (!engine.cheatExtras))
 	{
 		graphics.drawString(_("Oxygen"), 305, 5, TXT_RIGHT, graphics.screen, oxygenCache);
 
-		for (int i = 0 ; i < 7 ; i++)
+		for (int i = 0; i < 7; i++)
 		{
 			if (i < player.oxygen)
 				graphics.blit(graphics.getSprite("OxygenBlock", true)->getCurrentFrame(), 315 + (i * 15), 7, graphics.screen, false);
@@ -90,14 +90,14 @@ void doStatusBar()
 
 		if (player.oxygen <= 3)
 			if (engine.getFrameLoop() < 30)
-				for (int i = 0 ; i < player.oxygen ; i++)
+				for (int i = 0; i < player.oxygen; i++)
 					graphics.blit(graphics.getSprite("WarningBlock", true)->getCurrentFrame(), 315 + (i * 15), 7, graphics.screen, false);
 	}
 	else if ((game.hasJetPack) || (engine.cheatExtras))
 	{
 		graphics.drawString(_("Jetpack"), 305, 5, TXT_RIGHT, graphics.screen, jetpackCache);
 
-		for (int i = 0 ; i < 7 ; i++)
+		for (int i = 0; i < 7; i++)
 		{
 			if (i < player.fuel)
 				graphics.blit(graphics.getSprite("OxygenBlock", true)->getCurrentFrame(), 315 + (i * 15), 7, graphics.screen, false);
@@ -107,7 +107,7 @@ void doStatusBar()
 
 		if ((player.fuel < 3) && (!(player.flags & ENT_FLIES)))
 			if (engine.getFrameLoop() < 30)
-				for (int i = 0 ; i < player.fuel ; i++)
+				for (int i = 0; i < player.fuel; i++)
 					graphics.blit(graphics.getSprite("WarningBlock", true)->getCurrentFrame(), 315 + (i * 15), 7, graphics.screen, false);
 	}
 
@@ -117,34 +117,34 @@ void doStatusBar()
 		{
 			switch (engine.messageType)
 			{
-				case INFO_NORMAL:
-					graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
-					break;
-				case INFO_OBJECTIVE:
-					graphics.setFontColor(0x00, 0xff, 0x00, 0x00, 0x00, 0x00);
-					break;
-				case INFO_HINT:
-					graphics.setFontColor(0xff, 0xaa, 0x00, 0x00, 0x00, 0x00);
-					break;
-				case INFO_ACTIVATE:
-					graphics.setFontColor(0x00, 0xff, 0xff, 0x00, 0x00, 0x00);
-					break;
-				case INFO_BAD:
-					graphics.setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
-					break;
+			case INFO_NORMAL:
+				graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
+				break;
+			case INFO_OBJECTIVE:
+				graphics.setFontColor(0x00, 0xff, 0x00, 0x00, 0x00, 0x00);
+				break;
+			case INFO_HINT:
+				graphics.setFontColor(0xff, 0xaa, 0x00, 0x00, 0x00, 0x00);
+				break;
+			case INFO_ACTIVATE:
+				graphics.setFontColor(0x00, 0xff, 0xff, 0x00, 0x00, 0x00);
+				break;
+			case INFO_BAD:
+				graphics.setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
+				break;
 			}
-	
+
 			static Graphics::SurfaceCache cache;
 			graphics.blit(graphics.infoBar, 0, 455, graphics.screen, false);
 			graphics.drawString(_(engine.message), 320, 466, true, graphics.screen, cache);
-			
+
 			engine.messageTime--;
 			if (engine.messageTime == -1)
 			{
 				engine.messagePriority = -1;
 				engine.message[0] = 0;
 			}
-	
+
 			graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 		}
 	}
@@ -153,12 +153,12 @@ void doStatusBar()
 		if (map.mainBossPart != nullptr)
 		{
 			graphics.blit(graphics.infoBar, 0, 455, graphics.screen, false);
-			
+
 			static Graphics::SurfaceCache cache;
 			graphics.drawString(_(map.mainBossPart->name), 255, 460, TXT_RIGHT, graphics.screen, cache);
 			graphics.drawRect(265 - 1, 463 - 1, 200 + 2, 10 + 2, graphics.white, graphics.screen);
 			graphics.drawRect(265, 463, 200, 10, graphics.black, graphics.screen);
-			
+
 			if (map.mainBossPart->health > 0)
 			{
 				graphics.drawRect(265, 463, (int)(map.mainBossPart->health * map.bossEnergyMeterBit), 10, graphics.red, graphics.screen);
@@ -169,12 +169,12 @@ void doStatusBar()
 	static Graphics::SurfaceCache weaponCache;
 	std::string message = fmt::format("{} {}", _("Weapon:"), _(player.currentWeapon->name));
 	graphics.drawString(message, 630, 5, TXT_RIGHT, graphics.screen, weaponCache);
-	
+
 	if (game.skill == 3)
 	{
 		message = fmt::format(_("Time Remaining: {:02d}:{:02d}"), map.remainingMinutes, map.remainingSeconds);
 		graphics.blit(graphics.infoBar, 0, 25, graphics.screen, false);
-		
+
 		if ((map.remainingMinutes > 0) || (map.remainingSeconds > 0))
 		{
 			if (map.remainingMinutes == 0)
@@ -217,13 +217,13 @@ void doPauseInfo()
 	graphics.fade(130);
 
 	std::string message;
-	
+
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 
-	#if DEBUG
+#if DEBUG
 	message = fmt::format(_("Position = {}:{}"), (int)player.x, (int)player.y);
 	graphics.drawString(message, 5, 25, false, graphics.screen);
-	#endif
+#endif
 
 	graphics.drawString(_("*** PAUSED ***"), 320, y, TXT_CENTERED, graphics.screen);
 
@@ -272,10 +272,10 @@ void doPauseInfo()
 	for (auto &&objective: map.objectives)
 	{
 		y += 20;
-		
+
 		graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
-		
-		if ((game.skill < 3) &&  contains(objective.description, "L.R.T.S.") && (!gameData.completedWorld))
+
+		if ((game.skill < 3) && contains(objective.description, "L.R.T.S.") && (!gameData.completedWorld))
 		{
 			graphics.drawString(_("???? ???????? ????"), col1, y, TXT_RIGHT, graphics.screen);
 		}
@@ -283,7 +283,7 @@ void doPauseInfo()
 		{
 			graphics.drawString(_(objective.description), col1, y, TXT_RIGHT, graphics.screen);
 		}
-		
+
 		// this is a fake objective (for the 4th Ancient Tomb)
 		if (objective.targetValue == -1)
 		{
@@ -300,7 +300,7 @@ void doPauseInfo()
 			else
 			{
 				message = fmt::format("{} / {}", objective.currentValue, objective.targetValue);
-    			graphics.drawString(message, col2, y, TXT_LEFT, graphics.screen);
+				graphics.drawString(message, col2, y, TXT_LEFT, graphics.screen);
 			}
 
 			if (!objective.required)
@@ -340,33 +340,32 @@ static SDL_Surface *createMusicInfo(void)
 	h = text1->h;
 	w = text1->w;
 
-	if(audio.songalbum[0])
+	if (audio.songalbum[0])
 	{
 		graphics.setFontColor(0x80, 0xc0, 0xff, 0x40, 0x40, 0x40);
-		
+
 		text2 = graphics.getString(audio.songalbum, true);
 		h += text2->h + 4;
-		if(text2->w > w)
+		if (text2->w > w)
 			w = text2->w;
-
 	}
 
-	if(audio.songartist[0])
+	if (audio.songartist[0])
 	{
 		graphics.setFontColor(0xff, 0xc0, 0x80, 0x40, 0x40, 0x40);
 
 		text3 = graphics.getString(audio.songartist, true);
 		h += text3->h + 4;
-		if(text3->w > w)
+		if (text3->w > w)
 			w = text3->w;
 	}
 
-	if(audio.songlicense >= 0)
+	if (audio.songlicense >= 0)
 	{
 		icon = graphics.license[audio.songlicense];
 
 		h += icon->h + 8;
-		if(icon->w > w)
+		if (icon->w > w)
 			w = icon->w;
 	}
 
@@ -376,25 +375,29 @@ static SDL_Surface *createMusicInfo(void)
 	panel = graphics.createSurface(w + 10, h + 10);
 	SDL_FillRect(panel, nullptr, SDL_MapRGBA(panel->format, 0, 0, 0, 128));
 
-	if (text1) {
+	if (text1)
+	{
 		y -= text1->h;
 		graphics.blit(text1, x - text1->w, y, panel, false);
 		SDL_FreeSurface(text1);
 	}
 
-	if (text2) {
+	if (text2)
+	{
 		y -= text2->h + 4;
 		graphics.blit(text2, x - text2->w, y, panel, false);
 		SDL_FreeSurface(text2);
 	}
 
-	if (text3) {
+	if (text3)
+	{
 		y -= text3->h + 4;
 		graphics.blit(text3, x - text3->w, y, panel, false);
 		SDL_FreeSurface(text3);
 	}
 
-	if (icon) {
+	if (icon)
+	{
 		y -= icon->h + 8;
 		graphics.blit(icon, x - icon->w, y, panel, false);
 	}
@@ -404,7 +407,7 @@ static SDL_Surface *createMusicInfo(void)
 
 void doMusicInfo(unsigned int ticks)
 {
-	if(!audio.songtitle[0])
+	if (!audio.songtitle[0])
 		return;
 
 	static SDL_Surface *panel;
@@ -423,9 +426,9 @@ void doMusicInfo(unsigned int ticks)
 			return;
 		}
 
-		if(ticks < 6000)
+		if (ticks < 6000)
 			alpha = 1 - (6000 - ticks) / 1000.0f;
-		else if(ticks > 11000)
+		else if (ticks > 11000)
 			alpha = (12000 - ticks) / 1000.0f;
 	}
 

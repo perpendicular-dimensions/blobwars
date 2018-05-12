@@ -19,17 +19,15 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class Objective {
+class Objective
+{
+public:
+	std::string description;
+	std::string target;
+	int currentValue = 0;
+	int targetValue;
+	bool required;
+	bool completed = false;
 
-	public:
-	
-		std::string description;
-		std::string target;
-		int currentValue = 0;
-		int targetValue;
-		bool required;
-		bool completed = false;
-
-		Objective(const std::string &description, const std::string &target, int targetValue, bool required);
-
+	Objective(const std::string &description, const std::string &target, int targetValue, bool required);
 };

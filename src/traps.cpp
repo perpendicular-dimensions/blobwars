@@ -45,9 +45,11 @@ void addTrap(const std::string &name, int trapType, int damage, int speed, int s
 	trap.setDamage(damage);
 	trap.setSpeed(speed);
 	trap.setDestinations(startX, startY, endX, endY);
-	
-	if (wait1 == -1) wait1 = Math::rrand(10, 60);
-	if (wait2 == -1) wait2 = Math::rrand(10, 60);
+
+	if (wait1 == -1)
+		wait1 = Math::rrand(10, 60);
+	if (wait2 == -1)
+		wait2 = Math::rrand(10, 60);
 
 	trap.setWaitTimes(wait1, wait2);
 	trap.setSprite(graphics.getSprite(sprite, true));
@@ -108,7 +110,7 @@ static void drawTrapChain(Trap &trap)
 	while (true)
 	{
 		graphics.blit(chainLink, (int)(x - engine.playerPosX), (int)(y - engine.playerPosY), graphics.screen, true);
-		
+
 		x += dx;
 		y += dy;
 
@@ -148,15 +150,15 @@ static bool doTrapCollisions(Trap &trap)
 	if (Collision::collision(trap.x, trap.y, trap.width, trap.height, player.x, player.y, player.width, player.height))
 	{
 		throwAndDamageEntity(player, trap.damage, -5, 5, -8);
-		
+
 		if (trap.damage == 10)
 		{
 			player.health = 0;
 		}
-		
+
 		if (trap.type == TRAP_TYPE_MINE)
 		{
-			for (int i = 0 ; i < 10 ; i++)
+			for (int i = 0; i < 10; i++)
 			{
 				addExplosion(trap.x + Math::rrand(-15, 15), trap.y + Math::rrand(-15, 15), 50, engine.world);
 			}
@@ -175,8 +177,7 @@ void doTraps()
 {
 	bool remove = false;
 
-	map.traps.remove_if([&](auto &&trap)
-	{
+	map.traps.remove_if([&](auto &&trap) {
 		int x = (int)(trap.x - engine.playerPosX);
 		int y = (int)(trap.y - engine.playerPosY);
 
@@ -192,7 +193,7 @@ void doTraps()
 			absX = abs(x);
 			absY = abs(y);
 		}
-		
+
 		/*
 			Barrier traps must be do at all times. Otherwise there is an "break" in the
 			line if more than one barrier is used over a large space and the barrier becomes
@@ -207,27 +208,27 @@ void doTraps()
 			{
 				switch (trap.type)
 				{
-					case TRAP_TYPE_MINE:
-						audio.playSound(SND_ROCKET, CH_SPAWN, trap.x);
-						break;
-					case TRAP_TYPE_SPIKE:
-						audio.playSound(SND_ROCKET, CH_SPAWN, trap.x);
-						break;
-					case TRAP_TYPE_SWING:
-						audio.playSound(SND_THROW, CH_SPAWN, trap.x);
-						break;
-					case TRAP_TYPE_BARRIER:
-						if ((absX <= 640) && (absY <= 480))
-						{
-							audio.playSound(SND_ELECTRICITY1 + Math::prand() % 3, CH_SPAWN, trap.x);
-						}
-						break;
-					case TRAP_TYPE_FLAME:
-						if ((absX <= 640) && (absY <= 480))
-						{
-							audio.playSound(SND_FIRECRACKLE, CH_SPAWN, trap.x);
-						}
-						break;
+				case TRAP_TYPE_MINE:
+					audio.playSound(SND_ROCKET, CH_SPAWN, trap.x);
+					break;
+				case TRAP_TYPE_SPIKE:
+					audio.playSound(SND_ROCKET, CH_SPAWN, trap.x);
+					break;
+				case TRAP_TYPE_SWING:
+					audio.playSound(SND_THROW, CH_SPAWN, trap.x);
+					break;
+				case TRAP_TYPE_BARRIER:
+					if ((absX <= 640) && (absY <= 480))
+					{
+						audio.playSound(SND_ELECTRICITY1 + Math::prand() % 3, CH_SPAWN, trap.x);
+					}
+					break;
+				case TRAP_TYPE_FLAME:
+					if ((absX <= 640) && (absY <= 480))
+					{
+						audio.playSound(SND_FIRECRACKLE, CH_SPAWN, trap.x);
+					}
+					break;
 				}
 			}
 
@@ -250,61 +251,60 @@ void doTraps()
 
 			switch (trap.type)
 			{
-				case TRAP_TYPE_FLAME:
-				
-					graphics.blit(trap.sprite->getCurrentFrame(), x, y, graphics.screen, true);
+			case TRAP_TYPE_FLAME:
 
-					if ((absX <= 640) && (absY <= 480))
-					{
-						if (trap.currentAction == TRAP_FIRSTACTION)
-						{
-							if (trap.active)
-							{
-								engine.world.place((int)trap.x + (trap.startX * 8), (int)trap.y + (trap.startY * 8));
-								engine.world.currentWeapon = &weapon[WP_FLAMETHROWER];
-	
-								if (trap.startX == -1)
-								{
-									addBullet(engine.world, Math::rrand(-500, -100) / 100.00, Math::rrand(-20, 20) / 100.00);
-								}
-								else if (trap.startX == 1)
-								{
-									addBullet(engine.world, Math::rrand(100, 500) / 100.00, Math::rrand(-2, 20) / 100.00);
-								}
-								else if (trap.startY == -1)
-								{
-									addBullet(engine.world, Math::rrand(-20, 20) / 100.00, Math::rrand(-500, -100) / 100.00);
-								}
-								else if (trap.startY == 1)
-								{
-									addBullet(engine.world, Math::rrand(-20, 20) / 100.00, Math::rrand(100, 500) / 100.00);
-								}
-							}
-						}
-					}
-					break;
+				graphics.blit(trap.sprite->getCurrentFrame(), x, y, graphics.screen, true);
 
-				case TRAP_TYPE_BARRIER:
+				if ((absX <= 640) && (absY <= 480))
+				{
 					if (trap.currentAction == TRAP_FIRSTACTION)
 					{
 						if (trap.active)
 						{
-							graphics.blit(trap.sprite->getCurrentFrame(), x, y, graphics.screen, false);
-							doTrapCollisions(trap);
+							engine.world.place((int)trap.x + (trap.startX * 8), (int)trap.y + (trap.startY * 8));
+							engine.world.currentWeapon = &weapon[WP_FLAMETHROWER];
+
+							if (trap.startX == -1)
+							{
+								addBullet(engine.world, Math::rrand(-500, -100) / 100.00, Math::rrand(-20, 20) / 100.00);
+							}
+							else if (trap.startX == 1)
+							{
+								addBullet(engine.world, Math::rrand(100, 500) / 100.00, Math::rrand(-2, 20) / 100.00);
+							}
+							else if (trap.startY == -1)
+							{
+								addBullet(engine.world, Math::rrand(-20, 20) / 100.00, Math::rrand(-500, -100) / 100.00);
+							}
+							else if (trap.startY == 1)
+							{
+								addBullet(engine.world, Math::rrand(-20, 20) / 100.00, Math::rrand(100, 500) / 100.00);
+							}
 						}
 					}
-					break;
+				}
+				break;
 
-				default:
-					graphics.blit(trap.sprite->getCurrentFrame(), x, y, graphics.screen, false);
-    				if (trap.active)
+			case TRAP_TYPE_BARRIER:
+				if (trap.currentAction == TRAP_FIRSTACTION)
+				{
+					if (trap.active)
 					{
-						remove = doTrapCollisions(trap);
+						graphics.blit(trap.sprite->getCurrentFrame(), x, y, graphics.screen, false);
+						doTrapCollisions(trap);
 					}
-					break;
+				}
+				break;
+
+			default:
+				graphics.blit(trap.sprite->getCurrentFrame(), x, y, graphics.screen, false);
+				if (trap.active)
+				{
+					remove = doTrapCollisions(trap);
+				}
+				break;
 			}
 		}
-
 
 		if (trap.type != TRAP_TYPE_MINE)
 			remove = false;

@@ -73,13 +73,19 @@ extern DECLSPEC int SDLCALL SDL_GetGamma(float *red, float *green, float *blue);
 
 #if !defined(_WIN32) && !defined(__APPLE__)
 #include <libintl.h>
-inline const char *_(const char *str) { return gettext(str); }
-inline const char *_(const std::string &str) { return gettext(str.c_str()); }
+inline const char *_(const char *str)
+{
+	return gettext(str);
+}
+inline const char *_(const std::string &str)
+{
+	return gettext(str.c_str());
+}
 #else
 #define _(x) (x)
 #define gettext(x) (x)
-#define bindtextdomain(x, y) while(false)
-#define textdomain(x) while(false)
+#define bindtextdomain(x, y) while (false)
+#define textdomain(x) while (false)
 #endif
 
 #include "defs.h"
@@ -175,4 +181,3 @@ inline const char *_(const std::string &str) { return gettext(str.c_str()); }
 #include "triggers.h"
 #include "weapons.h"
 #include "widgets.h"
-

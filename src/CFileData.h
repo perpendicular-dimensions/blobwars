@@ -19,16 +19,15 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class FileData {
-
-	public:
-
-		std::string filename;
-		uint32_t cSize;
-		uint32_t fSize;
-		uint32_t location;
+class FileData
+{
+public:
+	std::string filename;
+	uint32_t cSize;
+	uint32_t fSize;
+	uint32_t location;
 
 	FileData();
-	
+
 	void set(const std::string &filename, uint32_t fSize, uint32_t cSize, uint32_t location);
 };

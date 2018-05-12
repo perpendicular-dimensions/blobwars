@@ -33,7 +33,7 @@ static bool okayToSpawnEnemy(std::string name, int x, int y)
 	{
 		return false;
 	}
-	
+
 	// stop enemies from appearing in the middile of doors
 	for (auto &&train: map.trains)
 	{
@@ -46,14 +46,14 @@ static bool okayToSpawnEnemy(std::string name, int x, int y)
 	}
 
 	Entity *enemy = getDefinedEnemy(name);
-	
+
 	if (map.isLiquid(x, y))
 	{
 		if (enemy->flags & ENT_SWIMS)
 		{
 			return true;
 		}
-		
+
 		debug(("Couldn't add enemy '%s' - Would drown\n", name));
 
 		return false;
@@ -63,7 +63,7 @@ static bool okayToSpawnEnemy(std::string name, int x, int y)
 		if (enemy->flags & ENT_SWIMS)
 		{
 			debug(("Couldn't add enemy '%s' - Not in water\n", name));
-			
+
 			return false;
 		}
 	}
@@ -73,21 +73,21 @@ static bool okayToSpawnEnemy(std::string name, int x, int y)
 		return true;
 	}
 
-	for (int i = 0 ; i < 30 ; i++)
+	for (int i = 0; i < 30; i++)
 	{
 		y++;
 
 		if (y > map.limitDown)
 		{
 			debug(("Couldn't add enemy '%s' - Outside map limits\n", name));
-			
+
 			return false;
 		}
 
 		if (map.isLiquid(x, y))
 		{
 			debug(("Couldn't add enemy '%s' - Would drown after free fall\n", name));
-			
+
 			return false;
 		}
 
@@ -96,7 +96,7 @@ static bool okayToSpawnEnemy(std::string name, int x, int y)
 			return true;
 		}
 	}
-	
+
 	debug(("Couldn't add enemy '%s' - Just couldn't!\n", name));
 
 	return false;
@@ -123,7 +123,7 @@ void doSpawnPoints()
 			{
 				x = (int)fabs(sp.x - player.x);
 				y = (int)fabs(sp.y - player.y);
-				
+
 				if ((x <= 640) && (y <= 480))
 				{
 					engine.setPlayerPosition((int)player.x + Math::rrand(-MAP_SHAKEAMOUNT, MAP_SHAKEAMOUNT), (int)player.y + Math::rrand(-MAP_SHAKEAMOUNT, MAP_SHAKEAMOUNT), map.limitLeft, map.limitRight, map.limitUp, map.limitDown);
@@ -133,7 +133,7 @@ void doSpawnPoints()
 			{
 				x = (int)fabs(sp.x - player.x);
 				y = (int)fabs(sp.y - player.y);
-				
+
 				if ((x <= 320) && (y <= 480))
 				{
 					engine.setPlayerPosition((int)player.x + Math::rrand(-MAP_SHAKEAMOUNT, MAP_SHAKEAMOUNT), (int)player.y + Math::rrand(-MAP_SHAKEAMOUNT, MAP_SHAKEAMOUNT), map.limitLeft, map.limitRight, map.limitUp, map.limitDown);
@@ -142,7 +142,7 @@ void doSpawnPoints()
 		}
 
 		if (sp.readyToSpawn())
-		{	
+		{
 			if ((sp.spawnType != SPW_ENEMY) && (sp.spawnType != SPW_ITEM))
 			{
 				// If the player is too far away, don't spawn (unless it's random enemy / item spawning)
@@ -158,131 +158,132 @@ void doSpawnPoints()
 
 			switch (sp.spawnType)
 			{
-				case SPW_HAZARD:
-					switch (sp.spawnSubType)
-					{
-						case HAZARD_LAVABALL:
-							engine.world.place(sp.x, sp.y);
-							engine.world.currentWeapon = &weapon[WP_LAVABALL1];
-							addBullet(engine.world, Math::rrand(-5, 5), Math::rrand(-(5 + game.skill), -(2 + game.skill)));
-							break;
-						case HAZARD_ROCKFALL:
-							engine.world.place(sp.x, sp.y);
-							engine.world.currentWeapon = &weapon[WP_ROCK1];
-							addBullet(engine.world, Math::rrand(-2, 2), Math::rrand(0, 2));
-							break;
-						case HAZARD_BOMBS:
-							engine.world.place(sp.x, sp.y);
-							engine.world.currentWeapon = &weapon[WP_BOMB];
-							addBullet(engine.world, Math::rrand(-2, 2), Math::rrand(0, 2));
-							break;
-						case HAZARD_EXPLOSION:
-							x = sp.x + Math::rrand(-128, 128);
-							y = sp.y + Math::rrand(-128, 128);
-							addExplosion(x, y, 50, engine.world);
-							x = x >> BRICKSHIFT;
-							y = y >> BRICKSHIFT;
-							if (map.isSolid(x, y))
-							{
-								int waterLevel = (int)map.waterLevel;
-								if (waterLevel == -1 || y < waterLevel)
-								{
-									map.data[x][y] = MAP_AIR;
-								}
-								else if (y == waterLevel)
-								{
-									map.data[x][y] = MAP_WATERANIM;
-								}
-								else
-								{
-									map.data[x][y] = MAP_WATER;
-								}
-							}
-							break;
-						case HAZARD_POWERBULLETS:
-							engine.world.place(sp.x, sp.y);
-							engine.world.currentWeapon = &weapon[WP_SHELLS];
-							x = engine.world.currentWeapon->dx;
-							if (player.x < sp.x) x = -x;
-							addBullet(engine.world, x, 0);
-							break;
-						case HAZARD_STALAGTITES:
-							engine.world.place(sp.x, sp.y);
-							engine.world.currentWeapon = &weapon[WP_STALAGTITE];
-							addBullet(engine.world, 0, 2);
-							break;
-						default:
-							printf("Spawn Subtype is unknown!\n");
-							break;
-					}
+			case SPW_HAZARD:
+				switch (sp.spawnSubType)
+				{
+				case HAZARD_LAVABALL:
+					engine.world.place(sp.x, sp.y);
+					engine.world.currentWeapon = &weapon[WP_LAVABALL1];
+					addBullet(engine.world, Math::rrand(-5, 5), Math::rrand(-(5 + game.skill), -(2 + game.skill)));
 					break;
-
-				case SPW_ENEMY:
-					if (game.missionOverReason != MIS_INPROGRESS)
-						break;
-
-					enemy = map.getSpawnableEnemy();
-
-					x = (int)(player.x) >> BRICKSHIFT;
-					y = (int)(player.y) >> BRICKSHIFT;
-
-					x += Math::rrand(-10, 10);
-					y += Math::rrand(-10, 10);
-
-					if ((x >= 0) && (y >= 0) && (x < MAPWIDTH) && (y < MAPHEIGHT))
+				case HAZARD_ROCKFALL:
+					engine.world.place(sp.x, sp.y);
+					engine.world.currentWeapon = &weapon[WP_ROCK1];
+					addBullet(engine.world, Math::rrand(-2, 2), Math::rrand(0, 2));
+					break;
+				case HAZARD_BOMBS:
+					engine.world.place(sp.x, sp.y);
+					engine.world.currentWeapon = &weapon[WP_BOMB];
+					addBullet(engine.world, Math::rrand(-2, 2), Math::rrand(0, 2));
+					break;
+				case HAZARD_EXPLOSION:
+					x = sp.x + Math::rrand(-128, 128);
+					y = sp.y + Math::rrand(-128, 128);
+					addExplosion(x, y, 50, engine.world);
+					x = x >> BRICKSHIFT;
+					y = y >> BRICKSHIFT;
+					if (map.isSolid(x, y))
 					{
-						if ((map.data[x][y] == MAP_AIR) || (map.data[x][y] == MAP_WATER))
+						int waterLevel = (int)map.waterLevel;
+						if (waterLevel == -1 || y < waterLevel)
 						{
-							if (okayToSpawnEnemy(enemy, x, y))
-							{
-								x = x << BRICKSHIFT;
-								y = y << BRICKSHIFT;
-								addEnemy(enemy, x, y, ENT_SPAWNED);
-								addTeleportParticles(x, y, 25, SND_TELEPORT2);
-							}
+							map.data[x][y] = MAP_AIR;
+						}
+						else if (y == waterLevel)
+						{
+							map.data[x][y] = MAP_WATERANIM;
+						}
+						else
+						{
+							map.data[x][y] = MAP_WATER;
 						}
 					}
-
 					break;
-					
-				case SPW_ITEM:
-					if (game.missionOverReason != MIS_INPROGRESS)
-						break;
-					
-					x = (int)(player.x) >> BRICKSHIFT;
-					y = (int)(player.y) >> BRICKSHIFT;
+				case HAZARD_POWERBULLETS:
+					engine.world.place(sp.x, sp.y);
+					engine.world.currentWeapon = &weapon[WP_SHELLS];
+					x = engine.world.currentWeapon->dx;
+					if (player.x < sp.x)
+						x = -x;
+					addBullet(engine.world, x, 0);
+					break;
+				case HAZARD_STALAGTITES:
+					engine.world.place(sp.x, sp.y);
+					engine.world.currentWeapon = &weapon[WP_STALAGTITE];
+					addBullet(engine.world, 0, 2);
+					break;
+				default:
+					printf("Spawn Subtype is unknown!\n");
+					break;
+				}
+				break;
 
-					x += Math::rrand(-10, 10);
-					y += Math::rrand(-10, 10);
+			case SPW_ENEMY:
+				if (game.missionOverReason != MIS_INPROGRESS)
+					break;
 
-					if ((x >= 0) && (y >= 0))
+				enemy = map.getSpawnableEnemy();
+
+				x = (int)(player.x) >> BRICKSHIFT;
+				y = (int)(player.y) >> BRICKSHIFT;
+
+				x += Math::rrand(-10, 10);
+				y += Math::rrand(-10, 10);
+
+				if ((x >= 0) && (y >= 0) && (x < MAPWIDTH) && (y < MAPHEIGHT))
+				{
+					if ((map.data[x][y] == MAP_AIR) || (map.data[x][y] == MAP_WATER))
 					{
-						if (map.data[x][y] == MAP_AIR)
+						if (okayToSpawnEnemy(enemy, x, y))
 						{
 							x = x << BRICKSHIFT;
 							y = y << BRICKSHIFT;
-							dropHelperItems(x, y);
-							addTeleportParticles(x, y, 5, SND_TELEPORT2);
+							addEnemy(enemy, x, y, ENT_SPAWNED);
+							addTeleportParticles(x, y, 25, SND_TELEPORT2);
 						}
 					}
-					
-					break;
-					
-				case SPW_BOSSBULLET:
-					
-					if (game.missionOverReason != MIS_INPROGRESS)
-						break;
-					
-					if (map.boss[sp.spawnSubType]->health > 0)
-					{
-						map.boss[sp.spawnSubType]->active = true;
-					}
-					
+				}
+
+				break;
+
+			case SPW_ITEM:
+				if (game.missionOverReason != MIS_INPROGRESS)
 					break;
 
-				default:
-					debug(("Spawn Type is unknown!\n"));
+				x = (int)(player.x) >> BRICKSHIFT;
+				y = (int)(player.y) >> BRICKSHIFT;
+
+				x += Math::rrand(-10, 10);
+				y += Math::rrand(-10, 10);
+
+				if ((x >= 0) && (y >= 0))
+				{
+					if (map.data[x][y] == MAP_AIR)
+					{
+						x = x << BRICKSHIFT;
+						y = y << BRICKSHIFT;
+						dropHelperItems(x, y);
+						addTeleportParticles(x, y, 5, SND_TELEPORT2);
+					}
+				}
+
+				break;
+
+			case SPW_BOSSBULLET:
+
+				if (game.missionOverReason != MIS_INPROGRESS)
 					break;
+
+				if (map.boss[sp.spawnSubType]->health > 0)
+				{
+					map.boss[sp.spawnSubType]->active = true;
+				}
+
+				break;
+
+			default:
+				debug(("Spawn Type is unknown!\n"));
+				break;
 			}
 
 			sp.reset();

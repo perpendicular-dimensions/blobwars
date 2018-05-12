@@ -21,24 +21,25 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /// A Sprite
 
-class Sprite {
+class Sprite
+{
+public:
+	std::string name;
 
-	public:
+	struct Frame
+	{
+		SDL_Surface *image;
+		unsigned char time;
+		Frame(SDL_Surface *image, unsigned char time):
+		                image(image), time(time) {}
+	};
 
-		std::string name;
+	std::vector<Frame> frames;
 
-		struct Frame {
-			SDL_Surface *image;
-			unsigned char time;
-			Frame(SDL_Surface *image, unsigned char time): image(image), time(time) {}
-		};
+	unsigned char currentFrame = 0;
+	unsigned char currentTime = 0;
 
-		std::vector<Frame> frames;
-
-		unsigned char currentFrame = 0;
-		unsigned char currentTime = 0;
-
-		bool randomFrames = false;
+	bool randomFrames = false;
 
 	void addFrame(SDL_Surface *shape, int time);
 	void animate();

@@ -18,13 +18,18 @@
 
 #include "headers.h"
 
-int stoi(std::string_view str) {
+int stoi(std::string_view str)
+{
 	int value = 0;
-	for (auto c: str) {
-		if (c >= '0' && c <= '9') {
+	for (auto c: str)
+	{
+		if (c >= '0' && c <= '9')
+		{
 			value *= 10;
 			value += c - '0';
-		} else {
+		}
+		else
+		{
 			break;
 		}
 	}

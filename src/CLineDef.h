@@ -19,20 +19,18 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class LineDef {
-	
-	public:
+class LineDef
+{
+public:
+	int x, y;
+	int width, height;
 
-		int x, y;
-		int width, height;
+	std::string name;
+	std::string linkName;
+	std::string activateMessage;
 
-		std::string name;
-		std::string linkName;
-		std::string activateMessage;
-
-		bool activated;
+	bool activated;
 
 	LineDef();
 	void set(const std::string &name, const std::string &linkName, const std::string &activateMessage, int x, int y, int width, int height);
-
 };

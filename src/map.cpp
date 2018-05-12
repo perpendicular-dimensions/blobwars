@@ -38,9 +38,9 @@ void drawMap()
 	int mapy = offsetY >> BRICKSHIFT;
 	int brick = 0;
 
-	for (int x = 0 ; x < 21 ; x++)
+	for (int x = 0; x < 21; x++)
 	{
-		for (int y = 0 ; y < 16 ; y++)
+		for (int y = 0; y < 16; y++)
 		{
 			brick = map.data[mapx + x][mapy + y];
 
@@ -48,16 +48,16 @@ void drawMap()
 			r.y = ((y * BRICKSIZE) - (offsetY & (BRICKSIZE - 1)));
 			r.w = r.h = BRICKSIZE;
 
-   			if ((brick >= MAP_BREAKABLE) && (brick < MAP_WATERANIM))
+			if ((brick >= MAP_BREAKABLE) && (brick < MAP_WATERANIM))
 			{
 				graphics.blit(graphics.tile[brick], r.x, r.y, graphics.screen, false);
-				
-				#if DEBUG
+
+#if DEBUG
 				if ((brick >= MAP_NORESET) && (brick < MAP_DECORATION))
 				{
 					graphics.drawRect(r.x, r.y, 32, 4, graphics.yellow, graphics.screen);
 				}
-				#endif
+#endif
 			}
 		}
 	}
@@ -78,9 +78,9 @@ void drawMapTopLayer()
 
 	int brick;
 
-	for (int x = 0 ; x < 21 ; x++)
+	for (int x = 0; x < 21; x++)
 	{
-		for (int y = 0 ; y < 16 ; y++)
+		for (int y = 0; y < 16; y++)
 		{
 			r.x = ((x * BRICKSIZE) - (offsetX & (BRICKSIZE - 1)));
 			r.y = ((y * BRICKSIZE) - (offsetY & (BRICKSIZE - 1)));
@@ -195,15 +195,15 @@ static void addMiniMapDoors(SDL_Surface *panel, int mapX, int mapY)
 		int width = 5;
 		int height = 5;
 		int color = graphics.white;
-		
+
 		int x = (int)train.x >> BRICKSHIFT;
 		int y = (int)train.y >> BRICKSHIFT;
-		
+
 		if ((x >= mapX) && (x <= mapX + 64) && (y >= mapY) && (y <= mapY + 48))
 		{
 			x -= mapX;
 			y -= mapY;
-			
+
 			if (train.type == TR_TRAIN)
 			{
 				width = 10;
@@ -216,31 +216,31 @@ static void addMiniMapDoors(SDL_Surface *panel, int mapX, int mapY)
 			{
 				height = 10;
 			}
-			
+
 			switch (train.type)
 			{
-				case TR_GOLD_DOOR:
-				case TR_GOLD_SLIDEDOOR:
-					color = graphics.yellow;
-					break;
-					
-				case TR_SILVER_DOOR:
-				case TR_SILVER_SLIDEDOOR:
-					color = graphics.grey;
-					break;
-					
-				case TR_BRONZE_DOOR:
-				case TR_BRONZE_SLIDEDOOR:
-					color = SDL_MapRGB(graphics.screen->format, 0xff, 0x99, 0x00);
-					break;
-					
-				case TR_DOOR:
-				case TR_LOCKED_DOOR:
-				case TR_LOCKED_SLIDEDOOR:
-					color = SDL_MapRGB(graphics.screen->format, 0xff, 0x00, 0xff);
-					break;
+			case TR_GOLD_DOOR:
+			case TR_GOLD_SLIDEDOOR:
+				color = graphics.yellow;
+				break;
+
+			case TR_SILVER_DOOR:
+			case TR_SILVER_SLIDEDOOR:
+				color = graphics.grey;
+				break;
+
+			case TR_BRONZE_DOOR:
+			case TR_BRONZE_SLIDEDOOR:
+				color = SDL_MapRGB(graphics.screen->format, 0xff, 0x99, 0x00);
+				break;
+
+			case TR_DOOR:
+			case TR_LOCKED_DOOR:
+			case TR_LOCKED_SLIDEDOOR:
+				color = SDL_MapRGB(graphics.screen->format, 0xff, 0x00, 0xff);
+				break;
 			}
-			
+
 			graphics.drawRect(x * 5, y * 5, width, height, color, panel);
 		}
 	}
@@ -255,7 +255,7 @@ void showMap(int centerX, int centerY)
 	x2 = centerX + 32;
 	y1 = centerY - 24;
 	y2 = centerY + 24;
-	
+
 	int minX = (map.limitLeft >> BRICKSHIFT);
 	int maxX = (map.limitRight >> BRICKSHIFT) - 44;
 	int minY = (map.limitUp >> BRICKSHIFT);
@@ -269,16 +269,16 @@ void showMap(int centerX, int centerY)
 	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.updateScreen();
 	SDL_Delay(500);
-	
+
 	SDL_Surface *panel = graphics.createSurface(320, 240);
 	SDL_Surface *background = graphics.loadImage("gfx/main/mapBackground.png");
 	SDL_SetAlpha(background, 130);
-	
+
 	graphics.blit(background, 0, 0, panel, false);
-	
-	for (int y = 0 ; y < 48 ; y++)
+
+	for (int y = 0; y < 48; y++)
 	{
-		for (int x = 0 ; x < 64 ; x++)
+		for (int x = 0; x < 64; x++)
 		{
 			if (map.data[x1 + x][y1 + y] == MAP_WATER)
 			{
@@ -286,12 +286,12 @@ void showMap(int centerX, int centerY)
 			}
 		}
 	}
-	
+
 	addMiniMapDoors(panel, x1, y1);
 
-	for (int y = 0 ; y < 48 ; y++)
+	for (int y = 0; y < 48; y++)
 	{
-		for (int x = 0 ; x < 64 ; x++)
+		for (int x = 0; x < 64; x++)
 		{
 			int color = graphics.black;
 
@@ -314,7 +314,7 @@ void showMap(int centerX, int centerY)
 			else if (map.data[x1 + x][y1 + y] >= MAP_DECORATION)
 			{
 				color = graphics.black;
-				
+
 				if (map.data[x1 + x][y1 + y - 1] == MAP_WATER)
 				{
 					color = graphics.blue;
@@ -344,7 +344,7 @@ void showMap(int centerX, int centerY)
 	blips.emplace_back(160 + ((centerX - x1) * 5), 120 + ((centerY - y1) * 5), 0);
 
 	addBlips(&blips, x1, y1);
-	
+
 	Sprite *enemySignal = graphics.getSprite("EnemySignal", true);
 	Sprite *miaSignal = graphics.getSprite("MIASignal", true);
 	Sprite *bobSignal = graphics.getSprite("BobSignal", true);
@@ -355,7 +355,7 @@ void showMap(int centerX, int centerY)
 	graphics.drawString(_(game.stageName), 320, 30, TXT_CENTERED, graphics.screen);
 
 	graphics.setFontSize(0);
-	
+
 	graphics.drawRect(160, 414, 7, 7, graphics.yellow, graphics.white, graphics.screen);
 	graphics.drawString(_("MIAs"), 175, 410, TXT_LEFT, graphics.screen);
 
@@ -397,18 +397,18 @@ void showMap(int centerX, int centerY)
 		{
 			switch (blip.type)
 			{
-				case 0:
-					graphics.blit(bobSignal->getCurrentFrame(), blip.x, blip.y, graphics.screen, true);
-					break;
-				case 1:
-					graphics.blit(miaSignal->getCurrentFrame(), blip.x, blip.y, graphics.screen, true);
-					break;
-				case 2:
-					graphics.blit(itemSignal->getCurrentFrame(), blip.x, blip.y, graphics.screen, true);
-					break;
-				case 3:
-					graphics.blit(enemySignal->getCurrentFrame(), blip.x, blip.y, graphics.screen, true);
-					break;
+			case 0:
+				graphics.blit(bobSignal->getCurrentFrame(), blip.x, blip.y, graphics.screen, true);
+				break;
+			case 1:
+				graphics.blit(miaSignal->getCurrentFrame(), blip.x, blip.y, graphics.screen, true);
+				break;
+			case 2:
+				graphics.blit(itemSignal->getCurrentFrame(), blip.x, blip.y, graphics.screen, true);
+				break;
+			case 3:
+				graphics.blit(enemySignal->getCurrentFrame(), blip.x, blip.y, graphics.screen, true);
+				break;
 			}
 		}
 
@@ -427,103 +427,103 @@ void evaluateMapAttribute(Entity &ent, int mapAttribute)
 {
 	switch (mapAttribute)
 	{
-		case MAP_AIR_WALL_1:
-		case MAP_AIR_WALL_2:
-		case MAP_AIR_WALL_3:
-		case MAP_AIR_CEILING_1:
+	case MAP_AIR_WALL_1:
+	case MAP_AIR_WALL_2:
+	case MAP_AIR_WALL_3:
+	case MAP_AIR_CEILING_1:
+		mapAttribute = MAP_AIR;
+		break;
+	case MAP_AIR_WALL_4:
+		if (map.isCavesTileset)
+		{
 			mapAttribute = MAP_AIR;
-			break;
-		case MAP_AIR_WALL_4:
-			if (map.isCavesTileset)
-			{
-				mapAttribute = MAP_AIR;
-			}
-			break;
-		case MAP_AIR_CEILING_2:
-			if (map.isGrasslandsTileset)
-			{
-				mapAttribute = MAP_AIR;
-			}
-			else if (map.isCavesTileset)
-			{
-				mapAttribute = MAP_WATER;
-			}
-			break;
-		case MAP_WATER_WALL:
-			if (map.isCavesTileset)
-			{
-				mapAttribute = MAP_WATER;
-			}
-			break;
+		}
+		break;
+	case MAP_AIR_CEILING_2:
+		if (map.isGrasslandsTileset)
+		{
+			mapAttribute = MAP_AIR;
+		}
+		else if (map.isCavesTileset)
+		{
+			mapAttribute = MAP_WATER;
+		}
+		break;
+	case MAP_WATER_WALL:
+		if (map.isCavesTileset)
+		{
+			mapAttribute = MAP_WATER;
+		}
+		break;
 	}
 
 	switch (mapAttribute)
 	{
-		case MAP_AIR:
-			if ((ent.environment != ENV_AIR) && (!(ent.flags & ENT_INANIMATE)))
+	case MAP_AIR:
+		if ((ent.environment != ENV_AIR) && (!(ent.flags & ENT_INANIMATE)))
+		{
+			if (!(ent.flags & ENT_SWIMS))
 			{
-				if (!(ent.flags & ENT_SWIMS))
+				if (ent.dy < 0)
 				{
-					if (ent.dy < 0)
-					{
-						ent.dy = PLAYER_JUMP_SPEED;
-					}
-
-					if ((&ent == &player) && ((game.hasAquaLung) || (engine.cheatExtras)))
-					{
-						player.setSprites(graphics.getSprite("BobRight", true), graphics.getSprite("BobLeft", true), graphics.getSprite("BobSpin", true));
-					}
-
-					ent.environment = ENV_AIR;
-					
-					if (ent.dy < 0)
-					{
-						audio.playSound(SND_WATEROUT, CH_TOUCH, ent.x);
-					}
-
-					ent.checkEnvironment();
+					ent.dy = PLAYER_JUMP_SPEED;
 				}
-			}
-			ent.falling = true;
-		case MAP_SOLID:
-			break;
-		case MAP_WATER:
-		case MAP_SLIME:
-		case MAP_LAVA:
 
-			ent.falling = false;
-
-			if (ent.environment == ENV_AIR)
-			{
-				audio.playSound(SND_WATERIN, CH_TOUCH, ent.x);
-				if ((mapAttribute == MAP_SLIME) || (mapAttribute == MAP_LAVA))
-					ent.thinktime = 1;
-			}
-			
-			// On ice levels water is harmful (because it's very very cold!)
-			if ((map.isIceLevel) && (mapAttribute == MAP_WATER))
-			{
-				mapAttribute = MAP_LAVA;
-				ent.thinktime = 1;
-			}
-
-			if (mapAttribute == MAP_WATER)
-			{
-				ent.environment = ENV_WATER;
 				if ((&ent == &player) && ((game.hasAquaLung) || (engine.cheatExtras)))
 				{
-					player.setSprites(graphics.getSprite("AquaBobRight", true), graphics.getSprite("AquaBobLeft", true), graphics.getSprite("AquaBobSpin", true));
+					player.setSprites(graphics.getSprite("BobRight", true), graphics.getSprite("BobLeft", true), graphics.getSprite("BobSpin", true));
 				}
+
+				ent.environment = ENV_AIR;
+
+				if (ent.dy < 0)
+				{
+					audio.playSound(SND_WATEROUT, CH_TOUCH, ent.x);
+				}
+
+				ent.checkEnvironment();
 			}
-			else if (mapAttribute == MAP_SLIME)
+		}
+		ent.falling = true;
+	case MAP_SOLID:
+		break;
+	case MAP_WATER:
+	case MAP_SLIME:
+	case MAP_LAVA:
+
+		ent.falling = false;
+
+		if (ent.environment == ENV_AIR)
+		{
+			audio.playSound(SND_WATERIN, CH_TOUCH, ent.x);
+			if ((mapAttribute == MAP_SLIME) || (mapAttribute == MAP_LAVA))
+				ent.thinktime = 1;
+		}
+
+		// On ice levels water is harmful (because it's very very cold!)
+		if ((map.isIceLevel) && (mapAttribute == MAP_WATER))
+		{
+			mapAttribute = MAP_LAVA;
+			ent.thinktime = 1;
+		}
+
+		if (mapAttribute == MAP_WATER)
+		{
+			ent.environment = ENV_WATER;
+			if ((&ent == &player) && ((game.hasAquaLung) || (engine.cheatExtras)))
 			{
-				ent.environment = ENV_SLIME;
+				player.setSprites(graphics.getSprite("AquaBobRight", true), graphics.getSprite("AquaBobLeft", true), graphics.getSprite("AquaBobSpin", true));
 			}
-			else if (mapAttribute == MAP_LAVA)
-			{
-				ent.environment = ENV_LAVA;
-			}
-			break;
+		}
+		else if (mapAttribute == MAP_SLIME)
+		{
+			ent.environment = ENV_SLIME;
+		}
+		else if (mapAttribute == MAP_LAVA)
+		{
+			ent.environment = ENV_LAVA;
+		}
+		break;
 	}
 }
 
@@ -538,23 +538,23 @@ void raiseWaterLevel()
 
 	if ((int)map.waterLevel != map.requiredWaterLevel)
 	{
-		for (int x = 0 ; x < MAPWIDTH ; x++)
+		for (int x = 0; x < MAPWIDTH; x++)
 		{
 			if ((map.data[x][y] == MAP_AIR) || (map.isLiquid(x, y)))
 			{
 				map.data[x][y] = MAP_WATER;
 			}
-			
+
 			if ((map.data[x][y] >= MAP_DECORATION) && (map.data[x][y] <= MAP_WATERANIM))
 			{
 				map.data[x][y] = MAP_WATER;
 			}
-			
+
 			if (map.data[x][y] >= MAP_TOPLAYER)
 			{
 				map.data[x][y] = MAP_WATER;
 			}
-			
+
 			if (map.data[x][y - 1] >= MAP_TOPLAYER)
 			{
 				map.data[x][y] = MAP_WATER;
@@ -564,7 +564,7 @@ void raiseWaterLevel()
 			{
 				map.data[x][y - 1] = MAP_WATERANIM;
 			}
-			
+
 			if ((map.data[x][y - 1] >= MAP_DECORATION) && (map.data[x][y - 1] <= MAP_WATERANIM))
 			{
 				map.data[x][y - 1] = MAP_WATERANIM;
@@ -588,18 +588,18 @@ void raiseWaterLevel()
 void doWind()
 {
 	map.windChangeTime--;
-	
+
 	if (map.windChangeTime <= 0)
 	{
 		map.windPower = 0;
-		
+
 		if (Math::rrand(0, 1) == 0)
 			map.windPower = Math::rrand(-3, 3);
-			
+
 		// change wind time
 		map.windChangeTime = Math::rrand(60, 600);
 	}
-	
+
 	addWindParticles();
 }
 

@@ -73,7 +73,7 @@ void loadResources()
 
 	audio.free();
 	graphics.free();
-	
+
 	graphics.quickSprite("cheatHeader", graphics.loadImage("gfx/main/cheats.png"));
 	graphics.quickSprite("optionsHeader", graphics.loadImage("gfx/main/options.png"));
 	graphics.quickSprite("joystickHeader", graphics.loadImage("gfx/main/joystickConfig.png"));
@@ -84,7 +84,7 @@ void loadResources()
 	graphics.drawString(_("Loading..."), 320, 440, TXT_CENTERED, graphics.screen);
 	graphics.showLoading(0, 0);
 	graphics.updateScreen();
-	
+
 	loadSprites();
 	loadSound(SND_WATERIN, "sound/waterIn");
 	loadSound(SND_WATEROUT, "sound/waterOut");
@@ -138,7 +138,7 @@ void loadResources()
 	graphics.showLoading(40, 40);
 
 	loadDefItems();
-	
+
 	graphics.showLoading(45, 45);
 
 	graphics.loadMapTiles("gfx/common");
@@ -151,12 +151,12 @@ void loadResources()
 
 	graphics.showLoading(100, 100);
 
-	#if USEPAK
+#if USEPAK
 	graphics.showLoading(100, 100);
 	graphics.delay(100);
-	#endif
+#endif
 
 	createBoss(game.stageName);
-	
+
 	game.canContinue = 0;
 }

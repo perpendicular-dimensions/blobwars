@@ -44,7 +44,7 @@ void Sprite::animate()
 		return;
 
 	currentFrame++;
-	
+
 	if (currentFrame >= frames.size())
 		currentFrame = 0;
 

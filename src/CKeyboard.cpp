@@ -47,18 +47,18 @@ std::string Keyboard::translateKey(int scancode)
 	}
 
 	SDL_Keycode key = SDL_GetKeyFromScancode((SDL_Scancode)scancode);
-	
+
 	std::string keyName = _(SDL_GetKeyName(key));
-	
+
 	/*
 	This is not really necessary, but it just makes
 	everything look neater. It runs through the string
 	and uppercase the first letter and any letter after
 	a space.
 	*/
-	
+
 	bool uppercase = true;
-	
+
 	for (auto &&c: keyName)
 	{
 		if ((c >= SDL_SCANCODE_A) && (c <= SDL_SCANCODE_Z))
@@ -74,7 +74,6 @@ std::string Keyboard::translateKey(int scancode)
 			uppercase = true;
 		}
 	}
-	
+
 	return keyName;
 }
-

@@ -30,16 +30,16 @@ static void createSceneList(split &it)
 	for (; it != it.end(); ++it)
 	{
 		auto line = *it;
-		
+
 		if (line == "@EOF@")
 			break;
-	
+
 		if (line[0] == '[')
-			break;	
-		
+			break;
+
 		if (line == "END")
 			break;
-		
+
 		if (line == "NEW")
 		{
 			scene = &scenes.emplace_back();
@@ -55,7 +55,7 @@ static void createSceneList(split &it)
 			line = *++it;
 			scene->waitTime = (stoi(line) * 100);
 		}
-		
+
 		if (scene && line != "@none@")
 		{
 			scene->appendText(line);
@@ -66,18 +66,18 @@ static void createSceneList(split &it)
 static bool setupScene(const std::string &stagename)
 {
 	scenes.clear();
-	
+
 	if (!engine.loadData(_("data/ending")))
 		return graphics.showErrorAndExit("Couldn't load cutscene data file (%s)", _("data/ending")), false;
 
 	graphics.clearChatString();
-	
+
 	std::string_view sv(&engine.dataBuffer.at(0), engine.dataBuffer.size());
 	auto lines = split(sv, '\n');
 	auto it = lines.begin();
 
 	for (; it != lines.end(); ++it)
-	{	
+	{
 		auto line = std::string(*it);
 
 		if (line[0] == '[')
@@ -91,7 +91,7 @@ static bool setupScene(const std::string &stagename)
 			}
 		}
 	}
-	
+
 	return false;
 }
 
@@ -99,44 +99,44 @@ static void showScene(bool allowSkip)
 {
 	graphics.setFontSize(0);
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
-	
+
 	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.delay(500);
-	
+
 	auto it = scenes.begin();
-	
+
 	SDL_Surface *panel = graphics.quickSprite("panel", graphics.createSurface(640, 90));
 	SDL_Surface *image = nullptr;
 	SDL_FillRect(panel, nullptr, graphics.black);
-	
+
 	float panelAlpha = 0;
-	
+
 	SDL_SetAlpha(panel, 0);
-	
+
 	engine.clearInput();
 	engine.flushInput();
-	
+
 	float changeTime = 100;
-	
+
 	engine.resetTimeDifference();
-	
+
 	audio.playMusicOnce();
-	
+
 	while (true)
 	{
 		graphics.updateScreen();
 		engine.getInput();
 		config.populate();
-		
+
 		engine.doTimeDifference();
-		
+
 		if ((engine.userAccepts()) && (allowSkip))
 		{
 			changeTime = 0;
 			panelAlpha = 255;
 			engine.clearInput();
 		}
-		
+
 		if (panelAlpha < 256)
 		{
 			panelAlpha += (1 * engine.getTimeDifference());
@@ -148,9 +148,9 @@ static void showScene(bool allowSkip)
 			}
 			graphics.blit(panel, 0, 390, graphics.screen, false);
 		}
-		
+
 		changeTime -= (1 * engine.getTimeDifference());
-		
+
 		if (changeTime <= 0)
 		{
 			if (it != scenes.end())
@@ -163,7 +163,7 @@ static void showScene(bool allowSkip)
 				SDL_FillRect(panel, nullptr, graphics.black);
 				graphics.drawChatString(panel, 0);
 				image = nullptr;
-				
+
 				if (!scene.sprite.empty())
 				{
 					debug(("Getting cutscene %s\n", scene.sprite));
@@ -179,7 +179,7 @@ static void showScene(bool allowSkip)
 
 		SDL_Delay(16);
 	}
-	
+
 	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.delay(500);
 }
@@ -191,15 +191,15 @@ void checkStartCutscene()
 	{
 		return;
 	}
-	
+
 	std::string sceneName = game.stageName + " Start";
-	
+
 	if (setupScene(sceneName))
 	{
 		audio.loadMusic("music/cutscene");
 		showScene(true);
 	}
-	
+
 	graphics.free();
 	audio.free();
 }
@@ -211,20 +211,20 @@ void checkEndCutscene()
 	{
 		return;
 	}
-	
+
 	std::string sceneName = game.stageName + " Start";
-	
+
 	debug(("%s\n", sceneName));
-	
+
 	bool allowSkip = true;
-	
+
 	// Don't let the player skip the end of game cutscene...
 	// So we get the music timed well! :)
 	if (game.stageName == "Final Battle")
 	{
 		allowSkip = false;
 	}
-	
+
 	if (setupScene(sceneName))
 	{
 		if (game.stageName != "Final Battle")
@@ -238,7 +238,7 @@ void checkEndCutscene()
 
 		showScene(allowSkip);
 	}
-	
+
 	graphics.free();
 	audio.free();
 }
@@ -247,14 +247,13 @@ void easyGameFinished()
 {
 	graphics.free();
 	audio.free();
-	
+
 	audio.loadMusic("music/gameover");
 	setupScene("Easy Game Finished");
 	showScene(true);
 	audio.fadeMusic();
 	graphics.delay(3500);
-	
+
 	graphics.free();
 	audio.free();
 }
-

@@ -30,7 +30,6 @@ FileData::FileData()
 
 void FileData::set(const std::string &filename, uint32_t fSize, uint32_t cSize, uint32_t location)
 {
-	
 	this->filename = filename;
 	this->fSize = fSize;
 	this->cSize = cSize;

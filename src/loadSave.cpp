@@ -28,7 +28,7 @@ void initSaveSlots()
 	engine.continueSaveSlot = 0;
 
 	//READ SAVE GAME DATA
-	for (int i = 0 ; i < 5 ; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		std::string filename = fmt::format("{}save{}.dat", engine.userHomeDirectory, i);
 
@@ -64,7 +64,7 @@ void initSaveSlots()
 			}
 		}
 	}
-	
+
 	debug(("Continue Save Slot = %d\n", engine.continueSaveSlot));
 }
 
@@ -77,15 +77,15 @@ bool loadGame(int slot)
 	game.clear();
 
 	SDL_Delay(500);
-	
+
 	std::string line;
 	char string[2][1024];
 	int param[2];
-	
+
 	std::string filename = fmt::format("{}save{}.dat", engine.userHomeDirectory, slot);
 
 	std::ifstream file(filename);
-	
+
 	if (file.bad())
 	{
 		return false;
@@ -97,17 +97,17 @@ bool loadGame(int slot)
 	{
 		return graphics.showErrorAndExit("The save data loaded was not in the format expected", ""), false;
 	}
-	
+
 	filename = fmt::format("{}persistant{}.dat", engine.userHomeDirectory, slot); // sic, to keep compatibility with older versions
 
 	file.close();
 	file.open(filename);
-	
+
 	if (file.bad())
 	{
 		return false;
 	}
-	
+
 	while (std::getline(file, line))
 	{
 		scan(line, "%*c %[^\"] %*c %*c %[^\"] %*c %d %d", string[0], string[1], &param[0], &param[1]);
@@ -116,14 +116,14 @@ bool loadGame(int slot)
 		{
 			break;
 		}
-		
+
 		gameData.addCompletedObjective(string[0], string[1], param[0], param[1]);
 	}
-	
+
 	std::string stageName;
 	int numberOfLines = 0;
 	bool complete = false;
-	
+
 	while (std::getline(file, stageName))
 	{
 		if (stageName == "@EOF@")
@@ -132,28 +132,30 @@ bool loadGame(int slot)
 			break;
 		}
 
-		if (!std::getline(file, line)) {
+		if (!std::getline(file, line))
+		{
 			break;
 		}
 
 		scan(line, "%d", &numberOfLines);
-		
+
 		debug(("Read %s with %d lines.\n", stageName, numberOfLines));
-		
+
 		auto persistent = map.createPersistent(stageName);
-		
-		for (int i = 0 ; i < numberOfLines ; i++)
+
+		for (int i = 0; i < numberOfLines; i++)
 		{
-			if (!std::getline(file, line)) {
+			if (!std::getline(file, line))
+			{
 				graphics.showErrorAndExit("Unexpected end of file reading save data", "");
 			}
 
 			auto persistData = new PersistData();
 
 			persistData->data = line;
-			
+
 			//debug(("Read %d: %s", i, persistData->data));
-			
+
 			persistent.push_back(persistData->data);
 		}
 	}
@@ -174,42 +176,42 @@ static int confirmSave()
 	{
 		return game.autoSaveSlot;
 	}
-	
+
 	if (!engine.loadWidgets("data/saveWidgets"))
 		graphics.showErrorAndExit(ERR_FILE, "data/saveWidgets");
-	
+
 	int slot[6], quitYes, quitNo;
 	slot[0] = slot[1] = slot[2] = slot[3] = slot[4] = slot[5] = 0;
 	quitYes = quitNo = 0;
-	
+
 	engine.setWidgetVariable("slot1", &slot[0]);
 	engine.setWidgetVariable("slot2", &slot[1]);
 	engine.setWidgetVariable("slot3", &slot[2]);
 	engine.setWidgetVariable("slot4", &slot[3]);
 	engine.setWidgetVariable("slot5", &slot[4]);
 	engine.setWidgetVariable("slot6", &slot[5]);
-	
+
 	engine.setWidgetVariable("contyes", &quitYes);
 	engine.setWidgetVariable("contno", &quitNo);
-	
-	for (int i = 0 ; i < 5 ; i++)
+
+	for (int i = 0; i < 5; i++)
 	{
 		std::string widgetName = fmt::format("slot{}", i + 1);
 		engine.getWidgetByName(widgetName)->label = engine.saveSlot[i];
 	}
-	
+
 	engine.highlightWidget("slot1");
-	
+
 	int menuSound = 0;
-	
+
 	int rtn = -1;
-	
+
 	engine.showWidgetGroup("gameSlots", true);
 	engine.showWidgetGroup("continueconf", false);
-	
+
 	graphics.setFontSize(4);
 	SDL_Surface *title = graphics.quickSprite("savetitle", graphics.getString("Save Game", true));
-	
+
 	while (true)
 	{
 		graphics.updateScreen();
@@ -221,11 +223,11 @@ static int confirmSave()
 
 		if (menuSound)
 			audio.playMenuSound(menuSound);
-		
+
 		graphics.blit(title, 320, 100, graphics.screen, true);
-		
+
 		drawWidgets();
-		
+
 		if (slot[5])
 		{
 			engine.showWidgetGroup("gameSlots", false);
@@ -234,12 +236,12 @@ static int confirmSave()
 			drawWidgets();
 			slot[5] = 0;
 		}
-		
+
 		if (quitYes)
 		{
 			break;
 		}
-		
+
 		if (quitNo)
 		{
 			engine.showWidgetGroup("gameSlots", true);
@@ -248,15 +250,15 @@ static int confirmSave()
 			drawWidgets();
 			quitNo = 0;
 		}
-		
-		for (int i = 0 ; i < 5 ; i++)
+
+		for (int i = 0; i < 5; i++)
 		{
 			if (slot[i])
 			{
 				rtn = i;
 			}
 		}
-		
+
 		if ((slot[0]) || (slot[1]) || (slot[2]) || (slot[3]) || (slot[4]) || (slot[5]))
 		{
 			break;
@@ -264,11 +266,11 @@ static int confirmSave()
 
 		SDL_Delay(16);
 	}
-	
+
 	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.updateScreen();
 	SDL_Delay(250);
-	
+
 	return rtn;
 }
 
@@ -279,9 +281,9 @@ void saveGame()
 	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.updateScreen();
 	SDL_Delay(500);
-	
+
 	int slot = confirmSave();
-	
+
 	if (slot == -1)
 		return;
 
@@ -294,7 +296,7 @@ void saveGame()
 	std::string filename = fmt::format("{}save{}.dat", engine.userHomeDirectory, slot);
 
 	std::ofstream file(filename);
-	
+
 	const auto &podgame = static_cast<PODGame>(game);
 	file.write((char *)&podgame, sizeof podgame);
 	file.close();
@@ -303,13 +305,13 @@ void saveGame()
 	{
 		return graphics.showErrorAndExit("File write error whilst saving game", strerror(errno));
 	}
-	
+
 	filename = fmt::format("{}persistant{}.dat", engine.userHomeDirectory, slot); // sic, to keep compatibility with older versions
 
 	file.open(filename);
-	
+
 	createPersistentMapData();
-	
+
 	for (auto &&objective: gameData.objectives)
 	{
 		for (auto &&subobjective: objective.second)
@@ -317,25 +319,25 @@ void saveGame()
 			fmt::print(file, "\"{}\" \"{}\" {} {}\n", objective.first, subobjective.first, subobjective.second.current, subobjective.second.target);
 		}
 	}
-	
+
 	fmt::print(file, "\"@EOF@\" \"@EOF@\" -1 -1\n");
-	
+
 	for (auto &[levelName, lines]: map.persistents)
 	{
 		if (levelName == "@none@")
 		{
 			continue;
 		}
-		
+
 		fmt::print(file, "{}\n", levelName);
 		fmt::print(file, "{}\n", lines.size());
-	
+
 		for (auto &line: lines)
 		{
 			fmt::print(file, "{}\n", line);
 		}
 	}
-	
+
 	fmt::print(file, "@EOF@\n");
 	file.close();
 
@@ -343,9 +345,9 @@ void saveGame()
 	{
 		return graphics.showErrorAndExit("File write error whilst saving game", "");
 	}
-	
+
 	map.clear();
-	
+
 	SDL_Delay(500);
 
 	graphics.drawString(_("Save Complete"), 320, 260, true, graphics.screen);

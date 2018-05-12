@@ -25,9 +25,8 @@ void addWindParticles()
 {
 	int c;
 	float x, y, dx, dy;
-	
 
-	for (int i = 0 ; i < 50 ; i++)
+	for (int i = 0; i < 50; i++)
 	{
 		if (player.x < 320)
 		{
@@ -37,20 +36,29 @@ void addWindParticles()
 		{
 			x = player.x + Math::rrand(-450, 450);
 		}
-			
+
 		c = Math::prand() % 4;
 		switch (c)
 		{
-			case 0: c = graphics.white; break;
-			case 1: c = graphics.lightGrey; break;
-			case 2: c = graphics.grey; break;
-			case 3: c = graphics.darkGrey; break;
+		case 0:
+			c = graphics.white;
+			break;
+		case 1:
+			c = graphics.lightGrey;
+			break;
+		case 2:
+			c = graphics.grey;
+			break;
+		case 3:
+			c = graphics.darkGrey;
+			break;
 		}
-		
+
 		y = player.y + Math::rrand(-450, 450);
 		dx = Math::rrand(1, 100) * map.windPower;
 		dx /= 100;
-		dy = Math::rrand(1, 10); dy /= 10;
+		dy = Math::rrand(1, 10);
+		dy /= 10;
 		map.addParticle(x, y, dx, dy, 120, c, nullptr, PAR_WEIGHTLESS);
 	}
 }
@@ -60,22 +68,34 @@ void addColorParticles(float x, float y, int amount, int color)
 	int c = color;
 	float dx, dy;
 
-	for (int i = 0 ; i < amount ; i++)
+	for (int i = 0; i < amount; i++)
 	{
 		if (color == -1)
 			c = Math::prand() % 5;
 
 		switch (c)
 		{
-			case 0: c = graphics.white; break;
-			case 1: c = graphics.grey; break;
-			case 2: c = graphics.blue; break;
-			case 3: c = graphics.cyan; break;
-			case 4: c = graphics.red; break;
+		case 0:
+			c = graphics.white;
+			break;
+		case 1:
+			c = graphics.grey;
+			break;
+		case 2:
+			c = graphics.blue;
+			break;
+		case 3:
+			c = graphics.cyan;
+			break;
+		case 4:
+			c = graphics.red;
+			break;
 		}
 
-		dx = Math::rrand(-30, 30); dx /= 30;
-		dy = Math::rrand(-30, 30); dy /= 30;
+		dx = Math::rrand(-30, 30);
+		dx /= 30;
+		dy = Math::rrand(-30, 30);
+		dy /= 30;
 		map.addParticle(x, y, dx, dy, Math::rrand(5, 30), c, nullptr, 0);
 	}
 }
@@ -87,7 +107,7 @@ void addFireTrailParticle(float x, float y)
 
 void addFireParticles(float x, float y, int amount)
 {
-	for (int i = 0 ; i < amount ; i++)
+	for (int i = 0; i < amount; i++)
 	{
 		map.addParticle(x + Math::rrand(-2, 2), y + Math::rrand(-2, 2), 0, 1, Math::rrand(5, 30), graphics.red, graphics.getSprite("Explosion", true), PAR_COLLIDES);
 	}
@@ -104,10 +124,10 @@ void addBubble(float x, float y)
 void throwStalagParticles(float x, float y)
 {
 	Sprite *stalagPiece = graphics.getSprite("StalagPiece", true);
-	
+
 	int amount = Math::rrand(3, 6);
-	
-	for (int i = 0 ; i < amount ; i++)
+
+	for (int i = 0; i < amount; i++)
 	{
 		map.addParticle(x, y, Math::rrand(-2, 2), Math::rrand(-3, -1), Math::rrand(5, 30), graphics.red, stalagPiece, 0);
 	}
@@ -116,10 +136,10 @@ void throwStalagParticles(float x, float y)
 void throwBrickParticles(float x, float y)
 {
 	int amount = Math::rrand(4, 8);
-	
+
 	Sprite *wallPiece = graphics.getSprite("WallPiece", true);
-	
-	for (int i = 0 ; i < amount ; i++)
+
+	for (int i = 0; i < amount; i++)
 	{
 		map.addParticle(x, y, Math::rrand(-2, 2), Math::rrand(-4, -1), Math::rrand(5, 30), graphics.red, wallPiece, 0);
 	}
@@ -130,10 +150,12 @@ void addTeleportParticles(float x, float y, int amount, int soundToPlay)
 	Sprite *teleportStar = graphics.getSprite("TeleportStar", true);
 	float dx, dy;
 
-	for (int i = 0 ; i < amount ; i++)
+	for (int i = 0; i < amount; i++)
 	{
-		dx = Math::rrand(-30, 30); dx /= 20;
-		dy = Math::rrand(-30, 30); dy /= 20;
+		dx = Math::rrand(-30, 30);
+		dx /= 20;
+		dy = Math::rrand(-30, 30);
+		dy /= 20;
 		map.addParticle(x, y, dx, dy, Math::rrand(30, 60), graphics.red, teleportStar, PAR_WEIGHTLESS);
 	}
 
@@ -145,17 +167,16 @@ void addTeleportParticles(float x, float y, int amount, int soundToPlay)
 
 void doParticles()
 {
-	map.particles.remove_if([](auto &&particle)
-	{
+	map.particles.remove_if([](auto &&particle) {
 		int x = (int)(particle.x - engine.playerPosX);
 		int y = (int)(particle.y - engine.playerPosY);
 
 		if (particle.sprite == nullptr)
 		{
 			graphics.lock(graphics.screen);
-			
+
 			graphics.putPixel(x, y, particle.color, graphics.screen);
-			
+
 			graphics.unlock(graphics.screen);
 		}
 		else

@@ -19,14 +19,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class Data {
+class Data
+{
+public:
+	std::string key;
+	std::string value;
+	int current = 0;
+	int target = 1;
 
-	public:
-		std::string key;
-		std::string value;
-		int current = 0;
-		int target = 1;
-		
 	Data(const std::string &key, const std::string &value, int current, int target);
 	void set(int current, int target);
 	bool isComplete();

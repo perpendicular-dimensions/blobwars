@@ -24,41 +24,41 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 static int medalWorker(void *data)
 {
 	std::string *tname = (std::string *)data;
-	
+
 	SDL_mutexP(medalServer.lock);
-	
+
 	int type = medalServer.postMedal(*tname);
-	
+
 	while (!graphics.canShowMedalMessage())
 	{
 		SDL_Delay(100);
 	}
-	
+
 	SDL_Delay(100);
-	
+
 	if (type >= 1 && type <= 3)
 	{
 		audio.playSound(SND_ITEM, CH_ANY);
 		graphics.showMedalMessage(type, medalServer.getMessage());
-		
+
 		if (medalServer.hasRuby())
 		{
 			while (!graphics.canShowMedalMessage())
 			{
 				SDL_Delay(100);
 			}
-			
+
 			SDL_Delay(100);
-			
+
 			audio.playSound(SND_ITEM, CH_ANY);
 			graphics.showMedalMessage(4, medalServer.getRubyMessage());
 		}
 	}
-	
+
 	SDL_mutexV(medalServer.lock);
-	
+
 	delete tname;
-	
+
 	return type;
 }
 
@@ -70,14 +70,14 @@ void presentPlayerMedal(const std::string &tname)
 	// Copy the input, so that threading
 	// doesn't trip us up!
 	std::string *data = new std::string(tname);
-	
-	SDL_Thread *thread = SDL_CreateThread(medalWorker, "MedalWorker", (void*)data);
+
+	SDL_Thread *thread = SDL_CreateThread(medalWorker, "MedalWorker", (void *)data);
 
 	if (thread == nullptr)
 	{
 		printf("Unable to create thread: %s\n", SDL_GetError());
 		printf("Calling medal server directly\n");
-		medalWorker((void*)data);
+		medalWorker((void *)data);
 		return;
 	}
 }
@@ -96,14 +96,14 @@ void addPlayerScore(int score)
 	{
 		presentPlayerMedal("Score_500000");
 	}
-	
+
 	game.score += score;
 }
 
 void resetPlayer()
 {
 	game.getCheckPoint(&player.x, &player.y);
-	
+
 	player.dx = 0;
 	player.dy = 0;
 	player.immune = 120;
@@ -111,11 +111,11 @@ void resetPlayer()
 	player.oxygen = 7;
 	player.fuel = 7;
 	addTeleportParticles(player.x + 10, player.y + 10, 50, SND_TELEPORT2);
-	
+
 	Math::removeBit(&player.flags, ENT_FLIES);
 	Math::removeBit(&player.flags, ENT_TELEPORTING);
 	player.setSprites(graphics.getSprite("BobRight", true), graphics.getSprite("BobLeft", true), graphics.getSprite("BobSpin", true));
-	
+
 	map.windPower = 0;
 	map.windChangeTime = 90;
 }
@@ -125,11 +125,11 @@ void gibPlayer()
 	float x, y, dx, dy;
 	int amount = (game.gore) ? 25 : 150;
 
-	for (int i = 0 ; i < amount ; i++)
+	for (int i = 0; i < amount; i++)
 	{
 		x = player.x + Math::rrand(-3, 3);
 		y = player.y + Math::rrand(-3, 3);
-		
+
 		if (game.gore)
 		{
 			dx = Math::rrand(-5, 5);
@@ -226,7 +226,7 @@ void doPlayer()
 			game.setMissionOver(MIS_PLAYERDEAD);
 		}
 	}
-	
+
 	if (player.flags & ENT_TELEPORTING)
 	{
 		moveEntity(player);
@@ -248,7 +248,7 @@ void doPlayer()
 		}
 
 		player.think();
-		
+
 		if (game.hasAquaLung)
 		{
 			player.oxygen = 7;
@@ -275,7 +275,7 @@ void doPlayer()
 	{
 		player.dx = 0;
 	}
-	
+
 	// toggles the Jetpack if available
 	if (config.isControl(CONTROL::JETPACK))
 	{
@@ -307,10 +307,10 @@ void doPlayer()
 		{
 			engine.setInfoMessage("Don't have jetpack!", 0, INFO_NORMAL);
 		}
-		
+
 		config.resetControl(CONTROL::JETPACK);
 	}
-	
+
 	if (map.isBlizzardLevel)
 	{
 		if ((!config.isControl(CONTROL::LEFT)) && (!config.isControl(CONTROL::RIGHT)))
@@ -325,7 +325,7 @@ void doPlayer()
 	if (config.isControl(CONTROL::LEFT))
 	{
 		player.face = 1;
-		
+
 		if (player.flags & ENT_FLIES)
 		{
 			player.dx -= 0.1;
@@ -368,7 +368,7 @@ void doPlayer()
 			player.dx = PLAYER_WALK_SPEED;
 			player.animate();
 		}
-		
+
 		if (engine.cheatSpeed)
 		{
 			player.dx *= 3;
@@ -431,8 +431,8 @@ void doPlayer()
 			player.dy *= 3;
 		}
 	}
-	
-	#if DEBUG
+
+#if DEBUG
 	if (engine.keyState[SDL_SCANCODE_1])
 		player.currentWeapon = &weapon[WP_PISTOL];
 	else if (engine.keyState[SDL_SCANCODE_2])
@@ -443,8 +443,8 @@ void doPlayer()
 		player.currentWeapon = &weapon[WP_LASER];
 	else if (engine.keyState[SDL_SCANCODE_5])
 		player.currentWeapon = &weapon[WP_SPREAD];
-	#endif
-	
+#endif
+
 	moveEntity(player);
 
 	// Math::limitFloat(player.x, 10, map.limitRight + 608);
@@ -483,13 +483,13 @@ void doPlayer()
 			}
 		}
 	}
-	
+
 	if (player.environment == ENV_WATER)
 	{
 		Math::removeBit(&player.flags, ENT_FLIES);
 
 		addBubble(player.x, player.y);
-		
+
 		if ((player.thinktime == 30) && (player.oxygen == 0))
 		{
 			audio.playSound(SND_DROWNING, CH_ANY);
@@ -497,17 +497,17 @@ void doPlayer()
 	}
 
 	player.think();
-	
+
 	if (player.fuel == 0)
 	{
 		player.setSprites(graphics.getSprite("BobRight", true), graphics.getSprite("BobLeft", true), graphics.getSprite("BobSpin", true));
 	}
-	
+
 	if ((game.hasAquaLung) || (engine.cheatExtras))
 	{
 		player.oxygen = 7;
 	}
-		
+
 	if (engine.cheatFuel)
 	{
 		player.fuel = 7;

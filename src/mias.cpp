@@ -45,12 +45,12 @@ void addMIA(const std::string &name, int x, int y, int type)
 
 	switch (mia.id)
 	{
-		case MIA_NORMAL:
-			mia.setSprites(graphics.getSprite("ScaredMIA", true), graphics.getSprite("ScaredMIA", true), graphics.getSprite("ScaredMIA", true));
-			break;
-		case MIA_AQUA:
-			mia.setSprites(graphics.getSprite("AquaMIA", true), graphics.getSprite("AquaMIA", true), graphics.getSprite("AquaMIA", true));
-			break;
+	case MIA_NORMAL:
+		mia.setSprites(graphics.getSprite("ScaredMIA", true), graphics.getSprite("ScaredMIA", true), graphics.getSprite("ScaredMIA", true));
+		break;
+	case MIA_AQUA:
+		mia.setSprites(graphics.getSprite("AquaMIA", true), graphics.getSprite("AquaMIA", true), graphics.getSprite("AquaMIA", true));
+		break;
 	}
 }
 
@@ -96,7 +96,6 @@ void doMIAs()
 
 				graphics.blit(mia.getFaceImage(), x, y, graphics.screen, false);
 				mia.animate();
-
 			}
 
 			if ((Collision::collision(player, mia)) && (player.health > 0) && (!(player.flags & ENT_TELEPORTING)))
@@ -108,7 +107,7 @@ void doMIAs()
 					audio.playSound(SND_TELEPORT1, CH_ANY, mia.x);
 				}
 			}
-			
+
 			if ((mia.id == MIA_NORMAL) && (mia.environment == ENV_WATER))
 			{
 				mia.id = MIA_AQUA;
@@ -118,7 +117,7 @@ void doMIAs()
 
 			if (mia.flags & ENT_DYING)
 			{
-				for (int i = 0 ; i < 2 ; i++)
+				for (int i = 0; i < 2; i++)
 					map.addParticle(mia.x + Math::rrand(-2, 15), mia.y + Math::prand() % mia.height, 0, Math::rrand(-5, -1), Math::rrand(30, 60), graphics.red, graphics.getSprite("TeleportStar", true), PAR_WEIGHTLESS);
 
 				if (mia.health <= 100)
@@ -146,7 +145,7 @@ void doMIAs()
 						message = fmt::format(_("Rescue {} MIAs - Objective Complete - Checkpoint Reached!"), map.requiredMIAs);
 						game.setObjectiveCheckPoint();
 					}
-					
+
 					// MIA Medals
 					if (game.totalMIAsRescued == 50)
 					{

@@ -19,13 +19,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class RadarBlip {
+class RadarBlip
+{
+public:
+	int x, y;
+	unsigned char type;
 
-	public:
-		
-		int x, y;
-		unsigned char type;
-
-	RadarBlip(int x, int y, int type): x(x), y(y), type(type) {}
-
+	RadarBlip(int x, int y, int type):
+	                x(x), y(y), type(type) {}
 };

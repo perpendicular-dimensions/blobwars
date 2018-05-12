@@ -26,7 +26,7 @@ void addObstacle(const std::string &name, int x, int y, const std::string &sprit
 	auto &obstacle = map.obstacles.emplace_back(0, name, x, y);
 
 	obstacle.setSprites(graphics.getSprite(spriteName, true), graphics.getSprite(spriteName, true), graphics.getSprite(spriteName, true));
-	
+
 	if (map.isIceLevel)
 	{
 		Math::addBit(&obstacle.flags, ENT_SLIDES);
@@ -48,7 +48,7 @@ bool checkObstacleContact(Entity &ent, int dir)
 		{
 			continue;
 		}
-			
+
 		if (dir == DIR_X)
 		{
 			collision = Collision::collision(ent.x + ent.dx, ent.y, ent.width, ent.height - 1, obstacle.x, obstacle.y, obstacle.width, obstacle.height);
@@ -69,9 +69,11 @@ bool checkObstacleContact(Entity &ent, int dir)
 				if ((ent.y + ent.height == obstacle.y + obstacle.height) || ((ent.flags & ENT_BULLET) && (ent.owner == &player)))
 				{
 					obstacle.dx = (ent.dx / 2);
-					
-					if (ent.dx < 0) ent.x = obstacle.x + obstacle.width;
-					if (ent.dx > 0) ent.x = obstacle.x - ent.width;
+
+					if (ent.dx < 0)
+						ent.x = obstacle.x + obstacle.width;
+					if (ent.dx > 0)
+						ent.x = obstacle.x - ent.width;
 				}
 			}
 

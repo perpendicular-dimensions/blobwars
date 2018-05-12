@@ -37,130 +37,130 @@ static void createStatsPanel(int page)
 
 	graphics.drawString(_("Metal Blob Solid : Statistics"), 200, y, true, image);
 	y += 10;
-	
+
 	Sprite *arrows = graphics.getSprite("HubArrows", true);
 
 	switch (page)
 	{
-		case 0:
-			graphics.drawString(_("Skill Level:"), x1, y += 20, false, image);
-			message = fmt::format("{}", _(skill[game.skill]));
+	case 0:
+		graphics.drawString(_("Skill Level:"), x1, y += 20, false, image);
+		message = fmt::format("{}", _(skill[game.skill]));
+		graphics.drawString(message, x2, y, false, image);
+
+		graphics.drawString(_("Score:"), x1, y += 20, false, image);
+		message = fmt::format("{}", game.score);
+		graphics.drawString(message, x2, y, false, image);
+
+		graphics.drawString(_("MIAs Saved:"), x1, y += 20, false, image);
+		message = fmt::format("{}", game.totalMIAsRescued);
+		graphics.drawString(message, x2, y, false, image);
+
+		graphics.drawString(_("Objectives Completed:"), x1, y += 20, false, image);
+		message = fmt::format("{}", game.totalObjectivesCompleted);
+		graphics.drawString(message, x2, y, false, image);
+
+		// Don't do this on Extreme or it will always say 100%
+		if (game.skill < 3)
+		{
+			graphics.drawString(_("Percentage Complete:"), x1, y += 20, false, image);
+			message = fmt::format("{}%", gameData.getPercentageComplete());
 			graphics.drawString(message, x2, y, false, image);
+		}
 
-			graphics.drawString(_("Score:"), x1, y += 20, false, image);
-			message = fmt::format("{}", game.score);
+		message = fmt::format("{} - {:02d}:{:02d}:{:02d}", _("Total Game Time"), game.totalHours, game.totalMinutes, game.totalSeconds);
+		graphics.drawString(message, 200, y += 110, true, image);
+
+		break;
+
+	case 1:
+
+		graphics.drawString(_("Enemies Defeated:"), x1, y += 20, false, image);
+		message = fmt::format("{}", game.totalEnemiesDefeated);
+		graphics.drawString(message, x2, y, false, image);
+
+		graphics.drawString(_("Items Collected:"), x1, y += 20, false, image);
+		message = fmt::format("{}", game.totalItemsCollected);
+		graphics.drawString(message, x2, y, false, image);
+
+		graphics.drawString(_("Bonuses Picked Up:"), x1, y += 20, false, image);
+		message = fmt::format("{}", game.totalBonusesCollected);
+		graphics.drawString(message, x2, y, false, image);
+
+		graphics.drawString(_("Best Combo:"), x1, y += 20, false, image);
+		message = fmt::format(_("{} Hits"), game.maxComboHits);
+		graphics.drawString(message, x2, y, false, image);
+
+		graphics.drawString(_("Missions Started:"), x1, y += 20, false, image);
+		message = fmt::format("{}", game.levelsStarted);
+		graphics.drawString(message, x2, y, false, image);
+
+		graphics.drawString(_("Continues Used:"), x1, y += 20, false, image);
+		message = fmt::format("{}", game.continuesUsed);
+		graphics.drawString(message, x2, y, false, image);
+
+		if ((game.continuesUsed > 0) && (game.levelsStarted > 0))
+		{
+			graphics.drawString(_("Average Continue Usage:"), x1, y += 20, false, image);
+			message = fmt::format("{}", (game.continuesUsed / game.levelsStarted));
 			graphics.drawString(message, x2, y, false, image);
+		}
 
-			graphics.drawString(_("MIAs Saved:"), x1, y += 20, false, image);
-			message = fmt::format("{}", game.totalMIAsRescued);
-			graphics.drawString(message, x2, y, false, image);
+		graphics.drawString(_("Escapes Used:"), x1, y += 20, false, image);
+		message = fmt::format("{}", game.escapes);
+		graphics.drawString(message, x2, y, false, image);
 
-			graphics.drawString(_("Objectives Completed:"), x1, y += 20, false, image);
-			message = fmt::format("{}", game.totalObjectivesCompleted);
-			graphics.drawString(message, x2, y, false, image);
+		break;
 
-			// Don't do this on Extreme or it will always say 100%
-			if (game.skill < 3)
-			{
-				graphics.drawString(_("Percentage Complete:"), x1, y += 20, false, image);
-				message = fmt::format("{}%", gameData.getPercentageComplete());
-				graphics.drawString(message, x2, y, false, image);
-			}
+	case 2:
 
-			message = fmt::format("{} - {:02d}:{:02d}:{:02d}", _("Total Game Time"), game.totalHours, game.totalMinutes, game.totalSeconds);
-			graphics.drawString(message, 200, y += 110, true, image);
+		x1 = 20;
+		x2 = 170;
+		x3 = 300;
 
-			break;
+		graphics.drawString(_("Weapon"), x1, y += 20, false, image);
+		graphics.drawString(_("Ammo Used"), x2, y, false, image);
+		graphics.drawString(_("Accuracy"), x3, y, false, image);
 
-		case 1:
+		graphics.drawString(_("Pistol"), x1, y += 30, false, image);
+		message = fmt::format("{}", game.bulletsFired[WP_PISTOL]);
+		graphics.drawString(message, x2, y, false, image);
+		message = fmt::format("{}%", game.getWeaponAccuracy(WP_PISTOL));
+		graphics.drawString(message, x3, y, false, image);
 
-			graphics.drawString(_("Enemies Defeated:"), x1, y += 20, false, image);
-			message = fmt::format("{}", game.totalEnemiesDefeated);
-			graphics.drawString(message, x2, y, false, image);
+		graphics.drawString(_("Machine Gun"), x1, y += 20, false, image);
+		message = fmt::format("{}", game.bulletsFired[WP_MACHINEGUN]);
+		graphics.drawString(message, x2, y, false, image);
+		message = fmt::format("{}%", game.getWeaponAccuracy(WP_MACHINEGUN));
+		graphics.drawString(message, x3, y, false, image);
 
-			graphics.drawString(_("Items Collected:"), x1, y += 20, false, image);
-			message = fmt::format("{}", game.totalItemsCollected);
-			graphics.drawString(message, x2, y, false, image);
+		graphics.drawString(_("Laser Cannon"), x1, y += 20, false, image);
+		message = fmt::format("{}", game.bulletsFired[WP_LASER]);
+		graphics.drawString(message, x2, y, false, image);
+		message = fmt::format("{}%", game.getWeaponAccuracy(WP_LASER));
+		graphics.drawString(message, x3, y, false, image);
 
-			graphics.drawString(_("Bonuses Picked Up:"), x1, y += 20, false, image);
-			message = fmt::format("{}", game.totalBonusesCollected);
-			graphics.drawString(message, x2, y, false, image);
+		graphics.drawString(_("Grenades"), x1, y += 20, false, image);
+		message = fmt::format("{}", game.bulletsFired[WP_GRENADES]);
+		graphics.drawString(message, x2, y, false, image);
+		message = fmt::format("{}%", game.getWeaponAccuracy(WP_GRENADES));
+		graphics.drawString(message, x3, y, false, image);
 
-			graphics.drawString(_("Best Combo:"), x1, y += 20, false, image);
-			message = fmt::format(_("{} Hits"), game.maxComboHits);
-			graphics.drawString(message, x2, y, false, image);
-			
-			graphics.drawString(_("Missions Started:"), x1, y += 20, false, image);
-			message = fmt::format("{}", game.levelsStarted);
-			graphics.drawString(message, x2, y, false, image);
+		graphics.drawString(_("Spread Gun"), x1, y += 20, false, image);
+		message = fmt::format("{}", game.bulletsFired[WP_SPREAD]);
+		graphics.drawString(message, x2, y, false, image);
+		message = fmt::format("{}%", game.getWeaponAccuracy(WP_SPREAD));
+		graphics.drawString(message, x3, y, false, image);
 
-			graphics.drawString(_("Continues Used:"), x1, y += 20, false, image);
-			message = fmt::format("{}", game.continuesUsed);
-			graphics.drawString(message, x2, y, false, image);
-			
-			if ((game.continuesUsed > 0) && (game.levelsStarted > 0))
-			{
-				graphics.drawString(_("Average Continue Usage:"), x1, y += 20, false, image);
-				message = fmt::format("{}", (game.continuesUsed / game.levelsStarted));
-				graphics.drawString(message, x2, y, false, image);
-			}
+		graphics.drawString(_("Total"), x1, y += 30, false, image);
+		message = fmt::format("{}", game.getTotalBulletsFired());
+		graphics.drawString(message, x2, y, false, image);
+		message = fmt::format("{}%", game.getTotalAccuracy());
+		graphics.drawString(message, x3, y, false, image);
 
-			graphics.drawString(_("Escapes Used:"), x1, y += 20, false, image);
-			message = fmt::format("{}", game.escapes);
-			graphics.drawString(message, x2, y, false, image);
+		message = fmt::format("{} - {}", _("Most Used Weapon"), _(weapon[game.getMostUsedWeapon()].name));
+		graphics.drawString(message, 200, y += 50, true, image);
 
-			break;
-
-		case 2:
-		
-			x1 = 20;
-			x2 = 170;
-			x3 = 300;
-
-			graphics.drawString(_("Weapon"), x1, y += 20, false, image);
-			graphics.drawString(_("Ammo Used"), x2, y, false, image);
-			graphics.drawString(_("Accuracy"), x3, y, false, image);
-
-			graphics.drawString(_("Pistol"), x1, y += 30, false, image);
-			message = fmt::format("{}", game.bulletsFired[WP_PISTOL]);
-			graphics.drawString(message, x2, y, false, image);
-			message = fmt::format("{}%", game.getWeaponAccuracy(WP_PISTOL));
-			graphics.drawString(message, x3, y, false, image);
-
-			graphics.drawString(_("Machine Gun"), x1, y += 20, false, image);
-			message = fmt::format("{}", game.bulletsFired[WP_MACHINEGUN]);
-			graphics.drawString(message, x2, y, false, image);
-			message = fmt::format("{}%", game.getWeaponAccuracy(WP_MACHINEGUN));
-			graphics.drawString(message, x3, y, false, image);
-
-			graphics.drawString(_("Laser Cannon"), x1, y += 20, false, image);
-			message = fmt::format("{}", game.bulletsFired[WP_LASER]);
-			graphics.drawString(message, x2, y, false, image);
-			message = fmt::format("{}%", game.getWeaponAccuracy(WP_LASER));
-			graphics.drawString(message, x3, y, false, image);
-			
-			graphics.drawString(_("Grenades"), x1, y += 20, false, image);
-			message = fmt::format("{}", game.bulletsFired[WP_GRENADES]);
-			graphics.drawString(message, x2, y, false, image);
-			message = fmt::format("{}%", game.getWeaponAccuracy(WP_GRENADES));
-			graphics.drawString(message, x3, y, false, image);
-
-			graphics.drawString(_("Spread Gun"), x1, y += 20, false, image);
-			message = fmt::format("{}", game.bulletsFired[WP_SPREAD]);
-			graphics.drawString(message, x2, y, false, image);
-			message = fmt::format("{}%", game.getWeaponAccuracy(WP_SPREAD));
-			graphics.drawString(message, x3, y, false, image);
-			
-			graphics.drawString(_("Total"), x1, y += 30, false, image);
-			message = fmt::format("{}", game.getTotalBulletsFired());
-			graphics.drawString(message, x2, y, false, image);
-			message = fmt::format("{}%", game.getTotalAccuracy());
-			graphics.drawString(message, x3, y, false, image);
-
-			message = fmt::format("{} - {}", _("Most Used Weapon"), _(weapon[game.getMostUsedWeapon()].name));
-			graphics.drawString(message, 200, y += 50, true, image);
-
-			break;
+		break;
 	}
 
 	graphics.blit(arrows->getFrame(0), 150, 260, image, false);
@@ -208,7 +208,7 @@ static void loadLevelBrief(const std::string &levelName)
 			}
 		}
 	}
-	
+
 	graphics.drawChatString(image, 40);
 }
 
@@ -225,7 +225,7 @@ static void createObjectivesPanel(const std::string &levelName)
 	int x1 = 60;
 	int x2 = 260;
 	int y = 15;
-	
+
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 
 	text = fmt::format(_("Information for {}"), _(levelName));
@@ -238,7 +238,8 @@ static void createObjectivesPanel(const std::string &levelName)
 
 		gameData.getMIARescueCount(levelName, &current, &target);
 
-		if (target > 0) {
+		if (target > 0)
+		{
 			graphics.drawString(_("MIAs Rescued"), x1, y += 20, false, image);
 			text = fmt::format("{} / {}", current, target);
 			(current == target) ? graphics.setFontColor(0x00, 0xff, 0x00, 0x00, 0x00, 0x00) : graphics.setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
@@ -278,7 +279,8 @@ static void createObjectivesPanel(const std::string &levelName)
 
 			if (completion.target == 1)
 			{
-				text = (completion.isComplete()) ? _("Completed") : _("Incomplete");;
+				text = (completion.isComplete()) ? _("Completed") : _("Incomplete");
+				;
 			}
 			else
 			{
@@ -368,7 +370,7 @@ static void createMIAPanel(int start, int max)
 	Sprite *arrows = graphics.getSprite("HubArrows", true);
 
 	if (start > 0)
- 		graphics.blit(arrows->getFrame(0), 150, 260, image, false);
+		graphics.blit(arrows->getFrame(0), 150, 260, image, false);
 	else
 		graphics.blit(arrows->getFrame(1), 150, 260, image, false);
 
@@ -391,7 +393,7 @@ static bool requirementMet(const std::string &requiredLevel)
 			return true;
 		}
 	}
-	
+
 	if (engine.cheatLevels)
 	{
 		return true;
@@ -409,16 +411,16 @@ int doHub()
 {
 	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.delay(1000);
-	
+
 	graphics.free();
 	audio.free();
 
 	graphics.loadBackground("gfx/main/worldMap.jpg");
 	audio.loadMusic("music/hub");
-	
+
 	// we might want this now, for medals
 	audio.loadSound(SND_ITEM, "sound/item");
-	
+
 	graphics.quickSprite("cheatHeader", graphics.loadImage("gfx/main/cheats.png"));
 	graphics.quickSprite("optionsHeader", graphics.loadImage("gfx/main/options.png"));
 	graphics.quickSprite("keyHeader", graphics.loadImage("gfx/main/keyConfig.png"));
@@ -428,7 +430,7 @@ int doHub()
 	std::string filename;
 
 	auto &cursor = graphics.addSprite("Cursor");
-	for (int i = 0 ; i < 6 ; i++)
+	for (int i = 0; i < 6; i++)
 	{
 		filename = fmt::format("gfx/main/cursor{}.png", i + 1);
 		cursor.addFrame(graphics.loadImage(filename), 10);
@@ -436,17 +438,17 @@ int doHub()
 
 	auto &newTarget = graphics.addSprite("NewTarget");
 	auto &visitedTarget = graphics.addSprite("VisitedTarget");
-	
-	for (int i = 0 ; i < 5 ; i++)
+
+	for (int i = 0; i < 5; i++)
 	{
 		filename = fmt::format("gfx/sprites/miaSignal{}.png", i + 1);
-		
+
 		newTarget.addFrame(graphics.loadImage(filename, -60, 0, 0), 15);
 		visitedTarget.addFrame(graphics.loadImage(filename, 0, 0, 0), 15);
 	}
 
 	auto &hubIcons = graphics.addSprite("HubIcons");
-	for (int i = 0 ; i < 6 ; i++)
+	for (int i = 0; i < 6; i++)
 	{
 		filename = fmt::format("gfx/main/hubIcon{}.png", i + 1);
 		hubIcons.addFrame(graphics.loadImage(filename), 60);
@@ -466,7 +468,7 @@ int doHub()
 
 	graphics.setFontSize(0);
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
-	
+
 	gameData.calculateWorldCompleted();
 
 	for (auto line: split(engine.dataBuffer, '\n'))
@@ -479,7 +481,7 @@ int doHub()
 		{
 			break;
 		}
-		
+
 		// don't show boss levels on Easy (they might be cheating!)
 		if (game.skill == 0)
 		{
@@ -502,21 +504,21 @@ int doHub()
 	}
 
 	int rtn = -1;
-	
+
 	game.stageName = "@none@";
 
 	bool showData = false;
 	bool showStats = false;
 	bool showMIAs = false;
-	
+
 	int miaStart = 0;
 	int miaMax = gameData.countMIAs();
 	int page = 0;
-	
+
 	int labelX, labelY;
 
 	bool validStage = false;
-	
+
 	if ((hubs.empty()) && (gameData.completedWorld))
 	{
 		game.setMapName("data/spaceStation");
@@ -525,23 +527,23 @@ int doHub()
 		showData = true;
 		showStats = showMIAs = false;
 		validStage = true;
-		
+
 		// Wait wait wait... we're in easy mode. Game ends here.
 		if (game.skill == 0)
 		{
 			hubs.clear();
 			return SECTION_EASYOVER;
 		}
-		
+
 		presentPlayerMedal("World_Complete");
 	}
-	
+
 	audio.playMusic();
 
 	int labelWidth = 0;
 	uint32_t frameLimit = SDL_GetTicks() + 16;
 	uint32_t now = SDL_GetTicks();
-	
+
 	while (rtn == -1)
 	{
 		graphics.updateScreen();
@@ -555,18 +557,18 @@ int doHub()
 			std::string message = fmt::format("{} : {}", _("Selected Destination"), _(game.stageName));
 			graphics.drawString(message, 320, 409, true, graphics.screen, cache);
 		}
-		
+
 		graphics.drawRect(10, 430, 620, 40, graphics.black, graphics.white, graphics.screen);
 
-		#if DEBUG
+#if DEBUG
 		static Graphics::SurfaceCache posCache;
 		std::string pos = fmt::format("{:03d}:{:03d}", engine.getMouseX(), engine.getMouseY());
 		graphics.drawString(pos, 320, 15, true, graphics.screen, posCache);
-		#endif
+#endif
 
 		engine.getInput();
 		config.populate();
-		
+
 		int mouseXDelta = 0;
 		int mouseYDelta = 0;
 
@@ -574,17 +576,17 @@ int doHub()
 		{
 			mouseXDelta += 5;
 		}
-		
+
 		if (config.isControl(CONTROL::LEFT))
 		{
 			mouseXDelta -= 5;
 		}
-		
+
 		if (config.isControl(CONTROL::DOWN))
 		{
 			mouseYDelta += 5;
 		}
-		
+
 		if (config.isControl(CONTROL::UP) || config.isControl(CONTROL::JUMP))
 		{
 			mouseYDelta -= 5;
@@ -634,7 +636,7 @@ int doHub()
 		}
 
 		// Collisions for Panel
-		for (int i = ((1 - validStage) * 2) ; i < 6 ; i++)
+		for (int i = ((1 - validStage) * 2); i < 6; i++)
 		{
 			graphics.blit(hubIcons.getFrame(i), 50 + (i * 100), 440, graphics.screen, false);
 			if (Collision::collision(engine.getMouseX(), engine.getMouseY(), 1, 1, 50 + (i * 100), 440, hubIcons.getFrame(i)->w, hubIcons.getFrame(i)->h))
@@ -643,32 +645,32 @@ int doHub()
 				{
 					switch (i)
 					{
-						case 0:
-							rtn = SECTION_GAME;
-							break;
-						case 1:
-							createObjectivesPanel(game.stageName);
-							showData = !showData;
-							showStats = showMIAs = false;
-							break;
-						case 2:
-							createMIAPanel(miaStart, miaMax);
-							showStats = showData = false;
-							showMIAs = !showMIAs;
-							break;
-						case 3:
-							createStatsPanel(page);
-							showStats = !showStats;
-							showData = showMIAs = false;
-							break;
-						case 4:
-							showOptions();
-							graphics.setFontSize(0);
-							graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
-							break;
-						case 5:
-							rtn = SECTION_TITLE;
-							break;
+					case 0:
+						rtn = SECTION_GAME;
+						break;
+					case 1:
+						createObjectivesPanel(game.stageName);
+						showData = !showData;
+						showStats = showMIAs = false;
+						break;
+					case 2:
+						createMIAPanel(miaStart, miaMax);
+						showStats = showData = false;
+						showMIAs = !showMIAs;
+						break;
+					case 3:
+						createStatsPanel(page);
+						showStats = !showStats;
+						showData = showMIAs = false;
+						break;
+					case 4:
+						showOptions();
+						graphics.setFontSize(0);
+						graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
+						break;
+					case 5:
+						rtn = SECTION_TITLE;
+						break;
 					}
 
 					engine.mouseLeft = false;
@@ -676,11 +678,11 @@ int doHub()
 				}
 			}
 		}
-		
+
 		// Collisions for Panel Buttons
 		if ((showMIAs) || (showStats))
 		{
-		    // SDL_SCANCODE_LCTRL is the "fire" button.
+			// SDL_SCANCODE_LCTRL is the "fire" button.
 			if (engine.mouseLeft || config.isControl(CONTROL::FIRE))
 			{
 				if (Collision::collision(engine.getMouseX(), engine.getMouseY(), 1, 1, 270, 310, 32, 32))
@@ -703,7 +705,6 @@ int doHub()
 					engine.mouseLeft = 0;
 					config.resetControl(CONTROL::FIRE);
 				}
-
 
 				if (Collision::collision(engine.getMouseX(), engine.getMouseY(), 1, 1, 320, 310, 32, 32))
 				{

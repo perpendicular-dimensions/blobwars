@@ -113,28 +113,28 @@ void Entity::checkEnvironment()
 {
 	switch (environment)
 	{
-		case ENV_AIR:
-			Math::limitChar(&(oxygen += 2), 0, 7);
-			break;
-		case ENV_WATER:
-			if (!(flags & ENT_SWIMS))
+	case ENV_AIR:
+		Math::limitChar(&(oxygen += 2), 0, 7);
+		break;
+	case ENV_WATER:
+		if (!(flags & ENT_SWIMS))
+		{
+			Math::limitChar(&(oxygen -= 1), 0, 7);
+			if (oxygen == 0)
 			{
-				Math::limitChar(&(oxygen -= 1), 0, 7);
-				if (oxygen == 0)
-				{
-					health--;
-					thinktime = 30;
-				}
-			}
-			break;
-		case ENV_SLIME:
-			if (immune == 0)
 				health--;
-			break;
-		case ENV_LAVA:
-			if (immune == 0)
-				health -= 2;
-			break;
+				thinktime = 30;
+			}
+		}
+		break;
+	case ENV_SLIME:
+		if (immune == 0)
+			health--;
+		break;
+	case ENV_LAVA:
+		if (immune == 0)
+			health -= 2;
+		break;
 	}
 }
 
@@ -157,7 +157,7 @@ void Entity::think()
 	{
 		health--;
 	}
-		
+
 	if (flags & ENT_FLIES)
 	{
 		if (thinktime == 0)

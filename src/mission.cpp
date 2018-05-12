@@ -29,7 +29,7 @@ static void skipBossMission()
 		gameData.addCompletedObjective("BioMech Supply Depot", "Easy Mode Skip", 1, 1);
 		game.stagesCleared = 6;
 	}
-	
+
 	if (game.stagesCleared == 10)
 	{
 		gameData.addCompletedObjective("BioMech Communications", "Easy Mode Skip", 1, 1);
@@ -41,7 +41,7 @@ static void skipBossMission()
 		graphics.delay(2000);
 		SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	}
-	
+
 	if (game.stagesCleared == 15)
 	{
 		gameData.addCompletedObjective("BioMech Assimilator", "Easy Mode Skip", 1, 1);
@@ -53,7 +53,7 @@ static void skipBossMission()
 		graphics.delay(2000);
 		SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	}
-	
+
 	if (game.stagesCleared == 21)
 	{
 		gameData.addCompletedObjective("BioMech HQ", "Easy Mode Skip", 1, 1);
@@ -68,12 +68,12 @@ void processPostMissionData()
 		presentPlayerMedal(game.stageName);
 		game.stagesCleared++;
 	}
-	
+
 	if (game.skill == 0)
 	{
 		skipBossMission();
 	}
-	
+
 	gameData.setMIARescueCount(map.name, map.foundMIAs, map.totalMIAs);
 
 	for (auto &&objective: map.objectives)
@@ -86,7 +86,7 @@ void processPostMissionData()
 		bool miaFound = mia.health <= 0;
 
 		std::string text = "MIA_" + mia.name;
-		
+
 		if (miaFound)
 		{
 			gameData.addCompletedObjective(map.name, text, 1, 1);
@@ -98,12 +98,12 @@ void processPostMissionData()
 	}
 
 	game.totalUpStats();
-	
+
 	if (game.totalEnemiesDefeated >= 1000)
 	{
 		presentPlayerMedal("1000_Enemies");
 	}
-	
+
 	if (game.totalEnemiesDefeated >= 2500)
 	{
 		presentPlayerMedal("2500_Enemies");
@@ -130,7 +130,7 @@ void showMissionClear()
 
 	SDL_Surface *panel = graphics.alphaRect(550, 420, 0x00, 0x00, 0x00);
 	SDL_SetAlpha(panel, 180);
-	graphics.drawRect(1, 1, panel->w - 2, panel->h - 2 , graphics.black, graphics.white, panel);
+	graphics.drawRect(1, 1, panel->w - 2, panel->h - 2, graphics.black, graphics.white, panel);
 
 	graphics.blit(panel, (640 - panel->w) / 2, (480 - panel->h) / 2, graphics.background, false);
 
@@ -159,9 +159,9 @@ void showMissionClear()
 			continue;
 
 		mia.x = 700;
-		
+
 		mia.y = miaY;
-		
+
 		count++;
 
 		if (count > colCount)
@@ -186,7 +186,7 @@ void showMissionClear()
 	engine.clearInput();
 
 	y = 130;
-	
+
 	if (map.totalMIAs > 0)
 	{
 		graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
@@ -213,8 +213,8 @@ void showMissionClear()
 		y += 20;
 
 		graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
-		
-		if ((game.skill < 3) &&  (contains(objective.description, "L.R.T.S.")) && (!gameData.completedWorld))
+
+		if ((game.skill < 3) && (contains(objective.description, "L.R.T.S.")) && (!gameData.completedWorld))
 		{
 			graphics.drawString(_("???? ???????? ????"), col1, y, TXT_RIGHT, graphics.background);
 		}
@@ -243,7 +243,7 @@ void showMissionClear()
 			graphics.drawString(_("Completed"), col2, y, TXT_LEFT, graphics.background);
 		}
 	}
-	
+
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 
 	unsigned int frameLimit = SDL_GetTicks() + 16;
@@ -292,7 +292,7 @@ void showMissionClear()
 
 				count++;
 			}
-			
+
 			if (perfect)
 			{
 				Math::limitInt(&(--nextStarBurst), 0, 999);
@@ -304,10 +304,12 @@ void showMissionClear()
 					px = Math::rrand(50, 585);
 					py = Math::rrand(55, 85);
 
-					for (int i = 0 ; i < 50 ; i++)
+					for (int i = 0; i < 50; i++)
 					{
-						dx = Math::rrand(-30, 30); dx /= 20;
-						dy = Math::rrand(-30, 30); dy /= 20;
+						dx = Math::rrand(-30, 30);
+						dx /= 20;
+						dy = Math::rrand(-30, 30);
+						dy /= 20;
 						map.addParticle(px, py, dx, dy, Math::rrand(30, 60), graphics.red, teleportStar, PAR_WEIGHTLESS);
 					}
 				}
@@ -333,4 +335,3 @@ void showMissionClear()
 		saveGame();
 	}
 }
-

@@ -44,16 +44,16 @@ static void drawMap(int mapX, int mapY)
 	SDL_Rect r;
 	int tile = 0;
 
-	for (int x = 0 ; x < 20 ; x++)
+	for (int x = 0; x < 20; x++)
 	{
-		for (int y = 0 ; y < 15 ; y++)
+		for (int y = 0; y < 15; y++)
 		{
 			r.x = x * BRICKSIZE;
 			r.y = y * BRICKSIZE;
 			r.w = r.h = BRICKSIZE - 1;
-			
+
 			tile = map.data[x + mapX][y + mapY];
-			
+
 			if (tile == MAP_WATERANIM)
 			{
 				tile = graphics.getWaterAnim();
@@ -62,7 +62,7 @@ static void drawMap(int mapX, int mapY)
 			if (tile > 0)
 			{
 				graphics.blit(graphics.tile[tile], r.x, r.y, graphics.screen, false);
-				
+
 				if ((tile >= MAP_NORESET) && (tile < MAP_DECORATION))
 				{
 					graphics.drawRect(r.x, r.y, 32, 4, graphics.yellow, graphics.screen);
@@ -87,28 +87,28 @@ static void showMap(int *mapX, int *mapY)
 
 		if (engine.keyState[SDL_SCANCODE_SPACE])
 			break;
-			
-		for (int x = 0 ; x < MAPWIDTH ; x++)
+
+		for (int x = 0; x < MAPWIDTH; x++)
 		{
-			for (int y = 0 ; y < MAPHEIGHT ; y++)
+			for (int y = 0; y < MAPHEIGHT; y++)
 			{
 				switch (map.data[x][y])
 				{
-					case 0:
-						graphics.putPixel(x, y, 9, graphics.screen);
-						break;
-					case 1:
-						graphics.putPixel(x, y,graphics.blue, graphics.screen);
-						break;
-					case 2:
-						graphics.putPixel(x, y, graphics.green, graphics.screen);
-						break;
-					case 3:
-						graphics.putPixel(x, y, graphics.red, graphics.screen);
-						break;
-					default:
-						graphics.putPixel(x, y, graphics.white, graphics.screen);
-						break;
+				case 0:
+					graphics.putPixel(x, y, 9, graphics.screen);
+					break;
+				case 1:
+					graphics.putPixel(x, y, graphics.blue, graphics.screen);
+					break;
+				case 2:
+					graphics.putPixel(x, y, graphics.green, graphics.screen);
+					break;
+				case 3:
+					graphics.putPixel(x, y, graphics.red, graphics.screen);
+					break;
+				default:
+					graphics.putPixel(x, y, graphics.white, graphics.screen);
+					break;
 				}
 			}
 		}
@@ -156,8 +156,10 @@ static int nextBlock(int current, int dir)
 	{
 		wanted += dir;
 
-		if (wanted < 0) return current;
-		if (wanted > 255) return current;
+		if (wanted < 0)
+			return current;
+		if (wanted > 255)
+			return current;
 
 		if (graphics.tile[wanted])
 			return wanted;
@@ -166,13 +168,13 @@ static int nextBlock(int current, int dir)
 
 static void drawEnemies()
 {
-	Entity *enemy = (Entity*)map.enemyList.getHead();
+	Entity *enemy = (Entity *)map.enemyList.getHead();
 
 	int x, y, absX, absY;
 
 	while (enemy->next != nullptr)
 	{
-		enemy = (Entity*)enemy->next;
+		enemy = (Entity *)enemy->next;
 
 		if (enemy->owner != enemy)
 		{
@@ -203,12 +205,12 @@ static void deleteEnemy(int x, int y)
 	x *= BRICKSIZE;
 	y *= BRICKSIZE;
 
-	Entity *enemy = (Entity*)map.enemyList.getHead();
+	Entity *enemy = (Entity *)map.enemyList.getHead();
 	Entity *previous = enemy;
 
 	while (enemy->next != nullptr)
 	{
-		enemy = (Entity*)enemy->next;
+		enemy = (Entity *)enemy->next;
 
 		if ((enemy->x == x) && (enemy->y == y))
 		{
@@ -225,11 +227,11 @@ static void deleteEnemy(int x, int y)
 static void saveMap(const std::string &name)
 {
 	std::ofstream file(name);
-	Entity *enemy = (Entity*)map.enemyList.getHead();
+	Entity *enemy = (Entity *)map.enemyList.getHead();
 
-	for (int y = 0 ; y < MAPHEIGHT ; y++)
+	for (int y = 0; y < MAPHEIGHT; y++)
 	{
-		for (int x = 0 ; x < MAPWIDTH ; x++)
+		for (int x = 0; x < MAPWIDTH; x++)
 		{
 			fmt::print(file, "{} ", map.data[x][y]);
 		}
@@ -240,10 +242,10 @@ static void saveMap(const std::string &name)
 	{
 		file << str;
 	}
-		
+
 	while (enemy->next != nullptr)
 	{
-		enemy = (Entity*)enemy->next;
+		enemy = (Entity *)enemy->next;
 		fmt::print(file, "EMH ENEMY \"{}\" {} {}\n", enemy->name, (int)enemy->x, (int)enemy->y);
 	}
 
@@ -265,8 +267,8 @@ static void collectMapData()
 	std::ifstream file(game.mapName);
 
 	/* Skip the map tiles */
-	for (int y = 0 ; y < MAPHEIGHT ; y++)
-		file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');	
+	for (int y = 0; y < MAPHEIGHT; y++)
+		file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
 	std::string line;
 
@@ -281,24 +283,24 @@ static void collectMapData()
 		{
 			strings.push_back(line);
 		}
-		
+
 		if (contains(line, "TILESET gfx/ancient"))
 		{
-			for (int x = 0 ; x < MAPWIDTH ; x++)
+			for (int x = 0; x < MAPWIDTH; x++)
 			{
-				for (int y = 0 ; y < MAPHEIGHT ; y++)
+				for (int y = 0; y < MAPHEIGHT; y++)
 				{
 					if ((map.data[x][y] >= 9) && (map.data[x][y] <= 20) && ((Math::prand() % 2) == 0))
 						map.data[x][y] = Math::rrand(9, 20);
 				}
 			}
 		}
-		
+
 		if (contains(line, "TILESET gfx/caves"))
 		{
-			for (int x = 0 ; x < MAPWIDTH ; x++)
+			for (int x = 0; x < MAPWIDTH; x++)
 			{
-				for (int y = 0 ; y < MAPHEIGHT ; y++)
+				for (int y = 0; y < MAPHEIGHT; y++)
 				{
 					if ((map.data[x][y] >= 9) && (map.data[x][y] <= 20))
 						map.data[x][y] = Math::rrand(9, 12);
@@ -312,15 +314,15 @@ static void newMap(const std::string &name)
 {
 	std::ofstream file(name);
 
-	for (int y = 0 ; y < MAPHEIGHT ; y++)
+	for (int y = 0; y < MAPHEIGHT; y++)
 	{
-		for (int x = 0 ; x < MAPWIDTH ; x++)
+		for (int x = 0; x < MAPWIDTH; x++)
 		{
 			fmt::print(file, "{} ", map.data[x][y]);
 		}
 		fmt::print(file, "\n");
 	}
-	
+
 	fmt::print(file, "EMH STAGENAME \"unnamed\"\n");
 
 	fmt::print(file, "EMH TILESET gfx/grasslands\n");
@@ -341,9 +343,9 @@ static void addTileDecoration()
 {
 	printf("Adding Tile Decoration...\n");
 
-	for (int y = 1 ; y < MAPHEIGHT ; y++)
+	for (int y = 1; y < MAPHEIGHT; y++)
 	{
-		for (int x = 0 ; x < MAPWIDTH ; x++)
+		for (int x = 0; x < MAPWIDTH; x++)
 		{
 			if ((map.data[x][y] == 9) && (map.data[x][y - 1] == MAP_AIR))
 			{
@@ -353,9 +355,9 @@ static void addTileDecoration()
 		}
 	}
 
-	for (int y = 0 ; y < MAPHEIGHT ; y++)
+	for (int y = 0; y < MAPHEIGHT; y++)
 	{
-		for (int x = 0 ; x < MAPWIDTH ; x++)
+		for (int x = 0; x < MAPWIDTH; x++)
 		{
 			if (map.data[x][y] == 241)
 			{
@@ -364,7 +366,7 @@ static void addTileDecoration()
 			}
 		}
 	}
-	
+
 	engine.keyState[SDL_SCANCODE_F1] = 0;
 }
 
@@ -373,25 +375,25 @@ static void fillHorizontal(int block, int x, int y)
 	bool moveLeft = true;
 	bool moveRight = true;
 	bool ok = true;
-	
+
 	int left = x;
 	int right = x;
-	
+
 	if (map.data[x][y] == 0)
 	{
 		map.data[x][y] = block;
-		
+
 		while (ok)
 		{
 			if (moveLeft)
 			{
 				left--;
-				if (left < 0) 
+				if (left < 0)
 				{
 					left = 0;
 				}
 			}
-			
+
 			if (map.data[left][y] == 0)
 			{
 				map.data[left][y] = block;
@@ -400,17 +402,17 @@ static void fillHorizontal(int block, int x, int y)
 			{
 				moveLeft = false;
 			}
-			
+
 			if (moveRight)
 			{
 				right++;
-				
+
 				if (right >= MAPWIDTH)
 				{
 					right = MAPWIDTH - 1;
 				}
 			}
-			
+
 			if (map.data[right][y] == 0)
 			{
 				map.data[right][y] = block;
@@ -419,7 +421,7 @@ static void fillHorizontal(int block, int x, int y)
 			{
 				moveRight = false;
 			}
-			
+
 			if ((!moveLeft) && (!moveRight))
 			{
 				ok = false;
@@ -441,7 +443,7 @@ int main(int argc, char *argv[])
 	replayData.reset();
 
 	atexit(cleanup);
-	
+
 	engine.useAudio = 0;
 
 	initSystem();
@@ -451,16 +453,16 @@ int main(int argc, char *argv[])
 		newMap(argv[1]);
 	else
 		fclose(fp);
-	
+
 	game.setMapName(argv[1]);
-	
+
 	loadResources();
-	
+
 	collectMapData();
-	
+
 	int mapX, mapY, allowMove, x, y;
 	mapX = mapY = allowMove = x = y = 0;
-	
+
 	int editing = 0;
 	int currentMonster = 0;
 	int currentItem = 0;
@@ -469,9 +471,9 @@ int main(int argc, char *argv[])
 	SDL_Rect r;
 
 	int MOVESPEED = 5;
-	
+
 	std::string statusline;
-	
+
 	unsigned int frameLimit = SDL_GetTicks() + 16;
 
 	while (true)
@@ -514,76 +516,109 @@ int main(int argc, char *argv[])
 
 		switch (editing)
 		{
-			case 0:
-				graphics.drawRect(r.x - 1, r.y - 1, 34, 1, graphics.yellow, graphics.screen);
-				graphics.drawRect(r.x - 1, r.y - 1, 1, 34, graphics.yellow, graphics.screen);
-				graphics.drawRect(r.x + 32, r.y - 1, 1, 34, graphics.yellow, graphics.screen);
-				graphics.drawRect(r.x - 1, r.y + 32, 34, 1, graphics.yellow, graphics.screen);
-				graphics.blit(graphics.tile[currentBlock], r.x, r.y, graphics.screen, false);
-				if (engine.mouseLeft)
-					map.data[mapX + x][mapY + y] = currentBlock;
-				break;
-			case 1:
-				graphics.blit(defEnemy[currentMonster].getFaceImage(), r.x, r.y, graphics.screen, false);
-				if (engine.mouseLeft)
-				{
-					addEnemy(defEnemy[currentMonster].name, (mapX + x) * BRICKSIZE, (mapY + y) * BRICKSIZE, 0);
-					engine.mouseLeft = 0;
-				}
-				break;
-			case 2:
-				graphics.blit(defItem[currentItem].getFaceImage(), r.x, r.y, graphics.screen, false);
-				if (engine.mouseLeft)
-				{
-					addItem(defItem[currentItem].id, defItem[currentItem].name, (mapX + x) * BRICKSIZE, (mapY + y) * BRICKSIZE, defItem[currentItem].sprite[0]->name, 0, defItem[currentItem].value, 0, true);
-					engine.mouseLeft = 0;
-				}
-				break;
+		case 0:
+			graphics.drawRect(r.x - 1, r.y - 1, 34, 1, graphics.yellow, graphics.screen);
+			graphics.drawRect(r.x - 1, r.y - 1, 1, 34, graphics.yellow, graphics.screen);
+			graphics.drawRect(r.x + 32, r.y - 1, 1, 34, graphics.yellow, graphics.screen);
+			graphics.drawRect(r.x - 1, r.y + 32, 34, 1, graphics.yellow, graphics.screen);
+			graphics.blit(graphics.tile[currentBlock], r.x, r.y, graphics.screen, false);
+			if (engine.mouseLeft)
+				map.data[mapX + x][mapY + y] = currentBlock;
+			break;
+		case 1:
+			graphics.blit(defEnemy[currentMonster].getFaceImage(), r.x, r.y, graphics.screen, false);
+			if (engine.mouseLeft)
+			{
+				addEnemy(defEnemy[currentMonster].name, (mapX + x) * BRICKSIZE, (mapY + y) * BRICKSIZE, 0);
+				engine.mouseLeft = 0;
+			}
+			break;
+		case 2:
+			graphics.blit(defItem[currentItem].getFaceImage(), r.x, r.y, graphics.screen, false);
+			if (engine.mouseLeft)
+			{
+				addItem(defItem[currentItem].id, defItem[currentItem].name, (mapX + x) * BRICKSIZE, (mapY + y) * BRICKSIZE, defItem[currentItem].sprite[0]->name, 0, defItem[currentItem].value, 0, true);
+				engine.mouseLeft = 0;
+			}
+			break;
 		}
 
 		if (engine.mouseRight)
 		{
-			if (editing == 0) map.data[mapX + x][mapY + y] = MAP_AIR;
-			if (editing == 1) deleteEnemy(mapX + x, mapY + y);
+			if (editing == 0)
+				map.data[mapX + x][mapY + y] = MAP_AIR;
+			if (editing == 1)
+				deleteEnemy(mapX + x, mapY + y);
 		}
 
 		allowMove--;
-		if (allowMove < 1) allowMove = 0;
+		if (allowMove < 1)
+			allowMove = 0;
 
 		if (allowMove == 0)
 		{
-			if (engine.keyState[SDL_SCANCODE_UP]) {mapY--; allowMove = MOVESPEED;}
-			if (engine.keyState[SDL_SCANCODE_DOWN]) {mapY++; allowMove = MOVESPEED;}
-			if (engine.keyState[SDL_SCANCODE_LEFT]) {mapX--; allowMove = MOVESPEED;}
-			if (engine.keyState[SDL_SCANCODE_RIGHT]) {mapX++; allowMove = MOVESPEED;}
+			if (engine.keyState[SDL_SCANCODE_UP])
+			{
+				mapY--;
+				allowMove = MOVESPEED;
+			}
+			if (engine.keyState[SDL_SCANCODE_DOWN])
+			{
+				mapY++;
+				allowMove = MOVESPEED;
+			}
+			if (engine.keyState[SDL_SCANCODE_LEFT])
+			{
+				mapX--;
+				allowMove = MOVESPEED;
+			}
+			if (engine.keyState[SDL_SCANCODE_RIGHT])
+			{
+				mapX++;
+				allowMove = MOVESPEED;
+			}
 
-			if (engine.keyState[SDL_SCANCODE_PAGEDOWN]) {mapY += 10; allowMove = MOVESPEED;}
-			if (engine.keyState[SDL_SCANCODE_PAGEUP]) {mapY -= 10; allowMove = MOVESPEED;}
+			if (engine.keyState[SDL_SCANCODE_PAGEDOWN])
+			{
+				mapY += 10;
+				allowMove = MOVESPEED;
+			}
+			if (engine.keyState[SDL_SCANCODE_PAGEUP])
+			{
+				mapY -= 10;
+				allowMove = MOVESPEED;
+			}
 
-			if (engine.keyState[SDL_SCANCODE_1]) editing = 0;
-			if (engine.keyState[SDL_SCANCODE_2]) editing = 1;
-			if (engine.keyState[SDL_SCANCODE_3]) editing = 2;
-			
-			if (engine.keyState[SDL_SCANCODE_0]) fillHorizontal(currentBlock, mapX + x, mapY + y);
+			if (engine.keyState[SDL_SCANCODE_1])
+				editing = 0;
+			if (engine.keyState[SDL_SCANCODE_2])
+				editing = 1;
+			if (engine.keyState[SDL_SCANCODE_3])
+				editing = 2;
 
-			if (engine.keyState[SDL_SCANCODE_F1]) addTileDecoration();
+			if (engine.keyState[SDL_SCANCODE_0])
+				fillHorizontal(currentBlock, mapX + x, mapY + y);
 
-			if (engine.keyState[SDL_SCANCODE_ESCAPE]) break;
+			if (engine.keyState[SDL_SCANCODE_F1])
+				addTileDecoration();
+
+			if (engine.keyState[SDL_SCANCODE_ESCAPE])
+				break;
 		}
 
 		if (engine.keyState[SDL_SCANCODE_PERIOD])
 		{
 			switch (editing)
 			{
-				case 0:
-					currentBlock = nextBlock(currentBlock, 1);
-					break;
-				case 1:
-					currentMonster++;
-					break;
-				case 2:
-					currentItem++;
-					break;
+			case 0:
+				currentBlock = nextBlock(currentBlock, 1);
+				break;
+			case 1:
+				currentMonster++;
+				break;
+			case 2:
+				currentItem++;
+				break;
 			}
 
 			engine.keyState[SDL_SCANCODE_PERIOD] = 0;
@@ -593,15 +628,15 @@ int main(int argc, char *argv[])
 		{
 			switch (editing)
 			{
-				case 0:
-					currentBlock = nextBlock(currentBlock, -1);
-					break;
-				case 1:
-					currentMonster--;
-					break;
-				case 2:
-					currentItem--;
-					break;
+			case 0:
+				currentBlock = nextBlock(currentBlock, -1);
+				break;
+			case 1:
+				currentMonster--;
+				break;
+			case 2:
+				currentItem--;
+				break;
 			}
 
 			engine.keyState[SDL_SCANCODE_COMMA] = 0;
@@ -612,18 +647,29 @@ int main(int argc, char *argv[])
 
 		if (defEnemy[currentMonster].sprite[0] == nullptr)
 			currentMonster = 0;
-			
+
 		if (defItem[currentItem].sprite[0] == nullptr)
 			currentItem = 0;
 
-		if (engine.keyState[SDL_SCANCODE_SPACE]) {showMap(&mapX, &mapY);}
+		if (engine.keyState[SDL_SCANCODE_SPACE])
+		{
+			showMap(&mapX, &mapY);
+		}
 
-		if (engine.keyState[SDL_SCANCODE_S]) {saveMap(game.mapName); engine.keyState[SDL_SCANCODE_S] = 0;}
+		if (engine.keyState[SDL_SCANCODE_S])
+		{
+			saveMap(game.mapName);
+			engine.keyState[SDL_SCANCODE_S] = 0;
+		}
 
-		if (mapX < 0) mapX = 0;
-		if (mapY < 0) mapY = 0;
-		if (mapX > MAPWIDTH - 40) mapX = MAPWIDTH - 40;
-		if (mapY > MAPHEIGHT - 30) mapY = MAPHEIGHT - 30;
+		if (mapX < 0)
+			mapX = 0;
+		if (mapY < 0)
+			mapY = 0;
+		if (mapX > MAPWIDTH - 40)
+			mapX = MAPWIDTH - 40;
+		if (mapY > MAPHEIGHT - 30)
+			mapY = MAPHEIGHT - 30;
 
 		if (editing == 0)
 			statusline = fmt::format("Index : {}:{} ; Screen {}:{} ; Tile {}", mapX + x, mapY + y, (mapX + x) * BRICKSIZE, (mapY + y) * BRICKSIZE, currentBlock);
@@ -644,7 +690,7 @@ int main(int argc, char *argv[])
 		SDL_FillRect(graphics.screen, &r, graphics.black);
 
 		graphics.drawString(statusline, 320, r.y + 5, true, graphics.screen);
-		
+
 		engine.delay(frameLimit);
 		frameLimit = SDL_GetTicks() + 16;
 	}

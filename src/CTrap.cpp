@@ -65,10 +65,10 @@ void Trap::setDestinations(int startX, int startY, int endX, int endY)
 	this->startY = startY;
 	this->endX = endX;
 	this->endY = endY;
-	
+
 	x = endX;
 	y = endY;
-	
+
 	if (type == TRAP_TYPE_SWING)
 	{
 		x = startX;
@@ -148,7 +148,7 @@ bool Trap::performSpikeAction()
 			thinktime = waitTime[1];
 		}
 	}
-	
+
 	return false;
 }
 
@@ -206,7 +206,7 @@ bool Trap::think()
 
 		Math::wrapChar(&(++currentAction), 0, 3);
 		thinktime = 60;
-		
+
 		if ((type == TRAP_TYPE_BARRIER) || (type == TRAP_TYPE_FLAME))
 			thinktime = waitTime[0];
 	}
@@ -214,20 +214,20 @@ bool Trap::think()
 	{
 		switch (type)
 		{
-			case TRAP_TYPE_SPIKE:
-				return performSpikeAction();
-				break;
-			case TRAP_TYPE_SWING:
-				return performSwingAction();
-				break;
-			case TRAP_TYPE_BARRIER:
-				return performBarrierAction();
-				break;
-			case TRAP_TYPE_FLAME:
-				return performBarrierAction();
-				break;
+		case TRAP_TYPE_SPIKE:
+			return performSpikeAction();
+			break;
+		case TRAP_TYPE_SWING:
+			return performSwingAction();
+			break;
+		case TRAP_TYPE_BARRIER:
+			return performBarrierAction();
+			break;
+		case TRAP_TYPE_FLAME:
+			return performBarrierAction();
+			break;
 		}
 	}
-	
+
 	return false;
 }

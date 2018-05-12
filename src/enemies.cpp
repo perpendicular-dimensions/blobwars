@@ -23,7 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 Entity *getDefinedEnemy(const std::string &name)
 {
-	for (int i = 0 ; i < MAX_ENEMIES ; i++)
+	for (int i = 0; i < MAX_ENEMIES; i++)
 	{
 		if (name == defEnemy[i].name)
 		{
@@ -58,7 +58,7 @@ void addEnemy(const std::string &name, int x, int y, int flags)
 	enemy.baseThink = 60;
 
 	enemy.flags += flags;
-	
+
 	enemy.reload = 120; // Wait about seconds seconds before attacking
 
 	if (map.data[(int)(enemy.x) >> BRICKSHIFT][(int)(enemy.y) >> BRICKSHIFT] == MAP_WATER)
@@ -107,7 +107,7 @@ static void lookForPlayer(Entity &enemy)
 	// player is dead
 	if (player.health <= -60)
 		return;
-	
+
 	if (game.missionOverReason == MIS_COMPLETE)
 		return;
 
@@ -193,7 +193,7 @@ static void lookForPlayer(Entity &enemy)
 
 	if ((enemy.flags & ENT_FLIES) || (enemy.flags & ENT_SWIMS) || (enemy.flags & ENT_NOJUMP))
 		return;
-		
+
 	if (enemy.flags & ENT_JUMPS)
 	{
 		if (!enemy.falling)
@@ -204,7 +204,7 @@ static void lookForPlayer(Entity &enemy)
 				enemy.setVelocity(distance - ((distance * 2) * enemy.face), Math::rrand(-12, -10));
 			}
 		}
-		
+
 		return;
 	}
 
@@ -234,7 +234,7 @@ static void doAI(Entity &enemy)
 
 	int x = (int)enemy.x;
 	int y = (int)enemy.y + enemy.height;
-	
+
 	if (enemy.dx > 0)
 		x += enemy.width;
 
@@ -247,7 +247,7 @@ static void doAI(Entity &enemy)
 	// Don't enter areas you're not supposed to
 	if (enemy.tx != (int)enemy.x)
 	{
-		if (!(enemy.flags & (ENT_FLIES|ENT_SWIMS)))
+		if (!(enemy.flags & (ENT_FLIES | ENT_SWIMS)))
 		{
 			if (!map.isSolid(x, y))
 			{
@@ -268,8 +268,8 @@ static void doAI(Entity &enemy)
 			}
 		}
 
-		Math::limitInt(&enemy.tx, 15, (MAPWIDTH * BRICKSIZE)- 20);
-		Math::limitInt(&enemy.ty, 15, (MAPHEIGHT * BRICKSIZE)- 20);
+		Math::limitInt(&enemy.tx, 15, (MAPWIDTH * BRICKSIZE) - 20);
+		Math::limitInt(&enemy.ty, 15, (MAPHEIGHT * BRICKSIZE) - 20);
 
 		if (map.isSolid((enemy.tx >> BRICKSHIFT), (enemy.ty >> BRICKSHIFT)))
 		{
@@ -303,20 +303,35 @@ static void doAI(Entity &enemy)
 	{
 		enemy.dx = enemy.dy = 0;
 
-		if ((int)enemy.y < enemy.ty) enemy.dy = 1;
-		if ((int)enemy.y > enemy.ty) enemy.dy = -1;
+		if ((int)enemy.y < enemy.ty)
+			enemy.dy = 1;
+		if ((int)enemy.y > enemy.ty)
+			enemy.dy = -1;
 	}
 
-	if ((int)enemy.x == enemy.tx) {enemy.dx = 0;}
-	if ((int)enemy.x < enemy.tx) {enemy.dx = 1; enemy.face = 0;}
-	if ((int)enemy.x > enemy.tx) {enemy.dx = -1; enemy.face = 1;}
+	if ((int)enemy.x == enemy.tx)
+	{
+		enemy.dx = 0;
+	}
+	if ((int)enemy.x < enemy.tx)
+	{
+		enemy.dx = 1;
+		enemy.face = 0;
+	}
+	if ((int)enemy.x > enemy.tx)
+	{
+		enemy.dx = -1;
+		enemy.face = 1;
+	}
 
 	if ((enemy.flags & ENT_SWIMS) && (enemy.environment == ENV_WATER))
 	{
 		enemy.dy = 0;
 
-		if ((int)enemy.y < enemy.ty) enemy.dy = 1;
-		if ((int)enemy.y > enemy.ty) enemy.dy = -1;
+		if ((int)enemy.y < enemy.ty)
+			enemy.dy = 1;
+		if ((int)enemy.y > enemy.ty)
+			enemy.dy = -1;
 	}
 
 	lookForPlayer(enemy);
@@ -325,9 +340,9 @@ static void doAI(Entity &enemy)
 static void checkCombo()
 {
 	int old = game.currentComboHits;
-	
+
 	game.doCombo();
-	
+
 	if (old == 24 && game.currentComboHits == 25)
 	{
 		presentPlayerMedal("25_Hit_Combo");
@@ -358,7 +373,7 @@ void enemyBulletCollisions(Entity &bullet)
 				{
 					bullet.health = 0;
 				}
-				
+
 				Math::removeBit(&bullet.flags, ENT_SPARKS);
 				Math::removeBit(&bullet.flags, ENT_PUFFS);
 
@@ -367,8 +382,16 @@ void enemyBulletCollisions(Entity &bullet)
 					bullet.health = 0; // include the Laser for this one!
 					enemy.owner->tx = (int)bullet.owner->x;
 					enemy.owner->ty = (int)bullet.owner->y;
-					if (enemy.x < enemy.tx) {enemy.owner->dx = 1; enemy.owner->face = 0;}
-					if (enemy.x > enemy.tx) {enemy.owner->dx = -1; enemy.owner->face = 1;}
+					if (enemy.x < enemy.tx)
+					{
+						enemy.owner->dx = 1;
+						enemy.owner->face = 0;
+					}
+					if (enemy.x > enemy.tx)
+					{
+						enemy.owner->dx = -1;
+						enemy.owner->face = 1;
+					}
 					return;
 				}
 
@@ -382,7 +405,7 @@ void enemyBulletCollisions(Entity &bullet)
 					enemy.tx = (int)player.x;
 					enemy.ty = (int)player.y;
 					enemy.face = 0;
-					
+
 					if (player.x < enemy.x)
 					{
 						enemy.face = 1;
@@ -418,30 +441,30 @@ void enemyBulletCollisions(Entity &bullet)
 					{
 						enemy.health -= bullet.damage;
 					}
-					
+
 					if (enemy.health <= 0)
-					{	
+					{
 						if (bullet.owner == &player)
 						{
 							addPlayerScore(enemy.value);
 							game.currentMissionEnemiesDefeated++;
-	
+
 							if (player.currentWeapon != &weapon[WP_LASER])
 							{
 								checkCombo();
 							}
-							
+
 							comboString = "Combo-" + bullet.name;
 							checkObjectives(comboString, false);
 							checkObjectives("Enemy", false);
 							checkObjectives(enemy.name, false);
 						}
-	
+
 						if (!(enemy.flags & ENT_STATIC))
 						{
 							enemy.dx = (bullet.dx / 4);
 							enemy.dy = -10;
-							
+
 							if (enemy.flags & ENT_EXPLODES)
 							{
 								audio.playSound(SND_ELECDEATH1 + Math::prand() % 3, CH_DEATH, enemy.x);
@@ -452,9 +475,8 @@ void enemyBulletCollisions(Entity &bullet)
 							}
 						}
 					}
-					
 				}
-				
+
 				if (enemy.flags & ENT_STATIC)
 				{
 					return;
@@ -465,7 +487,7 @@ void enemyBulletCollisions(Entity &bullet)
 					enemy.dx = Math::rrand(-3, 3);
 					enemy.dy = 5 - Math::prand() % 15;
 					enemy.health = -1;
-					
+
 					if (enemy.flags & ENT_EXPLODES)
 					{
 						audio.playSound(SND_ELECDEATH1 + Math::prand() % 3, CH_DEATH, enemy.x);
@@ -501,7 +523,7 @@ void enemyBulletCollisions(Entity &bullet)
 static int getNonGoreParticleColor(const std::string &name)
 {
 	int rtn = graphics.yellow;
-	
+
 	if (name == "Pistol Blob")
 	{
 		rtn = graphics.green;
@@ -522,7 +544,7 @@ static int getNonGoreParticleColor(const std::string &name)
 	{
 		rtn = SDL_MapRGB(graphics.screen->format, 200, 64, 24);
 	}
-	
+
 	return rtn;
 }
 
@@ -545,11 +567,11 @@ static void gibEnemy(Entity &enemy)
 	int amount = (game.gore) ? 25 : 150;
 	int color = getNonGoreParticleColor(enemy.name);
 
-	for (int i = 0 ; i < amount ; i++)
+	for (int i = 0; i < amount; i++)
 	{
 		x = enemy.x + Math::rrand(-3, 3);
 		y = enemy.y + Math::rrand(-3, 3);
-		
+
 		if (game.gore)
 		{
 			dx = Math::rrand(-5, 5);
@@ -563,7 +585,7 @@ static void gibEnemy(Entity &enemy)
 			addColoredEffect(x, y, dx, dy, color, EFF_COLORED + EFF_WEIGHTLESS);
 		}
 	}
-	
+
 	(game.gore) ? audio.playSound(SND_SPLAT, CH_ANY) : audio.playSound(SND_POP, CH_ANY, enemy.x);
 }
 
@@ -571,8 +593,7 @@ void doEnemies()
 {
 	map.fightingGaldov = false;
 
-	map.enemies.remove_if([](auto &&enemy)
-	{
+	map.enemies.remove_if([](auto &&enemy) {
 		if (!engine.cheatBlood)
 		{
 			if (enemy.dead == DEAD_DYING)
@@ -623,7 +644,7 @@ void doEnemies()
 						lookForPlayer(enemy);
 					}
 				}
-				
+
 				if (map.isBlizzardLevel)
 				{
 					enemy.dx += map.windPower * 0.1;
@@ -642,9 +663,9 @@ void doEnemies()
 					{
 						addFireTrailParticle(enemy.x + (enemy.face * 16) + Math::rrand(-1, 1), enemy.y + Math::rrand(-1, 1));
 					}
-					
+
 					graphics.blit(enemy.getFaceImage(), x, y, graphics.screen, false);
-					
+
 					if ((enemy.dx != 0) || (enemy.flags & ENT_FLIES) || (enemy.flags & ENT_STATIC))
 					{
 						enemy.animate();
@@ -687,7 +708,7 @@ void doEnemies()
 				Math::addBit(&enemy.flags, ENT_BOUNCES);
 				enemy.health = -1 - Math::prand() % 25;
 			}
-			
+
 			if (engine.cheatBlood)
 			{
 				if (!(enemy.flags & ENT_EXPLODES))
@@ -714,7 +735,7 @@ void doEnemies()
 				{
 					if ((enemy.health % 3) == 0)
 					{
-						addExplosion(enemy.x + Math::prand() % 25, enemy.y + Math::prand() % 25,  10 + (20 * game.skill), enemy);
+						addExplosion(enemy.x + Math::prand() % 25, enemy.y + Math::prand() % 25, 10 + (20 * game.skill), enemy);
 						addSmokeAndFire(enemy, Math::rrand(-5, 5), Math::rrand(-5, 5), 2);
 					}
 				}
@@ -735,16 +756,16 @@ void doEnemies()
 						if ((absX < 800) && (absY < 600))
 						{
 							gibEnemy(enemy);
-							
+
 							if (enemy.value)
 							{
 								dropRandomItems((int)enemy.x, (int)enemy.y);
 							}
 						}
-						
+
 						enemy.dead = DEAD_DYING;
 					}
-					
+
 					if (enemy.dead == DEAD_DYING)
 					{
 						if (!enemy.referenced)
@@ -752,13 +773,13 @@ void doEnemies()
 							if ((absX < 800) && (absY < 600))
 							{
 								gibEnemy(enemy);
-								
+
 								if (enemy.value)
 								{
 									dropRandomItems((int)enemy.x, (int)enemy.y);
 								}
 							}
-							
+
 							debug(("Removing unreferenced enemy '%s'\n", enemy.name));
 							return true;
 						}
@@ -766,7 +787,7 @@ void doEnemies()
 				}
 			}
 		}
-		
+
 		// default the enemy to not referenced.
 		// doBullets() will change this if required.
 		enemy.referenced = false;
@@ -804,7 +825,7 @@ void loadEnemy(const std::string &token)
 
 void loadDefEnemies()
 {
-	for (int i = 0 ; i < MAX_ENEMIES ; i++)
+	for (int i = 0; i < MAX_ENEMIES; i++)
 	{
 		defEnemy[i].name[0] = 0;
 	}

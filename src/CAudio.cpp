@@ -27,14 +27,14 @@ Audio::Audio()
 	useSound = true;
 	useMusic = true;
 
-	for (int i = 0 ; i < MAX_SOUNDS ; i++)
+	for (int i = 0; i < MAX_SOUNDS; i++)
 	{
 		sound[i] = nullptr;
 	}
 
 	music = nullptr;
 	quickSound = nullptr;
-	
+
 	songlicense = -1;
 }
 
@@ -65,7 +65,7 @@ bool Audio::loadSound(int i, const std::string &filename)
 	{
 		return true;
 	}
-		
+
 	if (i >= MAX_SOUNDS)
 	{
 		printf("ERROR: SOUND INDEX IS HIGHER THAN MAXIMUM ALLOWED %d >= %d\n", i, MAX_SOUNDS);
@@ -78,33 +78,33 @@ bool Audio::loadSound(int i, const std::string &filename)
 		sound[i] = nullptr;
 	}
 
-	#if USEPAK
-		engine->unpack(filename, PAK_SOUND);
-		sound[i] = Mix_LoadWAV_RW(engine->sdlrw, 1);
-	#else
-		sound[i] = Mix_LoadWAV(filename.c_str());
-	#endif
+#if USEPAK
+	engine->unpack(filename, PAK_SOUND);
+	sound[i] = Mix_LoadWAV_RW(engine->sdlrw, 1);
+#else
+	sound[i] = Mix_LoadWAV(filename.c_str());
+#endif
 
 	if (!sound[i])
 	{
 		debug(("WARNING - Failed to load %s\n", filename));
 		return false;
 	}
-	
+
 	return true;
 }
 
 bool Audio::loadMusic(const std::string &filename)
 {
 	std::string tempPath = fmt::format("{}music.mod", engine->userHomeDirectory);
-	
+
 	if (!engine->useAudio)
 	{
 		return true;
 	}
 
 	remove(tempPath.c_str());
-	
+
 	if (music != nullptr)
 	{
 		Mix_HaltMusic();
@@ -113,12 +113,12 @@ bool Audio::loadMusic(const std::string &filename)
 		music = nullptr;
 	}
 
-	#if USEPAK
-		engine->unpack(filename, PAK_MUSIC);
-		music = Mix_LoadMUS(tempPath.c_str());
-	#else
-		music = Mix_LoadMUS(filename.c_str());
-	#endif
+#if USEPAK
+	engine->unpack(filename, PAK_MUSIC);
+	music = Mix_LoadMUS(tempPath.c_str());
+#else
+	music = Mix_LoadMUS(filename.c_str());
+#endif
 
 	songtitle[0] = 0;
 	songalbum[0] = 0;
@@ -131,32 +131,32 @@ bool Audio::loadMusic(const std::string &filename)
 		return false;
 	}
 
-	#if USEPAK
-		tempPath = fmt::format("{}music.tags", engine->userHomeDirectory);
-		remove(tempPath.c_str());
+#if USEPAK
+	tempPath = fmt::format("{}music.tags", engine->userHomeDirectory);
+	remove(tempPath.c_str());
 
-		std::string tagFileName = fmt::format("{}.tags", filename);
-		engine->unpack(tagfilename, PAK_TAGS);
-	#else
-		tempPath = fmt::format("{}.tags", filename);
-	#endif
-	
+	std::string tagFileName = fmt::format("{}.tags", filename);
+	engine->unpack(tagfilename, PAK_TAGS);
+#else
+	tempPath = fmt::format("{}.tags", filename);
+#endif
+
 	std::ifstream file(tempPath);
 	std::string line;
-	
-	while(std::getline(file, line))
+
+	while (std::getline(file, line))
 	{
-		if(!line.compare(0, 6, "title="))
+		if (!line.compare(0, 6, "title="))
 			songtitle = line.substr(6);
-		else if(!line.compare(0, 6, "album="))
+		else if (!line.compare(0, 6, "album="))
 			songalbum = line.substr(6);
-		else if(!line.compare(0, 7, "artist="))
+		else if (!line.compare(0, 7, "artist="))
 			songartist = line.substr(7);
-		else if(!line.compare(0, 8, "license="))
+		else if (!line.compare(0, 8, "license="))
 		{
-			if(!line.compare(8, 6, "CC-BY "))
+			if (!line.compare(8, 6, "CC-BY "))
 				songlicense = 0;
-			else if(!line.compare(8, 9, "CC-BY-SA "))
+			else if (!line.compare(8, 9, "CC-BY-SA "))
 				songlicense = 1;
 		}
 	}
@@ -170,7 +170,7 @@ void Audio::playSoundRelative(int snd, int channel, float x)
 {
 	if ((!engine->useAudio) || (soundVolume == 0))
 		return;
-	
+
 	if (!output)
 	{
 		return;
@@ -180,10 +180,10 @@ void Audio::playSoundRelative(int snd, int channel, float x)
 	int attenuation = fabsf(x) / 40;
 
 	if (angle < 0)
-	        angle += 360;
+		angle += 360;
 
 	if (attenuation > 255)
-	        attenuation = 255;
+		attenuation = 255;
 
 	Mix_Volume(channel, soundVolume);
 	Mix_PlayChannel(channel, sound[snd], 0);
@@ -205,7 +205,7 @@ void Audio::playMusic()
 {
 	if (!engine->useAudio)
 		return;
-	
+
 	if (!output)
 	{
 		return;
@@ -220,7 +220,7 @@ void Audio::playMusicOnce()
 {
 	if (!engine->useAudio)
 		return;
-	
+
 	if (!output)
 	{
 		return;
@@ -239,7 +239,7 @@ bool Audio::loadGameOverMusic()
 	}
 
 	std::string tempPath = engine->userHomeDirectory + "music.mod";
-	
+
 	remove(tempPath.c_str());
 	SDL_Delay(250); // wait a bit, just to be sure!
 
@@ -251,12 +251,12 @@ bool Audio::loadGameOverMusic()
 		music = nullptr;
 	}
 
-	#if USEPAK
-		engine->unpack("music/gameover", PAK_MUSIC);
-		music = Mix_LoadMUS(tempPath.c_str());
-	#else
-		music = Mix_LoadMUS("music/gameover");
-	#endif
+#if USEPAK
+	engine->unpack("music/gameover", PAK_MUSIC);
+	music = Mix_LoadMUS(tempPath.c_str());
+#else
+	music = Mix_LoadMUS("music/gameover");
+#endif
 
 	if (!music)
 	{
@@ -287,7 +287,7 @@ void Audio::playAmbiance()
 	{
 		return;
 	}
-	
+
 	if (!output)
 	{
 		return;
@@ -317,7 +317,7 @@ int Audio::playMenuSound(int sound)
 
 	if (sound == 2)
 		playSound(SND_SELECT, CH_ANY);
-		
+
 	return sound;
 }
 
@@ -326,7 +326,7 @@ void Audio::pause()
 	if (!engine->useAudio)
 		return;
 
-	for (int i = 0 ; i < 8 ; i++)
+	for (int i = 0; i < 8; i++)
 		Mix_Pause(i);
 
 	Mix_PauseMusic();
@@ -336,13 +336,13 @@ void Audio::resume()
 {
 	if (!engine->useAudio)
 		return;
-	
+
 	if (!output)
 	{
 		return;
 	}
 
-	for (int i = 0 ; i < 8 ; i++)
+	for (int i = 0; i < 8; i++)
 		Mix_Resume(i);
 
 	Mix_ResumeMusic();
@@ -366,7 +366,7 @@ void Audio::fadeMusic()
 
 void Audio::free()
 {
-	for (int i = 0 ; i < MAX_SOUNDS - 3 ; i++)
+	for (int i = 0; i < MAX_SOUNDS - 3; i++)
 	{
 		if (sound[i] != nullptr)
 		{
@@ -394,7 +394,7 @@ void Audio::destroy()
 {
 	free();
 
-	for (int i = MAX_SOUNDS - 3 ; i < MAX_SOUNDS ; i++)
+	for (int i = MAX_SOUNDS - 3; i < MAX_SOUNDS; i++)
 	{
 		if (sound[i] != nullptr)
 		{

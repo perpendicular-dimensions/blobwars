@@ -39,3 +39,6 @@ blobwars
 core
 core.*
 vgcore.*
+
+# Exceptions
+!.clang-format

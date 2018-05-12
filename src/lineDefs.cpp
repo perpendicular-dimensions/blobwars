@@ -55,9 +55,9 @@ void doLineDefs()
 
 		if ((absX < 800) && (absY < 600))
 		{
-			#if DEBUG
-				graphics.drawRect(x, y, lineDef.width, lineDef.height, graphics.red, graphics.screen);
-			#endif
+#if DEBUG
+			graphics.drawRect(x, y, lineDef.width, lineDef.height, graphics.red, graphics.screen);
+#endif
 
 			if (player.health < 1)
 			{
@@ -71,16 +71,18 @@ void doLineDefs()
 					config.resetControl(CONTROL::LEFT);
 					config.resetControl(CONTROL::RIGHT);
 
-					if (player.dx > 0) player.x = (lineDef.x - player.width) - 2;
-					if (player.dx < 0) player.x = (lineDef.x + lineDef.width + 2);
-					
+					if (player.dx > 0)
+						player.x = (lineDef.x - player.width) - 2;
+					if (player.dx < 0)
+						player.x = (lineDef.x + lineDef.width + 2);
+
 					player.dx = 0;
-					
+
 					if (!map.isBossMission)
 					{
 						engine.setInfoMessage("Can't Exit Yet - Objectives Not Met", 1, INFO_HINT);
 					}
-					
+
 					continue;
 				}
 
@@ -124,7 +126,7 @@ void doLineDefs()
 					checkObjectives(lineDef.name, true);
 					activateTrigger(lineDef.linkName, lineDef.activateMessage, true);
 					lineDef.activated = true;
-					
+
 					if (lineDef.name == "StealCrystal")
 					{
 						stealCrystal();
@@ -133,6 +135,5 @@ void doLineDefs()
 				}
 			}
 		}
-
 	}
 }

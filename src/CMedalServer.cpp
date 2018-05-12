@@ -23,7 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 MedalServer::MedalServer()
 {
 	lock = SDL_CreateMutex();
-	
+
 	connected = false;
 	gotRuby = false;
 }
@@ -43,12 +43,12 @@ bool MedalServer::connect(const std::string &privateKey)
 		printf("ERROR: SDLNet_ResolveHost: %s\n", SDLNet_GetError());
 		return false;
 	}
-	
+
 	debug(("Connected %s to %s:%d\n", privateKey, MEDAL_SERVER_HOST, MEDAL_SERVER_PORT));
-	
+
 	this->privateKey = privateKey;
 	connected = true;
-	
+
 	return true;
 }
 
@@ -58,9 +58,9 @@ int MedalServer::postMedal(const std::string &str)
 	{
 		return 0;
 	}
-	
+
 	std::string medal = str;
-	
+
 	for (auto &&c: medal)
 	{
 		if (c == ' ' || c == '#' || c == ',')
@@ -68,20 +68,20 @@ int MedalServer::postMedal(const std::string &str)
 			c = '_';
 		}
 	}
-	
+
 	debug(("Attempting to post medal 'MBS_%s'\n", medal));
-	
+
 	TCPsocket socket = SDLNet_TCP_Open(&ip);
-	
+
 	if (!socket)
 	{
 		printf("ERROR: SDLNet_TCP_Open: %s\n", SDLNet_GetError());
 		return 0;
 	}
-	
+
 	std::string out = fmt::format("GET /addMedal/{}/MBS_{} HTTP/1.1\nHost: {}\nUser-Agent:BWMBS{:.2f}-{}\n\n", privateKey, medal, MEDAL_SERVER_HOST, VERSION, RELEASE);
-	
-	if (SDLNet_TCP_Send(socket, (void*)out.data(), out.size()) < (int)out.size())
+
+	if (SDLNet_TCP_Send(socket, (void *)out.data(), out.size()) < (int)out.size())
 	{
 		printf("SDLNet_TCP_Send: %s\n", SDLNet_GetError());
 		printf("Disconnected\n");
@@ -89,7 +89,7 @@ int MedalServer::postMedal(const std::string &str)
 		close();
 		return 0;
 	}
-	
+
 	std::vector<char> in;
 	in.reserve(1024);
 
@@ -106,17 +106,17 @@ int MedalServer::postMedal(const std::string &str)
 
 	in[len] = 0;
 	in.resize(len + 1);
-	
+
 	int response = 0;
 	char tmpMessage[512];
-	
+
 	for (auto token: split(in, '\n'))
 	{
 		if (contains(token, "MEDAL_RESPONSE"))
 		{
 			scan(token, "%*s %d %[^\n\r]", &response, tmpMessage);
 			message = tmpMessage;
-			
+
 			if (response == 4)
 			{
 				rubyMessage = message;
@@ -128,11 +128,11 @@ int MedalServer::postMedal(const std::string &str)
 			}
 		}
 	}
-	
+
 	debug(("MedalServer Response: %d '%s'\n", response, message))
-	
-	SDLNet_TCP_Close(socket);
-	
+
+	                SDLNet_TCP_Close(socket);
+
 	return response;
 }
 
@@ -149,13 +149,13 @@ bool MedalServer::hasRuby()
 std::string MedalServer::getRubyMessage()
 {
 	gotRuby = false;
-	
+
 	return rubyMessage;
 }
 
 void MedalServer::close()
 {
 	connected = false;
-	
+
 	SDL_DestroyMutex(lock);
 }

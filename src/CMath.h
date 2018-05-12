@@ -19,15 +19,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class Math {
+class Math
+{
+private:
+	Math() {}
 
-	private:
-
-		Math(){}
-
-	public:
-	
-		static long pSeed;
+public:
+	static long pSeed;
 
 	static void limitChar(signed char *in, int low, int high);
 	static void limitChar(unsigned char *in, int low, int high);

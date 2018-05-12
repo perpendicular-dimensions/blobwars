@@ -27,26 +27,26 @@ static void aquaBossAttack(); // break circular dependency
 static void leachParticles(Entity &enemy)
 {
 	float dx, dy;
-	
+
 	Sprite *blood = graphics.getSprite("RedBloodParticle", true);
-	
+
 	Math::calculateSlope(self->x, self->y, enemy.x, enemy.y, &dx, &dy);
-	
+
 	dx *= Math::rrand(1, 2);
 	dy *= Math::rrand(1, 2);
 
-	for (int i = 0 ; i < 25 ; i++)
+	for (int i = 0; i < 25; i++)
 	{
 		map.addParticle(enemy.x + 10 + Math::rrand(-2, 2), enemy.y + 10 + Math::rrand(-2, 2), dx, dy, Math::rrand(1, 60), graphics.red, blood, PAR_WEIGHTLESS);
 	}
-	
+
 	addBlood(enemy, 0, 0, 1);
 }
 
 static void aquaBossRecharge()
 {
 	debug(("aquaBossRecharge\n"));
-	
+
 	if (self->health == self->maxHealth)
 	{
 		self->think = aquaBossAttack;
@@ -54,19 +54,19 @@ static void aquaBossRecharge()
 		self->setSprites(graphics.getSprite("AquaBossRight", true), graphics.getSprite("AquaBossLeft", true), graphics.getSprite("AquaBossLeft", true));
 		return;
 	}
-	
+
 	bool leachedEnemy = false;
 	int diffX, diffY;
-	
+
 	for (auto &&enemy: map.enemies)
 	{
 		// don't leach enemies not in the pool!!
 		if (enemy.x >= 1490)
 			continue;
-		
+
 		diffX = abs((int)(enemy.x - self->x));
 		diffY = abs((int)(enemy.y - self->y));
-		
+
 		if ((diffX <= 160) && (diffY <= 120))
 		{
 			if (enemy.health > -100)
@@ -77,7 +77,7 @@ static void aquaBossRecharge()
 				{
 					audio.playSound(SND_DEATH1 + Math::prand() % 3, CH_DEATH, enemy.x);
 				}
-				
+
 				Math::limitInt(&(++self->health), 0, self->maxHealth);
 				self->setActionFinished(25);
 				leachParticles(enemy);
@@ -85,9 +85,9 @@ static void aquaBossRecharge()
 			}
 		}
 	}
-	
+
 	self->setActionFinished(5);
-	
+
 	if (!leachedEnemy)
 	{
 		self->think = aquaBossAttack;
@@ -101,24 +101,24 @@ static void aquaBossCircleStrafe()
 	// TODO: needs implementation
 
 	debug(("aquaBossCircleStrafe\n"));
-	
+
 	self->think = &aquaBossAttack;
 }
 
 static void aquaBossRapidLaserFire()
 {
 	debug(("aquaBossRapidLaserFire\n"));
-	
+
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
-	
+
 	self->setThinkTime(2);
 	self->setActionFinished(5);
-	
+
 	addBullet(*self, self->currentWeapon->getSpeed(self->face), 0);
 	self->think = &aquaBossRapidLaserFire;
-	
+
 	self->custom--;
-	
+
 	if (self->custom == 0)
 	{
 		self->think = &aquaBossAttack;
@@ -129,16 +129,18 @@ static void aquaBossRapidLaserFire()
 static void aquaBossRapidPreLaserFire()
 {
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
-	
+
 	self->dx = 0;
-	if (self->x < 1150) self->dx = 3;
-	if (self->x > 1170) self->dx = -3;
-	
+	if (self->x < 1150)
+		self->dx = 3;
+	if (self->x > 1170)
+		self->dx = -3;
+
 	if (self->custom == 0)
 	{
 		if (self->y > 490)
 			self->dy = -2;
-		
+
 		if (self->y <= 490)
 		{
 			self->think = &aquaBossRapidLaserFire;
@@ -150,7 +152,7 @@ static void aquaBossRapidPreLaserFire()
 	{
 		if (self->y < 940)
 			self->dy = 2;
-		
+
 		if (self->y >= 940)
 		{
 			self->think = &aquaBossRapidLaserFire;
@@ -163,17 +165,17 @@ static void aquaBossRapidPreLaserFire()
 void aquaBossFire()
 {
 	debug(("aquaBossFire\n"));
-	
+
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
-	
+
 	self->setActionFinished(5);
 	self->setThinkTime(2);
 	self->think = &aquaBossFire;
-	
+
 	addBullet(*self, 0, 0);
-	
+
 	self->custom--;
-	
+
 	if (self->custom == 0)
 	{
 		Math::removeBit(&self->flags, ENT_AIMS);
@@ -185,21 +187,21 @@ void aquaBossFire()
 static void aquaBossUnProtect()
 {
 	debug(("aquaBossUnProtect\n"));
-	
+
 	Math::removeBit(&self->flags, ENT_IMMUNE);
 	self->think = &aquaBossAttack;
-	
+
 	self->setSprites(graphics.getSprite("AquaBossRight", true), graphics.getSprite("AquaBossLeft", true), graphics.getSprite("AquaBossLeft", true));
 }
 
 static void aquaBossProtect()
 {
 	debug(("aquaBossProtect\n"));
-	
+
 	Math::addBit(&self->flags, ENT_IMMUNE);
 	self->think = &aquaBossUnProtect;
 	self->setThinkTime(Math::rrand(90, 120));
-	
+
 	self->setSprites(graphics.getSprite("AquaBossProtectRight", true), graphics.getSprite("AquaBossProtectLeft", true), graphics.getSprite("AquaBossProtectLeft", true));
 }
 
@@ -211,7 +213,7 @@ static void aquaBossReact()
 		self->setThinkTime(Math::rrand(90, 120));
 		return;
 	}
-	
+
 	if ((Math::prand() % 12) == 0)
 		aquaBossProtect();
 }
@@ -221,18 +223,18 @@ static void aquaBossDie()
 	self->health -= Math::rrand(1, 2);
 	self->setActionFinished(30);
 	self->setThinkTime(2);
-	
+
 	self->dx = Math::rrand(-3, 3);
 	self->dy = Math::rrand(-3, 3);
-	
+
 	addExplosion(self->x, self->y, 50, player);
 	addSmokeAndFire(*self, Math::rrand(-5, 5), Math::rrand(-5, 5), 2);
 	addBlood(*self, Math::rrand(-5, 5), Math::rrand(-5, 5), 3);
-	
+
 	if (self->health <= -100)
 	{
 		checkObjectives(self->name, false);
-		
+
 		map.mainBossPart = nullptr;
 	}
 }
@@ -244,13 +246,13 @@ static void aquaBossAttack()
 		self->dx = 0;
 		return;
 	}
-	
+
 	debug(("aquaBossAttack\n"));
-	
+
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
-	
+
 	int r = Math::prand() % (15 + game.skill);
-	
+
 	if (r < 5)
 	{
 		self->dx = Math::rrand(-2, 2);
@@ -285,7 +287,7 @@ static void aquaBossAttack()
 void aquaBossInit()
 {
 	debug(("aquaBossInit\n"));
-	
+
 	map.boss[0] = new Boss();
 	map.boss[0]->name = "BioMech Aqua Blob";
 	map.boss[0]->health = 45 * game.skill;
@@ -302,10 +304,10 @@ void aquaBossInit()
 	map.boss[0]->think = &aquaBossAttack;
 	map.boss[0]->react = &aquaBossReact;
 	map.boss[0]->die = &aquaBossDie;
-	
+
 	Math::addBit(&map.boss[0]->flags, ENT_SWIMS);
-	
+
 	map.setMainBossPart(map.boss[0]);
-	
+
 	debug(("aquaBossInit: Done\n"));
 }

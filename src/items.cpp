@@ -31,7 +31,7 @@ void addItem(int itemType, const std::string &name, int x, int y, const std::str
 	item.flags = ENT_INANIMATE + ENT_BOUNCES + ENT_COLLECTABLE;
 
 	// raise items taller than the enemy
- 	int x1 = x >> BRICKSHIFT;
+	int x1 = x >> BRICKSHIFT;
 	int x2 = (x + item.width - 1) >> BRICKSHIFT;
 	int y2 = (y + item.height - 1) >> BRICKSHIFT;
 	if ((map.isSolid(x1, y2)) || (map.isSolid(x2, y2)))
@@ -47,7 +47,7 @@ void addItem(int itemType, const std::string &name, int x, int y, const std::str
 	item.health += Math::prand() % 120;
 
 	Math::addBit(&item.flags, flags);
-	
+
 	if (item.id == ITEM_MISC_INVISIBLE)
 	{
 		if ((gameData.completedWorld) || (game.skill == 3))
@@ -63,19 +63,19 @@ static void dropBossItems(int x, int y)
 	{
 		return;
 	}
-	
+
 	int r = Math::rrand(ITEM_PISTOL, ITEM_DOUBLECHERRY);
-	
+
 	if (player.environment == ENV_WATER)
 	{
 		r = Math::rrand(ITEM_CHERRY, ITEM_DOUBLECHERRY);
 	}
-	
+
 	if ((Math::prand() % 10) == 0)
 	{
 		r = ITEM_TRIPLECHERRY;
 	}
-	
+
 	addItem(defItem[r].id, defItem[r].name, x, y, defItem[r].sprite[0]->name, 240, defItem[r].value, ENT_DYING, true);
 }
 
@@ -83,24 +83,24 @@ void dropRandomItems(int x, int y)
 {
 	int mapX = x >> BRICKSHIFT;
 	int mapY = y >> BRICKSHIFT;
-	
+
 	if (map.isSolid(mapX, mapY))
 	{
 		return;
 	}
-	
+
 	if (map.isBossMission)
 	{
 		dropBossItems(x, y);
 		return;
 	}
-	
+
 	int amount = Math::rrand(1, 5);
 	int r = Math::rrand(ITEM_POINTS, ITEM_POINTS7);
 
 	int cherryChance = 10 + (10 * game.skill);
 
-	for (int i = 0 ; i < amount ; i++)
+	for (int i = 0; i < amount; i++)
 	{
 		if ((Math::prand() % 8) == 0)
 		{
@@ -111,19 +111,19 @@ void dropRandomItems(int x, int y)
 		{
 			switch (Math::prand() % cherryChance)
 			{
-				case 0:
-					r = ITEM_TRIPLECHERRY;
-					break;
-				case 1:
-				case 2:
-				case 3:
-				case 4:
-				case 5:
-					r = ITEM_DOUBLECHERRY;
-					break;
-				default:
-					r = ITEM_CHERRY;
-					break;
+			case 0:
+				r = ITEM_TRIPLECHERRY;
+				break;
+			case 1:
+			case 2:
+			case 3:
+			case 4:
+			case 5:
+				r = ITEM_DOUBLECHERRY;
+				break;
+			default:
+				r = ITEM_CHERRY;
+				break;
 			}
 		}
 
@@ -138,7 +138,7 @@ void dropHelperItems(int x, int y)
 	int amount = Math::rrand(1, 5);
 	int r;
 
-	for (int i = 0 ; i < amount ; i++)
+	for (int i = 0; i < amount; i++)
 	{
 		r = Math::rrand(ITEM_PISTOL, ITEM_TRIPLECHERRY);
 
@@ -180,7 +180,7 @@ void dropCarriedItems()
 			continue;
 
 		Math::removeBit(&item.flags, ENT_DYING);
-		
+
 		item.owner = &item;
 		item.health = 240;
 		item.dx = 0;
@@ -210,36 +210,36 @@ static void pickUpItem(Entity &item)
 
 	switch (item.id)
 	{
-		case ITEM_PISTOL:
-		case ITEM_MACHINEGUN:
-		case ITEM_LASER:
-		case ITEM_GRENADES:
-		case ITEM_SPREAD:
-			player.currentWeapon = &weapon[item.id];
-			game.currentWeapon = item.id;
-			audio.playSound(SND_GETWEAPON, CH_ITEM, item.x);
-			break;
-		case ITEM_POINTS:
-		case ITEM_POINTS2:
-		case ITEM_POINTS3:
-		case ITEM_POINTS4:
-		case ITEM_POINTS5:
-		case ITEM_POINTS6:
-		case ITEM_POINTS7:
-			addPlayerScore(item.value);
-			audio.playSound(SND_ITEM, CH_ITEM, item.x);
-			break;
-		case ITEM_CHERRY:
-		case ITEM_DOUBLECHERRY:
-		case ITEM_TRIPLECHERRY:
-			Math::limitInt(&(player.health += item.value), 0, MAX_HEALTH);
-			audio.playSound(SND_GULP + (Math::prand() % 2), CH_ITEM, item.x);
-			break;
-		case ITEM_MISC:
-			item.owner = &player;
-		case ITEM_MISC_NOSHOW:
-			audio.playSound(SND_ITEM, CH_ITEM, item.x);
-			break;
+	case ITEM_PISTOL:
+	case ITEM_MACHINEGUN:
+	case ITEM_LASER:
+	case ITEM_GRENADES:
+	case ITEM_SPREAD:
+		player.currentWeapon = &weapon[item.id];
+		game.currentWeapon = item.id;
+		audio.playSound(SND_GETWEAPON, CH_ITEM, item.x);
+		break;
+	case ITEM_POINTS:
+	case ITEM_POINTS2:
+	case ITEM_POINTS3:
+	case ITEM_POINTS4:
+	case ITEM_POINTS5:
+	case ITEM_POINTS6:
+	case ITEM_POINTS7:
+		addPlayerScore(item.value);
+		audio.playSound(SND_ITEM, CH_ITEM, item.x);
+		break;
+	case ITEM_CHERRY:
+	case ITEM_DOUBLECHERRY:
+	case ITEM_TRIPLECHERRY:
+		Math::limitInt(&(player.health += item.value), 0, MAX_HEALTH);
+		audio.playSound(SND_GULP + (Math::prand() % 2), CH_ITEM, item.x);
+		break;
+	case ITEM_MISC:
+		item.owner = &player;
+	case ITEM_MISC_NOSHOW:
+		audio.playSound(SND_ITEM, CH_ITEM, item.x);
+		break;
 	}
 
 	if ((item.id < ITEM_POINTS) || (item.id > ITEM_POINTS7))
@@ -255,28 +255,28 @@ static void pickUpItem(Entity &item)
 		*/
 		switch (item.name[0])
 		{
-			case 'A':
-			case 'a':
-			case 'E':
-			case 'e':
-			case 'I':
-			case 'i':
-			case 'O':
-			case 'o':
-			case 'U':
-			case 'u':
-				message = fmt::format(_("Picked up an {}"), item.name);
-				break;
-			default:
-				message = fmt::format(_("Picked up a {}"), item.name);
-				break;
+		case 'A':
+		case 'a':
+		case 'E':
+		case 'e':
+		case 'I':
+		case 'i':
+		case 'O':
+		case 'o':
+		case 'U':
+		case 'u':
+			message = fmt::format(_("Picked up an {}"), item.name);
+			break;
+		default:
+			message = fmt::format(_("Picked up a {}"), item.name);
+			break;
 		}
 
 		if (!map.isBossMission)
 			engine.setInfoMessage(message, 0, INFO_NORMAL);
 
 		checkObjectives(item.name, true);
-		
+
 		if (item.name == "LRTS")
 		{
 			presentPlayerMedal("LRTS_PART");
@@ -338,7 +338,7 @@ void doItems()
 	for (auto it = map.items.begin(); it != map.items.end();)
 	{
 		auto &item = *it;
-		
+
 		if (item.id == ITEM_MISC_INVISIBLE)
 		{
 			++it;
@@ -359,7 +359,7 @@ void doItems()
 			// Gravity
 			if (!(item.flags & ENT_WEIGHTLESS))
 				item.applyGravity();
-				
+
 			if (!map.isIceLevel)
 				item.dx *= 0.98;
 

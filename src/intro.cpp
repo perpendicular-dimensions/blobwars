@@ -32,7 +32,7 @@ static void playIntro(split &it, int tx, int ty, int delay)
 	std::string line[3];
 	SDL_Surface *text[3];
 
-	for (int i = 0 ; i < 3 ; i++)
+	for (int i = 0; i < 3; i++)
 	{
 		line[i] = *it;
 		++it;
@@ -61,15 +61,17 @@ static void playIntro(split &it, int tx, int ty, int delay)
 		doSpawnPoints();
 		drawMapTopLayer();
 
-		for (int i = 0 ; i < 3 ; i++)
+		for (int i = 0; i < 3; i++)
 			if (text[i] != nullptr)
 				graphics.blit(text[i], 320, 150 + (i * 30), graphics.screen, true);
 
 		if (engine.userAccepts())
 			break;
 
-		if (player.x < player.tx) player.x++;
-		if (player.x > player.tx) player.x--;
+		if (player.x < player.tx)
+			player.x++;
+		if (player.x > player.tx)
+			player.x--;
 
 		if ((int)player.x == player.tx)
 		{
@@ -86,8 +88,8 @@ static void playIntro(split &it, int tx, int ty, int delay)
 		engine.delay(frameLimit);
 		frameLimit = SDL_GetTicks() + 16;
 	}
-	
-	for (int i = 0 ; i < 3 ; i++)
+
+	for (int i = 0; i < 3; i++)
 		if (text[i])
 			SDL_FreeSurface(text[i]);
 }
@@ -143,7 +145,7 @@ int doIntro()
 
 	loadResources();
 
-	for (int i = 0 ; i < 4 ; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		addItem(101, "CherryPlant", Math::prand() % 640, 9050, "CherryPlant", 100, 1, 0, false);
 	}
@@ -153,7 +155,7 @@ int doIntro()
 		showIntroError();
 		return SECTION_TITLE;
 	}
-	
+
 	player.health = -100;
 
 	audio.playMusic();

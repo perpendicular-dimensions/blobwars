@@ -51,17 +51,17 @@ void showLicense()
 	int y = 0;
 
 	for (auto token: split(engine.dataBuffer, '\n'))
-	while (true)
-	{
-		scan(token, "%d %[^\n\r]", &y, line);
-		
-		if (y == -1)
+		while (true)
 		{
-			break;
-		}
+			scan(token, "%d %[^\n\r]", &y, line);
 
-		graphics.drawString(line, 320, y, true, graphics.screen);
-	}
+			if (y == -1)
+			{
+				break;
+			}
+
+			graphics.drawString(line, 320, y, true, graphics.screen);
+		}
 
 	graphics.delay(4000);
 
@@ -79,7 +79,7 @@ void showLicense()
 			break;
 		SDL_Delay(16);
 	}
-	
+
 	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.delay(1000);
 }
@@ -88,7 +88,7 @@ void showLicense()
 void setupUserHomeDirectory()
 {
 	char *userHome = getenv("HOME");
-	
+
 	if ((!userHome) || (userHome == nullptr))
 	{
 		printf("Couldn't determine user home directory! Exitting.\n");
@@ -96,19 +96,19 @@ void setupUserHomeDirectory()
 	}
 
 	debug(("User Home = %s\n", userHome));
-	
+
 	char dir[PATH_MAX];
 	dir[0] = 0;
 
 	snprintf(dir, sizeof dir, "%s/.parallelrealities", userHome);
-	if ((mkdir(dir, S_IRWXU|S_IRWXG|S_IROTH|S_IXOTH) != 0) && (errno != EEXIST))
+	if ((mkdir(dir, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH) != 0) && (errno != EEXIST))
 	{
 		printf("Couldn't create required directory '%s'", dir);
 		exit(1);
 	}
 
 	snprintf(dir, sizeof dir, "%s/.parallelrealities/blobwars", userHome);
-	if ((mkdir(dir, S_IRWXU|S_IRWXG|S_IROTH|S_IXOTH) != 0) && (errno != EEXIST))
+	if ((mkdir(dir, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH) != 0) && (errno != EEXIST))
 	{
 		printf("Couldn't create required directory '%s'", dir);
 		exit(1);
@@ -163,7 +163,7 @@ static bool loadConfig()
 	{
 		engine.useAudio = game.output;
 	}
-		
+
 	config.loadKeyConfig();
 	config.loadJoystickConfig();
 
@@ -183,7 +183,7 @@ void saveConfig()
 	{
 		fmt::print("Error Saving Config to {}\n", configPath);
 	}
-	
+
 	debug(("Output Type = %d\n", game.output));
 }
 
@@ -195,16 +195,16 @@ static int initMedalService(void *data)
 	(void)data;
 
 	SDL_mutexP(medalServer.lock);
-	
+
 	std::string connectMessage = fmt::format("Contacting Medal Server - {}:{}", MEDAL_SERVER_HOST, MEDAL_SERVER_PORT);
-	
+
 	graphics.showMedalMessage(-1, connectMessage);
-	
+
 	std::string privateKey;
 	std::string keyPath = engine.userHomeDirectory + "medalKey";
-	
+
 	debug(("Loading private key from %s\n", keyPath));
-	
+
 	std::ifstream file(keyPath);
 	file >> privateKey;
 
@@ -220,19 +220,19 @@ static int initMedalService(void *data)
 		graphics.showMedalMessage(-1, "Medal Server Connection Failed - Online functions disabled");
 		return 0;
 	}
-	
+
 	graphics.showMedalMessage(-1, "Connected to Medal Server");
-	
+
 	SDL_mutexV(medalServer.lock);
-	
+
 	return 1;
 }
 
 void initConfig()
 {
-	#if UNIX
+#if UNIX
 	setupUserHomeDirectory();
-	#endif
+#endif
 
 	displayLicense = loadConfig();
 }
@@ -243,8 +243,8 @@ BRRRRRRRRRRRRRRRRRMMMMMMMMMMMMMMMMMMM!! Well, hopefully anyway! ;)
 */
 void initSystem()
 {
-	long flags = SDL_INIT_VIDEO|SDL_INIT_JOYSTICK;
-			
+	long flags = SDL_INIT_VIDEO | SDL_INIT_JOYSTICK;
+
 	if (engine.useAudio)
 	{
 		flags |= SDL_INIT_AUDIO;
@@ -305,7 +305,8 @@ void initSystem()
 
 	// This (attempts to) set the gamma correction. We attempt to catch an error here
 	// in case someone has done something really stupid in the config file(!!)
-	if (game.brightness != -1) {
+	if (game.brightness != -1)
+	{
 		Math::limitInt(&game.brightness, 1, 20);
 		float brightness = game.brightness;
 		brightness /= 10;
@@ -344,7 +345,7 @@ void initSystem()
 	graphics.registerEngine(&engine);
 	graphics.mapColors();
 
- 	audio.registerEngine(&engine);
+	audio.registerEngine(&engine);
 	audio.setSoundVolume(game.soundVol);
 	audio.setMusicVolume(game.musicVol);
 	audio.output = game.output;
@@ -357,12 +358,12 @@ void initSystem()
 	debug(("Pack Dir = %s\n", PAKLOCATION));
 	debug(("Loading Fonts...\n"));
 
-	#if USEPAK
-		if (!engine.unpack("data/vera.ttf", PAK_FONT))
-		{
-			engine.reportFontFailure();
-		}
-	#endif
+#if USEPAK
+	if (!engine.unpack("data/vera.ttf", PAK_FONT))
+	{
+		engine.reportFontFailure();
+	}
+#endif
 
 	graphics.loadFont(0, "data/vera.ttf", 12);
 	graphics.loadFont(1, "data/vera.ttf", 15);
@@ -375,7 +376,7 @@ void initSystem()
 	audio.loadSound(SND_CHEAT, "sound/Lock And Load!!!");
 	audio.loadSound(SND_HIGHLIGHT, "sound/menu");
 	audio.loadSound(SND_SELECT, "sound/select");
-	
+
 	graphics.medal[0] = graphics.loadImage("gfx/main/medal_bronze_1.png");
 	graphics.medal[1] = graphics.loadImage("gfx/main/award_star_silver_3.png");
 	graphics.medal[2] = graphics.loadImage("gfx/main/shield.png");
@@ -387,7 +388,7 @@ void initSystem()
 	SDL_Surface *device = graphics.loadImage("gfx/main/alienDevice.png");
 	SDL_SetWindowIcon(graphics.window, device);
 	SDL_FreeSurface(device);
-	
+
 	if (contains(engine.userHomeDirectory, "/root"))
 	{
 		graphics.showRootWarning();
@@ -401,7 +402,7 @@ void initSystem()
 	{
 		checkForLicense();
 	}
-	
+
 	if (SDLNet_Init() < 0)
 	{
 		printf("SDLNet_Init: %s\n", SDLNet_GetError());
@@ -409,7 +410,7 @@ void initSystem()
 	else
 	{
 		SDL_Thread *thread = SDL_CreateThread(initMedalService, "MedalService", nullptr);
-	
+
 		if (thread == nullptr)
 		{
 			printf("Unable to create thread: %s\n", SDL_GetError());
@@ -418,7 +419,7 @@ void initSystem()
 			return;
 		}
 	}
-	
+
 	engine.saveConfig = true;
 
 	debug(("Init Complete...\n"));
@@ -432,9 +433,9 @@ atexit();
 void cleanup()
 {
 	std::string tempPath;
-	
+
 	debug(("Cleaning Up...\n"));
-	
+
 	debug(("Updating Replay Data\n"));
 	replayData.header.score = game.score;
 
@@ -451,11 +452,11 @@ void cleanup()
 	debug(("Removing Font File...\n"));
 	tempPath = engine.userHomeDirectory + "font.ttf";
 	remove(tempPath.c_str());
-	
+
 	if (SDL_NumJoysticks() > 0)
 	{
 		SDL_JoystickEventState(SDL_DISABLE);
-		for (int i = 0 ; i < SDL_NumJoysticks() ; i++)
+		for (int i = 0; i < SDL_NumJoysticks(); i++)
 		{
 			debug(("Closing Joystick #%d\n", i));
 			SDL_JoystickClose(config.sdlJoystick);
@@ -470,7 +471,7 @@ void cleanup()
 
 	debug(("Closing TTF...\n"));
 	TTF_Quit();
-	
+
 	debug(("Closing NET...\n"));
 	SDLNet_Quit();
 
@@ -478,11 +479,10 @@ void cleanup()
 	SDL_Quit();
 
 	debug(("All Done.\n"));
-	
+
 	if (replayData.replayMode == REPLAY_MODE::PLAYBACK)
 	{
 		printf("\n==== ACTUAL PLAYBACK DATA ====\n");
 		replayData.printReplayInformation();
 	}
 }
-

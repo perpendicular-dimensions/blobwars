@@ -19,20 +19,18 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class Switch {
+class Switch
+{
+public:
+	std::string name;
+	std::string linkName;
+	std::string requiredObjectName;
+	std::string activateMessage;
 
-	public:
-		
-		std::string name;
-		std::string linkName;
-		std::string requiredObjectName;
-		std::string activateMessage;
+	int type;
+	int x, y;
+	int health = 0;
+	bool activated;
 
-		int type;
-		int x, y;
-		int health = 0;
-		bool activated;
-
-		Switch(const std::string &name, const std::string &linkName, const std::string &requiredObjectName, const std::string &activateMessage, int type, int x, int y, bool activated);
-		
+	Switch(const std::string &name, const std::string &linkName, const std::string &requiredObjectName, const std::string &activateMessage, int type, int x, int y, bool activated);
 };

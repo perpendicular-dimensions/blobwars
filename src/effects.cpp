@@ -38,7 +38,7 @@ void addSmokeAndFire(Entity &ent, float dx, float dy, int amount)
 {
 	int x, y;
 
-	for (int i = 0 ; i < amount ; i++)
+	for (int i = 0; i < amount; i++)
 	{
 		x = (int)(ent.x + Math::prand() % ent.width);
 		y = (int)(ent.y + Math::prand() % ent.height);
@@ -56,7 +56,7 @@ void addSmokeAndFire(Entity &ent, float dx, float dy, int amount)
 void addBlood(Entity &ent, float dx, float dy, int amount)
 {
 	int x, y;
-	
+
 	if (engine.cheatBlood)
 	{
 		amount *= 3;
@@ -64,7 +64,7 @@ void addBlood(Entity &ent, float dx, float dy, int amount)
 
 	if (game.gore)
 	{
-		for (int i = 0 ; i < amount ; i++)
+		for (int i = 0; i < amount; i++)
 		{
 			x = (int)(ent.x + Math::prand() % ent.width);
 			y = (int)(ent.y + Math::prand() % ent.height);
@@ -79,8 +79,7 @@ void doEffects()
 	Sprite *explosion = graphics.getSprite("SmallExplosion", true);
 	Sprite *smoke = graphics.getSprite("Smoke", true);
 
-	map.effects.remove_if([&](auto &&effect)
-	{
+	map.effects.remove_if([&](auto &&effect) {
 		effect.update();
 
 		if (effect.flags & EFF_BLEEDS)

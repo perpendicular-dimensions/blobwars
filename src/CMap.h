@@ -19,78 +19,76 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class Map {
+class Map
+{
+private:
+	Entity *allowableEnemy[10];
+	int maxAllowableEnemies;
 
-	private:
-		
-		Entity *allowableEnemy[10];
-		int maxAllowableEnemies;
+public:
+	std::string name;
 
-	public:
+	uint8_t data[MAPWIDTH][MAPHEIGHT];
 
-		std::string name;
+	int offsetX, offsetY;
+	int limitLeft, limitRight, limitUp, limitDown;
 
-		uint8_t data[MAPWIDTH][MAPHEIGHT];
+	int foundItems, totalItems;
+	int foundMIAs, totalMIAs;
+	int requiredMIAs;
 
-		int offsetX, offsetY;
-		int limitLeft, limitRight, limitUp, limitDown;
+	// time limit for extreme setting
+	int remainingMinutes;
+	int remainingSeconds;
 
-		int foundItems, totalItems;
-		int foundMIAs, totalMIAs;
-		int requiredMIAs;
-		
-		// time limit for extreme setting
-		int remainingMinutes;
-		int remainingSeconds;
-		
-		// special for ice levels
-		bool isIceLevel;
-		
-		// special for flooded tunnel #4
-		float waterLevel;
-		int requiredWaterLevel;
-		
-		// special for arctic wastes
-		bool isBlizzardLevel;
-		int windChangeTime;
-		float windPower;
-		
-		// air/water decoration
-		bool isCavesTileset;
-		bool isGrasslandsTileset;
+	// special for ice levels
+	bool isIceLevel;
 
-		// Boss Stuff
-		bool fightingGaldov;
-		bool isBossMission;
-		unsigned int bossNextThink;
-		void (*doBossLevelAction) (void);
-		Boss *boss[10];
-		Boss *mainBossPart;
-		float bossEnergyMeterBit;
-		
-		std::map<std::string, std::vector<std::string>> persistents;
+	// special for flooded tunnel #4
+	float waterLevel;
+	int requiredWaterLevel;
 
-		// Various types of items present in the map.
-		// Rules: std::list for things that are removed often, and that are referenced.
-		std::vector<Train> trains;
-		std::list<Entity> items;
-		std::list<Entity> bullets;
-		std::list<Entity> enemies;
-		std::list<Entity> mias;
-		std::list<Entity> obstacles;
-		std::list<Particle> particles;
-		std::vector<Switch> switches;
-		std::vector<SpawnPoint> spawns;
-		std::list<Effect> effects;
-		std::vector<Objective> objectives;
-		std::vector<Teleporter> teleports;
-		std::vector<LineDef> lines;
-		std::list<Trap> traps;
+	// special for arctic wastes
+	bool isBlizzardLevel;
+	int windChangeTime;
+	float windPower;
+
+	// air/water decoration
+	bool isCavesTileset;
+	bool isGrasslandsTileset;
+
+	// Boss Stuff
+	bool fightingGaldov;
+	bool isBossMission;
+	unsigned int bossNextThink;
+	void (*doBossLevelAction)(void);
+	Boss *boss[10];
+	Boss *mainBossPart;
+	float bossEnergyMeterBit;
+
+	std::map<std::string, std::vector<std::string>> persistents;
+
+	// Various types of items present in the map.
+	// Rules: std::list for things that are removed often, and that are referenced.
+	std::vector<Train> trains;
+	std::list<Entity> items;
+	std::list<Entity> bullets;
+	std::list<Entity> enemies;
+	std::list<Entity> mias;
+	std::list<Entity> obstacles;
+	std::list<Particle> particles;
+	std::vector<Switch> switches;
+	std::vector<SpawnPoint> spawns;
+	std::list<Effect> effects;
+	std::vector<Objective> objectives;
+	std::vector<Teleporter> teleports;
+	std::vector<LineDef> lines;
+	std::list<Trap> traps;
 
 	Map();
-	
+
 	void clear();
-	
+
 	bool isPracticeMission();
 	bool isValid(int x, int y);
 	bool isSolid(int x, int y);
@@ -98,11 +96,11 @@ class Map {
 	bool isNoReset(int x, int y);
 	bool isLiquid(int x, int y);
 	bool isTopLayer(int x, int y);
-	
+
 	std::vector<std::string> &getPersistent(const std::string &name);
 	std::vector<std::string> &createPersistent(const std::string &name);
 	void destroyPersistent(const std::string &name);
-	
+
 	void setName(const std::string &name);
 	void setClipping(int limitLeft, int limitRight, int limitUp, int limitDown);
 	void addTrain(const std::string &name, int startX, int startY, int endX, int endY, int pause, bool atStart, bool active);
@@ -112,13 +110,13 @@ class Map {
 	void addSpawnPoint(const std::string &name, int x, int y, int type, int subtype, int min, int max, bool active);
 	void addObjective(const std::string &description, const std::string &target, int targetValue, bool required);
 	void evalTileset(const std::string &baseDir);
-	
+
 	void killAllEnemies();
-	
+
 	void setAllowableEnemy(Entity *enemy);
 	std::string getSpawnableEnemy();
 	std::string getSpawnableEnemy(int i);
-	
+
 	void getRandomEntityPosition(int *x, int *y);
 	void setMainBossPart(Boss *boss);
 };

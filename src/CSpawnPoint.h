@@ -19,23 +19,21 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class SpawnPoint {
+class SpawnPoint
+{
+public:
+	std::string name;
 
-	public:
+	bool active;
 
-		std::string name;
+	int x, y;
 
-		bool active;
+	int spawnType, spawnSubType;
 
-		int x, y;
-
-		int spawnType, spawnSubType;
-
-		int currentInterval, minInterval, maxInterval, requiredInterval;
+	int currentInterval, minInterval, maxInterval, requiredInterval;
 
 	SpawnPoint(const std::string &name, int x, int y, int spawnType, int spawnSubType, int minInterval, int maxInterval, bool active);
 	void reset();
 	void think();
 	bool readyToSpawn();
-
 };

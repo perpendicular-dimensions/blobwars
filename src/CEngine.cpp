@@ -32,15 +32,15 @@ Engine::Engine()
 	mouseLeft = mouseRight = 0;
 	waitForButton = false;
 	waitForKey = false;
-	
+
 	allowJoypad = true;
 
 	fullScreen = 0;
 
 	useAudio = 2;
-	
+
 	practice = false;
-	
+
 	allowQuit = false;
 
 	saveConfig = false;
@@ -54,20 +54,22 @@ Engine::Engine()
 	// Development Stuff
 	devNoMonsters = false;
 
-	#ifdef FRAMEWORK_SDL
+#ifdef FRAMEWORK_SDL
 	char pakPath[PATH_MAX] = PAKFULLPATH;
-	if (CFBundleGetMainBundle() != nullptr) {
+	if (CFBundleGetMainBundle() != nullptr)
+	{
 		CFURLRef pakURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), CFSTR(PAKNAME), nullptr, nullptr);
-		if (pakURL != nullptr) {
+		if (pakURL != nullptr)
+		{
 			CFShow(pakURL);
-			CFURLGetFileSystemRepresentation(pakURL, true, (uint8_t*)pakPath, sizeof(pakPath));
+			CFURLGetFileSystemRepresentation(pakURL, true, (uint8_t *)pakPath, sizeof(pakPath));
 			CFRelease(pakURL);
 		}
 	}
 	pak.setPakFile(pakPath);
-	#else
+#else
 	pak.setPakFile(PAKFULLPATH);
-	#endif
+#endif
 
 	// Timer
 	time1 = time2 = 0;
@@ -76,7 +78,7 @@ Engine::Engine()
 	// Cheats
 	cheatHealth = cheatExtras = cheatFuel = cheatLevels = false;
 	cheatBlood = cheatInvulnerable = cheatReload = cheatSpeed = cheatSkipLevel = false;
-	
+
 	extremeAvailable = 0;
 }
 
@@ -119,155 +121,169 @@ void Engine::getInput()
 	{
 		switch (event.type)
 		{
-			case SDL_QUIT:
-				if (allowQuit)
+		case SDL_QUIT:
+			if (allowQuit)
+			{
+				exit(0);
+			}
+			break;
+
+		case SDL_MOUSEBUTTONDOWN:
+			if (event.button.button == SDL_BUTTON_LEFT)
+				mouseLeft = 1;
+			if (event.button.button == SDL_BUTTON_RIGHT)
+				mouseRight = 1;
+			break;
+
+		case SDL_MOUSEBUTTONUP:
+			if (event.button.button == SDL_BUTTON_LEFT)
+				mouseLeft = 0;
+			if (event.button.button == SDL_BUTTON_RIGHT)
+				mouseRight = 0;
+			break;
+
+		case SDL_MOUSEMOTION:
+			mouseX = event.motion.x;
+			mouseY = event.motion.y;
+			break;
+
+		case SDL_KEYDOWN:
+
+			if (waitForButton)
+			{
+				if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
 				{
-					exit(0);
-				}
-				break;
-
-			case SDL_MOUSEBUTTONDOWN:
-				if (event.button.button == SDL_BUTTON_LEFT) mouseLeft = 1;
-				if (event.button.button == SDL_BUTTON_RIGHT) mouseRight = 1;
-				break;
-
-			case SDL_MOUSEBUTTONUP:
-				if (event.button.button == SDL_BUTTON_LEFT) mouseLeft = 0;
-				if (event.button.button == SDL_BUTTON_RIGHT) mouseRight = 0;
-				break;
-
-			case SDL_MOUSEMOTION:
-				mouseX = event.motion.x;
-				mouseY = event.motion.y;
-				break;
-
-			case SDL_KEYDOWN:
-				
-				if (waitForButton)
-				{
-					if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
-					{
-						lastButtonPressed = -1;
-						*highlightedWidget->value = abs(*highlightedWidget->value) - 1000;
-						highlightedWidget->redraw();
-						waitForButton = false;
-						allowJoypad = false;
-					}
-					
-					if (event.key.keysym.scancode == SDL_SCANCODE_BACKSPACE)
-					{
-						lastButtonPressed = -2;
-						*highlightedWidget->value = -2;
-						highlightedWidget->redraw();
-						waitForButton = false;
-						allowJoypad = false;
-					}
-					
-					return;
-				}
-				
-				if (waitForKey)
-				{
-					if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
-					{
-						*highlightedWidget->value = -*highlightedWidget->value;
-					}
-					else
-					{
-						*highlightedWidget->value = event.key.keysym.scancode;
-					}
-					
 					lastButtonPressed = -1;
-					highlightedWidget->redraw();
-					waitForButton = false;
-					waitForKey = false;
-					allowJoypad = false;
-					
-					return;
-				}
-
-				keyState[event.key.keysym.scancode] = 1;
-				lastKeyPressed = SDL_GetKeyName(SDL_GetKeyFromScancode(event.key.keysym.scancode));
-				addKeyEvent();
-				break;
-
-			case SDL_KEYUP:
-				keyState[event.key.keysym.scancode] = 0;
-				break;
-
-			case SDL_JOYAXISMOTION:
-				if (event.jaxis.axis == 0)
-				{
-					joyX = event.jaxis.value;
-					int joycurX = joyX < -25000 ? -1 : joyX > 25000 ? 1 : 0;
-					if (joycurX != joyprevX)
-						joykeyX = joyprevX = joycurX;
-				}
-				else if (event.jaxis.axis == 1)
-				{
-					joyY = event.jaxis.value;
-					int joycurY = joyY < -25000 ? -1 : joyY > 25000 ? 1 : 0;
-					if (joycurY != joyprevY)
-						joykeyY = joyprevY = joycurY;
-				}
-				break;
-
-			case SDL_JOYBUTTONDOWN:
-				if (waitForButton)
-				{
-					lastButtonPressed = event.jbutton.button;
-					*highlightedWidget->value = lastButtonPressed;
+					*highlightedWidget->value = abs(*highlightedWidget->value) - 1000;
 					highlightedWidget->redraw();
 					waitForButton = false;
 					allowJoypad = false;
-					return;
-				}
-				
-				joystickState[event.jbutton.button] = 1;
-				joykeyFire = true;
-				break;
-
-			case SDL_JOYBUTTONUP:
-				joystickState[event.jbutton.button] = 0;
-				joykeyFire = false;
-				break;
-
-			case SDL_JOYHATMOTION:
-				switch (event.jhat.value) {
-				case SDL_HAT_CENTERED:
-					joyX = 0,      joyY = 0;      break;
-				case SDL_HAT_LEFT:
-					joyX = -32768, joyY = 0;      break;
-				case SDL_HAT_LEFTUP:
-					joyX = -32768, joyY = -32768; break;
-				case SDL_HAT_UP:
-					joyX = 0,      joyY = -32768; break;
-				case SDL_HAT_RIGHTUP:
-					joyX = 32767,  joyY = -32768; break;
-				case SDL_HAT_RIGHT:
-					joyX = 32767,  joyY = 0;      break;
-				case SDL_HAT_RIGHTDOWN:
-					joyX = 32767,  joyY = 32767;  break;
-				case SDL_HAT_DOWN:
-					joyX = 0,      joyY = 32767;  break;
-				case SDL_HAT_LEFTDOWN:
-					joyX = -32768, joyY = 32767;  break;
 				}
 
-				if (joyX != joyprevX)
-					joykeyX = joyprevX = joyX;
-				if (joyY != joyprevY)
-					joykeyY = joyprevY = joyY;
+				if (event.key.keysym.scancode == SDL_SCANCODE_BACKSPACE)
+				{
+					lastButtonPressed = -2;
+					*highlightedWidget->value = -2;
+					highlightedWidget->redraw();
+					waitForButton = false;
+					allowJoypad = false;
+				}
 
-				break;
+				return;
+			}
 
-			case SDL_WINDOWEVENT:
-				if (event.window.event == SDL_WINDOWEVENT_FOCUS_LOST)
-					paused = true;
-				break;
+			if (waitForKey)
+			{
+				if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
+				{
+					*highlightedWidget->value = -*highlightedWidget->value;
+				}
+				else
+				{
+					*highlightedWidget->value = event.key.keysym.scancode;
+				}
 
-			default:
+				lastButtonPressed = -1;
+				highlightedWidget->redraw();
+				waitForButton = false;
+				waitForKey = false;
+				allowJoypad = false;
+
+				return;
+			}
+
+			keyState[event.key.keysym.scancode] = 1;
+			lastKeyPressed = SDL_GetKeyName(SDL_GetKeyFromScancode(event.key.keysym.scancode));
+			addKeyEvent();
+			break;
+
+		case SDL_KEYUP:
+			keyState[event.key.keysym.scancode] = 0;
+			break;
+
+		case SDL_JOYAXISMOTION:
+			if (event.jaxis.axis == 0)
+			{
+				joyX = event.jaxis.value;
+				int joycurX = joyX < -25000 ? -1 : joyX > 25000 ? 1 : 0;
+				if (joycurX != joyprevX)
+					joykeyX = joyprevX = joycurX;
+			}
+			else if (event.jaxis.axis == 1)
+			{
+				joyY = event.jaxis.value;
+				int joycurY = joyY < -25000 ? -1 : joyY > 25000 ? 1 : 0;
+				if (joycurY != joyprevY)
+					joykeyY = joyprevY = joycurY;
+			}
+			break;
+
+		case SDL_JOYBUTTONDOWN:
+			if (waitForButton)
+			{
+				lastButtonPressed = event.jbutton.button;
+				*highlightedWidget->value = lastButtonPressed;
+				highlightedWidget->redraw();
+				waitForButton = false;
+				allowJoypad = false;
+				return;
+			}
+
+			joystickState[event.jbutton.button] = 1;
+			joykeyFire = true;
+			break;
+
+		case SDL_JOYBUTTONUP:
+			joystickState[event.jbutton.button] = 0;
+			joykeyFire = false;
+			break;
+
+		case SDL_JOYHATMOTION:
+			switch (event.jhat.value)
+			{
+			case SDL_HAT_CENTERED:
+				joyX = 0, joyY = 0;
 				break;
+			case SDL_HAT_LEFT:
+				joyX = -32768, joyY = 0;
+				break;
+			case SDL_HAT_LEFTUP:
+				joyX = -32768, joyY = -32768;
+				break;
+			case SDL_HAT_UP:
+				joyX = 0, joyY = -32768;
+				break;
+			case SDL_HAT_RIGHTUP:
+				joyX = 32767, joyY = -32768;
+				break;
+			case SDL_HAT_RIGHT:
+				joyX = 32767, joyY = 0;
+				break;
+			case SDL_HAT_RIGHTDOWN:
+				joyX = 32767, joyY = 32767;
+				break;
+			case SDL_HAT_DOWN:
+				joyX = 0, joyY = 32767;
+				break;
+			case SDL_HAT_LEFTDOWN:
+				joyX = -32768, joyY = 32767;
+				break;
+			}
+
+			if (joyX != joyprevX)
+				joykeyX = joyprevX = joyX;
+			if (joyY != joyprevY)
+				joykeyY = joyprevY = joyY;
+
+			break;
+
+		case SDL_WINDOWEVENT:
+			if (event.window.event == SDL_WINDOWEVENT_FOCUS_LOST)
+				paused = true;
+			break;
+
+		default:
+			break;
 		}
 	}
 }
@@ -297,7 +313,9 @@ bool Engine::userAccepts()
 
 void Engine::flushInput()
 {
-	while (SDL_PollEvent(&event)){}
+	while (SDL_PollEvent(&event))
+	{
+	}
 }
 
 void Engine::clearInput()
@@ -358,7 +376,7 @@ bool Engine::unpack(const std::string &filename, int fileType)
 	if ((fileType == PAK_MUSIC) || (fileType == PAK_FONT) || (fileType == PAK_TAGS))
 	{
 		std::string tempPath = userHomeDirectory;
-		
+
 		if (fileType == PAK_MUSIC)
 		{
 			tempPath.append("music.mod");
@@ -393,9 +411,9 @@ bool Engine::loadData(const std::string &filename)
 {
 	bool ret = true;
 
-	#if USEPAK
-		return unpack(filename, PAK_DATA);
-	#endif
+#if USEPAK
+	return unpack(filename, PAK_DATA);
+#endif
 
 	std::ifstream file(filename);
 
@@ -502,7 +520,8 @@ bool Engine::loadWidgets(const std::string &filename)
 
 		for (size_t i = 0; i < widgetNames.size(); ++i)
 		{
-			if (token == widgetNames[i]) {
+			if (token == widgetNames[i])
+			{
 				type = i;
 				break;
 			}
@@ -718,7 +737,7 @@ int Engine::processWidgets()
 				waitForButton = true;
 				waitForKey = false;
 				allowJoypad = true;
-				
+
 				if (*highlightedWidget->value > -1000)
 				{
 					*highlightedWidget->value = (-1000 - *highlightedWidget->value);
@@ -731,10 +750,9 @@ int Engine::processWidgets()
 				allowJoypad = false;
 				*highlightedWidget->value = -*highlightedWidget->value;
 			}
-			
+
 			update = 2;
 		}
-		
 
 		flushInput();
 		clearInput();
@@ -836,13 +854,14 @@ int Engine::getValueOfFlagTokens(const std::string &line)
 	return flags;
 }
 
-void Engine::delay(unsigned int frameLimit) {
+void Engine::delay(unsigned int frameLimit)
+{
 	unsigned int ticks = SDL_GetTicks();
 
-	if(frameLimit < ticks)
+	if (frameLimit < ticks)
 		return;
-	
-	if(frameLimit > ticks + 16)
+
+	if (frameLimit > ticks + 16)
 		SDL_Delay(16);
 	else
 		SDL_Delay(frameLimit - ticks);

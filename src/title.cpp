@@ -33,7 +33,7 @@ static void showSkillLevels()
 	engine.showWidget("back", true);
 
 	engine.highlightWidget("normal");
-		  
+
 	engine.enableWidget("extreme", engine.extremeAvailable);
 }
 
@@ -65,16 +65,16 @@ static void showSaves()
 */
 static void showManualHelp()
 {
-	#ifdef FRAMEWORK_SDL
+#ifdef FRAMEWORK_SDL
 	openHelpURL();
-	#else
+#else
 	engine.showWidgetGroup("help", true);
 	engine.showWidgetGroup("mainMenu", false);
-	
+
 	engine.showWidget("back", true);
 
 	engine.highlightWidget("back");
-	#endif
+#endif
 }
 
 /**
@@ -89,9 +89,9 @@ static void showTitleWidgets()
 	engine.showWidgetGroup("gameSlots", false);
 	engine.showWidgetGroup("help", false);
 	engine.showWidget("back", false);
-	
+
 	engine.showWidgetGroup("mainMenu", true);
-	
+
 	engine.highlightWidget("newGame");
 
 	if (!engine.continueSaveSlot)
@@ -111,16 +111,16 @@ static void showTitleWidgets()
 */
 static void setupSaveWidgets()
 {
-	for (int i = 0 ; i < 5 ; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		std::string widgetName = fmt::format("save{}", i + 1);
 		engine.getWidgetByName(widgetName)->label = engine.saveSlot[i];
-		
+
 		if ((contains(engine.saveSlot[i], _("Empty"))) || (contains(engine.saveSlot[i], _("Corrupt"))))
 		{
 			engine.enableWidget(widgetName, false);
 		}
-		
+
 		widgetName = fmt::format("slot{}", i + 1);
 		engine.getWidgetByName(widgetName)->label = engine.saveSlot[i];
 	}
@@ -139,7 +139,7 @@ static void loadTitleWidgets()
 	initSaveSlots();
 
 	setupSaveWidgets();
-	
+
 	Widget *widget = engine.getWidgetByName("labelManual");
 	widget->label = GAMEPLAYMANUAL;
 
@@ -170,10 +170,11 @@ static void doQuit()
 
 	graphics.updateScreen();
 
-	do {
+	do
+	{
 		SDL_Delay(16);
 		engine.getInput();
-	} while(!engine.userAccepts());
+	} while (!engine.userAccepts());
 }
 
 /**
@@ -204,7 +205,7 @@ int title()
 
 	SDL_Surface *prlogo = graphics.quickSprite("PRLogo", graphics.loadImage("gfx/main/prlogo.gif"));
 	SDL_Surface *title = graphics.quickSprite("Title", graphics.loadImage("gfx/main/title.png"));
-	
+
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 
 	graphics.setFontSize(3);
@@ -216,13 +217,13 @@ int title()
 
 	graphics.setFontSize(0);
 	SDL_Surface *copyright[] = {
-		graphics.quickSprite("Copyright1", graphics.getString(_("Copyright (C) 2011-2015 Perpendicular Dimensions"), true)),
-		graphics.quickSprite("Copyright2", graphics.getString(_("Copyright (C) 2004-2011 Parallel Realities"), true)),
-		nullptr,
+	                graphics.quickSprite("Copyright1", graphics.getString(_("Copyright (C) 2011-2015 Perpendicular Dimensions"), true)),
+	                graphics.quickSprite("Copyright2", graphics.getString(_("Copyright (C) 2004-2011 Parallel Realities"), true)),
+	                nullptr,
 	};
 
-	#define STRINGIFY_VALUE(x) STRINGIFY(x)
-	#define STRINGIFY(x) #x
+#define STRINGIFY_VALUE(x) STRINGIFY(x)
+#define STRINGIFY(x) #x
 	std::string v = fmt::format(_("Version {}"), STRINGIFY_VALUE(VERSION));
 	SDL_Surface *version = graphics.quickSprite("Version", graphics.getString(v, true));
 
@@ -268,9 +269,9 @@ int title()
 		engine.getInput();
 		config.populate();
 
-		for (int x = (int)offX ; x < 640 ; x += graphics.background->w)
+		for (int x = (int)offX; x < 640; x += graphics.background->w)
 		{
-			for (int y = 0 ; y < 480 ; y += graphics.background->h)
+			for (int y = 0; y < 480; y += graphics.background->h)
 			{
 				graphics.blit(graphics.background, x, y, graphics.screen, false);
 			}
@@ -378,7 +379,7 @@ int title()
 			startNewGame = 0;
 		}
 
-		for (int i = 0 ; i < 6 ; i++)
+		for (int i = 0; i < 6; i++)
 		{
 			if (slot[i])
 			{
@@ -406,19 +407,63 @@ int title()
 			load = 0;
 		}
 
-		if (easy) {engine.skill = 0; break;}
-		if (normal) {engine.skill = 1; break;}
-		if (hard) {engine.skill = 2; break;}
-		if (extreme) {engine.skill = 3; break;}
-		if (practice) {engine.skill = -1; break;}
+		if (easy)
+		{
+			engine.skill = 0;
+			break;
+		}
+		if (normal)
+		{
+			engine.skill = 1;
+			break;
+		}
+		if (hard)
+		{
+			engine.skill = 2;
+			break;
+		}
+		if (extreme)
+		{
+			engine.skill = 3;
+			break;
+		}
+		if (practice)
+		{
+			engine.skill = -1;
+			break;
+		}
 
-		if (cont) {load = engine.continueSaveSlot; break;}
+		if (cont)
+		{
+			load = engine.continueSaveSlot;
+			break;
+		}
 
-		if (save[0]) {load = 1; break;}
-		if (save[1]) {load = 2; break;}
-		if (save[2]) {load = 3; break;}
-		if (save[3]) {load = 4; break;}
-		if (save[4]) {load = 5; break;}
+		if (save[0])
+		{
+			load = 1;
+			break;
+		}
+		if (save[1])
+		{
+			load = 2;
+			break;
+		}
+		if (save[2])
+		{
+			load = 3;
+			break;
+		}
+		if (save[3])
+		{
+			load = 4;
+			break;
+		}
+		if (save[4])
+		{
+			load = 5;
+			break;
+		}
 
 		if (engine.keyState[SDL_SCANCODE_ESCAPE])
 		{
@@ -448,21 +493,21 @@ int title()
 	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.updateScreen();
 	audio.stopMusic();
-	
+
 	if (quit)
 	{
 		doQuit();
 		exit(0);
 	}
-	
+
 	newGame();
-	
+
 	(autoSaveSlot < 5) ? game.autoSaveSlot = autoSaveSlot : game.autoSave = false;
 
 	if (load)
 	{
 		loadGame(load - 1);
-		
+
 		debug(("Map Name = %s", game.mapName))
 	}
 	else if (engine.skill == -1)
@@ -478,7 +523,7 @@ int title()
 		game.skill = 3;
 		game.hasAquaLung = game.hasJetPack = true;
 	}
-	
+
 	if (game.mapName == "data/spaceStation")
 	{
 		game.setMapName("data/finalBattle");
@@ -512,7 +557,7 @@ void doCredits()
 	++it;
 
 	y = new float[numberOfCredits];
-	 SDL_Surface **credit = new SDL_Surface*[numberOfCredits];
+	SDL_Surface **credit = new SDL_Surface *[numberOfCredits];
 
 	pos1 = 520;
 
@@ -539,7 +584,7 @@ void doCredits()
 			break;
 		}
 	}
-	
+
 	SDL_Surface *device = graphics.quickSprite("credit", graphics.loadImage("gfx/main/creditsDevice.png"));
 
 	if (!deviceY)
@@ -570,18 +615,18 @@ void doCredits()
 			speed = 1.0;
 		else if (engine.keyState[SDL_SCANCODE_UP] || engine.joyY < -25000)
 			speed = -1.0;
-		
-		deviceY -= (speed* engine.getTimeDifference());
-		
+
+		deviceY -= (speed * engine.getTimeDifference());
+
 		if ((deviceY > 10) && (deviceY < 470))
 		{
 			graphics.blit(device, 320, (int)deviceY, graphics.screen, true);
 		}
 
-		for (i = 0 ; i < numberOfCredits ; i++)
+		for (i = 0; i < numberOfCredits; i++)
 		{
 			y[i] -= (speed * engine.getTimeDifference());
-			
+
 			if ((y[i] > 10) && (y[i] < 470))
 			{
 				graphics.blit(credit[i], 320, (int)y[i], graphics.screen, true);

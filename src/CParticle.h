@@ -19,22 +19,20 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-class Particle {
+class Particle
+{
+public:
+	float x, y, dx, dy;
 
-	public:
+	Sprite *sprite;
+	unsigned char currentFrame = 0;
+	unsigned char currentTime = 0;
 
-		float x, y, dx, dy;
+	int health, color;
+	long flags;
 
-		Sprite *sprite;
-		unsigned char currentFrame = 0;
-		unsigned char currentTime = 0;
-
-		int health, color;
-		long flags;
-
-		Particle(float x, float y, float dx, float dy, int color, int health, int flags, Sprite *sprite);
-		void setSprite(Sprite *sprite);
-		SDL_Surface *getFrame();
-		void move();
-
+	Particle(float x, float y, float dx, float dy, int color, int health, int flags, Sprite *sprite);
+	void setSprite(Sprite *sprite);
+	SDL_Surface *getFrame();
+	void move();
 };
