@@ -541,62 +541,60 @@ void doCredits()
 {
 	map.clear();
 
-	char string[100];
-	int i = 0;
-	int numberOfCredits = 0;
-	int pos1 = 0, pos2 = 0, size = 0;
-	float *y, deviceY = 0;
-
 	SDL_Surface *backdrop = graphics.quickSprite("CreditsBackGround", graphics.loadImage("gfx/main/creditsBack.png"));
 
-	engine.loadData(_("data/credits"));
+	engine.loadData(_("data/credits.md"));
 
-	auto it = split(engine.dataBuffer, '\n');
+	struct Line {
+		float y;
+		SDL_Surface *credit;
+		Line(float y, SDL_Surface *credit): y(y), credit(credit) {}
+	};
 
-	numberOfCredits = stoi(*it);
-	++it;
+	std::vector<Line> lines;
 
-	y = new float[numberOfCredits];
-	SDL_Surface **credit = new SDL_Surface *[numberOfCredits];
-
-	pos1 = 520;
+	float pos = 480;
 
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 
-	for (; it != it.end(); ++it)
+	for (auto &&it: split(engine.dataBuffer, '\n', true))
 	{
-		scan(*it, "%d %d %[^\n\r]", &pos2, &size, string);
+		std::string line{it};
 
-		pos1 += pos2;
-
-		y[i] = pos1;
-
-		if (pos2 == 220)
-			deviceY = pos1 - 50;
-
-		graphics.setFontSize(size);
-		credit[i] = graphics.quickSprite("credit", graphics.getString(string, true));
-
-		i++;
-
-		if (i == numberOfCredits)
+		if (line.empty())
 		{
-			break;
+			pos += 20;
+			continue;
 		}
+
+		if (contains(line, "Alien Device"))
+		{
+			lines.emplace_back(pos, graphics.quickSprite("credit", graphics.loadImage("gfx/main/creditsDevice.png")));
+			pos += 50;
+		}
+
+		if (line.size() > 2 && line[0] == '#')
+		{
+			graphics.setFontSize(1);
+			lines.emplace_back(pos, graphics.quickSprite("credit", graphics.getString(line.substr(2), true)));
+		}
+		else
+		{
+			graphics.setFontSize(0);
+			lines.emplace_back(pos, graphics.quickSprite("credit", graphics.getString(line, true)));
+		}
+
+		pos += 20;
 	}
-
-	SDL_Surface *device = graphics.quickSprite("credit", graphics.loadImage("gfx/main/creditsDevice.png"));
-
-	if (!deviceY)
-		deviceY = y[numberOfCredits - 7] - 50;
 
 	audio.loadMusic("music/credits");
 	audio.playMusic();
 
 	engine.resetTimeDifference();
 	uint32_t now = SDL_GetTicks();
+	float dy = 0;
 
-	while (y[numberOfCredits - 1] > 350)
+	while (pos + dy > 350)
 	{
 		unsigned int frameLimit = SDL_GetTicks() + 16;
 
@@ -616,25 +614,19 @@ void doCredits()
 		else if (engine.keyState[SDL_SCANCODE_UP] || engine.joyY < -25000)
 			speed = -1.0;
 
-		deviceY -= (speed * engine.getTimeDifference());
+		dy -= (speed * engine.getTimeDifference());
 
-		if ((deviceY > 10) && (deviceY < 470))
+		for (auto &&line: lines)
 		{
-			graphics.blit(device, 320, (int)deviceY, graphics.screen, true);
+			float y = line.y + dy;
+
+			if (y > 10 && y < 470)
+				graphics.blit(line.credit, 320, (int)y, graphics.screen, true);
+
 		}
 
-		for (i = 0; i < numberOfCredits; i++)
-		{
-			y[i] -= (speed * engine.getTimeDifference());
-
-			if ((y[i] > 10) && (y[i] < 470))
-			{
-				graphics.blit(credit[i], 320, (int)y[i], graphics.screen, true);
-			}
-
-			graphics.drawRect(0, 450, 640, 30, graphics.black, graphics.screen);
-			graphics.drawRect(0, 0, 640, 30, graphics.black, graphics.screen);
-		}
+		graphics.drawRect(0, 450, 640, 30, graphics.black, graphics.screen);
+		graphics.drawRect(0, 0, 640, 30, graphics.black, graphics.screen);
 
 		doMusicInfo(SDL_GetTicks() - (now + 10000));
 
@@ -644,7 +636,4 @@ void doCredits()
 	graphics.delay(12000);
 	audio.fadeMusic();
 	graphics.fadeToBlack();
-
-	delete[] y;
-	delete[] credit;
 }
