@@ -539,9 +539,7 @@ void Graphics::loadFont(int i, const std::string &filename, int pointSize)
 
 Sprite &Graphics::addSprite(const std::string &name)
 {
-	auto &sprite = sprites[name];
-	sprite.name = name;
-	return sprite;
+	return sprites.emplace(name, name)->second;
 }
 
 Sprite *Graphics::getSprite(const std::string &name, bool required)

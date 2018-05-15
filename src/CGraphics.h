@@ -29,7 +29,7 @@ private:
 	TTF_Font *font[5];
 	SDL_Color fontForeground, fontBackground;
 
-	std::map<std::string, Sprite> sprites;
+	std::multimap<std::string, Sprite> sprites;
 
 	int fontSize;
 
