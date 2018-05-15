@@ -1,0 +1,2 @@
+- {id: gameOverNo, group: gameover, type: BUTTON, title: Neuer Versuch vom letzten Kontrollpunkt aus, x: -1, y: 300}
+- {id: gameOverYes, group: gameover, type: BUTTON, title: Beenden und zum Titelbildschirm, x: -1, y: 330}

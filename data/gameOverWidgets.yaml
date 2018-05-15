@@ -1,0 +1,2 @@
+- {id: gameOverNo, group: gameover, type: BUTTON, title: Continue from last Checkpoint, x: -1, y: 300}
+- {id: gameOverYes, group: gameover, type: BUTTON, title: Quit to Title Screen, x: -1, y: 330}

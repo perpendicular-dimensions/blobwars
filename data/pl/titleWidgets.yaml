@@ -1,0 +1,40 @@
+- {id: gameOverNo, group: gameover, type: BUTTON, title: Kontynuuj od ostatniego punktu kontrolnego, x: -1, y: 300}
+- {id: gameOverYes, group: gameover, type: BUTTON, title: Przełącz do ekranu tytułowego, x: -1, y: 330}
+- {id: left, group: joystick, type: JOYPAD, title: W lewo, x: 100, y: 75}
+- {id: right, group: joystick, type: JOYPAD, title: W prawo, x: 100, y: 110}
+- {id: up, group: joystick, type: JOYPAD, title: W górę, x: 100, y: 145}
+- {id: down, group: joystick, type: JOYPAD, title: W dół, x: 100, y: 180}
+- {id: fire, group: joystick, type: JOYPAD, title: Strzał, x: 100, y: 215}
+- {id: jump, group: joystick, type: JOYPAD, title: Skok, x: 100, y: 250}
+- {id: jetpack, group: joystick, type: JOYPAD, title: Aktywacja plecaka odrzutowego, x: 100, y: 285}
+- {id: pause, group: joystick, type: JOYPAD, title: Pauza, x: 100, y: 320}
+- {id: map, group: joystick, type: JOYPAD, title: Mapa, x: 100, y: 355}
+- {id: confirm, group: joystick, type: BUTTON, title: Wyjście, x: 100, y: 420}
+- {id: newGame, group: mainMenu, type: BUTTON, title: Rozpocznij nową grę, x: -1, y: 240}
+- {id: loadGame, group: mainMenu, type: BUTTON, title: Wczytaj grę, x: -1, y: 270}
+- {id: continue, group: mainMenu, type: BUTTON, title: Kontynuuj bieżącą grę, x: -1, y: 300}
+- {id: options, group: mainMenu, type: BUTTON, title: Opcje, x: -1, y: 330}
+- {id: help, group: mainMenu, type: BUTTON, title: Pomoc, x: -1, y: 360}
+- {id: quit, group: mainMenu, type: BUTTON, title: Wyjście, x: -1, y: 390}
+- {id: label, group: help, type: LABEL, title: Pomoc dla gry jest dostępna, x: -1, y: 240}
+- {id: label, group: help, type: LABEL, title: na dysku w pliku, x: -1, y: 270}
+- {id: labelManual, group: help, type: LABEL, title: /usr/share/doc/blobwars/index.html, x: -1, y: 300}
+- {id: labelManual, group: help, type: LABEL, title: (w tej chwili tylko po angielsku), x: -1, y: 320}
+- {id: labelManual, group: help, type: LABEL, title: 'Polskie tłumaczenie: Marcin Kocur', x: -1, y: 350}
+- {id: labelManual, group: help, type: LABEL, title: 'Kontakt z tłumaczem: marcin2006@gmail.com', x: -1, y: 370}
+- {id: practice, group: skill, type: BUTTON, title: Trening, x: -1, y: 240}
+- {id: easy, group: skill, type: BUTTON, title: Łatwy, x: -1, y: 270}
+- {id: normal, group: skill, type: BUTTON, title: Zwykły, x: -1, y: 300}
+- {id: hard, group: skill, type: BUTTON, title: Trudny, x: -1, y: 330}
+- {id: extreme, group: skill, type: BUTTON, title: Ekstremalny, x: -1, y: 360}
+- {id: save1, group: saveGames, type: BUTTON, title: Zapisz, x: -1, y: 240}
+- {id: save2, group: saveGames, type: BUTTON, title: Zapisz, x: -1, y: 270}
+- {id: save3, group: saveGames, type: BUTTON, title: Zapisz, x: -1, y: 300}
+- {id: save4, group: saveGames, type: BUTTON, title: Zapisz, x: -1, y: 330}
+- {id: save5, group: saveGames, type: BUTTON, title: Zapisz, x: -1, y: 360}
+- {id: slot1, group: gameSlots, type: BUTTON, title: Zapisz, x: -1, y: 240}
+- {id: slot2, group: gameSlots, type: BUTTON, title: Zapisz, x: -1, y: 270}
+- {id: slot3, group: gameSlots, type: BUTTON, title: Zapisz, x: -1, y: 300}
+- {id: slot4, group: gameSlots, type: BUTTON, title: Zapisz, x: -1, y: 330}
+- {id: slot5, group: gameSlots, type: BUTTON, title: Zapisz, x: -1, y: 360}
+- {id: back, group: back, type: BUTTON, title: Powrót do menu głównego, x: -1, y: 420}

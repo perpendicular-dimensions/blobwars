@@ -1,7 +1,7 @@
 JOYPAD left 	joystick "W lewo" 					"*" 100 75 0 0
 JOYPAD right 	joystick "W prawo" 					"*" 100 110 0 0
 JOYPAD up 		joystick "W górę" 						"*" 100 145 0 0
-JOYPAD down 	joystick "W dół 					"*" 100 180 0 0
+JOYPAD down 	joystick "W dół" 					"*" 100 180 0 0
 JOYPAD fire 	joystick "Strzał" 					"*" 100 215 0 0
 JOYPAD jump 	joystick "Skok" 					"*" 100 250 0 0
 JOYPAD jetpack 	joystick "Aktywacja plecaka odrzutowego"			"*" 100 285 0 0

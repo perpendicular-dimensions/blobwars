@@ -1,0 +1,95 @@
+- {id: gameOverNo, group: gameover, type: BUTTON, title: Continua des del darrer Punt de Control, x: -1, y: 300}
+- {id: gameOverYes, group: gameover, type: BUTTON, title: Surt a la Pantalla d'Inici, x: -1, y: 330}
+- {id: left, group: joystick, type: JOYPAD, title: Esquerra, x: 100, y: 75}
+- {id: right, group: joystick, type: JOYPAD, title: Dreta, x: 100, y: 110}
+- {id: up, group: joystick, type: JOYPAD, title: Amunt, x: 100, y: 145}
+- {id: down, group: joystick, type: JOYPAD, title: Avall, x: 100, y: 180}
+- {id: fire, group: joystick, type: JOYPAD, title: Dispara, x: 100, y: 215}
+- {id: jump, group: joystick, type: JOYPAD, title: Salta, x: 100, y: 250}
+- {id: jetpack, group: joystick, type: JOYPAD, title: Activa Motxilla Jet, x: 100, y: 285}
+- {id: pause, group: joystick, type: JOYPAD, title: Pausa, x: 100, y: 320}
+- {id: map, group: joystick, type: JOYPAD, title: Mapa Radar, x: 100, y: 355}
+- {id: confirm, group: joystick, type: BUTTON, title: Surt, x: 100, y: 420}
+- {id: newGame, group: mainMenu, type: BUTTON, title: Comença Joc Nou, x: -1, y: 240}
+- {id: loadGame, group: mainMenu, type: BUTTON, title: Carrega Joc, x: -1, y: 270}
+- {id: continue, group: mainMenu, type: BUTTON, title: Continua Joc Actual, x: -1, y: 300}
+- {id: options, group: mainMenu, type: BUTTON, title: Opcions, x: -1, y: 330}
+- {id: help, group: mainMenu, type: BUTTON, title: Ajuda, x: -1, y: 360}
+- {id: quit, group: mainMenu, type: BUTTON, title: Surt, x: -1, y: 390}
+- {id: label, group: help, type: LABEL, title: 'Per a instruccions de joc, mira el manual de', x: -1, y: 260}
+- {id: label, group: help, type: LABEL, title: 'joc instal·lat a la següent localització,', x: -1, y: 290}
+- {id: labelManual, group: help, type: LABEL, title: /usr/share/doc/blobwars/manual.html, x: -1, y: 320}
+- {id: labelManual, group: help, type: LABEL, title: (actualment només amb anglès), x: -1, y: 350}
+- {id: practice, group: skill, type: BUTTON, title: Pràctica, x: -1, y: 240}
+- {id: easy, group: skill, type: BUTTON, title: Fàcil, x: -1, y: 270}
+- {id: normal, group: skill, type: BUTTON, title: Normal, x: -1, y: 300}
+- {id: hard, group: skill, type: BUTTON, title: Difícil, x: -1, y: 330}
+- {id: extreme, group: skill, type: BUTTON, title: Extrem, x: -1, y: 360}
+- {id: save1, group: saveGames, type: BUTTON, title: Save, x: -1, y: 240}
+- {id: save2, group: saveGames, type: BUTTON, title: Save, x: -1, y: 270}
+- {id: save3, group: saveGames, type: BUTTON, title: Save, x: -1, y: 300}
+- {id: save4, group: saveGames, type: BUTTON, title: Save, x: -1, y: 330}
+- {id: save5, group: saveGames, type: BUTTON, title: Save, x: -1, y: 360}
+- {id: slot1, group: gameSlots, type: BUTTON, title: Save, x: -1, y: 240}
+- {id: slot2, group: gameSlots, type: BUTTON, title: Save, x: -1, y: 270}
+- {id: slot3, group: gameSlots, type: BUTTON, title: Save, x: -1, y: 300}
+- {id: slot4, group: gameSlots, type: BUTTON, title: Save, x: -1, y: 330}
+- {id: slot5, group: gameSlots, type: BUTTON, title: Save, x: -1, y: 360}
+- {id: back, group: back, type: BUTTON, title: Torna al Menú Principal, x: -1, y: 420}
+- {id: fullscreen, group: options, type: RADIO, title: Pantalla Completa, options: ['No', Sí], x: 100, y: 65}
+- {id: soundvol, group: options, type: SMOOTH_SLIDER, title: Volum de So, x: 100, y: 100, min: 0, max: 128}
+- {id: musicvol, group: options, type: SMOOTH_SLIDER, title: Volum de Música, x: 100, y: 135, min: 0, max: 128}
+- {id: output, group: options, type: RADIO, title: Tipus de Sortida, options: [Cap, Mono, Estèreo], x: 100, y: 170}
+- {id: gamma, group: options, type: SLIDER, title: Brillantor, x: 100, y: 205, min: 1, max: 20}
+- {id: gore, group: options, type: RADIO, title: Vessament de Sang, options: ['No', Sí], x: 100, y: 240}
+- {id: keys, group: options, type: BUTTON, title: Configura Tecles..., x: 100, y: 275}
+- {id: joysticks, group: options, type: BUTTON, title: Configura Palanca de Joc..., x: 100, y: 310}
+- {id: cheats, group: options, type: BUTTON, title: Trucs..., x: 100, y: 345}
+- {id: confirm, group: options, type: BUTTON, title: Surt, x: 100, y: 420}
+- {id: health, group: cheats, type: RADIO, title: Energia Il·limitada, options: ['No', Sí], x: 100, y: 75}
+- {id: extras, group: cheats, type: RADIO, title: Sempre té Pulmó Aquàtic / Motxilla Jet, options: ['No', Sí], x: 100, y: 110}
+- {id: fuel, group: cheats, type: RADIO, title: Fuel Il·limitat, options: ['No', Sí], x: 100, y: 145}
+- {id: rate, group: cheats, type: RADIO, title: Disparament Ràpid, options: ['No', Sí], x: 100, y: 180}
+- {id: blood, group: cheats, type: RADIO, title: Vessament de Sang Extra, options: ['No', Sí], x: 100, y: 215}
+- {id: invulnerable, group: cheats, type: RADIO, title: Control de Gir, options: ['No', Sí], x: 100, y: 250}
+- {id: speed, group: cheats, type: RADIO, title: Velocitat Augmentada, options: ['No', Sí], x: 100, y: 285}
+- {id: levels, group: cheats, type: RADIO, title: Accés a Tots els Nivells, options: ['No', Sí], x: 100, y: 320}
+- {id: skip, group: cheats, type: RADIO, title: Auto Completa el Nivell (F3), options: ['No', Sí], x: 100, y: 355}
+- {id: confirm, group: options, type: BUTTON, title: Surt, x: 100, y: 420}
+- {id: left, group: keyboard, type: KEYBOARD, title: Esquerra, x: 100, y: 75}
+- {id: right, group: keyboard, type: KEYBOARD, title: Dreta, x: 100, y: 105}
+- {id: jump, group: keyboard, type: KEYBOARD, title: Salta, x: 100, y: 135}
+- {id: down, group: keyboard, type: KEYBOARD, title: Avall, x: 100, y: 165}
+- {id: fire, group: keyboard, type: KEYBOARD, title: Dispara, x: 100, y: 195}
+- {id: jetpack, group: keyboard, type: KEYBOARD, title: Activa Motxilla Jet, x: 100, y: 225}
+- {id: pause, group: keyboard, type: KEYBOARD, title: Pausa, x: 100, y: 255}
+- {id: map, group: keyboard, type: KEYBOARD, title: Mapa Radar, x: 100, y: 285}
+- {id: defaults, group: keyboard, type: BUTTON, title: Reinicia-ho Tot, x: 100, y: 325}
+- {id: confirm, group: keyboard, type: BUTTON, title: Surt, x: 100, y: 365}
+- {id: label, group: keyboard, type: LABEL, title: 'Nota: Els menús es controlen igualment amb', x: -1, y: 420}
+- {id: label, group: keyboard, type: LABEL, title: 'les fletxes i Intro, Retorn o Espai', x: -1, y: 450}
+- {id: continue, group: options, type: BUTTON, title: Torna al Joc, x: -1, y: 150}
+- {id: options, group: options, type: BUTTON, title: Opcions, x: -1, y: 175}
+- {id: escape, group: options, type: BUTTON, title: Fuig de l'Escena, x: -1, y: 200}
+- {id: restart, group: options, type: BUTTON, title: Reinicia l'Escena, x: -1, y: 225}
+- {id: quit, group: options, type: BUTTON, title: Surt a la Pantalla d'Inici, x: -1, y: 275}
+- {id: train, group: options, type: BUTTON, title: Acaba l'Entrenament, x: -1, y: 275}
+- {id: label, group: warning, type: LABEL, title: Avís - Si Fuges ara, x: -1, y: 150}
+- {id: label, group: warning, type: LABEL, title: perdràs el teu progrés actual en aquesta escena., x: -1, y: 170}
+- {id: label, group: warning, type: LABEL, title: 'Segur que vols fugir?', x: -1, y: 190}
+- {id: warnyes, group: warning, type: BUTTON, title: Sí, x: -1, y: 220}
+- {id: warnno, group: warning, type: BUTTON, title: 'No', x: -1, y: 250}
+- {id: label, group: restartconf, type: LABEL, title: 'Reinicia realment el nivell sencer?', x: -1, y: 150}
+- {id: label, group: restartconf, type: LABEL, title: (perdràs *TOT* el progrés en aquest nivell!), x: -1, y: 170}
+- {id: restartyes, group: restartconf, type: BUTTON, title: Sí, x: -1, y: 220}
+- {id: restartno, group: restartconf, type: BUTTON, title: 'No', x: -1, y: 250}
+- {id: label, group: escapeconf, type: LABEL, title: 'Fuig de l''escena i torna al Centre?', x: -1, y: 170}
+- {id: escapeyes, group: escapeconf, type: BUTTON, title: Sí, x: -1, y: 220}
+- {id: escapeno, group: escapeconf, type: BUTTON, title: 'No', x: -1, y: 250}
+- {id: label, group: quitconf, type: LABEL, title: 'Surt del joc i torna a la pantalla d''inici?', x: -1, y: 150}
+- {id: label, group: quitconf, type: LABEL, title: (es perdrà el teu progrés actual), x: -1, y: 170}
+- {id: quityes, group: quitconf, type: BUTTON, title: Sí, x: -1, y: 220}
+- {id: quitno, group: quitconf, type: BUTTON, title: 'No', x: -1, y: 250}
+- {id: label, group: trainconf, type: LABEL, title: 'Acaba l''entrenament i torna a la pantalla d''inici?', x: -1, y: 150}
+- {id: trainyes, group: trainconf, type: BUTTON, title: Sí, x: -1, y: 220}
+- {id: trainno, group: trainconf, type: BUTTON, title: 'No', x: -1, y: 250}

@@ -1,0 +1,39 @@
+- {id: gameOverNo, group: gameover, type: BUTTON, title: Continue from last Checkpoint, x: -1, y: 300}
+- {id: gameOverYes, group: gameover, type: BUTTON, title: Quit to Title Screen, x: -1, y: 330}
+- {id: left, group: joystick, type: JOYPAD, title: Left, x: 120, y: 65}
+- {id: right, group: joystick, type: JOYPAD, title: Right, x: 120, y: 100}
+- {id: up, group: joystick, type: JOYPAD, title: Up, x: 120, y: 135}
+- {id: down, group: joystick, type: JOYPAD, title: Down, x: 120, y: 170}
+- {id: fire, group: joystick, type: JOYPAD, title: Fire, x: 120, y: 205}
+- {id: jump, group: joystick, type: JOYPAD, title: Jump, x: 120, y: 240}
+- {id: jetpack, group: joystick, type: JOYPAD, title: Activate Jetpack, x: 120, y: 275}
+- {id: pause, group: joystick, type: JOYPAD, title: Pause, x: 120, y: 310}
+- {id: map, group: joystick, type: JOYPAD, title: Radar Map, x: 120, y: 345}
+- {id: sensitivity, group: joystick, type: SMOOTH_SLIDER, title: Sensitivity, x: 120, y: 380, min: 1, max: 320}
+- {id: confirm, group: joystick, type: BUTTON, title: Exit, x: 120, y: 420}
+- {id: newGame, group: mainMenu, type: BUTTON, title: Start New Game, x: -1, y: 240}
+- {id: loadGame, group: mainMenu, type: BUTTON, title: Load Game, x: -1, y: 270}
+- {id: continue, group: mainMenu, type: BUTTON, title: Continue Current Game, x: -1, y: 300}
+- {id: options, group: mainMenu, type: BUTTON, title: Options, x: -1, y: 330}
+- {id: help, group: mainMenu, type: BUTTON, title: Help, x: -1, y: 360}
+- {id: quit, group: mainMenu, type: BUTTON, title: Quit, x: -1, y: 390}
+- {id: label, group: help, type: LABEL, title: For gameplay instructions please see the gameplay, x: -1, y: 260}
+- {id: label, group: help, type: LABEL, title: 'manual installed in the following location,', x: -1, y: 290}
+- {id: labelManual, group: help, type: LABEL, title: /usr/share/doc/blobwars/manual.html, x: -1, y: 320}
+- {id: labelManual, group: help, type: LABEL, title: (currently only in English), x: -1, y: 350}
+- {id: practice, group: skill, type: BUTTON, title: Practice, x: -1, y: 240}
+- {id: easy, group: skill, type: BUTTON, title: Easy, x: -1, y: 270}
+- {id: normal, group: skill, type: BUTTON, title: Normal, x: -1, y: 300}
+- {id: hard, group: skill, type: BUTTON, title: Hard, x: -1, y: 330}
+- {id: extreme, group: skill, type: BUTTON, title: Extreme, x: -1, y: 360}
+- {id: save1, group: saveGames, type: BUTTON, title: Save, x: -1, y: 240}
+- {id: save2, group: saveGames, type: BUTTON, title: Save, x: -1, y: 270}
+- {id: save3, group: saveGames, type: BUTTON, title: Save, x: -1, y: 300}
+- {id: save4, group: saveGames, type: BUTTON, title: Save, x: -1, y: 330}
+- {id: save5, group: saveGames, type: BUTTON, title: Save, x: -1, y: 360}
+- {id: slot1, group: gameSlots, type: BUTTON, title: Save, x: -1, y: 240}
+- {id: slot2, group: gameSlots, type: BUTTON, title: Save, x: -1, y: 270}
+- {id: slot3, group: gameSlots, type: BUTTON, title: Save, x: -1, y: 300}
+- {id: slot4, group: gameSlots, type: BUTTON, title: Save, x: -1, y: 330}
+- {id: slot5, group: gameSlots, type: BUTTON, title: Save, x: -1, y: 360}
+- {id: back, group: back, type: BUTTON, title: Back to Main Menu, x: -1, y: 420}

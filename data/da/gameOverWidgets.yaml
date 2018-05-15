@@ -1,0 +1,2 @@
+- {id: gameOverNo, group: gameover, type: BUTTON, title: Fortsæt fra sidste gemmepunkt, x: -1, y: 300}
+- {id: gameOverYes, group: gameover, type: BUTTON, title: Gå ud til titelskærmen, x: -1, y: 330}

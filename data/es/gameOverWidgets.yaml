@@ -1,0 +1,2 @@
+- {id: gameOverNo, group: gameover, type: BUTTON, title: 'Continúa desde el último Punto de Control ', x: -1, y: 300}
+- {id: gameOverYes, group: gameover, type: BUTTON, title: 'Salir a la Pantalla de Inicio ', x: -1, y: 330}

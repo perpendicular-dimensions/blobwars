@@ -1,0 +1,274 @@
+0:
+  damage: 1
+  dx: 10
+  dy: 0
+  fireSound: 3
+  flags:
+  - ENT_WEIGHTLESS
+  health: 60
+  id: 0
+  name: Pistol
+  reload: 15
+  spriteLeft: FlameBulletLeft
+  spriteRight: FlameBulletRight
+1:
+  damage: 1
+  dx: 10
+  dy: 0
+  fireSound: 6
+  flags:
+  - ENT_WEIGHTLESS
+  health: 60
+  id: 1
+  name: Machine Gun
+  reload: 4
+  spriteLeft: FlameBulletLeft
+  spriteRight: FlameBulletRight
+2:
+  damage: 1
+  dx: 13
+  dy: 0
+  fireSound: 19
+  flags:
+  - ENT_WEIGHTLESS
+  - ENT_BOUNCES
+  health: 120
+  id: 2
+  name: Laser Cannon
+  reload: 40
+  spriteLeft: LaserBolt
+  spriteRight: LaserBolt
+3:
+  damage: 50
+  dx: 1
+  dy: -2
+  fireSound: 31
+  flags:
+  - ENT_BOUNCES
+  - ENT_EXPLODES
+  health: 240
+  id: 3
+  name: Grenades
+  reload: 20
+  spriteLeft: Grenade
+  spriteRight: Grenade
+4:
+  damage: 1
+  dx: 15
+  dy: 0
+  fireSound: 34
+  flags:
+  - ENT_WEIGHTLESS
+  - ENT_PARTICLETRAIL
+  health: 240
+  id: 4
+  name: Spread Gun
+  reload: 15
+  spriteLeft: PlasmaBolt
+  spriteRight: PlasmaBolt
+5:
+  damage: 75
+  dx: 8
+  dy: 8
+  fireSound: 11
+  flags:
+  - ENT_WEIGHTLESS
+  - ENT_FIRETRAIL
+  - ENT_EXPLODES
+  health: 240
+  id: 5
+  name: Rocket Launcher
+  reload: 45
+  spriteLeft: FlameBulletLeft
+  spriteRight: FlameBulletRight
+6:
+  damage: 15
+  dx: 8
+  dy: 8
+  fireSound: 34
+  flags:
+  - ENT_WEIGHTLESS
+  - ENT_EXPLODES
+  health: 60
+  id: 6
+  name: Plasma Rifle
+  reload: 8
+  spriteLeft: PlasmaBolt
+  spriteRight: PlasmaBolt
+7:
+  damage: 3
+  dx: 0
+  dy: 0
+  fireSound: -1
+  flags:
+  - ENT_WEIGHTLESS
+  health: 35
+  id: 7
+  name: Flame Thrower
+  reload: 0
+  spriteLeft: Explosion
+  spriteRight: Explosion
+9:
+  damage: 50
+  dx: 0
+  dy: 0
+  fireSound: 12
+  flags:
+  - ENT_ONFIRE
+  - ENT_EXPLODES
+  health: 240
+  id: 9
+  name: Lava Ball
+  reload: 20
+  spriteLeft: LavaRock
+  spriteRight: LavaRock
+10:
+  damage: 50
+  dx: 0
+  dy: 0
+  fireSound: 12
+  flags:
+  - ENT_ONFIRE
+  - ENT_EXPLODES
+  health: 240
+  id: 10
+  name: Lava Ball
+  reload: 20
+  spriteLeft: LavaRock
+  spriteRight: LavaRock
+11:
+  damage: 1
+  dx: 4
+  dy: 4
+  fireSound: 3
+  flags:
+  - ENT_WEIGHTLESS
+  health: 240
+  id: 11
+  name: Aimed Pistol
+  reload: 5
+  spriteLeft: AimedShot
+  spriteRight: AimedShot
+12:
+  damage: 1
+  dx: 4
+  dy: 4
+  fireSound: 34
+  flags:
+  - ENT_WEIGHTLESS
+  - ENT_PARTICLETRAIL
+  health: 240
+  id: 4
+  name: Aimed Spread Gun
+  reload: 15
+  spriteLeft: PlasmaBolt
+  spriteRight: PlasmaBolt
+13:
+  damage: 75
+  dx: 15
+  dy: 0
+  fireSound: 11
+  flags:
+  - ENT_WEIGHTLESS
+  - ENT_EXPLODES
+  health: 240
+  id: 13
+  name: Shells
+  reload: 1
+  spriteLeft: PlasmaBolt
+  spriteRight: PlasmaBolt
+14:
+  damage: 25
+  dx: 0
+  dy: 0
+  fireSound: 12
+  flags:
+  - ENT_EXPLODES
+  health: 240
+  id: 14
+  name: Rock
+  reload: 20
+  spriteLeft: LavaRock
+  spriteRight: LavaRock
+15:
+  damage: 3
+  dx: 0
+  dy: 0
+  fireSound: 12
+  flags:
+  - ENT_PARTICLETRAIL
+  health: 240
+  id: 15
+  name: Stalagtite
+  reload: 20
+  spriteLeft: Stalagtite
+  spriteRight: Stalagtite
+16:
+  damage: 25
+  dx: 0
+  dy: 0
+  fireSound: 11
+  flags:
+  - ENT_ONFIRE
+  - ENT_EXPLODES
+  health: 240
+  id: 16
+  name: Bomb
+  reload: 45
+  spriteLeft: Bomb
+  spriteRight: Bomb
+17:
+  damage: 3
+  dx: 13
+  dy: 0
+  fireSound: 19
+  flags:
+  - ENT_WEIGHTLESS
+  - ENT_BOUNCES
+  health: 120
+  id: 2
+  name: Alien Laser Cannon
+  reload: 15
+  spriteLeft: AlienLaserBolt
+  spriteRight: AlienLaserBolt
+18:
+  damage: 50
+  dx: 3
+  dy: -2
+  fireSound: 31
+  flags:
+  - ENT_BOUNCES
+  - ENT_EXPLODES
+  health: 240
+  id: 18
+  name: Alien Grenades
+  reload: 20
+  spriteLeft: AlienGrenade
+  spriteRight: AlienGrenade
+19:
+  damage: 1
+  dx: 8
+  dy: 8
+  fireSound: 6
+  flags:
+  - ENT_WEIGHTLESS
+  health: 240
+  id: 19
+  name: Aimed Machine Gun
+  reload: 2
+  spriteLeft: FlameBulletLeft
+  spriteRight: FlameBulletRight
+20:
+  damage: 50
+  dx: 4
+  dy: -4
+  fireSound: 31
+  flags:
+  - ENT_ONFIRE
+  - ENT_EXPLODES
+  health: 240
+  id: 20
+  name: Mortor Shells
+  reload: 20
+  spriteLeft: AlienGrenade
+  spriteRight: AlienGrenade

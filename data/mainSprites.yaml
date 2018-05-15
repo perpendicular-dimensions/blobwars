@@ -1,0 +1,715 @@
+AimedShot:
+  frames:
+  - {file: gfx/sprites/aimedShot1.png, time: 15}
+  - {file: gfx/sprites/aimedShot2.png, time: 15}
+  - {file: gfx/sprites/aimedShot3.png, time: 15}
+AlienGrenade:
+  frames:
+  - {file: gfx/sprites/alienGrenade1.png, time: 10}
+  - {file: gfx/sprites/alienGrenade2.png, time: 10}
+  - {file: gfx/sprites/alienGrenade3.png, time: 10}
+  - {file: gfx/sprites/alienGrenade4.png, time: 10}
+AlienLaserBolt:
+  frames:
+  - {file: gfx/sprites/laserBolt1.png, time: 60}
+  hue: 135
+AquaBlobDeath:
+  frames:
+  - {file: gfx/sprites/evilBlobRight1.png, time: 5}
+  - {file: gfx/sprites/evilBlobSpin1.png, time: 5}
+  - {file: gfx/sprites/evilBlobSpin2.png, time: 5}
+  - {file: gfx/sprites/evilBlobSpin3.png, time: 5}
+  hue: -50
+  sat: 5
+  val: 20
+AquaBlobLeft:
+  frames:
+  - {file: gfx/sprites/evilBlobLeft1.png, time: 8}
+  - {file: gfx/sprites/evilBlobLeft2.png, time: 8}
+  - {file: gfx/sprites/evilBlobLeft3.png, time: 8}
+  - {file: gfx/sprites/evilBlobLeft4.png, time: 8}
+  - {file: gfx/sprites/evilBlobLeft3.png, time: 8}
+  - {file: gfx/sprites/evilBlobLeft2.png, time: 8}
+  hue: -50
+  sat: 5
+  val: 20
+AquaBlobRight:
+  frames:
+  - {file: gfx/sprites/evilBlobRight1.png, time: 8}
+  - {file: gfx/sprites/evilBlobRight2.png, time: 8}
+  - {file: gfx/sprites/evilBlobRight3.png, time: 8}
+  - {file: gfx/sprites/evilBlobRight4.png, time: 8}
+  - {file: gfx/sprites/evilBlobRight3.png, time: 8}
+  - {file: gfx/sprites/evilBlobRight2.png, time: 8}
+  hue: -50
+  sat: 5
+  val: 20
+AquaBobLeft:
+  frames:
+  - {file: gfx/sprites/aquaBobLeft1.png, time: 60}
+AquaBobRight:
+  frames:
+  - {file: gfx/sprites/aquaBobRight1.png, time: 60}
+AquaBobSpin:
+  frames:
+  - {file: gfx/sprites/aquaBobRight1.png, time: 5}
+  - {file: gfx/sprites/aquaBobSpin1.png, time: 5}
+  - {file: gfx/sprites/aquaBobSpin2.png, time: 5}
+  - {file: gfx/sprites/aquaBobSpin3.png, time: 5}
+AquaMIA:
+  frames:
+  - {file: gfx/sprites/aquaMIA1.png, time: 3}
+  - {file: gfx/sprites/aquaMIA2.png, time: 2}
+  - {file: gfx/sprites/aquaMIA3.png, time: 3}
+  - {file: gfx/sprites/aquaMIA2.png, time: 2}
+BlueDiamond:
+  frames:
+  - {file: gfx/sprites/diamond.png, time: 60}
+  hue: 200
+BlueKeyCard:
+  frames:
+  - {file: gfx/sprites/keyCard1.png, time: 180}
+  - {file: gfx/sprites/keyCard2.png, time: 5}
+  - {file: gfx/sprites/keyCard3.png, time: 5}
+  - {file: gfx/sprites/keyCard4.png, time: 5}
+  - {file: gfx/sprites/keyCard5.png, time: 5}
+  hue: 100
+BobLeft:
+  frames:
+  - {file: gfx/sprites/bobLeft1.png, time: 8}
+  - {file: gfx/sprites/bobLeft2.png, time: 8}
+  - {file: gfx/sprites/bobLeft3.png, time: 8}
+  - {file: gfx/sprites/bobLeft2.png, time: 8}
+BobRight:
+  frames:
+  - {file: gfx/sprites/bobRight1.png, time: 8}
+  - {file: gfx/sprites/bobRight2.png, time: 8}
+  - {file: gfx/sprites/bobRight3.png, time: 8}
+  - {file: gfx/sprites/bobRight2.png, time: 8}
+BobSignal:
+  frames:
+  - {file: gfx/sprites/miaSignal1.png, time: 15}
+  - {file: gfx/sprites/miaSignal2.png, time: 15}
+  - {file: gfx/sprites/miaSignal3.png, time: 15}
+  - {file: gfx/sprites/miaSignal4.png, time: 15}
+  - {file: gfx/sprites/miaSignal5.png, time: 15}
+  - {file: gfx/sprites/miaSignal6.png, time: 60}
+  sat: 255
+BobSpin:
+  frames:
+  - {file: gfx/sprites/bobRight1.png, time: 5}
+  - {file: gfx/sprites/bobSpin1.png, time: 5}
+  - {file: gfx/sprites/bobSpin2.png, time: 5}
+  - {file: gfx/sprites/bobSpin3.png, time: 5}
+Bomb:
+  frames:
+  - {file: gfx/sprites/bomb.png, time: 60}
+BronzeDoor:
+  frames:
+  - {file: gfx/sprites/goldDoor.png, time: 60}
+  hue: -22
+BronzeKey:
+  frames:
+  - {file: gfx/sprites/goldKey1.png, time: 180}
+  - {file: gfx/sprites/goldKey2.png, time: 5}
+  - {file: gfx/sprites/goldKey3.png, time: 5}
+  - {file: gfx/sprites/goldKey4.png, time: 5}
+  - {file: gfx/sprites/goldKey3.png, time: 5}
+  - {file: gfx/sprites/goldKey2.png, time: 5}
+  hue: -30
+BronzeSlideDoor:
+  frames:
+  - {file: gfx/sprites/goldSlideDoor.png, time: 60}
+  hue: -22
+Bubble:
+  frames:
+  - {file: gfx/sprites/bubble.png, time: 60}
+Cherry:
+  frames:
+  - {file: gfx/sprites/cherry.png, time: 60}
+CyanKeyCard:
+  frames:
+  - {file: gfx/sprites/keyCard1.png, time: 180}
+  - {file: gfx/sprites/keyCard2.png, time: 5}
+  - {file: gfx/sprites/keyCard3.png, time: 5}
+  - {file: gfx/sprites/keyCard4.png, time: 5}
+  - {file: gfx/sprites/keyCard5.png, time: 5}
+  hue: 50
+DoubleCherries:
+  frames:
+  - {file: gfx/sprites/doubleCherries.png, time: 60}
+EnemyArrow:
+  frames:
+  - {file: gfx/sprites/scannerArrowUp.png, time: 60}
+  - {file: gfx/sprites/scannerArrowRight.png, time: 60}
+  - {file: gfx/sprites/scannerArrowDown.png, time: 60}
+  - {file: gfx/sprites/scannerArrowLeft.png, time: 60}
+EnemySignal:
+  frames:
+  - {file: gfx/sprites/miaSignal1.png, time: 15}
+  - {file: gfx/sprites/miaSignal2.png, time: 15}
+  - {file: gfx/sprites/miaSignal3.png, time: 15}
+  - {file: gfx/sprites/miaSignal4.png, time: 15}
+  - {file: gfx/sprites/miaSignal5.png, time: 15}
+  - {file: gfx/sprites/miaSignal6.png, time: 60}
+  hue: -250
+Explosion:
+  frames:
+  - {file: gfx/sprites/onFire1.png, time: 5}
+  - {file: gfx/sprites/onFire2.png, time: 5}
+Fire1:
+  frames:
+  - {file: gfx/sprites/onFire1.png, time: 60}
+Fire2:
+  frames:
+  - {file: gfx/sprites/onFire2.png, time: 60}
+FlameBulletLeft:
+  frames:
+  - {file: gfx/sprites/flameBullet2.png, time: 60}
+FlameBulletRight:
+  frames:
+  - {file: gfx/sprites/flameBullet1.png, time: 60}
+FlameThrower:
+  frames:
+  - {file: gfx/sprites/bubble.png, time: 60}
+GoldDoor:
+  frames:
+  - {file: gfx/sprites/goldDoor.png, time: 60}
+GoldKey:
+  frames:
+  - {file: gfx/sprites/goldKey1.png, time: 180}
+  - {file: gfx/sprites/goldKey2.png, time: 5}
+  - {file: gfx/sprites/goldKey3.png, time: 5}
+  - {file: gfx/sprites/goldKey4.png, time: 5}
+  - {file: gfx/sprites/goldKey3.png, time: 5}
+  - {file: gfx/sprites/goldKey2.png, time: 5}
+GoldSlideDoor:
+  frames:
+  - {file: gfx/sprites/goldSlideDoor.png, time: 60}
+GreenBloodParticle:
+  frames:
+  - {file: gfx/sprites/bloodParticle1.png, time: 25}
+  - {file: gfx/sprites/bloodParticle2.png, time: 25}
+  - {file: gfx/sprites/bloodParticle3.png, time: 25}
+  hue: 100
+GreenDiamond:
+  frames:
+  - {file: gfx/sprites/diamond.png, time: 60}
+  hue: 100
+GreenKeyCard:
+  frames:
+  - {file: gfx/sprites/keyCard1.png, time: 180}
+  - {file: gfx/sprites/keyCard2.png, time: 5}
+  - {file: gfx/sprites/keyCard3.png, time: 5}
+  - {file: gfx/sprites/keyCard4.png, time: 5}
+  - {file: gfx/sprites/keyCard5.png, time: 5}
+Grenade:
+  frames:
+  - {file: gfx/sprites/grenade1.png, time: 10}
+  - {file: gfx/sprites/grenade2.png, time: 10}
+  - {file: gfx/sprites/grenade3.png, time: 10}
+  - {file: gfx/sprites/grenade4.png, time: 10}
+GrenadeBlobDeath:
+  frames:
+  - {file: gfx/sprites/evilBlobRight1.png, time: 5}
+  - {file: gfx/sprites/evilBlobSpin1.png, time: 5}
+  - {file: gfx/sprites/evilBlobSpin2.png, time: 5}
+  - {file: gfx/sprites/evilBlobSpin3.png, time: 5}
+  hue: 80
+GrenadeBlobLeft:
+  frames:
+  - {file: gfx/sprites/evilBlobLeft1.png, time: 8}
+  - {file: gfx/sprites/evilBlobLeft2.png, time: 8}
+  - {file: gfx/sprites/evilBlobLeft3.png, time: 8}
+  - {file: gfx/sprites/evilBlobLeft4.png, time: 8}
+  - {file: gfx/sprites/evilBlobLeft3.png, time: 8}
+  - {file: gfx/sprites/evilBlobLeft2.png, time: 8}
+  hue: 80
+GrenadeBlobRight:
+  frames:
+  - {file: gfx/sprites/evilBlobRight1.png, time: 8}
+  - {file: gfx/sprites/evilBlobRight2.png, time: 8}
+  - {file: gfx/sprites/evilBlobRight3.png, time: 8}
+  - {file: gfx/sprites/evilBlobRight4.png, time: 8}
+  - {file: gfx/sprites/evilBlobRight3.png, time: 8}
+  - {file: gfx/sprites/evilBlobRight2.png, time: 8}
+  hue: 80
+GrenadeDroidDeath:
+  frames:
+  - {file: gfx/sprites/eyeDroid2Death.png, time: 60}
+  hue: -130
+GrenadeDroidLeft:
+  frames:
+  - {file: gfx/sprites/eyeDroid2Left1.png, time: 7}
+  - {file: gfx/sprites/eyeDroid2Left2.png, time: 7}
+  - {file: gfx/sprites/eyeDroid2Left3.png, time: 7}
+  - {file: gfx/sprites/eyeDroid2Left4.png, time: 7}
+  hue: -130
+GrenadeDroidRight:
+  frames:
+  - {file: gfx/sprites/eyeDroid2Right1.png, time: 7}
+  - {file: gfx/sprites/eyeDroid2Right2.png, time: 7}
+  - {file: gfx/sprites/eyeDroid2Right3.png, time: 7}
+  - {file: gfx/sprites/eyeDroid2Right4.png, time: 7}
+  hue: -130
+GrenadeIcon:
+  frames:
+  - {file: gfx/sprites/grenadeIcon.png, time: 60}
+HealthBlock:
+  frames:
+  - {file: gfx/sprites/healthBlock1.png, time: 120}
+  - {file: gfx/sprites/healthBlock2.png, time: 5}
+  - {file: gfx/sprites/healthBlock3.png, time: 5}
+  - {file: gfx/sprites/healthBlock4.png, time: 5}
+HealthBlockEmpty:
+  frames:
+  - {file: gfx/sprites/healthBlockEmpty.png, time: 60}
+ItemArrow:
+  frames:
+  - {file: gfx/sprites/scannerArrowUp.png, time: 60}
+  - {file: gfx/sprites/scannerArrowRight.png, time: 60}
+  - {file: gfx/sprites/scannerArrowDown.png, time: 60}
+  - {file: gfx/sprites/scannerArrowLeft.png, time: 60}
+  hue: 200
+ItemSignal:
+  frames:
+  - {file: gfx/sprites/miaSignal1.png, time: 15}
+  - {file: gfx/sprites/miaSignal2.png, time: 15}
+  - {file: gfx/sprites/miaSignal3.png, time: 15}
+  - {file: gfx/sprites/miaSignal4.png, time: 15}
+  - {file: gfx/sprites/miaSignal5.png, time: 15}
+  - {file: gfx/sprites/miaSignal6.png, time: 60}
+  hue: 100
+JPBobLeft:
+  frames:
+  - {file: gfx/sprites/bobJPLeft1.png, time: 10}
+  - {file: gfx/sprites/bobJPLeft2.png, time: 10}
+  - {file: gfx/sprites/bobJPLeft3.png, time: 10}
+  - {file: gfx/sprites/bobJPLeft4.png, time: 10}
+  - {file: gfx/sprites/bobJPLeft2.png, time: 10}
+  - {file: gfx/sprites/bobJPLeft3.png, time: 10}
+JPBobRight:
+  frames:
+  - {file: gfx/sprites/bobJPRight1.png, time: 10}
+  - {file: gfx/sprites/bobJPRight2.png, time: 10}
+  - {file: gfx/sprites/bobJPRight3.png, time: 10}
+  - {file: gfx/sprites/bobJPRight4.png, time: 10}
+  - {file: gfx/sprites/bobJPRight2.png, time: 10}
+  - {file: gfx/sprites/bobJPRight3.png, time: 10}
+LaserBlobDeath:
+  frames:
+  - {file: gfx/sprites/evilBlobRight1.png, time: 5}
+  - {file: gfx/sprites/evilBlobSpin1.png, time: 5}
+  - {file: gfx/sprites/evilBlobSpin2.png, time: 5}
+  - {file: gfx/sprites/evilBlobSpin3.png, time: 5}
+  hue: 165
+LaserBlobLeft:
+  frames:
+  - {file: gfx/sprites/evilBlobLeft1.png, time: 8}
+  - {file: gfx/sprites/evilBlobLeft2.png, time: 8}
+  - {file: gfx/sprites/evilBlobLeft3.png, time: 8}
+  - {file: gfx/sprites/evilBlobLeft4.png, time: 8}
+  - {file: gfx/sprites/evilBlobLeft3.png, time: 8}
+  - {file: gfx/sprites/evilBlobLeft2.png, time: 8}
+  hue: 165
+LaserBlobRight:
+  frames:
+  - {file: gfx/sprites/evilBlobRight1.png, time: 8}
+  - {file: gfx/sprites/evilBlobRight2.png, time: 8}
+  - {file: gfx/sprites/evilBlobRight3.png, time: 8}
+  - {file: gfx/sprites/evilBlobRight4.png, time: 8}
+  - {file: gfx/sprites/evilBlobRight3.png, time: 8}
+  - {file: gfx/sprites/evilBlobRight2.png, time: 8}
+  hue: 165
+LaserBolt:
+  frames:
+  - {file: gfx/sprites/laserBolt1.png, time: 60}
+LaserIcon:
+  frames:
+  - {file: gfx/sprites/laserIcon.png, time: 60}
+LavaRock:
+  frames:
+  - {file: gfx/sprites/lavaRock1.png, time: 5}
+  - {file: gfx/sprites/lavaRock2.png, time: 5}
+  - {file: gfx/sprites/lavaRock3.png, time: 5}
+  - {file: gfx/sprites/lavaRock4.png, time: 5}
+MIAArrow:
+  frames:
+  - {file: gfx/sprites/scannerArrowUp.png, time: 60}
+  - {file: gfx/sprites/scannerArrowRight.png, time: 60}
+  - {file: gfx/sprites/scannerArrowDown.png, time: 60}
+  - {file: gfx/sprites/scannerArrowLeft.png, time: 60}
+  hue: 60
+MIASignal:
+  frames:
+  - {file: gfx/sprites/miaSignal1.png, time: 15}
+  - {file: gfx/sprites/miaSignal2.png, time: 15}
+  - {file: gfx/sprites/miaSignal3.png, time: 15}
+  - {file: gfx/sprites/miaSignal4.png, time: 15}
+  - {file: gfx/sprites/miaSignal5.png, time: 15}
+  - {file: gfx/sprites/miaSignal6.png, time: 60}
+MachineBlobDeath:
+  frames:
+  - {file: gfx/sprites/evilBlobRight1.png, time: 5}
+  - {file: gfx/sprites/evilBlobSpin1.png, time: 5}
+  - {file: gfx/sprites/evilBlobSpin2.png, time: 5}
+  - {file: gfx/sprites/evilBlobSpin3.png, time: 5}
+  hue: -95
+MachineBlobLeft:
+  frames:
+  - {file: gfx/sprites/evilBlobLeft1.png, time: 8}
+  - {file: gfx/sprites/evilBlobLeft2.png, time: 8}
+  - {file: gfx/sprites/evilBlobLeft3.png, time: 8}
+  - {file: gfx/sprites/evilBlobLeft4.png, time: 8}
+  - {file: gfx/sprites/evilBlobLeft3.png, time: 8}
+  - {file: gfx/sprites/evilBlobLeft2.png, time: 8}
+  hue: -95
+MachineBlobRight:
+  frames:
+  - {file: gfx/sprites/evilBlobRight1.png, time: 8}
+  - {file: gfx/sprites/evilBlobRight2.png, time: 8}
+  - {file: gfx/sprites/evilBlobRight3.png, time: 8}
+  - {file: gfx/sprites/evilBlobRight4.png, time: 8}
+  - {file: gfx/sprites/evilBlobRight3.png, time: 8}
+  - {file: gfx/sprites/evilBlobRight2.png, time: 8}
+  hue: -95
+MachineDroidDeath:
+  frames:
+  - {file: gfx/sprites/eyeDroid2Death.png, time: 60}
+MachineDroidLeft:
+  frames:
+  - {file: gfx/sprites/eyeDroid2Left1.png, time: 7}
+  - {file: gfx/sprites/eyeDroid2Left2.png, time: 7}
+  - {file: gfx/sprites/eyeDroid2Left3.png, time: 7}
+  - {file: gfx/sprites/eyeDroid2Left4.png, time: 7}
+MachineDroidRight:
+  frames:
+  - {file: gfx/sprites/eyeDroid2Right1.png, time: 7}
+  - {file: gfx/sprites/eyeDroid2Right2.png, time: 7}
+  - {file: gfx/sprites/eyeDroid2Right3.png, time: 7}
+  - {file: gfx/sprites/eyeDroid2Right4.png, time: 7}
+MachineIcon:
+  frames:
+  - {file: gfx/sprites/machineGunIcon.png, time: 60}
+NormalDoor:
+  frames:
+  - {file: gfx/sprites/goldDoor.png, time: 60}
+  hue: 240
+OxygenBlock:
+  frames:
+  - {file: gfx/sprites/oxygenBlock1.png, time: 60}
+OxygenBlockEmpty:
+  frames:
+  - {file: gfx/sprites/oxygenBlockEmpty.png, time: 60}
+PistolBlobDeath:
+  frames:
+  - {file: gfx/sprites/evilBlobRight1.png, time: 5}
+  - {file: gfx/sprites/evilBlobSpin1.png, time: 5}
+  - {file: gfx/sprites/evilBlobSpin2.png, time: 5}
+  - {file: gfx/sprites/evilBlobSpin3.png, time: 5}
+PistolBlobLeft:
+  frames:
+  - {file: gfx/sprites/evilBlobLeft1.png, time: 8}
+  - {file: gfx/sprites/evilBlobLeft2.png, time: 8}
+  - {file: gfx/sprites/evilBlobLeft3.png, time: 8}
+  - {file: gfx/sprites/evilBlobLeft4.png, time: 8}
+  - {file: gfx/sprites/evilBlobLeft3.png, time: 8}
+  - {file: gfx/sprites/evilBlobLeft2.png, time: 8}
+PistolBlobRight:
+  frames:
+  - {file: gfx/sprites/evilBlobRight1.png, time: 8}
+  - {file: gfx/sprites/evilBlobRight2.png, time: 8}
+  - {file: gfx/sprites/evilBlobRight3.png, time: 8}
+  - {file: gfx/sprites/evilBlobRight4.png, time: 8}
+  - {file: gfx/sprites/evilBlobRight3.png, time: 8}
+  - {file: gfx/sprites/evilBlobRight2.png, time: 8}
+PistolDroidDeath:
+  frames:
+  - {file: gfx/sprites/eyeDroidDeath.png, time: 60}
+PistolDroidLeft:
+  frames:
+  - {file: gfx/sprites/eyeDroidLeft1.png, time: 7}
+  - {file: gfx/sprites/eyeDroidLeft2.png, time: 7}
+  - {file: gfx/sprites/eyeDroidLeft3.png, time: 7}
+  - {file: gfx/sprites/eyeDroidLeft4.png, time: 7}
+PistolDroidRight:
+  frames:
+  - {file: gfx/sprites/eyeDroidRight1.png, time: 7}
+  - {file: gfx/sprites/eyeDroidRight2.png, time: 7}
+  - {file: gfx/sprites/eyeDroidRight3.png, time: 7}
+  - {file: gfx/sprites/eyeDroidRight4.png, time: 7}
+PistolIcon:
+  frames:
+  - {file: gfx/sprites/pistolIcon.png, time: 60}
+PlasmaBolt:
+  frames:
+  - {file: gfx/sprites/plasmaBolt1.png, time: 6}
+  - {file: gfx/sprites/plasmaBolt2.png, time: 6}
+  - {file: gfx/sprites/plasmaBolt3.png, time: 6}
+  - {file: gfx/sprites/plasmaBolt4.png, time: 6}
+Platform:
+  frames:
+  - {file: gfx/sprites/platform.png, time: 60}
+PointsPod:
+  frames:
+  - {file: gfx/sprites/pointsPod1.png, time: 5}
+  - {file: gfx/sprites/pointsPod2.png, time: 5}
+  - {file: gfx/sprites/pointsPod3.png, time: 5}
+  - {file: gfx/sprites/pointsPod4.png, time: 5}
+PointsPod2:
+  frames:
+  - {file: gfx/sprites/pointsPod1.png, time: 5}
+  - {file: gfx/sprites/pointsPod2.png, time: 5}
+  - {file: gfx/sprites/pointsPod3.png, time: 5}
+  - {file: gfx/sprites/pointsPod4.png, time: 5}
+  hue: 50
+PointsPod3:
+  frames:
+  - {file: gfx/sprites/pointsPod1.png, time: 5}
+  - {file: gfx/sprites/pointsPod2.png, time: 5}
+  - {file: gfx/sprites/pointsPod3.png, time: 5}
+  - {file: gfx/sprites/pointsPod4.png, time: 5}
+  hue: 100
+PointsPod4:
+  frames:
+  - {file: gfx/sprites/pointsPod1.png, time: 5}
+  - {file: gfx/sprites/pointsPod2.png, time: 5}
+  - {file: gfx/sprites/pointsPod3.png, time: 5}
+  - {file: gfx/sprites/pointsPod4.png, time: 5}
+  hue: 150
+PointsPod5:
+  frames:
+  - {file: gfx/sprites/pointsPod1.png, time: 5}
+  - {file: gfx/sprites/pointsPod2.png, time: 5}
+  - {file: gfx/sprites/pointsPod3.png, time: 5}
+  - {file: gfx/sprites/pointsPod4.png, time: 5}
+  hue: 200
+PointsPod6:
+  frames:
+  - {file: gfx/sprites/pointsPod1.png, time: 5}
+  - {file: gfx/sprites/pointsPod2.png, time: 5}
+  - {file: gfx/sprites/pointsPod3.png, time: 5}
+  - {file: gfx/sprites/pointsPod4.png, time: 5}
+  hue: 250
+PointsPod7:
+  frames:
+  - {file: gfx/sprites/pointsPod1.png, time: 5}
+  - {file: gfx/sprites/pointsPod2.png, time: 5}
+  - {file: gfx/sprites/pointsPod3.png, time: 5}
+  - {file: gfx/sprites/pointsPod4.png, time: 5}
+  hue: 300
+PurpleDiamond:
+  frames:
+  - {file: gfx/sprites/diamond.png, time: 60}
+  hue: -60
+PurpleKeyCard:
+  frames:
+  - {file: gfx/sprites/keyCard1.png, time: 180}
+  - {file: gfx/sprites/keyCard2.png, time: 5}
+  - {file: gfx/sprites/keyCard3.png, time: 5}
+  - {file: gfx/sprites/keyCard4.png, time: 5}
+  - {file: gfx/sprites/keyCard5.png, time: 5}
+  hue: 150
+RedBloodParticle:
+  frames:
+  - {file: gfx/sprites/bloodParticle1.png, time: 25}
+  - {file: gfx/sprites/bloodParticle2.png, time: 25}
+  - {file: gfx/sprites/bloodParticle3.png, time: 25}
+RedDiamond:
+  frames:
+  - {file: gfx/sprites/diamond.png, time: 60}
+RedKeyCard:
+  frames:
+  - {file: gfx/sprites/keyCard1.png, time: 180}
+  - {file: gfx/sprites/keyCard2.png, time: 5}
+  - {file: gfx/sprites/keyCard3.png, time: 5}
+  - {file: gfx/sprites/keyCard4.png, time: 5}
+  - {file: gfx/sprites/keyCard5.png, time: 5}
+  hue: -120
+RocketDroidDeath:
+  frames:
+  - {file: gfx/sprites/eyeDroid2Death.png, time: 60}
+  hue: 100
+RocketDroidLeft:
+  frames:
+  - {file: gfx/sprites/eyeDroid2Left1.png, time: 7}
+  - {file: gfx/sprites/eyeDroid2Left2.png, time: 7}
+  - {file: gfx/sprites/eyeDroid2Left3.png, time: 7}
+  - {file: gfx/sprites/eyeDroid2Left4.png, time: 7}
+  hue: 100
+RocketDroidRight:
+  frames:
+  - {file: gfx/sprites/eyeDroid2Right1.png, time: 7}
+  - {file: gfx/sprites/eyeDroid2Right2.png, time: 7}
+  - {file: gfx/sprites/eyeDroid2Right3.png, time: 7}
+  - {file: gfx/sprites/eyeDroid2Right4.png, time: 7}
+  hue: 100
+ScaredMIA:
+  frames:
+  - {file: gfx/sprites/scaredMIA1.png, time: 3}
+  - {file: gfx/sprites/scaredMIA2.png, time: 2}
+  - {file: gfx/sprites/scaredMIA3.png, time: 3}
+  - {file: gfx/sprites/scaredMIA4.png, time: 2}
+SilverDoor:
+  frames:
+  - {file: gfx/sprites/silverDoor.png, time: 60}
+SilverKey:
+  frames:
+  - {file: gfx/sprites/goldKey1.png, time: 180}
+  - {file: gfx/sprites/goldKey2.png, time: 5}
+  - {file: gfx/sprites/goldKey3.png, time: 5}
+  - {file: gfx/sprites/goldKey4.png, time: 5}
+  - {file: gfx/sprites/goldKey3.png, time: 5}
+  - {file: gfx/sprites/goldKey2.png, time: 5}
+  hue: -100
+  sat: -150
+  val: -100
+SilverSlideDoor:
+  frames:
+  - {file: gfx/sprites/silverSlideDoor.png, time: 60}
+SlideDoor:
+  frames:
+  - {file: gfx/sprites/goldSlideDoor.png, time: 90}
+  hue: 240
+SmallExplosion:
+  frames:
+  - {file: gfx/sprites/smallExplosion1.bmp, time: 3}
+  - {file: gfx/sprites/smallExplosion2.bmp, time: 3}
+  - {file: gfx/sprites/smallExplosion3.bmp, time: 3}
+  - {file: gfx/sprites/smallExplosion4.bmp, time: 3}
+Smoke:
+  frames:
+  - {file: gfx/sprites/smoke1.bmp, time: 12}
+  - {file: gfx/sprites/smoke2.bmp, time: 12}
+  - {file: gfx/sprites/smoke3.bmp, time: 12}
+  - {file: gfx/sprites/smoke4.bmp, time: 14}
+SpiderBlob2Left:
+  frames:
+  - {file: gfx/sprites/spiderBlobLeft1.png, time: 10}
+  - {file: gfx/sprites/spiderBlobLeft2.png, time: 10}
+  - {file: gfx/sprites/spiderBlobLeft3.png, time: 10}
+  - {file: gfx/sprites/spiderBlobLeft2.png, time: 10}
+  hue: 80
+SpiderBlob2Right:
+  frames:
+  - {file: gfx/sprites/spiderBlobRight1.png, time: 10}
+  - {file: gfx/sprites/spiderBlobRight2.png, time: 10}
+  - {file: gfx/sprites/spiderBlobRight3.png, time: 10}
+  - {file: gfx/sprites/spiderBlobRight2.png, time: 10}
+  hue: 80
+SpiderBlob2Spin:
+  frames:
+  - {file: gfx/sprites/spiderBlobRight1.png, time: 5}
+  - {file: gfx/sprites/spiderBlobSpin1.png, time: 5}
+  - {file: gfx/sprites/spiderBlobSpin2.png, time: 5}
+  - {file: gfx/sprites/spiderBlobSpin3.png, time: 5}
+  hue: 80
+SpiderBlob3Left:
+  frames:
+  - {file: gfx/sprites/spiderBlobLeft1.png, time: 10}
+  - {file: gfx/sprites/spiderBlobLeft2.png, time: 10}
+  - {file: gfx/sprites/spiderBlobLeft3.png, time: 10}
+  - {file: gfx/sprites/spiderBlobLeft2.png, time: 10}
+  hue: 165
+SpiderBlob3Right:
+  frames:
+  - {file: gfx/sprites/spiderBlobRight1.png, time: 10}
+  - {file: gfx/sprites/spiderBlobRight2.png, time: 10}
+  - {file: gfx/sprites/spiderBlobRight3.png, time: 10}
+  - {file: gfx/sprites/spiderBlobRight2.png, time: 10}
+  hue: 165
+SpiderBlob3Spin:
+  frames:
+  - {file: gfx/sprites/spiderBlobRight1.png, time: 5}
+  - {file: gfx/sprites/spiderBlobSpin1.png, time: 5}
+  - {file: gfx/sprites/spiderBlobSpin2.png, time: 5}
+  - {file: gfx/sprites/spiderBlobSpin3.png, time: 5}
+  hue: 165
+SpiderBlob4Left:
+  frames:
+  - {file: gfx/sprites/spiderBlobLeft1.png, time: 10}
+  - {file: gfx/sprites/spiderBlobLeft2.png, time: 10}
+  - {file: gfx/sprites/spiderBlobLeft3.png, time: 10}
+  - {file: gfx/sprites/spiderBlobLeft2.png, time: 10}
+  hue: -95
+SpiderBlob4Right:
+  frames:
+  - {file: gfx/sprites/spiderBlobRight1.png, time: 10}
+  - {file: gfx/sprites/spiderBlobRight2.png, time: 10}
+  - {file: gfx/sprites/spiderBlobRight3.png, time: 10}
+  - {file: gfx/sprites/spiderBlobRight2.png, time: 10}
+  hue: -95
+SpiderBlob4Spin:
+  frames:
+  - {file: gfx/sprites/spiderBlobRight1.png, time: 5}
+  - {file: gfx/sprites/spiderBlobSpin1.png, time: 5}
+  - {file: gfx/sprites/spiderBlobSpin2.png, time: 5}
+  - {file: gfx/sprites/spiderBlobSpin3.png, time: 5}
+  hue: -95
+SpiderBlobLeft:
+  frames:
+  - {file: gfx/sprites/spiderBlobLeft1.png, time: 10}
+  - {file: gfx/sprites/spiderBlobLeft2.png, time: 10}
+  - {file: gfx/sprites/spiderBlobLeft3.png, time: 10}
+  - {file: gfx/sprites/spiderBlobLeft2.png, time: 10}
+SpiderBlobRight:
+  frames:
+  - {file: gfx/sprites/spiderBlobRight1.png, time: 10}
+  - {file: gfx/sprites/spiderBlobRight2.png, time: 10}
+  - {file: gfx/sprites/spiderBlobRight3.png, time: 10}
+  - {file: gfx/sprites/spiderBlobRight2.png, time: 10}
+SpiderBlobSpin:
+  frames:
+  - {file: gfx/sprites/spiderBlobRight1.png, time: 5}
+  - {file: gfx/sprites/spiderBlobSpin1.png, time: 5}
+  - {file: gfx/sprites/spiderBlobSpin2.png, time: 5}
+  - {file: gfx/sprites/spiderBlobSpin3.png, time: 5}
+SpreadIcon:
+  frames:
+  - {file: gfx/sprites/spreadIcon.png, time: 60}
+StalagPiece:
+  frames:
+  - {file: gfx/sprites/stalagPiece1.png, time: 12}
+  - {file: gfx/sprites/stalagPiece2.png, time: 12}
+  - {file: gfx/sprites/stalagPiece3.png, time: 12}
+  - {file: gfx/sprites/stalagPiece4.png, time: 12}
+Stalagtite:
+  frames:
+  - {file: gfx/sprites/stalagtite.png, time: 60}
+SwitchOff:
+  frames:
+  - {file: gfx/sprites/switch1.png, time: 60}
+SwitchOn:
+  frames:
+  - {file: gfx/sprites/switch2.png, time: 60}
+TeleportStar:
+  frames:
+  - {file: gfx/sprites/teleportStar1.png, time: 10}
+  - {file: gfx/sprites/teleportStar2.png, time: 10}
+  - {file: gfx/sprites/teleportStar3.png, time: 10}
+  - {file: gfx/sprites/teleportStar4.png, time: 10}
+  - {file: gfx/sprites/teleportStar5.png, time: 10}
+  - {file: gfx/sprites/teleportStar6.png, time: 10}
+  - {file: gfx/sprites/teleportStar7.png, time: 10}
+Teleporter:
+  frames:
+  - {file: gfx/sprites/teleporter1.png, time: 90}
+TripleCherries:
+  frames:
+  - {file: gfx/sprites/tripleCherries.png, time: 60}
+WallPiece:
+  frames:
+  - {file: gfx/sprites/wallPiece.png, time: 60}
+WarningBlock:
+  frames:
+  - {file: gfx/sprites/warningBlock.png, time: 60}
+YellowBloodParticle:
+  frames:
+  - {file: gfx/sprites/bloodParticle1.png, time: 25}
+  - {file: gfx/sprites/bloodParticle2.png, time: 25}
+  - {file: gfx/sprites/bloodParticle3.png, time: 25}
+  hue: 50
+YellowDiamond:
+  frames:
+  - {file: gfx/sprites/diamond.png, time: 60}
+  hue: 50

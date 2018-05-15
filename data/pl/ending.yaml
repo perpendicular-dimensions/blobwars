@@ -1,0 +1,248 @@
+BioMech Supply Depot Start:
+- image: gfx/cutscenes/supplyStart.jpg
+  duration: 10
+  text: >-
+    Po wkroczeniu do opustoszałej bazy obcych Bob stwierdził, że coś jest nie tak. Jego uwagę zaprzątnął
+    jednak ogromny monitor z mapą świata Blobów.
+- duration: 10
+  text: >-
+    Zauważył na niej wiele znanych mu miejsc, które zostały oznaczone, ale dwa z nich były mu obce. Zanim
+    jednak zdążył się nad tym zastanowić, przeszkodził mu dziwny odgłos...
+
+BioMech Supply Depot End:
+- image: gfx/cutscenes/supplyEnd.jpg
+  duration: 10
+  text: >-
+    Pozostawiając dopalające się szczątki biomechanicznych czołgów, Bob zwrócił ponownie uwagę na ekran.
+    Wywnioskował, że mapa ukazuje lokalizację dwóch starożytnych grobowców i wspomina coś o "magicznych
+    kryształach".
+- duration: 10
+  text: >-
+    Bob, nie posiadając bliższych informacji na temat kryształów czy grobowców stwierdził tylko, że musi
+    się do nich dostać, zanim zrobią to kosmici.
+
+BioMech Communications Start:
+- image: gfx/cutscenes/commStart.png
+  duration: 10
+  text: >-
+    Przeszukując bazę, Bob prawie natychmiast odnalazł lokalizację trzeciego starożytnego grobowca. Kolejne
+    odkrycie spowodowało, że żołądek niemal podskoczył mu do gardła.
+- duration: 15
+  text: >-
+    Eksperymenty obcych osiągnęły kolejny poziom obrzydliwości: w specjalnym basenie inkubacyjnym zobaczył
+    pokrakę z mackami i działem laserowym. Bob zdecydował natychmiast to zabić. I zabrać ze sobą sztuczne
+    skrzela.
+
+BioMech Communications End:
+- image: gfx/cutscenes/commEnd.png
+  duration: 15
+  text: >-
+    Stwór umarł zalewając basen większą ilością krwi, niż ktokolwiek mógłby się spodziewać. Bob wydostał
+    się z wody i ocenił sytuację. Przedstawiała się ona nieźle: znał lokalizację trzeciego starożytnego
+    grobowca i miał ze sobą sztuczne skrzela.
+- duration: 10
+  text: >-
+    Pozwolą mu one na uratowanie zaginionych w akcji i eksplorację obszarów, do których wcześniej nie
+    mógł dotrzeć. Bob nie tracąc czasu, kontynuował misję.
+
+BioMech Assimilator Start:
+- image: gfx/cutscenes/assimStart.jpg
+  duration: 15
+  text: >-
+    Bob wiedział, co powinien zrobić po wejściu do bazy - to tutaj jego przyjaciół przemieniono w mutantów.
+    Jego podstawowymi celami było: zniszczenie bazy, odnalezienie lokalizacji ostatniego grobowca i upewnienie
+    się, że żadni inni Blobowie nie zostali zmutowani.
+- duration: 10
+  text: >-
+    Musiał się jednak na razie z tym wstrzymać, ponieważ zmutowany odrzutowy Blob zamierzył się do ataku...
+
+BioMech Assimilator End:
+- image: gfx/cutscenes/assimEnd.jpg
+  duration: 15
+  text: >-
+    Bob pokonał wroga, pomimo że posiadał on generator zmiennego pola siłowego, pozostawiając na podłodze
+    jego dopalające się w śmiertelnych drgawkach szczątki.
+- duration: 10
+  text: >-
+    Zdobyty plecak odrzutowy bez wątpienia przyda się w kolejnych zadaniach. Bob był pewny, że od tej
+    chwili będzie w stanie w pełni wykonać powierzoną mu misję.
+
+'Ancient Tomb #4 End':
+- image: gfx/cutscenes/tombEnd.jpg
+  duration: 20
+  text: >-
+    Bob stał nieruchomo, podczas gdy kryształ został teleportowany. Odwrócił się, usłyszawszy śmiech.
+    Zobaczył Galdova zaledwie kilka kroków od siebie:
+- duration: 15
+  text: >-
+    "za późno, Bob! Kryształ jest mój"! Bob wystrzelił z pistoletu, jednak pocisk tylko błysknął, przelatując
+    przez hologram.
+- duration: 20
+  text: >-
+    "Wrócę po resztę, Bob. Zapamiętaj moje słowa." Hologram Galdova znikł, pozostawiając Boba samego w
+    grobowcu. Aktywował on teleporter i przysiągł sobie, że wyśledzi trasę Galdova do głównej bazy obcych,
+    a następnie odzyska kryształ.
+- duration: 10
+  text: >-
+    Bob miał jednak pewne zmartwienie. Nachodziła go uporczywa myśl, że kryształ zabrany przez Galdova
+    różni się czymś od pozostałych.
+
+BioMech HQ Start:
+- image: gfx/cutscenes/hqStart.png
+  duration: 10
+  text: >-
+    "Nareszcie!" - głos Galdova huknął w kwaterze. "Jestem zawiedziony, myślałem że zjawisz się tu wcześniej."
+    Zły metalowy Blob przesunął się w kierunku Boba i popatrzył na niego z góry.
+- duration: 10
+  text: >-
+    "Powinienem ci podziękować, Bob. Nauczyłem się dzięki tobie, że przyjaciół powinno się trzymać blisko,
+    a wrogów jeszcze bliżej!"
+- duration: 10
+  text: >-
+    "Moje wojsko śledziło każdy twój krok. Odkryłem w ten sposób nie tylko wejścia do wielu grobowców,
+    ale także dokładne położenie kryształów."
+- duration: 10
+  text: >-
+    Galdov śmiał się serdecznie, podczas gdy Bob sypał iskrami z oczu. "No, nie rób takiej gorzkiej miny!
+    Gdybyś tylko miał w swoich rękach moc tego kryształu..."
+- duration: 10
+  text: >-
+    "Nieźle się nim bawiłem i wydaje mi się, że nie odkryłem nawet połowy jego możliwości. Wracając jednak
+    do sprawy; przybyłeś tu, by mnie zabić, czyż nie?
+- duration: 7
+  text: >-
+    Ostrzegam cię jednak, mały Blobku, ten kryształ jst daleko bardziej interesujący od innych..."
+- duration: 10
+  text: >-
+    "... i dał mi NIESAMOWITE MOCE!!!" Galdov wyskoczył wysoko w powietrze i zanurzył się w energii emanującej
+    z kryształu urzeczywistniania.
+- duration: 7
+  text: >-
+    Gdy niebieskozielony słup ognia omiatał w powietrzu Galdova, Bob przygotowywał się na walkę z nieznanym.
+
+BioMech HQ End:
+- image: gfx/cutscenes/hqEnd.jpg
+  duration: 10
+  text: >-
+    "Głupie stworzenie, wygrałeś bitwę. I co z tego? Ciągle posiadam najpotężniejszy kryształ. Pomimo
+    twojego patetycznego wysiłku, nie zatrzymasz nas! Przegrałeś, Bob! PRZEGRAŁEŚ!!!"
+- duration: 10
+  text: >-
+    Galdov teleportował się z dala od bazy. Bob jednak miał świadomość wagi swojej misji i zamierzał ścigać
+    Galdova, aby zdobyć kryształ za wszelką cenę.
+- duration: 10
+  text: >-
+    Pozostało jednak wiele pracy do wykonania. Zanim Bob będzie mógł wyruszyć w pościg za Galdovem, musi
+    wypełnić podstawowy cel,
+- duration: 10
+  text: >-
+    ratując swoich przyjaciół Blobów, którzy w dalszym ciągu ukrywają się w przerażeniu na całej planecie.
+    Dopiero gdy Bob dokona tego i odnajdzie wszystkie wymagane obiekty, będzie mógł zmierzyć się z Galdovem.
+- duration: 15
+  text: >-
+    Galdov uciekł z satelity, którą obcy zbudowali na orbicie planety Blobów. Bob miał świadomość, że
+    jego teleporter nie dosięgnie do nowej lokalizacji Galdova,
+- duration: 15
+  text: >-
+    gdyby jednak udało mu się znaleźć źródła energii do eksperymentalnego projektu Blobów - dalekosiężnego
+    teleportera, mógłby podążyć za Galdovem i pokonać go raz na zawsze.
+
+Easy Game Finished:
+- image: gfx/cutscenes/ending4.jpg
+  duration: 20
+  text: >-
+    Misja Boba dobiegła końca. Uratował wszystkich swoich kolegów żołnierzy. Było wiele radości, gdy Bob
+    odzyskał znowu uśmiech na twarzy przed ekranem w centrum dowodzenia. Teraz Blobowie spróbują ponownie
+    podjąć walkę z obcymi.
+- duration: 20
+  text: >-
+    To tylko ułamek tego, co Bob będzie musiał osiągnąć, aby pozbyć się obcych. Będzie musiał zmierzyć
+    się z ich liderem, Galdovem; zniszczyć bazy i instalacje obcych; ostatecznie odnaleźć przyczynę wojny.
+    Dlaczego obcy zaatakowali jego planetę?
+- duration: 7
+  text: ""
+- duration: 15
+  text: >-
+    Aby zobaczyć prawdziwe zakończenie Blob Wars: Metal Blob Solid, musisz zagrać ponownie na poziomie
+    zwykłym lub trudnym. Tym sposobem poznasz odpowiedzi na nurtujące Cię pytania i doświadczysz w pełni
+    wyzwań i radości płynącej z gry.
+- duration: 10
+  text: >-
+    Przeznaczenie Boba jest czymś więcej, niż tylko ratowaniem zaginionych w akcji...
+
+Final Battle Start:
+- image: gfx/cutscenes/finalBattleStart.png
+  duration: 15
+  text: >-
+    "Jeśli jest coś, co można podziwiać w twoim uganianiu się za mną, to upór" - stwierdził lider obcych,
+    gdy Bob wkroczył na mostek stacji kosmicznej. Galdov powoli odwrócił się od ekranu, na którym wyświetlona
+    była mapa z planetą Blobów.
+- duration: 7
+  text: >-
+    Bob stał w miejscu i wpatrywał się w złowrogą maszynę. Przez dłuższą chwilę mierzyli się wzrokiem.
+- duration: 15
+  text: >-
+    "Nie możesz wygrać" - powiedział płasko, jak gdyby chodziło o stwierdzenie oczywistego faktu. Bob
+    świdrował oczyma przeciwnika, nie odzywając się jednak.
+- duration: 10
+  text: >-
+    W końcu Galdov przesunął się lekko w jego kierunku i powiedział zimno: "Zakończmy to wreszcie..."
+
+Final Battle End:
+- image: gfx/cutscenes/ending1.jpg
+  duration: 5
+  text: >-
+    @none@
+- duration: 13
+  text: >-
+    Strzały Boba wreszcie dotarły do celu, gdy osłona Galdova pękła z wielkim trzaskiem. Następny strzał
+    przebił lekki pancerz, aby roztrzaskać na drobne kawałki tysiące delikatnych układów scalonych.
+- duration: 10
+  text: >-
+    Z okrzykiem bólu i złości Galdov zdał sobie sprawę, że jego niedoceniany przeciwnik jest zwycięzcą.
+- image: gfx/cutscenes/ending2.jpg
+  duration: 23
+  text: >-
+    Gdy Galdov zwijał się na podłodze w śmiertelnych drgawkach, dynamit rozmieszczony przez Boba na stacji
+    wybuchł. Na całej stacji rozległ się dźwięk syreny ewakuacyjnej, jednak przyszłość Galdova była już
+    przesądzona.
+- duration: 10
+  text: >-
+    Zerkając po raz ostatni na niesprawnego metalowego Bloba, Bob podniósł kryształ urzeczywistniania
+    i włączył swój dalekosiężny teleporter.
+- duration: 13
+  text: >-
+    Był pewny, pomimo wszystkiego co zaszło, że ciągle żywa istota, będąca w Galdovie już poza kontrolą
+    maszyny, rzuciła jeszcze raz pogardliwe spojrzenie w jego stronę, zanim zniknął ze stacji.
+- image: gfx/cutscenes/ending3.jpg
+  duration: 10
+  text: >-
+    Powracający do domu Bob został powitany gromkimi oklaskami i okrzykami Blobów. Okrzyki radości urwały
+    się na kilka sekund, gdy uwagę wszystkich przykuło jasne światło na niebie.
+- duration: 10
+  text: >-
+    Była to eksplozja stacji kosmicznej, która rozpadła się na tysiące małych, kolorowych odłamków. Wiwaty
+    rozległy się jeszcze głośniej.
+- duration: 23
+  text: >-
+    Bob zrobił o wiele więcej, niż pokonanie lidera obcych i uratowanie wielu Blobów. Dał całej rasie
+    wiarę; wiarę, że Blobowie mogą zrzucić jarzmo obcych i powrócić do świata pokoju. Ze światłym przywództwem
+    Boba osiągną ten cel.
+- image: gfx/cutscenes/ending4.jpg
+  duration: 23
+  text: >-
+    Pomimo braku lidera, obcy wciąż byli w wielkiej liczbie i posiadali swoje bazy na planecie Blobów.
+    Nawet teraz przegrupowywali się i kierowali swoje wysiłki w kierunku podboju rasy Blobów i zagarnięciu
+    kryształów wraz z ich tajemnicami.
+- duration: 7
+  text: >-
+    W czasie trwania uroczystości w głowie Boba zrodziła się myśl, że ta wojna jest daleka od zakończenia.
+    Jednak z tego co widział i słyszał w tej chwili, utwierdził się w przekonaniu,
+- duration: 10
+  text: >-
+    że pozostało jeszcze wiele bitew do stoczenia, a kiedy rozpocznie się pierwsza z nich, obcy będą przygotowani...
+- image: gfx/cutscenes/ending5.jpg
+  duration: 10
+  text: >-
+    ... tak jak Blobowie
+

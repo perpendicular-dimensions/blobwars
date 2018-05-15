@@ -1,0 +1,2 @@
+- {id: gameOverNo, group: gameover, type: BUTTON, title: Kontynuuj od ostatniego punktu kontrolnego, x: -1, y: 300}
+- {id: gameOverYes, group: gameover, type: BUTTON, title: Przełącz do ekranu tytułowego, x: -1, y: 330}

@@ -1,0 +1,197 @@
+BioMech Supply Depot Start:
+- image: gfx/cutscenes/supplyStart.jpg
+  duration: 30
+  text: >-
+    Toen hij de basis van de aliens betrad, vond Bob het verlaten. Zijn aandacht werd getrokken door een
+    groot scherm dat een kaart van zijn thuiswereld toonde. Meerdere plekken waren gemarkeerd die Bob
+    herkende, maar twee daarvan waren hem onbekend. Maar voordat hij er verder naar kon kijken werd hij
+    onderbroken door een geluid...
+
+BioMech Supply Depot End:
+- image: gfx/cutscenes/supplyEnd.jpg
+  duration: 30
+  text: >-
+    De smeulende overblijfselen van de BioTanks achterlatend keerde Bob zijn aandacht weer naar het scherm.
+    Hij ontdekte dat de kaart de locatie van twee eeuwenoude tombes en een referentie naar de “Krachtige
+    Kristallen” toonde. Bob wist niets van de tombes of de Kristallen, maar hij wist wel dat hij er achter
+    moest komen voor de aliens.
+
+BioMech Communications Start:
+- image: gfx/cutscenes/commStart.png
+  duration: 30
+  text: >-
+    De basis verkennend ontdekte Bob al snel de locatie van de derde oude tombe. Maar zijn volgende ontdekking
+    maakte hem misselijk. De experimenten van de aliens op zijn medeblobs hadden een dieptepunt bereikt,
+    zo zag hij in de bak van de met lasergun bewapende tentakelfreak. Bob besloot onmiddelijk het af te
+    maken. En de Aqualong mee te nemen.
+
+BioMech Communications End:
+- image: gfx/cutscenes/commEnd.png
+  duration: 30
+  text: >-
+    Het wezen stierf terwijl het de waterbak met meer bloed dan ooit vulde. Bob klom uit het water en
+    overdacht de situatie. Hij wist nu de locatie van de derde oude tombe maar hij had ook de Aqualong.
+    Het zou hem helpen plaatsen en medeblobs te bereiken die hij voorheen niet kon bereiken. Bob verspilde
+    geen tijd en ging door met zijn missie.
+
+BioMech Assimilator Start:
+- image: gfx/cutscenes/assimStart.jpg
+  duration: 30
+  text: >-
+    Bob wist wat te doen toen hij de basis betrad - dit was waar zijn medeblobs veranderd waren in hun
+    vijandige vormen. Zijn eerste doel was om de basis te vernietigen, de locatie van de laatste tombe
+    te vinden en te zorgen dat er geen Blobs meer werden gemuteerd. Hij stopte toen de BioMech Jetpack
+    Blob op hem af kwam om aan te vallen...
+
+BioMech Assimilator End:
+- image: gfx/cutscenes/assimEnd.jpg
+  duration: 30
+  text: >-
+    Ondanks de variabele frequentie schildgenerator van de BioMech had Bob hem toch weten te verslaan.
+    Het smeulende lichaam lag stuiptrekkend op de vloer. Bobs nieuwe Jetpack zou hem zeker van pas komen
+    in zijn verdere zoektochten. Hij was er zeker van dat hij zijn missie nu helemaal kon afronden.
+
+'Ancient Tomb #4 End':
+- image: gfx/cutscenes/tombEnd.jpg
+  duration: 20
+  text: >-
+    Bob stond roerloos in de tombe terwijl hij het Kristal weggeteleporteerd zag worden. Gelach zorgde
+    dat hij zich omdraaide om Galdov slechts een meter van hem af te zien. “Te laat, Bob! Het Kristal
+    is van mij!” lachte de gemene Metal Blob. Bob vuurde zijn pistool, maar de kogel ging dwars door wat
+    nu slechts een hologram bleek te zijn heen.
+- duration: 30
+  text: >-
+    “Ik kom terug voor de rest, Bob. Let op mijn woorden.” Galdovs beeld verdween, en Bob bleef alleen
+    achter. Hij activeerde zijn teleporter en zwoer Galdov naar zijn basis te volgen en het Kristal terug
+    te halen. Maar Bob was bezorgd, er was iets anders aan dat Kristal in vergelijking met de andere die
+    hij had.
+
+BioMech HQ Start:
+- image: gfx/cutscenes/hqStart.png
+  duration: 20
+  text: >-
+    “Eindelijk!” galmde Galovs stem door de kamer, “Ik ben teleurgesteld, ik dacht dat je er sneller zou
+    zijn.” De gemene Metal Blob kwam dicht bij Bob en keek neer op hem. “Ik zou je moeten bedanken, Bob.
+    Ik heb lang geleden geleerd je vrienden dicht bij je te houden en je vijanden nog dichter bij!”
+- duration: 20
+  text: >-
+    “Door mijn troepen jouw bewegingen te laten volgen ontdekte ik niet alleen de ingang van vele tombes,
+    maar ook de exacte locaties van het Kristal.” Bob keek boos naar Galdov terwijl de leider van de aliens
+    hartelijk lachte. “Ach, trek niet zo'n gezicht! Als jij de kracht van dit Kristal in je handen zou
+    hebben...”
+- duration: 20
+  text: >-
+    “Ik heb er zoveel plezier mee, en ik denk dat ik slechts begonnen ben om alle geheimen die het bezit
+    te ontdekken. Maar terug naar waar we mee bezig zijn; ik geloof dat je kwam om mij om te brengen,
+    niet? Ik waarschuw je, kleine Blob, dat dit bij verre het meest interessante Kristal is van het stel...”
+- duration: 20
+  text: >-
+    “... en het heeft me ONTZAGWEKKENDE KRACHTEN gegeven!!!” Galdov sprong hoog de lucht in en baadde
+    plots in de energie van het Realiteitskristal. Terwijl de kolom blauwgroene kleuren in de lucht kronkelde
+    bereidde Bob zich voor op de onbekende strijd die hij moest gaan leveren.
+
+BioMech HQ End:
+- image: gfx/cutscenes/hqEnd.jpg
+  duration: 20
+  text: >-
+    Galdov keek Bob boos aan. “Stom creatuur, je overwinning is niets waard. Ik bezit nog steeds het krachtigste
+    Kristal dat jouw ras niet kon verdedigen. Ondanks je zielige pogingen kan je ons niet stoppen! Je
+    hebt verloren! VERLOREN zeg ik je!!!” Galdov activeerde zijn teleporter en ontsnapte. Bob wist dat
+    hij gelijk had en Galdov zou moeten achtervolgen om het Kristal terug te krijgen.
+- duration: 20
+  text: >-
+    Maar er moest nog veel gebeuren. Voordat Blob achter Galdov aan kon moest hij eerst zijn primaire
+    missie voltooien en al zijn medeblobs redden, waarvan hij wist dat ze nog steeds bang waren en zich
+    her en der hadden verstopt. Als hij dat eenmaal had gedaan en alle andere doelen had bereikt zou hij
+    pas achter Galdov aan kunnen gaan.
+- duration: 30
+  text: >-
+    Galdov is naar het ruimtestation ontsnapt dat de aliens hebben gebouwd in baan om Bobs thuiswereld.
+    Bob weet dat zijn eigen teleporter niet ver genoeg reikt, maar als hij de onderdelen van het experimentele
+    Lange Afstand Teleportatie-Systeem (L.A.T.S.) kan vinden dan zou hij Galdov achterna kunnen en voor
+    eens en altijd met hem afrekenen.
+
+Easy Game Finished:
+- image: gfx/cutscenes/ending4.jpg
+  duration: 20
+  text: >-
+    Bobs missie was voorbij. Het was hem gelukt al zijn medeBlobs te redden en veilig thuis te brengen.
+    Er werd gejuicht toen Bobs flikkerende beeld tevoorschijn kwam in de thuisbasis van het Blobleger.
+    Nu zouden ze nogmaals een poging doen de aliens te bestrijden.
+- duration: 20
+  text: >-
+    Maar dit was slechts een klein deel van wat Bob zou moeten bereiken om de aliens af te slaan. Hij
+    zou de gemene leider, Galdov, moeten bevechten; de basissen van de aliens en hun inwoners vernietigen;
+    en uiteindelijk zou hij de reden voor deze lange oorlog moeten ontdekken. Waarom hebben de aliens
+    de planeet aangevallen?
+- duration: 30
+  text: >-
+    Om het werkelijke eind van Blob Wars: Metal Blob Solid te zien moet je opnieuw spelen op Normaal of
+    Moeilijk niveau, waar je alle vragen op je antwoorden zult vinden en ook een veel diepgaander en uitdagend
+    spel zult ervaren. Bobs lot is veel complexer dan alleen het redden van MIAs...
+
+Final Battle Start:
+- image: gfx/cutscenes/finalBattleStart.png
+  duration: 20
+  text: >-
+    “Als er één bewonderenswaardig aspect is van jouw ras, dan is het dat jullie volhardend zijn,” zei
+    de BioMech leider toen Bob de controlekamer van het ruimtestation betrad. Galdov draaide langzaam
+    om van het uitzicht naar Bobs thuiswereld. Bob bleef staan en keek op naar de gemene machine. Lange
+    tellen gingen voorbij...
+- duration: 20
+  text: >-
+    “Je kunt niet winnen,” zei Galdov simpelweg, alsof hij een feit bracht. Bob zei niets en staarde uitdagend
+    naar zijn tegenstander. Uiteindelijk bewoog Galdov langzaam naar voren en stopte vlakbij Bob. En met
+    dezelfde koele vastberadenheid zei hij: “laten we er een eind aan maken...”
+
+Final Battle End:
+- image: gfx/cutscenes/ending1.jpg
+  duration: 5
+  text: >-
+    @none@
+- duration: 23
+  text: >-
+    Bobs wapen vond eindelijk zijn doel, en met een hard knappend geluid ging Galdovs schild kapot. De
+    volgende kogel drong door het lichte pantser van de gemene machine en sneed door honderden delicate
+    stukjes machinerie. Met een uitroep van pijn en woede realiseerde Galdov dat zijn onderschatte tegenstander
+    gewonnen had.
+- image: gfx/cutscenes/ending2.jpg
+  duration: 23
+  text: >-
+    Op hetzelfde moment als Galdov nederlaag begon het dynamiet dat Bob overal in het ruimtestation had
+    geplant af te gaan. Waarschuwingen om te evacueren gingen overal rond de twee tegenstanders af, maar
+    voor Galdov was het lot al bezegeld.
+- duration: 23
+  text: >-
+    Met een laatste blik op de defecte Metal Blob raapte Bob het Realiteitskristal op en activeerde zijn
+    Lange Afstand Teleporatie-Systeem. Hij was er van overtuigd dat ondanks alles Galdov hem nog een laatste
+    blik van minachting gaf voordat Bob van het ruimtestation wegteleporteerde.
+- image: gfx/cutscenes/ending3.jpg
+  duration: 23
+  text: >-
+    Terug op de graslanden van zijn thuis werd Bob door daverend applaus en gejuich ontvangen door medesoldaten
+    en de MIAs die hij had gered. Het gejuich hield even op toen een helder licht ieders aandacht naar
+    de hemel trok. Toen ze zagen dat het ruimtestation in een regen van gekleurde deeltjes uit elkaar
+    spatte, ging het gejuich weer door, dit keer nog luider.
+- duration: 23
+  text: >-
+    Bob had die dag meer gedaan dan alleen een leider van aliens te verslaan en zijn medeblobs te redden.
+    Hij had zijn hele ras hoop gegeven, dat na een leven van oorlog de Blobs de aliens konden verslaan
+    en de wereld weer vreedzaam konden maken. Bob had hun getoond hoe, en met zijn leiderschap konden
+    ze dat doel bereiken.
+- image: gfx/cutscenes/ending4.jpg
+  duration: 23
+  text: >-
+    Zelfs zonder hun leider waren de aliens nog steeds in grotere aantallen en hadden basissen en controleposten
+    over de hele wereld. Zelfs nu zouden de aliens hergroeperen en zich weer richten op het onderwerpen
+    van de Blobs en het terugkrijgen van de Kristallen en de geheimen die deze bevatten.
+- duration: 23
+  text: >-
+    Alhoewel de viering doorging was wist Bob toch dat deze oorlog verre van over was. Maar door wat hij
+    nu zag en hoorde was hij er zeker van dat er nog vele gevechten gevochten moesten worden, en wanneer
+    de volgende kwam zouden de aliens klaar zijn...
+- image: gfx/cutscenes/ending5.jpg
+  duration: 10
+  text: >-
+    ... en zo ook de Blobs.
+

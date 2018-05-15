@@ -1,0 +1,12 @@
+- {id: gameOverNo, group: gameover, type: BUTTON, title: Doorgaan vanaf laatste controlepunt, x: -1, y: 300}
+- {id: gameOverYes, group: gameover, type: BUTTON, title: Terug naar titelscherm, x: -1, y: 330}
+- {id: left, group: joystick, type: JOYPAD, title: Links, x: 100, y: 75}
+- {id: right, group: joystick, type: JOYPAD, title: Rechts, x: 100, y: 110}
+- {id: up, group: joystick, type: JOYPAD, title: Omhoog, x: 100, y: 145}
+- {id: down, group: joystick, type: JOYPAD, title: Neer, x: 100, y: 180}
+- {id: fire, group: joystick, type: JOYPAD, title: Vuur, x: 100, y: 215}
+- {id: jump, group: joystick, type: JOYPAD, title: Spring, x: 100, y: 250}
+- {id: jetpack, group: joystick, type: JOYPAD, title: Activeer Jetpack, x: 100, y: 285}
+- {id: pause, group: joystick, type: JOYPAD, title: Pauze, x: 100, y: 320}
+- {id: map, group: joystick, type: JOYPAD, title: Radarkaart, x: 100, y: 355}
+- {id: confirm, group: joystick, type: BUTTON, title: Terug, x: 100, y: 420}

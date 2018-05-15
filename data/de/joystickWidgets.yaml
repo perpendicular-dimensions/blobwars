@@ -1,0 +1,12 @@
+- {id: gameOverNo, group: gameover, type: BUTTON, title: Neuer Versuch vom letzten Kontrollpunkt aus, x: -1, y: 300}
+- {id: gameOverYes, group: gameover, type: BUTTON, title: Beenden und zum Titelbildschirm, x: -1, y: 330}
+- {id: left, group: joystick, type: JOYPAD, title: Links, x: 100, y: 75}
+- {id: right, group: joystick, type: JOYPAD, title: Rechts, x: 100, y: 110}
+- {id: up, group: joystick, type: JOYPAD, title: Hoch, x: 100, y: 145}
+- {id: down, group: joystick, type: JOYPAD, title: Runter, x: 100, y: 180}
+- {id: fire, group: joystick, type: JOYPAD, title: Feuern, x: 100, y: 215}
+- {id: jump, group: joystick, type: JOYPAD, title: Springen, x: 100, y: 250}
+- {id: jetpack, group: joystick, type: JOYPAD, title: Jetpack aktivieren, x: 100, y: 285}
+- {id: pause, group: joystick, type: JOYPAD, title: Pause, x: 100, y: 320}
+- {id: map, group: joystick, type: JOYPAD, title: Radarkarte, x: 100, y: 355}
+- {id: confirm, group: joystick, type: BUTTON, title: Zurück, x: 100, y: 420}

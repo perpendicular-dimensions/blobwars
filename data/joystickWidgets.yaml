@@ -1,0 +1,13 @@
+- {id: gameOverNo, group: gameover, type: BUTTON, title: Continue from last Checkpoint, x: -1, y: 300}
+- {id: gameOverYes, group: gameover, type: BUTTON, title: Quit to Title Screen, x: -1, y: 330}
+- {id: left, group: joystick, type: JOYPAD, title: Left, x: 120, y: 65}
+- {id: right, group: joystick, type: JOYPAD, title: Right, x: 120, y: 100}
+- {id: up, group: joystick, type: JOYPAD, title: Up, x: 120, y: 135}
+- {id: down, group: joystick, type: JOYPAD, title: Down, x: 120, y: 170}
+- {id: fire, group: joystick, type: JOYPAD, title: Fire, x: 120, y: 205}
+- {id: jump, group: joystick, type: JOYPAD, title: Jump, x: 120, y: 240}
+- {id: jetpack, group: joystick, type: JOYPAD, title: Activate Jetpack, x: 120, y: 275}
+- {id: pause, group: joystick, type: JOYPAD, title: Pause, x: 120, y: 310}
+- {id: map, group: joystick, type: JOYPAD, title: Radar Map, x: 120, y: 345}
+- {id: sensitivity, group: joystick, type: SMOOTH_SLIDER, title: Sensitivity, x: 120, y: 380, min: 1, max: 320}
+- {id: confirm, group: joystick, type: BUTTON, title: Exit, x: 120, y: 420}

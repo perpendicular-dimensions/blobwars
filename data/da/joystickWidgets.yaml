@@ -1,0 +1,12 @@
+- {id: gameOverNo, group: gameover, type: BUTTON, title: Fortsæt fra sidste gemmepunkt, x: -1, y: 300}
+- {id: gameOverYes, group: gameover, type: BUTTON, title: Gå ud til titelskærmen, x: -1, y: 330}
+- {id: left, group: joystick, type: JOYPAD, title: Venstre, x: 100, y: 75}
+- {id: right, group: joystick, type: JOYPAD, title: Højre, x: 100, y: 110}
+- {id: up, group: joystick, type: JOYPAD, title: Op, x: 100, y: 145}
+- {id: down, group: joystick, type: JOYPAD, title: Ned, x: 100, y: 180}
+- {id: fire, group: joystick, type: JOYPAD, title: Skyd, x: 100, y: 215}
+- {id: jump, group: joystick, type: JOYPAD, title: Hop, x: 100, y: 250}
+- {id: jetpack, group: joystick, type: JOYPAD, title: Aktivér jetpack, x: 100, y: 285}
+- {id: pause, group: joystick, type: JOYPAD, title: Pause, x: 100, y: 320}
+- {id: map, group: joystick, type: JOYPAD, title: Radarkort, x: 100, y: 355}
+- {id: confirm, group: joystick, type: BUTTON, title: Afslut, x: 100, y: 420}

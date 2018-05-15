@@ -1,0 +1,12 @@
+- {id: gameOverNo, group: gameover, type: BUTTON, title: 'Continúa desde el último Punto de Control ', x: -1, y: 300}
+- {id: gameOverYes, group: gameover, type: BUTTON, title: 'Salir a la Pantalla de Inicio ', x: -1, y: 330}
+- {id: left, group: joystick, type: JOYPAD, title: Izquierda, x: 100, y: 75}
+- {id: right, group: joystick, type: JOYPAD, title: Derecha, x: 100, y: 110}
+- {id: up, group: joystick, type: JOYPAD, title: Arriba, x: 100, y: 145}
+- {id: down, group: joystick, type: JOYPAD, title: Abajo, x: 100, y: 180}
+- {id: fire, group: joystick, type: JOYPAD, title: Dispara, x: 100, y: 215}
+- {id: jump, group: joystick, type: JOYPAD, title: Salta, x: 100, y: 250}
+- {id: jetpack, group: joystick, type: JOYPAD, title: Activa Mochila a Propulsión, x: 100, y: 285}
+- {id: pause, group: joystick, type: JOYPAD, title: Pausa, x: 100, y: 320}
+- {id: map, group: joystick, type: JOYPAD, title: Mapa Radar, x: 100, y: 355}
+- {id: confirm, group: joystick, type: BUTTON, title: Salir, x: 100, y: 420}

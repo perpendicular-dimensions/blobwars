@@ -1,0 +1,58 @@
+- {id: gameOverNo, group: gameover, type: BUTTON, title: Neuer Versuch vom letzten Kontrollpunkt aus, x: -1, y: 300}
+- {id: gameOverYes, group: gameover, type: BUTTON, title: Beenden und zum Titelbildschirm, x: -1, y: 330}
+- {id: left, group: joystick, type: JOYPAD, title: Links, x: 100, y: 75}
+- {id: right, group: joystick, type: JOYPAD, title: Rechts, x: 100, y: 110}
+- {id: up, group: joystick, type: JOYPAD, title: Hoch, x: 100, y: 145}
+- {id: down, group: joystick, type: JOYPAD, title: Runter, x: 100, y: 180}
+- {id: fire, group: joystick, type: JOYPAD, title: Feuern, x: 100, y: 215}
+- {id: jump, group: joystick, type: JOYPAD, title: Springen, x: 100, y: 250}
+- {id: jetpack, group: joystick, type: JOYPAD, title: Jetpack aktivieren, x: 100, y: 285}
+- {id: pause, group: joystick, type: JOYPAD, title: Pause, x: 100, y: 320}
+- {id: map, group: joystick, type: JOYPAD, title: Radarkarte, x: 100, y: 355}
+- {id: confirm, group: joystick, type: BUTTON, title: Zurück, x: 100, y: 420}
+- {id: newGame, group: mainMenu, type: BUTTON, title: Neues Spiel starten, x: -1, y: 240}
+- {id: loadGame, group: mainMenu, type: BUTTON, title: Spiel laden, x: -1, y: 270}
+- {id: continue, group: mainMenu, type: BUTTON, title: Laufendes Spiel fortsetzen, x: -1, y: 300}
+- {id: options, group: mainMenu, type: BUTTON, title: Optionen, x: -1, y: 330}
+- {id: help, group: mainMenu, type: BUTTON, title: Hilfe, x: -1, y: 360}
+- {id: quit, group: mainMenu, type: BUTTON, title: Beenden, x: -1, y: 390}
+- {id: label, group: help, type: LABEL, title: Für Hilfe zum Spielablauf konsultiere bitte das, x: -1, y: 260}
+- {id: label, group: help, type: LABEL, title: 'an der folgenden Stelle installierte Spielhandbuch:', x: -1, y: 290}
+- {id: labelManual, group: help, type: LABEL, title: /usr/share/doc/blobwars/manual.html, x: -1, y: 320}
+- {id: labelManual, group: help, type: LABEL, title: (derzeit nur auf Englisch), x: -1, y: 350}
+- {id: practice, group: skill, type: BUTTON, title: Übung, x: -1, y: 240}
+- {id: easy, group: skill, type: BUTTON, title: Leicht, x: -1, y: 270}
+- {id: normal, group: skill, type: BUTTON, title: Normal, x: -1, y: 300}
+- {id: hard, group: skill, type: BUTTON, title: Schwer, x: -1, y: 330}
+- {id: extreme, group: skill, type: BUTTON, title: Extrem, x: -1, y: 360}
+- {id: save1, group: saveGames, type: BUTTON, title: Speichern, x: -1, y: 240}
+- {id: save2, group: saveGames, type: BUTTON, title: Speichern, x: -1, y: 270}
+- {id: save3, group: saveGames, type: BUTTON, title: Speichern, x: -1, y: 300}
+- {id: save4, group: saveGames, type: BUTTON, title: Speichern, x: -1, y: 330}
+- {id: save5, group: saveGames, type: BUTTON, title: Speichern, x: -1, y: 360}
+- {id: slot1, group: gameSlots, type: BUTTON, title: Speichern, x: -1, y: 240}
+- {id: slot2, group: gameSlots, type: BUTTON, title: Speichern, x: -1, y: 270}
+- {id: slot3, group: gameSlots, type: BUTTON, title: Speichern, x: -1, y: 300}
+- {id: slot4, group: gameSlots, type: BUTTON, title: Speichern, x: -1, y: 330}
+- {id: slot5, group: gameSlots, type: BUTTON, title: Speichern, x: -1, y: 360}
+- {id: back, group: back, type: BUTTON, title: Zurück zum Hauptmenü, x: -1, y: 420}
+- {id: fullscreen, group: options, type: RADIO, title: Vollbild, options: [Aus, An], x: 100, y: 65}
+- {id: soundvol, group: options, type: SMOOTH_SLIDER, title: Geräuschlautstärke, x: 100, y: 100, min: 0, max: 128}
+- {id: musicvol, group: options, type: SMOOTH_SLIDER, title: Musiklautstärke, x: 100, y: 135, min: 0, max: 128}
+- {id: output, group: options, type: RADIO, title: Ausgabe, options: [Keine, Mono, Stereo], x: 100, y: 170}
+- {id: gamma, group: options, type: SLIDER, title: Helligkeit, x: 100, y: 205, min: 1, max: 20}
+- {id: gore, group: options, type: RADIO, title: Blutige Effekte, options: [Aus, An], x: 100, y: 240}
+- {id: keys, group: options, type: BUTTON, title: Tasten konfigurieren..., x: 100, y: 275}
+- {id: joysticks, group: options, type: BUTTON, title: Joysticks konfigurieren..., x: 100, y: 310}
+- {id: cheats, group: options, type: BUTTON, title: Cheats..., x: 100, y: 345}
+- {id: confirm, group: options, type: BUTTON, title: Zurück, x: 100, y: 385}
+- {id: health, group: cheats, type: RADIO, title: Unbegrenzte Gesundheit, options: [Aus, An], x: 100, y: 75}
+- {id: extras, group: cheats, type: RADIO, title: Aqualunge/Jetpack immer verfügbar, options: [Aus, An], x: 100, y: 110}
+- {id: fuel, group: cheats, type: RADIO, title: Unbegrenzter Treibstoff, options: [Aus, An], x: 100, y: 145}
+- {id: rate, group: cheats, type: RADIO, title: Schnelle Feuerrate, options: [Aus, An], x: 100, y: 180}
+- {id: blood, group: cheats, type: RADIO, title: Extrablutige Effekte, options: [Aus, An], x: 100, y: 215}
+- {id: invulnerable, group: cheats, type: RADIO, title: Drehkontrolle, options: [Aus, An], x: 100, y: 250}
+- {id: speed, group: cheats, type: RADIO, title: Erhöhte Geschwindigkeit, options: [Aus, An], x: 100, y: 285}
+- {id: levels, group: cheats, type: RADIO, title: Zugang zu allen Levels, options: [Aus, An], x: 100, y: 320}
+- {id: skip, group: cheats, type: RADIO, title: Level auto-vervollständigen (F3), options: [Aus, An], x: 100, y: 355}
+- {id: confirm, group: options, type: BUTTON, title: Zurück, x: 100, y: 420}
