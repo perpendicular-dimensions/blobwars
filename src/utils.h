@@ -40,22 +40,27 @@ class split
 {
 	std::string_view str;
 	char sep;
+	bool keepempty;
 
 	split(char sep):
 	                sep(sep) {}
 
 public:
-	split(const std::string_view str, char sep):
+	split(const std::string_view str, char sep, bool keepempty = false):
 	                str(str), sep(sep)
 	{
+		if (keepempty)
+			return;
 		auto beg = str.find_first_not_of(sep);
 		if (beg && beg != str.npos)
 			this->str.remove_prefix(beg);
 	}
 
-	split(const std::vector<char> &vec, char sep):
+	split(const std::vector<char> &vec, char sep, bool keepempty = false):
 	                str(vec.data(), vec.size()), sep(sep)
 	{
+		if (keepempty)
+			return;
 		auto beg = str.find_first_not_of(sep);
 		if (beg && beg != str.npos)
 			this->str.remove_prefix(beg);
@@ -64,7 +69,8 @@ public:
 	split begin()
 	{
 		return *this;
-	};
+	}
+
 	split end()
 	{
 		return split(sep);
@@ -93,7 +99,7 @@ public:
 		}
 		else
 		{
-			auto beg = str.find_first_not_of(sep, pos);
+			auto beg = keepempty ? ++pos : str.find_first_not_of(sep, pos);
 			if (beg == str.npos)
 				str = {};
 			else
