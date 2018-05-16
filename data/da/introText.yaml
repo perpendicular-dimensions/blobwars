@@ -1,0 +1,27 @@
+- delay: 1
+- text: >-
+    Blob'erne var en venlig og glad race. De var helt tilfredse. De tilbragte deres tid på at opfostre
+    deres børn, høste kirsebær og studere astro- og kvantefysik.
+  delay: 10
+- dx: 600
+  delay: 1
+- text: >-
+    Krige og konflikter var kun myter for Blob'erne. Mange af dem havde aldrig set et våben og nogen tvivlede
+    sågar på deres eksistens. Deres liv var glade, og det blev kun endnu bedre af en ren verden, fremragende
+    klima og feriesteder.
+  delay: 10
+- dx: -600
+  delay: 1
+- text: >-
+    Men pludselig gik noget helt galt...
+  delay: 3
+- dx: 300
+  spawn: BOMBDROP
+- dx: 300
+  text: >-
+    Mens rumvæsnernes bomber regnede ned over deres hjemplanet, gik det op for Blob'erne at deres værste
+    frygt var virkelighed...
+- dx: 200
+- dx: 400
+  text: >-
+    ...Blob'erne skulle i krig.

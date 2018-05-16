@@ -1,0 +1,22 @@
+'Grasslands': {map: data/grasslands1, x: 100, y: 50}
+'Flooded Tunnel': {map: data/floodedTunnel1, x: 200, y: 30}
+'Inner Cave Network, Part 1': {map: data/caves1, x: 280, y: 40, requires: 'Flooded Tunnel'}
+'Inner Cave Network, Part 2': {map: data/caves2, x: 300, y: 50, requires: 'Inner Cave Network, Part 1'}
+'Grasslands #2': {map: data/grasslands2, x: 380, y: 80, requires: 'Inner Cave Network, Part 2'}
+'BioMech Supply Depot': {map: data/supply, x: 345, y: 170, requires: 'Stages 5'}
+'Flooded Tunnel #2': {map: data/floodedTunnel2, x: 300, y: 185, requires: 'BioMech Supply Depot'}
+'Ancient Tomb #1': {map: data/tomb1, x: 290, y: 225, requires: 'Flooded Tunnel #2'}
+'Forgotten Caves': {map: data/caves3, x: 369, y: 288, requires: 'Ancient Tomb #1'}
+'Grasslands #3': {map: data/grasslands3, x: 489, y: 345, requires: 'Forgotten Caves'}
+'Ice Cave #1': {map: data/icecave1, x: 240, y: 325, requires: 'Forgotten Caves'}
+'BioMech Communications': {map: data/comm, x: 470, y: 190, requires: 'Stages 10'}
+'Flooded Tunnel #4': {map: data/floodedTunnel4, x: 130, y: 340, requires: 'Ice Cave #1'}
+'Uncharted Cavern': {map: data/caves4, x: 50, y: 300, requires: 'Flooded Tunnel #4'}
+'Flooded Tunnel #3': {map: data/floodedTunnel3, x: 580, y: 110, requires: 'BioMech Supply Depot'}
+'Ice Cave #2': {map: data/icecave2, x: 585, y: 70, requires: 'Flooded Tunnel #3'}
+'Ancient Tomb #2': {map: data/tomb2, x: 590, y: 35, requires: 'Ice Cave #2'}
+'Ancient Tomb #3': {map: data/tomb3, x: 555, y: 350, requires: 'BioMech Communications'}
+'Ancient Tomb #4': {map: data/tomb4, x: 90, y: 160, requires: 'Stages 18'}
+'BioMech Assimilator': {map: data/assimilator, x: 295, y: 365, requires: 'Ancient Tomb #4'}
+'Arctic Wastes': {map: data/arcticWastes, x: 190, y: 195, requires: 'BioMech Assimilator'}
+'BioMech HQ': {map: data/hq, x: 185, y: 240, requires: 'Stages 21'}

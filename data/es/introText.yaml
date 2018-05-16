@@ -1,0 +1,27 @@
+- delay: 1
+- text: >-
+    Los Blobs eran una raza feliz y amigable. No necesitaban nada más. Pasaban sus días criando a sus
+    hijos, recogiendo Cerezas y estudiando astrofísica y física cuántica.
+  delay: 10
+- dx: 600
+  delay: 1
+- text: >-
+    Las guerras y conflictos eran leyendas para los Blobs. Muchos de ellos nunca habían visto un arma
+    y algunos incluso dudaban de su existencia. Eran vidas felices, aún más por su mundo limpio, climas
+    excelentes y lugares de vacaciones.
+  delay: 10
+- dx: -600
+  delay: 1
+- text: >-
+    Entonces, algo malo sucedió...
+  delay: 3
+- dx: 300
+  spawn: BOMBDROP
+- dx: 300
+  text: >-
+    Las bombas de los invasores alienígenas llovieron sobre su mundo, los peores temores de los Blobs
+    se hicieron realidad...
+- dx: 200
+- dx: 400
+  text: >-
+    ...los Blobs iban A la Guerra.

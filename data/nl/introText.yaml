@@ -1,0 +1,27 @@
+- delay: 1
+- text: >-
+    De Blobs waren een vriendelijk, blij ras. Het ontbrak hun aan niets. Ze sleten hun dagen met het opvoeden
+    van hun kinderen, het oogsten van Kersen en het studeren van Astrofysica en Quantummechanica.
+  delay: 10
+- dx: 600
+  delay: 1
+- text: >-
+    Oorlog en conflict waren legendes voor de Blobs. De meeste van hen hadden nog nooit een wapen gezien,
+    sommige geloofden niet eens dat zulke dingen bestonden. Ze leefden blij in hun schone wereld met prima
+    klimaat en vakantieoorden.
+  delay: 10
+- dx: -600
+  delay: 1
+- text: >-
+    Toen ging er iets vreselijk mis...
+  delay: 3
+- dx: 300
+  spawn: BOMBDROP
+- dx: 300
+  text: >-
+    Toen de bommen van de aliens op hun thuiswereld neerregenden, werden de ergste angsten van de Blobs
+    werkelijkheid...
+- dx: 200
+- dx: 400
+  text: >-
+    ...de Blobs gingen de oorlog in.

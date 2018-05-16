@@ -1,0 +1,27 @@
+- delay: 1
+- text: >-
+    Els Blobs eren una raça feliç i amigable. No necessitaven res més. Passaven llurs dies criant els
+    fills, recollint Cireres i estudiant astrofísica i física quàntica.
+  delay: 10
+- dx: 600
+  delay: 1
+- text: >-
+    Les guerres i conflictes eren llegendes per als Blobs. Molts d'ells mai havien vist una arma i alguns
+    fins i tot dubtaven de la seva existència. Eren vides felices, més encara per llur món net, climes
+    excel·lents i llocs de vacances.
+  delay: 10
+- dx: -600
+  delay: 1
+- text: >-
+    Llavors, alguna cosa va anar molt malament...
+  delay: 3
+- dx: 300
+  spawn: BOMBDROP
+- dx: 300
+  text: >-
+    Així que les bombes dels invasors alienígenes van ploure sobre llur món, els pitjors temors dels Blobs
+    es van fer realitat...
+- dx: 200
+- dx: 400
+  text: >-
+    ...els Blobs anaven a la Guerra.

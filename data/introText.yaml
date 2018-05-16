@@ -1,0 +1,26 @@
+- delay: 1
+- text: >-
+    The Blobs were a friendly, happy race. They wanted for nothing. They spent their days raising their
+    children, harvesting Cherries and studying Astro and Quantum Physics.
+  delay: 10
+- dx: 600
+  delay: 1
+- text: >-
+    Wars and conflict to the Blobs was stuff of legend. Many of them had never even seen a weapon and
+    some even doubted their existence. Theirs were happy lives, made even better by their clean world,
+    excellent climates and holiday resorts.
+  delay: 10
+- dx: -600
+  delay: 1
+- text: >-
+    Then something went terribly wrong...
+  delay: 3
+- dx: 300
+  spawn: BOMBDROP
+- dx: 300
+  text: >-
+    As the alien invader's bombs rained down on their homeworld, the Blobs' worst fears had been realised...
+- dx: 200
+- dx: 400
+  text: >-
+    ...the Blobs were going to War.

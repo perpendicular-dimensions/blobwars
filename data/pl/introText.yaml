@@ -1,0 +1,28 @@
+- delay: 1
+- text: >-
+    Blobowie byli przyjazną, szczęśliwą rasą. Niczego im nie brakowało. Swoje życie spędzali na wychowywaniu
+    dzieci, zbieraniu wiśni oraz studiowaniu astrofizyki i fizyki kwantowej.
+  delay: 10
+- dx: 600
+  delay: 1
+- text: >-
+    Wojny i konflikty zgodnie ze stanem wiedzy Blobów należały do dziedziny mitów i legend. Wielu z nich
+    nie widziało nawet broni, a niektórzy powątpiewali w jej istnienie.
+  delay: 10
+- text: >-
+    Wiedli szczęśliwe życie, które umilało im czyste środowisko, świetny klimat i miejscowości wypoczynkowe.
+  delay: 10
+- dx: -600
+  delay: 1
+- text: >-
+    Gdy nagle coś poszło nie tak...
+  delay: 3
+- dx: 300
+  spawn: BOMBDROP
+- dx: 300
+  text: >-
+    Gdy bomby obcych najeźdźców spadły na planetę Blobów, spełniły się ich najgorsze koszmary...
+- dx: 200
+- dx: 400
+  text: >-
+    ...Blobowie przygotowywali się do wojny.

@@ -1,0 +1,27 @@
+- delay: 1
+- text: >-
+    Blobbarna var ett vänligt, lyckligt folk. De var anspråkslösa. De tillbringade sina dagar med att
+    uppfostra sina barn, skörda körsbär och studera astro- och kvantumfysik.
+  delay: 10
+- dx: 600
+  delay: 1
+- text: >-
+    För blobbarna var krig och konflikt sagolika ting. Många av dem hade aldrig ens sett ett vapen och
+    några tvivlade på deras existens. Deras liv var lyckliga och tillvaron blev bara bättre av deras rena
+    värld, utmärkta klimat och semesterorter.
+  delay: 10
+- dx: -600
+  delay: 1
+- text: >-
+    Då gick någonting väldigt fel...
+  delay: 3
+- dx: 300
+  spawn: BOMBDROP
+- dx: 300
+  text: >-
+    När de utomjordiska invaderarnas bomber regnade över deras hemplanet blev blobbarnas största skräck
+    verklighet...
+- dx: 200
+- dx: 400
+  text: >-
+    ...blobbarna var på väg ut i krig.

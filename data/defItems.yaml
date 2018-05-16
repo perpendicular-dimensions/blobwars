@@ -1,0 +1,15 @@
+0: {name: 'Pistol', sprite: PistolIcon, value: 1}
+1: {name: 'Machine Gun', sprite: MachineIcon, value: 1}
+2: {name: 'Laser Gun', sprite: LaserIcon, value: 1}
+3: {name: 'set of Grenades', sprite: GrenadeIcon, value: 1}
+4: {name: 'Three Way Spread', sprite: SpreadIcon, value: 1}
+5: {name: 'Cherry', sprite: Cherry, value: 1}
+6: {name: 'pair of Cherries', sprite: DoubleCherries, value: 2}
+7: {name: 'bunch of Cherries', sprite: TripleCherries, value: 5}
+8: {name: 'Points', sprite: PointsPod, value: 25}
+9: {name: 'Points2', sprite: PointsPod2, value: 50}
+10: {name: 'Points3', sprite: PointsPod3, value: 75}
+11: {name: 'Points4', sprite: PointsPod4, value: 100}
+12: {name: 'Points5', sprite: PointsPod5, value: 125}
+13: {name: 'Points6', sprite: PointsPod6, value: 150}
+14: {name: 'Points7', sprite: PointsPod7, value: 200}
