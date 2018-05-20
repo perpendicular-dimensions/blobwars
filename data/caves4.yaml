@@ -36,13 +36,13 @@ mias:
 - {name: Quegon, x: 7936, y: 2304, type: MIA_NORMAL}
 
 objectives:
-- {description: Access Northern Passage, target: Northern Passage}
-- {description: Access Eastern Passage, target: Eastern Passage}
-- {description: Access Western Passage, target: Western Passage}
-- {description: Destroy 10 Sentry Guns, target: Sentry Gun, count: 10}
-- {description: Get to the Exit, target: Exit}
-- {description: Destroy 10 Sentry Guns, target: Sentry Gun, count: 10, optional: true}
-- {description: Collect 25 Boxes of Orichalcum Beads, target: Box of Orichalcum, count: 25, optional: true}
+- {description: Access Northern Passage, target: Northern Passage, difficulty: [medium, hard]}
+- {description: Access Eastern Passage, target: Eastern Passage, difficulty: [medium, hard]}
+- {description: Access Western Passage, target: Western Passage, difficulty: [medium, hard]}
+- {description: Destroy 10 Sentry Guns, target: Sentry Gun, count: 10, difficulty: [hard]}
+- {description: Get to the Exit, target: Exit, difficulty: [medium, hard]}
+- {description: Destroy 10 Sentry Guns, target: Sentry Gun, count: 10, optional: true, difficulty: [medium]}
+- {description: Collect 25 Boxes of Orichalcum Beads, target: Box of Orichalcum, count: 25, optional: true, difficulty: [medium, hard]}
 
 items:
 - {type: 101, name: Box of Orichalcum, x: 4832, y: 4256, sprite: Orichalcum}
@@ -178,9 +178,9 @@ obstacles:
 spawnableEnemies: [Pistol Blob, Grenade Blob, Eye Droid V1.0]
 
 spawnpoints:
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 30, max: 60}
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 20, max: 40}
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 10, max: 10}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 30, max: 60, difficulty: [easy]}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 20, max: 40, difficulty: [medium]}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 10, max: 10, difficulty: [hard]}
 
 enemies:
 - {name: Eye Droid V2.0, x: 8512, y: 4000}

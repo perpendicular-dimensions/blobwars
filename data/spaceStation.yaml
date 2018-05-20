@@ -19,10 +19,10 @@ defEnemies:
 - {name: Sentry Gun, spriteRight: AutoCannonRight, spriteLeft: AutoCannonLeft, spriteDeath: AutoCannonSpin, weapon: Plasma Rifle, health: 25, value: 1000, flags: [ENT_NOMOVE, ENT_AIMS, ENT_EXPLODES, ENT_MULTIEXPLODE, ENT_RAPIDFIRE, ENT_NOJUMP]}
 
 objectives:
-- {description: Locate 10 Sticks of Dynamite, target: Dynamite, count: 10}
-- {description: Plant 10 Sticks of Dynamite, target: Dynamite Switch, count: 10}
-- {description: Destroy 6 Power Generators, target: Power Generator, count: 6}
-- {description: Find Galdov, target: Exit}
+- {description: Locate 10 Sticks of Dynamite, target: Dynamite, count: 10, difficulty: [medium, hard]}
+- {description: Plant 10 Sticks of Dynamite, target: Dynamite Switch, count: 10, difficulty: [medium, hard]}
+- {description: Destroy 6 Power Generators, target: Power Generator, count: 6, difficulty: [medium, hard]}
+- {description: Find Galdov, target: Exit, difficulty: [medium, hard]}
 
 items:
 - {type: 100, name: Dynamite, x: 1696, y: 4064, sprite: Dynamite}
@@ -53,8 +53,8 @@ switches:
 spawnableEnemies: [Eye Droid V1.0, Eye Droid V2.0, Eye Droid V3.0, Eye Droid V4.0]
 
 spawnpoints:
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 10, max: 20}
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 5, max: 10}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 10, max: 20, difficulty: [medium]}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 5, max: 10, difficulty: [hard]}
 
 enemies:
 - {name: Power Generator, x: 1696, y: 4672}

@@ -32,7 +32,7 @@ sprites:
 - {name: LRTS, frames: [{file: gfx/sprites/LRTS1.png, time: 15}, {file: gfx/sprites/LRTS2.png, time: 15}, {file: gfx/sprites/LRTS3.png, time: 15}, {file: gfx/sprites/LRTS4.png, time: 15}, {file: gfx/sprites/LRTS5.png, time: 15}, {file: gfx/sprites/LRTS4.png, time: 15}, {file: gfx/sprites/LRTS3.png, time: 15}, {file: gfx/sprites/LRTS2.png, time: 15}]}
 
 defEnemies:
-- {name: Galdov, spriteRight: GaldovRight, spriteLeft: GaldovLeft, spriteDeath: GaldovLeft, weapon: Plasma Rifle, health: 60, value: 1000, flags: [ENT_RAPIDFIRE, ENT_FLIES, ENT_GALDOV, ENT_ALWAYSCHASE, ENT_EXPLODES, ENT_IMMUNEEXPLODE, ENT_AIMS, ENT_FIRETRAIL]}
+- {name: Galdov, spriteRight: GaldovRight, spriteLeft: GaldovLeft, spriteDeath: GaldovLeft, weapon: Plasma Rifle, health: 60, value: 1000, flags: [ENT_RAPIDFIRE, ENT_FLIES, ENT_GALDOV, ENT_ALWAYSCHASE, ENT_EXPLODES, ENT_IMMUNEEXPLODE, ENT_AIMS, ENT_FIRETRAIL], difficulty: [medium, hard]}
 - {name: Sentry Gun, spriteRight: AutoCannonRight, spriteLeft: AutoCannonLeft, spriteDeath: AutoCannonSpin, weapon: Plasma Rifle, health: 25, value: 1000, flags: [ENT_NOMOVE, ENT_AIMS, ENT_EXPLODES, ENT_MULTIEXPLODE, ENT_RAPIDFIRE, ENT_NOJUMP]}
 
 mias:
@@ -56,12 +56,12 @@ mias:
 - {name: Butt, x: 64, y: 5536, type: MIA_NORMAL}
 
 objectives:
-- {description: Get the Ancient Space Crystal, target: Space Crystal}
-- {description: Activate 2 Security Points, target: SpaceTele, count: 2}
-- {description: Activate 4 Security Points, target: SpaceTele, count: 4}
-- {description: Get to the Maintenance Room, target: Maintenance Room}
-- {description: Battle Galdov, target: Galdov}
-- {description: Find L.R.T.S. Part, target: LRTS, optional: true}
+- {description: Get the Ancient Space Crystal, target: Space Crystal, difficulty: [medium, hard]}
+- {description: Activate 2 Security Points, target: SpaceTele, count: 2, difficulty: [medium, hard]}
+- {description: Activate 4 Security Points, target: SpaceTele, count: 4, difficulty: [medium, hard]}
+- {description: Get to the Maintenance Room, target: Maintenance Room, difficulty: [medium, hard]}
+- {description: Battle Galdov, target: Galdov, difficulty: [medium, hard]}
+- {description: Find L.R.T.S. Part, target: LRTS, optional: true, difficulty: [medium, hard]}
 
 items:
 - {type: 101, name: Space Crystal, x: 250, y: 4224, sprite: SpaceCrystal}
@@ -73,7 +73,7 @@ items:
 - {type: 100, name: Ancient Key, x: 1984, y: 5056, sprite: AncientKey}
 - {type: 100, name: Ancient Key, x: 1120, y: 4288, sprite: AncientKey}
 - {type: 100, name: Ancient Key, x: 288, y: 4128, sprite: AncientKey}
-- {type: 102, name: LRTS, x: 380, y: 2400, sprite: LRTS}
+- {type: 102, name: LRTS, x: 380, y: 2400, sprite: LRTS, difficulty: [medium, hard]}
 
 doors:
 - {name: DOOR1, type: TR_LOCKED_DOOR, startX: 8, startY: 4238, endX: 8, endY: 4288}
@@ -145,9 +145,9 @@ traps:
 spawnableEnemies: [Pistol Blob, Grenade Blob, Machine Gun Blob, Eye Droid V1.0, Eye Droid V2.0, Eye Droid V3.0]
 
 spawnpoints:
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 30, max: 60}
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 20, max: 40}
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 10, max: 10}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 30, max: 60, difficulty: [easy]}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 20, max: 40, difficulty: [medium]}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 10, max: 10, difficulty: [hard]}
 
 enemies:
 - {name: Sentry Gun, x: 288, y: 5440}

@@ -25,13 +25,13 @@ mias:
 - {name: Ceri, x: 4352, y: 608, type: MIA_NORMAL}
 
 objectives:
-- {description: Collect the Blueprints, target: Set of Blueprints}
-- {description: Access Upper Cave System, target: Exit}
-- {description: Find 10 Diamonds, target: Diamond, count: 10, optional: true}
-- {description: 4 Hit Combo with Grenades, target: Combo-Grenades, count: 4, optional: true}
-- {description: 8 Hit Combo with Grenades, target: Combo-Grenades, count: 8, optional: true}
-- {description: Defeat 50 Enemies, target: Enemy, count: 50, optional: true}
-- {description: Defeat 100 Enemies, target: Enemy, count: 100, optional: true}
+- {description: Collect the Blueprints, target: Set of Blueprints, difficulty: [medium, hard]}
+- {description: Access Upper Cave System, target: Exit, difficulty: [medium, hard]}
+- {description: Find 10 Diamonds, target: Diamond, count: 10, optional: true, difficulty: [medium, hard]}
+- {description: 4 Hit Combo with Grenades, target: Combo-Grenades, count: 4, optional: true, difficulty: [medium]}
+- {description: 8 Hit Combo with Grenades, target: Combo-Grenades, count: 8, optional: true, difficulty: [hard]}
+- {description: Defeat 50 Enemies, target: Enemy, count: 50, optional: true, difficulty: [medium]}
+- {description: Defeat 100 Enemies, target: Enemy, count: 100, optional: true, difficulty: [hard]}
 
 items:
 - {type: 100, name: Gold Key, x: 710, y: 200, sprite: GoldKey}
@@ -60,8 +60,8 @@ trains:
 - {name: LAVA_TRAIN, startX: 1880, startY: 320, endX: 2340, endY: 320, pause: 120, atStart: true, active: true}
 - {name: HIGH_TRAIN, startX: 3300, startY: 400, endX: 3300, endY: 940, pause: 1, atStart: false, active: false}
 - {name: HIGH_TRAIN, startX: 3750, startY: 100, endX: 3750, endY: 450, pause: 1, atStart: false, active: true}
-- {name: HELENA_TRAIN, startX: 1568, startY: 1725, endX: 1568, endY: 2150, pause: 120, atStart: true, active: false}
-- {name: BP_TRAIN, startX: 2880, startY: 1350, endX: 2880, endY: 1500, pause: 1, atStart: true, active: false}
+- {name: HELENA_TRAIN, startX: 1568, startY: 1725, endX: 1568, endY: 2150, pause: 120, atStart: true, active: false, difficulty: [medium, hard]}
+- {name: BP_TRAIN, startX: 2880, startY: 1350, endX: 2880, endY: 1500, pause: 1, atStart: true, active: false, difficulty: [medium, hard]}
 - {name: KEY_TRAIN, startX: 9950, startY: 260, endX: 9950, endY: 520, pause: 1, atStart: true, active: true}
 - {name: EXITTRAIN, startX: 4680, startY: 1440, endX: 4680, endY: 2336, pause: 1, atStart: true, active: true}
 - {name: EXITTRAIN, startX: 4744, startY: 1440, endX: 4744, endY: 2336, pause: 1, atStart: true, active: true}
@@ -85,23 +85,23 @@ switches:
 spawnableEnemies: [Pistol Blob, Grenade Blob, Eye Droid V1.0]
 
 spawnpoints:
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 30, max: 60}
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 20, max: 40}
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 10, max: 10}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 30, max: 60, difficulty: [easy]}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 20, max: 40, difficulty: [medium]}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 10, max: 10, difficulty: [hard]}
 - {name: LAVABALL1, x: 1900, y: 500, type: SPW_HAZARD, active: true, subtype: HAZARD_LAVABALL, min: 1, max: 10}
 - {name: LAVABALL1, x: 2000, y: 500, type: SPW_HAZARD, active: true, subtype: HAZARD_LAVABALL, min: 1, max: 10}
-- {name: LAVABALL1, x: 2100, y: 500, type: SPW_HAZARD, active: true, subtype: HAZARD_LAVABALL, min: 1, max: 10}
-- {name: LAVABALL1, x: 2200, y: 500, type: SPW_HAZARD, active: true, subtype: HAZARD_LAVABALL, min: 1, max: 10}
-- {name: LAVABALL1, x: 2300, y: 500, type: SPW_HAZARD, active: true, subtype: HAZARD_LAVABALL, min: 1, max: 10}
-- {name: LAVABALL1, x: 2400, y: 500, type: SPW_HAZARD, active: true, subtype: HAZARD_LAVABALL, min: 1, max: 10}
-- {name: ROCKFALL1, x: 10100, y: 150, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 5}
-- {name: ROCKFALL1, x: 10300, y: 150, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 5}
-- {name: ROCKFALL1, x: 10500, y: 150, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 5}
-- {name: ROCKFALL1, x: 10700, y: 150, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 5}
-- {name: ROCKFALL1, x: 3800, y: 1300, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 5}
-- {name: ROCKFALL1, x: 4000, y: 1300, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 5}
-- {name: ROCKFALL1, x: 4200, y: 1300, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 5}
-- {name: ROCKFALL1, x: 4400, y: 1300, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 5}
+- {name: LAVABALL1, x: 2100, y: 500, type: SPW_HAZARD, active: true, subtype: HAZARD_LAVABALL, min: 1, max: 10, difficulty: [medium, hard]}
+- {name: LAVABALL1, x: 2200, y: 500, type: SPW_HAZARD, active: true, subtype: HAZARD_LAVABALL, min: 1, max: 10, difficulty: [medium, hard]}
+- {name: LAVABALL1, x: 2300, y: 500, type: SPW_HAZARD, active: true, subtype: HAZARD_LAVABALL, min: 1, max: 10, difficulty: [hard]}
+- {name: LAVABALL1, x: 2400, y: 500, type: SPW_HAZARD, active: true, subtype: HAZARD_LAVABALL, min: 1, max: 10, difficulty: [hard]}
+- {name: ROCKFALL1, x: 10100, y: 150, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 5, difficulty: [hard]}
+- {name: ROCKFALL1, x: 10300, y: 150, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 5, difficulty: [hard]}
+- {name: ROCKFALL1, x: 10500, y: 150, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 5, difficulty: [hard]}
+- {name: ROCKFALL1, x: 10700, y: 150, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 5, difficulty: [hard]}
+- {name: ROCKFALL1, x: 3800, y: 1300, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 5, difficulty: [hard]}
+- {name: ROCKFALL1, x: 4000, y: 1300, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 5, difficulty: [hard]}
+- {name: ROCKFALL1, x: 4200, y: 1300, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 5, difficulty: [hard]}
+- {name: ROCKFALL1, x: 4400, y: 1300, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 5, difficulty: [hard]}
 
 enemies:
 - {name: Pistol Blob, x: 352, y: 192}

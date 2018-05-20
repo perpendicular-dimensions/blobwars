@@ -27,16 +27,16 @@ mias:
 - {name: Ben, x: 11424, y: 8320, type: MIA_NORMAL}
 
 objectives:
-- {description: Find L.R.T.S. Part, target: LRTS, optional: true}
+- {description: Find L.R.T.S. Part, target: LRTS, optional: true, difficulty: [medium, hard]}
 
 items:
-- {type: 102, name: LRTS, x: 9728, y: 8960, sprite: LRTS}
+- {type: 102, name: LRTS, x: 9728, y: 8960, sprite: LRTS, difficulty: [medium, hard]}
 spawnableEnemies: [Pistol Blob, Grenade Blob, Machine Gun Blob, Eye Droid V1.0, Eye Droid V2.0, Eye Droid V3.0, Spider Blob, Spider Blob V2.0, Spider Blob V3.0]
 
 spawnpoints:
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 30, max: 60}
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 20, max: 40}
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 10, max: 10}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 30, max: 60, difficulty: [easy]}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 20, max: 40, difficulty: [medium]}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 10, max: 10, difficulty: [hard]}
 
 enemies:
 - {name: Pistol Blob, x: 256, y: 8928}

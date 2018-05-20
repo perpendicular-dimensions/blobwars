@@ -46,10 +46,10 @@ mias:
 - {name: Monty, x: 4672, y: 2880, type: MIA_NORMAL}
 
 objectives:
-- {description: Locate Tomb Entrance, target: TombEntrance}
-- {description: Find 4 Ancient Keys, target: Ancient Key, count: 4}
-- {description: Disable Booby Traps, target: BoobyTrap, count: 3}
-- {description: Enter Ancient Tomb, target: Exit}
+- {description: Locate Tomb Entrance, target: TombEntrance, difficulty: [medium, hard]}
+- {description: Find 4 Ancient Keys, target: Ancient Key, count: 4, difficulty: [medium, hard]}
+- {description: Disable Booby Traps, target: BoobyTrap, count: 3, difficulty: [medium, hard]}
+- {description: Enter Ancient Tomb, target: Exit, difficulty: [medium, hard]}
 
 items:
 - {type: 100, name: Ancient Cog, x: 32, y: 4960, sprite: Cog}
@@ -229,9 +229,9 @@ traps:
 spawnableEnemies: [Pistol Blob, Grenade Blob, Machine Gun Blob, Eye Droid V1.0, Eye Droid V2.0, Eye Droid V3.0, Aqua Blob]
 
 spawnpoints:
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 30, max: 60}
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 20, max: 40}
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 10, max: 20}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 30, max: 60, difficulty: [easy]}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 20, max: 40, difficulty: [medium]}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 10, max: 20, difficulty: [hard]}
 
 enemies:
 - {name: Eye Droid V4.0, x: 1216, y: 2816}

@@ -29,7 +29,7 @@ for filename in ['defEnemies']:
         else:
             flags = ", flags: [{}]".format(", ".join(m.group(8).split("+")))
 
-        print("- {{name: '{}', spriteLeft: {}, spriteRight: {}, spriteDeath: {}, weapon: '{}', health: {}, value: {}{}}}".format(m.group(1), m.group(2), m.group(3), m.group(4), m.group(5), int(m.group(6)), int(m.group(7)), flags), file=foutput)
+        print("- {{name: '{}', spriteRight: {}, spriteLeft: {}, spriteDeath: {}, weapon: '{}', health: {}, value: {}{}}}".format(m.group(1), m.group(2), m.group(3), m.group(4), m.group(5), int(m.group(6)), int(m.group(7)), flags), file=foutput)
 
     finput.close()
     foutput.close()

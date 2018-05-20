@@ -27,11 +27,11 @@ mias:
 - {name: Magneto, x: 2240, y: 1376, type: MIA_NORMAL}
 
 objectives:
-- {description: Find the Dynamite, target: Pack of Dynamite}
-- {description: Exit the Tunnel System, target: Exit}
-- {description: Destroy 5 Power Generators, target: Power Generator, count: 5}
-- {description: Defeat 50 Enemies, target: Enemy, count: 50, optional: true}
-- {description: Defeat 100 Enemies, target: Enemy, count: 100, optional: true}
+- {description: Find the Dynamite, target: Pack of Dynamite, difficulty: [medium, hard]}
+- {description: Exit the Tunnel System, target: Exit, difficulty: [medium, hard]}
+- {description: Destroy 5 Power Generators, target: Power Generator, count: 5, difficulty: [medium, hard]}
+- {description: Defeat 50 Enemies, target: Enemy, count: 50, optional: true, difficulty: [medium]}
+- {description: Defeat 100 Enemies, target: Enemy, count: 100, optional: true, difficulty: [hard]}
 
 items:
 - {type: 100, name: Gold Key, x: 1600, y: 1165, sprite: GoldKey}
@@ -79,9 +79,9 @@ switches:
 spawnableEnemies: [Pistol Blob, Eye Droid V1.0]
 
 spawnpoints:
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 30, max: 60}
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 20, max: 40}
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 10, max: 10}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 30, max: 60, difficulty: [easy]}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 20, max: 40, difficulty: [medium]}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 10, max: 10, difficulty: [hard]}
 - {name: EXPLODEPOINT, x: 7350, y: 825, type: SPW_HAZARD, active: false, subtype: HAZARD_EXPLOSION}
 - {name: EXPLODEPOINT, x: 7360, y: 930, type: SPW_HAZARD, active: false, subtype: HAZARD_EXPLOSION}
 - {name: EXPLODEPOINT, x: 7370, y: 935, type: SPW_HAZARD, active: false, subtype: HAZARD_EXPLOSION}

@@ -31,14 +31,14 @@ mias:
 - {name: Chutney, x: 5664, y: 5888, type: MIA_NORMAL}
 
 objectives:
-- {description: Destroy 10 Spider Blobs, target: Spider Blob, count: 10}
-- {description: Collect 10 Cherry Plants, target: Cherry Plant, count: 10}
-- {description: Collect 20 Cherry Plants, target: Cherry Plant, count: 20, optional: true}
-- {description: 10 Hit Combo with Machine Gun, target: Combo-Machine Gun, count: 10, optional: true}
-- {description: 20 Hit Combo with Machine Gun, target: Combo-Machine Gun, count: 20, optional: true}
-- {description: Defeat 100 Enemies, target: Enemy, count: 100, optional: true}
-- {description: Defeat 200 Enemies, target: Enemy, count: 200, optional: true}
-- {description: Find L.R.T.S. Part, target: LRTS, optional: true}
+- {description: Destroy 10 Spider Blobs, target: Spider Blob, count: 10, difficulty: [medium, hard]}
+- {description: Collect 10 Cherry Plants, target: Cherry Plant, count: 10, difficulty: [hard]}
+- {description: Collect 20 Cherry Plants, target: Cherry Plant, count: 20, optional: true, difficulty: [medium, hard]}
+- {description: 10 Hit Combo with Machine Gun, target: Combo-Machine Gun, count: 10, optional: true, difficulty: [medium]}
+- {description: 20 Hit Combo with Machine Gun, target: Combo-Machine Gun, count: 20, optional: true, difficulty: [hard]}
+- {description: Defeat 100 Enemies, target: Enemy, count: 100, optional: true, difficulty: [medium]}
+- {description: Defeat 200 Enemies, target: Enemy, count: 200, optional: true, difficulty: [hard]}
+- {description: Find L.R.T.S. Part, target: LRTS, optional: true, difficulty: [medium, hard]}
 
 items:
 - {type: 100, name: Gold Key, x: 2496, y: 8224, sprite: GoldKey}
@@ -50,7 +50,7 @@ items:
 - {type: 100, name: Bronze Key, x: 6048, y: 5888, sprite: BronzeKey}
 - {type: 100, name: Red Keycard, x: 4160, y: 7552, sprite: RedKeyCard}
 - {type: 100, name: Green Keycard, x: 6208, y: 5600, sprite: GreenKeyCard}
-- {type: 102, name: LRTS, x: 7200, y: 5024, sprite: LRTS}
+- {type: 102, name: LRTS, x: 7200, y: 5024, sprite: LRTS, difficulty: [medium, hard]}
 - {type: 101, name: Cherry Plant, x: 4896, y: 5920, sprite: CherryPlant}
 - {type: 101, name: Cherry Plant, x: 4896, y: 6080, sprite: CherryPlant}
 - {type: 101, name: Cherry Plant, x: 5120, y: 5984, sprite: CherryPlant}
@@ -123,9 +123,9 @@ switches:
 spawnableEnemies: [Pistol Blob, Grenade Blob, Machine Gun Blob, Eye Droid V1.0, Eye Droid V2.0, Eye Droid V3.0]
 
 spawnpoints:
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 40, max: 50}
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 30, max: 40}
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 10, max: 10}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 40, max: 50, difficulty: [easy]}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 30, max: 40, difficulty: [medium]}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 10, max: 10, difficulty: [hard]}
 
 enemies:
 - {name: Grenade Blob, x: 1824, y: 5952}

@@ -23,8 +23,8 @@ sprites:
 - {name: BlackDroidDie, hue: -75, val: -100, frames: [{file: gfx/sprites/eyeDroid2Death.png, time: 60}]}
 
 objectives:
-- {description: Get the Reality Crystal, target: Reality Crystal}
-- {description: Defeat Galdov, target: Galdov}
+- {description: Get the Reality Crystal, target: Reality Crystal, difficulty: [medium, hard]}
+- {description: Defeat Galdov, target: Galdov, difficulty: [medium, hard]}
 
 items:
 - {type: 1, name: Machine Gun, x: 128, y: 800, sprite: MachineIcon}

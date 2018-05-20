@@ -40,11 +40,11 @@ mias:
 - {name: Spoilt B*st*rd, x: 10304, y: 8384, type: MIA_AQUA}
 
 objectives:
-- {description: Find 2 Sticks of Dynamite, target: Pack of Dynamite, count: 2}
-- {description: Raise Water Level, target: Water Level, count: 3}
-- {description: Get to the Main Pump Room, target: Pump Room}
-- {description: Exit the Tunnel System, target: Exit}
-- {description: Find Water Orb Shards, target: Crystal Shard, count: 5, optional: true}
+- {description: Find 2 Sticks of Dynamite, target: Pack of Dynamite, count: 2, difficulty: [medium, hard]}
+- {description: Raise Water Level, target: Water Level, count: 3, difficulty: [medium, hard]}
+- {description: Get to the Main Pump Room, target: Pump Room, difficulty: [medium, hard]}
+- {description: Exit the Tunnel System, target: Exit, difficulty: [medium, hard]}
+- {description: Find Water Orb Shards, target: Crystal Shard, count: 5, optional: true, difficulty: [medium, hard]}
 
 items:
 - {type: 100, name: Ancient Cog, x: 4640, y: 8384, sprite: Cog}
@@ -99,11 +99,11 @@ teleporters:
 - {name: TELE1, x: 4992, y: 6336, destX: 3808, destY: 7584, active: true}
 
 switches:
-- {name: Switch, type: SWT_NORMAL, x: 4416, y: 8416, target: COGBRIDGE, message: Bridge Activated}
+- {name: Switch, type: SWT_NORMAL, x: 4416, y: 8416, target: COGBRIDGE, message: Bridge Activated, difficulty: [medium, hard]}
 - {name: Switch, type: SWT_NORMAL, x: 8416, y: 8032, target: WATERLIFT, message: Lift Activated}
-- {name: Water Level, type: SWT_WATERLEVEL, x: 5088, y: 8896, target: WATERLEVEL, requires: Ancient Cog, message: '271'}
-- {name: Water Level, type: SWT_WATERLEVEL, x: 7456, y: 8000, target: WATERLEVEL, requires: Ancient Cog, message: '256'}
-- {name: Water Level, type: SWT_WATERLEVEL, x: 8256, y: 7936, target: WATERLEVEL, requires: Ancient Cog, message: '243'}
+- {name: Water Level, type: SWT_WATERLEVEL, x: 5088, y: 8896, target: WATERLEVEL, requires: Ancient Cog, message: '271', difficulty: [medium, hard]}
+- {name: Water Level, type: SWT_WATERLEVEL, x: 7456, y: 8000, target: WATERLEVEL, requires: Ancient Cog, message: '256', difficulty: [medium, hard]}
+- {name: Water Level, type: SWT_WATERLEVEL, x: 8256, y: 7936, target: WATERLEVEL, requires: Ancient Cog, message: '243', difficulty: [medium, hard]}
 - {name: Switch, type: SWT_TIMED, x: 4864, y: 8512, target: NRGTRAP, message: Trap Activated}
 - {name: Switch, type: SWT_NORMAL, x: 5056, y: 8512, target: TRAPDOOR2, requires: Ancient Key, message: Door Opened}
 - {name: Switch, type: SWT_NORMAL, x: 5216, y: 8512, target: TRAPDOOR3, requires: Ancient Key, message: Door Opened}
@@ -112,7 +112,7 @@ switches:
 - {name: Explode Point, type: SWT_PRESSURE, x: 3392, y: 6944, target: EXPLODEPOINT2, requires: Pack of Dynamite, message: Detonation Started...}
 
 traps:
-- {name: SWINGTRAP, type: TRAP_TYPE_SWING, damage: 2, startX: 5088, startY: 8320, endX: 220, endY: 160, wait1: 1, wait2: 1, sprite: SpikeBall, active: true}
+- {name: SWINGTRAP, type: TRAP_TYPE_SWING, damage: 2, startX: 5088, startY: 8320, endX: 220, endY: 160, wait1: 1, wait2: 1, sprite: SpikeBall, active: true, difficulty: [medium, hard]}
 - {name: NRGTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4864, startY: 8320, endX: 4864, endY: 8320, wait1: 240, wait2: 0, sprite: EnergyBarrier, active: false, speed: 3}
 - {name: NRGTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4864, startY: 8352, endX: 4864, endY: 8352, wait1: 240, wait2: 0, sprite: EnergyBarrier, active: false, speed: 3}
 - {name: NRGTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4864, startY: 8384, endX: 4864, endY: 8384, wait1: 240, wait2: 0, sprite: EnergyBarrier, active: false, speed: 3}
@@ -134,9 +134,9 @@ traps:
 spawnableEnemies: [Pistol Blob, Grenade Blob, Machine Gun Blob, Eye Droid V1.0, Eye Droid V2.0, Eye Droid V3.0, Spider Blob, Aqua Blob, Aqua Blob, Aqua Blob]
 
 spawnpoints:
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 30, max: 60}
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 20, max: 40}
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 5, max: 10}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 30, max: 60, difficulty: [easy]}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 20, max: 40, difficulty: [medium]}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 5, max: 10, difficulty: [hard]}
 - {name: EXPLODEPOINT1, x: 3554, y: 7036, type: SPW_HAZARD, active: false, subtype: HAZARD_EXPLOSION}
 - {name: EXPLODEPOINT1, x: 3554, y: 7186, type: SPW_HAZARD, active: false, subtype: HAZARD_EXPLOSION}
 - {name: EXPLODEPOINT1, x: 3554, y: 7236, type: SPW_HAZARD, active: false, subtype: HAZARD_EXPLOSION}

@@ -27,9 +27,9 @@ mias:
 - {name: Merry, x: 4032, y: 6688, type: MIA_NORMAL}
 
 objectives:
-- {description: Open Exit Door, target: ExitDoor}
-- {description: Get to the Exit, target: Exit}
-- {description: Find the 5 Crystal Shards, target: Crystal Shard, count: 5, optional: true}
+- {description: Open Exit Door, target: ExitDoor, difficulty: [medium, hard]}
+- {description: Get to the Exit, target: Exit, difficulty: [medium, hard]}
+- {description: Find the 5 Crystal Shards, target: Crystal Shard, count: 5, optional: true, difficulty: [medium, hard]}
 
 items:
 - {type: 100, name: Gold Key, x: 4704, y: 7904, sprite: GoldKey}
@@ -114,9 +114,9 @@ obstacles:
 spawnableEnemies: [Pistol Blob, Grenade Blob, Eye Droid V1.0]
 
 spawnpoints:
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 30, max: 60}
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 20, max: 40}
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 10, max: 10}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 30, max: 60, difficulty: [easy]}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 20, max: 40, difficulty: [medium]}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 10, max: 10, difficulty: [hard]}
 - {name: ROCKFALL1, x: 448, y: 7936, type: SPW_HAZARD, active: false, subtype: HAZARD_ROCKFALL, min: 2, max: 8}
 - {name: ROCKFALL1, x: 548, y: 7936, type: SPW_HAZARD, active: false, subtype: HAZARD_ROCKFALL, min: 2, max: 8}
 - {name: ROCKFALL1, x: 648, y: 7936, type: SPW_HAZARD, active: false, subtype: HAZARD_ROCKFALL, min: 2, max: 8}

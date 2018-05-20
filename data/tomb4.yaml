@@ -33,7 +33,7 @@ sprites:
 - {name: CrystalShard2, frames: [{file: gfx/sprites/crystalShards2-1.png, time: 240}, {file: gfx/sprites/crystalShards2-2.png, time: 5}, {file: gfx/sprites/crystalShards2-3.png, time: 5}, {file: gfx/sprites/crystalShards2-4.png, time: 5}, {file: gfx/sprites/crystalShards2-3.png, time: 5}, {file: gfx/sprites/crystalShards2-2.png, time: 5}]}
 
 defEnemies:
-- {name: Galdov, spriteRight: GaldovRight, spriteLeft: GaldovLeft, spriteDeath: GaldovLeft, weapon: Plasma Rifle, health: 60, value: 1000, flags: [ENT_RAPIDFIRE, ENT_FLIES, ENT_GALDOV, ENT_ALWAYSCHASE, ENT_EXPLODES, ENT_IMMUNEEXPLODE, ENT_AIMS, ENT_FIRETRAIL]}
+- {name: Galdov, spriteRight: GaldovRight, spriteLeft: GaldovLeft, spriteDeath: GaldovLeft, weapon: Plasma Rifle, health: 60, value: 1000, flags: [ENT_RAPIDFIRE, ENT_FLIES, ENT_GALDOV, ENT_ALWAYSCHASE, ENT_EXPLODES, ENT_IMMUNEEXPLODE, ENT_AIMS, ENT_FIRETRAIL], difficulty: [medium, hard]}
 - {name: Sentry Gun, spriteRight: AutoCannonRight, spriteLeft: AutoCannonLeft, spriteDeath: AutoCannonSpin, weapon: Plasma Rifle, health: 25, value: 1000, flags: [ENT_NOMOVE, ENT_AIMS, ENT_EXPLODES, ENT_MULTIEXPLODE, ENT_RAPIDFIRE, ENT_NOJUMP]}
 
 mias:
@@ -48,9 +48,9 @@ mias:
 - {name: Nanny Ogg, x: 11712, y: 256, type: MIA_NORMAL}
 
 objectives:
-- {description: Get the Ancient Reality Crystal, target: Reality Crystal}
-- {description: Find 3 Ancient Cogs, target: Ancient Cog, count: 3}
-- {description: Battle Galdov, target: Galdov}
+- {description: Get the Ancient Reality Crystal, target: Reality Crystal, difficulty: [medium, hard]}
+- {description: Find 3 Ancient Cogs, target: Ancient Cog, count: 3, difficulty: [medium, hard]}
+- {description: Battle Galdov, target: Galdov, difficulty: [medium, hard]}
 
 items:
 - {type: 100, name: Reality Crystal, x: 6590, y: 672, sprite: RealityCrystal}
@@ -143,9 +143,9 @@ traps:
 spawnableEnemies: [Pistol Blob, Grenade Blob, Machine Gun Blob, Eye Droid V1.0, Eye Droid V2.0, Eye Droid V3.0, Spider Blob, Spider Blob V2.0, Spider Blob V3.0]
 
 spawnpoints:
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 30, max: 60}
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 20, max: 40}
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 10, max: 10}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 30, max: 60, difficulty: [easy]}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 20, max: 40, difficulty: [medium]}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 10, max: 10, difficulty: [hard]}
 
 enemies:
 - {name: Pistol Blob, x: 11616, y: 96}

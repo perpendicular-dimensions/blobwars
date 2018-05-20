@@ -37,13 +37,13 @@ mias:
 - {name: Crackers, x: 2480, y: 3104, type: MIA_NORMAL}
 
 objectives:
-- {description: Find the 4 Map Pieces, target: Map Piece, count: 4}
-- {description: Stop the Cave in, target: CaveIn}
-- {description: Get to the Exit, target: Exit}
-- {description: Defeat 10 Hard Hide Blobs, target: Hard Hide Blob, count: 10, optional: true}
-- {description: Defeat 100 Enemies, target: Enemy, count: 100, optional: true}
-- {description: Defeat 200 Enemies, target: Enemy, count: 200, optional: true}
-- {description: Find L.R.T.S. Part, target: LRTS, optional: true}
+- {description: Find the 4 Map Pieces, target: Map Piece, count: 4, difficulty: [medium, hard]}
+- {description: Stop the Cave in, target: CaveIn, difficulty: [medium, hard]}
+- {description: Get to the Exit, target: Exit, difficulty: [medium, hard]}
+- {description: Defeat 10 Hard Hide Blobs, target: Hard Hide Blob, count: 10, optional: true, difficulty: [medium, hard]}
+- {description: Defeat 100 Enemies, target: Enemy, count: 100, optional: true, difficulty: [medium]}
+- {description: Defeat 200 Enemies, target: Enemy, count: 200, optional: true, difficulty: [hard]}
+- {description: Find L.R.T.S. Part, target: LRTS, optional: true, difficulty: [medium, hard]}
 
 items:
 - {type: 100, name: Gold Key, x: 2096, y: 1056, sprite: GoldKey}
@@ -59,7 +59,7 @@ items:
 - {type: 101, name: Map Piece, x: 7920, y: 2950, sprite: MapPiece}
 - {type: 101, name: Map Piece, x: 6816, y: 1984, sprite: MapPiece}
 - {type: 101, name: Map Piece, x: 4704, y: 3210, sprite: MapPiece}
-- {type: 102, name: LRTS, x: 9280, y: 2528, sprite: LRTS}
+- {type: 102, name: LRTS, x: 9280, y: 2528, sprite: LRTS, difficulty: [medium, hard]}
 
 doors:
 - {name: DOOR1, type: TR_DOOR, startX: 392, startY: 334, endX: 392, endY: 384}
@@ -117,7 +117,7 @@ teleporters:
 - {name: TELE1, x: 448, y: 1280, destX: 4320, destY: 768, active: true}
 - {name: TELE1, x: 4688, y: 576, destX: 64, destY: 1152, active: true}
 - {name: TELE1, x: 8016, y: 2976, destX: 8448, destY: 2752, active: true}
-- {name: TELE1, x: 2240, y: 2880, destX: 2080, destY: 2720, active: true}
+- {name: TELE1, x: 2240, y: 2880, destX: 2080, destY: 2720, active: true, difficulty: [easy]}
 
 switches:
 - {name: Switch, type: SWT_PRESSURE, x: 2272, y: 1632, target: REDCARDBRIDGE, message: Bridge Activated}
@@ -132,38 +132,38 @@ obstacles:
 spawnableEnemies: [Pistol Blob, Grenade Blob, Machine Gun Blob, Eye Droid V1.0, Eye Droid V2.0, Eye Droid V3.0]
 
 spawnpoints:
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 30, max: 60}
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 20, max: 40}
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 10, max: 10}
-- {name: CAVEIN, x: 3600, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3}
-- {name: CAVEIN, x: 3650, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3}
-- {name: CAVEIN, x: 3700, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3}
-- {name: CAVEIN, x: 3750, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3}
-- {name: CAVEIN, x: 3800, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3}
-- {name: CAVEIN, x: 3850, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3}
-- {name: CAVEIN, x: 3900, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3}
-- {name: CAVEIN, x: 3950, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3}
-- {name: CAVEIN, x: 4000, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3}
-- {name: CAVEIN, x: 4050, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3}
-- {name: CAVEIN, x: 4100, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3}
-- {name: CAVEIN, x: 4150, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3}
-- {name: CAVEIN, x: 4200, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3}
-- {name: CAVEIN, x: 4250, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3}
-- {name: CAVEIN, x: 4300, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3}
-- {name: CAVEIN, x: 4350, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3}
-- {name: CAVEIN, x: 4400, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3}
-- {name: CAVEIN, x: 4450, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3}
-- {name: CAVEIN, x: 4500, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3}
-- {name: CAVEIN, x: 4550, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3}
-- {name: CAVEIN, x: 4600, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3}
-- {name: CAVEIN, x: 4650, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3}
-- {name: CAVEIN, x: 4700, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3}
-- {name: CAVEIN, x: 4750, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3}
-- {name: CAVEIN, x: 4800, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3}
-- {name: CAVEIN, x: 4850, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3}
-- {name: CAVEIN, x: 4900, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3}
-- {name: CAVEIN, x: 4950, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3}
-- {name: CAVEIN, x: 5000, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 30, max: 60, difficulty: [easy]}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 20, max: 40, difficulty: [medium]}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 10, max: 10, difficulty: [hard]}
+- {name: CAVEIN, x: 3600, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3, difficulty: [medium, hard]}
+- {name: CAVEIN, x: 3650, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3, difficulty: [medium, hard]}
+- {name: CAVEIN, x: 3700, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3, difficulty: [medium, hard]}
+- {name: CAVEIN, x: 3750, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3, difficulty: [medium, hard]}
+- {name: CAVEIN, x: 3800, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3, difficulty: [medium, hard]}
+- {name: CAVEIN, x: 3850, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3, difficulty: [medium, hard]}
+- {name: CAVEIN, x: 3900, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3, difficulty: [medium, hard]}
+- {name: CAVEIN, x: 3950, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3, difficulty: [medium, hard]}
+- {name: CAVEIN, x: 4000, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3, difficulty: [medium, hard]}
+- {name: CAVEIN, x: 4050, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3, difficulty: [medium, hard]}
+- {name: CAVEIN, x: 4100, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3, difficulty: [medium, hard]}
+- {name: CAVEIN, x: 4150, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3, difficulty: [medium, hard]}
+- {name: CAVEIN, x: 4200, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3, difficulty: [medium, hard]}
+- {name: CAVEIN, x: 4250, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3, difficulty: [medium, hard]}
+- {name: CAVEIN, x: 4300, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3, difficulty: [medium, hard]}
+- {name: CAVEIN, x: 4350, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3, difficulty: [medium, hard]}
+- {name: CAVEIN, x: 4400, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3, difficulty: [medium, hard]}
+- {name: CAVEIN, x: 4450, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3, difficulty: [medium, hard]}
+- {name: CAVEIN, x: 4500, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3, difficulty: [medium, hard]}
+- {name: CAVEIN, x: 4550, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3, difficulty: [medium, hard]}
+- {name: CAVEIN, x: 4600, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3, difficulty: [medium, hard]}
+- {name: CAVEIN, x: 4650, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3, difficulty: [medium, hard]}
+- {name: CAVEIN, x: 4700, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3, difficulty: [medium, hard]}
+- {name: CAVEIN, x: 4750, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3, difficulty: [medium, hard]}
+- {name: CAVEIN, x: 4800, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3, difficulty: [medium, hard]}
+- {name: CAVEIN, x: 4850, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3, difficulty: [medium, hard]}
+- {name: CAVEIN, x: 4900, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3, difficulty: [medium, hard]}
+- {name: CAVEIN, x: 4950, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3, difficulty: [medium, hard]}
+- {name: CAVEIN, x: 5000, y: 2710, type: SPW_HAZARD, active: true, subtype: HAZARD_ROCKFALL, max: 3, difficulty: [medium, hard]}
 - {name: LAVABALL1, x: 4160, y: 2368, type: SPW_HAZARD, active: true, subtype: HAZARD_LAVABALL, min: 1, max: 10}
 - {name: LAVABALL1, x: 4200, y: 2368, type: SPW_HAZARD, active: true, subtype: HAZARD_LAVABALL, min: 1, max: 10}
 - {name: LAVABALL1, x: 4250, y: 2368, type: SPW_HAZARD, active: true, subtype: HAZARD_LAVABALL, min: 1, max: 10}

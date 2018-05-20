@@ -21,7 +21,7 @@ sprites:
 - {name: GaldovLeft, frames: [{file: gfx/sprites/galdovLeft1.png, time: 60}]}
 
 defEnemies:
-- {name: Galdov, spriteRight: GaldovRight, spriteLeft: GaldovLeft, spriteDeath: GaldovLeft, weapon: Plasma Rifle, health: 60, value: 1000, flags: [ENT_RAPIDFIRE, ENT_FLIES, ENT_GALDOV, ENT_ALWAYSCHASE, ENT_EXPLODES, ENT_IMMUNEEXPLODE, ENT_AIMS, ENT_FIRETRAIL]}
+- {name: Galdov, spriteRight: GaldovRight, spriteLeft: GaldovLeft, spriteDeath: GaldovLeft, weapon: Plasma Rifle, health: 60, value: 1000, flags: [ENT_RAPIDFIRE, ENT_FLIES, ENT_GALDOV, ENT_ALWAYSCHASE, ENT_EXPLODES, ENT_IMMUNEEXPLODE, ENT_AIMS, ENT_FIRETRAIL], difficulty: [medium, hard]}
 
 mias:
 - {name: Harry, x: 2848, y: 3648, type: MIA_NORMAL}
@@ -43,16 +43,16 @@ mias:
 - {name: Wormtail, x: 3840, y: 576, type: MIA_NORMAL}
 
 objectives:
-- {description: Access Upper Floor, target: Upper Floor}
-- {description: Battle Galdov, target: Galdov}
-- {description: Get the Ancient Fire Crystal, target: Fire Crystal}
-- {description: Defeat 100 Enemies, target: Enemy, count: 100, optional: true}
-- {description: Defeat 200 Enemies, target: Enemy, count: 200, optional: true}
-- {description: 6 Hit Combo with Spread Gun, target: Combo-Spread Gun, count: 6, optional: true}
-- {description: 12 Hit Combo with Spread Gun, target: Combo-Spread Gun, count: 12, optional: true}
+- {description: Access Upper Floor, target: Upper Floor, difficulty: [medium, hard]}
+- {description: Battle Galdov, target: Galdov, difficulty: [medium, hard]}
+- {description: Get the Ancient Fire Crystal, target: Fire Crystal, difficulty: [medium, hard]}
+- {description: Defeat 100 Enemies, target: Enemy, count: 100, optional: true, difficulty: [medium]}
+- {description: Defeat 200 Enemies, target: Enemy, count: 200, optional: true, difficulty: [hard]}
+- {description: 6 Hit Combo with Spread Gun, target: Combo-Spread Gun, count: 6, optional: true, difficulty: [medium]}
+- {description: 12 Hit Combo with Spread Gun, target: Combo-Spread Gun, count: 12, optional: true, difficulty: [hard]}
 
 items:
-- {type: 1, name: Machine Gun, x: 2912, y: 896, sprite: MachineIcon}
+- {type: 1, name: Machine Gun, x: 2912, y: 896, sprite: MachineIcon, difficulty: [medium, hard]}
 - {type: 100, name: Gold Key, x: 2592, y: 3232, sprite: GoldKey}
 - {type: 100, name: Bronze Key, x: 3168, y: 2000, sprite: BronzeKey}
 - {type: 100, name: Blue Keycard, x: 1952, y: 3648, sprite: BlueKeyCard}
@@ -117,15 +117,15 @@ obstacles:
 - {name: Stone Block 2, x: 1120, y: 1312, sprite: StoneBlock}
 
 traps:
-- {name: SpikeBall, type: TRAP_TYPE_SWING, damage: 2, startX: 4896, startY: 3450, endX: 160, endY: 135, wait1: 1, wait2: 1, sprite: SpikeBall, active: true}
-- {name: SpikeBall, type: TRAP_TYPE_SWING, damage: 2, startX: 4672, startY: 3450, endX: 160, endY: 135, wait1: 1, wait2: 1, sprite: SpikeBall, active: true}
-- {name: SpikeBall, type: TRAP_TYPE_SWING, damage: 2, startX: 4416, startY: 3450, endX: 160, endY: 135, wait1: 1, wait2: 1, sprite: SpikeBall, active: true}
+- {name: SpikeBall, type: TRAP_TYPE_SWING, damage: 2, startX: 4896, startY: 3450, endX: 160, endY: 135, wait1: 1, wait2: 1, sprite: SpikeBall, active: true, difficulty: [hard]}
+- {name: SpikeBall, type: TRAP_TYPE_SWING, damage: 2, startX: 4672, startY: 3450, endX: 160, endY: 135, wait1: 1, wait2: 1, sprite: SpikeBall, active: true, difficulty: [medium, hard]}
+- {name: SpikeBall, type: TRAP_TYPE_SWING, damage: 2, startX: 4416, startY: 3450, endX: 160, endY: 135, wait1: 1, wait2: 1, sprite: SpikeBall, active: true, difficulty: [hard]}
 spawnableEnemies: [Pistol Blob, Grenade Blob, Machine Gun Blob, Eye Droid V1.0, Eye Droid V2.0, Eye Droid V3.0]
 
 spawnpoints:
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 30, max: 60}
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 20, max: 40}
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 10, max: 20}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 30, max: 60, difficulty: [easy]}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 20, max: 40, difficulty: [medium]}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 10, max: 20, difficulty: [hard]}
 
 enemies:
 - {name: Pistol Blob, x: 3328, y: 3360}

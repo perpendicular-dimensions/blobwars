@@ -41,10 +41,10 @@ mias:
 - {name: Kilik, x: 1632, y: 8320, type: MIA_NORMAL}
 
 objectives:
-- {description: Get to the Tomb Entrance, target: Exit}
-- {description: Find Two Ancient Keys, target: Ancient Key, count: 2}
-- {description: Find 5 Earth Crystal Shards, target: Crystal Shard, count: 5, optional: true}
-- {description: Destroy the Ice Blobs, target: Ice Blob, count: 10, optional: true}
+- {description: Get to the Tomb Entrance, target: Exit, difficulty: [medium, hard]}
+- {description: Find Two Ancient Keys, target: Ancient Key, count: 2, difficulty: [medium, hard]}
+- {description: Find 5 Earth Crystal Shards, target: Crystal Shard, count: 5, optional: true, difficulty: [medium, hard]}
+- {description: Destroy the Ice Blobs, target: Ice Blob, count: 10, optional: true, difficulty: [medium, hard]}
 
 items:
 - {type: 101, name: Ancient Key, x: 1920, y: 9065, sprite: AncientKey}
@@ -93,33 +93,33 @@ switches:
 
 traps:
 - {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4584, startY: 8384, endX: 4584, endY: 8384, wait1: 120, wait2: 120, sprite: EnergyBarrier, active: true, speed: 3}
-- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4584, startY: 8416, endX: 4584, endY: 8416, wait1: 120, wait2: 120, sprite: EnergyBarrier, active: true, speed: 3}
-- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4520, startY: 8384, endX: 4520, endY: 8384, wait1: 100, wait2: 120, sprite: EnergyBarrier, active: true, speed: 3}
-- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4520, startY: 8416, endX: 4520, endY: 8416, wait1: 100, wait2: 120, sprite: EnergyBarrier, active: true, speed: 3}
-- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4456, startY: 8384, endX: 4456, endY: 8384, wait1: 125, wait2: 130, sprite: EnergyBarrier, active: true, speed: 3}
-- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4456, startY: 8416, endX: 4456, endY: 8416, wait1: 125, wait2: 130, sprite: EnergyBarrier, active: true, speed: 3}
-- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4392, startY: 8384, endX: 4392, endY: 8384, wait1: 120, wait2: 120, sprite: EnergyBarrier, active: true, speed: 3}
-- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4392, startY: 8416, endX: 4392, endY: 8416, wait1: 120, wait2: 120, sprite: EnergyBarrier, active: true, speed: 3}
+- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4584, startY: 8416, endX: 4584, endY: 8416, wait1: 120, wait2: 120, sprite: EnergyBarrier, active: true, speed: 3, difficulty: [medium, hard]}
+- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4520, startY: 8384, endX: 4520, endY: 8384, wait1: 100, wait2: 120, sprite: EnergyBarrier, active: true, speed: 3, difficulty: [hard]}
+- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4520, startY: 8416, endX: 4520, endY: 8416, wait1: 100, wait2: 120, sprite: EnergyBarrier, active: true, speed: 3, difficulty: [hard]}
+- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4456, startY: 8384, endX: 4456, endY: 8384, wait1: 125, wait2: 130, sprite: EnergyBarrier, active: true, speed: 3, difficulty: [medium, hard]}
+- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4456, startY: 8416, endX: 4456, endY: 8416, wait1: 125, wait2: 130, sprite: EnergyBarrier, active: true, speed: 3, difficulty: [medium, hard]}
+- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4392, startY: 8384, endX: 4392, endY: 8384, wait1: 120, wait2: 120, sprite: EnergyBarrier, active: true, speed: 3, difficulty: [hard]}
+- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4392, startY: 8416, endX: 4392, endY: 8416, wait1: 120, wait2: 120, sprite: EnergyBarrier, active: true, speed: 3, difficulty: [hard]}
 - {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4328, startY: 8384, endX: 4328, endY: 8384, wait1: 100, wait2: 140, sprite: EnergyBarrier, active: true, speed: 3}
 - {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4328, startY: 8416, endX: 4328, endY: 8416, wait1: 100, wait2: 140, sprite: EnergyBarrier, active: true, speed: 3}
-- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4200, startY: 8384, endX: 4200, endY: 8384, wait1: 130, wait2: 110, sprite: EnergyBarrier, active: true, speed: 3}
-- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4200, startY: 8416, endX: 4200, endY: 8416, wait1: 130, wait2: 110, sprite: EnergyBarrier, active: true, speed: 3}
-- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4072, startY: 8384, endX: 4072, endY: 8384, wait1: 125, wait2: 115, sprite: EnergyBarrier, active: true, speed: 3}
-- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4072, startY: 8416, endX: 4072, endY: 8416, wait1: 125, wait2: 115, sprite: EnergyBarrier, active: true, speed: 3}
-- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 3942, startY: 8384, endX: 3942, endY: 8384, wait1: 140, wait2: 100, sprite: EnergyBarrier, active: true, speed: 3}
-- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 3942, startY: 8416, endX: 3942, endY: 8416, wait1: 140, wait2: 100, sprite: EnergyBarrier, active: true, speed: 3}
+- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4200, startY: 8384, endX: 4200, endY: 8384, wait1: 130, wait2: 110, sprite: EnergyBarrier, active: true, speed: 3, difficulty: [hard]}
+- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4200, startY: 8416, endX: 4200, endY: 8416, wait1: 130, wait2: 110, sprite: EnergyBarrier, active: true, speed: 3, difficulty: [hard]}
+- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4072, startY: 8384, endX: 4072, endY: 8384, wait1: 125, wait2: 115, sprite: EnergyBarrier, active: true, speed: 3, difficulty: [medium, hard]}
+- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4072, startY: 8416, endX: 4072, endY: 8416, wait1: 125, wait2: 115, sprite: EnergyBarrier, active: true, speed: 3, difficulty: [medium, hard]}
+- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 3942, startY: 8384, endX: 3942, endY: 8384, wait1: 140, wait2: 100, sprite: EnergyBarrier, active: true, speed: 3, difficulty: [hard]}
+- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 3942, startY: 8416, endX: 3942, endY: 8416, wait1: 140, wait2: 100, sprite: EnergyBarrier, active: true, speed: 3, difficulty: [hard]}
 - {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4264, startY: 8384, endX: 4264, endY: 8384, wait1: 100, wait2: 100, sprite: EnergyBarrier, active: true, speed: 3}
 - {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4264, startY: 8416, endX: 4264, endY: 8416, wait1: 100, wait2: 100, sprite: EnergyBarrier, active: true, speed: 3}
-- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4136, startY: 8384, endX: 4136, endY: 8384, wait1: 120, wait2: 140, sprite: EnergyBarrier, active: true, speed: 3}
-- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4136, startY: 8416, endX: 4136, endY: 8416, wait1: 120, wait2: 140, sprite: EnergyBarrier, active: true, speed: 3}
-- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4008, startY: 8384, endX: 4008, endY: 8384, wait1: 120, wait2: 60, sprite: EnergyBarrier, active: true, speed: 3}
-- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4008, startY: 8416, endX: 4008, endY: 8416, wait1: 120, wait2: 60, sprite: EnergyBarrier, active: true, speed: 3}
+- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4136, startY: 8384, endX: 4136, endY: 8384, wait1: 120, wait2: 140, sprite: EnergyBarrier, active: true, speed: 3, difficulty: [hard]}
+- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4136, startY: 8416, endX: 4136, endY: 8416, wait1: 120, wait2: 140, sprite: EnergyBarrier, active: true, speed: 3, difficulty: [hard]}
+- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4008, startY: 8384, endX: 4008, endY: 8384, wait1: 120, wait2: 60, sprite: EnergyBarrier, active: true, speed: 3, difficulty: [medium, hard]}
+- {name: BARTRAP, type: TRAP_TYPE_BARRIER, damage: 3, startX: 4008, startY: 8416, endX: 4008, endY: 8416, wait1: 120, wait2: 60, sprite: EnergyBarrier, active: true, speed: 3, difficulty: [medium, hard]}
 spawnableEnemies: [Pistol Blob, Grenade Blob, Eye Droid V1.0]
 
 spawnpoints:
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 30, max: 60}
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 20, max: 40}
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 10, max: 10}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 30, max: 60, difficulty: [easy]}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 20, max: 40, difficulty: [medium]}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 10, max: 10, difficulty: [hard]}
 - {name: STALAGFALL, x: 5184, y: 8750, type: SPW_HAZARD, active: true, subtype: HAZARD_STALAGTITES, min: 2, max: 4}
 - {name: STALAGFALL, x: 5234, y: 8750, type: SPW_HAZARD, active: true, subtype: HAZARD_STALAGTITES, min: 2, max: 5}
 - {name: STALAGFALL, x: 5284, y: 8750, type: SPW_HAZARD, active: true, subtype: HAZARD_STALAGTITES, min: 2, max: 4}

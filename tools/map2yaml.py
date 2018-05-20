@@ -47,6 +47,20 @@ def unquote(w):
     else:
         return w
 
+def addDifficulty(mask, object):
+    if mask == "EMH" or mask == "EHM":
+        return
+    difficulties = []
+    if 'E' in mask:
+        difficulties.append('easy')
+    if 'M' in mask:
+        difficulties.append('medium')
+    if 'H' in mask:
+        difficulties.append('hard')
+    assert 'X' not in mask
+    assert difficulties
+    object["difficulty"] = difficulties
+
 for filename in maps:
     finput = fileinput.input(filename)
 
@@ -114,6 +128,7 @@ for filename in maps:
                 "atStart": m[8] == "TR_AT_START",
                 "active": m[9] == "ACTIVE",
             }
+            addDifficulty(m[0], train)
             trains.append(train)
         elif m[1] == "DOOR":
             door = {
@@ -126,6 +141,7 @@ for filename in maps:
             }
             if m[8] == "ACTIVE":
                 door["active"] = True
+            addDifficulty(m[0], door)
             doors.append(door)
         elif m[1] == "SWITCH":
             switch = {
@@ -142,6 +158,7 @@ for filename in maps:
                 switch["message"] = m[5]
             if m[9] == "ACTIVE":
                 switch["active"] = True
+            addDifficulty(m[0], switch)
             switches.append(switch)
         elif m[1] == "ITEM":
             item = {
@@ -151,6 +168,7 @@ for filename in maps:
                 "y": int(m[5]),
                 "sprite": m[6],
             }
+            addDifficulty(m[0], item)
             items.append(item)
         elif m[1] == "OBSTACLE":
             obstacle = {
@@ -159,6 +177,7 @@ for filename in maps:
                 "y": int(m[4]),
                 "sprite": m[5],
             }
+            addDifficulty(m[0], obstacle)
             obstacles.append(obstacle)
         elif m[1] == "OBJECTIVE":
             objective = {
@@ -169,6 +188,7 @@ for filename in maps:
                 objective["count"] = int(m[4])
             if m[5] == "OBJ_OPTIONAL":
                 objective["optional"] = True
+            addDifficulty(m[0], objective)
             objectives.append(objective)
         elif m[1] == "START":
             assert m[0] == "EMH"
@@ -182,6 +202,7 @@ for filename in maps:
                 "x": int(m[3]),
                 "y": int(m[4]),
             }
+            addDifficulty(m[0], enemy)
             enemies.append(enemy)
         elif m[1] == "MIA":
             mia = {
@@ -190,6 +211,7 @@ for filename in maps:
                 "y": int(m[4]),
                 "type": m[5],
             }
+            addDifficulty(m[0], mia)
             mias.append(mia)
             pass
         elif m[1] == "REQUIREDMIAS":
@@ -210,6 +232,7 @@ for filename in maps:
                 linedef["message"] = m[4]
             if m[9] == "ACTIVE":
                 linedef["active"] = True
+            addDifficulty(m[0], linedef)
             linedefs.append(linedef)
         elif m[1] == "SPAWNPOINT":
             spawnpoint = {
@@ -225,6 +248,7 @@ for filename in maps:
                 spawnpoint["min"] = int(m[7])
             if int(m[8]) != 1:
                 spawnpoint["max"] = int(m[8])
+            addDifficulty(m[0], spawnpoint)
             spawnpoints.append(spawnpoint)
         elif m[1] == "SPAWNABLE_ENEMY":
             assert m[0] == "EMH"
@@ -238,6 +262,7 @@ for filename in maps:
                 "destY": int(m[6]),
                 "active": m[7] == "ACTIVE",
             }
+            addDifficulty(m[0], teleporter)
             teleporters.append(teleporter)
         elif m[1] == "TRAP":
             trap = {
@@ -255,6 +280,7 @@ for filename in maps:
             }
             if int(m[5]):
                 trap["speed"] = int(m[5])
+            addDifficulty(m[0], trap)
             traps.append(trap)
         elif m[1] == "SPRITE":
             # Ignore difficulty level
@@ -288,6 +314,7 @@ for filename in maps:
                 "value": int(m[8]),
                 "flags": m[9].split('+'),
             }
+            addDifficulty(m[0], enemy)
             defEnemies.append(enemy)
         elif m[1] == "TILESET":
             assert m[0] == "EMH"

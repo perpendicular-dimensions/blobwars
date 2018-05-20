@@ -39,11 +39,11 @@ mias:
 - {name: Ozzy, x: 7712, y: 3264, type: MIA_NORMAL}
 
 objectives:
-- {description: Get to the Forest, target: Exit}
-- {description: Disable the Auto Cannon, target: Auto Cannon Switch}
-- {description: Defeat 15 Machine Gun Droids, target: Eye Droid V2.0, count: 15, optional: true}
-- {description: Defeat 25 Machine Gun Droids, target: Eye Droid V2.0, count: 25, optional: true}
-- {description: Destroy 5 Satellite Dishes, target: Dish, count: 5, optional: true}
+- {description: Get to the Forest, target: Exit, difficulty: [medium, hard]}
+- {description: Disable the Auto Cannon, target: Auto Cannon Switch, difficulty: [medium, hard]}
+- {description: Defeat 15 Machine Gun Droids, target: Eye Droid V2.0, count: 15, optional: true, difficulty: [medium]}
+- {description: Defeat 25 Machine Gun Droids, target: Eye Droid V2.0, count: 25, optional: true, difficulty: [hard]}
+- {description: Destroy 5 Satellite Dishes, target: Dish, count: 5, optional: true, difficulty: [medium, hard]}
 
 items:
 - {type: 100, name: Red Keycard, x: 7398, y: 2432, sprite: RedKeyCard}
@@ -91,9 +91,9 @@ spawnpoints:
 - {name: AUTOCANNON, x: 1695, y: 3818, type: SPW_HAZARD, active: true, subtype: HAZARD_POWERBULLETS}
 - {name: AUTOCANNON, x: 1695, y: 3819, type: SPW_HAZARD, active: true, subtype: HAZARD_POWERBULLETS}
 - {name: AUTOCANNON, x: 1695, y: 3820, type: SPW_HAZARD, active: true, subtype: HAZARD_POWERBULLETS}
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 40, max: 50}
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 30, max: 40}
-- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 10, max: 10}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 40, max: 50, difficulty: [easy]}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 30, max: 40, difficulty: [medium]}
+- {name: ENEMY, x: -1, y: -1, type: SPW_ENEMY, active: true, min: 10, max: 10, difficulty: [hard]}
 
 enemies:
 - {name: Pistol Blob, x: 6976, y: 3840}
