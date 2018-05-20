@@ -603,18 +603,22 @@ void doWind()
 	addWindParticles();
 }
 
-static void parseMapDataLine(std::string_view line, int y)
+static void parseMapData(const YAML::Node &data)
 {
-	int x = 0;
+	auto hex = data["data"].as<std::string>();
 
-	for (auto token: split(line, ' '))
+	int y = 0;
+
+	for (auto line: split(hex, '\n'))
 	{
-		map.data[x][y] = stoi(token);
+		if (line.size() != MAPWIDTH * 2)
+			abort();
 
-		x++;
+		for (int x = 0; x < MAPWIDTH; ++x)
+			map.data[x][y] = std::stoi(std::string(line.substr(x * 2, 2)), nullptr, 16);
 
-		if (x == MAPWIDTH)
-			break;
+		if (y++ >= MAPHEIGHT)
+			abort();
 	}
 }
 
@@ -622,17 +626,13 @@ bool loadMapData(const std::string &filename)
 {
 	map.clear();
 
-	if (!engine.loadData(filename))
+	auto data = engine.loadYAML(filename);
+	if (!data)
 		graphics.showErrorAndExit("The requested map '%s' was not found.", filename);
 
-	auto it = split(engine.dataBuffer, '\n').begin();
+	parseMapData(data);
 
-	for (int y = 0; y < MAPHEIGHT; ++it, ++y)
-	{
-		parseMapDataLine(*it, y);
-	}
-
-	getMapTokens(it);
+	getMapTokens(data);
 
 	adjustObjectives();
 	initMIAPhrases();

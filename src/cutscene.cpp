@@ -23,76 +23,28 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 static std::vector<Cutscene> scenes;
 
-static void createSceneList(split &it)
-{
-	Cutscene *scene = nullptr;
-
-	for (; it != it.end(); ++it)
-	{
-		auto line = *it;
-
-		if (line == "@EOF@")
-			break;
-
-		if (line[0] == '[')
-			break;
-
-		if (line == "END")
-			break;
-
-		if (line == "NEW")
-		{
-			scene = &scenes.emplace_back();
-
-			// Assume graphics is first line after new
-			line = *++it;
-			if (line != "@none@")
-			{
-				scene->sprite = line;
-				debug(("Loading cutscene image %s\n", scene->sprite));
-				graphics.quickSprite(scene->sprite, graphics.loadImage(scene->sprite));
-			}
-			line = *++it;
-			scene->waitTime = (stoi(line) * 100);
-		}
-
-		if (scene && line != "@none@")
-		{
-			scene->appendText(line);
-		}
-	}
-}
-
 static bool setupScene(const std::string &stagename)
 {
 	scenes.clear();
 
-	if (!engine.loadData(_("data/ending")))
-		return graphics.showErrorAndExit("Couldn't load cutscene data file (%s)", _("data/ending")), false;
+	auto endings = engine.loadYAML(_("data/ending.yaml"));
+	if (!endings)
+		graphics.showErrorAndExit("Couldn't load cutscene data file (%s)", _("data/ending.yaml"));
 
 	graphics.clearChatString();
 
-	std::string_view sv(&engine.dataBuffer.at(0), engine.dataBuffer.size());
-	auto lines = split(sv, '\n');
-	auto it = lines.begin();
+	if (!endings[stagename])
+		return false;
 
-	for (; it != lines.end(); ++it)
+	for (auto &&blurb: endings[stagename])
 	{
-		auto line = std::string(*it);
-
-		if (line[0] == '[')
-		{
-			char sceneLine[1024];
-			scan(line, "%*c %[^]]", sceneLine);
-			if (sceneLine == stagename)
-			{
-				createSceneList(it);
-				return true;
-			}
-		}
+		auto &scene = scenes.emplace_back();
+		scene.sprite = blurb["image"].as<std::string>("");
+		scene.waitTime = blurb["duration"].as<int>() * 100;
+		scene.appendText(blurb["text"].as<std::string>(""));
 	}
 
-	return false;
+	return true;
 }
 
 static void showScene(bool allowSkip)
@@ -167,7 +119,7 @@ static void showScene(bool allowSkip)
 				if (!scene.sprite.empty())
 				{
 					debug(("Getting cutscene %s\n", scene.sprite));
-					image = graphics.getSprite(scene.sprite, true)->getFrame(0);
+					image = graphics.quickSprite(scene.sprite, graphics.loadImage(scene.sprite));
 					SDL_SetColorKey(image, 0, SDL_MapRGB(image->format, 0, 0, 0));
 				}
 			}
@@ -212,7 +164,7 @@ void checkEndCutscene()
 		return;
 	}
 
-	std::string sceneName = game.stageName + " Start";
+	std::string sceneName = game.stageName + " End";
 
 	debug(("%s\n", sceneName));
 

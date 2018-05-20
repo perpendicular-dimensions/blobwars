@@ -112,7 +112,7 @@ public:
 	void drawRect(int x, int y, int w, int h, int color, int borderColor, SDL_Surface *dest);
 	void setFontColor(int red, int green, int blue, int red2, int green2, int blue2);
 	void setFontSize(int size);
-	SDL_Surface *getString(const std::string &in, bool transparent);
+	SDL_Surface *getString(const std::string &in, bool transparent, int maxwidth = 0);
 	void drawString(const std::string &in, int x, int y, int alignment, SDL_Surface *dest);
 	void drawString(const std::string &in, int x, int y, int alignment, SDL_Surface *dest, SurfaceCache &cache);
 	void clearChatString();

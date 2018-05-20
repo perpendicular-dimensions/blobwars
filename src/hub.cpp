@@ -175,40 +175,14 @@ static void createStatsPanel(int page)
 
 static void loadLevelBrief(const std::string &levelName)
 {
-	if (!engine.loadData(_("data/levelBrief")))
-	{
+	auto briefs = engine.loadYAML(_("data/levelBrief.yaml"));
+	if (!briefs)
 		graphics.showErrorAndExit("Couldn't load mission briefing file ({})", _("data/levelBrief"));
-	}
 
-	bool collectData = false;
 	SDL_Surface *image = graphics.getSprite("infoPanel", true)->getFrame(0);
 
 	graphics.clearChatString();
-
-	auto data_view = std::string_view(engine.dataBuffer.data(), engine.dataBuffer.size());
-
-	for (auto line_view: split(data_view, '\n'))
-	{
-		if (collectData)
-		{
-			if (line_view == "@EOF@")
-				break;
-
-			if (line_view[0] == '[')
-				break;
-
-			graphics.createChatString(std::string(line_view));
-		}
-		else
-		{
-			if (line_view[0] == '[' && line_view.size() > 2)
-			{
-				if (line_view.substr(1, line_view.size() - 2) == levelName)
-					collectData = true;
-			}
-		}
-	}
-
+	graphics.createChatString(briefs[levelName].as<std::string>());
 	graphics.drawChatString(image, 40);
 }
 
@@ -399,7 +373,7 @@ static bool requirementMet(const std::string &requiredLevel)
 		return true;
 	}
 
-	if (requiredLevel == "@none@")
+	if (requiredLevel.empty())
 	{
 		return true;
 	}
@@ -464,38 +438,31 @@ int doHub()
 
 	std::vector<HubLevel> hubs;
 
-	engine.loadData("data/hub");
+	auto hublevels = engine.loadYAML("data/hub.yaml");
 
 	graphics.setFontSize(0);
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 
 	gameData.calculateWorldCompleted();
 
-	for (auto line: split(engine.dataBuffer, '\n'))
+	for (auto &&hublevel: hublevels)
 	{
-		char name[50], level[50], requiredLevel[50];
-		int x, y;
-		scan(line, "%*c %[^\"] %*c %*c %[^\"] %*c %d %d %*c %[^\"] %*c", name, level, &x, &y, requiredLevel);
-
-		if (!strcmp(name, "@EOF@"))
-		{
-			break;
-		}
+		std::string name = hublevel.first.as<std::string>();
 
 		// don't show boss levels on Easy (they might be cheating!)
 		if (game.skill == 0)
 		{
-			if (strstr(name, "BioMech"))
+			if (contains(name, "BioMech"))
 			{
 				continue;
 			}
 		}
 
-		if (requirementMet(requiredLevel))
+		if (requirementMet(hublevel.second["requires"].as<std::string>("")))
 		{
 			if (!gameData.levelPrefectlyCleared(name))
 			{
-				auto &hubPoint = hubs.emplace_back(name, level, x, y);
+				auto &hubPoint = hubs.emplace_back(name, hublevel.second["map"].as<std::string>(), hublevel.second["x"].as<int>(), hublevel.second["y"].as<int>());
 
 				hubPoint.levelNameImage = graphics.getString(_(name), false);
 				hubPoint.target = !gameData.stagePreviouslyCleared(name) ? &newTarget : &visitedTarget;

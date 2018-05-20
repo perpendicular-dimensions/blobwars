@@ -795,70 +795,43 @@ void doEnemies()
 	});
 }
 
-void loadEnemy(const std::string &token)
+void loadEnemy(const YAML::Node &enemy)
 {
-	int enemy = -1;
+	int i;
 
-	for (int i = MAX_ENEMIES - 1; i >= 0; i--)
-		if (defEnemy[i].name == "")
-			enemy = i;
+	for (i = MAX_ENEMIES - 1; i >= 0; i--)
+		if (defEnemy[i].name.empty())
+			break;
 
-	if (enemy == -1)
+	if (i < 0)
 	{
 		printf("Out of enemy define space!\n");
 		exit(1);
 	}
 
-	char name[50], sprite[3][100], weapon[100], flags[1024];
-	int health, value;
+	defEnemy[i].setName(enemy["name"].as<std::string>());
+	defEnemy[i].setSprites(graphics.getSprite(enemy["spriteRight"].as<std::string>(), true), graphics.getSprite(enemy["spriteLeft"].as<std::string>(), true), graphics.getSprite(enemy["spriteDeath"].as<std::string>(), true));
+	defEnemy[i].currentWeapon = getWeaponByName(enemy["weapon"].as<std::string>());
+	defEnemy[i].health = enemy["health"].as<int>();
+	defEnemy[i].value = enemy["value"].as<int>();
 
-	sscanf(token.c_str(), "%*c %[^\"] %*c %s %s %s %*c %[^\"] %*c %d %d %s", name, sprite[0], sprite[1], sprite[2], weapon, &health, &value, flags);
-
-	defEnemy[enemy].setName(name);
-	defEnemy[enemy].setSprites(graphics.getSprite(sprite[0], true), graphics.getSprite(sprite[1], true), graphics.getSprite(sprite[2], true));
-	defEnemy[enemy].currentWeapon = getWeaponByName(weapon);
-	defEnemy[enemy].health = health;
-	defEnemy[enemy].value = value;
-
-	defEnemy[enemy].flags = engine.getValueOfFlagTokens(flags);
+	defEnemy[i].flags = 0;
+	for (auto &&flag: enemy["flags"])
+		defEnemy[i].flags |= engine.getValueOfFlagTokens(flag.as<std::string>());
 }
 
 void loadDefEnemies()
 {
 	for (int i = 0; i < MAX_ENEMIES; i++)
 	{
-		defEnemy[i].name[0] = 0;
+		defEnemy[i].name.clear();
 	}
 
-	int enemy = 0;
 
-	if (!engine.loadData("data/defEnemies"))
-	{
-		return graphics.showErrorAndExit("Couldn't load enemy definitions file (%s)", "data/defEnemies");
-	}
+	auto enemies = engine.loadYAML("data/defEnemies.yaml");
+	if (!enemies)
+		return graphics.showErrorAndExit("Couldn't load enemy definitions file (%s)", "data/defEnemies.yaml");
 
-	auto data_view = std::string_view(engine.dataBuffer.data(), engine.dataBuffer.size());
-
-	char name[50], sprite[3][100], weapon[100], flags[1024];
-	int health, value;
-
-	for (auto line_view: split(data_view, '\n'))
-	{
-		if (line_view == "@EOF@")
-		{
-			break;
-		}
-
-		auto line = std::string(line_view);
-		sscanf(line.c_str(), "%*c %[^\"] %*c %s %s %s %*c %[^\"] %*c %d %d %s", name, sprite[0], sprite[1], sprite[2], weapon, &health, &value, flags);
-
-		defEnemy[enemy].setName(name);
-		defEnemy[enemy].setSprites(graphics.getSprite(sprite[0], true), graphics.getSprite(sprite[1], true), graphics.getSprite(sprite[2], true));
-		defEnemy[enemy].currentWeapon = getWeaponByName(weapon);
-		defEnemy[enemy].health = health;
-		defEnemy[enemy].value = value;
-		defEnemy[enemy].flags = engine.getValueOfFlagTokens(flags);
-
-		enemy++;
-	}
+	for (auto &&enemy: enemies)
+		loadEnemy(enemy);
 }

@@ -112,6 +112,7 @@ public:
 	Pak *getPak();
 	bool unpack(const std::string &filename, int fileType);
 	bool loadData(const std::string &filename);
+	YAML::Node loadYAML(const std::string &filename);
 	void reportFontFailure();
 	void setPlayerPosition(int x, int y, int limitLeft, int limitRight, int limitUp, int limitDown);
 	int getFrameLoop() const;

@@ -26,35 +26,29 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 void loadDefWeapons()
 {
-	if (!engine.loadData("data/weapons"))
+	auto data = engine.loadYAML("data/weapons.yaml");
+	if (!data)
+		graphics.showErrorAndExit("Couldn't load weapon definitions file (%s)", "data/weapons.yaml");
+
+	for (auto &&it: data)
 	{
-		graphics.showErrorAndExit("Couldn't load weapon definitions file (%s)", "data/weapons");
-	}
+		auto id = it.first.as<int>();
+		if (id < 0 || id >= MAX_WEAPONS)
+			graphics.showErrorAndExit("Invalid weapon definitions file (%s)", "data/weapons.yaml");
 
-	char name[50];
-	char sprite[2][100];
-	char flags[100];
-	int param[8];
-	int id;
-
-	for (auto token: split(engine.dataBuffer, '\n'))
-	{
-		if (token == "@EOF@")
-			break;
-
-		scan(token, "%d %*c %[^\"] %*c %d %d %d %d %d %d %s %s %d %s", &id, name, &param[0], &param[1], &param[2], &param[3], &param[4], &param[5], sprite[0], sprite[1], &param[6], flags);
-
-		weapon[id].setName(name);
-		weapon[id].id = param[0];
-		weapon[id].damage = param[1];
-		weapon[id].health = param[2];
-		weapon[id].dx = param[3];
-		weapon[id].dy = param[4];
-		weapon[id].reload = param[5];
-		weapon[id].sprite[0] = graphics.getSprite(sprite[0], true);
-		weapon[id].sprite[1] = graphics.getSprite(sprite[1], true);
-		weapon[id].fireSound = param[6];
-		weapon[id].flags = engine.getValueOfFlagTokens(flags);
+		weapon[id].setName(it.second["name"].as<std::string>());
+		weapon[id].id = it.second["id"].as<int>();
+		weapon[id].damage = it.second["damage"].as<int>();
+		weapon[id].health = it.second["health"].as<int>();
+		weapon[id].dx = it.second["dx"].as<int>();
+		weapon[id].dy = it.second["dy"].as<int>();
+		weapon[id].reload = it.second["reload"].as<int>();
+		weapon[id].sprite[0] = graphics.getSprite(it.second["spriteRight"].as<std::string>(), true);
+		weapon[id].sprite[1] = graphics.getSprite(it.second["spriteLeft"].as<std::string>(), true);
+		weapon[id].fireSound = it.second["fireSound"].as<int>();
+		weapon[id].flags = 0;
+		for (auto &&flag: it.second["flags"])
+			weapon[id].flags |= engine.getValueOfFlagTokens(flag.as<std::string>());
 	}
 }
 

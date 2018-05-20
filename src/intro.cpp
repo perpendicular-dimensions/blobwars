@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-static void playIntro(split &it, int tx, int ty, int delay)
+static void playIntro(const std::string &text, int tx, int ty, int delay)
 {
 	unsigned int frameLimit = SDL_GetTicks() + 16;
 	unsigned int time = 0;
@@ -30,25 +30,10 @@ static void playIntro(split &it, int tx, int ty, int delay)
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 
 	std::string line[3];
-	SDL_Surface *text[3];
+	SDL_Surface *sprite = nullptr;
 
-	for (int i = 0; i < 3; i++)
-	{
-		line[i] = *it;
-		++it;
-
-		if (line[i].empty())
-		{
-			return graphics.showErrorAndExit("Malformed Intro Data", "");
-		}
-
-		text[i] = nullptr;
-
-		if (line[i] != "@none@")
-		{
-			text[i] = graphics.getString(line[i], true);
-		}
-	}
+	if (!text.empty())
+		sprite = graphics.getString(text, true, 600);
 
 	player.tx += tx;
 	player.ty += ty;
@@ -61,9 +46,8 @@ static void playIntro(split &it, int tx, int ty, int delay)
 		doSpawnPoints();
 		drawMapTopLayer();
 
-		for (int i = 0; i < 3; i++)
-			if (text[i] != nullptr)
-				graphics.blit(text[i], 320, 150 + (i * 30), graphics.screen, true);
+		if (sprite)
+			graphics.blit(sprite, 320, 150, graphics.screen, true);
 
 		if (engine.userAccepts())
 			break;
@@ -89,9 +73,8 @@ static void playIntro(split &it, int tx, int ty, int delay)
 		frameLimit = SDL_GetTicks() + 16;
 	}
 
-	for (int i = 0; i < 3; i++)
-		if (text[i])
-			SDL_FreeSurface(text[i]);
+	if (sprite)
+		SDL_FreeSurface(sprite);
 }
 
 static void showIntroError()
@@ -119,28 +102,8 @@ static void showIntroError()
 	}
 }
 
-static void parseIntroCommand(std::string_view line)
-{
-	char command[25], param[25];
-
-	scan(line, "%s %s", command, param);
-
-	if (!strcmp(command, "SPAWN"))
-	{
-		for (auto &&sp: map.spawns)
-		{
-			if (param == sp.name)
-			{
-				sp.active = true;
-			}
-		}
-	}
-}
-
 int doIntro()
 {
-	int x, y, delay;
-
 	game.setMapName("data/introMap");
 
 	loadResources();
@@ -150,7 +113,8 @@ int doIntro()
 		addItem(101, "CherryPlant", Math::prand() % 640, 9050, "CherryPlant", 100, 1, 0, false);
 	}
 
-	if (!engine.loadData(_("data/introText")))
+	auto blurbs = engine.loadYAML(_("data/introText.yaml"));
+	if (blurbs.IsNull())
 	{
 		showIntroError();
 		return SECTION_TITLE;
@@ -160,20 +124,26 @@ int doIntro()
 
 	audio.playMusic();
 
-	auto lines = split(engine.dataBuffer, '\n');
-	++lines;
+	int prevx = 0;
+	int prevy = 0;
 
-	for (auto it = lines.begin(); it != lines.end(); ++it)
+	for (auto &&blurb: blurbs)
 	{
-		if (scan(*it, "%d %d %d", &x, &y, &delay) != 3)
-			abort();
+		int x = blurb["dx"].as<int>(prevx);
+		int y = blurb["dy"].as<int>(prevy);
+		int delay = blurb["delay"].as<int>(0);
+		std::string text = blurb["text"].as<std::string>("");
 
-		if (delay == -1)
-			break;
+		if (blurb["spawn"])
+		{
+			std::string param = blurb["spawn"].as<std::string>();
 
-		parseIntroCommand(*++it);
+			for (auto &&sp: map.spawns)
+				if (param == sp.name)
+					sp.active = true;
+		}
 
-		playIntro(it, x, y, delay);
+		playIntro(text, x, y, delay);
 
 		if (engine.userAccepts())
 			break;

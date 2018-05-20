@@ -397,20 +397,20 @@ void doItems()
 
 void loadDefItems()
 {
-	if (!engine.loadData("data/defItems"))
-		graphics.showErrorAndExit("Couldn't load item definitions file (%s)", "data/defItems");
+	auto items = engine.loadYAML("data/defItems.yaml");
+	if (!items)
+		graphics.showErrorAndExit("Couldn't load item definitions file (%s)", "data/defItems.yaml");
 
-	int id;
-	char name[50];
-	char sprite[100];
-	int value;
-
-	for (auto token: split(engine.dataBuffer, '\n'))
+	for (auto &&item: items)
 	{
-		if (token == "@EOF@")
-			break;
+		int id = item.first.as<int>();
+		if (id < 0 || id >= MAX_ITEMS)
+			graphics.showErrorAndExit("Invalid item definitions file (%s)", "data/defItems.yaml");
 
-		scan(token, "%d %*c %[^\"] %*c %s %d", &id, name, sprite, &value);
+		auto data = item.second;
+		std::string name = data["name"].as<std::string>();
+		std::string sprite = data["sprite"].as<std::string>();
+		int value = data["value"].as<int>();
 
 		defItem[id].id = id;
 		defItem[id].setName(name);

@@ -89,7 +89,7 @@ void doLineDefs()
 				if (lineDef.name == "Message")
 				{
 					engine.setInfoMessage(lineDef.activateMessage, 1, INFO_HINT);
-					if (lineDef.linkName == "@none@")
+					if (lineDef.linkName.empty())
 					{
 						lineDef.activated = true;
 					}

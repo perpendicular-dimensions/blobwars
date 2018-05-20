@@ -93,7 +93,7 @@ public:
 	split &operator++()
 	{
 		auto pos = str.find(sep);
-		if (pos == str.npos)
+		if (pos == str.npos || !str[pos + 1])
 		{
 			str = {};
 		}

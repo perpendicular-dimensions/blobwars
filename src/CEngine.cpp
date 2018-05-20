@@ -433,6 +433,18 @@ bool Engine::loadData(const std::string &filename)
 	return ret;
 }
 
+YAML::Node Engine::loadYAML(const std::string &filename)
+{
+#if USEPAK
+	if (!unpack(filename, PAK_DATA))
+		return {};
+
+	return YAML::Load(databuffer.data());
+#endif
+
+	return YAML::LoadFile(filename);
+}
+
 void Engine::reportFontFailure()
 {
 	fmt::print("\nUnable to load font. The game cannot continue without it.\n");

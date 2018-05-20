@@ -596,7 +596,7 @@ void Graphics::loadBackground(const std::string &filename)
 	if (background != nullptr)
 		SDL_FreeSurface(background);
 
-	if (filename == "@none@")
+	if (filename.empty())
 		return;
 
 	background = loadImage(filename);
@@ -782,13 +782,18 @@ void Graphics::setFontSize(int size)
 	Math::limitInt(&fontSize, 0, 4);
 }
 
-SDL_Surface *Graphics::getString(const std::string &in, bool transparent)
+SDL_Surface *Graphics::getString(const std::string &in, bool transparent, int maxwidth)
 {
-	SDL_Surface *text = TTF_RenderUTF8_Shaded(font[fontSize], in.c_str(), fontForeground, fontBackground);
+	SDL_Surface *text;
+
+	if (maxwidth > 0)
+		text = TTF_RenderUTF8_Blended_Wrapped(font[fontSize], in.c_str(), fontForeground, maxwidth);
+	else
+		text = TTF_RenderUTF8_Blended(font[fontSize], in.c_str(), fontForeground);
 
 	if (!text)
 	{
-		text = TTF_RenderUTF8_Shaded(font[fontSize], "FONT_ERROR", fontForeground, fontBackground);
+		text = TTF_RenderUTF8_Blended(font[fontSize], "FONT_ERROR", fontForeground);
 	}
 
 	if (!text)
@@ -807,10 +812,10 @@ void Graphics::drawString(const std::string &in, int x, int y, int alignment, SD
 {
 	bool center = false;
 
-	SDL_Surface *text = TTF_RenderUTF8_Shaded(font[fontSize], in.c_str(), fontForeground, fontBackground);
+	SDL_Surface *text = TTF_RenderUTF8_Blended(font[fontSize], in.c_str(), fontForeground);
 
 	if (!text)
-		text = TTF_RenderUTF8_Shaded(font[fontSize], "FONT_ERROR", fontForeground, fontBackground);
+		text = TTF_RenderUTF8_Blended(font[fontSize], "FONT_ERROR", fontForeground);
 
 	if (!text)
 		return;
@@ -837,10 +842,10 @@ void Graphics::drawString(const std::string &in, int x, int y, int alignment, SD
 
 		cache.text = in;
 
-		cache.surface = TTF_RenderUTF8_Shaded(font[fontSize], in.c_str(), fontForeground, fontBackground);
+		cache.surface = TTF_RenderUTF8_Blended(font[fontSize], in.c_str(), fontForeground);
 
 		if (!cache.surface)
-			cache.surface = TTF_RenderUTF8_Shaded(font[fontSize], "FONT_ERROR", fontForeground, fontBackground);
+			cache.surface = TTF_RenderUTF8_Blended(font[fontSize], "FONT_ERROR", fontForeground);
 
 		if (!cache.surface)
 			return;
@@ -858,12 +863,13 @@ void Graphics::drawString(const std::string &in, int x, int y, int alignment, SD
 
 void Graphics::clearChatString()
 {
-	chatString[0] = 0;
+	chatString.clear();
 }
 
 void Graphics::createChatString(const std::string &in)
 {
-	chatString.push_back(' ');
+	if (!chatString.empty())
+		chatString.push_back(' ');
 	chatString.append(in);
 }
 

@@ -1,5 +1,5 @@
 void loadDefEnemies();
-void loadEnemy(const std::string &token);
+void loadEnemy(const YAML::Node &data);
 void doEnemies();
 void enemyBulletCollisions(Entity &bullet);
 bool hasClearShot(Entity &enemy);

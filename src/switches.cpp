@@ -51,7 +51,7 @@ void checkSwitchContact(Entity &ent)
 		{
 			okayToActivate = false;
 
-			if (swt.requiredObjectName == "@none@")
+			if (swt.requiredObjectName.empty())
 			{
 				okayToActivate = true;
 			}

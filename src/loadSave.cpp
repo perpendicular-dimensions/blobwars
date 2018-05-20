@@ -324,7 +324,7 @@ void saveGame()
 
 	for (auto &[levelName, lines]: map.persistents)
 	{
-		if (levelName == "@none@")
+		if (levelName.empty())
 		{
 			continue;
 		}

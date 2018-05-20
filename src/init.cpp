@@ -25,7 +25,7 @@ static bool displayLicense;
 
 static void checkForLicense()
 {
-	if (!engine.loadData(_("data/license")))
+	if (!engine.loadData(_("data/license.md")))
 	{
 		graphics.showLicenseErrorAndExit();
 	}
@@ -47,21 +47,17 @@ void showLicense()
 
 	checkForLicense();
 
-	char line[255];
-	int y = 0;
+	int y = 50;
 
-	for (auto token: split(engine.dataBuffer, '\n'))
-		while (true)
-		{
-			scan(token, "%d %[^\n\r]", &y, line);
-
-			if (y == -1)
-			{
-				break;
-			}
-
-			graphics.drawString(line, 320, y, true, graphics.screen);
+	for (auto line: split(engine.dataBuffer, '\n', true))
+	{
+			fmt::print("'{}' {} {}\n", line, line.size(), (int)line[0]);
+		if (!line.empty()) {
+			graphics.drawString(std::string(line), 320, y, true, graphics.screen);
 		}
+
+		y += 20;
+	}
 
 	graphics.delay(4000);
 

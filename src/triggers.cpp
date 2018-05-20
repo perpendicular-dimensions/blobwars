@@ -31,7 +31,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 void activateTrigger(const std::string &linkName, const std::string &activateMessage, bool active)
 {
-	if (linkName == "@none@")
+	if (linkName.empty())
 		return;
 
 	if (linkName == "WATERLEVEL")
@@ -78,7 +78,7 @@ void activateTrigger(const std::string &linkName, const std::string &activateMes
 		if (linkName == train.name)
 		{
 			train.active = active;
-			if ((train.active) && (activateMessage != "@none@"))
+			if (train.active && !activateMessage.empty())
 				engine.setInfoMessage(activateMessage, 1, INFO_ACTIVATE);
 
 			if (train.type != TR_TRAIN)
@@ -93,7 +93,7 @@ void activateTrigger(const std::string &linkName, const std::string &activateMes
 		if (linkName == sp.name)
 		{
 			sp.active = !sp.active;
-			if ((sp.active) && (activateMessage != "@none@"))
+			if (sp.active && !activateMessage.empty())
 				engine.setInfoMessage(activateMessage, 1, INFO_ACTIVATE);
 
 			linkOkay = true;
@@ -105,7 +105,7 @@ void activateTrigger(const std::string &linkName, const std::string &activateMes
 		if (linkName == tele.name)
 		{
 			tele.active = active;
-			if ((tele.active) && (activateMessage != "@none@"))
+			if (tele.active && !activateMessage.empty())
 				engine.setInfoMessage(activateMessage, 1, INFO_ACTIVATE);
 
 			linkOkay = true;
@@ -117,7 +117,7 @@ void activateTrigger(const std::string &linkName, const std::string &activateMes
 		if (linkName == trap.name)
 		{
 			toggleTrap(trap);
-			if (activateMessage != "@none@")
+			if (!activateMessage.empty())
 				engine.setInfoMessage(activateMessage, 1, INFO_ACTIVATE);
 			linkOkay = true;
 		}

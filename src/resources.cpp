@@ -49,20 +49,27 @@ void loadSprite(std::string_view token)
 	}
 }
 
+void loadSprite(const std::string &name, const YAML::Node &data)
+{
+	auto &sprite = graphics.addSprite(name);
+
+	int hue = data["hue"].as<int>(0);
+	int sat = data["sat"].as<int>(0);
+	int val = data["val"].as<int>(0);
+
+	for (auto it2: data["frames"])
+		sprite.addFrame(graphics.loadImage(it2["file"].as<std::string>(), hue, sat, val), it2["time"].as<int>(60));
+}
+
 void loadSprites()
 {
-	if (!engine.loadData("data/mainSprites"))
-		graphics.showErrorAndExit(ERR_FILE, "data/mainSprites");
+	auto data = engine.loadYAML("data/mainSprites.yaml");
+	if (!data)
+		graphics.showErrorAndExit(ERR_FILE, "data/mainSprites.yaml");
 
-	for (auto token: split(engine.dataBuffer, '\n'))
+	for (auto &&it: data)
 	{
-		if (token == "@EOF@")
-		{
-			break;
-		}
-
-		loadSprite(token);
-
+		loadSprite(it.first.as<std::string>(), it.second);
 		graphics.showLoading(1, 20);
 	}
 }
