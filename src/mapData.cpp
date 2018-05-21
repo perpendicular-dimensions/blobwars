@@ -136,7 +136,7 @@ void getMapTokens(const YAML::Node &data)
 		if (allowAtSkillLevel(linedef))
 			addLineDef(linedef["name"].as<std::string>(""), linedef["target"].as<std::string>(""), linedef["mesage"].as<std::string>(""), linedef["x"].as<int>(), linedef["y"].as<int>(), linedef["width"].as<int>(), linedef["height"].as<int>(), linedef["active"].as<bool>(false));
 
-	for (auto &&sp: data["spawnPoints"])
+	for (auto &&sp: data["spawnpoints"])
 		if (allowAtSkillLevel(sp))
 			map.addSpawnPoint(sp["name"].as<std::string>(), sp["x"].as<int>(), sp["y"].as<int>(), engine.getValueOfDefine(sp["type"].as<std::string>()), engine.getValueOfDefine(sp["subtype"].as<std::string>()), sp["min"].as<int>(0), sp["max"].as<int>(1), sp["active"].as<bool>());
 
@@ -152,10 +152,11 @@ void getMapTokens(const YAML::Node &data)
 			addTrap(trap["name"].as<std::string>(), engine.getValueOfDefine(trap["type"].as<std::string>()), trap["damage"].as<int>(), trap["speed"].as<int>(), trap["startX"].as<int>(), trap["startY"].as<int>(), trap["endX"].as<int>(), trap["endY"].as<int>(), trap["wait1"].as<int>(), trap["wait2"].as<int>(), trap["sprite"].as<std::string>(), trap["active"].as<bool>());
 
 	auto clipping = data["clipping"];
-	map.setClipping(clipping["left"].as<int>(-1), clipping["right"].as<int>(-1),clipping["up"].as<int>(-1), clipping["down"].as<int>(-1));
+	if (clipping)
+		map.setClipping(clipping["left"].as<int>(-1), clipping["right"].as<int>(-1),clipping["up"].as<int>(-1), clipping["down"].as<int>(-1));
 
 	if (data["ambience"])
-		audio.loadSound(SND_AMBIANCE, data["ambience"].as<std::string>());
+		audio.loadSound(SND_AMBIENCE, data["ambience"].as<std::string>());
 
 	if (data["waterLevel"])
 	{
@@ -178,7 +179,9 @@ void getMapTokens(const YAML::Node &data)
 		SDL_SetAlpha(graphics.tile[tile.as<int>()], 130);
 
 	graphics.loadBackground(data["background"].as<std::string>());
-	audio.loadMusic(data["music"].as<std::string>());
+
+	if (data["music"])
+		audio.loadMusic(data["music"].as<std::string>());
 
 	/*
 	We need to make sure the player doesn't appear in a wall that was previously
