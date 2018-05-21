@@ -622,9 +622,13 @@ static void parseMapData(const YAML::Node &data)
 	}
 }
 
-bool loadMapData(const std::string &filename)
+bool loadMapData(const std::string &origfilename)
 {
 	map.clear();
+
+	std::string filename = origfilename;
+	if (!contains(filename, ".yaml"))
+		filename.append(".yaml");
 
 	auto data = engine.loadYAML(filename);
 	if (!data)
