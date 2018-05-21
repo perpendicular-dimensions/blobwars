@@ -58,8 +58,8 @@ public:
 	int playMenuSound(int sound);
 	bool loadGameOverMusic();
 	bool reloadLevelMusic();
-	void playAmbiance();
-	void stopAmbiance();
+	void playAmbience();
+	void stopAmbience();
 	void pause();
 	void resume();
 	void stopMusic();

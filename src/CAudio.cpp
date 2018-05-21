@@ -264,7 +264,7 @@ bool Audio::reloadLevelMusic()
 	return loadMusic(levelMusicName);
 }
 
-void Audio::playAmbiance()
+void Audio::playAmbience()
 {
 	if ((!engine->useAudio) || (soundVolume == 0))
 	{
@@ -276,15 +276,15 @@ void Audio::playAmbiance()
 		return;
 	}
 
-	Mix_PlayChannel(CH_AMBIANCE, sound[SND_AMBIANCE], -1);
+	Mix_PlayChannel(CH_AMBIENCE, sound[SND_AMBIENCE], -1);
 }
 
-void Audio::stopAmbiance()
+void Audio::stopAmbience()
 {
 	if ((!engine->useAudio) || (soundVolume == 0))
 		return;
 
-	Mix_HaltChannel(CH_AMBIANCE);
+	Mix_HaltChannel(CH_AMBIENCE);
 }
 
 int Audio::playMenuSound(int sound)

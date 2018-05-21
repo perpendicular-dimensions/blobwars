@@ -214,7 +214,7 @@ static void galdovFinalDropCrystal()
 		map.boss[0]->health = 30 * game.skill;
 		map.boss[0]->setSprites(graphics.getSprite("GaldovPain", true), graphics.getSprite("GaldovPain", true), graphics.getSprite("GaldovPain", true));
 		engine.setInfoMessage("Galdov has dropped the crystal! Quick! Get it!!", 99, INFO_HINT);
-		audio.playSound(SND_BOSSCUSTOM2, CH_AMBIANCE, x);
+		audio.playSound(SND_BOSSCUSTOM2, CH_AMBIENCE, x);
 	}
 }
 
@@ -224,7 +224,7 @@ static void galdovFinalDie()
 	{
 		game.missionOverReason = MIS_GAMECOMPLETE;
 		audio.stopMusic();
-		audio.playSound(SND_BOSSCUSTOM3, CH_AMBIANCE, self->x);
+		audio.playSound(SND_BOSSCUSTOM3, CH_AMBIENCE, self->x);
 		player.health = 10;
 		self->dx = 5;
 		self->dy = -6;
@@ -466,7 +466,7 @@ static void galdovRejoin()
 	self->think = &galdovFinalTeleport;
 	self->currentWeapon = getRandomGaldovWeapon();
 
-	audio.playSound(SND_BOSSCUSTOM1, CH_AMBIANCE, self->x);
+	audio.playSound(SND_BOSSCUSTOM1, CH_AMBIENCE, self->x);
 
 	map.setMainBossPart(map.boss[0]);
 
@@ -528,7 +528,7 @@ static void galdovFinalSplit()
 		addTeleportParticles(map.boss[i]->x + 10 + map.boss[i]->dx, map.boss[i]->y + 10 + map.boss[i]->dy, 75, -1);
 	}
 
-	audio.playSound(SND_BOSSCUSTOM1, CH_AMBIANCE, map.boss[0]->x);
+	audio.playSound(SND_BOSSCUSTOM1, CH_AMBIENCE, map.boss[0]->x);
 
 	map.boss[0]->place(9999, 9999);
 	map.boss[0]->setThinkTime(2);
@@ -656,7 +656,7 @@ static void orbSeekGaldov()
 		self->setActionFinished(60);
 		self->setThinkTime(60);
 		addExplosion(self->x, self->y, 75, player);
-		audio.playSound(SND_BOSSCUSTOM2, CH_AMBIANCE, self->x);
+		audio.playSound(SND_BOSSCUSTOM2, CH_AMBIENCE, self->x);
 		self->place(9999, 9999);
 		map.boss[0]->setSprites(graphics.getSprite("GaldovPain", true), graphics.getSprite("GaldovPain", true), graphics.getSprite("GaldovPain", true));
 		map.boss[0]->think = &galdovFinalPainThrow2;

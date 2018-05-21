@@ -130,7 +130,7 @@ static void droidBossChangeFrequency()
 		break;
 	}
 
-	audio.playSound(SND_BOSSCUSTOM1, CH_AMBIANCE, self->x);
+	audio.playSound(SND_BOSSCUSTOM1, CH_AMBIENCE, self->x);
 }
 
 static void droidBossDie()

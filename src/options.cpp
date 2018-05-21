@@ -449,12 +449,12 @@ void showOptions()
 		if (!audio.output)
 		{
 			audio.stopMusic();
-			audio.stopAmbiance();
+			audio.stopAmbience();
 		}
 		else
 		{
 			audio.playMusic();
-			audio.playAmbiance();
+			audio.playAmbience();
 		}
 	}
 

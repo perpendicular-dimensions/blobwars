@@ -93,7 +93,7 @@ enum
 	SND_SWITCH1,
 	SND_SWITCH2,
 	SND_DROWNING,
-	SND_AMBIANCE,
+	SND_AMBIENCE,
 	SND_GULP,
 	SND_EAT,
 	SND_THROW,
@@ -127,7 +127,7 @@ enum
 #define CH_EXPLODE 3
 #define CH_DEATH 4
 #define CH_TOUCH 5
-#define CH_AMBIANCE 6
+#define CH_AMBIENCE 6
 #define CH_SPAWN 7
 
 /* ########## keyboard ############# */

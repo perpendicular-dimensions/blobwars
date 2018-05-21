@@ -144,7 +144,7 @@ static void showInGameOptions()
 		if ((escapeyes) || (warnyes))
 		{
 			audio.stopMusic();
-			audio.stopAmbiance();
+			audio.stopAmbience();
 			addTeleportParticles(player.x, player.y, 50, SND_TELEPORT3);
 			dropCarriedItems();
 			game.setMissionOver(MIS_PLAYERESCAPE);
@@ -225,7 +225,7 @@ static void showInGameOptions()
 			game.setMissionOver(MIS_PLAYERRESTART);
 			SDL_FillRect(graphics.screen, nullptr, graphics.black);
 			audio.stopMusic();
-			audio.stopAmbiance();
+			audio.stopAmbience();
 			graphics.delay(500);
 			break;
 		}
@@ -284,7 +284,7 @@ void doGameStuff()
 int gameover()
 {
 	audio.stopMusic();
-	audio.stopAmbiance();
+	audio.stopAmbience();
 
 	if (!engine.loadWidgets(_("data/gameOverWidgets")))
 	{
@@ -573,7 +573,7 @@ int doGame()
 	engine.messagePriority = -1;
 
 	audio.playMusic();
-	audio.playAmbiance();
+	audio.playAmbience();
 
 	if (!game.continueFromCheckPoint)
 	{
@@ -655,7 +655,7 @@ int doGame()
 			{
 				game.setMissionOver(MIS_PLAYERDEAD);
 				audio.fadeMusic();
-				audio.stopAmbiance();
+				audio.stopAmbience();
 			}
 			else
 			{
@@ -703,7 +703,7 @@ int doGame()
 				}
 
 				audio.stopMusic();
-				audio.stopAmbiance();
+				audio.stopAmbience();
 
 				game.setMissionOver(MIS_COMPLETE);
 				engine.setInfoMessage("All Required Objectives Met - Mission Complete", 10, INFO_OBJECTIVE);
