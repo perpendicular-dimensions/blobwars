@@ -24,10 +24,10 @@ class Audio
 private:
 	std::string levelMusicName;
 
-	Engine *engine;
+	Engine *engine = {};
 
-	Mix_Chunk *sound[MAX_SOUNDS];
-	Mix_Chunk *quickSound;
+	Mix_Chunk *sound[MAX_SOUNDS] = {};
+	Mix_Chunk *quickSound = {};
 
 	int musicVolume;
 	int soundVolume;
@@ -38,12 +38,13 @@ public:
 	std::string songtitle;
 	std::string songalbum;
 	std::string songartist;
-	int songlicense;
+	int songlicense = -1;
 
-	int output;
-	bool useSound, useMusic;
+	int output = 2;
+	bool useSound = true;
+	bool useMusic = true;
 
-	Audio();
+	~Audio();
 	void setSoundVolume(int soundVolume);
 	void setMusicVolume(int musicVolume);
 	void registerEngine(Engine *engine);
@@ -64,5 +65,4 @@ public:
 	void stopMusic();
 	void fadeMusic();
 	void free();
-	void destroy();
 };

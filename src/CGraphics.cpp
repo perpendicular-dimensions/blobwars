@@ -27,31 +27,6 @@ void SDL_SetAlpha(SDL_Surface *surface, uint8_t value)
 	SDL_SetSurfaceAlphaMod(surface, value);
 }
 
-Graphics::Graphics()
-{
-	for (int i = 0; i < MAX_TILES; i++)
-	{
-		tile[i] = nullptr;
-	}
-
-	background = nullptr;
-	infoMessage = nullptr;
-
-	fontSize = 0;
-
-	medalMessageTimer = 0;
-	medalType = 0;
-
-	currentLoading = 0;
-
-	screenShotNumber = 0;
-	takeRandomScreenShots = false;
-
-	waterAnim = 201;
-	slimeAnim = 208;
-	lavaAnim = 215;
-}
-
 void Graphics::free()
 {
 	debug(("graphics.free: Background\n"));
@@ -79,41 +54,28 @@ void Graphics::free()
 	debug(("graphics.free: Sprites - Done\n"));
 }
 
-void Graphics::destroy()
+Graphics::~Graphics()
 {
 	free();
 
+#if 0 // We can't because we called TTF_Quit() already at this point
 	for (int i = 0; i < 5; i++)
-	{
 		if (font[i])
-		{
 			TTF_CloseFont(font[i]);
-		}
-	}
+#endif
 
 	if (medalMessage != nullptr)
-	{
 		SDL_FreeSurface(medalMessage);
-	}
 
 	if (fadeBlack)
-	{
 		SDL_FreeSurface(fadeBlack);
-	}
 
 	if (infoBar)
-	{
 		SDL_FreeSurface(infoBar);
-	}
 
 	for (int i = 0; i < 4; i++)
-	{
 		if (medal[i] != nullptr)
-		{
 			SDL_FreeSurface(medal[i]);
-			medal[i] = nullptr;
-		}
-	}
 }
 
 void Graphics::registerEngine(Engine *engine)

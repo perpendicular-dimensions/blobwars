@@ -24,28 +24,29 @@ void SDL_SetAlpha(SDL_Surface *surface, uint8_t value);
 class Graphics
 {
 private:
-	Engine *engine;
+	Engine *engine = {};
 	SDL_Rect gRect;
-	TTF_Font *font[5];
-	SDL_Color fontForeground, fontBackground;
+	TTF_Font *font[5] = {};
+	SDL_Color fontForeground;
+	SDL_Color fontBackground;
 
 	std::multimap<std::string, Sprite> sprites;
 
-	int fontSize;
+	int fontSize = 0;
 
-	int waterAnim;
-	int slimeAnim;
-	int lavaAnim;
+	int waterAnim = 201;
+	int slimeAnim = 208;
+	int lavaAnim = 215;
 
-	int currentLoading;
+	int currentLoading = 0;
 
-	int screenShotNumber;
+	int screenShotNumber = 0;
 	std::string screenshot;
 	std::string chatString;
 
-	SDL_Surface *medalMessage;
-	int medalMessageTimer;
-	int medalType;
+	SDL_Surface *medalMessage = {};
+	int medalMessageTimer = 0;
+	int medalType = 0;
 
 	SDL_Surface *fadeBlack;
 	SDL_Surface *infoMessage;
@@ -57,24 +58,24 @@ public:
 		SDL_Surface *surface = nullptr;
 	};
 
-	bool takeRandomScreenShots;
+	bool takeRandomScreenShots = false;
 
-	SDL_Window *window;
-	SDL_Renderer *renderer;
-	SDL_Texture *texture;
-	SDL_Surface *screen, *background;
-	SDL_Surface *tile[MAX_TILES];
+	SDL_Window *window = {};
+	SDL_Renderer *renderer = {};
+	SDL_Texture *texture = {};
+	SDL_Surface *screen = {};
+	SDL_Surface*background = {};
+	SDL_Surface *tile[MAX_TILES] = {};
 
-	SDL_Surface *medal[4];
-	SDL_Surface *license[2];
+	SDL_Surface *medal[4] = {};
+	SDL_Surface *license[2] = {};
 
-	SDL_Surface *infoBar;
+	SDL_Surface *infoBar = {};
 
 	int red, yellow, green, darkGreen, skyBlue, blue, cyan, white, lightGrey, grey, darkGrey, black;
 
-	Graphics();
+	~Graphics();
 	void free();
-	void destroy();
 	void registerEngine(Engine *engine);
 	void mapColors();
 	void setTransparent(SDL_Surface *sprite);

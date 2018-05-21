@@ -66,7 +66,6 @@ public:
 
 	Game();
 	void clear();
-	void destroy();
 	void incrementMissionTime();
 	void setCheckPoint(float x, float y);
 	void getCheckPoint(float *x, float *y) const;

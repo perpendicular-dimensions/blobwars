@@ -21,23 +21,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-Audio::Audio()
-{
-	output = 2;
-	useSound = true;
-	useMusic = true;
-
-	for (int i = 0; i < MAX_SOUNDS; i++)
-	{
-		sound[i] = nullptr;
-	}
-
-	music = nullptr;
-	quickSound = nullptr;
-
-	songlicense = -1;
-}
-
 void Audio::setSoundVolume(int soundVolume)
 {
 	this->soundVolume = soundVolume;
@@ -390,16 +373,11 @@ void Audio::free()
 	quickSound = nullptr;
 }
 
-void Audio::destroy()
+Audio::~Audio()
 {
 	free();
 
 	for (int i = MAX_SOUNDS - 3; i < MAX_SOUNDS; i++)
-	{
 		if (sound[i] != nullptr)
-		{
 			Mix_FreeChunk(sound[i]);
-			sound[i] = nullptr;
-		}
-	}
 }

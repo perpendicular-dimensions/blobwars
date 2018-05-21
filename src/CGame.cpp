@@ -67,11 +67,6 @@ void Game::clear()
 	canContinue = 0;
 }
 
-void Game::destroy()
-{
-	clear();
-}
-
 void Game::incrementMissionTime()
 {
 	currentMissionSeconds++;
