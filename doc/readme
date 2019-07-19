@@ -116,11 +116,13 @@ INSTALLATION
 
 	Untar the archive and then run,
 	
-	make
+	meson build
+	cd build
+	ninja
 	
-	After make has [successfully] completed run,
+	After ninja has [successfully] completed run,
 	
-	make install
+	ninja install
 	
 	You will need to be root in order to perform the above step. After that has [again, sucessfully]
 	completed type,
