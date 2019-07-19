@@ -92,9 +92,9 @@ void showLicense()
 	graphics.delay(1000);
 }
 
-#if UNIX
 void setupUserHomeDirectory()
 {
+#ifndef _WIN32
 	char *userHome = getenv("HOME");
 	
 	if ((!userHome) || (userHome == NULL))
@@ -125,8 +125,8 @@ void setupUserHomeDirectory()
 	char gameSavePath[PATH_MAX];
 	snprintf(gameSavePath, sizeof gameSavePath, "%s/.parallelrealities/blobwars/", userHome);
 	engine.setUserHome(gameSavePath);
-}
 #endif
+}
 
 static bool loadConfig()
 {
@@ -259,10 +259,7 @@ static int initMedalService(void *data)
 
 void initConfig()
 {
-	#if UNIX
 	setupUserHomeDirectory();
-	#endif
-
 	displayLicense = loadConfig();
 }
 

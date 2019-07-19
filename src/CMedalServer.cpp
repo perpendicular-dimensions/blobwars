@@ -55,7 +55,7 @@ bool MedalServer::connect(const char *privateKey)
 	return true;
 }
 
-#if !UNIX
+#ifdef _WIN32
 extern char *strtok_r(char *s1, const char *s2, char **lasts);
 #endif
 		
