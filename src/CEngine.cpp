@@ -789,8 +789,6 @@ int Engine::processWidgets()
 
 	if ((keyState[SDL_SCANCODE_LEFT] || joykeyX < 0) && (highlightedWidget->type != WG_BUTTON && highlightedWidget->type != WG_JOYPAD))
 	{
-		SDL_Delay(1);
-
 		if (*highlightedWidget->value > highlightedWidget->min)
 		{
 			*highlightedWidget->value = *highlightedWidget->value - 1;
@@ -806,8 +804,6 @@ int Engine::processWidgets()
 
 	if ((keyState[SDL_SCANCODE_RIGHT] || joykeyX > 0) && (highlightedWidget->type != WG_BUTTON && highlightedWidget->type != WG_JOYPAD))
 	{
-		SDL_Delay(1);
-
 		if (*highlightedWidget->value < highlightedWidget->max)
 		{
 			*highlightedWidget->value = *highlightedWidget->value + 1;
@@ -1094,16 +1090,4 @@ int Engine::getValueOfFlagTokens(const char *realLine)
 	}
 
 	return flags;
-}
-
-void Engine::delay(unsigned int frameLimit) {
-	unsigned int ticks = SDL_GetTicks();
-
-	if(frameLimit < ticks)
-		return;
-	
-	if(frameLimit > ticks + 16)
-		SDL_Delay(16);
-	else
-		SDL_Delay(frameLimit - ticks);
 }

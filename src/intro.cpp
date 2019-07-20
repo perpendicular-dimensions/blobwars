@@ -23,7 +23,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 static void playIntro(int tx, int ty, int delay)
 {
-	unsigned int frameLimit = SDL_GetTicks() + 16;
 	unsigned int time = 0;
 
 	graphics.setFontSize(1);
@@ -81,9 +80,6 @@ static void playIntro(int tx, int ty, int delay)
 		if (time > 0)
 			if (SDL_GetTicks() > time)
 				break;
-
-		engine.delay(frameLimit);
-		frameLimit = SDL_GetTicks() + 16;
 	}
 	
 	for (int i = 0 ; i < 3 ; i++)
@@ -112,7 +108,6 @@ static void showIntroError()
 		config.populate();
 		if (engine.keyState[SDL_SCANCODE_ESCAPE])
 			break;
-		SDL_Delay(16);
 	}
 }
 

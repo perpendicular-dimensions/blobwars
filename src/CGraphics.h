@@ -51,6 +51,8 @@ class Graphics {
 		SDL_Surface *fadeBlack;
 		SDL_Surface *infoMessage;
 
+		uint64_t lastframe;
+
 	public:
 		struct SurfaceCache {
 			char *text;

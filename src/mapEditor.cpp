@@ -136,8 +136,6 @@ static void showMap(int *mapX, int *mapY)
 		graphics.drawRect(*mapX, *mapY, 1, 15, graphics.green, graphics.screen);
 		graphics.drawRect(*mapX, *mapY + 15, 20, 1, graphics.green, graphics.screen);
 		graphics.drawRect(*mapX + 20, *mapY, 1, 15, graphics.green, graphics.screen);
-
-		SDL_Delay(16);
 	}
 
 	engine.keyState[SDL_SCANCODE_SPACE] = 0;
@@ -487,8 +485,6 @@ int main(int argc, char *argv[])
 	
 	char string[255];
 	
-	unsigned int frameLimit = SDL_GetTicks() + 16;
-
 	while (true)
 	{
 		engine.getInput();
@@ -659,9 +655,6 @@ int main(int argc, char *argv[])
 		SDL_FillRect(graphics.screen, &r, graphics.black);
 
 		graphics.drawString(string, 320, r.y + 5, true, graphics.screen);
-		
-		engine.delay(frameLimit);
-		frameLimit = SDL_GetTicks() + 16;
 	}
 
 	String *str = stringHead->next;

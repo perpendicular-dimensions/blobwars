@@ -141,5 +141,4 @@ class Engine {
 	int getValueOfDefine(const char *word);
 	char *getDefineOfValue(const char *prefix, int value);
 	int getValueOfFlagTokens(const char *line);
-	void delay(unsigned int frameLimit);
 };

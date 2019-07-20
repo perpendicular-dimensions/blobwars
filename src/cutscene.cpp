@@ -203,8 +203,6 @@ static void showScene(bool allowSkip)
 				break;
 			}
 		}
-
-		SDL_Delay(16);
 	}
 	
 	SDL_FillRect(graphics.screen, NULL, graphics.black);

@@ -82,7 +82,6 @@ bool loadGame(int slot)
 	debug(("Loading Game #%d...\n", slot));
 	game.clear();
 
-	SDL_Delay(500);
 	char filename[PATH_MAX];
 	
 	char line[1024];
@@ -316,13 +315,10 @@ static int confirmSave()
 		{
 			break;
 		}
-
-		SDL_Delay(16);
 	}
 	
 	SDL_FillRect(graphics.screen, NULL, graphics.black);
 	graphics.updateScreen();
-	SDL_Delay(250);
 	
 	return rtn;
 }
@@ -333,7 +329,6 @@ void saveGame()
 
 	SDL_FillRect(graphics.screen, NULL, graphics.black);
 	graphics.updateScreen();
-	SDL_Delay(500);
 	
 	int slot = confirmSave();
 	
@@ -420,10 +415,6 @@ void saveGame()
 	
 	map.clear();
 	
-	SDL_Delay(500);
-
 	graphics.drawString(_("Save Complete"), 320, 260, true, graphics.screen);
 	graphics.updateScreen();
-
-	SDL_Delay(500);
 }

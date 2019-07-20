@@ -85,7 +85,6 @@ void showLicense()
 		config.populate();
 		if (engine.userAccepts())
 			break;
-		SDL_Delay(16);
 	}
 	
 	SDL_FillRect(graphics.screen, NULL, graphics.black);

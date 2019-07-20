@@ -114,7 +114,6 @@ bool Audio::loadMusic(const char *filename)
 	if (music != NULL)
 	{
 		Mix_HaltMusic();
-		SDL_Delay(5);
 		Mix_FreeMusic(music);
 		music = NULL;
 	}
@@ -255,12 +254,10 @@ bool Audio::loadGameOverMusic()
 	}
 
 	remove(tempPath);
-	SDL_Delay(250); // wait a bit, just to be sure!
 
 	if (music != NULL)
 	{
 		Mix_HaltMusic();
-		SDL_Delay(5);
 		Mix_FreeMusic(music);
 		music = NULL;
 	}
@@ -287,7 +284,6 @@ bool Audio::reloadLevelMusic()
 	if (music != NULL)
 	{
 		Mix_HaltMusic();
-		SDL_Delay(5);
 		Mix_FreeMusic(music);
 		music = NULL;
 	}
@@ -392,7 +388,6 @@ void Audio::free()
 	if (music != NULL)
 	{
 		Mix_HaltMusic();
-		SDL_Delay(5);
 		Mix_FreeMusic(music);
 	}
 

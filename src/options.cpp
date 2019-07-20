@@ -82,8 +82,6 @@ static void showCheatConfig()
 			engine.flushInput();
 			done = 1;
 		}
-
-		SDL_Delay(16);
 	}
 	
 	audio.playMenuSound(2);
@@ -170,8 +168,6 @@ static void showKeyConfig()
 			engine.flushInput();
 			done = 1;
 		}
-
-		SDL_Delay(16);
 	}
 	
 	engine.allowJoypad = true;
@@ -254,8 +250,6 @@ static void showJoystickConfig()
 			engine.flushInput();
 			done = 1;
 		}
-
-		SDL_Delay(16);
 	}
 	
 	config.joystick.sensitivity = (sensitivity * 100);
@@ -437,10 +431,7 @@ void showOptions()
 			engine.flushInput();
 			done = 1;
 		}
-
-		SDL_Delay(16);
 	}
-	
 	
 	if (audio.output  != game.output)
 	{

@@ -288,8 +288,6 @@ void showMissionClear()
 	
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 
-	unsigned int frameLimit = SDL_GetTicks() + 16;
-
 	if (perfect)
 		audio.playSound(1, 1);
 
@@ -365,9 +363,6 @@ void showMissionClear()
 		static Graphics::SurfaceCache cache;
 		snprintf(message, sizeof message, "%s - %.2d:%.2d:%.2d", _("Mission Time"), game.currentMissionHours, game.currentMissionMinutes, game.currentMissionSeconds);
 		graphics.drawString(message, 320, 420, true, graphics.screen, cache);
-
-		engine.delay(frameLimit);
-		frameLimit = SDL_GetTicks() + 16;
 	}
 
 	audio.stopMusic();

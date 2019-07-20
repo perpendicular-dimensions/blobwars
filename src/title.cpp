@@ -171,10 +171,8 @@ static void doQuit()
 	graphics.setFontSize(0);
 	graphics.drawString(_("Press Space to Exit."), 320, 460, true, graphics.screen);
 
-	graphics.updateScreen();
-
 	do {
-		SDL_Delay(16);
+		graphics.updateScreen();
 		engine.getInput();
 	} while(!engine.userAccepts());
 }
@@ -261,8 +259,6 @@ int title()
 	audio.playMusic();
 
 	Uint32 now = SDL_GetTicks();
-
-	unsigned int frameLimit = SDL_GetTicks() + 16;
 
 	while (true)
 	{
@@ -442,9 +438,6 @@ int title()
 		{
 			break;
 		}
-
-		engine.delay(frameLimit);
-		frameLimit = SDL_GetTicks() + 16;
 	}
 
 	engine.deleteWidgets();
@@ -561,8 +554,6 @@ void doCredits()
 
 	while (y[numberOfCredits - 1] > 350)
 	{
-		unsigned int frameLimit = SDL_GetTicks() + 16;
-
 		graphics.updateScreen();
 		engine.getInput();
 		config.populate();
@@ -600,8 +591,6 @@ void doCredits()
 		}
 
 		doMusicInfo(SDL_GetTicks() - (now + 10000));
-
-		engine.delay(frameLimit);
 	}
 
 	graphics.delay(12000);
