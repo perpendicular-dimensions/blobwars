@@ -605,19 +605,29 @@ void doWind()
 
 static void parseMapData(const YAML::Node &data)
 {
+	auto crop_x = data["crop"]["x"].as<size_t>();
+	auto crop_y = data["crop"]["y"].as<size_t>();
+	auto crop_w = data["crop"]["w"].as<size_t>();
+	auto crop_h = data["crop"]["h"].as<size_t>();
 	auto hex = data["data"].as<std::string>();
 
-	int y = 0;
+	if (crop_x + crop_w > MAPWIDTH)
+		abort();
+
+	if (crop_y + crop_h > MAPHEIGHT)
+		abort();
+
+	size_t y = 0;
 
 	for (auto line: split(hex, '\n'))
 	{
-		if (line.size() != MAPWIDTH * 2)
+		if (line.size() != crop_w * 2)
 			abort();
 
-		for (int x = 0; x < MAPWIDTH; ++x)
-			map.data[x][y] = std::stoi(std::string(line.substr(x * 2, 2)), nullptr, 16);
+		for (size_t x = 0; x < crop_w; ++x)
+			map.data[crop_x + x][crop_y + y] = std::stoi(std::string(line.substr(x * 2, 2)), nullptr, 16);
 
-		if (y++ >= MAPHEIGHT)
+		if (y++ >= crop_h)
 			abort();
 	}
 }

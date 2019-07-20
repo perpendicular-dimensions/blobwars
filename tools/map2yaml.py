@@ -81,7 +81,7 @@ for filename in maps:
     defEnemies = []
     sprites = []
 
-    # Read and dump map data
+    # Read map data
     blocks = []
 
     for line in finput:
@@ -95,7 +95,41 @@ for filename in maps:
             row.append(int(block))
 
         blocks.append(row)
-    
+
+    # Autocrop the map
+    offset_x = -1
+    offset_y = -1
+    last_x = -1
+    last_y = -1
+    for y, row in enumerate(blocks):
+        # Scan the row
+        row_offset_x = -1
+        row_last_x = -1
+        for x, col in enumerate(row):
+            if col:
+                if row_offset_x < 0:
+                    row_offset_x = x
+                row_last_x = x
+
+        if row_offset_x < 0:
+            continue
+
+        if offset_x < 0 or row_offset_x < offset_x:
+            offset_x = row_offset_x
+        if row_last_x > last_x:
+            last_x = row_last_x
+
+        if offset_y < 0:
+            offset_y = y
+        last_y = y
+
+    assert offset_x >= 0
+    assert offset_y >= 0
+    assert last_x >= offset_x
+    assert last_y >= offset_y
+
+    blocks = [row[offset_x:last_x+1] for row in blocks[offset_y:last_y+1]]
+
     # Read other data
     for line in finput:
         line = line.strip()
@@ -350,6 +384,14 @@ for filename in maps:
         else:
             print("could not parse", line)
             pass
+
+    data["crop"] = {
+        "x": offset_x,
+        "y": offset_y,
+        "w": last_x + 1 - offset_x,
+        "h": last_y + 1 - offset_y,
+    }
+
 
     if sprites:
         data["sprites"] = sprites
