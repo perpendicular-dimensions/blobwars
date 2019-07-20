@@ -138,7 +138,7 @@ void getMapTokens(const YAML::Node &data)
 
 	for (auto &&sp: data["spawnpoints"])
 		if (allowAtSkillLevel(sp))
-			map.addSpawnPoint(sp["name"].as<std::string>(), sp["x"].as<int>(), sp["y"].as<int>(), engine.getValueOfDefine(sp["type"].as<std::string>()), engine.getValueOfDefine(sp["subtype"].as<std::string>()), sp["min"].as<int>(0), sp["max"].as<int>(1), sp["active"].as<bool>());
+			map.addSpawnPoint(sp["name"].as<std::string>(), sp["x"].as<int>(), sp["y"].as<int>(), engine.getValueOfDefine(sp["type"].as<std::string>()), engine.getValueOfDefine(sp["subtype"].as<std::string>("SPW_NOSUBTYPE")), sp["min"].as<int>(0), sp["max"].as<int>(1), sp["active"].as<bool>());
 
 	for (auto &&enemy: data["spawnableEnemies"])
 		map.setAllowableEnemy(getDefinedEnemy(enemy.as<std::string>()));
