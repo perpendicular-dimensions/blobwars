@@ -265,7 +265,7 @@ static int confirmSave()
 
 	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.updateScreen();
-	
+
 	return rtn;
 }
 
@@ -275,7 +275,7 @@ void saveGame()
 
 	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.updateScreen();
-	
+
 	int slot = confirmSave();
 
 	if (slot == -1)
@@ -341,7 +341,7 @@ void saveGame()
 	}
 
 	map.clear();
-	
+
 	graphics.drawString(_("Save Complete"), 320, 260, true, graphics.screen);
 	graphics.updateScreen();
 }

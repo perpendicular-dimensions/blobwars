@@ -510,7 +510,7 @@ static void beamInPlayer()
 	game.getCheckPoint(&player.x, &player.y);
 
 	int beamInTime = 180;
-	
+
 	audio.playSound(SND_TELEPORT1, CH_ANY, player.x);
 
 	engine.setPlayerPosition((int)player.x, (int)player.y, map.limitLeft, map.limitRight, map.limitUp, map.limitDown);
@@ -795,15 +795,15 @@ int doGame()
 		if (engine.keyState[SDL_SCANCODE_F1])
 		{
 			autoCompleteAllObjectives(false);
-		}		
+		}
 #endif
-		
+
 		if (engine.keyState[SDL_SCANCODE_F5])
 		{
 			replayData.fast = !replayData.fast;
 			engine.keyState[SDL_SCANCODE_F5] = 0;
 		}
-		
+
 #if DEBUG
 		static Graphics::SurfaceCache fpsCache;
 		graphics.drawString(fps, 600, 30, true, graphics.screen, fpsCache);

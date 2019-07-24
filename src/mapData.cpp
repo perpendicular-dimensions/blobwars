@@ -49,7 +49,7 @@ void getMapTokens(const YAML::Node &data)
 	if (data["previouslyVisited"].as<bool>(false))
 	{
 		previouslyCleared = gameData.stagePreviouslyCleared(stageName);
-		
+
 		if (previouslyCleared)
 		{
 			debug(("Reading Persistence Data...\n"));
@@ -67,7 +67,7 @@ void getMapTokens(const YAML::Node &data)
 
 	for (auto &&sprite: data["sprites"])
 		loadSprite(sprite["name"].as<std::string>(), sprite);
-	
+
 	for (auto &&enemy: data["defEnemies"])
 		if (allowAtSkillLevel(enemy))
 			loadEnemy(enemy);
@@ -153,7 +153,7 @@ void getMapTokens(const YAML::Node &data)
 
 	auto clipping = data["clipping"];
 	if (clipping)
-		map.setClipping(clipping["left"].as<int>(-1), clipping["right"].as<int>(-1),clipping["up"].as<int>(-1), clipping["down"].as<int>(-1));
+		map.setClipping(clipping["left"].as<int>(-1), clipping["right"].as<int>(-1), clipping["up"].as<int>(-1), clipping["down"].as<int>(-1));
 
 	if (data["ambience"])
 		audio.loadSound(SND_AMBIENCE, data["ambience"].as<std::string>());
@@ -164,7 +164,7 @@ void getMapTokens(const YAML::Node &data)
 		{
 			map.waterLevel = 281;
 			map.requiredWaterLevel = 222;
-		} 
+		}
 		else if (previouslyCleared)
 		{
 			map.waterLevel = 281;

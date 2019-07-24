@@ -143,7 +143,7 @@ void Graphics::updateScreen()
 			blit(medal[medalType], screen->w - (medalMessage->w + 5 + 16), 7, screen, false);
 		}
 	}
-	
+
 	SDL_UpdateTexture(texture, NULL, screen->pixels, screen->w * 4);
 	SDL_RenderCopy(renderer, texture, nullptr, nullptr);
 

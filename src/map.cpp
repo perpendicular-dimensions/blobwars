@@ -268,7 +268,7 @@ void showMap(int centerX, int centerY)
 
 	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.updateScreen();
-	
+
 	SDL_Surface *panel = graphics.createSurface(320, 240);
 	SDL_Surface *background = graphics.loadImage("gfx/main/mapBackground.png");
 	SDL_SetAlpha(background, 130);

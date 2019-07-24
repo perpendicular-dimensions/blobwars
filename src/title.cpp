@@ -538,10 +538,12 @@ void doCredits()
 
 	engine.loadData(_("data/credits.md"));
 
-	struct Line {
+	struct Line
+	{
 		float y;
 		SDL_Surface *credit;
-		Line(float y, SDL_Surface *credit): y(y), credit(credit) {}
+		Line(float y, SDL_Surface *credit):
+		                y(y), credit(credit) {}
 	};
 
 	std::vector<Line> lines;
@@ -613,7 +615,6 @@ void doCredits()
 
 			if (y > 10 && y < 470)
 				graphics.blit(line.credit, 320, (int)y, graphics.screen, true);
-
 		}
 
 		graphics.drawRect(0, 450, 640, 30, graphics.black, graphics.screen);

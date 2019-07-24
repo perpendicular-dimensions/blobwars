@@ -509,7 +509,7 @@ int doHub()
 
 	int labelWidth = 0;
 	uint32_t now = SDL_GetTicks();
-	
+
 	while (rtn == -1)
 	{
 		graphics.updateScreen();

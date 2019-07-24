@@ -827,7 +827,6 @@ void loadDefEnemies()
 		defEnemy[i].name.clear();
 	}
 
-
 	auto enemies = engine.loadYAML("data/defEnemies.yaml");
 	if (!enemies)
 		return graphics.showErrorAndExit("Couldn't load enemy definitions file (%s)", "data/defEnemies.yaml");

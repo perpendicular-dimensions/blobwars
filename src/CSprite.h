@@ -41,7 +41,8 @@ public:
 
 	bool randomFrames = false;
 
-	Sprite(const std::string &name): name(name) {}
+	Sprite(const std::string &name):
+	                name(name) {}
 	~Sprite();
 
 	void addFrame(SDL_Surface *shape, int time);

@@ -66,7 +66,7 @@ public:
 	SDL_Renderer *renderer = {};
 	SDL_Texture *texture = {};
 	SDL_Surface *screen = {};
-	SDL_Surface*background = {};
+	SDL_Surface *background = {};
 	SDL_Surface *tile[MAX_TILES] = {};
 
 	SDL_Surface *medal[4] = {};

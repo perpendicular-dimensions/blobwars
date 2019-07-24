@@ -51,8 +51,9 @@ void showLicense()
 
 	for (auto line: split(engine.dataBuffer, '\n', true))
 	{
-			fmt::print("'{}' {} {}\n", line, line.size(), (int)line[0]);
-		if (!line.empty()) {
+		fmt::print("'{}' {} {}\n", line, line.size(), (int)line[0]);
+		if (!line.empty())
+		{
 			graphics.drawString(std::string(line), 320, y, true, graphics.screen);
 		}
 
