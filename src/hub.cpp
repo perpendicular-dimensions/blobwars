@@ -508,9 +508,8 @@ int doHub()
 	audio.playMusic();
 
 	int labelWidth = 0;
-	uint32_t frameLimit = SDL_GetTicks() + 16;
 	uint32_t now = SDL_GetTicks();
-
+	
 	while (rtn == -1)
 	{
 		graphics.updateScreen();
@@ -708,8 +707,6 @@ int doHub()
 		graphics.blit(cursor.getCurrentFrame(), engine.getMouseX(), engine.getMouseY(), graphics.screen, true);
 
 		doMusicInfo(SDL_GetTicks() - (now + 60000));
-		engine.delay(frameLimit);
-		frameLimit = SDL_GetTicks() + 16;
 	}
 
 	hubs.clear();

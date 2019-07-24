@@ -229,8 +229,6 @@ static void showInGameOptions()
 			graphics.delay(500);
 			break;
 		}
-
-		SDL_Delay(16);
 	}
 }
 
@@ -300,8 +298,6 @@ int gameover()
 	engine.flushInput();
 	engine.clearInput();
 
-	unsigned int frameLimit = SDL_GetTicks() + 16;
-
 	bool showGameOverOptions = false;
 	int cont, quit, menuSound;
 	cont = quit = menuSound = 0;
@@ -352,9 +348,6 @@ int gameover()
 
 		if ((cont) || (quit))
 			break;
-
-		engine.delay(frameLimit);
-		frameLimit = SDL_GetTicks() + 16;
 	}
 
 	if (quit)
@@ -480,8 +473,6 @@ void showMissionInformation()
 	player.x = px;
 	player.y = py;
 
-	unsigned int frameLimit = SDL_GetTicks() + 16;
-
 	while (true)
 	{
 		if ((int)player.x < player.tx)
@@ -503,9 +494,6 @@ void showMissionInformation()
 		graphics.blit(panelBack, 320, 220, graphics.screen, true);
 		graphics.blit(panel, 320, 220, graphics.screen, true);
 
-		engine.delay(frameLimit);
-		frameLimit = SDL_GetTicks() + 16;
-
 		if (engine.userAccepts())
 			break;
 	}
@@ -522,18 +510,13 @@ static void beamInPlayer()
 	game.getCheckPoint(&player.x, &player.y);
 
 	int beamInTime = 180;
-
-	unsigned int frameLimit = SDL_GetTicks() + 16;
-
+	
 	audio.playSound(SND_TELEPORT1, CH_ANY, player.x);
 
 	engine.setPlayerPosition((int)player.x, (int)player.y, map.limitLeft, map.limitRight, map.limitUp, map.limitDown);
 
 	while (beamInTime > 0)
 	{
-		engine.delay(frameLimit);
-		frameLimit = SDL_GetTicks() + 16;
-
 		doGameStuff();
 		drawMapTopLayer();
 
@@ -607,7 +590,6 @@ int doGame()
 
 	game.resetMissionOver();
 
-	frameLimit = SDL_GetTicks() + 16;
 	frames = millis = 0;
 	start = SDL_GetTicks();
 #ifdef DEBUG
@@ -800,8 +782,6 @@ int doGame()
 			{
 				audio.resume();
 			}
-
-			SDL_Delay(16);
 		}
 
 		if ((engine.keyState[SDL_SCANCODE_F3]) && (engine.cheatSkipLevel))
@@ -815,29 +795,15 @@ int doGame()
 		if (engine.keyState[SDL_SCANCODE_F1])
 		{
 			autoCompleteAllObjectives(false);
-		}
+		}		
 #endif
-
-		if (replayData.replayMode != REPLAY_MODE::PLAYBACK)
-		{
-			engine.delay(frameLimit);
-		}
-		else if (!replayData.fast)
-		{
-			engine.delay(frameLimit);
-		}
-
+		
 		if (engine.keyState[SDL_SCANCODE_F5])
 		{
 			replayData.fast = !replayData.fast;
 			engine.keyState[SDL_SCANCODE_F5] = 0;
 		}
-
-		frameLimit = SDL_GetTicks() + 16;
-
-		if (game.missionOverReason == MIS_GAMECOMPLETE)
-			frameLimit = SDL_GetTicks() + 64;
-
+		
 #if DEBUG
 		static Graphics::SurfaceCache fpsCache;
 		graphics.drawString(fps, 600, 30, true, graphics.screen, fpsCache);

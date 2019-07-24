@@ -19,6 +19,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
+#include <time.h>
+
 #include "headers.h"
 
 void SDL_SetAlpha(SDL_Surface *surface, uint8_t value)
@@ -141,10 +143,41 @@ void Graphics::updateScreen()
 			blit(medal[medalType], screen->w - (medalMessage->w + 5 + 16), 7, screen, false);
 		}
 	}
-
-	SDL_UpdateTexture(texture, nullptr, screen->pixels, screen->w * 4);
+	
+	SDL_UpdateTexture(texture, NULL, screen->pixels, screen->w * 4);
 	SDL_RenderCopy(renderer, texture, nullptr, nullptr);
+
+	struct timespec tsnow;
+	clock_gettime(CLOCK_MONOTONIC, &tsnow);
+	uint64_t now = tsnow.tv_nsec + tsnow.tv_sec * 1000000000;
+	int64_t delay = lastframe + 16000000 - now;
+	if (delay > 16000000)
+	{
+		delay = 16000000;
+	}
+
+	if (delay > 0)
+	{
+		struct timespec tsdelay = {0, delay};
+		nanosleep(&tsdelay, NULL);
+	}
+
 	SDL_RenderPresent(renderer);
+
+	clock_gettime(CLOCK_MONOTONIC, &tsnow);
+	now = tsnow.tv_nsec + tsnow.tv_sec * 1000000000;
+	lastframe += 16000000;
+	int64_t diff = lastframe - now;
+
+	if (lastframe == 0)
+	{
+		lastframe = now;
+	}
+	else if (diff < -1600000)
+	{
+		lastframe = now;
+	}
+
 	SDL_RenderClear(renderer);
 
 	if (takeRandomScreenShots)
@@ -155,8 +188,6 @@ void Graphics::updateScreen()
 			SDL_SaveBMP(screen, screenshot.c_str());
 			screenShotNumber++;
 		}
-
-		SDL_Delay(16);
 	}
 
 	if (engine->keyState[SDL_SCANCODE_F12])
@@ -1036,7 +1067,6 @@ void Graphics::showLicenseErrorAndExit()
 		engine->getInput();
 		if (engine->keyState[SDL_SCANCODE_ESCAPE])
 			exit(1);
-		SDL_Delay(16);
 	}
 }
 
@@ -1087,7 +1117,6 @@ void Graphics::showErrorAndExit(const std::string &error, const std::string &par
 		{
 			exit(1);
 		}
-		SDL_Delay(16);
 	}
 }
 
@@ -1122,7 +1151,5 @@ void Graphics::showRootWarning()
 		{
 			exit(0);
 		}
-
-		SDL_Delay(16);
 	}
 }

@@ -91,7 +91,6 @@ bool Audio::loadMusic(const std::string &filename)
 	if (music != nullptr)
 	{
 		Mix_HaltMusic();
-		SDL_Delay(5);
 		Mix_FreeMusic(music);
 		music = nullptr;
 	}
@@ -224,12 +223,10 @@ bool Audio::loadGameOverMusic()
 	std::string tempPath = engine->userHomeDirectory + "music.mod";
 
 	remove(tempPath.c_str());
-	SDL_Delay(250); // wait a bit, just to be sure!
 
 	if (music != nullptr)
 	{
 		Mix_HaltMusic();
-		SDL_Delay(5);
 		Mix_FreeMusic(music);
 		music = nullptr;
 	}
@@ -256,7 +253,6 @@ bool Audio::reloadLevelMusic()
 	if (music != nullptr)
 	{
 		Mix_HaltMusic();
-		SDL_Delay(5);
 		Mix_FreeMusic(music);
 		music = nullptr;
 	}
@@ -361,7 +357,6 @@ void Audio::free()
 	if (music != nullptr)
 	{
 		Mix_HaltMusic();
-		SDL_Delay(5);
 		Mix_FreeMusic(music);
 	}
 

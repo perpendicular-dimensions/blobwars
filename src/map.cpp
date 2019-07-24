@@ -268,8 +268,7 @@ void showMap(int centerX, int centerY)
 
 	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.updateScreen();
-	SDL_Delay(500);
-
+	
 	SDL_Surface *panel = graphics.createSurface(320, 240);
 	SDL_Surface *background = graphics.loadImage("gfx/main/mapBackground.png");
 	SDL_SetAlpha(background, 130);
@@ -411,13 +410,10 @@ void showMap(int centerX, int centerY)
 				break;
 			}
 		}
-
-		SDL_Delay(16);
 	}
 
 	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.updateScreen();
-	SDL_Delay(500);
 
 	engine.flushInput();
 	engine.clearInput();

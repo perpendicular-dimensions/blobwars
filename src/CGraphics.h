@@ -51,6 +51,8 @@ private:
 	SDL_Surface *fadeBlack;
 	SDL_Surface *infoMessage;
 
+	uint64_t lastframe = 0;
+
 public:
 	struct SurfaceCache
 	{

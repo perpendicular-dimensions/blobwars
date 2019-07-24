@@ -39,13 +39,11 @@ void ReplayData::printReplayInformation()
 
 void ReplayData::swapHeaderEndians()
 {
-#if UNIX
-	header.randomSeed = SDL_SwapLE32(header.randomSeed);
-	header.version = SDL_SwapLE32(header.version);
-	header.release = SDL_SwapLE32(header.release);
-	header.skill = SDL_SwapLE32(header.skill);
-	header.score = SDL_SwapLE32(header.score);
-#endif
+	header.randomSeed 	= SDL_SwapLE32(header.randomSeed);
+	header.version 		= SDL_SwapLE32(header.version);
+	header.release 		= SDL_SwapLE32(header.release);
+	header.skill 		= SDL_SwapLE32(header.skill);
+	header.score 		= SDL_SwapLE32(header.score);
 }
 
 void ReplayData::setMode(REPLAY_MODE::TYPE replayMode)

@@ -27,8 +27,6 @@ void showAllSprites()
 
 	int x, y, h;
 
-	unsigned int frameLimit = SDL_GetTicks() + 16;
-
 	while (true)
 	{
 		x = y = h = 0;
@@ -57,8 +55,5 @@ void showAllSprites()
 				}
 			}
 		}
-
-		engine.delay(frameLimit);
-		frameLimit = SDL_GetTicks() + 16;
 	}
 }

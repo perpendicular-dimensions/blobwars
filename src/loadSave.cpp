@@ -76,8 +76,6 @@ bool loadGame(int slot)
 	debug(("Loading Game #%d...\n", slot));
 	game.clear();
 
-	SDL_Delay(500);
-
 	std::string line;
 	char string[2][1024];
 	int param[2];
@@ -263,14 +261,11 @@ static int confirmSave()
 		{
 			break;
 		}
-
-		SDL_Delay(16);
 	}
 
 	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.updateScreen();
-	SDL_Delay(250);
-
+	
 	return rtn;
 }
 
@@ -280,8 +275,7 @@ void saveGame()
 
 	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.updateScreen();
-	SDL_Delay(500);
-
+	
 	int slot = confirmSave();
 
 	if (slot == -1)
@@ -347,11 +341,7 @@ void saveGame()
 	}
 
 	map.clear();
-
-	SDL_Delay(500);
-
+	
 	graphics.drawString(_("Save Complete"), 320, 260, true, graphics.screen);
 	graphics.updateScreen();
-
-	SDL_Delay(500);
 }

@@ -137,5 +137,4 @@ public:
 	int getValueOfDefine(const std::string &word);
 	std::string getDefineOfValue(const std::string &prefix, int value);
 	int getValueOfFlagTokens(const std::string &line);
-	void delay(unsigned int frameLimit);
 };
