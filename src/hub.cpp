@@ -44,7 +44,7 @@ static void createStatsPanel(int page)
 	{
 	case 0:
 		graphics.drawString(_("Skill Level:"), x1, y += 20, false, image);
-		message = fmt::format("{}", _(skill[game.skill]));
+		message = fmt::format("{}", _(skill[game.skill].c_str()));
 		graphics.drawString(message, x2, y, false, image);
 
 		graphics.drawString(_("Score:"), x1, y += 20, false, image);
@@ -157,7 +157,7 @@ static void createStatsPanel(int page)
 		message = fmt::format("{}%", game.getTotalAccuracy());
 		graphics.drawString(message, x3, y, false, image);
 
-		message = fmt::format("{} - {}", _("Most Used Weapon"), _(weapon[game.getMostUsedWeapon()].name));
+		message = fmt::format("{} - {}", _("Most Used Weapon"), _(weapon[game.getMostUsedWeapon()].name.c_str()));
 		graphics.drawString(message, 200, y += 50, true, image);
 
 		break;
@@ -202,7 +202,7 @@ static void createObjectivesPanel(const std::string &levelName)
 
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 
-	text = fmt::format(_("Information for {}"), _(levelName));
+	text = fmt::format(_("Information for {}"), _(levelName.c_str()));
 	graphics.drawString(text, 200, y, true, image);
 	y += 10;
 
@@ -233,7 +233,7 @@ static void createObjectivesPanel(const std::string &levelName)
 			}
 			else
 			{
-				text = _(name);
+				text = _(name.c_str());
 
 				if (text.size() >= 25)
 				{
@@ -317,7 +317,7 @@ static void createMIAPanel(int start, int max)
 
 			graphics.drawString(text, x1, y += 20, false, image);
 
-			graphics.drawString(_(levelName), x2, y, false, image);
+			graphics.drawString(_(levelName.c_str()), x2, y, false, image);
 
 			if (completion.isComplete())
 			{
@@ -464,7 +464,7 @@ int doHub()
 			{
 				auto &hubPoint = hubs.emplace_back(name, hublevel.second["map"].as<std::string>(), hublevel.second["x"].as<int>(), hublevel.second["y"].as<int>());
 
-				hubPoint.levelNameImage = graphics.getString(_(name), false);
+				hubPoint.levelNameImage = graphics.getString(_(name.c_str()), false);
 				hubPoint.target = !gameData.stagePreviouslyCleared(name) ? &newTarget : &visitedTarget;
 			}
 		}
@@ -520,7 +520,7 @@ int doHub()
 		{
 			static Graphics::SurfaceCache cache;
 			graphics.drawRect(10, 400, 620, 20, graphics.black, graphics.white, graphics.screen);
-			std::string message = fmt::format("{} : {}", _("Selected Destination"), _(game.stageName));
+			std::string message = fmt::format("{} : {}", _("Selected Destination"), _(game.stageName.c_str()));
 			graphics.drawString(message, 320, 409, true, graphics.screen, cache);
 		}
 

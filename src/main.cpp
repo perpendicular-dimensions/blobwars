@@ -216,7 +216,8 @@ int main(int argc, char *argv[])
 
 	case REPLAY_MODE::RECORD:
 		requiredSection = SECTION_GAME;
-		strncpy(replayData.header.map, game.mapName.c_str(), sizeof replayData.header.map);
+		strncpy(replayData.header.map, game.mapName.c_str(), sizeof replayData.header.map - 1);
+		replayData.header.map[sizeof replayData.header.map - 1] = 0;
 		replayData.header.skill = game.skill = 3;
 		replayData.setMode(REPLAY_MODE::RECORD);
 		break;

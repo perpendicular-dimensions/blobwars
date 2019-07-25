@@ -220,7 +220,7 @@ void showMissionClear()
 		}
 		else
 		{
-			graphics.drawString(_(objective.description), col1, y, TXT_RIGHT, graphics.background);
+			graphics.drawString(_(objective.description.c_str()), col1, y, TXT_RIGHT, graphics.background);
 		}
 
 		if (objective.currentValue < objective.targetValue)

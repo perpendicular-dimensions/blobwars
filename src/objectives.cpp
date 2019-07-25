@@ -235,12 +235,12 @@ void checkObjectives(const std::string &name, bool alwaysInform)
 				{
 					if (!map.isBossMission)
 					{
-						message = fmt::format(_("{} - Objective Completed - Check Point Reached!"), _(objective.description));
+						message = fmt::format(_("{} - Objective Completed - Check Point Reached!"), _(objective.description.c_str()));
 						game.setObjectiveCheckPoint();
 					}
 					else
 					{
-						message = fmt::format(_("{} - Objective Completed"), _(objective.description));
+						message = fmt::format(_("{} - Objective Completed"), _(objective.description.c_str()));
 					}
 
 					if (objective.description == "Get the Aqua Lung")
@@ -268,13 +268,13 @@ void checkObjectives(const std::string &name, bool alwaysInform)
 						switch (Math::prand() % 3)
 						{
 						case 0:
-							message = fmt::format(_("{} - {} more to go..."), _(objective.description), requiredValue);
+							message = fmt::format(_("{} - {} more to go..."), _(objective.description.c_str()), requiredValue);
 							break;
 						case 1:
-							message = fmt::format(_("{} - need {} more"), _(objective.description), requiredValue);
+							message = fmt::format(_("{} - need {} more"), _(objective.description.c_str()), requiredValue);
 							break;
 						case 2:
-							message = fmt::format(_("{} - {} of {}"), _(objective.description), objective.currentValue, objective.targetValue);
+							message = fmt::format(_("{} - {} of {}"), _(objective.description.c_str()), objective.currentValue, objective.targetValue);
 							break;
 						}
 

@@ -91,7 +91,7 @@ void doMIAs()
 				{
 					static Graphics::SurfaceCache cache;
 					graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
-					graphics.drawString(_(mia_scared[mia.value]), x + 10, y - 10, true, graphics.screen, cache);
+					graphics.drawString(_(mia_scared[mia.value].c_str()), x + 10, y - 10, true, graphics.screen, cache);
 				}
 
 				graphics.blit(mia.getFaceImage(), x, y, graphics.screen, false);

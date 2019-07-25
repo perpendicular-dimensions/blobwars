@@ -49,7 +49,6 @@ private:
 	int medalType = 0;
 
 	SDL_Surface *fadeBlack;
-	SDL_Surface *infoMessage;
 
 	std::chrono::time_point<std::chrono::steady_clock> lastframe = {};
 

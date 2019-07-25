@@ -351,7 +351,7 @@ void showMap(int centerX, int centerY)
 
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 	graphics.setFontSize(3);
-	graphics.drawString(_(game.stageName), 320, 30, TXT_CENTERED, graphics.screen);
+	graphics.drawString(_(game.stageName.c_str()), 320, 30, TXT_CENTERED, graphics.screen);
 
 	graphics.setFontSize(0);
 

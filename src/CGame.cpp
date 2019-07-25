@@ -57,8 +57,8 @@ void Game::clear()
 		bulletsHit[i] = bulletsFired[i] = 0;
 	}
 
-	mapName = "data/grasslands1";
-	stageName = "Grasslands";
+	setMapName("data/grasslands1");
+	setStageName("Grasslands");
 
 	continuesUsed = 0;
 	levelsStarted = 0;
@@ -208,13 +208,15 @@ void Game::totalUpStats()
 void Game::setStageName(const std::string &name)
 {
 	stageName = name;
-	strncpy(s_stageName, name.c_str(), sizeof s_stageName);
+	strncpy(s_stageName, name.c_str(), sizeof s_stageName - 1);
+	s_stageName[sizeof s_stageName - 1] = 0;
 }
 
 void Game::setMapName(const std::string &name)
 {
 	mapName = name;
-	strncpy(s_mapName, name.c_str(), sizeof s_mapName);
+	strncpy(s_mapName, name.c_str(), sizeof s_mapName - 1);
+	s_stageName[sizeof s_mapName - 1] = 0;
 }
 
 void Game::setMissionOver(int reason)

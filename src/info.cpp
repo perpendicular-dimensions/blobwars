@@ -136,7 +136,7 @@ void doStatusBar()
 
 			static Graphics::SurfaceCache cache;
 			graphics.blit(graphics.infoBar, 0, 455, graphics.screen, false);
-			graphics.drawString(_(engine.message), 320, 466, true, graphics.screen, cache);
+			graphics.drawString(_(engine.message.c_str()), 320, 466, true, graphics.screen, cache);
 
 			engine.messageTime--;
 			if (engine.messageTime == -1)
@@ -155,7 +155,7 @@ void doStatusBar()
 			graphics.blit(graphics.infoBar, 0, 455, graphics.screen, false);
 
 			static Graphics::SurfaceCache cache;
-			graphics.drawString(_(map.mainBossPart->name), 255, 460, TXT_RIGHT, graphics.screen, cache);
+			graphics.drawString(_(map.mainBossPart->name.c_str()), 255, 460, TXT_RIGHT, graphics.screen, cache);
 			graphics.drawRect(265 - 1, 463 - 1, 200 + 2, 10 + 2, graphics.white, graphics.screen);
 			graphics.drawRect(265, 463, 200, 10, graphics.black, graphics.screen);
 
@@ -167,7 +167,7 @@ void doStatusBar()
 	}
 
 	static Graphics::SurfaceCache weaponCache;
-	std::string message = fmt::format("{} {}", _("Weapon:"), _(player.currentWeapon->name));
+	std::string message = fmt::format("{} {}", _("Weapon:"), _(player.currentWeapon->name.c_str()));
 	graphics.drawString(message, 630, 5, TXT_RIGHT, graphics.screen, weaponCache);
 
 	if (game.skill == 3)
@@ -281,7 +281,7 @@ void doPauseInfo()
 		}
 		else
 		{
-			graphics.drawString(_(objective.description), col1, y, TXT_RIGHT, graphics.screen);
+			graphics.drawString(_(objective.description.c_str()), col1, y, TXT_RIGHT, graphics.screen);
 		}
 
 		// this is a fake objective (for the 4th Ancient Tomb)

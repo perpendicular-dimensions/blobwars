@@ -386,7 +386,7 @@ void showMissionInformation()
 
 	graphics.setFontSize(3);
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
-	graphics.drawString(_(game.stageName), 200, 20, TXT_CENTERED, panel);
+	graphics.drawString(_(game.stageName.c_str()), 200, 20, TXT_CENTERED, panel);
 
 	graphics.setFontSize(0);
 
@@ -423,7 +423,7 @@ void showMissionInformation()
 		}
 		else
 		{
-			graphics.drawString(_(objective.description), col1, y, TXT_LEFT, panel);
+			graphics.drawString(_(objective.description.c_str()), col1, y, TXT_LEFT, panel);
 		}
 
 		// this is a fake objective (for the 4th Ancient Tomb)
