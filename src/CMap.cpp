@@ -201,8 +201,6 @@ void Map::addTrain(const std::string &name, int startX, int startY, int endX, in
 	{
 		debug(("WARNING: TRAIN WITH 0 WAIT TIME ADDED '%s' (%d:%d)\n", name, startX, startY));
 	}
-
-	trains.emplace_back(train);
 }
 
 void Map::addDoor(const std::string &name, int type, int startX, int startY, int endX, int endY, bool active)
