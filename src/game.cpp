@@ -544,7 +544,7 @@ int doGame()
 	SDL_FillRect(graphics.screen, nullptr, graphics.black);
 	graphics.delay(1000);
 
-	uint32_t frames, frameLimit, millis;
+	uint32_t frames, millis;
 	uint32_t start, cur;
 
 #if DEBUG

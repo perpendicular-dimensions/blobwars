@@ -19,8 +19,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include <time.h>
-
 #include "headers.h"
 
 void SDL_SetAlpha(SDL_Surface *surface, uint8_t value)
@@ -147,37 +145,25 @@ void Graphics::updateScreen()
 	SDL_UpdateTexture(texture, NULL, screen->pixels, screen->w * 4);
 	SDL_RenderCopy(renderer, texture, nullptr, nullptr);
 
-	struct timespec tsnow;
-	clock_gettime(CLOCK_MONOTONIC, &tsnow);
-	uint64_t now = tsnow.tv_nsec + tsnow.tv_sec * 1000000000;
-	int64_t delay = lastframe + 16000000 - now;
-	if (delay > 16000000)
-	{
-		delay = 16000000;
-	}
+	const auto interval = std::chrono::milliseconds(16);
+	auto now = std::chrono::steady_clock::now();
+	auto delay = lastframe + interval - now;
 
-	if (delay > 0)
+	if (delay > interval)
 	{
-		struct timespec tsdelay = {0, delay};
-		nanosleep(&tsdelay, NULL);
+		delay = interval;
+	}
+	else if (delay > delay.zero())
+	{
+		lastframe += interval;
+		std::this_thread::sleep_until(lastframe);
+	}
+	else
+	{
+		lastframe = now;
 	}
 
 	SDL_RenderPresent(renderer);
-
-	clock_gettime(CLOCK_MONOTONIC, &tsnow);
-	now = tsnow.tv_nsec + tsnow.tv_sec * 1000000000;
-	lastframe += 16000000;
-	int64_t diff = lastframe - now;
-
-	if (lastframe == 0)
-	{
-		lastframe = now;
-	}
-	else if (diff < -1600000)
-	{
-		lastframe = now;
-	}
-
 	SDL_RenderClear(renderer);
 
 	if (takeRandomScreenShots)

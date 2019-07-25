@@ -30,6 +30,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <dirent.h>
 
 #include <algorithm>
+#include <chrono>
 #include <fstream>
 #include <functional>
 #include <istream>
@@ -39,6 +40,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <string>
 #include <string_view>
 #include <streambuf>
+#include <thread>
 #include <vector>
 
 #include <fmt/format.h>

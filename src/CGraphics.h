@@ -51,7 +51,7 @@ private:
 	SDL_Surface *fadeBlack;
 	SDL_Surface *infoMessage;
 
-	uint64_t lastframe = 0;
+	std::chrono::time_point<std::chrono::steady_clock> lastframe = {};
 
 public:
 	struct SurfaceCache
