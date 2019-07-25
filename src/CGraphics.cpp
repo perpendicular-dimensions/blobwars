@@ -170,7 +170,7 @@ void Graphics::updateScreen()
 	{
 		if ((Math::prand() % 500) == 0)
 		{
-			screenshot = fmt::format("screenshots/screenshot{:.3d}.bmp", screenShotNumber);
+			screenshot = fmt::format("screenshots/screenshot{:03d}.bmp", screenShotNumber);
 			SDL_SaveBMP(screen, screenshot.c_str());
 			screenShotNumber++;
 		}
@@ -178,7 +178,7 @@ void Graphics::updateScreen()
 
 	if (engine->keyState[SDL_SCANCODE_F12])
 	{
-		screenshot = fmt::format("screenshots/screenshot{:.3d}.bmp", screenShotNumber);
+		screenshot = fmt::format("screenshots/screenshot{:03d}.bmp", screenShotNumber);
 		SDL_SaveBMP(screen, screenshot.c_str());
 		screenShotNumber++;
 
