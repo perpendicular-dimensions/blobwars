@@ -388,7 +388,7 @@ enum
 #define debug(x)                           \
 	{                                  \
 		fmt::print("*** DEBUG: "); \
-		fmt::printf x;             \
+		fmt::print x;              \
 	}
 #else
 #define debug(x) \
