@@ -72,6 +72,7 @@ static void showHelp()
 	                       "\t-window             Start the game in Window mode\n"
 	                       "\t-mono               Use mono sound output instead of stereo\n"
 	                       "\t-noaudio            Disables audio\n"
+	                       "\t-data <directory>   Use game data files from the specified directory\n"
 	                       "\t-version            Display version number\n"
 	                       "\t--help              This help\n"
 	                       "\n"),
@@ -121,16 +122,6 @@ int main(int argc, char *argv[])
 	debug(("Not Using PAK...\n"));
 #endif
 
-#if RELEASE
-#ifdef PAKLOCATION
-	if (PAKLOCATION[0] && chdir(PAKLOCATION))
-	{
-		perror("Could not chdir to '" PAKLOCATION "'");
-		return 1;
-	}
-#endif
-#endif
-
 	config.engine = &engine;
 
 	replayData.reset();
@@ -144,6 +135,7 @@ int main(int argc, char *argv[])
 
 	bool showSprites = false;
 	bool hub = false;
+	bool need_chdir = true;
 
 	int recordMode = REPLAY_MODE::NONE;
 	int requiredSection = SECTION_INTRO;
@@ -200,6 +192,15 @@ int main(int argc, char *argv[])
 		else if (strcmp(argv[i], "-nomonsters") == 0)
 			engine.devNoMonsters = true;
 #endif
+		else if (strcmp(argv[i], "-data") == 0 && argc > i + 1)
+		{
+			if (chdir(argv[++i]))
+			{
+				perror("Could not chdir to data directory");
+				return 1;
+			}
+			need_chdir = false;
+		}
 
 		else
 		{
@@ -207,6 +208,16 @@ int main(int argc, char *argv[])
 			showHelp();
 		}
 	}
+
+#if RELEASE and defined(PAKLOCATION)
+	if (need_chdir && PAKLOCATION[0] && chdir(PAKLOCATION))
+	{
+		perror("Could not chdir to '" PAKLOCATION "'");
+		return 1;
+	}
+#else
+	(void)need_chdir;
+#endif
 
 	switch (recordMode)
 	{
