@@ -799,11 +799,11 @@ void loadEnemy(const YAML::Node &enemy)
 {
 	int i;
 
-	for (i = MAX_ENEMIES - 1; i >= 0; i--)
+	for (i = 0; i < MAX_ENEMIES; i++)
 		if (defEnemy[i].name.empty())
 			break;
 
-	if (i < 0)
+	if (i >= MAX_ENEMIES)
 	{
 		printf("Out of enemy define space!\n");
 		exit(1);
