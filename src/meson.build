@@ -104,12 +104,12 @@ executable('blobwars',
 	install_dir: bindir,
 )
 
-#executable('mapeditor',
-#	defines,
-#	sources,
-#	'mapEditor.cpp',
-#	dependencies: deps,
-#)
+executable('mapeditor',
+	defines,
+	sources,
+	'mapEditor.cpp',
+	dependencies: deps,
+)
 
 #pak = executable('pak',
 #	'CFileData.cpp',

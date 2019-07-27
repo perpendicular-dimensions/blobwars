@@ -601,8 +601,8 @@ void doWind()
 
 static void parseMapData(const YAML::Node &data)
 {
-	auto crop_x = data["crop"]["x"].as<size_t>();
-	auto crop_y = data["crop"]["y"].as<size_t>();
+	auto crop_x = data["crop"]["x"].as<size_t>(0);
+	auto crop_y = data["crop"]["y"].as<size_t>(0);
 	auto crop_w = data["crop"]["w"].as<size_t>();
 	auto crop_h = data["crop"]["h"].as<size_t>();
 	auto hex = data["data"].as<std::string>();

@@ -21,8 +21,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "headers.h"
 
-std::vector<std::string> strings;
-
 Audio audio;
 Engine engine;
 Game game;
@@ -65,7 +63,7 @@ static void drawMap(int mapX, int mapY)
 
 				if ((tile >= MAP_NORESET) && (tile < MAP_DECORATION))
 				{
-					graphics.drawRect(r.x, r.y, 32, 4, graphics.yellow, graphics.screen);
+					graphics.drawRect(r.x, r.y, BRICKSIZE, 4, graphics.yellow, graphics.screen);
 				}
 			}
 		}
@@ -166,34 +164,28 @@ static int nextBlock(int current, int dir)
 
 static void drawEnemies()
 {
-	Entity *enemy = (Entity *)map.enemyList.getHead();
-
-	int x, y, absX, absY;
-
-	while (enemy->next != nullptr)
+	for (auto &&enemy: map.enemies)
 	{
-		enemy = (Entity *)enemy->next;
-
-		if (enemy->owner != enemy)
+		if (enemy.owner != &enemy)
 		{
-			enemy->face = enemy->owner->face;
-			(enemy->face == 0) ? enemy->x = enemy->owner->x + enemy->tx : enemy->x = enemy->owner->x + -enemy->tx;
-			enemy->y = enemy->owner->y + enemy->ty;
+			enemy.face = enemy.owner->face;
+			(enemy.face == 0) ? enemy.x = enemy.owner->x + enemy.tx : enemy.x = enemy.owner->x + -enemy.tx;
+			enemy.y = enemy.owner->y + enemy.ty;
 		}
 
-		x = (int)(enemy->x - engine.playerPosX);
-		y = (int)(enemy->y - engine.playerPosY);
+		int x = (int)(enemy.x - engine.playerPosX);
+		int y = (int)(enemy.y - engine.playerPosY);
 
-		absX = abs(x);
-		absY = abs(y);
+		int absX = abs(x);
+		int absY = abs(y);
 
 		if ((absX < 800) && (absY < 600))
 		{
-			graphics.blit(enemy->getFaceImage(), x, y, graphics.screen, false);
-			enemy->animate();
+			graphics.blit(enemy.getFaceImage(), x, y, graphics.screen, false);
+			enemy.animate();
 
-			if ((!(enemy->flags & ENT_WEIGHTLESS)) && (!(enemy->flags & ENT_FLIES)) && (!(enemy->flags & ENT_SWIMS)))
-				enemy->applyGravity();
+			if ((!(enemy.flags & ENT_WEIGHTLESS)) && (!(enemy.flags & ENT_FLIES)) && (!(enemy.flags & ENT_SWIMS)))
+				enemy.applyGravity();
 		}
 	}
 }
@@ -203,52 +195,94 @@ static void deleteEnemy(int x, int y)
 	x *= BRICKSIZE;
 	y *= BRICKSIZE;
 
-	Entity *enemy = (Entity *)map.enemyList.getHead();
-	Entity *previous = enemy;
-
-	while (enemy->next != nullptr)
-	{
-		enemy = (Entity *)enemy->next;
-
-		if ((enemy->x == x) && (enemy->y == y))
-		{
-			map.enemyList.remove(previous, enemy);
-			enemy = previous;
-		}
-		else
-		{
-			previous = enemy;
-		}
-	}
+	map.enemies.remove_if([&](auto &&enemy) {
+		return enemy.x == x && enemy.y == y;
+	});
 }
 
 static void saveMap(const std::string &name)
 {
-	std::ofstream file(name);
-	Entity *enemy = (Entity *)map.enemyList.getHead();
+	using namespace YAML;
+
+	// Load the original file and modify the YAML structure in place.
+	// This should preserve any manual additions to the map file.
+	auto data = engine.loadYAML(name);
+	if (!data)
+		exit(1);
+
+	// Update enemies
+	Node enemies(NodeType::Sequence);
+
+	for (auto &&enemy: map.enemies)
+	{
+		Node node(NodeType::Map);
+		node.SetStyle(EmitterStyle::Flow);
+		node["name"] = enemy.name;
+		node["x"] = enemy.x;
+		node["y"] = enemy.y;
+		enemies.push_back(node);
+	}
+
+	data["enemies"] = enemies;
+
+	// Determine the map crop area
+	int minx = MAPWIDTH;
+	int miny = MAPHEIGHT;
+	int maxx = 0;
+	int maxy = 0;
 
 	for (int y = 0; y < MAPHEIGHT; y++)
 	{
 		for (int x = 0; x < MAPWIDTH; x++)
 		{
-			fmt::print(file, "{} ", map.data[x][y]);
+			if (map.data[x][y])
+			{
+				minx = std::min(minx, x);
+				miny = std::min(miny, y);
+				maxx = std::max(maxx, x);
+				maxy = std::max(maxy, y);
+			}
 		}
-		fmt::print(file, "\n");
 	}
 
-	for (auto &&str: strings)
+	if (minx > maxx || miny > maxy)
 	{
-		file << str;
+		minx = 0;
+		miny = 0;
+		maxx = -1;
+		maxy = -1;
 	}
 
-	while (enemy->next != nullptr)
+	int w = maxx - minx + 1;
+	int h = maxy - miny + 1;
+
+	data["crop"] = Node(NodeType::Map);
+	data["crop"].SetStyle(EmitterStyle::Flow);
+	data["crop"]["x"] = minx;
+	data["crop"]["y"] = miny;
+	data["crop"]["w"] = w;
+	data["crop"]["h"] = h;
+
+	// Update the map data
+	std::string mapdata;
+	mapdata.reserve(h * (2 * w + 1));
+
+	for (int y = miny; y <= maxy; y++)
 	{
-		enemy = (Entity *)enemy->next;
-		fmt::print(file, "EMH ENEMY \"{}\" {} {}\n", enemy->name, (int)enemy->x, (int)enemy->y);
+		for (int x = minx; x <= maxx; x++)
+		{
+			mapdata += fmt::format("{:02x}", map.data[x][y]);
+		}
+		mapdata += '\n';
 	}
 
-	fmt::print(file, "@EOF@\n");
-	file.close();
+	data["data"] = mapdata;
+
+	// Write out the resulting YAML document
+	std::ofstream file(name);
+	Emitter yaml(file);
+	yaml << data;
+	yaml << Newline;
 
 	if (file.bad())
 	{
@@ -260,78 +294,45 @@ static void saveMap(const std::string &name)
 	}
 }
 
-static void collectMapData()
-{
-	std::ifstream file(game.mapName);
-
-	/* Skip the map tiles */
-	for (int y = 0; y < MAPHEIGHT; y++)
-		file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-	std::string line;
-
-	while (getline(file, line))
-	{
-		fmt::print("Read: {}\n", line);
-
-		if (contains(line, "@EOF@"))
-			break;
-
-		if (!contains(line, " ENEMY \""))
-		{
-			strings.push_back(line);
-		}
-
-		if (contains(line, "TILESET gfx/ancient"))
-		{
-			for (int x = 0; x < MAPWIDTH; x++)
-			{
-				for (int y = 0; y < MAPHEIGHT; y++)
-				{
-					if ((map.data[x][y] >= 9) && (map.data[x][y] <= 20) && ((Math::prand() % 2) == 0))
-						map.data[x][y] = Math::rrand(9, 20);
-				}
-			}
-		}
-
-		if (contains(line, "TILESET gfx/caves"))
-		{
-			for (int x = 0; x < MAPWIDTH; x++)
-			{
-				for (int y = 0; y < MAPHEIGHT; y++)
-				{
-					if ((map.data[x][y] >= 9) && (map.data[x][y] <= 20))
-						map.data[x][y] = Math::rrand(9, 12);
-				}
-			}
-		}
-	}
-}
-
 static void newMap(const std::string &name)
 {
+	using namespace YAML;
 	std::ofstream file(name);
+	Emitter yaml(file);
 
-	for (int y = 0; y < MAPHEIGHT; y++)
+	yaml << BeginMap;
 	{
-		for (int x = 0; x < MAPWIDTH; x++)
+		yaml << Key << "stageName" << Value << "unnamed";
+		yaml << Key << "tileset" << Value << "gfx/grasslands";
+		yaml << Key << "background" << Value << "gfx/grasslands/stone.jpg";
+		yaml << Key << "music" << Value << "music/tunnel";
+		yaml << Key << "alphaTiles" << Value << Flow;
 		{
-			fmt::print(file, "{} ", map.data[x][y]);
+			yaml << BeginSeq;
+			yaml << 1 << 2 << 3 << 200 << 201 << 202 << 203 << 204 << 244 << 245 << 246;
+			yaml << EndSeq;
 		}
-		fmt::print(file, "\n");
+		yaml << Key << "start" << Value << Flow;
+		{
+			yaml << BeginMap;
+			yaml << Key << "x" << Value << 0;
+			yaml << Key << "y" << Value << 0;
+			yaml << EndMap;
+		}
+		yaml << Key << "crop" << Value << Flow;
+		{
+			yaml << BeginMap;
+			yaml << Key << "x" << Value << 0;
+			yaml << Key << "y" << Value << 0;
+			yaml << Key << "w" << Value << 0;
+			yaml << Key << "h" << Value << 0;
+			yaml << EndMap;
+		}
+		yaml << Newline << Newline;
+		yaml << Key << "data" << Value << Literal << "";
 	}
-
-	fmt::print(file, "EMH STAGENAME \"unnamed\"\n");
-
-	fmt::print(file, "EMH TILESET gfx/grasslands\n");
-	fmt::print(file, "EMH BACKGROUND gfx/grasslands/stone.jpg\n");
-	fmt::print(file, "EMH MUSIC music/tunnel\n");
-
-	fmt::print(file, "EMH ALPHATILES 1 2 3 200 201 202 203 204 244 245 246 -1\n");
-
-	fmt::print(file, "EMH START 10 10\n");
-
-	fmt::print(file, "@EOF@\n");
+	yaml << EndMap;
+	yaml << Newline;
 
 	if (file.bad())
 		exit(1);
@@ -443,6 +444,7 @@ int main(int argc, char *argv[])
 	atexit(cleanup);
 
 	engine.useAudio = 0;
+	engine.allowQuit = true;
 
 	initSystem();
 
@@ -456,10 +458,11 @@ int main(int argc, char *argv[])
 
 	loadResources();
 
-	collectMapData();
-
-	int mapX, mapY, allowMove, x, y;
-	mapX = mapY = allowMove = x = y = 0;
+	int mapX = map.limitLeft / BRICKSIZE;
+	int mapY = map.limitUp / BRICKSIZE;
+	int x = 0;
+	int y = 0;
+	int allowMove = 0;
 
 	int editing = 0;
 	int currentMonster = 0;
@@ -483,7 +486,7 @@ int main(int argc, char *argv[])
 		graphics.animateSprites();
 		graphics.drawBackground();
 
-		engine.setPlayerPosition((mapX * 32) + 320, (mapY * 32) + 240, map.limitLeft, map.limitRight, map.limitUp, map.limitDown);
+		engine.setPlayerPosition((mapX * BRICKSIZE) + 320, (mapY * BRICKSIZE) + 240, INT_MIN, INT_MAX, INT_MIN, INT_MAX);
 
 		drawMap(mapX, mapY);
 		doTrains();
@@ -515,14 +518,15 @@ int main(int argc, char *argv[])
 		case 0:
 			graphics.drawRect(r.x - 1, r.y - 1, 34, 1, graphics.yellow, graphics.screen);
 			graphics.drawRect(r.x - 1, r.y - 1, 1, 34, graphics.yellow, graphics.screen);
-			graphics.drawRect(r.x + 32, r.y - 1, 1, 34, graphics.yellow, graphics.screen);
-			graphics.drawRect(r.x - 1, r.y + 32, 34, 1, graphics.yellow, graphics.screen);
+			graphics.drawRect(r.x + BRICKSIZE, r.y - 1, 1, 34, graphics.yellow, graphics.screen);
+			graphics.drawRect(r.x - 1, r.y + BRICKSIZE, 34, 1, graphics.yellow, graphics.screen);
 			graphics.blit(graphics.tile[currentBlock], r.x, r.y, graphics.screen, false);
 			if (engine.mouseLeft)
 				map.data[mapX + x][mapY + y] = currentBlock;
 			break;
 		case 1:
-			graphics.blit(defEnemy[currentMonster].getFaceImage(), r.x, r.y, graphics.screen, false);
+			if (defEnemy[currentMonster].sprite[0])
+				graphics.blit(defEnemy[currentMonster].getFaceImage(), r.x, r.y, graphics.screen, false);
 			if (engine.mouseLeft)
 			{
 				addEnemy(defEnemy[currentMonster].name, (mapX + x) * BRICKSIZE, (mapY + y) * BRICKSIZE, 0);
