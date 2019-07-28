@@ -124,7 +124,7 @@ INSTALLATION
 	
 	ninja install
 	
-	You will need to be root in order to perform the above step. After that has [again, sucessfully]
+	You will need to be root in order to perform the above step. After that has [again, successfully]
 	completed type,
 	
 	blobwars

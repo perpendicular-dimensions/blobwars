@@ -13,7 +13,7 @@ Last Updated: August 2015
 2) The PAK File
 3) The FileData Object
 4) The Map File
-5) Map Entites
+5) Map Entities
 6) Other Files
 7) FAQ
 8) Closing comments
@@ -66,13 +66,13 @@ Stephen Sweeney
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 The PAK file used in BW:MBS differs from the one used in Project: Starfighter where
-as it is compressed and contains a lot more metadata making it a lot more effecient.
+as it is compressed and contains a lot more metadata making it a lot more efficient.
 The format is as follows,
 
 NB: All binary data is little endian
 
 <variable length data> (char)
-<varibale number of binary strutures> (FileData)
+<variable number of binary strutures> (FileData)
 <offset of FileData structures> (unsigned long)
 <number of file data structures in archive> (unsigned long)
 
@@ -110,9 +110,9 @@ allocating a memory buffer save uncompress the data into.
 
 location is the offset of the data within the PAK archive. When a match for the filename
 has been found in stepping through the filedata array, the PAK file is opened and then
-seeked to the appropriate location. The appropriate amount of data is then read.
+sought to the appropriate location. The appropriate amount of data is then read.
 
-When working with big endian machines it is neccessary to convert the values in the FileData
+When working with big endian machines it is necessary to convert the values in the FileData
 object o little endian so they may of proper use.
 
 
@@ -204,7 +204,7 @@ in the level (like the bubbling sound in the Caves levels).
 ALPHATILES <variable length list>
 
 Tile numbers that should be made transparent. Ideally this should have been in the tileset
-directory. Numbers should be seperated by spaces with -1 to determine the end of the list.
+directory. Numbers should be separated by spaces with -1 to determine the end of the list.
 
 
 OBJECTIVE <"description"> <"target"> <requiredAmount> <optional>
@@ -243,7 +243,7 @@ Simply sets up a teleporter with an origin and a destination. Can be on or off b
 
 LINEDEF <"type"> <related object> <"message"> <x> <y> <width> <height> <active / inactive>
 
-Sets up a line that is actived when the player crosses it. Common types can be of "Checkpoint", 
+Sets up a line that is activated when the player crosses it. Common types can be of "Checkpoint", 
 "Message, "Exit". "Exit" will prevent the player from crossing until it is the last required
 objective remaining on the level.
 
@@ -370,9 +370,9 @@ A.	About 18 months from beginning to end.
 Q.	Why did so much change during the game, like the saves becoming incompatible around 0.91?
 
 A.	Metal Blob Solid was very much a make-it-up-as-you-go-along game. It was only decided later
-	on that the levels should be kept within a persistant state so as to not force the player
+	on that the levels should be kept within a persistent state so as to not force the player
 	to reopen doors, redo puzzles, etc. This in itself was a bit of a headache and due to a
-	small cockup when creating the persistance data the game would crash if you returned to a
+	small cockup when creating the persistence data the game would crash if you returned to a
 	previous level, left, saved, quit the game and reloaded.
 	
 

@@ -1070,7 +1070,7 @@ void Graphics::showErrorAndExit(const std::string &error, const std::string &par
 
 	setFontSize(3);
 	setFontColor(0xff, 0x00, 0x00, 0x00, 0x00, 0x00);
-	drawString("An unforseen error has occurred", 320, 50, true, screen);
+	drawString("An unforeseen error has occurred", 320, 50, true, screen);
 	setFontSize(1);
 	setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 	drawString(message, 320, 90, true, screen);

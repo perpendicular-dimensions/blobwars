@@ -214,13 +214,13 @@ Version 0.9
 
 * Added Boss missions
 
-* Added level persistance
+* Added level persistence
 
 * Added cutscenes and more music
 
 * Fixed bug on big endian machines where switches did not appear in levels
 
-* Added true joypad support and configuartion
+* Added true joypad support and configuration
 
 
 Version 0.52
@@ -230,7 +230,7 @@ Version 0.52
   
 * Added in placeholder level for Boss #1 (to be fully implemented)
 
-* Implemented joypad support and configuartion.
+* Implemented joypad support and configuration.
 
 * Removed need for ZZIP Lib - Now using custom virtual file system
   (see CPak.cpp / CFileData.cpp)

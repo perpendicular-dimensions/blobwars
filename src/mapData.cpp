@@ -134,7 +134,7 @@ void getMapTokens(const YAML::Node &data)
 
 	for (auto &&linedef: data["linedefs"])
 		if (allowAtSkillLevel(linedef))
-			addLineDef(linedef["name"].as<std::string>(""), linedef["target"].as<std::string>(""), linedef["mesage"].as<std::string>(""), linedef["x"].as<int>(), linedef["y"].as<int>(), linedef["width"].as<int>(), linedef["height"].as<int>(), linedef["active"].as<bool>(false));
+			addLineDef(linedef["name"].as<std::string>(""), linedef["target"].as<std::string>(""), linedef["message"].as<std::string>(""), linedef["x"].as<int>(), linedef["y"].as<int>(), linedef["width"].as<int>(), linedef["height"].as<int>(), linedef["active"].as<bool>(false));
 
 	for (auto &&sp: data["spawnpoints"])
 		if (allowAtSkillLevel(sp))
