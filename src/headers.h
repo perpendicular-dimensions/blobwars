@@ -19,15 +19,16 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-#include <errno.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
+#include <cassert>
+#include <cerrno>
+#include <clocale>
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <dirent.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <locale.h>
-#include <dirent.h>
 
 #include <algorithm>
 #include <chrono>
@@ -45,12 +46,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include <fmt/format.h>
 #include <fmt/ostream.h>
-#include <fmt/time.h>
-//#include <boost/filesystem.hpp>
 
 #include <yaml-cpp/yaml.h>
-
-//namespace fs = boost::filesystem;
 
 #include <zlib.h>
 
