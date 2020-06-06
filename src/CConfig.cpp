@@ -98,7 +98,7 @@ bool Config::loadJoystickConfig()
 {
 	std::string filename = engine->userHomeDirectory + "joystick.cfg";
 
-	debug(("Loading joystick config from %s\n", filename));
+	debug("Loading joystick config from {}\n", filename);
 
 	std::ifstream file(filename);
 
@@ -118,7 +118,7 @@ bool Config::saveJoystickConfig()
 
 	std::string filename = engine->userHomeDirectory + "joystick.cfg";
 
-	debug(("Saving joystick config to %s\n", filename));
+	debug("Saving joystick config to {}\n", filename);
 
 	std::ofstream file(filename);
 
@@ -127,7 +127,7 @@ bool Config::saveJoystickConfig()
 
 	if (file.bad())
 	{
-		debug(("WARNING: Couldn't save joystick config: %s\n", strerror(errno)));
+		debug("WARNING: Couldn't save joystick config: {}\n", strerror(errno));
 		ret = false;
 	}
 
@@ -138,7 +138,7 @@ bool Config::loadKeyConfig()
 {
 	std::string filename = engine->userHomeDirectory + "keyboard.cfg";
 
-	debug(("Loading keyboard config from %s\n", filename));
+	debug("Loading keyboard config from {}\n", filename);
 
 	std::ifstream file(filename);
 
@@ -160,7 +160,7 @@ bool Config::saveKeyConfig()
 	bool ret = true;
 	std::string filename = engine->userHomeDirectory + "keyboard.cfg";
 
-	debug(("Saving keyboard config to %s\n", filename));
+	debug("Saving keyboard config to {}\n", filename);
 
 	std::ofstream file(filename);
 
@@ -169,7 +169,7 @@ bool Config::saveKeyConfig()
 
 	if (file.bad())
 	{
-		debug(("WARNING: Couldn't save keyboard config: %s\n", strerror(errno)));
+		debug("WARNING: Couldn't save keyboard config: {}\n", strerror(errno));
 		ret = false;
 	}
 

@@ -199,7 +199,7 @@ void Map::addTrain(const std::string &name, int startX, int startY, int endX, in
 
 	if (pause == 0)
 	{
-		debug(("WARNING: TRAIN WITH 0 WAIT TIME ADDED '%s' (%d:%d)\n", name, startX, startY));
+		debug("WARNING: TRAIN WITH 0 WAIT TIME ADDED '{}' ({}:{})\n", name, startX, startY);
 	}
 }
 
@@ -271,7 +271,7 @@ void Map::setAllowableEnemy(Entity *enemy)
 		}
 	}
 
-	debug(("WARNING: Can't add anymore spawnable enemies to list!!!\n"));
+	debug("WARNING: Can't add anymore spawnable enemies to list!!!\n");
 }
 
 std::string Map::getSpawnableEnemy(int i)

@@ -118,7 +118,7 @@ static void showScene(bool allowSkip)
 
 				if (!scene.sprite.empty())
 				{
-					debug(("Getting cutscene %s\n", scene.sprite));
+					debug("Getting cutscene {}\n", scene.sprite);
 					image = graphics.quickSprite(scene.sprite, graphics.loadImage(scene.sprite));
 					SDL_SetColorKey(image, 0, SDL_MapRGB(image->format, 0, 0, 0));
 				}
@@ -164,7 +164,7 @@ void checkEndCutscene()
 
 	std::string sceneName = game.stageName + " End";
 
-	debug(("%s\n", sceneName));
+	debug("{}\n", sceneName);
 
 	bool allowSkip = true;
 

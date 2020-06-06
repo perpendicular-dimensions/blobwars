@@ -31,7 +31,7 @@ Entity *getDefinedEnemy(const std::string &name)
 		}
 	}
 
-	debug(("No Such Enemy '%s'\n", name));
+	debug("No Such Enemy '{}'\n", name);
 
 	return nullptr;
 }
@@ -42,7 +42,7 @@ void addEnemy(const std::string &name, int x, int y, int flags)
 
 	if (defEnemy == nullptr)
 	{
-		debug(("ERROR : COULDN'T FIND ENEMY '%s'!\n", name));
+		debug("ERROR : COULDN'T FIND ENEMY '{}'!\n", name);
 		return;
 	}
 
@@ -600,7 +600,7 @@ void doEnemies()
 			{
 				if (!enemy.referenced)
 				{
-					debug(("Removing unreferenced enemy '%s'\n", enemy.name));
+					debug("Removing unreferenced enemy '{}'\n", enemy.name);
 					return true;
 				}
 				else
@@ -780,7 +780,7 @@ void doEnemies()
 								}
 							}
 
-							debug(("Removing unreferenced enemy '%s'\n", enemy.name));
+							debug("Removing unreferenced enemy '{}'\n", enemy.name);
 							return true;
 						}
 					}

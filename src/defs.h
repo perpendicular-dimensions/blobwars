@@ -384,17 +384,13 @@ enum
 
 /* ############# debug ################## */
 
-#if DEBUG
-#define debug(x)                           \
-	{                                  \
-		fmt::print("*** DEBUG: "); \
-		fmt::print x;              \
-	}
-#else
-#define debug(x) \
-	{        \
-	}
+template<typename... Args>
+static void debug(const char *format, const Args&... args) {
+#ifdef DEBUG
+    fmt::print("*** DEBUG: ");
+    fmt::print(format, args...);
 #endif
+}
 
 #ifndef IGNORE_FLAGTOKEN_ERRORS
 #define IGNORE_FLAGTOKEN_ERRORS 0

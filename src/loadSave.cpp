@@ -65,7 +65,7 @@ void initSaveSlots()
 		}
 	}
 
-	debug(("Continue Save Slot = %d\n", engine.continueSaveSlot));
+	debug("Continue Save Slot = {}\n", engine.continueSaveSlot);
 }
 
 /*
@@ -73,7 +73,7 @@ Fill in later...
 */
 bool loadGame(int slot)
 {
-	debug(("Loading Game #%d...\n", slot));
+	debug("Loading Game #{}...\n", slot);
 	game.clear();
 
 	std::string line;
@@ -137,7 +137,7 @@ bool loadGame(int slot)
 
 		scan(line, "%d", &numberOfLines);
 
-		debug(("Read %s with %d lines.\n", stageName, numberOfLines));
+		debug("Read {} with {} lines.\n", stageName, numberOfLines);
 
 		auto persistent = map.createPersistent(stageName);
 
@@ -152,7 +152,7 @@ bool loadGame(int slot)
 
 			persistData->data = line;
 
-			//debug(("Read %d: %s", i, persistData->data));
+			//debug("Read {}: {}", i, persistData->data);
 
 			persistent.push_back(persistData->data);
 		}
@@ -163,7 +163,7 @@ bool loadGame(int slot)
 		graphics.showErrorAndExit("Unexpected end of file reading save data", "");
 	}
 
-	debug(("Loaded Successfully\n"));
+	debug("Loaded Successfully\n");
 
 	return true;
 }

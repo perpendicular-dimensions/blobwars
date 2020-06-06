@@ -202,7 +202,7 @@ void ReplayData::load()
 		return;
 	}
 
-	debug(("ReplayData::load()\n"));
+	debug("ReplayData::load()\n");
 
 	file.read((char *)data, sizeof data);
 
@@ -212,12 +212,12 @@ void ReplayData::load()
 		exit(1);
 	}
 
-	debug(("ReplayData::load() - Done\n"));
+	debug("ReplayData::load() - Done\n");
 }
 
 void ReplayData::save()
 {
-	debug(("ReplayData::save()\n"));
+	debug("ReplayData::save()\n");
 
 	file.write((char *)data, sizeof data);
 
@@ -227,7 +227,7 @@ void ReplayData::save()
 		exit(1);
 	}
 
-	debug(("ReplayData::save() - Done\n"));
+	debug("ReplayData::save() - Done\n");
 
 	reset();
 }

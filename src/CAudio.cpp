@@ -70,7 +70,7 @@ bool Audio::loadSound(int i, const std::string &filename)
 
 	if (!sound[i])
 	{
-		debug(("WARNING - Failed to load %s\n", filename));
+		debug("WARNING - Failed to load {}\n", filename);
 		return false;
 	}
 
@@ -109,7 +109,7 @@ bool Audio::loadMusic(const std::string &filename)
 
 	if (!music)
 	{
-		debug(("WARNING - Failed to load %s\n", filename));
+		debug("WARNING - Failed to load {}\n", filename);
 		return false;
 	}
 

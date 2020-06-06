@@ -40,7 +40,7 @@ static bool okayToSpawnEnemy(std::string name, int x, int y)
 		// assume enemy is 20 x 20 pixels (most are at least) and trains are 64 x 64
 		if (Collision::collision(x * BRICKSHIFT, y * BRICKSHIFT, 20, 20, train.x, train.y, 64, 64))
 		{
-			debug(("Couldn't add enemy '%s' - Collided with train\n", name));
+			debug("Couldn't add enemy '{}' - Collided with train\n", name);
 			return false;
 		}
 	}
@@ -54,7 +54,7 @@ static bool okayToSpawnEnemy(std::string name, int x, int y)
 			return true;
 		}
 
-		debug(("Couldn't add enemy '%s' - Would drown\n", name));
+		debug("Couldn't add enemy '{}' - Would drown\n", name);
 
 		return false;
 	}
@@ -62,7 +62,7 @@ static bool okayToSpawnEnemy(std::string name, int x, int y)
 	{
 		if (enemy->flags & ENT_SWIMS)
 		{
-			debug(("Couldn't add enemy '%s' - Not in water\n", name));
+			debug("Couldn't add enemy '{}' - Not in water\n", name);
 
 			return false;
 		}
@@ -79,14 +79,14 @@ static bool okayToSpawnEnemy(std::string name, int x, int y)
 
 		if (y > map.limitDown)
 		{
-			debug(("Couldn't add enemy '%s' - Outside map limits\n", name));
+			debug("Couldn't add enemy '{}' - Outside map limits\n", name);
 
 			return false;
 		}
 
 		if (map.isLiquid(x, y))
 		{
-			debug(("Couldn't add enemy '%s' - Would drown after free fall\n", name));
+			debug("Couldn't add enemy '{}' - Would drown after free fall\n", name);
 
 			return false;
 		}
@@ -97,7 +97,7 @@ static bool okayToSpawnEnemy(std::string name, int x, int y)
 		}
 	}
 
-	debug(("Couldn't add enemy '%s' - Just couldn't!\n", name));
+	debug("Couldn't add enemy '{}' - Just couldn't!\n", name);
 
 	return false;
 }
@@ -213,7 +213,7 @@ void doSpawnPoints()
 					addBullet(engine.world, 0, 2);
 					break;
 				default:
-					printf("Spawn Subtype is unknown!\n");
+					debug("Spawn Type is unknown!\n");
 					break;
 				}
 				break;
@@ -282,7 +282,7 @@ void doSpawnPoints()
 				break;
 
 			default:
-				debug(("Spawn Type is unknown!\n"));
+				debug("Spawn Type is unknown!\n");
 				break;
 			}
 

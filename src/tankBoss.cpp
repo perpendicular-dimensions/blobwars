@@ -376,7 +376,7 @@ static void tankBossMGStart()
 
 void tankBossMGInit()
 {
-	debug(("tankBossMGInit\n"));
+	debug("tankBossMGInit\n");
 
 	map.boss[0] = new Boss();
 	map.boss[0]->name = "BioMech Tank V1.1";
@@ -401,7 +401,7 @@ void tankBossMGInit()
 
 	map.setMainBossPart(map.boss[0]);
 
-	debug(("tankBossMGInit: Done\n"));
+	debug("tankBossMGInit: Done\n");
 }
 
 // **************** Grenade Launcher Boss ***********************
@@ -598,7 +598,7 @@ static void tankBossGLDie()
 
 void tankBossGLInit()
 {
-	debug(("tankBossGLInit\n"));
+	debug("tankBossGLInit\n");
 
 	map.boss[1] = new Boss();
 	map.boss[1]->name = "BioMech Tank V2.6";
@@ -617,5 +617,5 @@ void tankBossGLInit()
 	map.boss[1]->react = &tankBossGLReact;
 	map.boss[1]->die = &tankBossGLDie;
 
-	debug(("tankBossMGInit: Done\n"));
+	debug("tankBossMGInit: Done\n");
 }

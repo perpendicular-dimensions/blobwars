@@ -52,7 +52,7 @@ void Pak::setPakFile(const std::string &pakFilename)
 #if USEPAK
 	strlcpy(this->pakFilename, pakFilename, sizeof this->pakFilename);
 
-	debug(("Pak : Filename set to %s\n", pakFilename));
+	debug("Pak : Filename set to {}\n", pakFilename);
 
 	FILE *pak = fopen(pakFilename, "rb");
 
@@ -73,8 +73,8 @@ void Pak::setPakFile(const std::string &pakFilename)
 		return showPakErrorAndExit();
 	}
 
-	debug(("Pak : File list resides at %d\n", (int)listPos));
-	debug(("Pak : Number of files are %d\n", (int)numberOfFiles));
+	debug("Pak : File list resides at {}\n", listPos);
+	debug("Pak : Number of files are {}\n", numberOfFiles);
 
 	fd = new FileData[numberOfFiles];
 
@@ -92,7 +92,7 @@ void Pak::setPakFile(const std::string &pakFilename)
 			return showPakErrorAndExit();
 		}
 
-		debug(("Read FileData #%d / %d : %s\n", (i + 1), numberOfFiles, fd[i].filename));
+		debug("Read FileData #{} / {} : {}\n", (i + 1), numberOfFiles, fd[i].filename);
 	}
 
 	fclose(pak);
@@ -104,7 +104,7 @@ void Pak::setPakFile(const std::string &pakFilename)
 
 bool Pak::unpack(const std::string &filename, std::vector<char> *buffer)
 {
-	debug(("Pak : Unpacking %s...\n", filename));
+	debug("Pak : Unpacking {}...\n", filename);
 
 	currentFile = nullptr;
 
@@ -142,7 +142,7 @@ bool Pak::unpack(const std::string &filename, std::vector<char> *buffer)
 	uncompress((Bytef *)buffer->data(), &fSize, (Bytef *)input.data(), currentFile->cSize);
 	buffer->at(currentFile->fSize) = 0;
 
-	debug(("Pak : Unpack %s...Done\n", filename));
+	debug("Pak : Unpack {}...Done\n", filename);
 
 	return true;
 }

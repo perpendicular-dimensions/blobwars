@@ -187,7 +187,7 @@ void checkPlayerBulletCollisions(Entity &bullet)
 
 			if (bullet.id == WP_LASER)
 			{
-				debug(("Laser Hit Player"));
+				debug("Laser Hit Player");
 				throwAndDamageEntity(player, 0, -3, 3, -8);
 			}
 			else
@@ -432,7 +432,7 @@ void doPlayer()
 		}
 	}
 
-#if DEBUG
+#ifdef DEBUG
 	if (engine.keyState[SDL_SCANCODE_1])
 		player.currentWeapon = &weapon[WP_PISTOL];
 	else if (engine.keyState[SDL_SCANCODE_2])

@@ -129,6 +129,6 @@ void activateTrigger(const std::string &linkName, const std::string &activateMes
 	}
 	else
 	{
-		debug(("WARNING : No such object '%s'!\n", linkName));
+		debug("WARNING : No such object '{}'!\n", linkName);
 	}
 }

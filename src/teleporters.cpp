@@ -58,7 +58,7 @@ void checkTeleportContact(Entity &ent)
 			Math::addBit(&ent.flags, ENT_TELEPORTING);
 			addTeleportParticles(ent.x + (ent.width / 2), ent.y + (ent.height / 2), 50, SND_TELEPORT3);
 
-			debug(("%s - Teleporting to %f:%f\n", ent.name, ent.dx, ent.dy));
+			debug("{} - Teleporting to {}:{}\n", ent.name, ent.dx, ent.dy);
 		}
 	}
 }

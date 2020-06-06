@@ -267,7 +267,7 @@ static void doOrb()
 
 static void fireOrb(int i)
 {
-	debug(("fireOrb()\n"));
+	debug("fireOrb()\n");
 
 	map.boss[i]->active = true;
 	map.boss[i]->maxHealth = map.boss[i]->health = 1 * game.skill;
@@ -282,7 +282,7 @@ static void fireOrb(int i)
 
 static void droidBossOrbAttack()
 {
-	debug(("droidBossClawAttack\n"));
+	debug("droidBossClawAttack\n");
 
 	for (int i = 1; i < 6; i++)
 	{
@@ -363,7 +363,7 @@ static void droidBossAttack()
 
 void droidBossInit()
 {
-	debug(("droidBossInit\n"));
+	debug("droidBossInit\n");
 
 	map.boss[0] = new Boss();
 	map.boss[0]->name = "BioMech Jetpack Blob";
@@ -401,5 +401,5 @@ void droidBossInit()
 	audio.loadSound(SND_BOSSCUSTOM1, "sound/droidChangeFreq");
 	audio.loadSound(SND_BOSSCUSTOM2, "sound/droidFreakOut");
 
-	debug(("droidBossInit: Done\n"));
+	debug("droidBossInit: Done\n");
 }

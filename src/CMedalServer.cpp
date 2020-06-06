@@ -44,7 +44,7 @@ bool MedalServer::connect(const std::string &privateKey)
 		return false;
 	}
 
-	debug(("Connected %s to %s:%d\n", privateKey, MEDAL_SERVER_HOST, MEDAL_SERVER_PORT));
+	debug("Connected {} to {}:{}\n", privateKey, MEDAL_SERVER_HOST, MEDAL_SERVER_PORT);
 
 	this->privateKey = privateKey;
 	connected = true;
@@ -69,7 +69,7 @@ int MedalServer::postMedal(const std::string &str)
 		}
 	}
 
-	debug(("Attempting to post medal 'MBS_%s'\n", medal));
+	debug("Attempting to post medal 'MBS_{}'\n", medal);
 
 	TCPsocket socket = SDLNet_TCP_Open(&ip);
 
@@ -129,7 +129,7 @@ int MedalServer::postMedal(const std::string &str)
 		}
 	}
 
-	debug(("MedalServer Response: %d '%s'\n", response, message))
+	debug("MedalServer Response: {} '{}'\n", response, message);
 
 	                SDLNet_TCP_Close(socket);
 

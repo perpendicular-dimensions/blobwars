@@ -112,7 +112,7 @@ void doMIAs()
 			{
 				mia.id = MIA_AQUA;
 				mia.setSprites(graphics.getSprite("AquaMIA", true), graphics.getSprite("AquaMIA", true), graphics.getSprite("AquaMIA", true));
-				debug(("MIA '%s' fell into water. Became Aqua Mia\n", mia.name));
+				debug("MIA '{}' fell into water. Became Aqua Mia\n", mia.name);
 			}
 
 			if (mia.flags & ENT_DYING)

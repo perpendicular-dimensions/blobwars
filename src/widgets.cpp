@@ -215,7 +215,7 @@ void drawWidgets()
 
 		if ((!widget.value) && (widget.type != WG_LABEL))
 		{
-			debug(("WARNING: Widget variable for '%s' not set!\n", widget.name));
+			debug("WARNING: Widget variable for '{}' not set!\n", widget.name);
 			continue;
 		}
 

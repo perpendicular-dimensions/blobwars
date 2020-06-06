@@ -35,7 +35,7 @@ Train::Train(const std::string &name, int type, int startX, int startY, int endX
 	Math::calculateSlope(startX, startY, endX, endY, &dx, &dy);
 
 	if ((dx != 0) && (dy != 0))
-		debug(("WARNING: TRAIN '%s' is not straight! - %d %d %d %d\n", name, startX, startY, endX, endY));
+		debug("WARNING: TRAIN '{}' is not straight! - {} {} {} {}\n", name, startX, startY, endX, endY);
 
 	if (fromStart)
 	{

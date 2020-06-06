@@ -547,7 +547,7 @@ int doGame()
 	uint32_t frames, millis;
 	uint32_t start, cur;
 
-#if DEBUG
+#ifdef DEBUG
 	uint32_t now, then, frameCounter;
 	std::string fps = "fps";
 #endif
@@ -608,7 +608,7 @@ int doGame()
 	engine.flushInput();
 	engine.clearInput();
 
-	debug(("Map Clipping is %d %d %d %d\n", map.limitLeft, map.limitRight, map.limitUp, map.limitDown));
+	debug("Map Clipping is {} {} {} {}\n", map.limitLeft, map.limitRight, map.limitUp, map.limitDown);
 
 	game.continueFromCheckPoint = false;
 
@@ -791,7 +791,7 @@ int doGame()
 			engine.setInfoMessage("Skipping Mission...", 2, INFO_OBJECTIVE);
 		}
 
-#if DEBUG
+#ifdef DEBUG
 		if (engine.keyState[SDL_SCANCODE_F1])
 		{
 			autoCompleteAllObjectives(false);
@@ -804,7 +804,7 @@ int doGame()
 			engine.keyState[SDL_SCANCODE_F5] = 0;
 		}
 
-#if DEBUG
+#ifdef DEBUG
 		static Graphics::SurfaceCache fpsCache;
 		graphics.drawString(fps, 600, 30, true, graphics.screen, fpsCache);
 

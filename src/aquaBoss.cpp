@@ -45,7 +45,7 @@ static void leachParticles(Entity &enemy)
 
 static void aquaBossRecharge()
 {
-	debug(("aquaBossRecharge\n"));
+	debug("aquaBossRecharge\n");
 
 	if (self->health == self->maxHealth)
 	{
@@ -100,14 +100,14 @@ static void aquaBossCircleStrafe()
 {
 	// TODO: needs implementation
 
-	debug(("aquaBossCircleStrafe\n"));
+	debug("aquaBossCircleStrafe\n");
 
 	self->think = &aquaBossAttack;
 }
 
 static void aquaBossRapidLaserFire()
 {
-	debug(("aquaBossRapidLaserFire\n"));
+	debug("aquaBossRapidLaserFire\n");
 
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
 
@@ -164,7 +164,7 @@ static void aquaBossRapidPreLaserFire()
 
 void aquaBossFire()
 {
-	debug(("aquaBossFire\n"));
+	debug("aquaBossFire\n");
 
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
 
@@ -186,7 +186,7 @@ void aquaBossFire()
 
 static void aquaBossUnProtect()
 {
-	debug(("aquaBossUnProtect\n"));
+	debug("aquaBossUnProtect\n");
 
 	Math::removeBit(&self->flags, ENT_IMMUNE);
 	self->think = &aquaBossAttack;
@@ -196,7 +196,7 @@ static void aquaBossUnProtect()
 
 static void aquaBossProtect()
 {
-	debug(("aquaBossProtect\n"));
+	debug("aquaBossProtect\n");
 
 	Math::addBit(&self->flags, ENT_IMMUNE);
 	self->think = &aquaBossUnProtect;
@@ -247,7 +247,7 @@ static void aquaBossAttack()
 		return;
 	}
 
-	debug(("aquaBossAttack\n"));
+	debug("aquaBossAttack\n");
 
 	(self->x < player.x) ? self->face = 0 : self->face = 1;
 
@@ -286,7 +286,7 @@ static void aquaBossAttack()
 
 void aquaBossInit()
 {
-	debug(("aquaBossInit\n"));
+	debug("aquaBossInit\n");
 
 	map.boss[0] = new Boss();
 	map.boss[0]->name = "BioMech Aqua Blob";
@@ -309,5 +309,5 @@ void aquaBossInit()
 
 	map.setMainBossPart(map.boss[0]);
 
-	debug(("aquaBossInit: Done\n"));
+	debug("aquaBossInit: Done\n");
 }

@@ -453,7 +453,7 @@ static void fakeDie()
 
 void galdovInit()
 {
-	debug(("galdovInit\n"));
+	debug("galdovInit\n");
 
 	map.boss[0] = new Boss();
 	map.boss[0]->name = "Galdov";
@@ -495,5 +495,5 @@ void galdovInit()
 	audio.loadSound(SND_BOSSCUSTOM1, "sound/galdovSplit");
 	audio.loadSound(SND_BOSSCUSTOM2, "sound/galdovPain");
 
-	debug(("galdovInit: Done\n"));
+	debug("galdovInit: Done\n");
 }

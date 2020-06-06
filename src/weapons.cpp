@@ -153,7 +153,7 @@ Weapon *getWeaponByName(const std::string &name)
 		}
 	}
 
-	debug(("WARNING - COULD NOT FIND WEAPON '%s'\n", name));
+	debug("WARNING - COULD NOT FIND WEAPON '{}'\n", name);
 
 	return &weapon[WP_PISTOL];
 }

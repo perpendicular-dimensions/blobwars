@@ -74,7 +74,7 @@ void adjustObjectives()
 			{
 				objective.completed = true;
 
-				debug(("Objective %s has been completed\n", objective.description));
+				debug("Objective {} has been completed\n", objective.description);
 			}
 
 			gameData.getObjectiveValues(map.name, objective.description, &current, &target);
@@ -90,7 +90,7 @@ void adjustObjectives()
 				{
 					objective.completed = true;
 
-					debug(("Objective %s has been completed (gameplay adjustment!)\n", objective.description));
+					debug("Objective {} has been completed (gameplay adjustment!)\n", objective.description);
 				}
 			}
 		}

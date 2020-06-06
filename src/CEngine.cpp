@@ -330,7 +330,7 @@ void Engine::clearInput()
 void Engine::setUserHome(const std::string &path)
 {
 	userHomeDirectory = path;
-	debug(("User Home = %s\n", path));
+	debug("User Home = {}\n", path);
 }
 
 Pak *Engine::getPak()
@@ -402,7 +402,7 @@ bool Engine::unpack(const std::string &filename, int fileType)
 		}
 	}
 
-	debug(("unpack() : Loaded %s (%d), ret: %d\n", filename, pak.getUncompressedSize(), (int)ret));
+	debug("unpack() : Loaded {} ({}), ret: {}\n", filename, pak.getUncompressedSize(), (int)ret);
 
 	return ret;
 }
@@ -428,7 +428,7 @@ bool Engine::loadData(const std::string &filename)
 	if (file.bad())
 		ret = false;
 
-	debug(("loadData() : Loaded %s (%d), ret: %d\n", filename, fSize, (int)ret));
+	debug("loadData() : Loaded {} ({}), ret: {}\n", filename, fSize, (int)ret);
 
 	return ret;
 }
@@ -572,7 +572,7 @@ Widget *Engine::getWidgetByName(const std::string &name)
 
 	return nullptr;
 
-	debug(("No such widget '%s'\n", name));
+	debug("No such widget '{}'\n", name);
 
 	return nullptr;
 }
@@ -592,7 +592,7 @@ void Engine::showWidgetGroup(const std::string &groupName, bool show)
 	}
 
 	if (!found)
-		debug(("Group '%s' does not exist\n", groupName));
+		debug("Group '{}' does not exist\n", groupName);
 }
 
 void Engine::enableWidgetGroup(const std::string &groupName, bool show)
@@ -610,7 +610,7 @@ void Engine::enableWidgetGroup(const std::string &groupName, bool show)
 	}
 
 	if (!found)
-		debug(("Group '%s' does not exist\n", groupName));
+		debug("Group '{}' does not exist\n", groupName);
 }
 
 void Engine::showWidget(const std::string &name, bool show)
@@ -731,7 +731,7 @@ int Engine::processWidgets()
 	{
 		if (highlightedWidget->value == nullptr)
 		{
-			debug(("%s has not been implemented!\n", highlightedWidget->name));
+			debug("{} has not been implemented!\n", highlightedWidget->name);
 		}
 		else
 		{

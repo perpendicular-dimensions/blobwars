@@ -147,7 +147,7 @@ static void galdovInitBlackDroids()
 		{
 			map.boss[i] = new Boss();
 		}
-		debug(("BlackDroid %d init\n", i));
+		debug("BlackDroid {} init\n", i);
 		map.boss[i]->name = "BlackDrod"; // sic?
 		map.boss[i]->health = -90;
 		map.boss[i]->maxHealth = -90;
@@ -443,7 +443,7 @@ static void galdovMiniDie()
 
 static void galdovRejoin()
 {
-	debug(("galdovRejoin\n"));
+	debug("galdovRejoin\n");
 
 	for (int i = 1; i < 10; i++)
 	{
@@ -470,7 +470,7 @@ static void galdovRejoin()
 
 	map.setMainBossPart(map.boss[0]);
 
-	debug(("galdovRejoin: Done\n"));
+	debug("galdovRejoin: Done\n");
 }
 
 static void galdovFinalMiniReact()
@@ -487,7 +487,7 @@ static void galdovFinalMiniReact()
 
 static void galdovFinalSplit()
 {
-	debug(("galdovFinalSplit\n"));
+	debug("galdovFinalSplit\n");
 
 	for (int i = 1; i < 10; i++)
 	{
@@ -538,7 +538,7 @@ static void galdovFinalSplit()
 
 	map.setMainBossPart(nullptr);
 
-	debug(("galdovFinalSplit: Done\n"));
+	debug("galdovFinalSplit: Done\n");
 }
 
 static void galdovFinalReact()
@@ -555,7 +555,7 @@ static void galdovFinalReact()
 
 void galdovFinalInit()
 {
-	debug(("galdovFinalInit\n"));
+	debug("galdovFinalInit\n");
 
 	map.boss[0] = new Boss();
 	map.boss[0]->name = "Galdov";
@@ -582,7 +582,7 @@ void galdovFinalInit()
 
 	map.setMainBossPart(map.boss[0]);
 
-	debug(("galdovFinalInit: Done\n"));
+	debug("galdovFinalInit: Done\n");
 }
 
 // ******************** Second part of Final Battle *********************************

@@ -102,13 +102,13 @@ static void tankBossLevel()
 	if (!blob1)
 	{
 		addEnemy("Red Blob 1", 1100, 8352, 0);
-		debug(("Added Red Blob #1\n"));
+		debug("Added Red Blob #1\n");
 	}
 
 	if (!blob2)
 	{
 		addEnemy("Red Blob 2", 120, 8352, 0);
-		debug(("Added Red Blob #2\n"));
+		debug("Added Red Blob #2\n");
 	}
 
 	map.bossNextThink = Math::rrand(10, 15) * 60;
@@ -302,7 +302,7 @@ void createBoss(const std::string &stageName)
 		return;
 	}
 
-	debug(("createBoss()\n"));
+	debug("createBoss()\n");
 
 	if (stageName == "BioMech Supply Depot")
 	{
@@ -336,7 +336,7 @@ void createBoss(const std::string &stageName)
 		map.doBossLevelAction = &galdovFinalLevel;
 	}
 
-	debug(("createBoss(): Done\n"));
+	debug("createBoss(): Done\n");
 }
 
 void doBosses()
@@ -392,7 +392,7 @@ void doBosses()
 
 				if (!self->referenced)
 				{
-					debug(("Deleting unreferenced Boss...\n"));
+					debug("Deleting unreferenced Boss...\n");
 
 					if (map.mainBossPart == map.boss[i])
 						map.mainBossPart = nullptr;

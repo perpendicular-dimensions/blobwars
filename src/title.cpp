@@ -501,7 +501,7 @@ int title()
 	{
 		loadGame(load - 1);
 
-		debug(("Map Name = %s", game.mapName))
+		debug("Map Name = {}", game.mapName);
 	}
 	else if (engine.skill == -1)
 	{

@@ -119,7 +119,7 @@ static void listMaps()
 int main(int argc, char *argv[])
 {
 #if !USEPAK
-	debug(("Not Using PAK...\n"));
+	debug("Not Using PAK...\n");
 #endif
 
 	config.engine = &engine;
@@ -182,7 +182,7 @@ int main(int argc, char *argv[])
 		else if (strcmp(argv[i], "-credits") == 0)
 			requiredSection = SECTION_CREDITS;
 
-#if DEBUG
+#ifdef DEBUG
 		else if (strcmp(argv[i], "-showsprites") == 0)
 			showSprites = true;
 		else if (strcmp(argv[i], "-hub") == 0)

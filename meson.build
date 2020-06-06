@@ -35,7 +35,7 @@ add_global_arguments('-DMEDAL_SERVER_HOST="www.stephenjsweeney.com"', language: 
 add_global_arguments('-DMEDAL_SERVER_PORT=80', language: 'cpp')
 
 if get_option('buildtype').startswith('debug')
-	add_global_arguments('-DRELEASE=0', language: 'cpp')
+	add_global_arguments('-DRELEASE=0', '-DDEBUG', language: 'cpp')
 else
 	add_global_arguments('-DRELEASE=1', language: 'cpp')
 endif

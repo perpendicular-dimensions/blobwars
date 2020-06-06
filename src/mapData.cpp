@@ -52,7 +52,7 @@ void getMapTokens(const YAML::Node &data)
 
 		if (previouslyCleared)
 		{
-			debug(("Reading Persistence Data...\n"));
+			debug("Reading Persistence Data...\n");
 			//persistent = &map.persistents[stageName];
 			//persistent_it = persistent->begin();
 		}
@@ -220,7 +220,7 @@ void createPersistentMapData()
 
 	if (perfectlyCompleted())
 	{
-		debug(("createPersistentMapData :: Perfect - Skipping\n"));
+		debug("createPersistentMapData :: Perfect - Skipping\n");
 		return;
 	}
 

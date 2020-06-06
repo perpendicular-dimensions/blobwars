@@ -91,7 +91,7 @@ void setupUserHomeDirectory()
 		exit(1);
 	}
 
-	debug(("User Home = %s\n", userHome));
+	debug("User Home = {}\n", userHome);
 
 	char dir[PATH_MAX];
 	dir[0] = 0;
@@ -124,14 +124,14 @@ static bool loadConfig()
 
 	std::string configPath = engine.userHomeDirectory + "config";
 
-	debug(("Loading Config from %s\n", configPath));
+	debug("Loading Config from {}\n", configPath);
 
 	std::ifstream file(configPath);
 	file >> version;
 	file >> release;
 
-	debug(("Version = %.2f - Expected %.2f\n", version, VERSION));
-	debug(("Release = %d - Expected %d\n", release, RELEASE));
+	debug("Version = {:.2f} - Expected {:.2f}\n", version, VERSION);
+	debug("Release = {} - Expected {}\n", release, RELEASE);
 
 	if ((version != VERSION) && (release != RELEASE))
 	{
@@ -151,8 +151,8 @@ static bool loadConfig()
 		rtn = true;
 	}
 
-	debug(("Extreme Mode = %d\n", engine.extremeAvailable));
-	debug(("Output Type = %d\n", game.output));
+	debug("Extreme Mode = {}\n", engine.extremeAvailable);
+	debug("Output Type = {}\n", game.output);
 
 	// Override audio if there is no sound available
 	if ((engine.useAudio) && (game.output))
@@ -180,7 +180,7 @@ void saveConfig()
 		fmt::print("Error Saving Config to {}\n", configPath);
 	}
 
-	debug(("Output Type = %d\n", game.output));
+	debug("Output Type = {}\n", game.output);
 }
 
 //
@@ -199,7 +199,7 @@ static int initMedalService(void *data)
 	std::string privateKey;
 	std::string keyPath = engine.userHomeDirectory + "medalKey";
 
-	debug(("Loading private key from %s\n", keyPath));
+	debug("Loading private key from {}\n", keyPath);
 
 	std::ifstream file(keyPath);
 	file >> privateKey;
@@ -324,11 +324,11 @@ void initSystem()
 		}
 	}
 
-	debug(("Found %d Joysticks...\n", SDL_NumJoysticks()));
+	debug("Found {} Joysticks...\n", SDL_NumJoysticks());
 
 	if (SDL_NumJoysticks() > 0)
 	{
-		debug(("Opening Joystick - %s...\n", SDL_JoystickName(0)));
+		debug("Opening Joystick - {}...\n", SDL_JoystickName(0));
 		SDL_JoystickEventState(SDL_ENABLE);
 		config.sdlJoystick = SDL_JoystickOpen(0);
 	}
@@ -343,13 +343,13 @@ void initSystem()
 	audio.setMusicVolume(game.musicVol);
 	audio.output = game.output;
 
-	debug(("Sound Volume = %d\n", game.soundVol));
-	debug(("Music Volume = %d\n", game.musicVol));
-	debug(("Output Type = %d\n", game.output));
-	debug(("Brightness = %d\n", game.brightness));
-	debug(("tmp dir = %s\n", engine.userHomeDirectory));
-	debug(("Pack Dir = %s\n", PAKLOCATION));
-	debug(("Loading Fonts...\n"));
+	debug("Sound Volume = {}\n", game.soundVol);
+	debug("Music Volume = {}\n", game.musicVol);
+	debug("Output Type = {}\n", game.output);
+	debug("Brightness = {}\n", game.brightness);
+	debug("tmp dir = {}\n", engine.userHomeDirectory);
+	debug("Pack Dir = {}\n", PAKLOCATION);
+	debug("Loading Fonts...\n");
 
 #if USEPAK
 	if (!engine.unpack("data/vera.ttf", PAK_FONT))
@@ -364,7 +364,7 @@ void initSystem()
 	graphics.loadFont(3, "data/vera.ttf", 23);
 	graphics.loadFont(4, "data/vera.ttf", 24);
 
-	debug(("Font sizes all loaded!!\n"));
+	debug("Font sizes all loaded!!\n");
 
 	audio.loadSound(SND_CHEAT, "sound/Lock And Load!!!");
 	audio.loadSound(SND_HIGHLIGHT, "sound/menu");
@@ -415,7 +415,7 @@ void initSystem()
 
 	engine.saveConfig = true;
 
-	debug(("Init Complete...\n"));
+	debug("Init Complete...\n");
 }
 
 /*
@@ -427,22 +427,22 @@ void cleanup()
 {
 	std::string tempPath;
 
-	debug(("Cleaning Up...\n"));
+	debug("Cleaning Up...\n");
 
-	debug(("Updating Replay Data\n"));
+	debug("Updating Replay Data\n");
 	replayData.header.score = game.score;
 
-	debug(("Removing Music...\n"));
+	debug("Removing Music...\n");
 	tempPath = engine.userHomeDirectory + "music.mod";
 	remove(tempPath.c_str());
 
-	debug(("Saving Config...\n"));
+	debug("Saving Config...\n");
 	if (engine.saveConfig)
 	{
 		saveConfig();
 	}
 
-	debug(("Removing Font File...\n"));
+	debug("Removing Font File...\n");
 	tempPath = engine.userHomeDirectory + "font.ttf";
 	remove(tempPath.c_str());
 
@@ -451,27 +451,27 @@ void cleanup()
 		SDL_JoystickEventState(SDL_DISABLE);
 		for (int i = 0; i < SDL_NumJoysticks(); i++)
 		{
-			debug(("Closing Joystick #%d\n", i));
+			debug("Closing Joystick #{}\n", i);
 			SDL_JoystickClose(config.sdlJoystick);
 		}
 	}
 
-	debug(("Closing Audio...\n"));
+	debug("Closing Audio...\n");
 	if (engine.useAudio)
 	{
 		Mix_CloseAudio();
 	}
 
-	debug(("Closing TTF...\n"));
+	debug("Closing TTF...\n");
 	TTF_Quit();
 
-	debug(("Closing NET...\n"));
+	debug("Closing NET...\n");
 	SDLNet_Quit();
 
-	debug(("Closing SDL Sub System...\n"));
+	debug("Closing SDL Sub System...\n");
 	SDL_Quit();
 
-	debug(("All Done.\n"));
+	debug("All Done.\n");
 
 	if (replayData.replayMode == REPLAY_MODE::PLAYBACK)
 	{

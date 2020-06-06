@@ -290,7 +290,7 @@ void moveEntity(Entity &ent)
 				ent.y = (y2 * BRICKSIZE) - ent.height;
 			}
 
-			debug(("%s reappeared at %f:%f\n", ent.name, ent.x, ent.y));
+			debug("{} reappeared at {}:{}\n", ent.name, ent.x, ent.y);
 		}
 
 		return;

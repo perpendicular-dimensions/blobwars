@@ -220,7 +220,7 @@ void doPauseInfo()
 
 	graphics.setFontColor(0xff, 0xff, 0xff, 0x00, 0x00, 0x00);
 
-#if DEBUG
+#ifdef DEBUG
 	message = fmt::format(_("Position = {}:{}"), (int)player.x, (int)player.y);
 	graphics.drawString(message, 5, 25, false, graphics.screen);
 #endif

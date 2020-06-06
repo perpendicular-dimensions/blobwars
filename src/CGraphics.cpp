@@ -29,16 +29,16 @@ void SDL_SetAlpha(SDL_Surface *surface, uint8_t value)
 
 void Graphics::free()
 {
-	debug(("graphics.free: Background\n"));
+	debug("graphics.free: Background\n");
 	if (background != nullptr)
 	{
 		SDL_FreeSurface(background);
 	}
-	debug(("graphics.free: Background - Done\n"));
+	debug("graphics.free: Background - Done\n");
 
 	background = nullptr;
 
-	debug(("graphics.free: Tiles\n"));
+	debug("graphics.free: Tiles\n");
 	for (int i = 0; i < MAX_TILES; i++)
 	{
 		if (tile[i] != nullptr)
@@ -47,11 +47,11 @@ void Graphics::free()
 			tile[i] = nullptr;
 		}
 	}
-	debug(("graphics.free: Tiles - Done\n"));
+	debug("graphics.free: Tiles - Done\n");
 
-	debug(("graphics.free: Sprites Clear()\n"));
+	debug("graphics.free: Sprites Clear()\n");
 	sprites.clear();
-	debug(("graphics.free: Sprites - Done\n"));
+	debug("graphics.free: Sprites - Done\n");
 }
 
 Graphics::~Graphics()
@@ -371,7 +371,7 @@ SDL_Surface *Graphics::loadImage(const std::string &filename, int hue, int sat, 
 	{
 		if (image->format->BitsPerPixel != 8)
 		{
-			debug(("WARNING: Could not set Hue for '%s'! Not an 8 bit image!\n", filename));
+			debug("WARNING: Could not set Hue for '{}'! Not an 8 bit image!\n", filename);
 		}
 		else
 		{
@@ -492,11 +492,11 @@ void Graphics::loadMapTiles(const std::string &baseDir)
 
 void Graphics::loadFont(int i, const std::string &filename, int pointSize)
 {
-	debug(("Attempting to load font %s with point size of %d...\n", filename, pointSize));
+	debug("Attempting to load font {} with point size of {}...\n", filename, pointSize);
 
 	if (font[i])
 	{
-		debug(("Freeing Font %d first...\n", i));
+		debug("Freeing Font {} first...\n", i);
 		TTF_CloseFont(font[i]);
 	}
 
@@ -872,7 +872,7 @@ void Graphics::drawChatString(SDL_Surface *surface, int y)
 
 			if ((!r) && (!g) && (!b))
 			{
-				debug(("Parse Error in Text Color (%d:%d:%d)!!\n", r, g, b));
+				debug("Parse Error in Text Color ({}:{}:{})!!\n", r, g, b);
 				exit(1);
 			}
 

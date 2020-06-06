@@ -526,7 +526,7 @@ int doHub()
 
 		graphics.drawRect(10, 430, 620, 40, graphics.black, graphics.white, graphics.screen);
 
-#if DEBUG
+#ifdef DEBUG
 		static Graphics::SurfaceCache posCache;
 		std::string pos = fmt::format("{:03d}:{:03d}", engine.getMouseX(), engine.getMouseY());
 		graphics.drawString(pos, 320, 15, true, graphics.screen, posCache);
